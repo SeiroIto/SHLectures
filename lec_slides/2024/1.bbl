@@ -1,0 +1,94 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Acemoglu and Molina]{Acemoglu and
+  Molina}{2021}{AcemogluMolina2021}
+{\bf Acemoglu, Daron and Carlos~A. Molina}, ``Converging to converge? A
+  comment,'' Technical Report, National Bureau of Economic Research 2021.
+
+\harvarditem[Balboni et al.]{Balboni, Bandiera, Burgess, Ghatak and
+  Heil}{2020}{Balboni2020}
+{\bf Balboni, Clare, Oriana Bandiera, Robin Burgess, Maitreesh Ghatak, and
+  Anton Heil}, ``Why do people stay poor?,'' 2020.
+
+\harvarditem[Banerjee and Duflo]{Banerjee and
+  Duflo}{2011}{BanerjeeDuflo2011book}
+{\bf Banerjee, A. and E.~Duflo}, {\it Poor Economics: A Radical Rethinking of
+  the Way to Fight Global Poverty}, PublicAffairs, 2011.
+
+\harvarditem[Doleac and Hansen]{Doleac and Hansen}{2020}{DoleacHansen2020}
+{\bf Doleac, Jennifer~L. and Benjamin Hansen}, ``The Unintended Consequences of
+  “Ban the Box”: Statistical Discrimination and Employment Outcomes When
+  Criminal Histories Are Hidden,'' {\it Journal of Labor Economics}, 2020, {\it
+  38} (2), 321--374.
+
+\harvarditem[Easterly]{Easterly}{2006}{Easterly2006}
+{\bf Easterly, William}, {\it The white man's burden: why the West's efforts to
+  aid the rest have done so much ill and so little good}, Penguin, 2006.
+
+\harvarditem[Galor and Zeira]{Galor and Zeira}{1993}{GalorZeira1993}
+{\bf Galor, Oded and Joseph Zeira}, ``Income Distribution and Macroeconomics,''
+  {\it The Review of Economic Studies}, 1993, {\it 60} (1), 35--52.
+
+\harvarditem[Heckman]{Heckman}{2010}{Heckman2010bridgegaps}
+{\bf Heckman, James~J.}, ``Building Bridges between Structural and Program
+  Evaluation Approaches to Evaluating Policy,'' {\it Journal of Economic
+  Literature}, 2010, {\it 48} (2), 356--98.
+
+\harvarditem[Heckman and Smith]{Heckman and Smith}{1995}{HeckmanSmith1995}
+{\bf \bysame{} and Jeffrey~A. Smith}, ``Assessing the case for social
+  experiments,'' {\it The Journal of Economic Perspectives}, 1995, {\it 9} (2),
+  85--110.
+
+\harvarditem[{International Monetary Fund}]{{International Monetary
+  Fund}}{2017}{IMF2017Sep}
+{\bf {International Monetary Fund}}, {\it Fiscal monitor}, International
+  Monetary Fund, September 2017.
+
+\harvarditem[Jones]{Jones}{forthcoming}{Jones2022}
+{\bf Jones, Charles~I.}, ``The end of economic growth? Unintended consequences
+  of a declining population,'' {\it The American Economic Review}, forthcoming.
+
+\harvarditem[Kanbur et al.]{Kanbur, Ortiz-Juarez and Sumner}{2022}{Kanbur2022}
+{\bf Kanbur, Ravi, Eduardo Ortiz-Juarez, and Andy Sumner}, ``The global
+  inequality boomerang,'' 2022.
+
+\harvarditem[Kremer]{Kremer}{1993}{Kremer1993}
+{\bf Kremer, Michael}, ``Population growth and technological change: One
+  million BC to 1990,'' {\it The Quarterly Journal of Economics}, 1993, {\it
+  108} (3), 681--716.
+
+\harvarditem[Kremer et al.]{Kremer, Willis and You}{2022}{KremerWillisYou2022}
+{\bf \bysame{}, Jack Willis, and Yang You}, ``Converging to convergence,'' {\it
+  NBER Macroeconomics Annual}, 2022, {\it 36} (1), 337--412.
+
+\harvarditem[Leamer]{Leamer}{1983}{Leamer1983}
+{\bf Leamer, Edward~E}, ``Let's take the con out of econometrics,'' {\it The
+  American Economic Review}, 1983, pp.~31--43.
+
+\harvarditem[Pande and Enevoldsen]{Pande and
+  Enevoldsen}{2021}{PandeEnevoldsen2021}
+{\bf Pande, Rohini and Nils~T. Enevoldsen}, ``Growing pains? a comment on
+  ``Converging to Convergence'','' 2021.
+
+\harvarditem[Ravallion]{Ravallion}{2012}{Ravallion2012}
+{\bf Ravallion, Martin}, ``Fighting Poverty One Experiment at a Time: A Review
+  of Abhijit Banerjee and Esther Duflo's Poor Economics: A Radical Rethinking
+  of the Way to Fight Global Poverty,'' {\it Journal of Economic Literature},
+  2012, {\it 50} (1), 103--114.
+
+\harvarditem[Rosenzweig]{Rosenzweig}{2012}{Rosenzweig2012}
+{\bf Rosenzweig, Mark~R.}, ``Thinking Small: A Review of Poor Economics: A
+  Radical Rethinking of the Way to Fight Global Poverty by Abhijit Banerjee and
+  Esther Duflo,'' {\it Journal of Economic Literature}, 2012, {\it 50} (1),
+  115--127.
+
+\harvarditem[Sachs et al.]{Sachs, Haslam, Schafter and
+  Beaudet}{2006}{Sachs2006}
+{\bf Sachs, Jeffrey, Paul~A Haslam, Jessica Schafter, and Pierre Beaudet}, {\it
+  The End of Poverty: Economic Possibilities for Our Time}, Penguin
+  (Non-Classics), 2006.
+
+\end{thebibliography}
