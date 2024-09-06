@@ -1,0 +1,119 @@
+\setbeamercovered{invisible}
+\begin{tikzpicture}[
+scale=5.5,
+axis/.style={very thick, ->, >=stealth'},
+important line/.style={thick},
+S line/.style={very thick, blue},
+dashed line/.style={dashed, thin},
+pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten >=2pt},
+every node/.style={color=white},
+background rectangle/.style = {fill = gray90},
+]
+% axis
+\draw[axis] (-0.1, 0)  -- (1.5, 0) node (xline)[right]{$k_{t}$};
+\draw[axis] (0, -0.1) -- (0, 1.2) node (yline)[above] {$k_{t+1}$};
+% Lines
+\draw[important line] 
+	(.0, .0) coordinate (s1) -- (1.1, 1.1) coordinate (s2)
+	node[above, text width=5em] {$k_{t}=k_{t+1}$};
+\draw[blue] 
+	(.05, .15) coordinate (oldd1) -- ($ (oldd1) + (.3, .05) $) coordinate (oldd2) -- 
+	(.6, .75) coordinate (oldd3) -- ($ (oldd3) + (.3, .05)+(.2, .0266)$) coordinate (oldd4)
+	node[below right, text width=5em] {$S$};
+\draw[opacity = 0]
+	(.4, .4) coordinate (oldstartL) -- ($ (oldstartL) + (.3, .0) $) coordinate (oldLdummy);
+\fill[green] (intersection cs:
+	first line={(oldstartL) -- (oldLdummy)},
+	second line={(oldd2) -- (oldd3)}) 
+	coordinate (oldL1) circle (.4pt) node[right] {};
+
+\pause
+\draw[S line] 
+	(.05, .25) coordinate (d1) -- ($ (d1) + (.3, .05) $) coordinate (d2) -- 
+	(.6, .85) coordinate (d3) -- ($ (d3) + (.3, .05)+(.2, .0266)$) coordinate (d4)
+	node[above right, text width=5em] {$S'$};
+\draw[->, >=latex'] ($ (oldd4) + (.05, 0)$) -- ($(d4) + (.05, 0)$);
+\pause
+\fill[green] (intersection cs:
+	first line={(oldL1) -- ($(oldL1) + (0, .1)$)},
+	second line={(d2) -- (d3)}) 
+	coordinate (H0) circle (.4pt) node[below,] {};
+
+% Intersection of lines
+%  low
+\pause
+\fill[red] (intersection cs:
+	first line={(d1) -- (d2)},
+	second line={(s1) -- (s2)}) 
+	coordinate (L) circle (.4pt) node[above] {$L'$};
+%  mid
+\fill[blue] (intersection cs:
+	first line={(d2) -- (d3)},
+	second line={(s1) -- (s2)}) 
+	coordinate (U) circle (.4pt) node[above left] {$M'$};
+%  high
+\fill[red] (intersection cs:
+	first line={(d3) -- (d4)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H) circle (.4pt) node[above] {$H'$};
+
+%	path to H
+
+\pause
+
+\draw[opacity = 0]
+	(H0) -- ($ (H0) + (.3, .0) $) coordinate (Hdummy0);
+\fill (intersection cs:
+	first line={(H0) -- (Hdummy0)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H1) node[right] {};
+\draw[red, ->, >=latex'] (H0)  -- (H1);
+
+\pause
+\draw[opacity = 0]
+	(H1)  -- ($ (H1) + (.0, .4) $) coordinate (Hdummy1);
+\fill (intersection cs:
+	first line={(H1) -- (Hdummy1)},
+	second line={(d2) -- (d3)}) 
+	coordinate (H2) node[right] {};
+\draw[red, ->, >=latex'] (H1)  -- (H2);
+
+\pause
+\draw[opacity = 0]
+	(H2)  -- ($ (H2) + (.1, 0) $) coordinate (Hdummy2);
+\fill (intersection cs:
+	first line={(H2) -- (Hdummy2)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H3) node[right] {};
+\draw[red, ->, >=latex'] (H2)  -- (H3);
+
+\pause
+\draw[opacity = 0]
+	(H3)  -- ($ (H3) + (.0, .4) $) coordinate (Hdummy3);
+\fill (intersection cs:
+	first line={(H3) -- (Hdummy3)},
+	second line={(d3) -- (d4)}) 
+	coordinate (H4) node[right] {};
+\draw[red, ->, >=latex'] (H3)  -- (H4);
+
+\pause
+\draw[opacity = 0]
+	(H4)  -- ($ (H4) + (.1, 0) $) coordinate (Hdummy4);
+\fill (intersection cs:
+	first line={(H4) -- (Hdummy4)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H5) node[right] {};
+\draw[red, ->, >=latex'] (H4)  -- (H5);
+
+\pause
+\draw[opacity = 0]
+	(H5)  -- ($ (H5) + (0, .1) $) coordinate (Hdummy5);
+\fill (intersection cs:
+	first line={(H5) -- (Hdummy5)},
+	second line={(d3) -- (d4)}) 
+	coordinate (H6) node[right] {};
+\draw[red, ->, >=latex'] (H5)  -- (H6);
+\pause % this pause is for beamer not to show the footer...it hides "go back" buttom
+
+\end{tikzpicture}\hfill\hyperlink{changeequilibria<1>}{\beamergotobutton{go back}}
+\setbeamercovered{transparent}

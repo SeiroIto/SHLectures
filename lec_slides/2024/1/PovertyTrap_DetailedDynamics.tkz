@@ -1,0 +1,225 @@
+\begin{tikzpicture}[
+scale=5.25,
+axis/.style={very thick, ->, >=stealth'},
+important line/.style={thick},
+S line/.style={very thick, blue},
+dashed line/.style={dashed, thin},
+pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten >=2pt},
+every node/.style={font=\footnotesize},
+background rectangle/.style = {fill = gray90},
+]
+% axis
+\draw[axis, name path=xaxis] (-0.1, 0) -- (1.5, 0) node (xline)[right]{$k_{t}$};
+\draw[axis, name path=yaxis] (0, -0.1) -- (0, 1.2) node (yline)[above] {$k_{t+1}$};
+% Lines
+\onslide<9->{
+\draw[important line] 
+	(.0, .0) coordinate (s1) -- (1.1, 1.1) coordinate (s2)
+	node[above, text width=5em] {$k_{t}=k_{t+1}$};
+\node[draw] at ($ (s2) + (.45, .1) $)  {\mpage{3.5cm}{$k_{t+1}=k_{t}$‚Í‘–{—Ê‚ª•Ï‚í‚ç‚È‚¢’èíó‘Ôsteady state\setlength{\baselineskip}{10pt}}};
+}
+\onslide<2->{
+\draw[S line] 
+	% segments: d1-d2=bottom S, d2-d3=mid S, d3-d4=top S
+	(.05, .15) coordinate (d1) -- ($ (d1) + (.3, .05) $) coordinate (d2) -- 
+	(.6, .75) coordinate (d3) -- ($ (d3) + (.3, .05)+(.2, .0266)$) coordinate (d4)
+	node[right, text width=5em] {$S$};
+\node[draw] at ($ (yline) + (.45, -.25) $)  {\mpage{4cm}{$S$‚Í‘–{sê‹ÏtüA$k_{t}$‚ª—^‚¦‚ç‚ê‚½‚Æ‚«‚Ì$k_{t+1}$‚ÌŠÖŒW\setlength{\baselineskip}{10pt}}};
+}
+% Intersection of lines
+%  low
+\onslide<16->{
+\fill[red] (intersection cs:
+	first line={(d1) -- (d2)},
+	second line={(s1) -- (s2)}) 
+	coordinate (L) circle (.4pt) node[above] {$L$};
+%  mid
+\fill[blue] (intersection cs:
+	first line={(d2) -- (d3)},
+	second line={(s1) -- (s2)}) 
+	coordinate (U) circle (.4pt) node[left] {$M$};
+%  high
+\fill[red] (intersection cs:
+	first line={(d3) -- (d4)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H) circle (.4pt) node[above] {$H$};
+}
+\onslide<3-5>{
+% Horizontal line through a point on 45 degree line: startL -- Ldummy
+\draw[opacity = 0]
+	(.3, .3) coordinate (startL) -- ($ (startL) + (.3, .0) $) coordinate (Ldummy);
+% Starting point of dynamics: P1=intersection of horizontal line and d2--d3
+\fill[green] (intersection cs:
+	first line={(startL) -- (Ldummy)},
+	second line={(d2) -- (d3)}) 
+	coordinate (P1) circle (.4pt) node[right] {};
+}
+\onslide<1-5>{
+% xaxis point of P1
+\coordinate (P1x) at (s1 -| P1);
+\fill[green] (P1x) circle (.4pt)  node[below, text width=1em] {$k^{0}$};
+}
+\onslide<3-5>{
+% Vertical line through P1: startL -- Ldummy
+\draw[dashed line] (P1) -- (P1x);
+}
+\onslide<4-5>{
+% Curly bracket P1 -- P1x
+\draw[decoration={brace, mirror, raise=5pt}, decorate]
+  ($(P1x) + (0, .1mm)$) -- node[right=6pt] {\mpage{2.5cm}{$k_{t}=k^{0}$‚Ì‚Æ‚«$t+1$Šú‚Ì$k$\\ $=k_{t+1}$}} ($(P1) + (0, -.1mm)$);
+}
+
+\onslide<5->{
+% Horizontal line through a point on 45 degree line: startL -- Ldummy
+\coordinate (P2x) at (1, 0);
+\fill[green] (P2x) circle (.4pt)  node[below] {$k^{1}$};
+}
+\onslide<6->{
+% Starting point of dynamics: P2=intersection of vertical line through P2x and d3--d4
+\fill[green] (intersection cs:
+	first line={(P2x) -- ($(P2x) + (0, 1)$)},
+	second line={(d3) -- (d4)}) 
+	coordinate (P2) circle (.4pt) node[right] {};
+% Vertical line through P2: startL -- Ldummy
+\draw[dashed line] (P2) -- (P2x);
+}
+\onslide<7->{
+% Curly bracket P2 -- P2x
+\draw[decoration={brace, mirror, raise=5pt}, decorate]
+  ($(P2x) + (0, .1mm)$) -- node[right=6pt] {\mpage{2.25cm}{$k_{t}=k^{1}$‚Ì‚Æ‚«$t+1$Šú‚Ì$k$\\ $k_{t+1}=k^{2}$}} ($(P2) + (0, -.1mm)$);
+}
+\onslide<13->{
+% P3=Intersection of horizontal line through P2 and 45 degree line
+\fill[green] (intersection cs:
+	first line={(P2) -- ($(P2) + (-1, 0)$)},
+	second line={(s1) -- (s2)}) 
+	coordinate (P3) circle (.4pt) node[right] {};
+% P3x=Intersection of vertical line through P3 and x axis
+\draw [draw = none, name path=P3vertical] (P3) -- ($(P3) + (0, -1)$);
+\path [name intersections={of=xaxis and P3vertical, by = P3x}];
+}
+\onslide<8->{
+% Curly bracket O -- P3x
+\draw[decoration={brace, mirror, raise=5pt}, decorate]
+  ($(0, 0) + (.1mm, 0)$) -- node[below=6pt] {$k^{2}$} ($(P3x) + (-.1mm, 0)$);
+%	coordinate (P3x) circle (.4pt) node[right] {};
+\fill[green] (P3x) circle (.4pt) node[right] {};
+}
+\onslide<10->{
+\draw[red, ->, >=latex'] (P2)  -- (P3);
+}
+\onslide<11->{
+\draw[dashed line] (P3)  -- (P3x);
+}
+\onslide<12>{
+\node[draw] at ($ (U) + (1.5, .375) $)  {\mpage{6cm}{c‚Æ“¯‚¶’·‚³‚Ì‰¡‚ğ’T‚·‚É‚ÍAc‚ğˆê•Ó‚Æ‚·‚é’¼Šp“ñ“™•ÓOŠpŒ`‚ğ’T‚¹‚Î‚æ‚¢B\setlength{\baselineskip}{10pt}}};
+}
+\onslide<13->{
+\node[draw] at ($ (U) + (1.5, .1) $)  {\mpage{4.5cm}{$t\rightarrow t+1$‚É‚È‚é‚ÆA$S$ã‚Ì‚‚³($k_{t+1}$²‚Ì‘å‚«‚³)‚ªŸŠú‚Ì$k$A‚Â‚Ü‚èA$k_{t+1}$‚ª$k_{t}$‚É‚È‚éB$S$ü‚©‚ç45“xü‚É…•½ˆÚ“®B\setlength{\baselineskip}{10pt}}};
+}
+
+%  arrow to L
+%    first, draw a dummy invisible line wth opacity = 0
+%    second, get coordinates of intersections on D and S
+%    third, draw a line
+%  repeat these for the number of arrows you want
+%  repeat 4 times
+\onslide<14->{
+\draw[opacity = 0]
+	(.4, .4) coordinate (startL) -- ($ (startL) + (.3, .0) $) coordinate (Ldummy);
+% Dynamic process starting point: L1
+\fill[green] (intersection cs:
+	first line={(startL) -- (Ldummy)},
+	second line={(d2) -- (d3)}) 
+	coordinate (L1) circle (.4pt) node[right] {};
+}
+\onslide<15->{
+\draw[opacity = 0]
+	(startL)  -- ($ (startL) + (.0, -.4) $) coordinate (Ldummy2);
+\fill (intersection cs:
+	first line={(startL) -- (Ldummy2)},
+	second line={(d2) -- (d3)}) 
+	coordinate (L2) node[right] {};
+\draw[red, ->, >=latex'] (L1)  -- (startL);
+}
+\onslide<16->{
+\draw[red, ->, >=latex'] (startL)  -- (L2);
+\node[draw] at ($ (U) + (1.5, -.25) $)  {\mpage{4.5cm}{45üã‚Ì$k_{t+1}$‚ğ¡Šú‚Ì$k$‚Æ‚·‚ê‚ÎŸŠú‚Ì$k$‚Í$S$üã‚Å“¾‚ç‚ê‚éB45“xü‚©‚çSü‚É‚’¼ˆÚ“®B\setlength{\baselineskip}{10pt}}};
+}
+\onslide<17->{
+\draw[opacity = 0]
+	(L2)  -- ($ (L2) + (-.1, 0) $) coordinate (Ldummy3);
+\fill (intersection cs:
+	first line={(L2) -- (Ldummy3)},
+	second line={(s1) -- (s2)}) 
+	coordinate (L3) node[right] {};
+\draw[red, ->, >=latex'] (L2)  -- (L3);
+}
+\onslide<18->{
+\draw[opacity = 0]
+	(L3)  -- ($ (L3) + (0, -.1) $) coordinate (Ldummy4);
+\fill (intersection cs:
+	first line={(L3) -- (Ldummy4)},
+	second line={(d1) -- (d2)}) 
+	coordinate (L4) node[right] {};
+\draw[red, ->, >=latex'] (L3)  -- (L4);
+}
+\onslide<19->{
+\draw[opacity = 0]
+	(L4)  -- ($ (L4) + (-.1, 0) $) coordinate (Ldummy5);
+\fill (intersection cs:
+	first line={(L4) -- (Ldummy5)},
+	second line={(s1) -- (s2)}) 
+	coordinate (L5) node[right] {};
+\draw[red, ->, >=latex'] (L4)  -- (L5);
+}
+%	path to H
+
+\onslide<20->{
+\draw[opacity = 0]
+	(.55, .55) coordinate (startH) -- ($ (startH) + (-.3, .0) $) coordinate (Hdummy0);
+\fill[green] (intersection cs:
+	first line={(startH) -- (Hdummy0)},
+	second line={(d2) -- (d3)}) 
+	coordinate (H1) circle (.4pt) node[right] {};
+}
+\onslide<21->{
+\draw[red, ->, >=latex'] (H1)  -- (startH);
+}
+\onslide<22->{
+\draw[opacity = 0]
+	(startH)  -- ($ (startH) + (.0, .4) $) coordinate (Hdummy1);
+\fill (intersection cs:
+	first line={(startH) -- (Hdummy1)},
+	second line={(d2) -- (d3)}) 
+	coordinate (H2) node[right] {};
+\draw[red, ->, >=latex'] (startH)  -- (H2);
+}
+\onslide<23->{
+\draw[opacity = 0]
+	(H2)  -- ($ (H2) + (.1, 0) $) coordinate (Hdummy2);
+\fill (intersection cs:
+	first line={(H2) -- (Hdummy2)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H3) node[right] {};
+\draw[red, ->, >=latex'] (H2)  -- (H3);
+}
+\onslide<24->{
+\draw[opacity = 0]
+	(H3)  -- ($ (H3) + (.0, .4) $) coordinate (Hdummy3);
+\fill (intersection cs:
+	first line={(H3) -- (Hdummy3)},
+	second line={(d3) -- (d4)}) 
+	coordinate (H4) node[right] {};
+\draw[red, ->, >=latex'] (H3)  -- (H4);
+}
+\onslide<25->{
+\draw[opacity = 0]
+	(H4)  -- ($ (H4) + (.1, 0) $) coordinate (Hdummy4);
+\fill (intersection cs:
+	first line={(H4) -- (Hdummy4)},
+	second line={(s1) -- (s2)}) 
+	coordinate (H5) node[right] {};
+\draw[red, ->, >=latex'] (H4)  -- (H5);
+}
+\end{tikzpicture}

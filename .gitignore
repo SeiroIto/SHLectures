@@ -1,0 +1,13 @@
+#### This is gitignore for Seishin
+/admin/
+/homeworks/201*/
+/homeworks/2020/
+/homeworks/2021/
+/homeworks/2022/
+/homeworks/assignment/
+/homeworks/h*/
+/lec_slides/201*/
+/lec_slides/2020/
+/lec_slides/2021/
+/lec_slides/2022/
+/lec_slides/Ran*/
