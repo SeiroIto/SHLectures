@@ -1,5 +1,8 @@
 #### This is gitignore for Seishin
+/.quarto/
 /admin/
+/_extensions/
+/_freeze/
 /homeworks/201*/
 /homeworks/2020/
 /homeworks/2021/

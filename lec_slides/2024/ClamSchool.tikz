@@ -1,0 +1,4 @@
+\begin{tikzpicture}[inner sep=0pt, remember picture]
+\node at (0, 0) {\includegraphics[width = .9\textwidth]{ChinaClamSchoolFeeControl_Nikkei20201Sep07.jpg}};
+\node (a) [draw, rectangle, thick, rounded corners, minimum height = 1.25cm, minimum width = .5cm, red] at (1.05cm, .5cm){};
+\end{tikzpicture}

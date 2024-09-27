@@ -1,0 +1,1220 @@
+---
+title: "開発経済論"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/1.html>
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+filters:
+  - parse-latex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: ../../seiro.bib
+resources:
+  - 01.pdf
+# quarto render 01.qmd
+---
+```{css }
+Red {
+  color: red;
+}
+Orange {
+  color: #e94e2c;
+}
+Blue {
+  color: blue;
+}
+.reveal .slides pre code {
+    max-height: 800px;
+}
+#TOC {
+  font-color: #e94e2c;
+}
+```
+
+::: {style="text-align: center;"}
+# はじめに
+:::
+
+----
+
+## 本講義の目的: 以下を実施すること。Purposes of this course: To  
+
+* 低所得国で貧困を生むメカニズムを知ること。Know the mechanism that generates poverty in low income countries.  
+* 身の回りの社会経済課題についての論理的・経済学的思考方法に習熟すること。Be familiar with logical and economic thinking on socioeconomic issues around us.  
+* 因果関係の推論方法を知ること。Know how to infer causal relationships.  
+* データ視覚化の方法を知ること。Know how to visualise data.  
+* 開発ミクロ経済学の入門的知識を得ること。Get an accessible introduction to development microeconomics.  
+* 研究の最先端を垣間見ること。Have a glimpse of research frontier.  
+
+----  
+
+## トピック: Topics:   
+
+* 家計: 消費、家計内資源配分、労働供給、人的資本、早期児童発達、リスク、認知バイアスと変則行動など。  
+* Households: Consumption, intrahousehold resource allocation, labour supply, human capital, early childhood development, risks, cognitive biases and behavioral anomalies, etc.  
+* 企業: 物的資本、信用制約、起業家能力と経営資本など。  
+* Firms: Physical capital, credit constraints, entrepreneurship and management capital.  
+* 可能な限り多く扱う。  
+* Hope to cover as many as possible.  
+
+----
+
+## ハウスキーピングhousekeeping
+
+成績: 下記のウェイトを使います。  
+
+* クラス内短試験: 10%. $\rightarrow$ オンラインでは実施不可だったので、質問や発言によるクラスへの貢献度で代替
+* 宿題、レポート: 3-4 times, 50% or more.
+* クラス内参照可能期末試験In-class, open book (web), final exam: Up to 40%. 
+* 希望者のみレポートOptional reports: 20%.
+
+. . . 
+
+希望者のみレポート以外で100になるようにする。希望者のみレポートは100に加算。  
+
+* レポートはグループ作業も歓迎します。その際には共同作業した学生の名前を明記し、文章は各自が書くようにして下さい。文章を参照記載なしに複製した場合には、点数は共有にします(=1名分の点数を複製した人数で割ります)。
+* 期限を過ぎた提出は成績に反映されません。
+
+----
+
+その他: Other stuffs:
+
+* オフィスはありませんので、質問等は講義の後にオンラインで直接、もしくは、その他の時間にメールでお願いします。 seiroi@gmail.com
+* <Red>クラス内の質問を推奨します。</Red>
+* 講義言語: 日本語
+* リアクション・ペーパーを講義終了日の20時までにGoogle Classroomにアップロード。時間の猶予がほしい場合には都度ご相談下さい。Hard copy?  
+* 下記を書いて頂けると助かります。
+	* 感想
+	* 分かりづらかった点
+	* こういう理解で良いかという確認
+	* 参考文献照会
+	* その他疑問など
+
+----
+
+AIの利用について
+
+* 聖心女子大学のポリシー(?)  
+
+. . .
+
+::: {style="font-size: 80%;"}
+> 先生の監督の下、授業内や認められた課題などで学生に使用させることに問題はございません。  
+:::
+
+. . . 
+
+<br>
+
+伊藤の考え  
+
+* AIは上手に使えるに越したことはない  
+* でも、AIは自信満々に嘘をつく=hallucinateするし、プライバシーなど気にしない  
+* 上手な利用方法とは?  
+   * 明確な方法は知らないですが、以下のようなルールに沿って作業させています  
+     1. 自分が与えた材料だけを使わせる  
+     1. 作業の仕方をすべて指定する  
+     1. 中途成果物を戻してもらい、その都度、自分が駄目出しをする  
+
+----
+
+AIの利用について
+
+* 下手な利用方法  
+   * 情報を集めてもらう「日本人の起源は?」「このコマンドは内部で何をしているの?」  
+      * 定説や意見対立を調べずに答える  
+      * 実は内部を読んだことがないのに、コマンドの解説から類推して答える  
+      * どのような情報源から学習したか知らずに情報収集を依頼するのは危険  
+   * 判断を委ねてしまう「大意を変えずにこの文章を200字減らして」
+      * 大意の理解を誤っていると、大事な部分を削られてしまう  
+      * 自分の重視するポイント、自分の想定を理解していると仮定するのは危険  
+   * 条件を詳細にせずに尋ねてしまう「地球はこれから暑くなるの?」  
+      * 寒冷化する場所はあるかもしれない(例: ヨーロッパ)  
+      * AIに判断の自由度を与えて尋ねると、どのような条件を想定しているか分からないので危険  
+
+
+----
+
+利用例: 文章の要約
+
+出所: https://note.com/genkaijokyo/n/na34fa4ec5d76
+
+注意: <Red>未試用</Red>で、お知らせのみです  
+
+```
+ユーザーからの入力を受け取り、それを指定された文字数の範囲内に要約してください。
+要約された文章の文字数の上限と下限を指定できるようにし、文字数が範囲内に収まっていない場合には、文字を追加または削除する処理を繰り返します。
+
+1. ユーザーから次の情報を入力してもらいます。
+- 入力する文章：(ここに文章入れる)
+- 文字数の下限：（文字数の下限入力）
+- 文字数の上限：（文字数の下限入力）
+
+2. 文字数が指定された範囲内に収まるように文章を要約します。
+
+3. 要約された文章の文字数が範囲内に収まっているか確認します。
+
+4. 文字数が範囲内に収まっていない場合、以下の処理を繰り返します。
+- 文字数が上限を超えている場合: 文章から余分な単語やフレーズを削除します。
+- 文字数が下限を下回っている場合: 言い換えたり、適切な単語やフレーズを追加して、文章を拡張します。
+
+5. 最終的な要約された文章を表示し、ユーザーが満足するまで、文章を調整します
+```
+
+----
+
+利用例: 制度の図示  
+
+「マレーシアのディーゼル燃料についての補助金制度が先日改定されました。わりと制度が複雑だったので、Claude 3.5のProjectに関連する政府の文書や新聞記事を5-6個いれて、「この制度を分かりやすく図にしてください」とお願いすると、以下のような図になりました。」  
+
+![](MalaysiaDieselSubsidy.jpg){.lightbox width=500 fig-align="center"}
+
+----
+
+## クラウドやプログラムの利用
+
+
+クラウド
+
+講義資料は[伊藤のサイトhttps://github.com/SeiroIto/SHLectures](https://github.com/SeiroIto/SHLectures)で共有します  
+
+. . .
+
+受講者はGithub(ファイルのバックアップ、版管理、協業、共有のクラウド・サービス)を使って自分のファイルを管理してほしいと思います  
+
+. . . 
+
+そのために、次回までに以下の作業を自分のPCで実施してください  
+
+1. 自分のアカウントをGithubで作成(無料プランを選ぶ)  
+1. Githubでレポジトリ(ファイルを管理するフォルダ)を1つ作成する  
+   * [参照](https://qiita.com/TakuroKawakami/items/5d3a08bafb156e16491e)  
+1. Gitのプログラムをダウンロードしてインストール、プログラムに作成したGithubアカウントのレポジトリを登録する  
+   * [参照](https://www.sejuku.net/blog/73444?utm_source=blog&utm_medium=blog&utm_campaign=blog_Normal_73468)  
+
+----
+
+プログラム
+
+受講者には、文書(html, pdf, docxなど)作成にRというプログラムとrmarkdownというRのライブラリを使えるようになってほしいです  
+
+ * rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
+ * [markdown](https://ja.wikipedia.org/wiki/Markdown)は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
+ * [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdownのための道具として考えてください  
+   * Rは統計計算や描画で最も使われているプログラムです  
+
+. . .
+
+そのために、次回までに以下の作業を自分のPCで実施してください  
+
+1. Rをインストールする  
+   * 参照: [1. (windows)](https://syunsuke.github.io/r_install_guide_for_beginners/03_installation_of_R.html)、[2. (windows)](https://multivariate-statistics.com/2022/10/21/r-programming-install/)、[3. (mac)](https://bigdata-analytics.jp/install-tools/install_r_for_mac/)  
+1. Rでrmarkdownライブラリをインストールする  
+   * [参照](https://seiroito.github.io/SHLectures/InstallPackagesInR.html)  
+
+
+----
+
+::: {style="text-align: center;"}
+# 開発経済学の動機
+:::
+
+----
+
+* 開発経済学とは?:  
+   * 発展地域を分析する経済学の一分野。
+* クラスで習う普通の経済学と違うものですか?  
+   * 同じです。 
+* では、なぜ開発経済学が必要なのですか?  
+   * 必要かどうかには議論があります。特別な経済学は必要ないかもしれませんが、発展地域の課題の特性を分析する経済学は必要です。  
+* 開発経済学と普通の経済学に違いがあるとすれば何ですか?  
+   * 発展地域を扱うので、対象にする個人、家計、経済取引、保健や環境の課題、社会習慣やルールなどが違います。普通の経済学を使ってこれらを分析しますが、先進地域とは異なる視点や仮定の下で分析します。経済学は人々の意思決定を説明しようとしていることを思い出して下さい。そうした道具を異なる社会経済条件下の人々、企業、組織、政府などに適用します。これが開発経済学の中身です。
+
+----
+
+* What is development economics?  
+  * It is a branch of economics that studies the developing areas.  
+* Is it different from regular, economics that we learn in a class?
+  * No.  
+* Then, why do we need development economics?
+   * There is a debate if we need one. We may not need a special economics, but we definitely need economics to understand the nature of problems in developing areas.   
+* What is special about development economics?  
+   * <span style="font-size: 60%;">Because it deals with developing areas, we study a very different set of individuals, households, economic transations, health issues, environmental issues, social customs, rules, etc. While we still use economics as a tool to analyse issues, we need a different set of perspectives and assumptions than when we analyse issues of developed areas. Remember, economics tries to explain about people's decision making. We apply it to the people, firms, groups, organizations, governments of different countries under different socioeconomic conditions.  That is the content of development economics.</span>
+
+----
+
+今後学ぶ内容がぼんやりと分かったと思います。Now, you have a very vague picture of what you will learn.  
+
+. . . 
+
+では、開発経済学をどのように役立てるか問うて下さい。Then, please ask yourself what you make out of dev econ.  
+
+. . . 
+
+違う言い方をすれば、あなたが開発経済学を学ぶ根源的な動機です。Or, your intrinsic motivation of studying dev econ.  
+
+. . . 
+
+以下では動機を1つ挙げることができます。I can give you one good motivation.  
+
+. . . 
+
+\textcolor{red}{われわれの共感能力が不完全であるため}です。Our imperfect empathy.
+
+----
+
+:::: {.columns}
+
+:::: {.column width="60%"}
+
+Peter Singer、倫理学者、哲学者 [https://petersinger.info/projects](https://petersinger.info/projects)  
+
+::::
+
+:::: {.column width="40%"}
+
+![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PeterSinger.jpg){}
+
+::: {style="font-size: 30%;"}
+Photo by Alletta Vaandering  
+:::
+
+::::
+
+::::
+
+. . . 
+
+溺れる子どもChild in the pond問題:  
+
+. . . 
+
+ほぼ全員が「はい」  
+
+. . . 
+
+シンガーの問い  
+
+. . . 
+
+シンガー: 先進国に住むわれわれは所得の一定割合を貧しい国の住民に与える道徳的義務がある  
+
+. . . 
+
+* われわれは共感する人間でありたい、貧しい国の貧困について考えたい、と思っているはずですが、かなり不完全にしかできません。(だから、強制的に考えるように仕向けなければならない、のかもしれない。)なぜ貧しいか、何で困っているか、を理解することが、共感を行動に変える第一歩になると思います。
+
+----
+
+::::: {.columns}
+
+:::: {.column width="60%"}
+
+Denis Mukwege、婦人科医、ノーベル平和賞受賞者 https://www.mukwegefoundation.org/dr-denis-mukwege
+
+::::
+
+:::: {.column width="40%"}
+
+![](c:/seiro/docs/external/seishin/lec_slides/2024/1/DenisMukwege.jpg)
+
+::: {style="font-size: 30%;"}
+Photo by MONUSCO CC BY-SA 2.0 ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/cc-by-sa_nobackground.jpg)
+:::
+
+::::
+
+:::::
+
+DRCでの(戦争)暴力被害者女性の治療と啓発活動  
+
+[NHKこころの時代「沈黙は共犯 闘う医師」](https://www.nhk.jp/p/ts/X83KJR6973/episode/te/VW23V46YQ4/)
+
+. . . 
+
+戦争・災害が起こると暴力が始まる... &larr; 平和時から暴力の根がある  
+
+. . . 
+
+反無関心: (性)暴力、戦争での殺戮は被害者を物として捉えることで可能になる  
+
+. . . 
+
+非紛争地でも平時から他者への尊敬と差別を許さない行動: 暴力を減らせる  
+
+
+* 暴力はどこの社会でも発生するので、行動は自分の周囲でいい
+
+----
+
+::::: {.columns}
+
+:::: {.column width="60%"}
+
+John Rawls、政治哲学者 
+
+::::
+
+:::: {.column width="40%"}
+
+![](c:/seiro/docs/external/seishin/lec_slides/2024/1/JohnRawls.jpg)
+
+::: {style="font-size: 30%;"}
+Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicDomain.jpg)
+:::
+
+::::
+
+:::::
+
+. . . 
+
+「正義論」A theory of justiceで許容できる不平等を問うた
+
+. . . 
+
+*Original positionによる思考実験:* People deliberately select what kind of society they would choose to live in if they did not know which social position they would personally occupy.  
+
+. . . 
+
+*Veil of ignorance:* OP思考実験では、自分が社会のどの地位を占めるか分からないと想定。
+
+. . . 
+
+* 性別、宗教、人種、年齢、知力、財力などについて分からない  
+* この想定下で各人が許容できる分配の不平等を問うた  
+
+. . . 
+
+特定のグループを差別する分配は誰も提案しないし、最悪の状態にある人たちを救おうとする  
+
+
+* 自分が恵まれない条件化にあるかもと思えば助けたくなる
+
+----
+
+:::: {.columns}
+
+::: {.column width="45%"}
+:::: {.nonincremental}
+* シンガー: 地球の裏側まで共感せよ  
+
+<br>
+
+* ムクウェゲ: 共感は自らの周囲からでいい、共感するために平時から他者尊敬と差別撤廃  
+
+<br>
+
+* ロウルズ: 共感すべき理由=無知のヴェイル  
+::::
+:::
+::: {.column width="50%"}
+::: {.fragment}
+* あらゆる社会に対して発した考え方
+* 普遍的で分かりやすいけど強烈
+:::
+::: {.fragment}
+* 多様な人がいる社会にふさわしい考え方  
+* 良さそうだけど、ふわっとしていて手段が分かりにくい  
+:::
+
+<br>
+
+::: {.fragment}
+* 社会から切り離した考え方  
+* 理性的で思考実験向きだけど、結論・手段を導くには専門家が必要  
+:::
+:::
+
+::::
+
+. . .
+
+開発経済学はどのような条件の下に置かれているかを理論モデルのなかに位置づけ、(機会平等を期するために、資源を無駄なく利用するために)どのような介入が必要か考える  
+
+. . . 
+
+共感能力が乏しくても、論理的に整理することで、問題を理解して<Red>解決策を提示</Red>できる
+
+<!--
+
+----
+
+* シンガー: 地球の裏側まで共感せよ
+
+  ::: {.fragment}
+  * あらゆる社会に対して発した考え方
+  * 普遍的で分かりやすいけど強烈
+  :::
+
+* ムクウェゲ: 共感は自らの周囲からでいい、共感するために平時から他者尊敬と差別撤廃  
+
+  ::: {.fragment}
+  * 多様な人がいる社会にふさわしい考え方  
+  * 良さそうだけど、ふわっとしていて手段が分かりにくい  
+  :::
+
+* ロウルズ: 共感すべき理由=無知のヴェイル  
+
+  ::: {.fragment}
+  * 社会から切り離した考え方  
+  * 理性的で思考実験向きだけど、結論・手段を導くには専門家が必要  
+  :::
+
+
+. . .
+
+開発経済学はどのような条件の下に置かれているかを理論モデルのなかに位置づけ、(機会平等を期するために、資源を無駄なく利用するために)どのような介入が必要か考える  
+
+. . . 
+
+共感能力が乏しくても、論理的に整理することで、問題を理解して<Red>解決策を提示</Red>できる
+
+-->
+
+----
+
+開発経済学を学ぶ動機をもう1つ挙げられます  
+
+. . . 
+
+<Red>世界を豊かにするため</Red>です  
+
+. . . 
+
+インドには10億人以上の人がいます  
+
+. . . 
+
+その20%前後が文盲です  
+
+. . . 
+
+2億人が追加的に識字人口に加わると世界はどう変わるでしょうか  
+
+* 識字人口1億人に1人が素晴らしい発見をする場合、素晴らしい発見が2個増えます  
+* インドは若年人口が半分以上を占め、5億人の20\%である1億人が大卒になるとし、大卒人口1000万人に1人が素晴らしい発見をすれば、発見は10個増えます  
+* 新たな11-12個の素晴らしい発見によって、世界とあなたの生活も豊かになります
+
+. . .
+
+知識(発見)は廃れず誰でも使えます。公共財。
+
+* 知識生産に関わる人が多いほど所得の成長率は高まります[@Kremer1993]  
+* 知識生産人口が減少すると成長しなくなります[@Jones2022]
+
+----
+
+I want you to rise above the cycle of punishments and rewards.  
+
+. . . 
+
+This [my teaching] is information, and you can do what you want with this information.  
+
+. . . 
+
+If you want to learn something, I cannot stop you.  
+
+. . . 
+
+If you do not want to learn it, I cannot teach you.  
+
+. . . 
+
+Wynton Marsalis, a jazz trumpeter,  
+a teacher/director of Juilliard Jazz Studies program  
+[Freakonomics Radio](http://freakonomics.com/archive/) Episode 355, 01:16:30.
+
+[Wynton](https://wyntonmarsalis.org/images/press/TwoMenWithTheBlues_cover_back.jpg)
+
+----
+
+::: {style="text-align: center;"}
+# 経済学を使う動機
+:::
+
+----
+
+## 例1: 中国の塾授業料上限規制
+
+::::: {.columns}
+
+:::: {.column width="60%"}
+```{r, echo=FALSE, fig.align='center', out.width='92.5%', fig.show='animate'}
+knitr::include_graphics("c:/seiro/docs/external/seishin/lec_slides/2024/1/ChinaClamSchoolFeeControl_Nikkei20201Sep07.jpg")
+```
+::::
+
+:::: {.column width="40%"}
+
+* [目的] 家計の教育費を抑え、養育費用を下げて出産増加を狙う。  
+* [手段] (塾の収入)授業料上限を設定。(塾の支払)塾講師賃金や広告宣伝費に上限を設定。  
+* 授業料を下げると、塾は? 家計は?  
+* 賃金や広告宣伝費を下げると塾は?  
+
+::: {.fragment}
+中国共産党は塾への統制で少子化を防ぐことができるでしょうか。  
+:::
+
+::: {.fragment}
+非営利団体に登記、とはすごい  
+:::
+
+::::
+
+:::::
+
+----
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+[DSの図](http://seiroito.github.io/SHLectures/lec_slides/2024/1.pdf#page=82)
+
+:::
+
+::: {.column width="40%"}
+
+::: {.nonincremental}
+* 需要曲線: ある価格のときに消費者が買おうとする量、これをあらゆる価格水準に適用したもの  
+* 供給曲線: ある価格のときに生産者が売ろうとする量、これをあらゆる価格水準に適用したもの  
+* 均衡: 需要曲線と供給曲線の交点が均衡。買いと売りが一致するため。%生産者が価格を高めるよう求めても需要が不足するので交点まで戻る。消費者が価格を低める求めても供給が不足するので交点まで戻る。交点から離れない。  
+:::
+
+:::
+
+::::
+
+----
+
+授業料統制、費用統制の影響  
+
+. . . 
+
+超過需要が発生し、同じ授業料を払っても塾には入れない人が出てくる。  
+
+::: {.incremental}
+* 塾側に費用を切り下げるように強要すると、塾にサービスを提供している人の稼ぎが減る。塾オーナーが自分の取り分を削る場合には塾オーナーの稼ぎが減る。  
+   * 短期: 強制力に屈して我慢するだろう。供給曲線が下に移動。  
+   * 長期: 塾講師や塾オーナーが減り、同じ価格での塾サービスの供給が減る。供給曲線が上に移動。最初より悪化するかも。  
+* ほぼ確実に養育費用は下がらない。よって、ほぼ確実に出生率も上がらない。  
+:::
+
+. . . 
+
+Take away: 市場を強権で統制しても、望んだ結果を都合よく得られると限らない。  
+
+----
+
+では、どうすれば養育費用を下げられるか。  
+
+. . . 
+
+養育費用とは子どもの保護者が養育のために支払う費用  
+
+::: {.incremental}
+* 直接費用: 子どもの生活費、保育費、教育費など。  
+* 機会費用: 子どものために時間を使うことで失う所得。高所得者ほど大きい。  
+:::
+
+. . . 
+
+養育サービス内容が同じ場合、一人当たり(とくに女性)の所得水準が上がる限り=国が豊かになる限り  
+
+
+::: {.incremental}
+* 機会費用は上昇、所得と並行して上昇  
+* 直接費用は上昇する可能性はあるが、所得と比べて相対的に低下  
+:::
+
+----
+
+では、どうすれば養育費用を下げられるか。  
+
+. . . 
+
+養育費用とは子どもの保護者が養育のために支払う費用  
+
+::: {.incremental}
+* 直接費用: 子どもの生活費、保育費、教育費など。  
+* 機会費用: 子どものために時間を使うことで失う所得。高所得者ほど大きい。  
+:::
+
+. . . 
+
+養育サービス内容が同じ場合、一人当たり(とくに女性)の所得水準が上がる限り=国が豊かになる限り  
+
+
+::: {.incremental}
+* 機会費用は上昇、所得と並行して上昇  
+* 直接費用は上昇する可能性はあるが、所得と比べて相対的に低下  
+:::
+
+
+----
+
+では、どうすれば養育費用を下げられるか。  
+
+. . . 
+
+今は直接費用を低下させる政策が主  
+
+* 保育園や学校への補助金、保育無償化・減免  
+
+. . . 
+
+機会費用を下げる政策  
+
+* 保育時間を減らす手段(保育サービス供給)拡大  
+* 子どもペナルティ軽減義務化(出産育児休業の整備)  
+* 子ども手当は可処分所得を増やすので、子どもを持つことの機会費用を減らす  
+
+. . . 
+
+どれが最も効果が大きいか  
+
+. . . 
+
+研究で明らかにするしかない  
+
+. . . 
+
+日本: 待機児童、待機学童、女性の管理職登用目標30%(2022年、課長で11.5%)
+
+
+----
+
+## 例2: ボックス禁止政策(アメリカ) Ban The Box policy in the US.
+
+. . . 
+
+* 背景
+  * 収監は犯罪対策としては費用が高い。  
+  * 637,000人の服役囚が毎年出所するが2/3が3年以内に再服役する。  
+     * 2001年生まれの男性のうち、アフリカ系32%、ヒスパニック系17%、白人6%が1度は服役する。収監は再犯防止効果を上げていない。とくにアフリカ系男性。  
+* 雇用は効果あり: 雇用機会を増やすとrecividism (再犯)確率が減ることがデータで示されている。  
+* `The Box': 	求職応募用紙  
+
+. . . 
+
+```
+Have you ever been arrested and imprisoned?  
+❏ Yes.  
+❏ No.  
+```
+
+----
+
+従来から、雇用主はYesの人を落としていました。
+
+* 職場での犯罪を避けるため。
+* 職場の犯罪は生産費用を高めるため。
+
+. . . 
+
+これは就業差別です。
+
+* 前科のある人をまだ起こしてもいない犯罪を根拠に雇用しないため。  
+
+. . . 
+
+不公平に見えますし、前科のある人に厳しすぎるように見えます。
+
+. . . 
+
+でも、雇用主にとっては経済合理性があります。なので、無くなりません。  
+
+----
+
+企業が前科のない人に支払うことを厭わない賃金は下記  
+
+::: {style="font-size: 80%;"}
+$$
+\begin{aligned}
+\mbox{前科のない人の賃金} \leqslant &\mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  
+&\hspace{2em}+\mbox{前科のある人の賃金}
+\end{aligned}
+$$
+
+* (誰もが生産性は同じと仮定)
+:::
+
+. . . 
+
+「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値がプラスである限り、前科のある人の賃金は前科のない人の賃金よりも少なくなる
+
+. . . 
+
+* 前科のある人を雇うと犯罪により期待値で10万円費用が余計にかかるとき  
+&rArr; 10万円余計に払っても犯罪歴のない人を雇う、前科のある人を(10万円安く雇うことは明確な差別になるので)雇わない
+
+----
+
+* Ban The Box movement: 	「雇用主が前科を知らなければ、job-readyな前科のある人は面接でチャンスを得られる。」犯罪歴を尋ねるのを採用の一定段階以降まで遅らせるよう雇用主に求めた。Law passed in Hawaii (1998) ... Federal Government employment (2015). 34 states and DC in 2015.
+
+. . . 
+
+意図はよし。BTB政策は前科のある人を助け、犯罪の社会費用を減らそうとしています。The intention is good. BTB policy wants to help the ex-offenders and reduce the costs of crimes to the society.  
+
+. . . 
+
+政策は意図した効果があったでしょうか? Did the policy have the intended impacts?  
+
+. . . 
+
+What do you expect the impacts of BTB policy?
+
+$$
+\left\{
+\begin{array}{l}
+\mbox{a. Increase}  
+\mbox{b. Do not change}  
+\mbox{c. Reduce}
+\end{array}
+\right\} \ \mbox{employment and }
+\left\{
+\begin{array}{l}
+\mbox{reduce}  
+\mbox{do not change}  
+\mbox{increase}
+\end{array}
+\right\} \ \mbox{recividism}.
+$$
+
+----
+
+@DoleacHansen2020 の示した意図せざる結果unintended consequences  
+
+. . . 
+
+若い黒人男性: 
+
+<!--
+https://github.com/quarto-dev/quarto-cli/discussions/3224
+-->
+
+$$
+\left\{
+\begin{array}{l}
+\mbox{}  
+\phantom{\mbox{b. Do not change}}  
+\class{fragment}{\mbox{c. Reduce}}
+\end{array}
+\right\} \ \mbox{employment and }
+\left\{
+\begin{array}{l}
+\mbox{}  
+\phantom{\mbox{do not change}}  
+\class{fragment}{\mbox{increase}}
+\end{array}
+\right\} \ \mbox{recividism}.
+$$
+
+
+----
+
+::: {.fragment fragment-index=1}
+推計された効果:
+
+* 若い (25-34) アフリカ系アメリカ人YAAs男性の雇用は3.4%減少
+* 若いヒスパニック系YHs男性の雇用も減少したが、推計値は不正確で統計学的にゼロと違わなかった。their estimates are imprecise and they are statistically not different from zero. 
+	* 失業率の高い地域で減少幅が大きかった。
+	* YAAs, YHsが人口で占める割合が高い地域では減少しなかった &larr; Cannot discriminate when majority residents are AA or H.
+* 以下のグループは雇用が増えた: 年齢が上(35-64)で高卒AA男性、年齢が上で大卒AA 女性、年齢が上で高卒H女性。
+:::
+
+
+----
+
+何が起こっているのでしょうか?  
+
+. . . 
+
+雇用主は、犯罪歴を知ることができないと、他の情報から犯罪歴の有無を類推しようとします。  
+
+. . . 
+
+観察可能な属性: Race, age, gender, education, locality, etc.  
+
+. . . 
+
+雇用主は<Blue>人種、年齢、ジェンダー、学歴</Blue>などを使った模様。<Blue>若い高卒アフリカ系男性</Blue>は避けられました。犯罪歴を持つ確率が高いため。
+
+* <Orange>統計的差別statistical discrimination:</Orange> 観察可能な属性を使ってネガティブな属性を類推し差別すること。ネガティブ・ステレオタイピング。Using observable characteristics to infer a negative trait (and discriminate). A negative stereotyping.  
+* <Orange>選好による差別taste based discrimination:</Orange> 好みや信念による差別。Discrimination out of preferences or beliefs. 
+
+. . . 
+
+犯罪歴の可能性が低い: 年齢が上のアフリカ系男性、年令が上の大卒アフリカ系女性、年令が上の高卒ヒスパニック女性、白人  
+
+----
+
+情報を奪われた企業は、観察上リスクの最も高いグループを避け、観察上リスクの低いグループで代替  
+
+. . . 
+
+この解釈が正しければ、以下が予想できる  
+
+* もしも、全ての人がアフリカ系だったら、BTB政策は効果が無いはず。  
+  * 全ての人を却下できないため。アフリカ系人口比率の高い南部では効果は無かった。  
+* 労働市場が緩むと代替できるグループの人数が増えるので、BTB政策の効果が大きくなるはず。  
+  * 失業率が高い地域・時期ではBTB政策の影響が強まった。  
+
+. . . 
+
+想定したメカニズムが存在すれば成立する現象を確認 = 解釈の正しさの裏付け  
+
+----
+
+* 若いアフリカ系男性を採用候補に考えないことが、職場犯罪を避ける安価な方法になってしまっています。
+* 採用には多額の費用がかかるため、後で犯罪歴を尋ねて落とし、採用費用を無駄にする可能性が高い人をそもそも選考対象にしない方が費用が低い。  
+* 雇用主から情報を奪うことで、職場犯罪を防ぐという根源的な問題を解決できません。
+* 犯罪歴のある人の雇用を増やしたいのであれば、犯罪歴のある人を訓練し、雇うことで利益が増えるようなインセンティブを企業に与える必要があります。
+   * 例えば、補助金など。
+
+---- 
+
+なぜBTB政策? 政府に費用がかからないので実施しやすい。象徴的でアピールしやすい。  
+
+* 意図はよいが、雇用主の反応を考えない政策。基本的な経済理論(「同じものなら安い方が選ばれる」)を考えれば、雇用主の反応は予想できたはず。残念。  
+* BTB政策は若いアフリカ系男性の雇用を奪うことで、雇われていれば何もしなかった人を犯罪に走らせた可能性すらあります。重ねて残念。
+
+
+----
+
+::: {style="text-align: center;"}
+# 開発経済学の今まで
+:::
+
+----
+
+* 50-60年代:  ビッグ・アイディアの時代: 貧困の罠(ビッグプッシュ)、経済成長モデル、移転問題、ルイス・モデルなど。市場機能は軽視されがち。  
+* 70年代:  「新古典派の再興」Neoclassical resurgence。教科書的経済理論への回帰。貧しいが合理的poor but rational、最適化する経済主体として分析、ミクロ経済モデルとミクロデータを組み合わせた研究の始まり。  
+* 80-90年代:  市場の不完全性とインセンティブに注目。情報の非対称性、不完備契約、家計内資源配分。市場の失敗を修正する介入で厚生改善。  
+* 00年代:  制度・慣行への注目と実験(ランダム化比較試験randomised controlled trials, RCTs)の流行。制度・慣行は市場の失敗への対応として捉える。実験は"Let's take the con out of econometrics"への対応[@Leamer1983]。  
+* 10年代:  認知バイアスに注目。心理学と経済学の融合=行動経済学の応用。貧しくて非合理的。誰もが非合理的。  
+* 20年代:  非調査目的データへの着目。行政データや衛星画像などの活用。AIなどデータを基盤とした予測技術の利用。  
+
+
+----
+
+::: {style="text-align: center;"}
+# 開発の概観
+:::
+
+
+----
+
+::: {#fig-Angus1 layout-ncol=2}
+
+![AD0-2000](1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
+
+![BC4000-2000](1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
+
+Source: Angus Maddison. I made up \$200 in 40000BC. 
+:::
+
+. . .
+
+人類史上、現代(19世紀以降)が異常なことが分かります 
+
+----
+
+次のページで1960年からの一人あたり所得が図に描かれています。どのようなパタンを予想しますか。低所得国は豊かになっているでしょうか。  
+
+. . .
+
+以下は2008年時点の一人あたり所得です。大きな格差です。1960年から差は縮まったでしょうか。  
+
+::: {style="font-size: 80%;line-height: 0.8;"}
+```{=latex}
+\begin{tabular}{>{\scriptsize\hfil}p{.5cm}<{}>{\scriptsize\hfil}p{3cm}<{}>{\scriptsize\hfil}p{2cm}<{}>{\scriptsize\hfil}p{3cm}<{}>{\scriptsize\hfil}p{2cm}<{}}
+\rowcolor{gray90}
+\makebox[.5cm]{} & \makebox[3cm]{poorest} & \makebox[2cm]{poor USD} & \makebox[3cm]{richest} & \makebox[2cm]{rich USD}\\
+1 & Zaire & 249 & Hong Kong & 31704\\
+2 & Burundi & 479 & USA & 31178\\
+3 & Niger & 514 & Norway & 28500\\
+4 & Centr. Afr. Rep. & 536 & Singapore & 28107\\
+5 & Comoro Islands & 549 & Ireland & 27898\\
+6 & Togo & 606 & Australia & 25301\\
+7 & Guinea Bissau & 617 & Canada & 25267\\
+8 & Guinea & 628 & Switzerland & 25104\\
+9 & Sierra Leone & 686 & Netherlands & 24695\\
+10 & Haiti & 686 & Denmark & 24621
+\end{tabular}
+```
+:::
+
+----
+
+::: {#fig-Angus2 layout-ncol=2}
+
+![自然数目盛](1/world_income_1950-2008_natural.jpg){.fragment #fig-Angus21}
+
+![対数目盛](1/world_income_1950-2008.jpg){.fragment #fig-Angus22}
+
+Source: Angus Maddison.  
+:::
+
+::: {style="font-size: 80%;line-height: 0.8;"}
+* 大きな値と小さな値を同時に表示するとき、対数目盛にすると小さい値がよりばらけて見える...はずですが...  
+:::
+
+----
+
+```{r world bank 2017 constant PPP pc GDP, message = F, warning = F, echo = F}
+#### downloaded from https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD
+#### GDP per capita, PPP (constant 2017 international $) GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP at purchaser's prices is the sum of gross value added by all resident producers in the country plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2017 international dollars.
+library(data.table)
+grepout <- function(str, x)
+  # returns element of match (not numbers)
+  x[grep(str, x, perl = T)]
+y <- fread("1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
+  header = T, skip = 2, sep = ",")
+setnames(y, 
+  grepout("^1|^2", colnames(y))
+  , paste0("pcdgp.", grepout("^1|^2", colnames(y)))
+  )
+yL <- reshape(y, direction = "long", idvar = c("Country Name", "Country Code"),
+  varying = grepout("^pc", colnames(y)))
+yL[, c("indicator", "Indicator Name", "Indicator Code", "V67") := NULL]
+setnames(yL, c("name", "code", "year", "value"))
+yL <- yL[year >= 1990]
+#### yL[value > 75000, .(year, num=1:.N), by = name][num==1]
+library(ggplot2)
+yL2 <- yL[!(code %in% code[value > 75000])]
+g <- ggplot(data = yL2, 
+  aes(x = year, y = value, group = code, colour = code)) +
+  geom_line(size = .2) +
+  geom_line(data = 
+  yL2[code %in% code[value[year == 2019] > value[year == 2019 & code == "JPN"]], ]
+    , size = .5)+
+  geom_line(data = yL2[code == "JPN", ], size = 2, colour = "red")+
+  labs(
+      title = "",
+      x = "年",
+      y = "１人あたりGDP (2017年国際ドル表示、PPP換算)"
+  ) +  
+  scale_x_continuous(breaks = 1990:2020, minor_breaks = NULL)+
+  theme(
+    strip.text.x = element_text(color = "blue", size = 6, 
+      margin = margin(0, 1.25, 0, 1.25, "cm")), 
+    axis.text.x = element_text(size = 5, angle = 45, vjust = 1, hjust = 1), 
+    #axis.text.x = element_text(size = 6, vjust = .5, hjust = .5), 
+    axis.text.y = element_text(size = 6), 
+    axis.title.x = element_text(size = 7, vjust = .5, hjust = .5), 
+    axis.title.y = element_text(size = 7, vjust = .5, hjust = .5), 
+    legend.position="none"
+  )
+cairo_pdf(
+  "1/pcPPPGDP1990-2020.pdf"
+  , width=14/2.54, height=8/2.54, 
+  family = "Meiryo")
+print(g)
+whatever <- dev.off()
+ggsave(
+   "1/pcPPPGDP1990-2020.jpg"
+  , g, width = 14, height = 8, units = "cm",
+  dpi = 300
+ )
+glog <- g +
+  scale_y_log10(breaks = c(1000, 3000, 5000, 10000, 20000, 40000, 80000))
+cairo_pdf(
+   "1/LogpcPPPGDP1990-2020.pdf"
+  , width=14/2.54, height=8/2.54, 
+  family = "Meiryo")
+print(glog)
+whatever <- dev.off()
+ggsave(
+   "1/LogpcPPPGDP1990-2020.jpg"
+  , glog, width = 14, height = 8, units = "cm",
+  dpi = 300
+ )
+```
+
+::: {#fig-pcincome layout-ncol=2}
+
+![自然数目盛](c:/seiro/docs/external/seishin/lec_slides/2024/1/pcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome1}
+
+![対数目盛](c:/seiro/docs/external/seishin/lec_slides/2024/1/LogpcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome2}
+
+Source: World Bank [https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)
+:::
+
+::: {style="font-size: 80%;line-height: 0.8;"}
+* 赤が日本  
+* 2019年時点で日本よりも豊かな国は太線  
+* それ以外は細線  
+* (1990年に20000ドル以下で日本を追い抜いたのはマルタと韓国)  
+:::
+
+----
+
+The message is clear.  
+Poor countries are not catching up the rich countries.  
+
+. . .
+
+なお、1990年代以降は貧しい国も先進国にキャッチアップしつつあるという研究が最近出てきています[@KremerWillisYou2022]が、事実は認識されたものの、推計方法への注文が付いており[@AcemogluMolina2021]、ゆっくりキャッチアップしつつある理由、持続するかなど、解釈にはコンセンサスができていません
+
+* 人口大国(1980年代以降の中国、90年代以降のインド)で市場自由化が進んだことが理由  
+* インドや中国で極貧層が大幅に減ったことに比べれば、先進国での所得格差の広がりは小さな問題、自由市場を堅持すべしという意見もあります  
+
+---- 
+
+国の平均値を比べるだけだと貧困が見落とされるという指摘もあります[@PandeEnevoldsen2021]
+
+. . . 
+
+* 中所得国になった国(インド、バングラデシュ、ナイジェリアなどの人口大国)にも多数の貧困層がいる
+
+. . . 
+
+つまり、貧困問題を考えるために低所得国だけを対象にすると、多くの貧困層を見失います 
+
+* 低所得国と近かった中所得国が高所得国との差を縮めると各国間の所得不平等は減るが、中所得国がさらに高所得国に近づくと低所得国と中所得国の差が広がるため、いずれは各国間の所得不平等が増すという指摘もあります[@Kanbur2022]
+
+----
+
+:::: {.columns}
+
+::: {.column width="65%"}
+![](1/NonConvergence.jpg)
+:::
+
+::: {.column width="30%"}
+* 経済成長理論の入門教科書の図  
+* convergence=収斂、キャッチアップ  
+* キャッチアップするには所得の低い国ほど成長率が高い必要あり  
+:::
+
+::::
+
+* 横軸1960年の1人当たり対数所得、縦軸1960-2000年成長率とすると、右下がりの関係が必要  
+* 僅かに右上がり=キャッチアップなし
+
+----
+
+:::: {.columns}
+
+::: {.column width="65%"}
+![](1/ConvergenceIn2000s.jpg)
+
+@KremerWillisYou2022
+:::
+
+::: {.column width="30%"}
+* 2007: 2007-2017
+:::
+
+::::
+
+----
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![](1/InequalityWithinBetweenCountries.jpg)  
+:::
+
+::: {.column width="70%"}
+Gini coefficientジニ係数: 分配の偏りを示す指標  
+
+* 最小値は0: 	全員が同じ所得を持つ状態
+* 最大値は1: 	1人がすべての所得を持つ状態
+
+[@IMF2017Sep](https://www.imf.org/-/media/Files/Publications/fiscal-monitor/2017/October/pdf/fm1702.ashx)  
+
+* 全世界の所得分布のジニ係数: 0.68(1988)&rarr;0.62(2013)
+* 国$c$個人$i$の(対数)所得$y_{ci}$と世界平均(対数)所得$\bar{y}$との差
+=国間の差+国内の差
+$$
+y_{ci}-\bar{y}=\hspace{2em}\underbrace{\bar{y}_{c}-\bar{y}}_{\hspace{-2em}\scriptsize{\mbox{$c$国平均と世界平均の差}}}\hspace{4em}+\hspace{2em}\underbrace{y_{ci}-\bar{y}_{c}}_{\scriptsize{\mbox{個人$i$と$c$国平均の差}}}
+$$
+
+	* <span style = "font-size: 70%;line-height: 0.8;">国間差平均: 0.80(1988)&rarr;0.49(2013), 国内差平均: 0.20(1988)&rarr;0.27(2013)</span>
+:::
+
+::: {.fragment}
+全体では格差は減ったが、国平均値の格差が減り、各国内の格差が増えた
+:::
+::: {.fragment}
+低所得国で一部の人々が富裕になり低所得国の平均値は高まったが貧困層は残っている
+:::
+
+::::
+
+----
+
+::: {style="text-align: center;"}
+# 貧困の罠
+:::
+
+----
+
+::: {style="text-align: center;"}
+# 開発経験をどのように学ぶか
+:::
+
+----
+
+----
+
+[Child in the pond question:](https://www.thelifeyoucansave.org.au/child-in-the-pond/)  
+
+> You are walking in an isolated park, passing by a pond, where you see a child drowning. There is no one around, and you do not have a phone to call for a help. You are good at swimming and can save the child by jumping into the water. But you have expensive shoes on. Jumping into the water will ruin them, a loss of USD 200. If you do not help the child, the child will die.
+
+Would you jump into the pond to save the child?
+
+----
+
+#### References
+
+::: {#refs}
+:::
