@@ -1258,6 +1258,148 @@ $$
 
 ----
 
+資本市場均衡線がS字直線で、極端に高い位置や低い位置にない限り、45度線と3つ交点を持つ
+
+. . . 
+
+* 厳密には、S字直線の緩やかな傾きが45度未満、急な傾きが45度以上で、Sの下部分が45度線よりも高い位置で始まり、急な傾きになる前に1つ交点を持てば、合計で3つ交点を持つ  
+
+. . . 
+
+経済が動学的に安定な低位均衡にいると、高位均衡には自然に移らない。
+
+* $H$に行くためには以下が必要:
+	*  $S$線を引き上げて高位均衡への収束経路に乗せる制度変化。
+	* 経済を一気に右側に移して高位均衡への収束経路に乗せるビッグ・プッシュ。 大量の資本$k$を投下 (``マーシャル・プラン''). 
+* どの制度を変化させるか? どの資本を増やすか? どうやって?
+
+----
+
+J-PAL to the rescue!
+* Abdul Ratif Jameel Poverty Action Lab at MIT.
+* \sout{Homepage: ``729 ongoing and completed randomized evaluations in 67 countries''.}
+* ``1094 randomized evaluations...in 91 countries,'' ``from clean water to microfinance to crime prevention.'' 
+* 大変な数
+* ランダム化比較試験RCTは政策の効果を歪み無く示すことができる
+	* なぜ歪まないか? 理由はコースの後半で学びます。
+* RCTはパイロット研究pilot studyです。パイロット研究はロジスティクスや費用対効果などを示すことができます。
+
+----
+
+Examples: A summary of their RCTs on \href{https://www.povertyactionlab.org/policy-lessons/education/increasing-test-score-performance}{learning (web page in 2020)}.
+
+* When access to education is extremely limited, getting children into school can lead to large learning gains (Afghanistan).
+* Motivating students to go to school and learn can be very cost-effective, by scholarship (Kenya), by conditional cash transfer (Malawi).
+* There is little evidence that simply increasing the number of teachers or teaching resources improves learning (India, Kenya, Kenya, Kenya). 
+* Teaching children according to their actual learning levels is the most consistently effective at improving learning, and is also very cost-effective (Kenya, Kenya, India, India).
+
+----
+
+Examples: Learning (continued).
+
+* Incentives for teachers can lead to significant learning gains if they are objectively administered and structured in such a way as to discourage ``teaching to the test'' (India, Kenya, India).
+* Adding an extra teacher on a short-term contract can produce significant learning gains at a relatively low cost (Kenya).
+* Grants provided to communities as part of empowerment programs can lead to better learning (Gambia, Indonesia).
+
+----
+
+ここで変なことは何でしょう? OK, what is wrong with this picture?
+
+. . . 
+
+* 途上国はインドとケニアだけではありません
+* (Not shown) J-PALは一緒に仕事する組織が当然限られます。India = Maharashtra, Telangana, Rajasthan; Kenya = 西部の州.
+* ``India'' $\neq$ India, ``India'' $=$ 少数の州. ``Kenya''も同じ
+
+. . . 
+
+* 政策効果の因果推計causal inference (教訓the lesson learned)が他の地域に当てはまらないとき、推計は\textcolor{pink}{外的妥当性external validity}を欠く、といいます。リストした研究内容は外的妥当性が限られています。 
+* 推計が因果関係を捉えている(識別するidentify)とき、推計には\textcolor{pink}{内的妥当性internal validity}がある、といいます。
+
+----
+
+* これは厳しすぎる批判かも。J-PALは重要な知見のある研究をたくさん実施。
+* しかし、リスト内容からは、小規模RCTを使った方法に限界があることが分かります。
+*  2019年にJ-PALのBanerjee, Duflo, Kremerがノーベル経済学賞を受賞。
+
+彼らの研究の集大成: \textit{Poor Economics} written by \citet{BanerjeeDuflo2011book}.
+
+. . . 
+
+* 素晴らしい本。読みやすい。開発経済学に興味のある誰もが読むべき。
+
+. . . 
+
+@Ravallion2012, @Rosenzweig2012 は批判:
+
+* 小規模なエビデンスを積み上げるとビッグ・プッシュになるのか?
+
+. . . 
+
+* 的を射ている。他の研究方法と組み合わせれば良いのでは?
+
+. . . 
+
+* 行政データなどの大規模データを使った観察研究でも知見はある。
+
+. . . 
+
+@HeckmanSmith1995, @Heckman2010bridgegaps はRCTの利用と誘導型推計を疑問視:
+
+* 全ての政策を実験・ランダム化できるのか? できない。
+* ランダム化=政策実施か? 二重盲検(double blind) RCTでないと、ランダム化バイアスrandomisation biasは必ずある。
+* なぜ効果があった・無かったのか? メカニズムを示す理論はあるのか?
+	* ただし、誘導型推計でも理論を検定することは可能
+
+----
+
+彼らによれば[@BanerjeeDuflo2011book]、彼らの研究の前は貧困には2つのアプローチがありました。
+
+. . . 
+
+* Save them.:  助けが必要 ... a Big Push [@Sachs2006]。Milleneum Village Project.
+* Can't save them.:  放っておこう。自分たちで豊かにならないといけない\citep{Easterly2006}。
+
+. . . 
+
+@BanerjeeDuflo2011book は中間を示したと主張します。*Poor Economics*以前の時代を単純化しすぎていないか、ちょっと疑問が残ります。
+
+----
+
+[Milleneum Villages](http://millenniumvillages.org/)はどうなったでしょうか? [ODI's review page](http://www.odi.org/projects/765-millennium-villages-project-review)の引用.
+
+. . . 
+
+> The project is led by Professor Jeffrey Sachs of the Earth Institute, Columbia University. The five year project was launched in 2006 and targets 80 Millennium Villages across ten African countries. It provides low-cost interventions in agriculture and nutrition, health, water and sanitation, education, infrastructure and the environment to the villages at a cost of $120 per person per year.
+
+. . . 
+
+> (In summary) The MVP has achieved results and has demonstrated the impact of greater investment in evidence-based, low-cost interventions at village level on progress towards the MDGs. 
+
+. . . 
+
+レビューはポジティブな内容です。その回答Sachs et al. (2008)は感謝していました。
+
+----
+
+* サックスはMV Project [``is flourishing''](https://www.project-syndicate.org/commentary/jeffrey-d-sachs-defends-the-track-record-of-the-millennium-villages-project)といいます。
+* Bill Gatesはサックスを賞賛しているものの[``Sachs is the Bono of economics''](https://www.project-syndicate.org/commentary/bill-gates-explains-why-the-millennium-villages-project--though-a-failure--was-worth-the-risk)、MVPの成果に批判的です。[Bono](https://www.rte.ie/archives/exhibitions/937-u2/291767-bono-remembers-the-early-years/), [Bono2](https://upload.wikimedia.org/wikipedia/commons/6/60/Bush_and_Bono.jpg)
+* しかし...成果についてなぜ意見が割れるのでしょうか。だって、成果に関するデータをチェックすれば1は1、2は2なので意見を異にする点はないのでは?
+* 答え: MV Projectの評価デザインに本質的な欠点がある([The Economist article](http://www.economist.com/blogs/feastandfamine/2012/05/jeffrey-sachs-and-millennium-villages))ので、見方が割れます。
+	* サックスは天才なので、彼がなぜこんなデザインにしたのか不思議です。
+	* もしかすると、自由にデザインを選べなかったのかも ... コースの後半で扱います。
+* この講義では、欠点が何か、修正する方法を学びます。
+
+----
+
+* Poverty trap:  A vicious cycle that keeps the economy in poverty.
+* Big Push:  A set of policies that moves the economy to a convergent path to ``high'' equilibria.
+* Milleneum Development Villages:  An attempt to mimic a Big Push that intervenes the African villages in every aspect of life.
+* J-PAL:  A research centre focusing on randomised controlled trials (RCTs) to produce practical policy lessons.
+* internal validity:  An unbiased causal inference.
+* external validity:  An unbiased causal inference with applicability beyond studied subjects.
+
+
 ----
 
 ## Child in the pond question:
