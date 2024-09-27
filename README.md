@@ -12,5 +12,5 @@
 
 Lecture slides 2024 will be placed here.  
 
-* [01](https://seiroito.github.io/SHLectures/01.html)  
+* [01](https://seiroito.github.io/SHLectures/lec_slides/2024/01.html)  
 
