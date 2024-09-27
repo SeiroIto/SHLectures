@@ -541,7 +541,7 @@ Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicD
 
 . . .
 
-開発経済学はどのような条件の下に置かれているかを理論モデルのなかに位置づけ、(機会平等を期するために、資源を無駄なく利用するために)どのような介入が必要か考える  
+開発経済学=どのような条件の下に置かれているかを理論モデルを使いつつ位置づけ、(機会平等を期するため、資源を無駄なく利用するためには)どのような介入が必要か考える  
 
 . . . 
 
@@ -732,37 +732,13 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 
 . . . 
 
-養育サービス内容が同じ場合、一人当たり(とくに女性)の所得水準が上がる限り=国が豊かになる限り  
+一人当たり所得水準が上がる限り=国が豊かになる限り  
 
 
 ::: {.incremental}
 * 機会費用は上昇、所得と並行して上昇  
 * 直接費用は上昇する可能性はあるが、所得と比べて相対的に低下  
 :::
-
-----
-
-では、どうすれば養育費用を下げられるか。  
-
-. . . 
-
-養育費用とは子どもの保護者が養育のために支払う費用  
-
-::: {.incremental}
-* 直接費用: 子どもの生活費、保育費、教育費など。  
-* 機会費用: 子どものために時間を使うことで失う所得。高所得者ほど大きい。  
-:::
-
-. . . 
-
-養育サービス内容が同じ場合、一人当たり(とくに女性)の所得水準が上がる限り=国が豊かになる限り  
-
-
-::: {.incremental}
-* 機会費用は上昇、所得と並行して上昇  
-* 直接費用は上昇する可能性はあるが、所得と比べて相対的に低下  
-:::
-
 
 ----
 
@@ -779,7 +755,7 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 機会費用を下げる政策  
 
 * 保育時間を減らす手段(保育サービス供給)拡大  
-* 子どもペナルティ軽減義務化(出産育児休業の整備)  
+* 子どもペナルティ軽減義務化(出産育児休業の整備、mommy track禁止・休業復帰後の地位保全)  
 * 子ども手当は可処分所得を増やすので、子どもを持つことの機会費用を減らす  
 
 . . . 
@@ -844,8 +820,10 @@ Have you ever been arrested and imprisoned?
 ::: {style="font-size: 80%;"}
 $$
 \begin{aligned}
-\mbox{前科のない人の賃金} \leqslant &\mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  
-&\hspace{2em}+\mbox{前科のある人の賃金}
+\mbox{前科のない人の賃金} \leqslant &\mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  \\
+&\hspace{2em}+\mbox{前科のある人の賃金}\\
+\mbox{前科のない人の賃金} - &\mbox{前科のある人の賃金}\\
+& \leqslant \mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  
 \end{aligned}
 $$
 
@@ -880,15 +858,15 @@ What do you expect the impacts of BTB policy?
 $$
 \left\{
 \begin{array}{l}
-\mbox{a. Increase}  
-\mbox{b. Do not change}  
+\mbox{a. Increase}  \\
+\mbox{b. Do not change}  \\
 \mbox{c. Reduce}
 \end{array}
 \right\} \ \mbox{employment and }
 \left\{
 \begin{array}{l}
-\mbox{reduce}  
-\mbox{do not change}  
+\mbox{reduce}  \\
+\mbox{do not change}  \\
 \mbox{increase}
 \end{array}
 \right\} \ \mbox{recividism}.
@@ -910,15 +888,15 @@ $$
 \left\{
 \begin{array}{l}
 \mbox{}  
-\phantom{\mbox{b. Do not change}}  
-\class{fragment}{\mbox{c. Reduce}}
+\phantom{\mbox{b. Do not change}}  \\
+\class{fragment}{\mbox{c. Reduce}}\\
 \end{array}
 \right\} \ \mbox{employment and }
 \left\{
 \begin{array}{l}
 \mbox{}  
-\phantom{\mbox{do not change}}  
-\class{fragment}{\mbox{increase}}
+\phantom{\mbox{do not change}}  \\
+\class{fragment}{\mbox{increase}}\\
 \end{array}
 \right\} \ \mbox{recividism}.
 $$
@@ -1022,7 +1000,7 @@ $$
 
 ![AD0-2000](1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
 
-![BC4000-2000](1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
+![BC40000-2000](1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
 
 Source: Angus Maddison. I made up \$200 in 40000BC. 
 :::
@@ -1033,7 +1011,7 @@ Source: Angus Maddison. I made up \$200 in 40000BC.
 
 ----
 
-次のページで1960年からの一人あたり所得が図に描かれています。どのようなパタンを予想しますか。低所得国は豊かになっているでしょうか。  
+次のページで1960年からの各国の一人あたり所得が図に描かれています。どのようなパタンを予想しますか。低所得国は豊かになっているでしょうか。  
 
 . . .
 
@@ -1170,22 +1148,14 @@ Poor countries are not catching up the rich countries.
 
 なお、1990年代以降は貧しい国も先進国にキャッチアップしつつあるという研究が最近出てきています[@KremerWillisYou2022]が、事実は認識されたものの、推計方法への注文が付いており[@AcemogluMolina2021]、ゆっくりキャッチアップしつつある理由、持続するかなど、解釈にはコンセンサスができていません
 
+<!--
 * 人口大国(1980年代以降の中国、90年代以降のインド)で市場自由化が進んだことが理由  
 * インドや中国で極貧層が大幅に減ったことに比べれば、先進国での所得格差の広がりは小さな問題、自由市場を堅持すべしという意見もあります  
+-->
 
----- 
+. . .
 
-国の平均値を比べるだけだと貧困が見落とされるという指摘もあります[@PandeEnevoldsen2021]
-
-. . . 
-
-* 中所得国になった国(インド、バングラデシュ、ナイジェリアなどの人口大国)にも多数の貧困層がいる
-
-. . . 
-
-つまり、貧困問題を考えるために低所得国だけを対象にすると、多くの貧困層を見失います 
-
-* 低所得国と近かった中所得国が高所得国との差を縮めると各国間の所得不平等は減るが、中所得国がさらに高所得国に近づくと低所得国と中所得国の差が広がるため、いずれは各国間の所得不平等が増すという指摘もあります[@Kanbur2022]
+低所得国と近かった中所得国が高所得国との差を縮めると各国間の所得不平等は減るが、中所得国がさらに高所得国に近づくと低所得国と中所得国の差が広がるため、いずれは各国間の所得不平等が増すという指摘もあります[@Kanbur2022]
 
 ----
 
@@ -1222,6 +1192,18 @@ Poor countries are not catching up the rich countries.
 :::
 
 ::::
+
+---- 
+
+国の平均値を比べるだけだと貧困が見落とされるという指摘もあります[@PandeEnevoldsen2021]
+
+. . . 
+
+* 中所得国になった国(インド、バングラデシュ、ナイジェリアなどの人口大国)にも多数の貧困層がいる
+
+. . . 
+
+つまり、貧困問題を考えるために低所得国だけを対象にすると、多くの貧困層を見失います 
 
 ----
 
@@ -1263,6 +1245,10 @@ $$
 ::: {style="text-align: center;"}
 # 貧困の罠
 :::
+
+----
+
+[図](http://seiroito.github.io/SHLectures/lec_slides/2024/1.pdf#page=220)
 
 ----
 
