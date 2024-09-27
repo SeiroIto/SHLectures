@@ -10,6 +10,7 @@
 
 [R package installation instruction](https://seiroito.github.io/SHLectures/InstallPackagesInR.html).
 
+Lecture slides 2024 will be placed here.  
 
+* [01](https://seiroito.github.io/SHLectures/01.html)  
 
-Lecture slides 2024 will be placed here. Yes.
