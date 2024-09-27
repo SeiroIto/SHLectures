@@ -109,16 +109,17 @@ Blue {
 
 成績: 下記のウェイトを使います。  
 
-* クラス内短試験: 10%. $\rightarrow$ オンラインでは実施不可だったので、質問や発言によるクラスへの貢献度で代替
-* 宿題、レポート: 3-4 times, 50% or more.
-* クラス内参照可能期末試験In-class, open book (web), final exam: Up to 40%. 
-* 希望者のみレポートOptional reports: 20%.
+* クラス内短試験、質問や発言: 0%  
+* 試験(中間試験): 30%  
+* 宿題: 3-4 times, 30%  
+* レポート(参照可能期末試験In-class, open book, final exam): 40%   
+* 希望者のみレポートOptional reports: 20%  
 
 . . . 
 
-希望者のみレポート以外で100になるようにする。希望者のみレポートは100に加算。  
+「希望者のみレポート」の提出者: 「レポート」の配分を20にするか、「希望者のみレポート」を0にして「レポート」を40のままにするか、選んでください  
 
-* レポートはグループ作業も歓迎します。その際には共同作業した学生の名前を明記し、文章は各自が書くようにして下さい。文章を参照記載なしに複製した場合には、点数は共有にします(=1名分の点数を複製した人数で割ります)。
+* 「レポート」「希望者のみレポート」はグループ作業も歓迎します。その際には共同作業した学生の名前を明記し、文章は各自が書くようにして下さい。文章を参照記載なしに複製した場合には、点数は共有にします(=1名分の点数を複製した人数で割ります)。  
 * 期限を過ぎた提出は成績に反映されません。
 
 ----
@@ -183,7 +184,7 @@ AIの利用について
 
 利用例: 文章の要約
 
-出所: https://note.com/genkaijokyo/n/na34fa4ec5d76
+出所: [https://note.com/genkaijokyo/n/na34fa4ec5d76](https://note.com/genkaijokyo/n/na34fa4ec5d76)
 
 注意: <Red>未試用</Red>で、お知らせのみです  
 
@@ -217,6 +218,55 @@ AIの利用について
 
 ----
 
+利用例: プログラム言語間の翻訳
+
+::: {#fig-con layout-ncol=2}
+
+![1](1/ConvergenceSlide1.jpg){.fragment .lightbox #fig-con1}
+
+![2](1/ConvergenceSlide2.jpg){.fragment .lightbox #fig-con2}
+
+:::
+
+上記をClaude 3.5 Sonnetにquarto reveal.js (htmlスライド)に翻訳させたものが次の2ページです
+
+----
+
+## Slide 1
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+![](1/NonConvergence.jpg)
+:::
+::: {.column width="50%"}
+- SHU, IDE
+- convergence = 
+  - 1960
+  - 1960-2000
+:::
+::::::::::::::
+
+## Slide 2
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+![](1/ConvergenceIn2000s.jpg)
+:::
+::: {.column width="50%"}
+- SHU, IDE
+- Kremer et al. (2022)
+- 2007: 2007-2017
+:::
+::::::::::::::
+
+----
+
+悪くはないですが、細かな点でレイアウトがおかしいです  
+
+日本語を使えないようですね  
+
+----
+
 ## クラウドやプログラムの利用
 
 
@@ -242,12 +292,12 @@ AIの利用について
 
 プログラム
 
-受講者には、文書(html, pdf, docxなど)作成にRというプログラムとrmarkdownというRのライブラリを使えるようになってほしいです  
+受講者には、RというプログラムとrmarkdownというRのライブラリを使い、文書(html, pdf, docxなど)を作成できるようになってほしいです  
 
- * rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
- * [markdown](https://ja.wikipedia.org/wiki/Markdown)は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
  * [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdownのための道具として考えてください  
    * Rは統計計算や描画で最も使われているプログラムです  
+ * rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
+ * [markdown](https://ja.wikipedia.org/wiki/Markdown)文法は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
 
 . . .
 
@@ -258,6 +308,17 @@ AIの利用について
 1. Rでrmarkdownライブラリをインストールする  
    * [参照](https://seiroito.github.io/SHLectures/InstallPackagesInR.html)  
 
+----
+
+::: {style="text-align: center;"}
+オンライン講義
+
+* 10月25日(金)
+* 11月1日(金)
+
+Google classroomのMeetで実施します
+
+:::
 
 ----
 
@@ -285,7 +346,7 @@ AIの利用について
 * Then, why do we need development economics?
    * There is a debate if we need one. We may not need a special economics, but we definitely need economics to understand the nature of problems in developing areas.   
 * What is special about development economics?  
-   * <span style="font-size: 60%;">Because it deals with developing areas, we study a very different set of individuals, households, economic transations, health issues, environmental issues, social customs, rules, etc. While we still use economics as a tool to analyse issues, we need a different set of perspectives and assumptions than when we analyse issues of developed areas. Remember, economics tries to explain about people's decision making. We apply it to the people, firms, groups, organizations, governments of different countries under different socioeconomic conditions.  That is the content of development economics.</span>
+   * <span style="font-size: 60%;line-height: 0.6;">Because it deals with developing areas, we study a very different set of individuals, households, economic transations, health issues, environmental issues, social customs, rules, etc. While we still use economics as a tool to analyse issues, we need a different set of perspectives and assumptions than when we analyse issues of developed areas. Remember, economics tries to explain about people's decision making. We apply it to the people, firms, groups, organizations, governments of different countries under different socioeconomic conditions.  That is the content of development economics.</span>
 
 ----
 
@@ -311,15 +372,15 @@ AIの利用について
 
 :::: {.columns}
 
-:::: {.column width="60%"}
+:::: {.column width="40%"}
 
 Peter Singer、倫理学者、哲学者 [https://petersinger.info/projects](https://petersinger.info/projects)  
 
 ::::
 
-:::: {.column width="40%"}
+:::: {.column width="20%"}
 
-![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PeterSinger.jpg){}
+![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PeterSinger.jpg){.lightbox width=60%}
 
 ::: {style="font-size: 30%;"}
 Photo by Alletta Vaandering  
@@ -329,25 +390,29 @@ Photo by Alletta Vaandering
 
 ::::
 
-. . . 
+. . .
 
-溺れる子どもChild in the pond問題:  
+溺れる子どもChild in the pond問題
 
-. . . 
+. . .
 
 ほぼ全員が「はい」  
 
-. . . 
+. . .
 
-シンガーの問い  
+シンガーの問い: では、なぜ地球の裏側の...  
 
 . . . 
 
 シンガー: 先進国に住むわれわれは所得の一定割合を貧しい国の住民に与える道徳的義務がある  
 
+
+<!--
 . . . 
 
-* われわれは共感する人間でありたい、貧しい国の貧困について考えたい、と思っているはずですが、かなり不完全にしかできません。(だから、強制的に考えるように仕向けなければならない、のかもしれない。)なぜ貧しいか、何で困っているか、を理解することが、共感を行動に変える第一歩になると思います。
+* われわれは共感する人間でありたい、貧しい国の貧困について考えたい、と思っているはずですが、かなり不完全にしかできません。
+* なぜ貧しいか、何で困っているか、を理解することが、共感を行動に変える第一歩になると思います。
+-->
 
 ----
 
@@ -355,7 +420,11 @@ Photo by Alletta Vaandering
 
 :::: {.column width="60%"}
 
-Denis Mukwege、婦人科医、ノーベル平和賞受賞者 https://www.mukwegefoundation.org/dr-denis-mukwege
+Denis Mukwege、婦人科医、ノーベル平和賞受賞者 
+
+::: {style="font-size: 60%;"}
+<https://www.mukwegefoundation.org/dr-denis-mukwege>
+:::
 
 ::::
 
@@ -364,7 +433,7 @@ Denis Mukwege、婦人科医、ノーベル平和賞受賞者 https://www.mukweg
 ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/DenisMukwege.jpg)
 
 ::: {style="font-size: 30%;"}
-Photo by MONUSCO CC BY-SA 2.0 ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/cc-by-sa_nobackground.jpg)
+Photo by MONUSCO CC BY-SA 2.0 ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/cc-by-sa_nobackground.jpg){.lightbox width=10%}
 :::
 
 ::::
@@ -387,26 +456,23 @@ DRCでの(戦争)暴力被害者女性の治療と啓発活動
 
 非紛争地でも平時から他者への尊敬と差別を許さない行動: 暴力を減らせる  
 
-
 * 暴力はどこの社会でも発生するので、行動は自分の周囲でいい
 
 ----
 
 ::::: {.columns}
 
-:::: {.column width="60%"}
+:::: {.column width="40%"}
 
 John Rawls、政治哲学者 
 
 ::::
 
-:::: {.column width="40%"}
+:::: {.column width="20%"}
 
-![](c:/seiro/docs/external/seishin/lec_slides/2024/1/JohnRawls.jpg)
+![](c:/seiro/docs/external/seishin/lec_slides/2024/1/JohnRawls.jpg){.lightbox width=20%} <span style="font-size: 30%;">
+Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicDomain.jpg){.lightbox width=10%} </span>
 
-::: {style="font-size: 30%;"}
-Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicDomain.jpg)
-:::
 
 ::::
 
@@ -450,7 +516,7 @@ Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicD
 
 <br>
 
-* ロウルズ: 共感すべき理由=無知のヴェイル  
+* ロウルズ: 共感すべき理由=無知のヴェイル=そこに生まれていたのは自分かも  
 ::::
 :::
 ::: {.column width="50%"}
@@ -550,25 +616,26 @@ Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicD
 
 ----
 
+
+::: {style="font-size: 90%; line-height: 120%"}
+:::{.blockquote}
 I want you to rise above the cycle of punishments and rewards.  
-
-. . . 
-
 This [my teaching] is information, and you can do what you want with this information.  
-
-. . . 
-
 If you want to learn something, I cannot stop you.  
-
-. . . 
-
 If you do not want to learn it, I cannot teach you.  
+:::
 
-. . . 
-
+::: {fragment}
+::: {style="text-align: right;"}
 Wynton Marsalis, a jazz trumpeter,  
 a teacher/director of Juilliard Jazz Studies program  
 [Freakonomics Radio](http://freakonomics.com/archive/) Episode 355, 01:16:30.
+:::
+:::
+
+:::
+
+. . .
 
 [Wynton](https://wyntonmarsalis.org/images/press/TwoMenWithTheBlues_cover_back.jpg)
 
@@ -1129,7 +1196,7 @@ Poor countries are not catching up the rich countries.
 :::
 
 ::: {.column width="30%"}
-* 経済成長理論の入門教科書の図  
+* 2009年に書かれた経済成長理論の入門教科書に掲載されている図  
 * convergence=収斂、キャッチアップ  
 * キャッチアップするには所得の低い国ほど成長率が高い必要あり  
 :::
@@ -1150,7 +1217,8 @@ Poor countries are not catching up the rich countries.
 :::
 
 ::: {.column width="30%"}
-* 2007: 2007-2017
+* 2007: 2007-2017(COVID-19前の10年間)  
+* 2000年代に入るとキャッチアップが見られる  
 :::
 
 ::::
@@ -1206,7 +1274,11 @@ $$
 
 ----
 
-[Child in the pond question:](https://www.thelifeyoucansave.org.au/child-in-the-pond/)  
+## Child in the pond question:
+
+::: {style="font-size: 50%;line-height: 0.8;"}
+ <https://www.thelifeyoucansave.org.au/child-in-the-pond/>  
+:::
 
 > You are walking in an isolated park, passing by a pond, where you see a child drowning. There is no one around, and you do not have a phone to call for a help. You are good at swimming and can save the child by jumping into the water. But you have expensive shoes on. Jumping into the water will ruin them, a loss of USD 200. If you do not help the child, the child will die.
 
