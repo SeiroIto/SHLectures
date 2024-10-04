@@ -90,7 +90,7 @@ if (window.hljs) {
 
 <h1 class="title toc-ignore">HW2: rmarkdownを使った文書作成</h1>
 <h4 class="author">伊藤成朗</h4>
-<h4 class="date">2024年10月04日 14:51</h4>
+<h4 class="date">2024年10月04日 21:13</h4>
 
 
 <div id="TOC">
@@ -99,7 +99,6 @@ if (window.hljs) {
 <ul>
 <li><a href="#pandocのインストール" id="toc-pandocのインストール">pandocのインストール</a></li>
 <li><a href="#tinytex-tufteのインストール" id="toc-tinytex-tufteのインストール">tinytex, tufteのインストール</a></li>
-<li><a href="#gitignoreの作成" id="toc-gitignoreの作成">.gitignoreの作成</a></li>
 </ul></li>
 <li><a href="#rmarkdownを使ったhtmlの作成" id="toc-rmarkdownを使ったhtmlの作成">rmarkdownを使ったhtmlの作成</a>
 <ul>
@@ -157,21 +156,6 @@ install.packages(&quot;tufte&quot;)</code></pre>
 </li>
 <li><code>tufte</code>パッケージはhtmlやpdfで<a href="https://en.wikipedia.org/wiki/Edward_Tufte">Edward Tufte</a>の提唱した組版原則を適用するツールです。</li>
 </ul>
-</div>
-<div id="gitignoreの作成" class="section level2">
-<h2>.gitignoreの作成</h2>
-<ul>
-<li>iPadOS: このセクションは省略</li>
-</ul>
-<p>下記をコピーして<code>.gitignore</code>というファイルとして保存</p>
-<ul>
-<li>保存先はとりあえずこのファイルと同じフォルダにしておいてください<br />
-</li>
-<li>中身: gitが変更履歴をトラックしないフォルダやファイルを指定しています</li>
-</ul>
-<pre class="r SeiroBenign"><code>#### Following folders/files will not be tracked
-/FolderA/
-*.jpg</code></pre>
 </div>
 </div>
 <div id="rmarkdownを使ったhtmlの作成" class="section level1">

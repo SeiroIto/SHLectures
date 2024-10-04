@@ -105,20 +105,6 @@ install.packages("tufte")
 * [`tinytex`](https://yihui.org/tinytex/)^[ややこしいのですが、RのtinytexパッケージはtinytexというRとは別のプログラムを管理しています。]はpdf出力に必要です。  
 * `tufte`パッケージはhtmlやpdfで[Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte)の提唱した組版原則を適用するツールです。  
 
-## .gitignoreの作成
-
-* iPadOS: このセクションは省略
-
-下記をコピーして`.gitignore`というファイルとして保存  
-
-* 保存先はとりあえずこのファイルと同じフォルダにしておいてください  
-* 中身: gitが変更履歴をトラックしないフォルダやファイルを指定しています  
-
-```{r gitignore, eval = F}
-#### Following folders/files will not be tracked
-/FolderA/
-*.jpg
-```
 
 # rmarkdownを使ったhtmlの作成
 
