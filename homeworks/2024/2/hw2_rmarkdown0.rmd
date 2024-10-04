@@ -68,6 +68,8 @@ tab
 ```
 ````
 ```{r , echo = F, comment = NA}
+tab <- cbind(letters[1:4], 1:4, LETTERS[1:4])
+colnames(tab) <- c("alph", "num", "Alph")
 tab
 ```
 
