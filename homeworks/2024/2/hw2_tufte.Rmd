@@ -24,7 +24,7 @@ header-includes:
     - \usepackage[ipa]{zxjafont} 
     - \usepackage{marginnote}
 bibliography: c:/seiro/settings/Tex/seiro.bib
-link-citations: yes
+link-citations: true
 # setwd(path <- "c:/seiro/docs/external/seishin/homeworks/2024/"); rmarkdown::render(paste0(path, "2/hw2_tufte.Rmd"))
 #### Below are git bash commands.  ####
 #### git init
