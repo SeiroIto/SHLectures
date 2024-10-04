@@ -86,6 +86,8 @@ resources:
 * Esther Duflo: 	フランス人。開発経済学者。MIT教授。
 * Michael Kremer: 	アメリカ人。理論経済学者。ハーバード大教授。
 
+. . .
+
 受賞理由: 
 
 「貧困緩和に実験的手法を導入した功績。貧困(という大きな)問題を小さな扱いやすい問題に分解し、実験を使って対策を示した。」
@@ -95,20 +97,24 @@ resources:
 長所
 
 * 歪みなく効果を計測できる(\textcolor{red}{internal validity})
-* (結果に疑問を挟む余地は少ないので無駄な議論を節約できる)
-* 被験者をランダムに治療群the treatedと統御群the cotrolに割り振り、前者にのみ介入
-* Randomisation of treatment: 治療群と統御群は相似、異なるのは介入の有無だけ
-* 結果指標の違いは介入が原因と解釈可能
+   * (結果に疑問を挟む余地は少ないので無駄な議論を節約できる)
+   * 被験者をランダムに治療群the treatedと統御群the cotrolに割り振り、前者にのみ介入
+   * Randomisation of treatment: 治療群と統御群は相似、異なるのは介入の有無だけ
+   * 結果指標の違いは介入が原因と解釈可能
 
+---
 
 貢献
+
 * 政策の根拠を推測から科学的証拠に変えた: evidence based policy making
 * 研究者も証拠の質を議論するようになった
 * 実験可能な事象・研究が提示すべき証拠の質の基準を上げた$\rightarrow$転じて観察データを使う研究の対象を明確化
 
+. . .
+
 例
 
-![](ImpactEvaluation/figure/fig2_ek_19_improved_educational_outcomes.jpg)
+![](ImpactEvaluation/figure/fig2_ek_19_improved_educational_outcomes.jpg){width=14cm}
 
 教科書無料配布よりも(ケニア西部)、無料学校給食よりも(ケニア西部)、習熟の遅い生徒に補習させる方が試験点数を上げることが分かった(インド、ムンバイ近郊)
 
@@ -131,16 +137,26 @@ resources:
 * 検討手段が実験可能なものに集中: 薬、職業訓練、教材、補助教員、肥料、携帯
 	* ランダム化しやすい: 親の学歴や年齢、家族構成は無理
 	* 小さい(分割可能で被験者に割当可能): 橋や為替レートは無理
-	* 倫理的に許要できる: 母乳育児、違法行為(贈賄: インド)推奨は駄目、政治デモ参加推奨(して参加人数計測)は文脈による\citep{Bursztyn2021}?
-		* かと思われたが、やはり、[批判されている](https://www.pnas.org/doi/10.1073/pnas.2012021117){@McDermottHatemi2020, "Should scholars be allowed to start a riot to see how violence spreads?"]。350香港ドル=45ドルくらい。
+	* 倫理的に許要できる: 母乳育児、違法行為(贈賄: インド)推奨は駄目、政治デモ参加推奨(して参加人数計測)は文脈による[@Bursztyn2021]?
+		* かと思われたが、やはり、[批判されている](https://www.pnas.org/doi/10.1073/pnas.2012021117)[@McDermottHatemi2020, "Should scholars be allowed to start a riot to see how violence spreads?"]。350香港ドル=45ドルくらい。
 		* [筆者たちの主張(オンライン付論)](https://www.aeaweb.org/doi/10.1257/aeri.20200261.appx): 
 			* 4大学(Munich, Stanford, UC Berkeley, HKUST)のIRB承認を得ている
 			* リスクは小さい(10/15回で逮捕者ゼロ、2003年からのべ135万人が参加なのでデモ参加は日常から乖離せず、実験当時の2017-2018に言論の自由は保障されていた、軍による鎮圧可能性は小さい) &larr; 先読み感ゼロ、想像力が...当局が写真撮るかもよ?
 
 ----
 
-![鍵を捜す男](ImpactEvaluation/figure/FindKey.jpg){height = 7cm}
-出所: <>https://diabetes.diabetesjournals.org/content/64/4/1105<>
+::::{.columns}
+
+::: {.column width="60%"}
+![鍵を捜す男](ImpactEvaluation/figure/FindKey_small.jpg){.lightbox height=50%}  
+:::
+::: {.column width="30%"}
+:::{style="font-size: 55%;line-height: 1.1;"}
+出所: <https://diabetes.diabetesjournals.org/content/64/4/1105>
+:::
+:::
+
+::::
 
 ----
 
@@ -176,12 +192,12 @@ resources:
 :::: {.columns}
 
 ::: {.column width="60%"}
-![](ImpactEvaluation/figure/bad_graphs/hahaha0.eps){height = 7cm}
+![](ImpactEvaluation/figure/hahaha0.jpg){width=25cm}
 :::
 
 ::: {.column width="40%"}
 
-![](ImpactEvaluation/figure/bad_graphs/hahaha1.eps){}}
+![](ImpactEvaluation/figure/hahaha1.jpg){}
 
 * 高齢者: 笑う頻度が減ると健康不調を報告する比率が増える
 
@@ -209,32 +225,33 @@ resources:
 
 . . . 
 
-%A correlation between $A$ and $B$ can include multitude of cases.
 $A$と$B$が相関: さまざまな因果関係があり得る
+A correlation between $A$ and $B$ can include multitude of cases.
 
 [図](../2024/ImpactEvaluation.pdf#page=42)
 
 ----
 
+笑いは健康(自己申告)を引き起こすか?  
+Does laughter cause (self-reported) healthiness?  
 
-%Does laughter cause (self-reported) healthiness?
-笑いは健康(自己申告)を引き起こすか?
-* 可能性はある%Maybe. 
-* もしくは、健康が笑いを引き起こす%Or healthiness can cause laugher.
-* もしくは、その両方%Or both.
+* 可能性はあるMaybe. 
+* もしくは、健康が笑いを引き起こすOr healthiness can cause laugher.
+* もしくは、その両方Or both.
 
 
 . . . 
 
-この研究のデザインは因果関係を明らかにできるか?
-* できない。%No. 
-(なぜかはすぐに分かります)%You will see later why not.)
-では、何でもいいので何らかの因果関係を示すことはできるか。
-* できない %No.
+この研究のデザインは因果関係を明らかにできるか?  
+
+* できないNo. 
+(なぜかはすぐに分かります)You will see later why not.)
+* では、何でもいいので何らかの因果関係を示すことはできるか。Can it show *any* causal relationship?
+* できない No.
 
 ----
 
-![](ImpactEvaluation/figure/bad_graphs/hahaha.eps){height = 8cm}
+![](ImpactEvaluation/figure/hahaha.jpg){height=800}
 
 
 ----
@@ -252,7 +269,7 @@ $A$と$B$が相関: さまざまな因果関係があり得る
 . . . 
 
 
-
+$$
 \begin{aligned}
 \mbox{試験点数}&=20+20*D+e\\
 D&=
@@ -269,11 +286,11 @@ D&=
 \end{array}
 \right.
 \end{aligned}
+$$
 
 $D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離散変数。2つの値しかとらないので2項変数binary variableとも呼ばれる。ここでは塾に週1時間以上通うと1、そうではない場合は0という値をとる変数。塾に通う人と通わない人にグループ分けできる。$e$は誤差を表す確率変数で誤差項error termという。\\
 
-
-. . . 
+----
 
 ダミー変数は質的情報を表現できる: 
 
@@ -285,7 +302,7 @@ $D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離
 
 * 背景に連続変数がない: 	分類によるグループ分け。右利きと左利き、テレビとそれ以外の家電、男とそれ以外のジェンダー、日本人と外国人。
 
-----
+. . .
 
 $$
 \mbox{試験点数}=20+20*D+e
@@ -1272,7 +1289,7 @@ For 5th graders, using discontinuity neighbourhood sample, there is a negative c
 
 ----
 
-赤林さんは中3国語で期待した成果が出なかったことに驚くが、以下のように解釈 {\footnotesize <>https://synodos.jp/education/12530</>}  
+赤林さんは中3国語で期待した成果が出なかったことに驚くが、以下のように解釈 {\footnotesize <https://synodos.jp/education/12530>}  
 
 . . . 
 
@@ -1306,7 +1323,7 @@ For 5th graders, using discontinuity neighbourhood sample, there is a negative c
 
 中室牧子さん: 35人学級は、2011年に公立小学校の1年生に対してのみ導入されました。財務省は、2011年以前と以後で、いじめ、暴力行為、不登校の平均値を比べると、いじめや暴力、不登校には大きな変化が見られないので、少人数学級には効果がない。したがって、「40人学級に戻すべき」と主張したのです。  
 ![](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){}  
-<>https://diamond.jp/articles/-/66992<>  
+<https://diamond.jp/articles/-/66992>  
 
 
 . . . 
