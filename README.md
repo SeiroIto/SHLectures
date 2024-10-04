@@ -18,6 +18,9 @@ Lecture slides etc. 2024 will be placed here.
    * [hw01](https://seiroito.github.io/SHLectures/homeworks/2024/1/hw1.txt)  
 * Lecture 02  
    * [02](https://seiroito.github.io/SHLectures/lec_slides/2024/02.html)  
-   * [hw02](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_tufte.html)  
+   * [hw02, instruction](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_tufte.html)  
+   * [hw02, how to write a rmarkdown file](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_rmarkdown0.html)  
+   * [hw02, UTF-8 encoded rmd file](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_rmarkdown.rmd)  
+   * [hw02, example output](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_rmarkdown.html)  
 
 
