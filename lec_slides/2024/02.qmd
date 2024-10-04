@@ -1,0 +1,1434 @@
+---
+title: "開発経済論: 効果推計"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    includes:
+      in_header: 
+        "../MathShorthand.html"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+    css: LecNoteStyles.css 
+filters:
+  - parse-latex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../MathShorthand.html 
+bibliography: ../../seiro.bib
+resources:
+  - 02.pdf
+# quarto render 02.qmd
+---
+
+::: {style="text-align: center;"}
+# はじめに
+:::
+
+----
+
+祝: ノーベル経済学賞受賞3人(2019年)
+
+![](ImpactEvaluation/figure/BanerjeeDufloKremer.jpg)
+
+出所: <https://wikibio.in/abhijit-banerjee/>
+
+---
+
+* Abhijit Banerjee: 	インド人。理論経済学者。MIT教授。
+* Esther Duflo: 	フランス人。開発経済学者。MIT教授。
+* Michael Kremer: 	アメリカ人。理論経済学者。ハーバード大教授。
+
+受賞理由: 
+
+「貧困緩和に実験的手法を導入した功績。貧困(という大きな)問題を小さな扱いやすい問題に分解し、実験を使って対策を示した。」
+
+----
+
+長所
+
+* 歪みなく効果を計測できる(\textcolor{red}{internal validity})
+* (結果に疑問を挟む余地は少ないので無駄な議論を節約できる)
+* 被験者をランダムに治療群the treatedと統御群the cotrolに割り振り、前者にのみ介入
+* Randomisation of treatment: 治療群と統御群は相似、異なるのは介入の有無だけ
+* 結果指標の違いは介入が原因と解釈可能
+
+
+貢献
+* 政策の根拠を推測から科学的証拠に変えた: evidence based policy making
+* 研究者も証拠の質を議論するようになった
+* 実験可能な事象・研究が提示すべき証拠の質の基準を上げた$\rightarrow$転じて観察データを使う研究の対象を明確化
+
+例
+
+![](ImpactEvaluation/figure/fig2_ek_19_improved_educational_outcomes.jpg)
+
+教科書無料配布よりも(ケニア西部)、無料学校給食よりも(ケニア西部)、習熟の遅い生徒に補習させる方が試験点数を上げることが分かった(インド、ムンバイ近郊)
+
+----
+
+短所
+
+* メカニズム・理由(なぜ効果があったか)と無関係に実施可能。このため、理論を意識しなくても実験が可能。メカニズムが不明なので、その他地域への適用可能性(\textcolor{red}{external validity})が不明。
+	* 地域: インドで効果1ならガボンではどのくらいの効果?
+	* 実施主体: NGOは能力もモラルも高く、政策担当者と比較にならない
+	* (該当する理論が存在しないときに先入観無しにできることが良いときもある)
+* 大きな政策を扱えない。大規模実験(e.g., ジャムナ橋建設)は統御群をなくす。
+* 標本サイズが小さい($\leftarrow$予算がかかるから)ので推計値の精度が低い。参加率が低いと分析に使える標本がさらに減る。マイクロファイナンス実験。
+* 実験バイアス: Hawthorne effect (treated), John Henry effect (control; raced against machine)
+
+----
+
+短所
+
+* 検討手段が実験可能なものに集中: 薬、職業訓練、教材、補助教員、肥料、携帯
+	* ランダム化しやすい: 親の学歴や年齢、家族構成は無理
+	* 小さい(分割可能で被験者に割当可能): 橋や為替レートは無理
+	* 倫理的に許要できる: 母乳育児、違法行為(贈賄: インド)推奨は駄目、政治デモ参加推奨(して参加人数計測)は文脈による\citep{Bursztyn2021}?
+		* かと思われたが、やはり、[批判されている](https://www.pnas.org/doi/10.1073/pnas.2012021117){@McDermottHatemi2020, "Should scholars be allowed to start a riot to see how violence spreads?"]。350香港ドル=45ドルくらい。
+		* [筆者たちの主張(オンライン付論)](https://www.aeaweb.org/doi/10.1257/aeri.20200261.appx): 
+			* 4大学(Munich, Stanford, UC Berkeley, HKUST)のIRB承認を得ている
+			* リスクは小さい(10/15回で逮捕者ゼロ、2003年からのべ135万人が参加なのでデモ参加は日常から乖離せず、実験当時の2017-2018に言論の自由は保障されていた、軍による鎮圧可能性は小さい) &larr; 先読み感ゼロ、想像力が...当局が写真撮るかもよ?
+
+----
+
+![鍵を捜す男](ImpactEvaluation/figure/FindKey.jpg){height = 7cm}
+出所: <>https://diabetes.diabetesjournals.org/content/64/4/1105<>
+
+----
+
+倫理上、母乳育児や母乳育児に金銭的誘因を与える「推奨」を実験できないが、母乳育児の非金銭的「推奨」(内容伝達)を実験しても倫理的に問題ない  
+
+. . . 
+
+ただし、推奨内容が比較対象の女性に伝わらないか統御は難しい  
+
+. . . 
+
+実験がうまくいき、効果があると分かっても、政策に採用されるかは別問題  
+
+. . . 
+
+政治家および投票基盤が政策実施=得策と思わねばならないから
+
+. . . 
+
+* 個別補習の費用対効果が最も大きい: <!-- %学習塾経営者は驚かないだろうが、教科書・参考書配布派、栄養補給派を説得するために証拠提示が必要だったのだろう。-->
+学校教育の不十分さを示す結果。実験は学校教育の質の低さへの対症療法を示したが、根治療法を示していない。根治療法は教員・公務員組合等の反対で政治的に困難だろう。
+
+. . . 
+
+実験は思いついた政策に効果があるか気軽に試せるが、必要となる作業監理と予算は多いために、本当に検討する価値のある政策を選ばないと資源の無駄
+
+. . . 
+
+投与と反応を見る疫学研究ではなく、人々の意志決定と行動選択を含む経済学研究なので計測に費用がかかる
+
+----
+
+:::: {.columns}
+
+::: {.column width="60%"}
+![](ImpactEvaluation/figure/bad_graphs/hahaha0.eps){height = 7cm}
+:::
+
+::: {.column width="40%"}
+
+![](ImpactEvaluation/figure/bad_graphs/hahaha1.eps){}}
+
+* 高齢者: 笑う頻度が減ると健康不調を報告する比率が増える
+
+:::
+::::
+
+----
+
+この記事には問題があります。何でしょうか。
+
+. . . 
+
+問題を理解するためには、インパクト評価のキー・タームを知る必要があります
+
+----
+
+::: {description-list}
+因果causality
+: 	$A\Rightarrow B$ ("A causes B.")
+
+相関correlation
+: 	$\corr[A, B]\neq 0$ ("A is correlated with B.")
+
+:::
+
+. . . 
+
+%A correlation between $A$ and $B$ can include multitude of cases.
+$A$と$B$が相関: さまざまな因果関係があり得る
+
+[図](../2024/ImpactEvaluation.pdf#page=42)
+
+----
+
+
+%Does laughter cause (self-reported) healthiness?
+笑いは健康(自己申告)を引き起こすか?
+* 可能性はある%Maybe. 
+* もしくは、健康が笑いを引き起こす%Or healthiness can cause laugher.
+* もしくは、その両方%Or both.
+
+
+. . . 
+
+この研究のデザインは因果関係を明らかにできるか?
+* できない。%No. 
+(なぜかはすぐに分かります)%You will see later why not.)
+では、何でもいいので何らかの因果関係を示すことはできるか。
+* できない %No.
+
+----
+
+![](ImpactEvaluation/figure/bad_graphs/hahaha.eps){height = 8cm}
+
+
+----
+
+因果関係と相関関係は同じではない
+
+. . . 
+
+* 因果関係$\Rightarrow$相関関係
+
+. . . 
+
+* 相関関係$\Rightarrow$因果関係、ではない場合がある
+
+. . . 
+
+
+
+\begin{aligned}
+\mbox{試験点数}&=20+20*D+e\\
+D&=
+\left\{
+\begin{array}{c}
+0\\
+1
+\end{array}
+\right. \quad \mbox{if 塾に週1時間以上}
+\left\{
+\begin{array}{l}
+\mbox{通わない}\\
+\mbox{通う}
+\end{array}
+\right.
+\end{aligned}
+
+$D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離散変数。2つの値しかとらないので2項変数binary variableとも呼ばれる。ここでは塾に週1時間以上通うと1、そうではない場合は0という値をとる変数。塾に通う人と通わない人にグループ分けできる。$e$は誤差を表す確率変数で誤差項error termという。\\
+
+
+. . . 
+
+ダミー変数は質的情報を表現できる: 
+
+. . . 
+
+* 背景に連続変数がある: 	程度によるグループ分け。明るいと明るくない、早いと早くない、貧しいと貧しくない。
+
+. . . 
+
+* 背景に連続変数がない: 	分類によるグループ分け。右利きと左利き、テレビとそれ以外の家電、男とそれ以外のジェンダー、日本人と外国人。
+
+----
+
+$$
+\mbox{試験点数}=20+20*D+e
+$$
+
+. . . 
+
+これが因果関係の場合: 塾に通う$\Rightarrow$点数が40点になる、という解釈になる。  
+
+[図](../2024/ImpactEvaluation.pdf#page=69)
+
+
+----
+
+でも、方程式は相関関係を表す場合もある。
+
+* 仮に、塾に試験点数を上げる効果は全く無いときに、勉強好きで試験点数がもともと20点程度良い人が勉強の機会を増やすために塾に行っている場合にも、この方程式は成り立つ。この場合、勉強好き$\Rightarrow$点数、勉強好き$\Rightarrow$塾通いという因果関係はあっても、塾通い$\Rightarrow$試験点数という因果関係はない。
+
+. . . 
+
+「勉強好き」という欠落変数が試験点数と塾通いに同時に影響を与えていて、試験点数と塾通いの間に因果的な関係はない。
+
+. . . 
+
+[図](../2024/ImpactEvaluation.pdf#page=72)
+
+
+----
+
+方程式は逆の因果関係を表す場合もある。
+
+* 仮に、試験点数が20点ほど良い人だけ選んで塾に行くことを強制しても、この方程式は成り立つ。
+
+. . . 
+
+この場合、点数$\Rightarrow$塾通いという逆の因果関係が成り立っている。
+
+. . . 
+
+[図](../2024/ImpactEvaluation.pdf#page=76)
+
+
+. . . 
+
+方程式は必ずしも右辺$\Rightarrow$左辺の因果関係ばかりではなく、逆方向の因果関係や欠落変数を通じた相関関係も含む。
+
+----
+
+因果関係を示すためには特定の条件が必要。その条件がない\textcolor{red}{通常の回帰式の場合、相関関係まで}しか読み取ることができない。  
+
+. . . 
+
+\textcolor{red}{予測だけなら相関関係で十分}  
+
+* 塾に通う人は(なぜか分からないけど)試験点数が高い傾向がある、という関係だけで予測はできる
+* これは便利  
+
+. . . 
+
+でも、\textcolor{red}{相関関係からは理由やメカニズム(因果関係のどの組み合わせか)は分からない}  
+
+* 何かの事情でメカニズムが変わった場合、相関関係の強さも変わって、それまで通りの予測はできなくなる  
+
+. . . 
+
+相関関係に頼った予測はメカニズムを検討しないため、理論なき計測measurement without a theoryと揶揄されることもある
+
+----
+
+因果関係を示す方法: \textbf{ランダム化統御試験randomised controlled trial (RCT)}
+
+
+:::{style="font-size: 95%;line-height: 1.1;"}
+1. 母集団を設定し、被験者・対象をサンプルする  
+1. 被験者・対象をランダムに「治療群(the treated)」「統御群(the control)」に割り振る
+	* ランダムに割り振ったので、両群の試験点数(とその他変数)の分布(の特徴である平均値)はほぼ同じのはず
+	* 標本が大きいほど誤差が減って平均値差はゼロに近づく
+1. 治療群のみ塾に通わせる
+	* 治療のspilloverを防ぐ: 統御群被験者が塾に通わないように、治療群被験者が塾に通うように、かつ、治療群被験者が統御群被験者に塾で学んだことを教えないように、被験者の行動を統御しなければいけない
+	* でも、被験者はやりたいことをやるので、そうした不完全な統御の政策の効果を測定していると解釈
+1. 後日、試験をして採点する
+1. 治療群の方が成績が高くなったら、塾に通う$\Rightarrow$試験点数が高い、という\textcolor{red}{因果関係を示すことができる}
+:::
+
+----
+
+プロジェクト評価の報告書にはさらっとこんな結論が散見される 
+
+「プロジェクトによって健康状態が改善された」"with the project, health status improved."
+
+
+::: {description-lb}
+問うべきこと
+: Counterfactual(比較\underline{すべき}対象)は何か? What is the CF (what \underline{should be} compared with)?
+
+現行に対して問い直すべきこと
+: 比較\underline{している}対象は何か? What \underline{is being} compared with?
+:::
+
+
+. . . 
+
+<br>
+
+::: {description-list}
+Before-after
+: 以前の自分 Previous self
+
+With-without
+: アクセスのない誰か Someone who does not have access
+:::
+
+. . . 
+
+<br>
+インパクトを知る上で適切な比較か?  Is this a legit comparison?
+
+. . . 
+
+殆どの場合、不適切 Almost always, no. 
+
+----
+
+下記のようにインパクトを計測できれば、政策が結果指標$y_{i}$を変えたといえる  
+We can say a policy changed $y_{i}$ when we can compute its causal impact on $y_{i}$ as  
+
+<br>
+
+::: {style="text-align: center;"}
+($i$が政策に影響されたときの$y_{i}$)$-(i$が政策に影響されなかったときの$y_{i}$)  
+:::
+
+. . . 
+
+$$
+\begin{aligned}
+(y_{i}|D_{i}=1) &- (y_{i}|D_{i}=0), \quad \mbox{or,}\\
+y_{i1}&-y_{i0}.%, \quad y_{i0}=y_{i}|D=0, \ y_{i1}=y_{i}|D=1.
+\end{aligned}
+$$
+
+. . . 
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+$D_{i}=0,1$
+: $i$が治療群(政策に影響されるグループ)に属するとき$D_{i}=1$、$i$が統御群(政策に影響されないグループ)に属するとき$D_{i}=0$. $D_{i}$は$i$が政策に影響されるグループに属することのインディケータ関数\textit{indicator function} 、ダミー変数\textit{dummy variable}。
+
+"$|$"
+:  Reads "given" or "when". 「次が所与のとき」「次が成り立つとき」と読む
+
+$y_{i}|D_{i}=1$
+:  $i$が治療群に属しているときの$y_{i}$、$y_{i1}$とも書く
+
+$y_{i}|D_{i}=0$
+:  $i$が統御群に属しているときの$y_{i}$、$y_{i0}$とも書く
+:::
+
+----
+
+個人$i$の治療効果treatment effect of policy for individual $i$:
+
+$$
+(y_{i}|D_{i}=1)-(y_{i}|D_{i}=0)=
+y_{1i}-y_{0i}.
+$$
+
+. . .
+
+\textbf{プログラム評価での根源的問題 The fundamental problem in program evaluation}
+
+. . . 
+
+::: {style="text-align: center;"}
+治療群に属するときの$y_{i}$と統御群に属するときの$y_{i}$を同時に観察できない We cannot observe $y_{i}$ in the treated and in the control for the same individual $i$ simultaneously.
+:::
+
+. . . 
+
+::: {style="text-align: center;"}
+$\Leftrightarrow$
+
+各個人$i$の結果指標$y_{i}$の<Red>counterfactual (CF)</Red>を観測することはできないWe cannot observe a <Red>counterfactual (CF)</Red> outcome of each individual $i$'s factual outcome.
+:::
+
+. . . 
+
+::: {style="text-align: center;"}
+$\Leftrightarrow$
+
+言い換えれば、仮定なしには政策の効果を計算することはできないIn other words, we cannot compute the causal impacts of a policy for each individual $i$ without further assumptions.
+:::
+
+---- 
+
+CFは何か? What are the CFs?
+
+* $y_{i}|D_{i}=1$のCF:  現実には治療群($D_{i}=1$)に属する$i$が統御群に属したときの結果指標$y_{i}$ ("$y_{0i}$")。$y_{0i}|D_{i}=1$と表記。
+* CF for $y_{i}|D_{i}=1$: An outcome $y_{i}$ if $i$ belongs to the control ("$y_{0i}$"), when in reality $i$ belongs to the treated ($D_{i}=1$). Write as $y_{0i}|D_{i}=1$. 
+* $y_{i}|D_{i}=0$のCF:  現実には統御群($D_{i}=0$)に属する$i$が治療群に属したときの結果指標$y_{i}$ ("$y_{1i}$")。$y_{1i}|D_{i}=0$と表記。
+* CF for $y_{i}|D_{i}=0$: An outcome $y_{i}$ if $i$ belongs to the treated ("$y_{1i}$"), when in reality $i$ belongs to the control ($D_{i}=0$). Write as $y_{1i}|D_{i}=0$. 
+
+----
+
+一定の仮定の下、政策の\textcolor{red}{平均治療効果average treatment effect (ATE)}を推計できるBut under a certain set of assumptions, we can estimate the average causal impacts of a policy, the \textcolor{red}{average treatment effect (ATE)}.
+$$
+ATE=\E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=0].
+$$
+
+. . . 
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+以下の思考実験を考えるConsider the following thought experiment.
+
+1. 多数$n$の個人に対し、ランダムに治療状態$D_{i}$をを割り当てる。Suppose there are a large number $n$ of individuals and we randomly assign the treatment status $D_{i}$ to everyone $i=1,\cdots, n$.  
+   * ランダム化がうまくできたとする(公平なコインを使うなど).  Assume the randomisation was done well (i.e., based on "a fair coin toss")  
+1. 両グループの$y_{i}$の分布は似通うはず。分布が近似していれば平均値も近似する。極限を取って$n\rightarrow\infty$($n$が無限大の場合)、両グループの分布は同一、平均値も同じになる。The distribution of $y_{i}$ of each group should look very similar, or in the limit where $n\rightarrow\infty$, they are identical. If the distributions are very similar, then their means are also very similar. Write the mean in the limit as $\mu_{0}$.  
+:::
+
+----
+
+ATEを(一致推計量consistent estimator [標本が無限大になると真の値になる推計量]として)得る条件 Conditions that gave the ATE estimate consistency are
+
+1. 政策前に、統御群と治療群の($y_{i}$)分布が近似していることDistributions of $y_{i}$ of the control and the treated are very similar in the absence of a policy\label{atecon1}
+1. インパクトはすべての$i$で同じImpact is homogenous across $i$\label{atecon3}
+
+
+. . . 
+
+\ref{atecon3}は単純化のために利用。グループごとにインパクトが違うなら、グループをもっと細かく分ければいい。\ref{atecon3} is used for simplification. If the impact is different across subgroups, we can use finer grouping.  
+
+. . . 
+
+\ref{atecon1}が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。\ref{atecon1} is of most importance at this stage. It is randomisation of treatment status among individuals that gave similarity of distributions.   
+
+
+----
+
+グループの割り振りがランダムだと、ATEの一致推計量が得られる。Whenever we can expect random assignment of treatment status, we can get a consistent estimate of ATE. E.g., clinical trials use explict randomisation between the treated and the placebo to get a consistent estimate of ATE.
+
+* ATEの一致推計量を得るために、治験は患者をプラセボ(統御群)と治療群にランダムに割り振る。
+
+----
+
+実験をしてからの手順
+
+1. ATEを推計 (estimation)
+	* 両群の平均値の差を計算
+1. 推計値を検定する統計学的推論 (inference)
+	* 帰無仮説「両群の平均値の差はゼロ」が正しい場合の分布を使って平均値の差が極端かを計算、計算する極端さの指標は$p$値
+	* 極端であれば帰無仮説に疑問を呈し、$p$の確率でATEはゼロではない、と推論
+1. 推論の頑健性をチェック (robustness checks)
+	* ランダム化の確認
+		* Randomisation checks: 	実験前の特徴が両群で似ていること=ランダム化が成功していることを検定、帰無仮説「実験前の(全)変数において、両群の平均値の差はゼロ」
+	* 他要因排除の確認: 他要因による効果を検定。効果が見出されたら、メインの結論もその要因が引き起こしたかも。
+		* Placebo tests: 	介入変数を編集して、効果が無いことを検定(e.g., 一部controlに介入=1と割当てる、介入量doseを変える)
+		* Falsification tests (negative controls): 	効果が発生し得ない標本や結果に介入=1と割当て、効果がないことを検定(e.g., 介入前の標本、ラマダン介入に影響され得ないラマダン下のキリスト教徒標本)
+		* 両方ともほぼ同じ内容。敢えて言うならば、placebo testsはどんなデータでも実施可能、falsification testsは特定の文脈を使って実施。後者だけ実施可能な対象を狭める限定があるので、後者は前者に含まれる概念。
+
+----
+
+$p$値($p$ value)は帰無仮説が成り立つ確率と考えていい
+
+* 正確には、得られた推計値(この場合は平均値の差)よりも極端な値が帰無仮説下で発生する確率
+* この確率($p$値)が小さいとき、得られた推計値は帰無仮説から見て極端な事象
+   * $\rightarrow$帰無仮説の正しさを疑うべき
+   * $\rightarrow$帰無仮説が正しい確率は$p$値ほど小さい
+
+. . .
+
+$p$値が5\%をカットオフにして、5\%未満だったら「統計的に有意」、以上だったら「統計的に有意ではない」と表現されることが多いが、\textcolor{red}{推奨できない} $\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎる
+
+----
+
+実験をしてからの手順
+
+ランダム化確認: permutation test (並べ替え検定), randomisation test (確率化検定)  
+
+. . . 
+
+帰無仮説null hypothesis: グループaの分布=グループbの分布  
+
+. . . 
+
+1. 両グループのデータ全てを並べ、グループ名(a, b)をランダムに並べ替えてグループ"a"平均値を計算
+1. これを多数回繰り返すと、グループ"a"平均値の分布が描ける  
+1. 検定: 本当のグループa平均値=グループ"a"平均値?
+   * 帰無仮説が正しければ、本当のグループa平均値はグループ"a"平均値の分布の中央付近に位置するはず  
+   * 左右どちらかの端にあれば、グループaとグループbの分布は異なっていると判断できる。
+
+
+----
+
+バングラデシュ最貧困層への貸付実験: 大規模貸付グループと小規模貸付グループの比較
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+```{=latex}
+\begin{tabular}{>{\scriptsize\hfil$}p{3cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}}
+{variables} & {NonTradArm} & {TradArm} & {p-value.lower} & {p-value.mid} & {p-value.upper}\\
+HeadLiteracy & 0.116 & 0.100 & 0.498 & 0.545 & 0.591\$$-.2ex]
+HeadAge & 38.023 & 38.536 & 0.549 & 0.550 & 0.551\\
+HHsize & 4.188 & 4.128 & 0.618 & 0.629 & 0.640\$$-.2ex]
+FloodInRd1 & 0.508 & 0.464 & 0.265 & 0.285 & 0.305\\
+HAssetAmount & 782 & 690 & 0.085 & 0.085 & 0.085\$$-.2ex]
+PAssetAmount & 1114 & 1083 & 0.823 & 0.823 & 0.823\\
+LivestockValue & 5951 & 5184 & 0.328 & 0.328 & 0.328\$$-.2ex]
+NumCows & 0.266 & 0.237 & 0.458 & 0.472 & 0.487\\
+NetValue & 7675 & 6604 & 0.334 & 0.334 & 0.334\\
+n & 580 & 180 & && (rate: 0.237)
+\end{tabular}
+
+\begin{tabular}{>{\hfill\scriptsize}p{1cm}<{}>{\hfill\scriptsize}p{.25cm}<{}>{\scriptsize}p{10cm}<{\hfill}}
+Source:& & Estimated with GUK administrative and survey data.\\
+Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean covariates to conduct approximate permutation tests. \\
+&2. & Number of repetition is set to 100000. Step-down method is used to adjust for multiple testing of a multi-factor grouping variable. 40 are lost to flood before arm assignment. 
+\end{tabular}
+```
+:::
+
+
+----
+
+治療対象選定をランダム化するとATEの一致推計量が得られるRandomisation of treatment status will give us a consistent ATE estimate 
+
+* でも... 人々には同意するか決める権利がある。治療を断るかもしれない。 But... people have a right to choose. Choose not to get treated. 
+* さらに... 人々は時にずるをする。統御群に割り振られても何とかして治療群として参加するかもしれない。被験者が同意事項に違反するときどうする?Further... people sometimes cheat. They will do stuffs that give them the treated status when they are assigned as the control. What if there is noncompliance?     
+* 北朝鮮のような独裁国家以外では、人々には選ぶ権利がある。被験者にグループ割り振りを強制することはできない。Except in North Korea, people have a right to choose. So we cannot force the assigned treatment status to the subjects.    
+* 実験者も完璧ではないので非同意者を必ず出してしまうAnd experimenters are never perfect, so there may be noncompliers. 
+
+---- 
+
+われわれが計測できるのは非同意者を含むグループ平均値の差。非同意者がいるとインパクトが小さくなる。What we can measure is the mean group difference inclusive of noncompliance. Noncompliance makes estimated impacts smaller.   
+
+非同意者を含む効果推計値を\textcolor{red}{治療意図に基づく効果intention-to-treat (ITT) effect}という。The estimator under partial compliance is called \textcolor{red}{intention-to-treat (ITT)} effect, and is like a down-to-earth version of ATE. 
+
+* 実験室での効力\textit{efficacy}ではなくフィールドでの有効性\textit{effectiveness}。It is about \textit{effectiveness} (impacts in the field) rather than \textit{efficacy} (impacts in the lab).
+* ATEを推計できる研究は少ない。Few study estimates ATE.  
+
+----
+
+さまざまな効果推計量(実証研究の大半がITTかLATE)  
+
+:::{description-list}
+ATE
+: 	Average treatment effects: 全個人の平均効果 $$ATE = \E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=01].$$
+
+ITT
+: 	Intention-to-treat effects: 実施群非同意者(比率$1-\alpha\in[0, 1]$)と統御群非同意者(比率$1-\beta\in[0, 1]$)を含む全個人の平均効果, 実際の割当て$A_{i}=0, 1$ $$
+\begin{aligned}
+ITT
+&= 
+\alpha\E[y_{i}|D_{i}=1, A_{i}=1]+(1-\alpha)\E[y_{i}|D_{i}=1, A_{i}=0] \\
+&\hspace{1em}-\beta\E[y_{i}|D_{i}=0, A_{i}=0]-(1-\beta)\E[y_{i}|D_{i}=0, A_{i}=1].
+\end{aligned}
+$$
+
+ATT
+: 	Average treatment effects on the treated: 実施群における平均効果$$ATT = \E[y_{1i}|D_{i}=1]-\E[y_{0i}|D_{i}=1].
+$$
+:::
+
+----
+
+:::{description-list}
+LATE
+: 	Local average treatment effects: 割当てられて初めて介入を受ける同意者compliers ($\alpha-\beta$だけいる)の平均効果、均一効果$\E[\Delta y_{i}|D_{i}=1, A_{i}=1]=\E[\Delta y_{i}|D_{i}=0, A_{i}=0]=\mu$を仮定$$
+\begin{aligned}
+LATE &= \frac{\alpha\E[\Delta y_{i}|D_{i}=1, A_{i}=1]-\beta\E[\Delta y_{i}|D_{i}=0, A_{i}=0]}{\alpha-\beta}\\
+&=
+\frac{(\alpha-\beta)\mu}{\alpha-\beta}=\mu.
+\end{aligned}
+$$
+
+ATC
+: 統御群の平均治療効果average treatment effects on the control (ATC)$$
+ATC = \E[y_{1i}|D_{i}=0]-\E[y_{0i}|D_{i}=0].
+$$
+:::
+
+---- 
+
+
+* ATEとATTの違い:  全員 vs. 治療群 Difference between ATE and ATT:  The mean outcome difference among the treated or everyone.
+* ITTとATEの違い: 非同意者を含む全員 vs. 非同意者なしの全員
+* ATEはATTとATCの加重平均値 ATE is a weighted average of ATT and ATC.
+$$
+ATE = b ATT + (1-b) ATC, \quad b= \frac{n_{\scriptsize{\mbox{treated}}}}{n_{\scriptsize{\mbox{control}}}+n_{\scriptsize{\mbox{treated}}}}.
+$$
+* ターゲティング(対象設定)が正しくても、実現するかは別問題
+* LATE: compliers (Yes, Yes) - compliers (No, No)
+
+----
+
+実験には人が意図して実施する科学実験と偶然発生する自然実験natural experimentsがある  
+
+
+. . . 
+
+科学実験は非倫理的なものは実施しない  
+
+
+. . . 
+
+自然実験は意図せず発生するので非倫理的であっても実施されてしまう
+
+. . . 
+
+* チャンス!
+
+. . . 
+
+非倫理的な自然実験の例:
+
+* 妊婦のアルコール摂取[@Nilsson2017]
+* 胎内での経済的・心的ショック[@PerssonRossinSlater2018]
+* 親の変更[@FagerengMogstadRonning2021]
+
+----
+
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
+
+@FagerengMogstadRonning2021: 韓国の生活苦の乳児が養子縁組でノルウェイに行く  
+
+. . . 
+
+NGO: ノルウェイで養親候補を書類審査+面接、合格者の書類を韓国に送付、先着順で子どもと縁組  
+
+. . . 
+
+養親は子どもに関する希望を出せず、到着順はランダム  
+
+. . . 
+
+養親は年齢、学歴、所得、純資産額などで異なる
+
+. . . 
+
+* 子にとっては親がランダムに変更される
+* 親のこれら特徴+その他をランダムに変える実験
+
+. . . 
+
+ランダムであることの確認: 
+
+. . . 
+
+養子全員がtreatedなのでpermutation testは使えない
+
+. . . 
+
+* NGOの手続き説明書類
+* 養子の特徴(月齢と性別)が養親の特徴と無相関: 養子の特徴を養親の特徴に回帰、推計された係数が統計学的にゼロ(帰無仮説: 係数はゼロ、が棄却できず)
+
+----
+
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
+
+:::: {.columns}
+
+::: {.column width="60%"}
+![](ImpactEvaluation/figure/FMR_Fig4.jpg){height=100%}
+:::
+
+::: {.column width="40%"}
+::: {.fragment}
+* 右上がり: 養親の純資産額が増える$\Rightarrow$養子の純資産額が増える(右縦軸)
+	* 実線: 推計値
+	* 破線: 95\%信頼区間(95\% confidence interval)
+* 養親の純資産額の度数分布(左縦軸)
+	* 標本が多い(度数が多い)資産額では信頼区間が狭い=推計値の精度が高い
+:::
+:::
+::::
+
+----
+
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
+
+養子$i$の特徴$Y_{i}$と養親$j$の$k+1$個の特徴$W_{j}, x_{1j}, \dots, x_{kj}$がどのように関係しているかを見たい (養親純資産額は$W_{j}$, 養子の特徴も$m$個: $x_{1i}, \dots, x_{mi}$)
+
+* 特徴: 学歴、年齢、性別、所得、リスク資産投資比率など
+   * 実験 $\rightarrow$ 養子にとって養親の特徴はランダムに与えられている
+* 実験の場合に限り、OLS(普通の回帰式)で歪みのない効果が推計できる
+
+----
+
+:::: {.columns}
+
+::: {.column width="60%"}
+$$
+\begin{aligned}
+Y_{i}
+&=
+\overbrace{\alpha_{1965}Z_{1965}+\cdots+\alpha_{1986}Z_{1986}}^{\scriptsize{\mbox{縁組年の固定効果}}}+{\color{red}\beta} W_{j}\\
+&\hspace{1em}
++\underbrace{\eta_{1}x_{1j}+\cdots+\eta_{k}x_{kj}}_{\scriptsize{\mbox{養親の特徴の効果}}}\\
+&\hspace{1em}
++\underbrace{\lambda_{1}x_{1i}+\cdots+\lambda_{m}x_{mi}}_{\scriptsize{\mbox{養子の特徴の効果}}} \$$-3ex]
+&\hspace{1em}
++\underbrace{\gamma\kappa_{j}+\delta\chi_{i}}_{\scriptsize{\mbox{養親と養子の各個人固定効果}}}+u_{i}.
+\end{aligned}
+$$
+:::
+
+::: {.column width="40%"}
+::: {.fragment}
+${\color{red}\beta}$: 養親から養子への純資産額^の伝播係数  
+:::
+
+::: {.fragment}
+$\beta$は以下の効果を除いた上で推計されたものです  
+
+* 1965年の効果$+\dots+$1986年の効果  
+* 学歴(就学年数)の効果$+$養親のX歳効果$+$養子のX歳効果$+$縁組み日齢の効果$+$兄弟人数の効果$+$居住地域所得中央値の効果
+:::
+:::
+::::
+
+----
+
+純資産額の効果は60%程度が直接効果、40%程度が間接効果(養子の所得、学歴、養子への生前贈与、経済系の学位)を経由  
+
+* 間接効果の80%が生前贈与
+* 逆に言えば、養子の純資産額は68\%くらい(直接効果の60%+40%の2割)が生前贈与以外のもの
+
+. . . 
+
+養親の純資産額は養子の学歴は僅少効果、所得には統計学的にはゼロの効果
+
+* ノルウェイが高学歴でより平等な社会だから差が出なかったのか?
+
+. . . 
+
+ただし、リスク資産投資比率は養親から養子に直接効果あり  
+
+. . . 
+
+所得や学歴以外の家庭内の何かが子の純資産額を高める
+* 学校ではない...学校教育は平等化装置ではない(ノルウェイでは)
+* 何かが分からない...何をすれば貧しい家庭の子どもが同じリソースにアクセスできるのか
+
+----
+
+::: {style="text-align: center;"}
+# 選抜問題Selection problem
+:::
+
+----
+
+グループの割り振り($D_{i}$)がランダム化していないと、ごく稀なケースを除き、政策がない場合の結果指標の分布はグループ間で異なる。When the treatment assignment ($D_{i}$) is not randomised, except for very rare lucky cases, the distributions of outcome measure in the absense of a policy are different between the treated and the control.   
+
+. . . 
+
+被験者=目的意識を持って参加する人間なので、参加者と不参加者は特徴が異なるThis is because we are dealing with humans who participate purposefully.  
+  
+:::{description-list}
+
+自己選抜self-selection
+: 	 対象者自身による選抜。参加利益のある人は参加。Selection by potential participants. People with a positive net participation benefit choose to participate.
+
+実施対象選抜placement selection
+: 	政策担当者による選抜。政策担当者が特定の集団を選ぶように指示もしくは誘因を得ているとき、政策がないときに対象者(治療群)と非対象者(統御群)の分布が近似する保証はない。Selection by policymakers. If a policymaker is incentivised or instructed to choose a particular group, there is no guarantee that the distributions of outcome measures in the absence of a policy become similar between the treated (chosen) and the control (unchosen).
+
+:::
+
+<!--
+As in the microfinance example, policy impacts (participation benefits) are expected to be correlated with the outcomes in the absence of a policy. Thus the distributions are different. In the absence of randomisation, if we take $D_{i}$ as we observe and compare between them, we end up comparing apples with oranges.
+-->
+
+----
+
+What we will learn:  
+
+1. Mechanism of self-selection
+1. Bias of the naïve estimator (simple comparison between the participants and the nonparticipants)
+1. Difference-in-differences (DID) estimator and how before-after data of both treated and control can give a consistent estimate of ATT under a mild condition
+
+
+----
+
+[自己選抜の図](../2024/ImpactEvaluation.pdf#page=231)
+
+----
+
+Implementation:  
+
+Get data:  
+
+* Treated group outcomes $y^{1}_{i,t}$ before and after the policy. If there are $n^{1}$ individuals, $\underbrace{y^{1}_{1,t}, \dots, y^{1}_{n^{1},t}}_{\mbox{year } t}, \underbrace{y^{1}_{1,t+1}, \dots, y^{1}_{n^{1}, t+1}}_{\mbox{year } t+1}$.  
+* Control group outcomes $y^{0}_{i,t}$ before and after the policy. If there are $n^{0}$ individuals, $\underbrace{y^{0}_{1,t}, \dots, y^{0}_{n^{0},t}}_{\mbox{year } t}, \underbrace{y^{0}_{1,t+1}, \dots, y^{0}_{n^{0}, t+1}}_{\mbox{year } t+1}$.  
+   * One needs individual level data, not just group level averages, to do inferences (=compute $p$ values). For testing a null hypothesis, one needs standard errors of the estimates, which need variances and covariances, which can only be computed with individual level data.  
+* Let us denote the smaller of $n^{1}, n^{0}$ as $n^{min}$. 
+
+----
+
+Steps:
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+1. Compute before and after means for both groups. $$
+\bar{y}^{1}_{t}=\frac{y^{1}_{1,t}+ \dots + y^{1}_{n^{1},t}}{n^{1}}=\frac{\sum\limits_{i=1}^{n^{1}}y^{1}_{i,t}}{n^{1}}, \quad
+\bar{y}^{0}_{t}=\frac{\sum\limits_{i=1}^{n^{0}}y^{0}_{i,t}}{n^{0}}, \quad
+\bar{y}^{1}_{t+1}%=\frac{\sum\limits_{i=1}^{n^{1}}y^{1}_{i,t+1}}{n^{1}}
+, \quad
+\bar{y}^{0}_{t+1}%=\frac{\sum\limits_{i=1}^{n^{0}}y^{0}_{i,t+1}}{n^{0}}.
+$$
+1. Compute difference-in-differences: $y^{DID}=(\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t})-(\bar{y}^{0}_{t+1}-\bar{y}^{0}_{t})$.
+1. Compute the standard deviation of $y^{DID}$ with: $$
+\sigma^{DID}
+=
+\sqrt{\NU\left[\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t}-\bar{y}^{0}_{t+1}+\bar{y}^{0}_{t}\right]}
+$$
+where $\NU\left[\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t}-\bar{y}^{0}_{t+1}+\bar{y}^{0}_{t}\right]$ equals to
+$$
+\begin{aligned}
+\frac{\hat{\sigma}^{2}_{y^{1}_{t+1}}}{n^{1}}
+&
++\frac{\hat{\sigma}^{2}_{y^{1}_{t}}}{n^{1}}
++\frac{\hat{\sigma}^{2}_{y^{0}_{t+1}}}{n^{0}}
++\frac{\hat{\sigma}^{2}_{y^{0}_{t+1}}}{n^{0}}
+-2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{1}_{t}]}{n^{1}}
+-2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t+1}]}{n^{min}}
++2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t}]}{n^{min}}\\
+&
++2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t+1}]}{n^{min}}
+-2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t}]}{n^{min}}
+-2\frac{\widehat{\cov}[y^{0}_{t+1}, y^{0}_{t}]}{n^{0}}.
+\end{aligned}
+$$
+1. Compute $p$ value. Using R, pt($y^{DID}/\sigma^{DID}, n^{min}$, lower.tail = F) gives the $p$ value of the null hypothesis of zero effect.
+:::
+
+----
+
+A simpler way: It can be shown that $y^{DID}=a_{3}$ in the following regression.  
+
+1. Regress $y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+e_{i,t}$ using $t, t+1$ data.  
+	* $D_{i}$: Treatment dummy variable. $D_{i}
+	=\left\{
+	\begin{array}{c}
+	1\\ 0
+	\end{array}
+	\right.
+	\quad \mbox{if} \quad \left\{
+	\begin{array}{l}
+	\mbox{treated} \\ \mbox{control}
+	\end{array}
+	\right.$  
+	* $after_{t+1}$: "after" dummy variable. $after_{t+1}= 
+	\left\{
+	\begin{array}{c}
+	1\\ 0
+	\end{array}
+	\right.
+	\quad \mbox{if} \quad \left\{
+	\begin{array}{l}
+	t+1 \\ t
+	\end{array}
+	\right.$
+1. Test $a_{3}=0$ and get its $p$ value.
+
+----
+
+DIDの識別仮定: 介入がないとき、結果指標の変化が群間で似ていること。\pause 共通トレンドの仮定 \textbf{common trend assumption}.  
+
+* 水準は違ってもいい(だから、水準の分布は似ていなくてよい)
+* 群同士が似ていると仮定するよりも現実的
+* 低所得者: 消費の分布は低位ばかり
+* 高所得者: 消費の分布は高位ばかり
+* 消費水準の分布は異なるかもしれないが、消費<Red>変化</Red>の分布は似ている可能性あり
+
+----
+
+List of \textcolor{red}{identifying assumptions}.   
+In the absence of the policy: $\delta(A)$ reads "distribution of $A$"
+
+With-without
+:  $\delta(y_{i1}) \simeq \delta(y_{i0})$.
+
+Before-after
+:  $\delta(y_{i, \mbox{\scriptsize after}}) \simeq \delta(y_{i, \mbox{\scriptsize before}})$.
+
+DID
+:  $\delta(\Delta y_{i1}) \simeq \delta(\Delta y_{i0})$.
+
+For DID we need:
+
+* Before-after data.
+* For both the treated and the control.
+
+You need to get the control data even before the policy starts. 
+
+----
+
+With-without  
+
+* グラミン銀行メンバー=the treated、非メンバー=the control、マイクロファイナンス貸付の所得へのATE=各群の所得の平均値の差
+	* 貸付がないとき、所得分布は各群で似ているか?
+	* ほぼ似ていない(はず)。メンバーは自己選抜\textit{self-select}して加入するため、メンバーだけの特徴が何かある(はず)。(連帯責任制の場合、メンバーは相互に選び合う) この加入過程は所得稼得能力の分布が各群で異なることを示唆している。そうであれば、介入がないときの所得の分布も各群で異なる(はず)。
+	* CF = 借り入れしていない状態のメンバーの所得
+* グラミン銀行のメンバーからランダムにサンプル=the treated、非メンバーからランダムにサンプル=the control、貸付の所得へのATE=各群の平均所得の差
+	* ランダム・サンプリング $\neq$ (貸付の)ランダム割当
+
+----
+
+Before-after:  
+
+* とある集団で、運動開始後の体重=the treated、運動開始前の体重=the control、運動の体重へのATE=各群の平均体重の差
+	* 運動をしないとき、運動開始前と運動開始後の体重の分布は似ているか?
+	* 体重が時間とともに変化するときは似ていない。冬に運動を開始すれば、たくさん食べることで体重が増えるため、運動の効果は過少推計されるunderestimated。
+	* CF = 運動する人たちが運動しないときの体重
+
+----
+
+Before-after:  
+
+* 技術支援前の時期の穀物反収=the control、技術支援後の時期の穀物反収=the treated、技術支援の穀物反収へのATE=各群の平均反収の差
+	* 技術支援がないときに、支援前の時期と支援後の時期で反収分布は似ているか?
+	* おそらく似ていない。穀物生産は気候などの時間を通じて変わるショックに曝されるため。反収変化がショックによる部分と技術支援による部分に分離することは難しい。
+	* 支援前のパネル・データ(支援2期前から支援1期前など)を使って反収のトレンドを計算し、このトレンドが続くと仮定すれば、ショック・トレンドによる部分と技術支援による部分に分解できる。
+
+----
+
+::::{.columns}
+
+::: {.column width=75%}
+![](ImpactEvaluation/figure/bad_graphs/subaru02.jpg)
+:::
+
+::: {.column width=25%}
+アイサイトの効果...?
+
+
+2016年の広告、2024年現在では7車種(最高価格ソルテラ、最低価格ジャスティ、レックス、軽自動車全4種)以外全車種にアイサイト搭載
+:::
+
+::::
+
+
+----
+
+With-without:  
+
+* Eyesight搭載車=the treated、Eyesight非搭載車=the control、Eyesightの事故確率へのATE=各群の平均事故率の差.
+	* アイサイト非搭載時に、アイサイト搭載車とアイサイト非搭載車で事故の確率分布は似ているか?
+	* おそらく似ていない。\sout{アイサイトはハイエンドの車種に搭載され、}そうした車を運転する人たちは系統的に異なる(より\sout{高所得}安全志向のはず)。このため、運転の仕方や事故確率も異なる(はず)。
+	* アイサイト非搭載時に\sout{ハイエンド}アイサイト搭載車種の運転手は安全運転をする傾向があるか? おそらく安全運転をする傾向が強い、\sout{失うものが多い}アイサイトを選ぶ=安全志向だから。この場合、アイサイト搭載の事故への効果は過大評価されるoverestimated。
+	* \sout{アイサイト非搭載時にハイエンド車種の運転手が危険な運転をする傾向があるかもしれない、リスクを取って財を成したから。この場合、アイサイト搭載の事故への効果は過小評価されるunderestimated。}
+	* アイサイトの導入をランダムに割り当てることもできる$\rightarrow$実験可能
+
+----
+
+::::{.columns}
+
+::: {.column width=65%}
+![](ImpactEvaluation/figure/bad_graphs/subaru01.jpg){}
+:::
+
+::: {.column width=25%}
+::: {.fragment}
+"Accident rate reduced by 61\%."  
+:::
+::: {.fragment}
+WRONG: Not reduced but "smaller than non-Eyesight cars."
+:::
+:::
+
+::::
+
+----
+
+With-without:  
+
+* 日常的によく笑う人=the treated、日常的にあまり笑わない人=the control、笑いの健康へのATE=両群の自己申告による健康度合いの平均値の差
+	* 笑う頻度が同じという仮想的状況で、両群の自己申告健康の分布は似ているか?
+	* おそらく似ていない。健康を自認する人ほど笑う頻度は高いはずだから。この場合、過大な効果推計になる。
+	* 厳密に笑いの効果を示すには、笑う頻度を各人にランダムに割り当てねばならない。そんな実験は可能か?
+	* ある程度までは可能。コメディや漫才の放送局の無料視聴権を与えて笑いの頻度を変えることはできるかもしれない。しかし、どのくらい実験を続けなくてはいけないか不明。おそらく、笑いの効果を研究すること自体が野心的すぎるかもしれない。
+
+----
+
+自然実験  
+
+オランダ飢餓の冬(1944-45)への胎内曝露 [@Lumey1997]
+
+成人1人当たり配給カロリー(飢餓の冬は1000カロリー/日)  
+
+. . .
+
+データ:  
+
+* 地域: アムステルダム(Wilhelmina Gasthuis病院)生まれ、女性のみ
+* 時期: 1944年8月-1946年4月生まれ($n=1116$、1987-91年追跡可能834、参加700)
+* バーカー仮説(Barker hypothesis): 飢餓の冬を胎内で過ごした人は成人期に循環器系疾患に罹りやすい
+
+. . . 
+
+@Lumey1997 : 飢餓の冬生まれ vs. その他期間生まれ(Before-afterに近い)  
+
+----
+
+第3三半期曝露:  1945年2-6月生まれ
+
+第2三半期曝露:  1945年5-9月生まれ
+
+第1三半期曝露:  1945年8-12月生まれ
+
+統御群: 	1944年8月-1945年1月、1946年1月-4月生まれ
+
+. . . 
+
+$$
+\begin{aligned}
+\mbox{子どもの周産期(W22-D7)死亡率}
+&=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}\\
+&\hspace{-2cm}
++a_{2}*\mbox{第2三半期曝露}
++a_{3}*\mbox{第3三半期曝露}+\mbox{誤差項}
+\end{aligned}
+$$
+
+$a_{1}, a_{2}, a_{3}$がゼロ $\Leftrightarrow$ 曝露の影響は他期間生まれに比べてゼロ  
+
+. . . 
+
+$a_{1}, a_{2}, a_{3}$で曝露の影響が測れるための識別仮定: 同じ地域生まれであれば、飢餓の冬がなければ、全てのコーホート(1944年8月-1946年4月)の死亡率は一定=死亡率にコーホート効果なし
+
+----
+
+そうかもしれないし、そうじゃないかもしれない  
+
+. . . 
+
+CF=他期間生まれ  
+
+* 死亡率が一定と期待する理由は不明なので、推計値の信頼性は不明
+* 戦争の影響を受けなければ、別年同月の死亡率は同じになると期待できるが、戦争の影響は何かあるはずなので、これはbig if
+
+信頼性のより高いデザイン・推計方法(DID): 全ての地域のコーホート・パネル・データ
+
+* 地域: アムステルダムとその他地域生まれ
+* 同じ誕生日の人たちを他地域で見つければ良い
+   * 1987年時点までに死亡している女性はいる=より健康な女性のみが残っている=子どもの周産期死亡率は過小推計されるはずだが、アムステルダム標本でも生存選抜について何も対応していないので、他地域標本を加えない理由が見当たらない
+* 時期: 1944年8月-1946年4月生まれ
+
+----
+
+::: {style="text-align: center;"}
+# Regression discontinuity design
+:::
+
+----
+
+全ての特徴を観察できれば結果の差をすべて説明できる。が、観察できない。
+
+. . . 
+
+実験でなく、パネル・データが(=DIDができ)ないとき、どうすれば良いのか?  
+
+. . . 
+
+Good news:  インパクト評価の範囲を狭くすれば、推計可能。
+Impacts can be estimated if we limit our attention to a narrower domain.
+
+. . .
+
+Consider a poverty reduction policy that gives a subsidy to the people below the poverty line.  
+*  "BPL" card in India.
+
+. . . 
+
+Suppose poverty line is USD 1.25 per day and this criteria is strictly enforced. So if your income is USD 1.24 per day, you get the money. If your income is USD 1.25, you don't.  
+
+
+. . . 
+
+People with daily income of USD 1.24 and USD 1.25 are similar.   
+
+. . . 
+
+Estimate impacts by comparing BPL and APL near the poverty line.
+
+----
+
+The narrower focus around cutoff gives us a "matched pair" or a pseudo counterfactual.   
+
+. . . 
+
+Interpretation of estimates: Policy impacts on the subpopulation near the cutoff. \pause 
+It is a local impact we are estimating, not a global impact such as ATE (or ATT, ATC).   
+
+. . . 
+
+Applications: Cutoffs, geographical boundaries.  
+
+
+. . . 
+
+Policies are full of cutoffs. So almost every policy has a chance of estimating its impacts near the cutoff.  
+
+. . . 
+
+Identifying assumption:
+
+. . . 
+
+There is nothing other than the policy which "jumps" discretely around the cutoff point. So a jump in the outcome is attributed only to the policy.  
+
+. . . 
+
+But there is a catch: (Because we fit the line locally around the cutoff neighbourhood) It takes a large sample to use RDD estimator with the order of 10,000. 
+
+----
+
+因果関係を示す方法: \textbf{回帰不連続regression discontinuity design (RDD)}  
+
+. . . 
+
+右辺の変数が急に変化する状況を見つけ、その前後で左辺の変化を観察する  
+
+. . . 
+
+teacher-pupil ratio $\Rightarrow$ exam score  
+
+. . . 
+
+メモニデス(中世のトーラー学者)による戒律
+
+. . . 
+
+"Only up to 40 students in one class...."
+
+. . . 
+
+![](ImpactEvaluation/figure/maimonides-mishna.jpg){}
+
+----
+
+![](ImpactEvaluation/figure/maimonides.jpg){}
+
+----
+
+The Government of Israel still holds it. 
+
+. . . 
+
+![](ImpactEvaluation/figure/AEvans_Fig01.jpg){}
+
+----
+
+Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
+
+![](ImpactEvaluation/figure/AEvans_Fig02.jpg)
+
+Impact is more evident in smaller enrollment counts. Average score is increasing after 60 regardless of predicted class size. Possible reasons: Greater deviation of actual class size from predicted class size, different petagogical methods in large schools or more competition/learning among peers.
+
+----
+
+4th graders\\
+![](ImpactEvaluation/figure/AEvans_Tab05.jpg){}
+
+Using all sample, there is a negative relationship between class size and learning only in reading but not in maths. For 4th graders, no impacts of class size at discontinuity neighbourhood sample.
+
+
+----
+
+4th and 5th graders\\
+![](ImpactEvaluation/figure/ALavy_Tab06.jpg){}
+
+For 5th graders, using discontinuity neighbourhood sample, there is a negative causal relationship between class size and learning in both reading and maths.
+
+----
+
+横浜市2009年40人学級: 小6国語(共通試験点数偏差値)
+
+![](ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaShou6.png)
+
+@Akabayashi2013
+
+----
+
+横浜市2009年40人学級: 中3国語(共通試験点数偏差値)\\
+![](ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaChu3.png)
+
+@Akabayashi2013
+
+----
+
+赤林さんは中3国語で期待した成果が出なかったことに驚くが、以下のように解釈 {\footnotesize <>https://synodos.jp/education/12530</>}  
+
+. . . 
+
+少人数学級=きめ細やかな指導が可能、なので、自動的に成績が上がるわけではない  
+
+. . . 
+
+教員の指導能力、意欲、効率性重視方針も必要  
+
+. . . 
+
+教員の数が増えれば能力が低い、意欲が弱い人も雇用される  
+
+. . . 
+
+伸び代が高い生徒に注力(効率性重視)するか、成績の低い生徒に注力(公平性重視)するか  
+
+. . . 
+
+どうも地価の高い地域では成績が上がったようです(論文アクセスないので未読)  
+
+. . . 
+
+情報開示請求で得た学校平均点数と学年生徒数のデータなので、実際のクラス数(よって、実際のクラス・サイズ)は分からない模様  
+
+. . . 
+
+点数がより変化しやすそうな英語や数学の結果が知りたい
+
+----
+
+中室牧子さん: 35人学級は、2011年に公立小学校の1年生に対してのみ導入されました。財務省は、2011年以前と以後で、いじめ、暴力行為、不登校の平均値を比べると、いじめや暴力、不登校には大きな変化が見られないので、少人数学級には効果がない。したがって、「40人学級に戻すべき」と主張したのです。  
+![](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){}  
+<>https://diamond.jp/articles/-/66992<>  
+
+
+. . . 
+
+この効果推計で不適切な点: 帰無仮説(効果ゼロ)の$p$値がない、推計方法(識別仮定)の信頼性が低い、プラシーボ検定(私立1年生や公立2年生)もできる
+
+----
+
+日経新聞2020年12月17日(木)朝刊\\
+![](ImpactEvaluation/figure/Nikkei_35NinClass2020Dec17.jpg)
+
+3密回避が動機  
+今回も(35人が良いとする)エビデンスに依拠せず  
+全国一律だと効果推計は難しい
+
+----
+
+* @LemieuxMilligan2008: In Quebec, unemployment benefits are increased once reaching the age of 30 for adults with no child. This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced.
+	* Will there be a jump in employment rates at 30 to the below?
+* @Lee2008: Being an incumbent can give an additional benefit in the next election. If this is true, at the vote share margin close to zero, an incumbent vs. non-incumbent contrast gives effects of this benefit. Most suitable data comes from the US state gubernatorial elections where there are effectively only two candidates/parties.
+	* Will there be a jump in winning probability at zero vote margin to the above?
+
+----
+
+@LemieuxMilligan2008. Age and unemployment benefits in Quebec.
+
+![](ImpactEvaluation/figure/Lemieux_Fig03.jpg)
+
+----
+
+@Lee2008. Margin of vote share in $t$ and probability of winning in $t+1$.
+
+![](ImpactEvaluation/figure/Lee_Fig02a.jpg){}
+
+----
+
+There is an indirect yet nice use of data to assess the logical coherence of the results.  
+
+. . . 
+
+Take a sample that should not be affected by the policy and test if there is an impact.   
+
+. . . 
+
+If there is an impact, then your main result is likely to be also picking up something different from the policy.  
+
+. . . 
+
+This is called a \textit{placebo test}.  
+
+. . . 
+
+A placebo test is run only when the main estimation indicates a non-zero effect.  
+
+. . . 
+
+If the main estimate has a low $p$ value (probability of null hypothesis `zero effect' being true), one tries to run a placebo test, in a hope of finding a large $p$ value in it, to get a further confidence that the result is not an accident.
+
+----
+
+Placebo tests in \citet{LemieuxMilligan2008}. Rest of Canada or post 1991 should not detect effects.
+
+![](ImpactEvaluation/figure/Lemieux_Tab03.jpg)
+
+----
+
+Placebo tests in @Lee2008. Margin of vote share in $t$ should not give a jump of events before $t$.
+
+![](ImpactEvaluation/figure/Lee_Fig02b.jpg)
+
+----
+
+現在ではカットオフから遠い標本を使った多項式(曲線)をフィットさせることは誤りとされている  
+
+* カットオフから遠い標本は推計に重用されるべきではない
+* 多項式はカットオフから遠い標本の僅かな値の変動によって推計値が大きく変化する
+
+現在は直線、もしくは、local linear regressionという遠い標本のウェイトを小さくして直線を推計する手法を使う
+
+----
+
+When applied to geographical boundaries, such as school zones, there may be parents who move across border for better education.  
+
+. . . 
+
+Then the cutoff becomes nondeterministic, or "fuzzy." If the jump does not happen exactly at the predetermined cutoff, RDD is said to have a \textit{fuzzy design}. 
+
+* There can be many instances of fuzzy RDD if one can fabricate the eligibility. In India's BPL example, the BPL card can be issued to a resident who pays a bribe. This introduces a noise in estimates, hence estimates become less precise.
+* Nonetheless, a fuzzy RDD can also give a consistent estimate of local impacts, as long as we have a large enough sample that complies with the cutoff.
+
+. . . 
+
+If there is not cross cutoff movement, RDD is said to have a \textit{sharp design}.
+
+----
+
+RDDは局地的な実験と捉えられる  
+境界内外で越境があったとしても、treatment assignmentについて人々の意向が不正確にしか反映されなければ、ランダムな割当の要素があるから  
+実験と同様、density testはランダム化を達成できたか検定
+
+----
+
+RDD	での識別仮定の信頼性チェック
+
+* placebo test: 	欠落変数の影響を確認: 政策変化のない点の推計値がゼロを検定
+   * ...棄却 $\Rightarrow$ 推計した効果に疑問
+* density test: 	非越境(local randomisation)の確認: 
+	* 越境者が多ければ境界で標本が多くなり、分布に凹凸ができる: forcing variableの分布密度が境界内外で等しい(=帰無仮説: 越境がなく分布の差が境界内外でゼロ)か検定(density test or McCary test)
+	   * ...棄却 $\Rightarrow$ 越境あり 
+	* 治療確率(propensity scoreという)の差が境界内外でゼロ(=帰無仮説: 越境が完全で治療確率に対し境界が無意味になる)か検定
+	   * ...棄却 $\Rightarrow$ 越境なし
+	* 特定の特徴を持つ人たちが越境していないか: その他変数の平均値が境界内外で等しい(=帰無仮説: 越境がなく平均値の差が境界内外でゼロ)か検定
+	   * ...棄却 $\Rightarrow$ 越境あり
+
+. . . 
+
+PTは論理的なチェックで傍証。DTはランダム化の検定。
+
+
+----
+
+#### References
+
+::: {#refs}
+:::

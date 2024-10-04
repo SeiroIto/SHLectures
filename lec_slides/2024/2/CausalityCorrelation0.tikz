@@ -1,0 +1,8 @@
+```{r, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\end{tikzpicture}
+```
+

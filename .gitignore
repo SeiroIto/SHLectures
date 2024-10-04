@@ -14,3 +14,14 @@
 /lec_slides/2021/
 /lec_slides/2022/
 /lec_slides/Ran*/
+/lec_slides/2024/RP/test*
+/lec_slides/2024/RP/_imag*
+/lec_slides/2024/*.log
+/lec_slides/2024/test*
+/lec_slides/2024/RP/*.log
+/lec_slides/2024/ImpactEvaluation/cache/
+/lec_slides/2024/ImpactEvaluation/figure/bad_graphs/
+/lec_slides/2024/ImpactEvaluation/figure/local/
+/lec_slides/2024/ImpactEvaluation/figure/lineas*/
+/lec_slides/2024/ImpactEvaluation/figure/*.zip
+/lec_slides/2024/ImpactEvaluation/figure/*.eps

@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+every node/.style = {color = blue}
+]
+\path 
+(3, 3) node [shape = circle, draw, fill = blue!25] (A1) {Œ»İ‚Ì$A$}
+(3, 0) node [shape = circle, draw, fill = red!25] (B1) {Œ»İ‚Ì$B$};
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!50] (A2) {‰ß‹‚Ì$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!50] (B2) {‰ß‹‚Ì$B$};
+\draw [->, >= stealth', red] (A2) -- (B1);
+\draw [->, >= stealth', red] (B2) -- (B1);
+\path 
+	($(A1) + (-3.5, 0)$) node [shape = circle, draw, fill = blue!10] (A3) {«—ˆ‚Ì$A$}
+	($(B1) + (-3.5, 0)$) node [shape = circle, draw, fill = red!10] (B3) {«—ˆ‚Ì$B$};
+\end{tikzpicture}
