@@ -241,6 +241,27 @@ Blue {
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
+ボックス禁止政策の話のところで、”what do you expect the impacts of BTB policy?”の答えが意図せざる結果となったとありますが、なぜそうなったのか、reduce employment and increase recividism と答えたからなんなのか、良く分かりませんでした。
+:::
+</div>
+
+:::{.fragment}
+政策意図=就業差別抑止による再犯防止でした
+:::
+
+:::{.fragment}
+なので、収監可能性と再犯可能性の最も高いYAA男性に正反対の効果が出たので、意図せざる結果、と表現しました
+:::
+
+:::{.fragment}
+意図・目的と手段が一致していない例です
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
 ボックス禁止政策について、職業差別が話題に上がっていたが、私は差別だとは思わなかった。一度罪を犯した人間が社会に出たときに、罪を犯していない人間と同じ立場になれてしまうと、その事実がまた罪を犯すきっかけになると考えるからである。罪を犯したら、もう二度と元の立場には戻れないという認識を持つ必要があると考える。(冤罪は別)
 :::
 </div>
