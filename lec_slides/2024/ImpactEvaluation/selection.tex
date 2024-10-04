@@ -1,0 +1,924 @@
+\setcounter{angle}{0}
+\newcounter{r}
+\newcommand{\escalar}[1]{\setcounter{r}{#1 * #1 * #1}}
+\newcounter{m}
+\setcounter{m}{0}
+\newcounter{mc}
+
+
+
+\begin{frame}{self-selection}
+%\def\beforeline{(0, 3) parabola bend (5,4) (8, 4.44)}
+What we will learn:
+\begin{enumerate}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Mechanism of self-selection
+\item	Bias of the na\"ive estimator (simple comparison among treated and control)
+\item	Difference-in-differences (DID) estimator and how before-after data of both treated and control can give a consistent estimate of ATT under a mild condition
+\end{enumerate}
+\end{frame}
+
+\def\xlow{3.83}
+\def\xadd{1.87}
+\def\xpivot{3.2}
+\def\xpivothalf{1.6}
+\def\xpivothalftwo{5.6}
+\def\xright2{4.5}
+%\def\xpivothalf{\divide \xpivot by 2}
+%\def\divider{2}
+%\def\xpivothalf{\xpivot / \divider}
+%\def\beforeline{(0, 3) to [out=20, in=-170] (8, \xright2) }
+%\def\afterline{(0, 3)  to [out=45, in=-170] (8, 7.5)}
+\def\beforeline{(0, 3) to [bend left = 5] (8, \xright2) }
+\def\afterline{(0, 3)  to [bend left = 17] (8, 7.5)}
+\setbeamercovered{invisible}
+
+
+\begin{frame}{self-selection (benefits)}
+%\def\beforeline{(0, 3) parabola bend (5,4) (8, 4.44)}
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+\onslide<1->{
+		\draw[->] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->] (0, 3) -- (0, 8) node[above] {outcome};
+}
+\onslide<2->{
+		\draw[green, thick, -] \beforeline node[below right] {before};
+}
+\onslide<3->{
+		\draw[azure, thick, -] \afterline node[above right] {after};
+}
+		%\foreach \x in {1, 2,..., 9}
+		%\draw[shift={(\x, 3)}] (0pt, 2pt) -- (0pt, -2pt);
+		%\foreach \y in {1, 2,..., 5}
+		%\draw[shift={(0, 3+\y)}] (2pt, 0pt) -- (-2pt, 0pt); 
+		%	pause for shaded area
+\onslide<4->{
+		\fill[blue, path fading=myfade]  (8, 7.5) to (8, \xright2)
+		to [bend right=5] (0, 3) to [bend left=17] (8, 7.5);
+		\node at (0, 3) [xshift = 5cm, yshift = 2.5cm]{\textbf{benefits}};
+		\draw[green, thick, -] \beforeline node[below right] {before};
+		\draw[azure, thick, -] \afterline node[above right] {after};
+		\draw[->] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->] (0, 3) -- (0, 8) node[above] {outcome};
+}
+      	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+\tikzstyle{shadingcosts} = [left color=gray!90, right color=gray!80, opacity = .3]
+\tikzstyle{shadingcostsTwo} = [left color=gray!90, right color=gray!80, opacity = .12]
+\begin{frame}{self-selection (costs)}
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+		%	participation costs
+		\draw[->,  >=stealth'] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->,  >=stealth'] (0, 3) -- (0, 8) node[above] {outcome};
+		\draw[- ] (0, \xlow) -- (8.5, \xlow);
+		\draw[- ] (0, \xlow + \xadd) -- (8.5, \xlow + \xadd);
+		\pause
+		\shade[shadingcosts] (0, \xlow) rectangle +(8.5, \xadd);
+		\draw[](0, \xlow) node[xshift = 5cm, yshift = 1cm]{\textbf{participation costs}};
+      	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{self-selection (benefits and costs)}
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+		\fill[blue, path fading=myfade]  (8, 7.5) to (8, \xright2)
+		to [bend right=5] (0, 3) to [bend left=17] (8, 7.5);
+		\node at (0, 3) [xshift = 5cm, yshift = 2.5cm]{\textbf{benefits}};
+		\draw[green, thick, -] \beforeline node[below right] {before};
+		\draw[azure, thick, -] \afterline node[above right] {after};
+		\draw[->] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->] (0, 3) -- (0, 8) node[above] {outcome};
+		\shade[shadingcosts] (0, \xlow) rectangle +(8.5, \xadd); 
+		\draw[-] (0, \xlow) -- (8.5, \xlow);
+		\draw[-] (0, \xlow + \xadd) -- (8.5, \xlow + \xadd);
+		\draw[](0, \xlow) node[xshift = 5cm, yshift = 1cm]{\textbf{participation costs}};
+      	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\def\beforelinesecondhalf{(\xpivot, \xlow) to [out=10, in=-170] (8, 4.5)}
+\begin{frame}{self-selection (participation decisions)}
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+		\fill[blue, path fading=myfade]  (8, 7.5) to (8, \xright2)
+		to [bend right=5] (0, 3) to [bend left=17] (8, 7.5);
+		\node at (0, 3) [xshift = 5cm, yshift = 2.5cm]{\textbf{benefits}};
+		\draw[azure, thick, -] \afterline node[above right] {after};
+		\only<1>{\shade[shadingcosts] (0, \xlow) rectangle +(8, \xadd); }
+		\draw[](0, \xlow) node[xshift = 5cm, yshift = 1cm]{\textbf{participation costs}};
+		\draw[green, thick, -] \beforeline node[below right] {before};
+		\draw[->] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->] (0, 3) -- (0, 8) node[above] {outcome};
+		\pause
+		\shade[shadingcosts] (0, \xlow) rectangle +(\xpivot, \xadd); 
+		\fill[shadingcostsTwo]  (\xpivot, \xlow+\xadd) to (8, \xlow+\xadd)
+		  to (8, \xright2) to [bend right=2] (\xpivot, \xlow);
+		\fill[shadingcostsTwo]  (\xpivot, \xlow+\xadd) to[bend left=.75] (8, \xlow+\xadd + \xright2 - \xlow)
+		  to (8, \xlow+\xadd) to (\xpivot, \xlow+\xadd);
+		\draw[green, thick, dashed] (\xpivot, \xlow+\xadd) to [out=10, in=-170] 
+			(8, \xlow+\xadd + \xright2 - \xlow);
+		\draw[green, thick, -] \beforeline node[below right] {before};
+		\pause
+		\draw[dashed] (\xpivot, 3) -- (\xpivot, 8) node[left] {do not participate} node[right] {participate};
+      	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\def\beforelinefirsthalf{(0, 3) to [out=20, in=-172] (\xpivot, \xlow)}
+\def\afterlinesecondhalf{(\xpivot, \xlow+\xadd) to [out=32, in=-170] (8, 7.5)}
+\def\afterlinefirsthalf{(0, 3) to [out=45, in=-145] (\xpivot, \xlow + \xadd)}
+\begin{frame}{self-selection (results)}
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+		\draw[->] (0, 3) -- (9, 3) node[right] {ability};
+		\draw[->] (0, 3) -- (0, 8) node[above] {outcome};
+		\draw[name path=befmid, draw = none] (\xpivothalf, 3.2) -- (\xpivothalf, 8);
+		\draw[name path=befone, thick, -] \beforelinefirsthalf;
+		\draw[name path=contCF, draw = none] \afterlinefirsthalf;
+		\draw[name path=treatCF, draw = none] \beforelinesecondhalf;
+		\draw[name path=aftmid, draw = none] (\xpivothalftwo, 3.2) -- (\xpivothalftwo, 8);
+		\draw[name path=aftone, thick, -] \afterlinesecondhalf;
+		\draw[name path=befmean, draw = none] (4, 3.2) -- (4, 8);
+		\pause
+		\path[name intersections= {of=befone and befmid, by = int1}]; 
+			\coordinate[label = below: {}] (b1) at (int1);
+			\node[fill = black!10!white, inner sep = 2pt] at (b1){};
+			\draw ($(b1) + (0, -1.75ex)$) node{\scriptsize$\E[y_{0}|D=0]$};
+		\path[name intersections= {of=aftone and aftmid, by = int2}]; 
+			\coordinate[label = above:{}] (a1) at (int2);
+			\node[fill = black!10!white, inner sep = 2pt] at (a1){};
+			\draw ($(a1) + (-2ex, 2ex)$) node{\scriptsize$\E[y_{1}|D=1]$};
+		\pause
+		\draw[dashed] (a1) -- ($(a1) - (4.2, 0)$);
+		\draw[purple, thick, densely dashed, double, > = latex, <->] 
+			($(a1) - (4.2, 0)$) -- ($(b1) - (.2, 0)$) 
+			node[left = 1pt, pos = .45]{\scriptsize na\"{i}ve}
+			node[left = 1pt, pos = .55]{\scriptsize comparison};
+		\pause
+		\draw[blue, dashed, thick] \afterlinefirsthalf;
+		\draw[blue, dashed, thick] \beforelinesecondhalf;
+		\path[name intersections= {of=contCF and befmid, by = int3}]; 
+			\coordinate[label = below: {}] (a2) at (int3);
+			\node[fill = black!10!white, inner sep = 2pt] at (a2){};
+			\draw ($(a2) + (5ex, -.0ex)$) node{\scriptsize$\E[y_{1}|D=0]$};
+		\path[name intersections= {of=treatCF and aftmid, by = int4}]; 
+			\coordinate[label = above:{}] (b2) at (int4);
+			\node[fill = black!10!white, inner sep = 2pt] at (b2){};
+			\draw ($(b2) + (1ex, -2ex)$) node{\scriptsize$\E[y_{0}|D=1]$};
+		\pause
+		\draw[red, ultra thick, > = latex, <->] (b1) -- (a2) 
+			node[right = 2pt, pos = .5]{\scriptsize ATC};
+		\draw[red, ultra thick, > = latex, <->] (b2) -- (a1) 
+			node[right = 2pt, pos = .5]{\scriptsize ATT};
+		\pause
+		\path[name intersections= {of=treatCF and befmean, by = int5}]; 
+			\coordinate[label = below: {}] (b3) at (int5);
+			\node[fill = black!10!white, inner sep = 2pt] at (b3){};
+			\draw ($(b3) + (0ex, -2.0ex)$) node{\scriptsize$\E[y_{0}]$};
+		\path[name intersections= {of=aftone and befmean, by = int6}]; 
+			\coordinate[label = above:{}] (a3) at (int6);
+			\node[fill = black!10!white, inner sep = 2pt] at (a3){};
+			\draw ($(a3) + (-1ex, 1.5ex)$) node{\scriptsize$\E[y_{1}]$};
+		\draw[red, ultra thick, > = latex, <->] (a3) -- (b3) 
+			node[right = 2pt, pos = .5]{\scriptsize ATE};
+      	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\def\rectwidth{1.5}
+\begin{frame}{self-selection (what we observe)}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (aftCorigin) at (5, 3);
+	\coordinate (aftTorigin) at (5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (7, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (7, 2.5) node[right] {sequence};
+	%	sequence of events and background shading
+	\pause
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize before};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\phantom{\footnotesize decision}};
+	\node (x3) at ($(aftCorigin) + (.75, -1)$) {\phantom{\footnotesize after}};
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (-4, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\pause
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\pause
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\filldraw[color = orange!50, opacity = .3] ($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(aftCorigin) + (0, 5.25)$);
+	\pause
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	\pause
+	\node (x3) at ($(aftCorigin) + (.75, -1)$) {\footnotesize after};
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	control tukey plot
+	\pause
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- 
+		($(aftCorigin) + (.75, .83)$) node[above] {do not participate};
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- 
+			($(aftCorigin) + (\rectwidth, .83)$);
+	%	treated tukey plot
+	\pause
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+	%	before tukey plot
+	\pause
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- 
+		($(befCorigin) + (.75, 1.5)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, .375)$) 
+			rectangle +(\rectwidth, 0.75);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, 1.5)$) -- 
+			($(befCorigin) + (\rectwidth, 1.5)$);
+	%	arrows
+	\pause
+	\draw[->, ultra thick, ] ($(befCorigin) + (\rectwidth + .05, .75)$)
+		to [out = -20, in = -170] ($(aftCorigin) + (-.2, .415)$);
+	\pause
+	\draw[->, ultra thick] ($(befCorigin) + (\rectwidth + .05, .75)$)
+		to [out = 20, in = 170]  ($(aftTorigin) + (-.1, .9)$);
+	%	dummy arguments
+        	\input{ImpactEvaluation/selection_figure_dummy1.tex}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{evaluation: na\"ive comparison}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (aftCorigin) at (5, 3);
+	\coordinate (aftTorigin) at (5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (7, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (7, 2.5) node[right] {sequence};
+	%	sequence of events and background shading
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize before};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\node (x3) at ($(aftCorigin) + (.75, -1)$) {\footnotesize after};
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (-4, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\filldraw[color = orange!50, opacity = .3] ($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(aftCorigin) + (0, 5.25)$);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	control tukey plot
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- 
+		($(aftCorigin) + (.75, .83)$) node[above] {do not participate};
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- 
+			($(aftCorigin) + (\rectwidth, .83)$);
+	%	treated tukey plot
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+	%	before tukey plot
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- 
+		($(befCorigin) + (.75, 1.5)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, .375)$) 
+			rectangle +(\rectwidth, 0.75);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, 1.5)$) -- 
+			($(befCorigin) + (\rectwidth, 1.5)$);
+	%	dummy arguments
+        	\input{ImpactEvaluation/selection_figure_dummy1.tex}
+	%	parenthesis
+	\pause
+        	\draw [gray, ultra thick, >= latex, <->]
+			($(aftTorigin) + (\rectwidth + .05, .9)$) .. controls 
+			 ($(aftTorigin) + (\rectwidth + .5, -.8)$) .. 
+			($(aftCorigin) + (\rectwidth + .05, .415)$)
+			node [right = .1pt, midway, yshift = 3.25pt] 
+				{\scriptsize 比べては}
+			node [right = .1pt, midway, yshift = -3.25pt] 
+				{\scriptsize ダメ};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{evaluation: proper comparison}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (aftCorigin) at (5, 3);
+	\coordinate (aftTorigin) at (5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (7, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (7, 2.5) node[right] {sequence};
+	%	sequence of events and background shading
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize before};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\node (x3) at ($(aftCorigin) + (.75, -1)$) {\footnotesize after};
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (-4, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\filldraw[color = orange!50, opacity = .3] ($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(aftCorigin) + (0, 5.25)$);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	control tukey plot
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- 
+		($(aftCorigin) + (.75, .83)$) node[above] {do not participate};
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- 
+			($(aftCorigin) + (\rectwidth, .83)$);
+	%	treated tukey plot
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+	%	before tukey plot
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- 
+		($(befCorigin) + (.75, 1.5)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, .375)$) 
+			rectangle +(\rectwidth, 0.75);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, 1.5)$) -- 
+			($(befCorigin) + (\rectwidth, 1.5)$);
+	%	dummy arguments
+        	\input{ImpactEvaluation/selection_figure_dummy1.tex}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{evaluation: proper comparison}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (aftCorigin) at (5, 3);
+	\coordinate (aftTorigin) at (5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (7, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (7, 2.5) node[right] {sequence};
+	%	sequence of events and background shading
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize before};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\node (x3) at ($(aftCorigin) + (.75, -1)$) {\footnotesize after};
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (-4, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\filldraw[color = orange!50, opacity = .3] ($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(aftCorigin) + (0, 5.25)$);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	\filldraw[color = gray!50, opacity = .3] ($(aftCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	control tukey plot
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- 
+		($(aftCorigin) + (.75, .83)$) node[above] {do not participate};
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- 
+			($(aftCorigin) + (\rectwidth, .83)$);
+	%	treated tukey plot
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+	%	before tukey plot: split into 2
+		%	to be control
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- ($(befCorigin) + (.75, .83)$);
+		\filldraw[shading = ball] 
+			($(befCorigin) + (0, .2075)$) rectangle +(\rectwidth, 0.405);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, .83)$) -- 
+			($(befCorigin) + (\rectwidth, .83)$);
+		%	to be treated
+	\draw[-] ($(befCorigin) + (.75, .86)$) -- 
+		($(befCorigin) + (.75, 1.5)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, 1)$) 
+			rectangle +(\rectwidth, .27);
+		\draw[-] ($(befCorigin) + (0, .86)$) -- 
+			($(befCorigin) + (\rectwidth, .86)$);
+		\draw[-] ($(befCorigin) + (0, 1.5)$) -- 
+			($(befCorigin) + (\rectwidth, 1.5)$);
+	%	arrows
+			%	ATT (treated comparison)
+		\draw[-, dashed, deepred] ($(aftTorigin) + (\rectwidth, .9)$) -- 
+			($(aftTorigin) + (\rectwidth + .75, .9)$);
+		\draw[-, dashed, deepred] ($(befCorigin) + (\rectwidth, .84+.28)$) -- 
+			($(aftCorigin) + (0, .84+.28)$);
+		\draw[-, dashed, deepred] ($(aftCorigin) + (\rectwidth, .84+.28)$) -- 
+			($(aftCorigin) + (\rectwidth+.5, .84+.28)$);
+		\pause
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) to [out = 20, in = -170]
+			($(aftTorigin) + (-.1, .9)$);
+			%	control comparison
+		\pause
+		\draw[-, dashed, deepred] ($(aftCorigin) + (\rectwidth, .415)$) -- 
+			($(aftCorigin) + (\rectwidth+.75, .415)$);
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .415)$) -- 
+			($(aftCorigin) + (-.1, .415)$);
+			%	ATT 
+		\pause
+        	\draw [red, ultra thick, >= latex, <->]
+			($(aftCorigin) + (\rectwidth + .5, .84+.28)$) --
+			($(aftTorigin) + (\rectwidth + .5, .9)$) 
+			node[left = 1pt, pos = .5] {\scriptsize ATT};
+			%	naive
+		\pause
+        	\draw [purple, ultra thick, >= latex, <->]
+			($(aftCorigin) + (\rectwidth + .75, .415)$) --
+			($(aftTorigin) + (\rectwidth + .75, .9)$) 
+			node[right = 1pt, pos = .55] {\scriptsize na\"{i}ve}
+			node[right = 1pt, pos = .45] {\scriptsize comparison};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{ATC is usually not estimable}
+\hfil\begin{tikzpicture}
+\node (tbl) {\hfil\begin{tabular}{l>{\footnotesize}c<{}>{\footnotesize}c<{}}
+	& factual & CF\\
+	ATT&  treated &  wants to be treated but not treated\\
+	ATC& control & wants to be not treated but treated
+	\end{tabular}};
+\begin{pgfonlayer}{background}
+\shade[toprow, rounded corners]
+	($(tbl.north west)+(0.12, -0.8ex)$)
+	rectangle ($(tbl.north east)-(0.13, 1.9)$);
+\draw[maintable, rounded corners]
+    ($(tbl.north east)-(0.13, 0.6)$)
+    rectangle ($(tbl.south west)+(0.13, 0.1)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+
+\pause
+\vspace{1.0ex}
+ATCは治療されたくないという意思が尊重されれば推計不可能。
+\begin{dinglist}{43}\footnotesize
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{10pt}
+\pause
+\item	ATC推計には、治療を受けないことを選ぶ人たち$D=0$と$D=0$の人たちと似ているが治療を受けた人たちをマッチさせる必要あり。
+\pause
+\item	これはあり得ない。「似た人たち」は治療を受けるはずがないから。しかし、なぜか治療を受けた。結局は似ていないのかもしれない。
+\pause
+\item	例外: 天災やその他の個人には制御不能な事件・事故などによって「治療」が避けられないとき。資産損失、融資打ち切り、アルコール成分の高いビールの若年層(妊娠を知らない妊婦)向け販売解禁、など。
+%\pause
+%\item	例外: 参加費用が下げられるとき。しかし、無料でも治療を忌避する人は必ずいる。よって、母集団のどの部分を治療できた(できなかった)のか不明。得られるのはATCのITT版のみ。
+%\item	 If ATC=ATT, ATC is estimable but this should not happen if there is self-selection.
+\end{dinglist}
+\end{frame}
+
+\def\timeshift{.45}
+\begin{frame}{difference-in-differences (idea)}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (befTorigin) at ($(befCorigin) + (0, .86)$);
+	\coordinate (cfTorigin) at ($(befCorigin) + (4, \timeshift + .86)$);
+	\coordinate (aftCorigin) at ($(befCorigin) + (4, \timeshift)$);
+	\coordinate (aftTorigin) at (6.5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (9, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (9, 2.5) node[right] {time};
+	%	sequence of events 
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize $t=0$};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\node (x3) at ($(aftCorigin) + (.75, -1-\timeshift)$) {\footnotesize $t=1$};
+	%\node (x4) at ($(aftCorigin) + (.75, -1.5-\timeshift)$) {\footnotesize (do not participate)};
+	%\node (x5) at ($(aftTorigin) + (.75, -4.2)$) {\footnotesize (participate)};
+	%	background shading
+	\filldraw[color = gray!50, opacity = .3] 
+		($(befCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = orange!50, opacity = .3] 
+		($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(befCorigin) + (4, 5.25)$);
+	\filldraw[color = gray!30, opacity = .3] 
+		($(aftCorigin) + (0, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = blue!25, opacity = .3] 
+		($(aftCorigin) + (\rectwidth, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	arrows between events
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	%	dashed lines
+		%	t=0, control horizontal line
+	\draw[-, dashed, deepred] ($(befCorigin) + (\rectwidth, .415)$) -- 
+					($(befCorigin) + (4+2*\rectwidth+.5, .415)$);
+		%	t=0, treated horizontal line
+	\draw[-, dashed, deepred] ($(befTorigin) + (0, .23)$) -- 
+					($(befTorigin) + (4+2*\rectwidth+.5, .23)$);
+	%	t = 0, tukey plot: split into 2
+		%	to be control group
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- ($(befCorigin) + (.75, .83)$);
+		\filldraw[shading = ball] 
+			($(befCorigin) + (0, .2075)$) rectangle +(\rectwidth, 0.405);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, .83)$) -- 
+			($(befCorigin) + (\rectwidth, .83)$);
+		%	to be treated group
+	\draw[-] ($(befTorigin) + (.75, 0)$) -- 
+		($(befTorigin) + (.75, 1.5-.86)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, 1)$) 
+			rectangle +(\rectwidth, .27);
+		\draw[-] (befTorigin) -- ($(befTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befTorigin) + (0, 1.5-.86)$) -- 
+			($(befTorigin) + (\rectwidth, 1.5-.86)$);
+	%	t = 1, control tukey plot
+	\pause
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- ($(aftCorigin) + (.75, .83)$);
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$)
+			node [below, xshift = -1.8em] {do not participate};
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- ($(aftCorigin) + (\rectwidth, .83)$);
+			%	t=1, control horizontal line
+		\draw[-, dashed, deepred] ($(aftCorigin) + (\rectwidth, .415)$) -- 
+						($(aftCorigin) + (2*\rectwidth+.5, .415)$);
+			%	arrows, control
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .415)$) -- 
+			($(befCorigin) + (4, \timeshift + .415)$);
+	%	treated tukey plot
+	\pause
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+			%	arrows treated
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) to [out = 80, in = -180]
+			($(aftTorigin) + (-.1, .9)$);
+	%	treated CF tukey plot
+	\pause
+	\draw[-, gray] ($(cfTorigin) + (.75, 0)$) -- ($(cfTorigin) + (.75, .54)$) 
+		node[above] {CF};
+		\filldraw[shading = ball, ball color = gray!10!white] 
+			($(cfTorigin) + (0, .135)$) rectangle +(\rectwidth, .27);
+		\draw[-, gray] (cfTorigin) -- ($(cfTorigin) + (\rectwidth, 0)$);
+		\draw[-, gray] ($(cfTorigin) + (0, .54)$) -- 
+						($(cfTorigin) + (\rectwidth, .54)$);
+		%	t=1, treated CF horizontal line
+		\draw[-, dashed, deepred] 
+			($(cfTorigin) + (\rectwidth, .28)$) -- 
+			($(cfTorigin) + (2*\rectwidth+.5, .28)$);
+		%	arrows treated CF
+	    	\draw [gray, dashed, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) --
+			($(befCorigin) + (4, \timeshift + .84+.28)$);
+	%	ATT (treated comparison)
+	\pause
+		%	before-after
+    	\draw [orange, ultra thick, >= latex, <->]
+		($(befTorigin) + (4+2*\rectwidth+.25, .28)$) --
+		($(aftTorigin) + (\rectwidth + .25, .9)$)
+		node[left = 1pt, pos = .55] {\scriptsize\textbf{after$-$}}
+		node[left = 1pt, pos = .45] {\scriptsize\textbf{before}};
+		%	ATT 
+		\pause
+        	\draw [red, ultra thick, >= latex, <->]
+			($(cfTorigin) + (2*\rectwidth+ .5, .28)$) --
+			($(aftTorigin) + (\rectwidth + .5, .9)$) 
+			%node[left = 1pt, pos = .5] {\scriptsize $\E[y_{1,t=1}-y_{0,t=0}|D=1]$}
+			node[right = 1pt, pos = .5] {\scriptsize ATT}
+			;
+		%	treated CF pararell shift
+	\pause
+    	\draw [purple, thick, >= stealth, <->]
+		($(befTorigin) + (4+2*\rectwidth+.5, .28)$) --
+		($(cfTorigin) + (2*\rectwidth+.5, .28)$) 
+		node [right = .5pt, pos = .5] (para1) {\scriptsize\textbf{trend}};
+    	\draw [white, thick, >= stealth, <->]
+		($(befCorigin) + (4+2*\rectwidth+.5, .415)$) --
+		($(aftCorigin) + (2*\rectwidth+.5, .415)$) 
+		node [right = .5pt, pos = .5] (para2) {\scriptsize\textbf{trend}};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{difference-in-differences (implementation)}
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (befTorigin) at ($(befCorigin) + (0, .86)$);
+	\coordinate (cfTorigin) at ($(befCorigin) + (4, \timeshift + .86)$);
+	\coordinate (aftCorigin) at ($(befCorigin) + (4, \timeshift)$);
+	\coordinate (aftTorigin) at (6.5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (9, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (9, 2.5) node[right] {time};
+	%	sequence of events 
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize $t=0$};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize decision};
+	\node (x3) at ($(aftCorigin) + (.75, -1-\timeshift)$) {\footnotesize $t=1$};
+	%\node (x4) at ($(aftCorigin) + (.75, -1.5-\timeshift)$) {\footnotesize (do not participate)};
+	%\node (x5) at ($(aftTorigin) + (.75, -4.2)$) {\footnotesize (participate)};
+	%	background shading
+	\filldraw[color = gray!50, opacity = .3] 
+		($(befCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = orange!50, opacity = .3] 
+		($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(befCorigin) + (4, 5.25)$);
+	\filldraw[color = gray!30, opacity = .3] 
+		($(aftCorigin) + (0, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = blue!25, opacity = .3] 
+		($(aftCorigin) + (\rectwidth, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	arrows between events
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	%	dashed lines
+		%	t=0, control horizontal line
+	\draw[-, dashed, deepred] ($(befCorigin) + (\rectwidth, .415)$) -- 
+					($(befCorigin) + (4+2*\rectwidth+.5, .415)$);
+		%	t=0, treated horizontal line
+	\draw[-, dashed, deepred] ($(befTorigin) + (0, .23)$) -- 
+					($(befTorigin) + (4+2*\rectwidth+.5, .23)$);
+	%	t = 0, tukey plot: split into 2
+		%	to be control group
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- ($(befCorigin) + (.75, .83)$);
+		\filldraw[shading = ball] 
+			($(befCorigin) + (0, .2075)$) rectangle +(\rectwidth, 0.405);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, .83)$) -- 
+			($(befCorigin) + (\rectwidth, .83)$);
+		%	to be treated group
+	\draw[-] ($(befTorigin) + (.75, 0)$) -- 
+		($(befTorigin) + (.75, 1.5-.86)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, 1)$) 
+			rectangle +(\rectwidth, .27);
+		\draw[-] (befTorigin) -- ($(befTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befTorigin) + (0, 1.5-.86)$) -- 
+			($(befTorigin) + (\rectwidth, 1.5-.86)$);
+	%	t = 1, control tukey plot
+	\pause
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- 
+		($(aftCorigin) + (.75, .83)$) node[above] {do not participate};
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- ($(aftCorigin) + (\rectwidth, .83)$);
+			%	t=1, control horizontal line
+		\draw[-, dashed, deepred] ($(aftCorigin) + (\rectwidth, .415)$) -- 
+						($(aftCorigin) + (2*\rectwidth+.5, .415)$);
+			%	arrows, control
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .415)$) -- 
+			($(befCorigin) + (4, \timeshift + .415)$);
+	%	treated tukey plot
+	\pause
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {participate};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+			%	arrows treated
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) to [out = 80, in = -180]
+			($(aftTorigin) + (-.1, .9)$);
+	%	treated CF tukey plot
+	\pause
+		%	t=1, treated CF horizontal line
+		\draw[-, dashed, gray, thick] 
+			($(cfTorigin) + (\rectwidth, .28)$) -- 
+			($(cfTorigin) + (2*\rectwidth+.5, .28)$);
+		%	arrows treated CF
+	    	\draw [gray, dashed, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) --
+			($(befCorigin) + (4, \timeshift + .84+.28)$);
+		%	treated CF pararell shift
+	\pause
+    	\draw [lightblue, thick, >= stealth, <->]
+		($(befTorigin) + (4+2*\rectwidth-.25, .28)$) --
+		($(cfTorigin) + (2*\rectwidth- .25, .28)$) node [pos = .5] (para1) {};
+		%	control pararell shift
+	    	\draw [purple, thick, >= stealth, <->]
+			($(befCorigin) + (4+2*\rectwidth-.25, .415)$) --
+			($(aftCorigin) + (2*\rectwidth- .25, .415)$) node [pos = .5] (para2) {};
+		\path [<->, > = stealth] (para1) 
+			edge [blue, thick, bend right = 20] 
+			node (para3) [thick, fill = yellow!30, left = .5pt, pos = .5] 
+			{\scriptsize same} (para2);
+	%	ATT (treated comparison)
+	\pause
+		%	before-after
+    	\draw [orange, ultra thick, >= latex, <->]
+		($(befTorigin) + (4+2*\rectwidth+.25, .28)$) --
+		($(aftTorigin) + (\rectwidth + .25, .9)$);
+		%	pararell shift
+		\pause
+	    	\draw [purple, thick, >= stealth, <->]
+			($(befTorigin) + (4+2*\rectwidth+.5, .28)$) --
+			($(cfTorigin) + (2*\rectwidth+.5, .28)$) 
+			node (para4) [right = .5pt, pos = .5] {\scriptsize\textbf{trend}};
+	    	\path [blue, thick, >= latex, ->, xshift = -2pt, yshift = -2pt] (para2)
+			edge [blue, thick, bend right = 20] 
+			node {} (para4);
+		%	ATT 
+		\pause
+		\draw [red, ultra thick, >= latex, <->]
+			($(cfTorigin) + (2*\rectwidth+ .5, .28)$) --
+			($(aftTorigin) + (\rectwidth + .5, .9)$) 
+			node[right = 1pt, pos = .5] {\scriptsize ATT};
+		%	really? 
+		\pause
+		\node (r1) [draw = blue, thick, fill = blue!30]  
+			at ($(aftTorigin) + (1, -3.2)$) {Really???};
+		\draw [darkred, ultra thick, >= latex, ->] ($(para3) + (-2pt, -3pt)$) -- (r1);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]{}
+Implementation:\\~\\
+
+Get data:
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Treated group outcomes $y^{1}_{i,t}$ before and after the policy. If there are $n^{1}$ individuals, $\underbrace{y^{1}_{1,t}, \dots, y^{1}_{n^{1},t}}_{\mbox{year } t}, \underbrace{y^{1}_{1,t+1}, \dots, y^{1}_{n^{1}, t+1}}_{\mbox{year } t+1}$.
+\pause
+\item	Control group outcomes $y^{0}_{i,t}$ before and after the policy. If there are $n^{0}$ individuals, $\underbrace{y^{0}_{1,t}, \dots, y^{0}_{n^{0},t}}_{\mbox{year } t}, \underbrace{y^{0}_{1,t+1}, \dots, y^{0}_{n^{0}, t+1}}_{\mbox{year } t+1}$.
+\pause
+	\begin{dinglist}{43}
+	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+	\item	One needs individual level data, not just group level averages, to do inferences (=compute $p$ values). For testing a null hypothesis, one needs standard errors of the estimates, which need variances and covariances, which can only be computed with individual level data.
+	\end{dinglist}
+\item	Let us denote the smaller of $n^{1}, n^{0}$ as $n^{min}$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{}
+Steps:
+\begin{enumerate}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Compute before and after means for both groups. 
+\[
+\bar{y}^{1}_{t}=\frac{y^{1}_{1,t}+ \dots + y^{1}_{n^{1},t}}{n^{1}}=\frac{\sum\limits_{i=1}^{n^{1}}y^{1}_{i,t}}{n^{1}}, \quad
+\bar{y}^{0}_{t}=\frac{\sum\limits_{i=1}^{n^{0}}y^{0}_{i,t}}{n^{0}}, \quad
+\bar{y}^{1}_{t+1}%=\frac{\sum\limits_{i=1}^{n^{1}}y^{1}_{i,t+1}}{n^{1}}
+, \quad
+\bar{y}^{0}_{t+1}%=\frac{\sum\limits_{i=1}^{n^{0}}y^{0}_{i,t+1}}{n^{0}}
+.
+\]
+\pause
+\item	Compute difference-in-differences: $y^{DID}=(\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t})-(\bar{y}^{0}_{t+1}-\bar{y}^{0}_{t})$.
+\pause
+\item	Compute the standard deviation of $y^{DID}$ with:
+\[
+\sigma^{DID}
+=
+\sqrt{\NU\left[\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t}-\bar{y}^{0}_{t+1}+\bar{y}^{0}_{t}\right]}
+\]
+where $\NU\left[\bar{y}^{1}_{t+1}-\bar{y}^{1}_{t}-\bar{y}^{0}_{t+1}+\bar{y}^{0}_{t}\right]$ equals to
+\[\scriptsize
+\begin{aligned}
+\frac{\hat{\sigma}^{2}_{y^{1}_{t+1}}}{n^{1}}
+&
++\frac{\hat{\sigma}^{2}_{y^{1}_{t}}}{n^{1}}
++\frac{\hat{\sigma}^{2}_{y^{0}_{t+1}}}{n^{0}}
++\frac{\hat{\sigma}^{2}_{y^{0}_{t+1}}}{n^{0}}
+-2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{1}_{t}]}{n^{1}}
+-2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t+1}]}{n^{min}}
++2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t}]}{n^{min}}\\
+&
++2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t+1}]}{n^{min}}
+-2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t}]}{n^{min}}
+-2\frac{\widehat{\cov}[y^{0}_{t+1}, y^{0}_{t}]}{n^{0}}.
+\end{aligned}
+\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{}
+Steps:
+\begin{enumerate}
+\setcounter{enumi}{3}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Compute $p$ value. Using R, pt($y^{DID}/\sigma^{DID}, n^{min}$, lower.tail = F) gives the $p$ value of the null hypothesis of zero effect.
+\end{enumerate}
+
+\vspace{4ex}
+\pause
+A simpler way: It can be shown that $y^{DID}=a_{3}$ in the following regression.
+\begin{enumerate}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Regress $y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+e_{i,t}$ using $t, t+1$ data.
+	\begin{itemize}
+	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+	\item	$D_{i}$: Treatment dummy variable. $D_{i}
+	=\left\{
+	\begin{array}{c}
+	1\\ 0
+	\end{array}
+	\right.
+	\quad \mbox{if} \quad \left\{
+	\begin{array}{l}
+	\mbox{treated} \\ \mbox{control}
+	\end{array}
+	\right.$
+	\item	$after_{t+1}$: `after' dummy variable. $after_{t+1}= 
+	\left\{
+	\begin{array}{c}
+	1\\ 0
+	\end{array}
+	\right.
+	\quad \mbox{if} \quad \left\{
+	\begin{array}{l}
+	t+1 \\ t
+	\end{array}
+	\right.$
+	\end{itemize}
+\item	Test $a_{3}=0$ and get its $p$ value.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{}
+DIDの識別仮定: 介入がないとき、結果指標の変化が群間で似ていること。\pause 共通トレンドの仮定 \textbf{common trend assumption}.\\~\\
+
+\pause It:
+\begin{itemize}[<+->]
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	水準は違ってもいい(だから、水準の分布は似ていなくてよい)
+\end{itemize}
+\pause
+群同士が似ていると仮定するよりも現実的
+\begin{itemize}[<+->]
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	低所得者: 消費の分布は低位ばかり
+\item	高所得者: 消費の分布は高位ばかり
+\item	消費水準の分布は異なるかもしれないが、消費変化の分布は似ている可能性あり
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+List of \textcolor{red}{identifying assumptions}. \\~\\
+In the absence of the policy: $\delta(A)$ reads ``distribution of $A$''
+\begin{description}[<+->]
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item[With-without] $\delta(y_{i1}) \simeq \delta(y_{i0})$.
+\item[Before-after] $\delta(y_{i, \mbox{\scriptsize after}}) \simeq \delta(y_{i, \mbox{\scriptsize before}})$.
+\item[DID] $\delta(\Delta y_{i1}) \simeq \delta(\Delta y_{i0})$.
+\end{description}
+\pause 
+For DID we need:
+\begin{itemize}[<+->]
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	Before-after data.
+\item	For both the treated and the control.
+\end{itemize}
+\pause 
+You need to get the control data even before the policy starts. 
+\end{frame}
+
+

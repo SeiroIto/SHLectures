@@ -1,0 +1,412 @@
+---
+title: "RP01"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP01.html>
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+filters:
+  - parse-latex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP01.pdf
+# quarto render RP01.qmd
+---
+```{css, echo = F, results = "hide"}
+Red {
+  color: red;
+}
+Orange {
+  color: #e94e2c;
+}
+Blue {
+  color: blue;
+}
+.reveal .slides pre code {
+    max-height: 800px;
+}
+#TOC {
+  font-color: #e94e2c;
+}
+.big-code{
+  font-size: 110%  
+}
+#### Below is suggested by Claude
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list ol {
+####   list-style-type: none;
+####   padding-left: 0;
+####   margin-left: 0;
+####   counter-reset: item;
+#### }
+#### .small-font-list ol li {
+####   margin-bottom: 0.5em;
+####   display: flex;
+#### }
+#### .small-font-list ol li::before {
+####   content: counter(item) ". ";
+####   counter-increment: item;
+####   margin-right: 0.5em;
+####   flex-shrink: 0;
+#### }
+#### .small-font-list ol li > p:first-child {
+####   margin: 0;
+####   display: inline;
+#### }
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+#### 開発経済学を学ぶ動機
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+昨年夏から...草の根活動に参加し、スリランカの小学校で環境教育支援を行っています。現地の子どもたちの中には、学びの目的が学ぶことではなく、学校で配布されるパンと牛乳を受け取ることだと知り、この現状を直視しました。  
+
+この経験から、私は貧困に左右されず質の高い教育を受けられる環境を作りたいと強く思うようになりました。開発経済学を学ぶ理由は、現地の課題を分析するスキルを高め、より効果的に支援するためです。具体的には、ニーズや課題を定量化し、深く理解したいと考えています。将来的には、自分自身でソーシャルビジネスを立ち上げることを目指しており、ここでの学びはその実現に向けて大いに役立つと考えています。
+:::
+</div>
+
+[SDGs\#04](https://sdgs.un.org/goals/goal4)そのものですね。パンと牛乳目当てであっても、登校してくれるのは有り難いことです。
+
+* パンと牛乳で「釣る」のは効果的だったので、就学率を高める手段としては成功です。  
+* 質の高い教育$\neq$通学、です。通学+学習、が必要です。  
+   * 対子ども、対教員、対学校の支援  
+* 世銀の[human capital index](https://www.worldbank.org/en/publication/human-capital) [@Filmer2020; @Angrist2021HK]: 就学率$\times$習熟度   
+
+----
+
+#### 開発経済学を学ぶ動機
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+アジア圏の国は受験戦争がシビアである上に、何卒かどうか・大卒であればどの大学を出ているのか、などで就職出来る会社や生涯年収が決まってしまいます。こうした社会構造なのにも関わらず、格差を拡大させる要因に対して何のアクションもしないのは、社会的流動性の低さや貧困の再生産に寄与してしまっているなと感じました。
+
+(中略)
+
+お金を出せる家庭は月にいくらでも学業の支援を受けられて、出す余裕がない家庭は最悪一度も通わずに自力でやらなければならないという状況の中、子供が塾に通えるかが完全に家庭(親)に依拠しているのは恐ろしいことだなと感じました。
+:::
+</div>
+
+. . .
+
+日本は義務教育が履行されており、出自の違いが影響するのは中等、高等教育です  
+
+::: {.small-font-list}
+* ハーバード大学では、世帯所得が12000万円(US$85,000)以下だと学費免除です  
+* 日本でも大学ごとの学費減免制度が充実すると良いと思いますが、財務基盤が弱いために実施困難です  
+* 最近になってようやく公的な給付型奨学金も増え始めてきました  
+:::
+
+. . .
+
+途上国では初等教育の就学率は100%近くになりました  
+
+. . .
+
+中等教育以降の就学率は世帯の豊かさに強く縛られます  
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+ボックス禁止政策について、職業差別が話題に上がっていたが、私は差別だとは思わなかった。一度罪を犯した人間が社会に出たときに、罪を犯していない人間と同じ立場になれてしまうと、その事実がまた罪を犯すきっかけになると考えるからである。罪を犯したら、もう二度と元の立場には戻れないという認識を持つ必要があると考える。(冤罪は別)
+:::
+</div>
+
+良い視点です。
+
+* 事前(=予防)の視点  
+   * 犯罪を予防するためには、犯罪を犯す前に罪の重さを認識させることが有効です  
+   * 初犯予防には、犯罪リスクの高い人たちへの働きかけ(e.g., 闇バイト容疑広告の制限、闇バイトの特徴周知)や就業支援の仕組みが必要でしょう  
+* 事後(=社会復帰)の視点  
+   * 再犯予防には、罪認識だけでなく、前科のある人が合法に生きられる必要があります  
+   * 雇用機会の提供は犯罪に頼らない生き方を可能にします  
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+ボックス禁止政策について、職業差別が話題に上がっていたが、私は差別だとは思わなかった。一度罪を犯した人間が社会に出たときに、罪を犯していない人間と同じ立場になれてしまうと、その事実がまた罪を犯すきっかけになると考えるからである。罪を犯したら、もう二度と元の立場には戻れないという認識を持つ必要があると考える。(冤罪は別)
+:::
+</div>
+
+犯罪を減らすには、予防と社会復帰の両方が必要です。しかし、両者はトレード・オフにあります。予防に偏ると社会復帰が妨げられ、社会復帰に偏ると予防が疎かになります。  
+
+* 初犯と再犯をどのようにウェイト付けるかによって、最適なバランスが異なります  
+   * 数学のセクションで最適化問題を解くとき、具体例を示すことができます  
+
+----
+
+事前対応(予防)と事後対応(再犯防止)が矛盾・トレードオフ関係にあるのは割と一般的で、ほかにも多くの事例があります  
+
+::: {style="font-size: 100%;line-height: 1.0;"}
+* 銀行健全性規制 vs. 銀行救済  
+* 求職 vs. 失業保険  
+* 禁煙 vs. [COPD](https://ja.wikipedia.org/wiki/%E6%85%A2%E6%80%A7%E9%96%89%E5%A1%9E%E6%80%A7%E8%82%BA%E7%96%BE%E6%82%A3)への医療保険  
+* 経済的自立 vs. 生活保護  
+* ハザード・マップを利用した災害回避 vs. 防災インフラ支出・救助・復興作業  
+:::
+
+----
+
+$$
+\mbox{共通: }
+\underbrace{\mbox{事前の自助努力を鈍らせる原因 }\vphantom{\mbox{モラル・ハザード}}}_{\class{fragment}{\mbox{モラル・ハザード}}}
+\mbox{ ← 事後的な救済措置}
+$$
+
+
+::: {.fragment}
+事後の救済があるので事前の自助努力が不足気味になります  
+:::
+
+::: {.fragment}
+事後救済をする理由  
+:::
+
+::: {style="font-size: 70%;line-height: 0.8;"}
+::: {.description-lb}
+社会的影響が甚大
+: 銀行(決済システムが停止すると経済が大混乱に)
+
+権利
+: 文化的な生活をする権利
+
+互助
+: 被災者・患者を救うのは政府・社会の責務
+:::
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+国、個人の所得の世界平均所得との差=国間の差+国内の差になるという式によって、国ごとに比べたら埋もれてしまう貧困部について明確にわかる点が非常に優れていると感じました。
+:::
+</div>
+
+グループ$a$、個人$i$の値$x_{ai}$とグループ$a$の$x$の平均値$\bar{x}_{a}$の差にグループ$A$の平均値$\bar{x}_{A}$を足して引く(=差し引きゼロ)ことで、差を分解するのはよく使われるテクニックです。
+
+$$
+x_{ai}-\bar{x}_{a}=\underbrace{x_{ai}-\bar{x}_{A}}_{\scriptsize{\mbox{$x_{ai}$と$\bar{x}_{A}$の差}}}+\overbrace{\bar{x}_{A}-\bar{x}_{a}}^{\scriptsize{\mbox{$\bar{x}_{A}$と$\bar{x}_{a}$の差}}}
+$$
+
+グループが$a, b, c, ...$と複数あり、グループ$A$がそうしたすべてのグループを集めたもの(=全標本)とすると、$\bar{x}_{A}$は全体の平均値です。この分解は、グループ内の格差を「全体平均値との格差」と「グループ$a$平均値と全体平均値との格差」に分解します。そうすると個人$i$の全体での位置づけ、グループの全体での位置づけ、という意味づけができます。
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+メディアなどでも、AIについては取り上げていますが、毎回どのメディアも、AIと人間の共存が大事という結論に至ってます。具体的な解決策を講じてくれないため、共存といわれても、ピンとくるようなことがありませんでした。
+:::
+</div>
+
+AIは社会を豊かにする技術革新です  
+
+. . .
+
+懸念点は以下です  
+
+* 作り出したデジタル成果物によって、人々を混乱(事実誤認や認知誤認)させ、homophily(=似た者集団化)による社会分断を加速させる可能性があること  
+* パタン認識を安価に提供することで、特定の技能を代替し、代替された技能の持ち主の所得が減ること、一部企業の独占(=一部の人への富の集中)が進むこと  
+* 電力消費を高めて温暖化を加速させること    
+
+----
+
+Claudeに尋ねたら以下のような返答が来ました  
+
+::: {.small-font-list}
+1. Job displacement: AI could automate many tasks, potentially leading to unemployment in certain sectors.  
+1. Privacy concerns: (略)  
+1. Bias and discrimination: (略)  
+1. Cybersecurity risks: (略)  
+1. Autonomous weapons: (略)  
+1. Misinformation and deepfakes: (略)  
+1. Economic inequality: The benefits of AI might disproportionately go to those who own and control the technology, potentially widening wealth gaps.  
+1. Overdependence on technology: As AI systems become more prevalent, society might become overly reliant on them, potentially losing important skills or critical thinking abilities.  
+1. Ethical decision-making: AI systems may need to make complex ethical decisions (e.g., in self-driving cars), raising questions about how to program moral judgments.  
+1. Loss of human connection: (略)  
+1. Unintended consequences: (略)  
+1. Concentration of power: Companies or governments with the most advanced AI capabilities could gain disproportionate influence over society and the economy.  
+:::
+
+* このリストを生成するコードも、Claudeに合計10数回に及んだ質問でようやく希望の出力を得ました  
+
+----
+
+Claudeになぜそんなに回数を要したのか、どのように尋ねるべきだったかを尋ねたら、以下の回答を得ました  
+
+::: {.description-list}
+Misinterpretation of requirements
+: Initially, I focused too much on the automatic incrementing feature and lost sight of the font size and line height requirements that were working earlier.
+
+Lack of continuity
+: I didn't consistently build upon the parts of previous solutions that were working, leading to some back-and-forth.
+
+Overcomplication
+: In some responses, I added unnecessary complexity, trying to solve problems that weren't explicitly stated.
+
+Assumptions about the environment
+: I made assumptions about how the CSS would interact with Quarto and Reveal.js without fully considering your specific setup.
+:::
+
+----
+
+<!--
+::: {.description-lb}
+Misinterpretation of requirements
+: Initially, I focused too much on the automatic incrementing feature and lost sight of the font size and line height requirements that were working earlier.
+
+Overcomplication
+: In some responses, I added unnecessary complexity, trying to solve problems that weren't explicitly stated.
+
+Lack of continuity
+: I didn't consistently build upon the parts of previous solutions that were working, leading to some back-and-forth.
+
+Assumptions about the environment
+: I made assumptions about how the CSS would interact with Quarto and Reveal.js without fully considering your specific setup.
+:::
+-->
+
+----
+
+#### References
+
+::: {#refs}
+:::
+
+----
+
+::: {.r-stack}
+$$ a = \class{fragment fade-out}{b} \class{fragment fade-in}{\hspace{-1em}\underbrace{b}_{=c}} $$
+:::
+

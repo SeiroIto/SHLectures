@@ -75,6 +75,58 @@ Blue {
 #TOC {
   font-color: #e94e2c;
 }
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
 ```
 
 ::: {style="text-align: center;"}
@@ -1252,37 +1304,69 @@ $$
 
 ----
 
-::: {style="text-align: center;"}
-# 開発経験をどのように学ぶか
+なぜS字形? 例(他の論拠もあります)  
+
+. . . 
+
+発展段階・所得が低いときには生産性の伸びは低い。生産にさまざまな障害(市場の不完全性)があるため。資本蓄積の度合い(傾き)は緩やか。
+
+:::[description-lb]
+資本市場
+:  借り手と貸し手が出会う機会が乏しい、資金回収リスクがあるので資金提供しにくい
+
+保険市場
+:  灌漑施設と降雨保険がないと、乾燥に強い低収益作物(アワ、ヒエ)
+
+貸出市場
+:  子どもの教育投資は家計の豊かさに依存するので、低所得家計は投資しにくい
+
+市場に関わる制度
+:  司法、行政、インフラなどが不十分で投資収益が下がる  
 :::
+
+. . .
+
+発展段階・所得が中段階になると生産性の伸びが高まる。市場が整備され、豊かな国からの技術移転も利用できるため。資本蓄積の度合い(傾き)は急。  
+
+. . . 
+
+発展段階・所得が高くなると、生産性の伸びは低くなる。技術移転に頼らず自前で技術開発しないといけなくなるから。資本蓄積の度合い(傾き)は緩やか。
 
 ----
 
 資本市場均衡線がS字直線で、極端に高い位置や低い位置にない限り、45度線と3つ交点を持つ
 
-. . . 
-
+::: {style="font-size: 80%;line-height: 1;"}
 * 厳密には、S字直線の緩やかな傾きが45度未満、急な傾きが45度以上で、Sの下部分が45度線よりも高い位置で始まり、急な傾きになる前に1つ交点を持てば、合計で3つ交点を持つ  
+:::
 
 . . . 
 
 経済が動学的に安定な低位均衡にいると、高位均衡には自然に移らない。
 
 * $H$に行くためには以下が必要:
-	*  $S$線を引き上げて高位均衡への収束経路に乗せる制度変化。
-	* 経済を一気に右側に移して高位均衡への収束経路に乗せるビッグ・プッシュ。 大量の資本$k$を投下 (``マーシャル・プラン''). 
+	*  $S$線を引き上げて高位均衡への収束経路に乗せる制度変化。[図](http://seiroito.github.io/SHLectures/lec_slides/2024/1.pdf#page=333)
+	* 経済を一気に右側に移して高位均衡への収束経路に乗せるビッグ・プッシュ。 大量の資本$k$を投下 ("マーシャル・プラン"). 
 * どの制度を変化させるか? どの資本を増やすか? どうやって?
+
 
 ----
 
-J-PAL to the rescue!
+::: {style="text-align: center;"}
+# 開発経験をどのように学ぶか
+:::
+
+----
+
+J-PAL to the rescue!  
+
 * Abdul Ratif Jameel Poverty Action Lab at MIT.
-* \sout{Homepage: ``729 ongoing and completed randomized evaluations in 67 countries''.}
-* ``1094 randomized evaluations...in 91 countries,'' ``from clean water to microfinance to crime prevention.'' 
-* 大変な数
-* ランダム化比較試験RCTは政策の効果を歪み無く示すことができる
+* \sout{Homepage: ``729 ongoing and completed randomized evaluations in 67 countries''.}  
+* "1094 randomized evaluations...in 91 countries," "from clean water to microfinance to crime prevention."   
+* 大変な数  
+* ランダム化比較試験RCTは政策の効果を歪み無く示すことができる  
 	* なぜ歪まないか? 理由はコースの後半で学びます。
-* RCTはパイロット研究pilot studyです。パイロット研究はロジスティクスや費用対効果などを示すことができます。
+* RCTはパイロット研究pilot studyです。パイロット研究はロジスティクスや費用対効果などを示すことができます。  
 
 ----
 
@@ -1297,7 +1381,7 @@ Examples: A summary of their RCTs on \href{https://www.povertyactionlab.org/poli
 
 Examples: Learning (continued).
 
-* Incentives for teachers can lead to significant learning gains if they are objectively administered and structured in such a way as to discourage ``teaching to the test'' (India, Kenya, India).
+* Incentives for teachers can lead to significant learning gains if they are objectively administered and structured in such a way as to discourage "teaching to the test" (India, Kenya, India).
 * Adding an extra teacher on a short-term contract can produce significant learning gains at a relatively low cost (Kenya).
 * Grants provided to communities as part of empowerment programs can lead to better learning (Gambia, Indonesia).
 
@@ -1308,19 +1392,24 @@ Examples: Learning (continued).
 . . . 
 
 * 途上国はインドとケニアだけではありません
-* (Not shown) J-PALは一緒に仕事する組織が当然限られます。India = Maharashtra, Telangana, Rajasthan; Kenya = 西部の州.
-* ``India'' $\neq$ India, ``India'' $=$ 少数の州. ``Kenya''も同じ
+* (Web pageに明記されてはいないですが) J-PALは一緒に仕事する組織が当然限られます。India = Maharashtra, Telangana, Rajasthan; Kenya = 西部の州.
+* "India" $\neq$ India, "India" $=$ 少数の州. "Kenya"も同じ
 
 . . . 
 
-* 政策効果の因果推計causal inference (教訓the lesson learned)が他の地域に当てはまらないとき、推計は\textcolor{pink}{外的妥当性external validity}を欠く、といいます。リストした研究内容は外的妥当性が限られています。 
-* 推計が因果関係を捉えている(識別するidentify)とき、推計には\textcolor{pink}{内的妥当性internal validity}がある、といいます。
+* 政策効果の因果推計causal inference (教訓the lesson learned)が他の地域に当てはまらないとき、推計は<Red>外的妥当性external validity</Red>を欠く、といいます。リストした研究内容は外的妥当性が限られています。 
+* 推計が因果関係を捉えている(識別するidentify)とき、推計には<Red>内的妥当性internal validity</Red>がある、といいます。
 
 ----
 
 * これは厳しすぎる批判かも。J-PALは重要な知見のある研究をたくさん実施。
 * しかし、リスト内容からは、小規模RCTを使った方法に限界があることが分かります。
+   * 比較的小さな政策が多い: 教員給与、補助教員追加、学習教材配布、家計への補助金、ワクチン接種、etc.  
+   * 不可逆的政策は無理: 授業の現地語化・英語化、進級・進学基準の変更  
+   * +大規模政策は無理: 学校建設、正規教員増員  
 *  2019年にJ-PALのBanerjee, Duflo, Kremerがノーベル経済学賞を受賞。
+
+. . .
 
 彼らの研究の集大成: \textit{Poor Economics} written by \citet{BanerjeeDuflo2011book}.
 
@@ -1328,19 +1417,13 @@ Examples: Learning (continued).
 
 * 素晴らしい本。読みやすい。開発経済学に興味のある誰もが読むべき。
 
-. . . 
+---- 
 
 @Ravallion2012, @Rosenzweig2012 は批判:
 
 * 小規模なエビデンスを積み上げるとビッグ・プッシュになるのか?
-
-. . . 
-
-* 的を射ている。他の研究方法と組み合わせれば良いのでは?
-
-. . . 
-
-* 行政データなどの大規模データを使った観察研究でも知見はある。
+* 的を射ている。でも、他の研究方法と組み合わせて、ビッグ・プッシュになるようにすれば良いのでは?
+   * 行政データなどの大規模データを使った観察研究でも知見はある。
 
 . . . 
 
@@ -1355,18 +1438,27 @@ Examples: Learning (continued).
 
 彼らによれば[@BanerjeeDuflo2011book]、彼らの研究の前は貧困には2つのアプローチがありました。
 
+:::{description-list}
+Save them.
+:  助けが必要 ... a Big Push [@Sachs2006], [Milleneum Village Project](https://en.wikipedia.org/wiki/Millennium_Villages_Project)  
+
+Can't save them.
+:  放っておこう、自分たちで豊かにならないといけない[@Easterly2006]。
+:::
+
 . . . 
 
-* Save them.:  助けが必要 ... a Big Push [@Sachs2006]。Milleneum Village Project.
-* Can't save them.:  放っておこう。自分たちで豊かにならないといけない\citep{Easterly2006}。
+@BanerjeeDuflo2011book は中間を示したと主張します: 自助努力の支援方法を示した  
 
-. . . 
-
-@BanerjeeDuflo2011book は中間を示したと主張します。*Poor Economics*以前の時代を単純化しすぎていないか、ちょっと疑問が残ります。
+* *Poor Economics*以前の時代を単純化しすぎていないか、ちょっと疑問が残ります。
 
 ----
 
-[Milleneum Villages](http://millenniumvillages.org/)はどうなったでしょうか? [ODI's review page](http://www.odi.org/projects/765-millennium-villages-project-review)の引用.
+[Milleneum Villages (サイトがなくなっています!)](http://millenniumvillages.org/)はどうなったでしょうか? 
+
+[Angelina Jolie on MVP](https://www.youtube.com/watch?v=uUHf_kOUM74)
+
+[ODI's review page](http://www.odi.org/projects/765-millennium-villages-project-review)の引用.
 
 . . . 
 

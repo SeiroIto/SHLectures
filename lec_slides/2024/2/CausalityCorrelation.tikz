@@ -1,0 +1,149 @@
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+\draw [->, >= stealth'] (B2) -- (A2);
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+\draw [->, >= stealth'] (B2) -- (A2);
+\path 
+	($(A1) + (1.75, -1)$) node [shape = circle, draw, fill = blue!20] (A4) {$A$}
+	($(B1) + (1.75, -1)$) node [shape = circle, draw, fill = red!20] (B4) {$B$};
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+\draw [->, >= stealth'] (B2) -- (A2);
+\path 
+	($(A1) + (1.75, -1)$) node [shape = circle, draw, fill = blue!20] (A4) {$A$}
+	($(B1) + (1.75, -1)$) node [shape = circle, draw, fill = red!20] (B4) {$B$};
+\draw [->, >= stealth'] ($(B4) + (-.4, .2)$) -- ($(A4) + (.4, .2)$); 
+\draw [->, >= stealth'] ($(A4) + (.4, -.2)$) -- ($(B4) + (-.4, -.2)$);
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+\draw [->, >= stealth'] (B2) -- (A2);
+\path 
+	($(A1) + (1.75, -1)$) node [shape = circle, draw, fill = blue!20] (A4) {$A$}
+	($(B1) + (1.75, -1)$) node [shape = circle, draw, fill = red!20] (B4) {$B$};
+\draw [->, >= stealth'] ($(B4) + (-.4, .2)$) -- ($(A4) + (.4, .2)$); 
+\draw [->, >= stealth'] ($(A4) + (.4, -.2)$) -- ($(B4) + (-.4, -.2)$);
+\path 
+	($(A2) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A3) {$A$}
+	($(B2) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B3) {$B$}
+	($(A3) + (1, -1)$) node [shape = circle, draw, fill = green!20] (C3) {$C$};
+\end{tikzpicture}
+```
+
+----
+
+<section data-visibility="uncounted"></section>
+
+```{r tikz pic1, engine = 'tikz'}
+\hfil\begin{tikzpicture}
+\path 
+	(0, 1) node [shape = circle, draw, fill = blue!20] (A1) {$A$}
+	(2, 1) node [shape = circle, draw, fill = red!20] (B1) {$B$};
+\draw [->, >= stealth'] (A1) -- (B1);
+\path 
+	($(A1) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A2) {$A$}
+	($(B1) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B2) {$B$};
+\draw [->, >= stealth'] (B2) -- (A2);
+\path 
+	($(A1) + (1.75, -1)$) node [shape = circle, draw, fill = blue!20] (A4) {$A$}
+	($(B1) + (1.75, -1)$) node [shape = circle, draw, fill = red!20] (B4) {$B$};
+\draw [->, >= stealth'] ($(B4) + (-.4, .2)$) -- ($(A4) + (.4, .2)$); 
+\draw [->, >= stealth'] ($(A4) + (.4, -.2)$) -- ($(B4) + (-.4, -.2)$);
+\path 
+	($(A2) + (3.5, 0)$) node [shape = circle, draw, fill = blue!20] (A3) {$A$}
+	($(B2) + (3.5, 0)$) node [shape = circle, draw, fill = red!20] (B3) {$B$}
+	($(A3) + (1, -1)$) node [shape = circle, draw, fill = green!20] (C3) {$C$};
+\draw [->, >= stealth'] (C3) -- (A3); \draw [->, >= stealth'] (C3) -- (B3);
+\node[below] at ($(C3) + (0, -.5)$) {Œ©‚¹‚©‚¯‚Ì‘ŠŠÖ};
+\end{tikzpicture}
+```
+

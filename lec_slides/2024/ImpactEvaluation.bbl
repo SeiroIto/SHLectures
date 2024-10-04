@@ -1,0 +1,192 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Abadie et al.]{Abadie, Diamond and
+  Hainmueller}{2010}{AbadieSCM2010}
+{\bf Abadie, Alberto, Alexis Diamond, and Jens Hainmueller}, ``Synthetic
+  control methods for comparative case studies: Estimating the effect of
+  California's tobacco control program,'' {\it Journal of the American
+  Statistical Association}, 2010, {\it 105} (490), 493--505.
+
+\harvarditem[Abadie and Gardeazabal]{Abadie and
+  Gardeazabal}{2003}{AbadieGardeazabal2003}
+{\bf \bysame{} and Javier Gardeazabal}, ``The economic costs of conflict: A
+  case study of the Basque Country,'' {\it American Economic Review}, 2003,
+  {\it 93} (1), 113--132.
+
+\harvarditem[Akabayashi and Nakamura]{Akabayashi and
+  Nakamura}{2014}{Akabayashi2013}
+{\bf Akabayashi, Hideo and Ryosuke Nakamura}, ``Can Small Class Policy Close
+  the Gap? An Empirical Analysis of Class Size Effects in Japan,'' {\it The
+  Japanese Economic Review}, 2014, {\it 65} (3), 253--281.
+
+\harvarditem[Angrist and Lavy]{Angrist and Lavy}{1999}{AngristLavy1999}
+{\bf Angrist, Joshua~D. and Victor Lavy}, ``Using Maimonides' Rule To Estimate
+  The Effect Of Class Size On Scholastic Achievement,'' {\it The Quarterly
+  Journal of Economics}, May 1999, {\it 114} (2), 533--575.
+
+\harvarditem[Bayer et al.]{Bayer, Ferreira and
+  McMillan}{2007}{BayerFerreiraMcMillan2007}
+{\bf Bayer, Patrick, Fernando Ferreira, and Robert McMillan}, ``A Unified
+  Framework for Measuring Preferences for Schools and Neighborhoods,'' {\it
+  Journal of Political Economy}, 2007, {\it 115} (4), 588--638.
+
+\harvarditem[Billmeier and Nannicini]{Billmeier and
+  Nannicini}{2013}{Billmeier2013}
+{\bf Billmeier, Andreas and Tommaso Nannicini}, ``Assessing economic
+  liberalization episodes: A synthetic control approach,'' {\it Review of
+  Economics and Statistics}, 2013, {\it 95} (3), 983--1001.
+
+\harvarditem[Black]{Black}{1999}{Black1999}
+{\bf Black, Sandra~E.}, ``{Do Better Schools Matter? Parental Valuation of
+  Elementary Education},'' {\it The Quarterly Journal of Economics}, 05 1999,
+  {\it 114} (2), 577--599.
+
+\harvarditem[Bohlken]{Bohlken}{2018}{Bohlken2018}
+{\bf Bohlken, Anjali~Thomas}, ``Targeting Ordinary Voters or Political Elites?
+  Why Pork Is Distributed Along Partisan Lines in India,'' {\it American
+  Journal of Political Science}, 2018, {\it 62} (4), 796--812.
+
+\harvarditem[Bosch and Schady]{Bosch and Schady}{2019}{BoschSchady2019}
+{\bf Bosch, Mariano and Norbert Schady}, ``The effect of welfare payments on
+  work: Regression discontinuity evidence from Ecuador,'' {\it Journal of
+  Development Economics}, 2019, {\it 139}, 17 -- 27.
+
+\harvarditem[Bursztyn et al.]{Bursztyn, Cantoni, Yang, Yuchtman and
+  Zhang}{2021}{Bursztyn2021}
+{\bf Bursztyn, Leonardo, Davide Cantoni, David~Y Yang, Noam Yuchtman, and
+  Y~Jane Zhang}, ``Persistent political engagement: Social interactions and the
+  dynamics of protest movements,'' {\it American Economic Review: Insights},
+  2021, {\it 3} (2), 233--50.
+
+\harvarditem[Buse et al.]{Buse, Ludi and Vigneri}{2008}{ODIMV2008}
+{\bf Buse, Kent, Eva Ludi, and Marcella Vigneri}, {\it Can project-funded
+  investments in rural development be scaled-up? Lessons from the Millennium
+  Villages Project} number 118. In `Natural Resource Perspecitves.', Overseas
+  Development Institute, November 2008.
+
+\harvarditem[Campbell et al.]{Campbell, Conti, Heckman, Moon, Pinto, Pungello
+  and Pan}{2014}{CampbellConti2014}
+{\bf Campbell, Frances, Gabriella Conti, James~J. Heckman, Seong~Hyeok Moon,
+  Rodrigo Pinto, Elizabeth Pungello, and Yi~Pan}, ``Early Childhood Investments
+  Substantially Boost Adult Health,'' {\it Science}, 2014, {\it 343} (6178),
+  1478--1485.
+
+\harvarditem[Campos et al.]{Campos, Coricelli and Moretti}{2014}{Campos2014}
+{\bf Campos, Nauro, Fabrizio Coricelli, and Luigi Moretti}, ``Economic Growth
+  and Political Integration: Estimating the Benefits from Membership in the
+  European Union Using the Synthetic Counterfactuals Method,'' Technical
+  Report, CEPR Discussion Papers 2014.
+
+\harvarditem[Clemens and Demombynes]{Clemens and
+  Demombynes}{2011}{ClemensDemombynes2011}
+{\bf Clemens, Michael~A. and Gabriel Demombynes}, ``When does rigorous impact
+  evaluation make a difference? The case of the Millennium Villages,'' {\it
+  Journal of Development Effectiveness}, 2011, {\it 3} (3), 305--339.
+
+\harvarditem[Duflo et al.]{Duflo, Dupas and Kremer}{2011}{DufloDupasKremer2011}
+{\bf Duflo, Esther, Pascaline Dupas, and Michael Kremer}, ``Peer effects,
+  teacher incentives, and the impact of tracking: Evidence from a randomized
+  evaluation in Kenya,'' {\it The American Economic Review}, 2011, {\it 101}
+  (5), 1739.
+
+\harvarditem[{Evaluation Gap Working Group}]{{Evaluation Gap Working
+  Group}}{2006}{CGD2006}
+{\bf {Evaluation Gap Working Group}}, {\it When will We Ever Learn?: Improving
+  Lives through Impact Evaluation}, Center for Global Development, 2006.
+
+\harvarditem[Fagereng et al.]{Fagereng, Mogstad and
+  R\o{}nning}{2021}{FagerengMogstadRonning2021}
+{\bf Fagereng, Andreas, Magne Mogstad, and Marte R\o{}nning}, ``Why do wealthy
+  parents have wealthy children?,'' {\it Journal of Political Economy}, 2021,
+  {\it 129} (3), 703--756.
+
+\harvarditem[Gertler et al.]{Gertler, Heckman, Pinto, Zanolini, Vermeersch,
+  Walker, Chang and Grantham-McGregor}{2014}{GertlerHeckman2014}
+{\bf Gertler, Paul, James Heckman, Rodrigo Pinto, Arianna Zanolini, Christel
+  Vermeersch, Susan Walker, Susan~M. Chang, and Sally Grantham-McGregor},
+  ``Labor market returns to an early childhood stimulation intervention in
+  Jamaica,'' {\it Science}, 2014, {\it 344} (6187), 998--1001.
+
+\harvarditem[Heckman et al.]{Heckman, Moon, Pinto, Savelyev and
+  Yavitz}{2010}{HeckmanMoonPinto2010}
+{\bf Heckman, James~J., Seong~Hyeok Moon, Rodrigo Pinto, Peter~A. Savelyev, and
+  Adam Yavitz}, ``The rate of return to the HighScope Perry Preschool
+  Program,'' {\it Journal of Public Economics}, 2010, {\it 94} (1-2), 114 --
+  128.
+
+\harvarditem[Lee]{Lee}{2008}{Lee2008}
+{\bf Lee, David~S.}, ``Randomized experiments from non-random selection in U.S.
+  House elections,'' {\it Journal of Econometrics}, 2008, {\it 142} (2), 675 --
+  697.
+\newblock Special issue: The regression discontinuity design: Theory and
+  applications.
+
+\harvarditem[Lemieux and Milligan]{Lemieux and
+  Milligan}{2008}{LemieuxMilligan2008}
+{\bf Lemieux, Thomas and Kevin Milligan}, ``Incentive effects of social
+  assistance: A regression discontinuity approach,'' {\it Journal of
+  Econometrics}, 2008, {\it 142} (2), 807 -- 828.
+\newblock The regression discontinuity design: Theory and applications.
+
+\harvarditem[Lumey and Stein]{Lumey and Stein}{1997}{Lumey1997}
+{\bf Lumey, LH and Aryeh~D Stein}, ``In utero exposure to famine and subsequent
+  fertility: The Dutch Famine Birth Cohort Study.,'' {\it American journal of
+  public health}, 1997, {\it 87} (12), 1962--1966.
+
+\harvarditem[Magaloni et al.]{Magaloni, D{\'\i}az-Cayeros and
+  Ruiz~Euler}{2019}{Magaloni2019}
+{\bf Magaloni, Beatriz, Alberto D{\'\i}az-Cayeros, and Alexander~Ruiz Euler},
+  ``Public good provision and traditional governance in indigenous communities
+  in Oaxaca, Mexico,'' {\it Comparative Political Studies}, 2019, {\it 52}
+  (12), 1841--1880.
+
+\harvarditem[McDermott and Hatemi]{McDermott and
+  Hatemi}{2020}{McDermottHatemi2020}
+{\bf McDermott, Rose and Peter~K. Hatemi}, ``Ethics in field experimentation: A
+  call to establish new standards to protect the public from unwanted
+  manipulation and real harms,'' {\it Proceedings of the National Academy of
+  Sciences}, 2020, {\it 117} (48), 30014--30021.
+
+\harvarditem[Miyawaki et al.]{Miyawaki, Tabuchi, Tomata and
+  Tsugawa}{2020}{Miyawaki2020}
+{\bf Miyawaki, Atsushi, Takahiro Tabuchi, Yasutake Tomata, and Yusuke Tsugawa},
+  ``Association between Participation in Government Subsidy Program for
+  Domestic Travel and Symptoms Indicative of COVID-19 Infection,'' 2020.
+
+\harvarditem[Montalvo]{Montalvo}{2011}{Montalvo2011}
+{\bf Montalvo, Jose~G}, ``Voting after the bombings: A natural experiment on
+  the effect of terrorist attacks on democratic elections,'' {\it Review of
+  Economics and Statistics}, 2011, {\it 93} (4), 1146--1154.
+
+\harvarditem[Nilsson]{Nilsson}{2017}{Nilsson2017}
+{\bf Nilsson, J~Peter}, ``Alcohol availability, prenatal conditions, and
+  long-term economic outcomes,'' {\it Journal of Political Economy}, 2017, {\it
+  125} (4), 1149--1207.
+
+\harvarditem[Persson and Rossin-Slater]{Persson and
+  Rossin-Slater}{2018}{PerssonRossinSlater2018}
+{\bf Persson, Petra and Maya Rossin-Slater}, ``Family ruptures, stress, and the
+  mental health of the next generation,'' {\it American economic review}, 2018,
+  {\it 108} (4-5), 1214--52.
+
+\harvarditem[Pinotti]{Pinotti}{2015}{Pinotti2015}
+{\bf Pinotti, Paolo}, ``The Economic Costs of Organised Crime: Evidence from
+  Southern Italy,'' {\it The Economic Journal}, 2015, {\it 125} (586),
+  F203--F232.
+
+\harvarditem[Sanchez et al.]{Sanchez, Palm, Sachs, Denning, Flor, Harawa, Jama,
+  Kiflemariam, Konecky, Kozar, Lelerai, Malik, Modi, Mutuo, Niang, Okoth,
+  Place, Sachs, Said, Siriri, Teklehaimanot, Wang, Wangila and
+  Zamba}{2007}{SachsSanchez2007}
+{\bf Sanchez, Pedro, Cheryl Palm, Jeffrey Sachs, Glenn Denning, Rafael Flor,
+  Rebbie Harawa, Bashir Jama, Tsegazeab Kiflemariam, Bronwen Konecky, Raffaela
+  Kozar, Eliud Lelerai, Alia Malik, Vijay Modi, Patrick Mutuo, Amadou Niang,
+  Herine Okoth, Frank Place, Sonia~Ehrlich Sachs, Amir Said, David Siriri,
+  Awash Teklehaimanot, Karen Wang, Justine Wangila, and Colleen Zamba}, ``The
+  African Millennium Villages,'' {\it Proceedings of the National Academy of
+  Sciences}, 2007, {\it 104} (43), 16775--16780.
+
+\end{thebibliography}

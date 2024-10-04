@@ -1,0 +1,101 @@
+---
+title: "HW2: 出力"
+author: "あなたの名前"
+date: "`r format(Sys.time(), '%Y年%m月%d日 %R')`"
+output:
+  tufte::tufte_html:
+    toc: true
+urlcolor: blue
+linkcolor: red
+header-includes:
+    - \usepackage{xltxtra} 
+    - \usepackage{zxjatype} 
+    - \usepackage[ipa]{zxjafont} 
+---
+```{css, echo = F}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+```{r setup, echo = F, results = "hide"} 
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = NA, 
+  echo = T, cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+```
+
+# 第1階層ヘッダ
+## Second level header
+
+rmarkdownです。
+
+* こうすればリストができます。  
+* リストは最後に半角スペース2を入れて改行します。  
+
+1. 番号付きリストです。  
+1. 番号は自動で増えていきます。  
+1. 番号付きリストも最後に半角スペース2を入れて改行します。  
+
+### Third level header
+
+`tufte_html`では第3階層ヘッダは本文と変わらないので、第2階層ヘッダまでしか使いません。
+
+* Edward Tufteは第2階層までしか使うべきでないと考えていたそうです。  
+* [Richard Feynmann](https://en.wikipedia.org/wiki/File:Richard_Feynman_Nobel.jpg)^[ノーベル物理学賞受賞者]の講義資料で物理学のすべてが第2階層までで書かれていたことを根拠にしています。  
+
+# 表
+
+```{r}
+tab <- cbind(letters[1:4], 1:4, LETTERS[1:4])
+colnames(tab) <- c("alph", "num", "Alph")
+tab
+```
+
+`kable`で表らしく出力
+```{r, echo = F}
+knitr::kable(tab, caption = "An example table", align = rep("c", 3))
+```
+
+# 図
+
+Rで作業用のデータを作ります
+
+
+マージンの図
+
+```{r generate data for figure}
+set.seed(123)
+x <- rnorm(1000)
+x <- cbind("x"=x[1:500], "y"=1+2*x[1:500]+x[501:1000])
+```
+```{r fig-margin, fig.margin=TRUE}
+plot(x)
+```
+
+本文サイズの図
+
+```{r, fig.cap='Main column', out.width='100%'}
+plot(x)
+```
+
+全幅サイズの図
+
+```{r, fig.fullwidth=TRUE, fig.cap='Page width', out.width='100%'}
+plot(x)
+```
+

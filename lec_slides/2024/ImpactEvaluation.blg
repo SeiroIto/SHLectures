@@ -1,0 +1,55 @@
+This is upBibTeX, Version 0.99d-j0.36-u1.30 (utf8.euc) (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: ImpactEvaluation.aux
+The style file: aer.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: c:/seiro/settings/TeX/seiro.bib
+Reallocated buffer (elt_size=1) to 40000 items from 20000.
+Reallocated sv_buffer (elt_size=1) to 40000 items from 20000.
+Reallocated ex_buf (elt_size=1) to 40000 items from 20000.
+Reallocated out_buf (elt_size=1) to 40000 items from 20000.
+Reallocated name_tok (elt_size=4) to 40000 items from 20000.
+Reallocated name_sep_char (elt_size=1) to 40000 items from 20000.
+You've used 30 entries,
+            2984 wiz_defined-function locations,
+            880 strings with 11143 characters,
+and the built_in function-call counts, 30019 in all, are:
+= -- 4421
+> -- 2011
+< -- 537
++ -- 719
+- -- 404
+* -- 2289
+:= -- 6530
+add.period$ -- 34
+call.type$ -- 30
+change.case$ -- 210
+chr.to.int$ -- 30
+cite$ -- 30
+duplicate$ -- 330
+empty$ -- 863
+format.name$ -- 988
+if$ -- 7332
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 30
+newline$ -- 98
+num.names$ -- 360
+pop$ -- 449
+preamble$ -- 1
+purify$ -- 240
+quote$ -- 0
+skip$ -- 0
+stack$ -- 0
+substring$ -- 1004
+swap$ -- 114
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 0
+while$ -- 337
+width$ -- 0
+write$ -- 510
+is.kanji.str$ -- 0

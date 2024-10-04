@@ -1,0 +1,220 @@
+---
+title: "HW2: rmarkdownを使った文書作成"
+author: "伊藤成朗"
+date: "`r format(Sys.time(), '%Y年%m月%d日 %R')`"
+output:
+  tufte::tufte_html:
+    citation_package: natbib
+    toc: true
+  pdf_document:
+    latex_engine: xelatex
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+urlcolor: blue
+linkcolor: red
+header-includes:
+    - \usepackage{amsmath}
+    - \usepackage{amssymb}
+    - \usepackage{amsfonts}
+    - \usepackage{bookmark} 
+    - \usepackage{natbib} 
+    - \usepackage{xltxtra} 
+    - \usepackage{zxjatype} 
+    - \usepackage[ipa]{zxjafont} 
+    - \usepackage{marginnote}
+bibliography: c:/seiro/settings/Tex/seiro.bib
+link-citations: yes
+# setwd(path <- "c:/seiro/docs/external/seishin/homeworks/2024/"); rmarkdown::render(paste0(path, "2/hw2_tufte.Rmd"))
+#### Below are git bash commands.  ####
+#### git init
+#### git config --global user.name "SeiroIto"
+#### git remote add origin https://github.com/SeiroIto/Ramadan.git  ## specify remote
+#### git branch -M main  ## specify the branch to follow
+#### Close git once and start again. 
+#### Before running below, create .gitignore and place it in c:/data/Ramadan/submit2024/
+#### git add c:/data/Ramadan/submit2024/program c:/data/Ramadan/submit2024/save   ## this adds files to track
+#### Below may not be necessary if .gitignore works as intended. 
+#### git ls-tree -r main --name-only ## list all tracked files
+#### git commit -am "initial commit"  ## commit the change, comment what the changes are
+#### git push origin main  ## push files to remote
+#### if error with push fatal: the remote end hung up unexpectedly, run below and push again
+#### git config http.postBuffer 2000000000
+#### git push -f origin main  ## push files to remote, force option
+---
+
+```{css, echo=F}
+DBlue {
+  color: dodgerblue;
+}
+Blue {
+  color: blue;
+}
+Red {
+  color: red;
+}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+
+```{r setup, echo = F, results = "hide"} 
+#### include = F <==> echo=F & results = F
+library(knitr)
+library(tufte)
+#### invalidate cache when the tufte version changes
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = "", 
+  echo = T, cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+gc()
+```
+
+# 準備編
+
+## pandocのインストール
+
+* windows: https://www.oresamalabo.net/entry/2022/07/24/165638
+* iOS: https://docs.zettlr.com/ja/installing-pandoc/#macos
+* iPadOS=RStudio Cloud: ローカルへのインストールは不要
+
+## tinytex, tufteのインストール
+
+Rで下記を実行します。
+
+```{r install tinytex tufte, eval = F}
+install.packages("tinytex")
+tinytex::install_tinytex()
+install.packages("tufte")
+```
+
+* [`tinytex`](https://yihui.org/tinytex/)^[ややこしいのですが、RのtinytexパッケージはtinytexというRとは別のプログラムを管理しています。]はpdf出力に必要です。  
+* `tufte`パッケージはhtmlやpdfで[Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte)の提唱した組版原則を適用するツールです。  
+
+## .gitignoreの作成
+
+* iPadOS: このセクションは省略
+
+下記をコピーして`.gitignore`というファイルとして保存  
+
+* 保存先はとりあえずこのファイルと同じフォルダにしておいてください  
+* 中身: gitが変更履歴をトラックしないフォルダやファイルを指定しています  
+
+```{r gitignore, eval = F}
+#### Following folders/files will not be tracked
+/FolderA/
+*.jpg
+```
+
+# rmarkdownを使ったhtmlの作成
+
+## ファイルの作成
+
+* フォルダ内に`hw2_rmarkdown.rmd`という名前のテキスト・ファイルを作成します  
+* エディタなどを使い、そのファイルに下記を書き加えていきます
+
+## yaml(ヘッダ)
+
+```{r yaml, eval = F}
+---
+title: "HW2"
+author: "名前"
+date: "`r format(Sys.time(), '%Y年%m月%d日 %R')`"
+output:
+  tufte::tufte_html:
+    toc: true
+urlcolor: blue
+linkcolor: red
+header-includes:
+    - \usepackage{xltxtra} 
+    - \usepackage{zxjatype} 
+    - \usepackage[ipa]{zxjafont} 
+---
+```
+
+<Red>重要注意事項:</Red>  
+
+* 行末に余計な空白を入れずに改行  
+* `output:`のように次行に続く場合には、次の行の行頭に2スペースを入れること  
+* スペース=半角スペース  
+
+## 本文
+
+リストは以下のように作成
+
+```{r list example, eval = F}
+* こうすればリストができます。  
+* リストは最後に半角スペース2を入れて改行します。  
+
+1. 番号付きリストです。  
+1. 番号は自動で増えていきます。  
+1. 番号付きリストも最後に半角スペース2を入れて改行します。  
+```
+
+## Render 
+
+Rでrmarkdownを使って文書組版します  
+
+この講義「フォルダへのパス」をRに知らせ、その中のhwフォルダにある`hw2_rmarkdown.rmd`を指定してrenderします。
+
+* もしも、`c:\lectures\devecon\`というのが本講義のフォルダだとすると、`\`を`/`に代替してパスを表現します。つまり、`c:/lectures/devecon/`です。  
+* `path <- "c:/lectures/devecon/"`でフォルダパスを`path`というobjectとして名付けました。この後にRで`path`とうてば、その内容を表示できます。
+* `rmarkdown::render`: 対象ファイルに`rmarkdown`パッケージの`render`コマンドを実施。
+* `paste0("a", "b")="ab"`です。よって、`paste0(path, "hw/2/hw2_rmarkdown.rmd")` =`"c:/lectures/devecon/hw/2/hw2_rmarkdown.rmd"`です。
+* `setwd`=作業フォルダworking directory(wd)をsetするコマンド。お薦めコマンドではないが単純化のために実行。  
+* ここではファイルへのパス=`c:/lectures/devecon/hw/w/hw2_rmarkdown.rmd`を想定しています  
+
+```{r, eval = F}
+setwd(path <- "c:/lectures/devecon/")
+path
+```
+```{r, eval = T, echo = F}
+path <- "c:/lectures/devecon/"
+path
+```
+```{r, eval = T, echo = F}
+path <- "c:/seiro/docs/external/seishin/homeworks/2024/"
+```
+```{r, echo = T, eval = F}
+rmarkdown::render(paste0(path, "hw/2/hw2_rmarkdown.rmd"))
+```
+
+## pdfへの出力
+
+yamlヘッダで`pdf_document:`以下を追記します  
+
+* スペースに関する注意事項に気をつけて追記してください  
+
+```{r , eval = F}
+output:
+  tufte::tufte_html:
+    citation_package: natbib
+    toc: true
+  pdf_document:
+    latex_engine: xelatex
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+```
+
+そして以下を実行します
+
+```{r , eval = F}
+rmarkdown::render(paste0(path, "hw/2/hw2_rmarkdown.rmd"), output_format = "all")
+```
+
