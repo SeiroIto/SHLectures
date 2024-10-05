@@ -42,29 +42,40 @@ options(htmltools.dir.version = FALSE, width = 100)
 # 第1階層ヘッダ
 ## Second level header
 
-rmarkdownです。
+markdownでは見出しを\#を行頭に付けて作成します
+
+````{markdown}
+# 第1階層ヘッダ
+## Second level header
+````
+
+リストは下記のようにして作成します
 
 ````{markdown}
 * こうすればリストができます。  
-* リストは最後に半角スペース2を入れて改行します。  
+* リストは各行末に半角スペース2を入れて改行します。  
 
 1. 番号付きリストです。  
 1. 番号は自動で増えていきます。  
-1. 番号付きリストも最後に半角スペース2を入れて改行します。  
+1. 番号付きリストも各行末に半角スペース2を入れて改行します。  
 ````
 
 * こうすればリストができます。  
-* リストは最後に半角スペース2を入れて改行します。  
+* リストは各行末に半角スペース2を入れて改行します。  
 
 1. 番号付きリストです。  
 1. 番号は自動で増えていきます。  
-1. 番号付きリストも最後に半角スペース2を入れて改行します。  
+1. 番号付きリストも各行末に半角スペース2を入れて改行します。  
 
 ### Third level header
 
-`tufte_html`では第3階層ヘッダは本文と変わらないので、第2階層ヘッダまでしか使いません。
+````{markdown}
+### Third level header
+````
 
-* Edward Tufteは第2階層までしか使うべきでないと考えていたそうです。  
+`tufte_html`では第3階層ヘッダは本文と変わらないので、通常は第2階層ヘッダまでしか使いません。
+
+* [Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte)は第2階層までしか使うべきでないと考えていたそうです。  
 * [Richard Feynmann](https://en.wikipedia.org/wiki/File:Richard_Feynman_Nobel.jpg)^[ノーベル物理学賞受賞者]の講義資料で物理学のすべてが第2階層までで書かれていたことを根拠にしています。  
 
 # 表
@@ -94,7 +105,8 @@ knitr::kable(tab, caption = "An example table", align = rep("c", 3))
 
 # 図
 
-Rで作業用のデータを作ります
+Rで乱数を発生させて^[`set.seed(123)`は乱数発生の初期値を123として設定しています。123と指定すれば、同じ乱数が発生し、同じ結果を見ることができます。`set.seed`で指定しないと、どのような初期値を使ったのか分からなくなります。`rnorm(1000)`は標準正規分布から1000個の値を発生させるコマンドです。]
+作業用のデータ^[`cbind`コマンドで、データを1から500番目まで、501から1000番目を2列のデータとして整形しています。`"x"=`, `"y"=`とすることで、最初の列にx、2番目の列にはyという変数名を付けています。]を作ります
 
 ```{r, echo = F}
 set.seed(123)
@@ -105,7 +117,6 @@ x <- cbind("x"=x[1:500], "y"=1+2*x[1:500]+x[501:1000])
 plot(x)
 ```
 
-マージンの図
 ````{markdown}
 ```{r generate data for figure}
 set.seed(123)
@@ -113,24 +124,39 @@ x <- rnorm(1000)
 x <- cbind("x"=x[1:500], "y"=1+2*x[1:500]+x[501:1000])
 ```
 ````
+
+## Margin figure
+
+マージンの図: 全体の傾向を見る目的であれば、マージン図が最適です
 ````{markdown}
 ```{r fig-margin, fig.margin=TRUE}
 plot(x)
 ```
 ````
 
-本文サイズの図
+ここでは欄外注(2., 3.)が長くてスペースを取っているため、
+マージン図もそれに押されて下の方に位置しています。
+マージンを使うと、それよりも上部のマージンの使い方によっては、
+マージン図の位置が下に行きすぎてしまうときがあります。
+
+
+## Main column figure
+
+本文サイズの図: 細部を見せることも目的にあるならば、本文サイズの図を使います
 
 ````{markdown}
-```{r, fig.cap='Main column', out.width='100%'}
+```{r, fig.cap='本文サイズ', out.width='100%'}
 plot(x)
 ```
 ````
-```{r, echo=FALSE, fig.cap='Main column', out.width='100%'}
+```{r, echo=FALSE, fig.cap='本文サイズ', out.width='100%'}
 plot(x)
 ```
 
-全幅サイズの図
+## Full page figure
+
+
+全幅サイズの図: これは少し大きすぎですが、どうしても必要な場合もあります
 
 ````{markdown}
 ```{r, fig.fullwidth=TRUE, fig.cap='Page width', out.width='100%'}
@@ -140,4 +166,34 @@ plot(x)
 ```{r, echo=FALSE, fig.fullwidth=TRUE, fig.cap='Page width', out.width='100%'}
 plot(x)
 ```
+
+## ggplot2
+
+`ggplot2`パッケージを使うと視認性に優れた^[`scale_fill_viridis_d()`は色覚障害者にも視認しやすい色使いをします]
+^[`aes(x = x, y = y, fill = groups, color = groups, shape = groups)`ではx軸、y軸の変数を`x=x`、`y=y`と指定し、`fill`で塗り込む色、`color`で点の枠の色、`shape`で点の形を`groups`の値(ここではa, b, c, d)ごとに揃えるよう指定しています]
+描画ができます^[以下では`data.table`パッケージもインストールして、データ作業をやりやすくしています]
+````{markdown}
+```{r, fig.cap = "見やすい図"}
+install.packages("data.table")
+install.packages("ggplot2")
+library(ggplot2)
+x2 <- data.table(groups = rep(letters[1:4], 125), x)
+ggplot(data = x2, 
+    aes(x = x, y = y, fill = groups, color = groups, shape = groups)) +
+  geom_point(aes(colour = groups)) +
+  scale_fill_viridis_d() + 
+  theme(legend.position = "bottom")
+```
+````
+
+```{r, echo=FALSE, fig.cap = "見やすい図"}
+library(ggplot2)
+x2 <- data.table(groups = rep(letters[1:4], 125), x)
+ggplot(data = x2, 
+    aes(x = x, y = y, fill = groups, color = groups, shape = groups)) +
+  geom_point(aes(colour = groups)) +
+  scale_fill_viridis_d() + 
+  theme(legend.position = "bottom")
+```
+
 
