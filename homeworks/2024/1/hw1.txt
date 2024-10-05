@@ -1,13 +1,13 @@
-1. Github‚ÉƒAƒJƒEƒ“ƒg‚ðì‚èAƒŒƒ|ƒWƒgƒŠ‚ð1‚Âì¬‚µ‚Ä‚­‚¾‚³‚¢BƒŒƒ|ƒWƒgƒŠ‚ÆƒAƒJƒEƒ“ƒg–¼‚ª•ª‚©‚éƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ð’ño‚µ‚Ä‚­‚¾‚³‚¢Bƒtƒ@ƒCƒ‹–¼‚Í1.jpg, 1.pdf‚Ì‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B
+1. Githubã«ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’ä½œã‚Šã€ãƒ¬ãƒã‚¸ãƒˆãƒªã‚’1ã¤ä½œæˆã—ã¦ãã ã•ã„ã€‚ãƒ¬ãƒã‚¸ãƒˆãƒªã¨ã‚¢ã‚«ã‚¦ãƒ³ãƒˆåãŒåˆ†ã‹ã‚‹ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚’æå‡ºã—ã¦ãã ã•ã„ã€‚ãƒ•ã‚¡ã‚¤ãƒ«åã¯1.jpg, 1.pdfã®ã‚ˆã†ã«ã—ã¦ãã ã•ã„ã€‚
 
-2. Git‚ðŽ©•ª‚ÌPC‚ÉƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B‹N“®Œã‚ÌƒEƒBƒ“ƒhƒE‚ÌƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ð’ño‚µ‚Ä‚­‚¾‚³‚¢Bƒtƒ@ƒCƒ‹–¼‚Í2.jpg, 2.pdf‚Ì‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B
+2. Gitã‚’è‡ªåˆ†ã®PCã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚èµ·å‹•å¾Œã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚’æå‡ºã—ã¦ãã ã•ã„ã€‚ãƒ•ã‚¡ã‚¤ãƒ«åã¯2.jpg, 2.pdfã®ã‚ˆã†ã«ã—ã¦ãã ã•ã„ã€‚
 
-3. R‚ðŽ©•ª‚ÌPC‚ÉƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢Bwindows: Rgui.exe, mac: RƒRƒ“ƒ\[ƒ‹‚ð‹N“®‚µAˆÈ‰º‚ðƒy[ƒXƒg‚µ‚Ärmarkdown‚ðƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B
+3. Rã‚’è‡ªåˆ†ã®PCã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚windows: Rgui.exe, mac: Rã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’èµ·å‹•ã—ã€ä»¥ä¸‹ã‚’ãƒšãƒ¼ã‚¹ãƒˆã—ã¦rmarkdownã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ãã ã•ã„ã€‚
 install.packages("rmarkdown")
-rmarkdownƒCƒ“ƒXƒg[ƒ‹Š®—¹Œã‚ÌƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ð’ño‚µ‚Ä‚­‚¾‚³‚¢Bƒtƒ@ƒCƒ‹–¼‚Í3.jpg, 3.pdf‚Ì‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B
+rmarkdownã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å®Œäº†å¾Œã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚’æå‡ºã—ã¦ãã ã•ã„ã€‚ãƒ•ã‚¡ã‚¤ãƒ«åã¯3.jpg, 3.pdfã®ã‚ˆã†ã«ã—ã¦ãã ã•ã„ã€‚
 
-* iPadOS‚É‚ÍR‚ðƒCƒ“ƒXƒg[ƒ‹‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñBiOSAwindowsAlinux‚É‚Ì‚ÝƒCƒ“ƒXƒg[ƒ‹‚Å‚«‚Ü‚·B
-* iPadOSƒ†[ƒU‚ÍAPC‚âMac‚ð‚¨Ž‚¿‚È‚ç‚ÎA‚»‚Ì—˜—p‚ð‚¨Š©‚ß‚¢‚½‚µ‚Ü‚·B‚Ç‚¤‚µ‚Ä‚àiPad‚ðŽg‚í‚È‚¢‚Æ‚¢‚¯‚È‚¢ê‡‚É‚ÍARStudio Cloud(ƒNƒ‰ƒEƒh”Å‚ÌR+ƒAƒ‹ƒtƒ@)‚ð—˜—p‚µ‚Ä‚­‚¾‚³‚¢B‰º‹Lurl‚ªRStudio Cloud—˜—pŠJŽn‚ÌŽQl‚É‚È‚è‚Ü‚·BCloud Free(–³—¿ƒvƒ‰ƒ“)‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢BRStudio Cloud‚Íƒ[ƒJƒ‹‚ÉƒCƒ“ƒXƒg[ƒ‹‚µ‚½R‚Æ”ä‚×‚ÄA”½‰ž‚ª’x‚¢A2ƒoƒCƒg•¶Žš(“ú–{Œê‚È‚Ç)‚ª‰»‚¯‚éA‚È‚Ç‚Ì’ZŠ‚ª‚ ‚é‚æ‚¤‚Å‚·B
-* RStudio Cloud‚ÍƒNƒ‰ƒEƒhã‚ÌƒT[ƒrƒX‚È‚Ì‚ÅA‚Ç‚Ìƒvƒ‰ƒbƒgƒtƒH[ƒ€‚©‚ç‚Å‚à—˜—p‚Å‚«‚Ü‚·B
+* iPadOSã«ã¯Rã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ã€‚iOSã€windowsã€linuxã«ã®ã¿ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã§ãã¾ã™ã€‚
+* iPadOSãƒ¦ãƒ¼ã‚¶ã¯ã€PCã‚„Macã‚’ãŠæŒã¡ãªã‚‰ã°ã€ãã®åˆ©ç”¨ã‚’ãŠå‹§ã‚ã„ãŸã—ã¾ã™ã€‚ã©ã†ã—ã¦ã‚‚iPadã‚’ä½¿ã‚ãªã„ã¨ã„ã‘ãªã„å ´åˆã«ã¯ã€RStudio Cloud(ã‚¯ãƒ©ã‚¦ãƒ‰ç‰ˆã®R+ã‚¢ãƒ«ãƒ•ã‚¡)ã‚’åˆ©ç”¨ã—ã¦ãã ã•ã„ã€‚ä¸‹è¨˜urlãŒRStudio Cloudåˆ©ç”¨é–‹å§‹ã®å‚è€ƒã«ãªã‚Šã¾ã™ã€‚Cloud Free(ç„¡æ–™ãƒ—ãƒ©ãƒ³)ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚RStudio Cloudã¯ãƒ­ãƒ¼ã‚«ãƒ«ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ãŸRã¨æ¯”ã¹ã¦ã€åå¿œãŒé…ã„ã€2ãƒã‚¤ãƒˆæ–‡å­—(æ—¥æœ¬èªžãªã©)ãŒåŒ–ã‘ã‚‹ã€ãªã©ã®çŸ­æ‰€ãŒã‚ã‚‹ã‚ˆã†ã§ã™ã€‚
+* RStudio Cloudã¯ã‚¯ãƒ©ã‚¦ãƒ‰ä¸Šã®ã‚µãƒ¼ãƒ“ã‚¹ãªã®ã§ã€ã©ã®ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã‹ã‚‰ã§ã‚‚åˆ©ç”¨ã§ãã¾ã™ã€‚
 
 https://note.com/eiko_dokusho/n/n95dad456f2f7?authuser=0
