@@ -1,0 +1,570 @@
+---
+title: "RP02"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP02.html>
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP02.pdf
+# quarto render RP02.qmd
+---
+```{css, echo = F, results = "hide"}
+Red {
+  color: red;
+}
+Orange {
+  color: #e94e2c;
+}
+Blue {
+  color: blue;
+}
+.reveal .slides pre code {
+    max-height: 800px;
+}
+#TOC {
+  font-color: #e94e2c;
+}
+.big-code{
+  font-size: 110%  
+}
+#### Below is suggested by Claude
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list ol {
+####   list-style-type: none;
+####   padding-left: 0;
+####   margin-left: 0;
+####   counter-reset: item;
+#### }
+#### .small-font-list ol li {
+####   margin-bottom: 0.5em;
+####   display: flex;
+#### }
+#### .small-font-list ol li::before {
+####   content: counter(item) ". ";
+####   counter-increment: item;
+####   margin-right: 0.5em;
+####   flex-shrink: 0;
+#### }
+#### .small-font-list ol li > p:first-child {
+####   margin: 0;
+####   display: inline;
+#### }
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+AIに殺人を判断させるのは戦争がより身近になってしまうように思いました。技術発展するにつれて、暴力性が高まっていってしまうという事実を考えさせられました
+:::
+</div>
+
+人間を介さないAIによる殺人はすでに行われています。[2023年のForbesの記事](https://www.forbes.com/sites/davidhambling/2023/10/17/ukraines-ai-drones-seek-and-attack-russian-forces-without-human-oversight/)によると、ウクライナがドローン攻撃でAIに標的を判断させているそうです。
+
+* 妨害電波によって無線が使えない場合、自律的な攻撃判断なしにドローン攻撃はできません。  
+* ドローンが標的を判断するようすを映したSaker社の[ビデオ](https://youtu.be/tLUmv9TO9xU)  
+
+> The Aim is to enable an extremely fast reconnaissance-decision making-strike process (also known as the ‘kill chain’) in a way that is not possible when humans are involved. 
+
+* 自律的ドローンが標的を探知し攻撃する[ビデオ](https://youtu.be/M7tmYBmI0kM)  
+   * 注意: この映像だけだと真偽は分かりませんので、映像自体はfakeの可能性もあります...  
+
+> The spokesman noted that the AI is not perfect, but their priority was getting a useful system that saves lives into the field. As mentioned, Saker are in constant contact with users and the system is updated continuously.
+
+怖いコメントです。
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+貧困の罠についての内容が興味深かったです。所得が低い時には、資産の蓄積度合いは緩やかであり、所得が一定のポイントを超えると資産の蓄積が高くなるS字方のグラフを見ました。その原因について、資本市場・保険市場・貸出市場・市場に関わる制度の４つの観点が挙げられていました。その中でも、資本市場・保険市場・貸出市場の３点については、繋がりがあるように感じました。子供への投資・より収益の高い作物の育成と収穫を行うためには、資金が必要です。しかし、金融機関は資金を回収できないリスクを考えて、低所得の家庭には、資金を貸しにくいです。初期資本がないことが、短期間で貧困から回復することが難しい原因になっていると感じました。
+:::
+</div>
+
+良い観点だと思います。なぜならば、「低開発」はさまざまな市場や制度が未発達な状態だからです。複数の原因が複合的に投資の収益を低くしていることがあり得ます。  
+
+* この場合、一つの原因だけに対処するだけで投資が進むのか分かりません。  
+* RCTが示す単一の課題・原因に対する対処法で十分なのかは分かりません。  
+   * でも、単一の課題・原因にすら対処法を示せてこなかったRCT以前があります。  
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+貧困の罠という単語はキリスト教学やラテンアメリカ地域論のCCTプログラムなどで聞いたことのありましたが、貧困の罠という単語については言葉で説明され、自分で想像するといった理解の仕方であったので、今回の講義で図を用いて検討したことで、自分の想像だけでなく理論的に理解が出来たように感じました。
+:::
+</div>
+
+:::::{.columns}
+
+::::{.column width="50%"}
+```{r, engine = "tikz"}
+#| out-width: "30%"
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\newcommand{\mpage}[2]{\begin{minipage}[t]{#1}#2\end{minipage}}
+
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+% The block diagram code is probably more verbose than necessary
+\begin{tikzpicture}[
+    scale = .5, auto, node distance=3cm, >=latex,
+    show background rectangle, 
+    background rectangle/.style={fill=yellow!10}
+  ]
+    % We start by placing the blocks
+    \node [block] (Poor) {poor};
+    \node [block, right of=Poor, xshift = 3cm] (lreturns) {low returns};
+    % We draw an edge between the Poor and lreturns block to 
+    % calculate the coordinate u. We need it to place the lir block. 
+    \draw [->] (Poor) -- node[name=u] {\footnotesize\hfil low level of institutions} (lreturns);
+    \node [block, below of=u] (lir) {low investment rate};
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw, ->] (Poor) -- (lreturns);
+    \draw [->] (lreturns) |- (lir);
+    \draw [->] (lir) -| node[pos=0.99] {} 
+        node [near end] (income) {\footnotesize income} (Poor);
+    \coordinate (low) at ($(income) + (-.1, .15)$);
+    \node[below of = low, yshift = 3.25cm] (low2) {\footnotesize low}; 
+\end{tikzpicture}
+```
+::::
+
+::::{.column width="50%"}
+::: {style="font-size: 70%;"}
+* こんな感じの図を見たことがあるかもしれません。「貧困の悪循環」。ほぼ恒等的(トートロジカル)な図なので、解決策を提示できていません。
+:::
+::::
+
+:::::
+
+:::{.fragment}
+講義で用いた図の強み: 時間を通じた資本の変化を示して  
+
+* 初期時点の資本量が一定以下であれば低い均衡、それ以上だと高い均衡に分かれること
+* よって、ビッグプッシュという解決策を提示していること  
+
+:::
+
+:::{.fragment}
+@GalorZeira1993 の図(理論モデル)が解決策を提示できるのは、貧困の悪循環に陥る均衡$L$と抜け出したときの均衡$H$を同時に示しているから  
+
+* S字線の位置(収益率水準)や傾き(収益率の増え方=限界収益率)によって行き着く均衡が変わる  
+* 位置や傾きを変える政策を議論できる
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+日本では、そもそも前科がある人の雇用に関して大きな関心が持たれていない印象が強く、日本とアメリカの異文化が背景にあるのだろうと考えます。この点については、日本での雇用環境との違いを再認識する機会になりました。アメリカでの職業差別に対する政策が抱えるジレンマに触れることで、日本の雇用慣行に関する考え方も一度見直す必要があるのではないかとも思いました。
+:::
+</div>
+
+断片的な情報しか知りませんが、日本でも犯罪歴のある人が再就職して生計を立てることは困難です  
+
+アメリカとの差は、
+
+* 銃やドラッグがアメリカほど蔓延しておらず、犯罪発生率が低いこと  
+* 人種の違いが少ないので、人種差別の件数が少なく顕在化していないこと  
+
+国際比較可能なデータを見つけたので、次ページで殺人犠牲者数比率(10万人あたり)を比較しました
+
+----
+
+```{r read homicide data, results = "hide"}
+grepout <- function(str, x)
+  # returns element of match (not numbers)
+  x[grep(str, x, perl = T)]
+#### setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/RP/")
+library(data.table)
+hd <- fread("HomicideData.tsv", skip = 2, header = T)
+#### Change column name: Unit of measurement => Units
+#### Change column name: Iso3_code => iso3
+setnames(hd, c(grepout("Uni", colnames(hd)), "Iso3_code"), c("Units", "iso3"))
+#### Character columns => factor columns
+chacol <- colnames(hd)[grepl("cha", sapply(hd, class))]
+hd[, (chacol) := lapply(.SD, factor), .SDcol = chacol]
+#### Choose data:
+####   Total for Sex, Age, Dimension, Category
+####   Units = Rates per 10000, Indicator != Regional estimates
+####   iso3 must be 3 characters long (>3 is a region of a country)
+hdt <- hd[grepl("T", Sex) & grepl("T", Age) & grepl("T", Dimension) & 
+  grepl("T", Category) & grepl("Rate", Units) & !grepl("Reg", Indicator) & 
+  nchar(as.character(iso3)) == 3, ]
+summary(hdt)
+#### Drop unused levels in factors
+hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
+summary(hdt)
+#### Use only number of victims
+hdt <- hdt[grepl("Vic", Indicator), ]
+hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
+```
+年ごとの標本サイズを調べます
+```{r}
+table(hdt[, Year])
+```
+
+最近年で標本サイズが大きい2020年を選んで描画
+
+:::::{.columns}
+
+::::{.column width="70%"}
+```{r plot homicide in 2020, width = 800}
+#### Tabulate num of observations by year: 
+####   2020 is most recent among large number of obs
+setkey(hdt, Year, VALUE)
+setorder(hdt, Year, -VALUE)
+library(ggplot2)
+hdt2 <- hdt[grepl("2020", Year), .(iso3, VALUE)]
+hdt2[, iso3 := factor(iso3, levels = 
+reorder(iso3, -VALUE)
+)]
+ggplot(data = hdt2[c(1:39, grep("JPN", iso3)), ], 
+    aes(x = iso3, y = VALUE)) +
+  geom_col() +
+  theme(
+    axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)
+  )
+```
+
+
+::: {style="font-size: 50%;"}
+出所: <https://dataunodc.un.org/dp-intentional-homicide-victims>
+:::
+::::
+
+::::{.column width="30%"}
+* 日本よりも相当多い(20倍以上)  
+::::
+
+:::::
+
+----
+
+データを読んで整形するRのコード
+
+```{r echo = F}
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = NA, eval = F, 
+  echo = "fenced", cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+
+```
+
+::: {style="font-size: 100%;"}
+```{r read UN homicide data}
+grepout <- function(str, x)
+  # returns element of match (not numbers)
+  x[grep(str, x, perl = T)]
+#### setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/RP/")
+library(data.table)
+hd <- fread("HomicideData.tsv", skip = 2, header = T)
+#### Change column name: Unit of measurement => Units
+#### Change column name: Iso3_code => iso3
+setnames(hd, c(grepout("Uni", colnames(hd)), "Iso3_code"), c("Units", "iso3"))
+#### Character columns => factor columns
+chacol <- colnames(hd)[grepl("cha", sapply(hd, class))]
+hd[, (chacol) := lapply(.SD, factor), .SDcol = chacol]
+#### Choose data:
+####   Total for Sex, Age, Dimension, Category
+####   Units = Rates per 10000, Indicator != Regional estimates
+####   iso3 must be 3 characters long (>3 is a region of a country)
+hdt <- hd[grepl("T", Sex) & grepl("T", Age) & grepl("T", Dimension) & 
+  grepl("T", Category) & grepl("Rate", Units) & !grepl("Reg", Indicator) & 
+  nchar(as.character(iso3)) == 3, ]
+summary(hdt)
+#### Drop unused levels in factors
+hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
+summary(hdt)
+#### Use only number of victims
+hdt <- hdt[grepl("Vic", Indicator), ]
+hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
+```
+:::
+
+----
+
+
+年ごとの標本サイズ
+
+```{r}
+table(hdt[, Year])
+```
+
+描画
+
+```{r plot UN homicide in 2020, width = 800}
+#### Tabulate num of observations by year: 
+####   2020 is most recent among large number of obs
+setkey(hdt, Year, VALUE)
+setorder(hdt, Year, -VALUE)
+library(ggplot2)
+hdt2 <- hdt[grepl("2020", Year), .(iso3, VALUE)]
+hdt2[, iso3 := factor(iso3, levels = 
+reorder(iso3, -VALUE)
+)]
+ggplot(data = hdt2[c(1:39, grep("JPN", iso3)), ], 
+    aes(x = iso3, y = VALUE)) +
+  geom_col() +
+  theme(
+    axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1)
+  )
+```
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+日本の財務基盤が安定した時日本の子供は平等に学べるのでしょうか。
+:::
+</div>
+
+簡潔で良い質問だと思いました
+
+まず、日本は公教育に関しては中学校までとても平等だと思います  
+
+* 高校以前段階の問題は公教育の質です  
+* 学級崩壊や教員多忙などで公立小学校・中学校での学習の質は低下  
+   * [2019年度](https://www.mext.go.jp/content/20230524-mext-tokubetu01-000026255_01.pdf#page=7): 小中学生男子で「学習面又は行動面で著しい困難を示す」割合=12.1%  
+   * うち、特別な教育支援が必要と判断されている割合: 28.7%
+      * 小中学校著しい困難ありで放置: 男子`r round(12.1*(100-28.7)/100, 2)`%、女子`r round(5.4*(100-28.7)/100, 2)`%&rarr;<Red>`r round(17.5*c(12.1, 5.4)*(100-28.7)/10000, 2)`人/35人学級</red>  
+   * 僕の知る限り、地方や国の政治家はほとんど取り上げません  
+   * 集票に効果がないと考えているのかもしれません(想像)  
+   * PISA(15歳)などで学力低下が表面化していないことも原因でしょう  
+      * [数学的リテラシー(1位/5位)、読解力(2位/3位)、科学的リテラシー(1位/2位)](https://www.nier.go.jp/kokusai/pisa/pdf/2022/01_point_2.pdf#page=2)  
+* 高校以前段階で私立学校教育の質がより高いならば、所得と学習の正相関が出てきます  
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+日本の財務基盤が安定した時日本の子供は平等に学べるのでしょうか。
+:::
+</div>
+
+
+:::::{.columns}
+
+::::{.column width="60%"}
+高等学校等就学支援金制度(2020年度-): 高校は家庭年収660万円以下(1030万円)であれば約40万円(約12万円)を上限に授業料が減額されます  
+
+:::{.nonincremental}
+* 東京都などは年収制限無しに無償化しています  
+:::
+
+:::{.fragment}
+[高等教育の修学支援新制度(2026年度-)](https://www.mext.go.jp/content/20240426-mxt_gakushi_100001505_2.pdf): 多子家庭(3人以上)、もしくは、世帯年収600万未満であれば、70万円*4年+26万円を上限に減免
+:::
+::::
+
+::::{.column width="40%"}
+<br><br><br><br>
+
+* 大学進学希望者どれだけの割合になるのかよく分かりませんが、あまり多くないでしょう  
+* 聖心女子大学: 入学金25万、授業料70万、施設設備費30万、諸費10万  
+* 慶應義塾大学経済学部: 入学金20万、授業料92万、その他29万  
+::::
+
+:::::
+
+:::{.fragment}
+日本政府は対象者を拡げ、教育にもっと支出しても良いのではと思います  
+:::
+
+----
+
+:::::{.columns}
+
+::::{.column width="55%"}
+![](OECD_EduSpending.jpg){.lightbox width="70%"}
+
+::: {style="font-size: 50%;"}
+出所: <https://www.oecd.org/en/data/indicators/public-spending-on-education.html>
+:::
+::::
+
+```{r , echo = F, eval = T}
+u20 <- 4714+5061+5340+5769
+totpop <- 125930
+a60 <- 36050+7446
+u20r <- u20/totpop
+a60r <- a60/totpop
+egdp <- (4.0624+.4882)/(4.0624/2.98)
+```
+
+::::{.column width="45%"}
+令和6年度の文教予算は4兆624億  
+
+::: {style="font-size: 80%;"}
+
+   * 高等教育の修学支援新制度(5438億円)は社会保障関係費(消費税財源)に計上されている  
+      * 2020年度(令和2年度)は4882億  
+   * OECDの数値に入っていないものと仮定すると2.98%&rarr;`r round(egdp, 2)`%  
+   * [高齢予算対GDP比(2020年度)](https://www.ipss.go.jp/ss-cost/j/fsss-R02/R02-houdougaiyou.pdf#page=5): 9.11%  
+   * [20歳以下人口](https://www.e-stat.go.jp/dbview?sid=0003459019)`r u20/10`万人(`r round(u20r*100, 2)`%)、60歳以上`r a60/10`万人(`r round(a60r*100, 2)`%)&larr;60歳から受給可能  
+   * 1000人あたり支出: 文教`r formatC(egdp/u20, digits = 6, format = "f")`%、高齢`r formatC(9.11/a60, digits = 6, format = "f")`%、高齢予算が1人あたり<Red>`r round(((9.11/a60)/(egdp/u20)-1)*100, 0)`%多い</Red>
+:::
+::::
+
+:::::
+
+* 保健(介護保険、医療保険など)は含めず
+* 含めたら、世代間公的支出格差はもっと増えます
+
+----
+
