@@ -210,12 +210,18 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 * 妨害電波によって無線が使えない場合、自律的な攻撃判断なしにドローン攻撃はできません。  
 * ドローンが標的を判断するようすを映したSaker社の[ビデオ](https://youtu.be/tLUmv9TO9xU)  
 
+----
+
 > The Aim is to enable an extremely fast reconnaissance-decision making-strike process (also known as the ‘kill chain’) in a way that is not possible when humans are involved. 
 
 * 自律的ドローンが標的を探知し攻撃する[ビデオ](https://youtu.be/M7tmYBmI0kM)  
-   * 注意: この映像だけだと真偽は分かりませんので、映像自体はfakeの可能性もあります...  
+   * 注意: この映像だけだと真偽は分かりませんので、映像はfakeの可能性もあります...  
+
+. . .
 
 > The spokesman noted that the AI is not perfect, but their priority was getting a useful system that saves lives into the field. As mentioned, Saker are in constant contact with users and the system is updated continuously.
+
+. . .
 
 怖いコメントです。
 
@@ -223,11 +229,13 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-貧困の罠についての内容が興味深かったです。所得が低い時には、資産の蓄積度合いは緩やかであり、所得が一定のポイントを超えると資産の蓄積が高くなるS字方のグラフを見ました。その原因について、資本市場・保険市場・貸出市場・市場に関わる制度の４つの観点が挙げられていました。その中でも、資本市場・保険市場・貸出市場の３点については、繋がりがあるように感じました。子供への投資・より収益の高い作物の育成と収穫を行うためには、資金が必要です。しかし、金融機関は資金を回収できないリスクを考えて、低所得の家庭には、資金を貸しにくいです。初期資本がないことが、短期間で貧困から回復することが難しい原因になっていると感じました。
+貧困の罠についての内容が興味深かったです。所得が低い時には、資産の蓄積度合いは緩s、所得が一定のポイントを超えると資産の蓄積が高くなるS字方のグラフを見ました。その原因について、資本市場・保険市場・貸出市場・市場に関わる制度の４つの観点が挙げられていました。その中でも、資本市場・保険市場・貸出市場の３点については、繋がりがあるように感じました。子供への投資・より収益の高い作物の育成と収穫を行うためには、資金が必要です。しかし、金融機関は資金を回収できないリスクを考えて、低所得の家庭には、資金を貸しにくいです。初期資本がないことが、短期間で貧困から回復することが難しい原因になっていると感じました。
 :::
 </div>
 
-良い観点だと思います。なぜならば、「低開発」はさまざまな市場や制度が未発達な状態だからです。複数の原因が複合的に投資の収益を低くしていることがあり得ます。  
+. . .
+
+良い観点だと思います。なぜならば、「低開発」はさまざまな市場や制度が未発達な状態だからです。複数の原因が複合的に投資の収益を低くしているはずです。  
 
 * この場合、一つの原因だけに対処するだけで投資が進むのか分かりません。  
 * RCTが示す単一の課題・原因に対する対処法で十分なのかは分かりません。  
@@ -251,7 +259,7 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 \newcommand{\mpage}[2]{\begin{minipage}[t]{#1}#2\end{minipage}}
 
 \tikzstyle{block} = [draw, fill=blue!20, rectangle, 
-    minimum height=3em, minimum width=6em]
+    minimum height=3em, minimum width=3cm]
 \tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
 \tikzstyle{input} = [coordinate]
 \tikzstyle{output} = [coordinate]
@@ -264,7 +272,7 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
   ]
     % We start by placing the blocks
     \node [block] (Poor) {poor};
-    \node [block, right of=Poor, xshift = 3cm] (lreturns) {low returns};
+    \node [block, right of=Poor, xshift = 4.5cm] (lreturns) {\begin{minipage}{3cm}\hfil low returns\\$\phantom{m}$ on investments\end{minipage}};
     % We draw an edge between the Poor and lreturns block to 
     % calculate the coordinate u. We need it to place the lir block. 
     \draw [->] (Poor) -- node[name=u] {\footnotesize\hfil low level of institutions} (lreturns);
@@ -297,7 +305,7 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 :::
 
 :::{.fragment}
-@GalorZeira1993 の図(理論モデル)が解決策を提示できるのは、貧困の悪循環に陥る均衡$L$と抜け出したときの均衡$H$を同時に示しているから  
+@GalorZeira1993 の図(理論モデル)が$L$&rarr;$H$の解決策を提示できるのは、貧困の悪循環に陥る均衡$L$と抜け出したときの均衡$H$を同時に示しているから  
 
 * S字線の位置(収益率水準)や傾き(収益率の増え方=限界収益率)によって行き着く均衡が変わる  
 * 位置や傾きを変える政策を議論できる
@@ -565,6 +573,7 @@ egdp <- (4.0624+.4882)/(4.0624/2.98)
 
 * 保健(介護保険、医療保険など)は含めず
 * 含めたら、世代間公的支出格差はもっと増えます
+* 日本の大学授業料は安いので、政府が補助しても世代間公的支出格差は埋まらないと思います  
 
 ----
 
