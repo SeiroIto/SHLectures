@@ -34,6 +34,7 @@ format:
     include-after-body: toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
     css: LecNoteStyles.css 
+lightbox: auto
 filters:
   - parse-latex
 include-in-header:
@@ -408,11 +409,12 @@ $$
 
 <br>
 
+
 ::: {description-list}
-Before-after
+Before-after(例: @sec-wwo1)
 : 以前の自分 Previous self
 
-With-without
+With-without(例: @sec-ba1)
 : アクセスのない誰か Someone who does not have access
 :::
 
@@ -423,7 +425,7 @@ With-without
 
 . . . 
 
-殆どの場合、不適切 Almost always, no. 
+殆どの場合、不適切 Almost always, no. &rarr; 自己選抜の図
 
 ----
 
@@ -514,7 +516,7 @@ $$
 
 . . . 
 
-::: {style="font-size: 80%;line-height: 1.1;"}
+::: {style="font-size: 60%;line-height: 1.1;"}
 以下の思考実験を考えるConsider the following thought experiment.
 
 1. 多数$n$の個人に対し、ランダムに治療状態$D_{i}$をを割り当てる。Suppose there are a large number $n$ of individuals and we randomly assign the treatment status $D_{i}$ to everyone $i=1,\cdots, n$.  
@@ -537,11 +539,6 @@ ATEを(一致推計量consistent estimator [標本サイズが無限大になる
 . . . 
 
 1.が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。1. is of most importance at this stage. It is randomisation of treatment status among individuals that gave similarity of distributions.   
-
-
-----
-
-グループの割り振りがランダムだと、ATEの一致推計量が得られる。Whenever we can expect random assignment of treatment status, we can get a consistent estimate of ATE. 
 
 * ATEの一致推計量を得るために、治験は患者をプラセボ(統御群)と治療群にランダムに割り振る。E.g., clinical trials use explict randomisation between the treated and the placebo to get a consistent estimate of ATE.
 
@@ -611,9 +608,13 @@ $\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎ�
 
 ----
 
+実験をしてからの手順
+
+ランダム化確認: permutation test (並べ替え検定), randomisation test (確率化検定)  
+
 バングラデシュ最貧困層への貸付実験: 大規模貸付グループと小規模貸付グループの比較
 
-::: {style="font-size: 70%;line-height: 1.1;"}
+::: {style="font-size: 60%;line-height: 1.1;"}
 
 ```{=latex}
 \begin{tabular}{>{\scriptsize\hfil$}p{3cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}}
@@ -636,6 +637,24 @@ Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean
 &2. & Number of repetition is set to 100000. Step-down method is used to adjust for multiple testing of a multi-factor grouping variable. 40 are lost to flood before arm assignment. 
 \end{tabular}
 ```
+:::
+
+----
+
+実験をしてからの手順
+
+他要因排除の確認 (placebo tests, falsification tests)
+
+::: {layout="[10,-2,20]" layout-valign="bottom"}
+
+:::{.fragment}
+![ラマダンと期末試験](RamadanEvents.jpg)
+:::
+
+:::{.fragment}
+![インパクトとfalsification test](RamadanImpactsMainPacebo.jpg)
+:::
+
 :::
 
 
@@ -1010,7 +1029,7 @@ You need to get the control data even before the policy starts.
 
 ----
 
-With-without  
+### With-without{#sec-wwo1}  
 
 * グラミン銀行メンバー=the treated、非メンバー=the control、マイクロファイナンス貸付の所得へのATE=各群の所得の平均値の差
 	* 貸付がないとき、所得分布は各群で似ているか?
@@ -1021,7 +1040,7 @@ With-without
 
 ----
 
-Before-after:  
+### Before-after{#sec-ba1}  
 
 * とある集団で、運動開始後の体重=the treated、運動開始前の体重=the control、運動の体重へのATE=各群の平均体重の差
 	* 運動をしないとき、運動開始前と運動開始後の体重の分布は似ているか?
