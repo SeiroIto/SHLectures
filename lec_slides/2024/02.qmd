@@ -164,7 +164,7 @@ resources:
 
 . . . 
 
-ただし、推奨内容が比較対象の女性に伝わらないか統御は難しい  
+ただし、推奨内容が統御群(比較対象)の女性に伝わらないか統御は難しい  
 
 . . . 
 
@@ -176,8 +176,9 @@ resources:
 
 . . . 
 
-* 個別補習の費用対効果が最も大きい: <!-- %学習塾経営者は驚かないだろうが、教科書・参考書配布派、栄養補給派を説得するために証拠提示が必要だったのだろう。-->
-学校教育の不十分さを示す結果。実験は学校教育の質の低さへの対症療法を示したが、根治療法を示していない。根治療法は教員・公務員組合等の反対で政治的に困難だろう。
+* 個別補習の費用対効果が最も大きい:  <!-- %学習塾経営者は驚かないだろうが、教科書・参考書配布派、栄養補給派を説得するために証拠提示が必要だったのだろう。-->
+   * 学校教育の不十分さを示す結果。実験は学校教育の質の低さへの対症療法を示したが、根治療法を示していない。
+   * 根治療法は教員・公務員組合等の反対で政治的に困難だろう。
 
 . . . 
 
@@ -287,7 +288,7 @@ D&=
 \end{aligned}
 $$
 
-$D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離散変数。2つの値しかとらないので2項変数binary variableとも呼ばれる。ここでは塾に週1時間以上通うと1、そうではない場合は0という値をとる変数。塾に通う人と通わない人にグループ分けできる。$e$は誤差を表す確率変数で誤差項error termという。\\
+$D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離散変数。2つの値しかとらないので2項変数binary variableとも呼ばれる。ここでは塾に週1時間以上通うと1、そうではない場合は0という値をとる変数。塾に通う人と通わない人にグループ分けできる。$e$は誤差を表す確率変数で誤差項error termという。
 
 ----
 
@@ -296,9 +297,10 @@ $D$はダミー変数dummy variableと呼ばれる0と1の2つの値をとる離
 . . . 
 
 * 背景に連続変数がある: 	程度によるグループ分け。明るいと明るくない、早いと早くない、貧しいと貧しくない。
-
-. . . 
-
+   * 一定値以上(以下)で、ある、なしに分類する
+   * 一定値をどこにするか=そこで線引きすると意味のあるグループ分けになるかどうか
+      * 絶対的貧困: 2005PPPドルで1.00(1991)&rarr;2005PPPドルで1.25(2008)&rarr;2017USDで2.15 
+      * [絶対的貧困を真面目に測る](https://www.ide.go.jp/Japanese/IDEsquare/Column/ISQ000002/ISQ000002_007.html)にはどういう作業が必要か
 * 背景に連続変数がない: 	分類によるグループ分け。右利きと左利き、テレビとそれ以外の家電、男とそれ以外のジェンダー、日本人と外国人。
 
 . . .
@@ -322,7 +324,7 @@ $$
 
 . . . 
 
-「勉強好き」という欠落変数が試験点数と塾通いに同時に影響を与えていて、試験点数と塾通いの間に因果的な関係はない。
+「勉強好き」という欠落変数omitted variableが試験点数と塾通いに同時に影響を与えていて、試験点数と塾通いの間に因果的な関係はない。
 
 . . . 
 
@@ -376,7 +378,7 @@ $$
 
 :::{style="font-size: 95%;line-height: 1.1;"}
 1. 母集団を設定し、被験者・対象をサンプルする  
-1. 被験者・対象をランダムに「治療群(the treated)」「統御群(the control)」に割り振る
+1. 被験者・対象を「治療群(the treated)」「統御群(the control)」<Red>ランダムに</Red>割り振る
 	* ランダムに割り振ったので、両群の試験点数(とその他変数)の分布(の特徴である平均値)はほぼ同じのはず
 	* 標本が大きいほど誤差が減って平均値差はゼロに近づく
 1. 治療群のみ塾に通わせる
@@ -522,7 +524,7 @@ $$
 
 ----
 
-ATEを(一致推計量consistent estimator [標本が無限大になると真の値になる推計量]として)得る条件 Conditions that gave the ATE estimate consistency are
+ATEを(一致推計量consistent estimator [標本サイズが無限大になると真の値になる推計量]として)得る条件 Conditions that make the ATE estimate consistent are
 
 1. 政策前に、統御群と治療群の($y_{i}$)分布が近似していることDistributions of $y_{i}$ of the control and the treated are very similar in the absence of a policy\label{atecon1}
 1. インパクトはすべての$i$で同じImpact is homogenous across $i$\label{atecon3}
@@ -530,18 +532,18 @@ ATEを(一致推計量consistent estimator [標本が無限大になると真の
 
 . . . 
 
-\ref{atecon3}は単純化のために利用。グループごとにインパクトが違うなら、グループをもっと細かく分ければいい。\ref{atecon3} is used for simplification. If the impact is different across subgroups, we can use finer grouping.  
+2.は単純化のために利用。グループごとにインパクトが違うなら、グループをもっと細かく分ければいい。2. is used for simplification. If the impact is different across subgroups, we can use finer grouping.  
 
 . . . 
 
-\ref{atecon1}が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。\ref{atecon1} is of most importance at this stage. It is randomisation of treatment status among individuals that gave similarity of distributions.   
+1.が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。1. is of most importance at this stage. It is randomisation of treatment status among individuals that gave similarity of distributions.   
 
 
 ----
 
-グループの割り振りがランダムだと、ATEの一致推計量が得られる。Whenever we can expect random assignment of treatment status, we can get a consistent estimate of ATE. E.g., clinical trials use explict randomisation between the treated and the placebo to get a consistent estimate of ATE.
+グループの割り振りがランダムだと、ATEの一致推計量が得られる。Whenever we can expect random assignment of treatment status, we can get a consistent estimate of ATE. 
 
-* ATEの一致推計量を得るために、治験は患者をプラセボ(統御群)と治療群にランダムに割り振る。
+* ATEの一致推計量を得るために、治験は患者をプラセボ(統御群)と治療群にランダムに割り振る。E.g., clinical trials use explict randomisation between the treated and the placebo to get a consistent estimate of ATE.
 
 ----
 
@@ -550,11 +552,22 @@ ATEを(一致推計量consistent estimator [標本が無限大になると真の
 1. ATEを推計 (estimation)
 	* 両群の平均値の差を計算
 1. 推計値を検定する統計学的推論 (inference)
-	* 帰無仮説「両群の平均値の差はゼロ」が正しい場合の分布を使って平均値の差が極端かを計算、計算する極端さの指標は$p$値
-	* 極端であれば帰無仮説に疑問を呈し、$p$の確率でATEはゼロではない、と推論
+	* 帰無仮説「両群の平均値の差はゼロ」が正しい場合の分布を使って平均値の差が極端かを計算、計算する極端さの指標は$p$値($p$ value)
+<!--
+	   * $p$値=推計値よりも極端な値が得られる確率  
+	   * 帰無仮説「ATE=ゼロ」の下で推計値が得られる確率は最大で$p$  
+	   * $p$が小さければ、前提=帰無仮説「ATE=ゼロ」の成立が怪しい  
+	* 極端($p$値が小さいの)であれば帰無仮説に疑問を呈する「ATE=ゼロは疑わしいと推論する」-->
+	* ...ベイズ統計学(Bayesian statistics)では全く違う推論方法を使います  
 1. 推論の頑健性をチェック (robustness checks)
+
+----
+
+実験をしてからの手順
+
+3. 推論の頑健性をチェック (robustness checks)
 	* ランダム化の確認
-		* Randomisation checks: 	実験前の特徴が両群で似ていること=ランダム化が成功していることを検定、帰無仮説「実験前の(全)変数において、両群の平均値の差はゼロ」
+		* Randomisation checks: 	実験前の特徴が両群で似ている=ランダム化が成功していることを検定、帰無仮説「実験前の(全)変数において、両群の平均値の差はゼロ」
 	* 他要因排除の確認: 他要因による効果を検定。効果が見出されたら、メインの結論もその要因が引き起こしたかも。
 		* Placebo tests: 	介入変数を編集して、効果が無いことを検定(e.g., 一部controlに介入=1と割当てる、介入量doseを変える)
 		* Falsification tests (negative controls): 	効果が発生し得ない標本や結果に介入=1と割当て、効果がないことを検定(e.g., 介入前の標本、ラマダン介入に影響され得ないラマダン下のキリスト教徒標本)
@@ -571,7 +584,11 @@ $p$値($p$ value)は帰無仮説が成り立つ確率と考えていい
 
 . . .
 
-$p$値が5\%をカットオフにして、5\%未満だったら「統計的に有意」、以上だったら「統計的に有意ではない」と表現されることが多いが、\textcolor{red}{推奨できない} $\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎる
+5\%の$p$値をカットオフにして、5\%未満だったら「統計的に有意」、以上だったら「統計的に有意ではない」と表現されることが多いが、\textcolor{red}{推奨できない} 
+
+. . .
+
+$\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎる、四捨五入するとき4.4%と4.5%の差、もしくは、4.95%と4.94%の差
 
 ----
 
@@ -597,16 +614,17 @@ $p$値が5\%をカットオフにして、5\%未満だったら「統計的に�
 バングラデシュ最貧困層への貸付実験: 大規模貸付グループと小規模貸付グループの比較
 
 ::: {style="font-size: 70%;line-height: 1.1;"}
+
 ```{=latex}
 \begin{tabular}{>{\scriptsize\hfil$}p{3cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}}
 {variables} & {NonTradArm} & {TradArm} & {p-value.lower} & {p-value.mid} & {p-value.upper}\\
-HeadLiteracy & 0.116 & 0.100 & 0.498 & 0.545 & 0.591\$$-.2ex]
+HeadLiteracy & 0.116 & 0.100 & 0.498 & 0.545 & 0.591\\[-.2ex]
 HeadAge & 38.023 & 38.536 & 0.549 & 0.550 & 0.551\\
-HHsize & 4.188 & 4.128 & 0.618 & 0.629 & 0.640\$$-.2ex]
+HHsize & 4.188 & 4.128 & 0.618 & 0.629 & 0.640\\[-.2ex]
 FloodInRd1 & 0.508 & 0.464 & 0.265 & 0.285 & 0.305\\
-HAssetAmount & 782 & 690 & 0.085 & 0.085 & 0.085\$$-.2ex]
+HAssetAmount & 782 & 690 & 0.085 & 0.085 & 0.085\\[-.2ex]
 PAssetAmount & 1114 & 1083 & 0.823 & 0.823 & 0.823\\
-LivestockValue & 5951 & 5184 & 0.328 & 0.328 & 0.328\$$-.2ex]
+LivestockValue & 5951 & 5184 & 0.328 & 0.328 & 0.328\\[-.2ex]
 NumCows & 0.266 & 0.237 & 0.458 & 0.472 & 0.487\\
 NetValue & 7675 & 6604 & 0.334 & 0.334 & 0.334\\
 n & 580 & 180 & && (rate: 0.237)
@@ -633,6 +651,8 @@ Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean
 ---- 
 
 われわれが計測できるのは非同意者を含むグループ平均値の差。非同意者がいるとインパクトが小さくなる。What we can measure is the mean group difference inclusive of noncompliance. Noncompliance makes estimated impacts smaller.   
+
+. . .
 
 非同意者を含む効果推計値を\textcolor{red}{治療意図に基づく効果intention-to-treat (ITT) effect}という。The estimator under partial compliance is called \textcolor{red}{intention-to-treat (ITT)} effect, and is like a down-to-earth version of ATE. 
 
@@ -798,7 +818,7 @@ Y_{i}
 &\hspace{1em}
 +\underbrace{\eta_{1}x_{1j}+\cdots+\eta_{k}x_{kj}}_{\scriptsize{\mbox{養親の特徴の効果}}}\\
 &\hspace{1em}
-+\underbrace{\lambda_{1}x_{1i}+\cdots+\lambda_{m}x_{mi}}_{\scriptsize{\mbox{養子の特徴の効果}}} \$$-3ex]
++\underbrace{\lambda_{1}x_{1i}+\cdots+\lambda_{m}x_{mi}}_{\scriptsize{\mbox{養子の特徴の効果}}} \\[-3ex]
 &\hspace{1em}
 +\underbrace{\gamma\kappa_{j}+\delta\chi_{i}}_{\scriptsize{\mbox{養親と養子の各個人固定効果}}}+u_{i}.
 \end{aligned}
@@ -821,24 +841,20 @@ $\beta$は以下の効果を除いた上で推計されたものです
 
 ----
 
-純資産額の効果は60%程度が直接効果、40%程度が間接効果(養子の所得、学歴、養子への生前贈与、経済系の学位)を経由  
+OLS推計結果
 
-* 間接効果の80%が生前贈与
-* 逆に言えば、養子の純資産額は68\%くらい(直接効果の60%+40%の2割)が生前贈与以外のもの
-
-. . . 
-
-養親の純資産額は養子の学歴は僅少効果、所得には統計学的にはゼロの効果
-
-* ノルウェイが高学歴でより平等な社会だから差が出なかったのか?
-
-. . . 
-
-ただし、リスク資産投資比率は養親から養子に直接効果あり  
+* 純資産額の効果は60%程度が直接効果、40%程度が間接効果(養子の所得、学歴、養子への生前贈与、経済系の学位)を経由  
+   * 間接効果の80%が生前贈与
+   * 養子純資産額の68\%(直接効果の60%+40%の2割)が生前贈与以外のものが影響
+* では、教育か? No. 養親の純資産額は養子の学歴に僅少効果。
+   * ノルウェイが高学歴でより平等な社会だから差が出なかったのか?
+* 養親の純資産額は養子の所得に統計学的にゼロの効果  
+* ただし、リスク資産投資比率は養親から養子に直接効果あり  
 
 . . . 
 
-所得や学歴以外の家庭内の何かが子の純資産額を高める
+**所得や学歴以外の家庭内の何か**が子の純資産額を高める  
+
 * 学校ではない...学校教育は平等化装置ではない(ノルウェイでは)
 * 何かが分からない...何をすれば貧しい家庭の子どもが同じリソースにアクセスできるのか
 
@@ -859,10 +875,10 @@ $\beta$は以下の効果を除いた上で推計されたものです
 :::{description-list}
 
 自己選抜self-selection
-: 	 対象者自身による選抜。参加利益のある人は参加。Selection by potential participants. People with a positive net participation benefit choose to participate.
+: 	 対象者自身による選抜。<Red>参加利益のある人</Red>は参加。Selection by potential participants. People with a positive net participation benefit choose to participate.
 
 実施対象選抜placement selection
-: 	政策担当者による選抜。政策担当者が特定の集団を選ぶように指示もしくは誘因を得ているとき、政策がないときに対象者(治療群)と非対象者(統御群)の分布が近似する保証はない。Selection by policymakers. If a policymaker is incentivised or instructed to choose a particular group, there is no guarantee that the distributions of outcome measures in the absence of a policy become similar between the treated (chosen) and the control (unchosen).
+: 	政策担当者による選抜。<Red>政策担当者に特定の集団を選ぶ指示・誘因がある</Red>とき、政策がないときに対象者(治療群)と非対象者(統御群)の分布が近似する保証はない。Selection by policymakers. If a policymaker is incentivised or instructed to choose a particular group, there is no guarantee that the distributions of outcome measures in the absence of a policy become similar between the treated (chosen) and the control (unchosen).
 
 :::
 

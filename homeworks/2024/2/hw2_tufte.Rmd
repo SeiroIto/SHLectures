@@ -88,6 +88,14 @@ gc()
 
 ## pandocのインストール
 
+英語  
+
+[すべてのOSでのインストール手順](https://github.com/jgm/pandoc/blob/main/INSTALL.md)  
+
+* [windows](https://stackoverflow.com/a/50636885)  
+
+日本語  
+
 * windows: https://www.oresamalabo.net/entry/2022/07/24/165638
 * iOS: https://docs.zettlr.com/ja/installing-pandoc/#macos
 * iPadOS=RStudio Cloud: ローカルへのインストールは不要
