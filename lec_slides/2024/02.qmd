@@ -220,7 +220,7 @@ resources:
 : 	$A\Rightarrow B$ ("A causes B.")
 
 相関correlation
-: 	$\corr[A, B]\neq 0$ ("A is correlated with B.")
+: 	$\corr[A, B]\neq 0$ ("A is not correlated with B.")
 
 :::
 
