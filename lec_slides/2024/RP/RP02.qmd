@@ -199,6 +199,13 @@ Blue {
   margin: 0;
 }
 ```
+
+これも価格が安すぎる例です(先週末の銀座三越)
+
+![](Bulgari.jpg){height=700}
+
+----
+
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
 AIに殺人を判断させるのは戦争がより身近になってしまうように思いました。技術発展するにつれて、暴力性が高まっていってしまうという事実を考えさせられました
