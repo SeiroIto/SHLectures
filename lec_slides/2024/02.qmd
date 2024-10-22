@@ -31,7 +31,9 @@ format:
     toc-depth: 1
     template-partials: 
       - ../../toc-slide.html
-    include-after-body: ../../toc-add.html
+    includes:
+      in_header: ../../sky_add_FilePointer.html
+      after-body: ../../toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
 lightbox: auto
 filters:
@@ -1048,9 +1050,13 @@ DIDの識別仮定: 介入がないとき、結果指標の変化が群間で似
 
 ----
 
-List of \textcolor{red}{identifying assumptions}.   
+識別仮定List of \textcolor{red}{identifying assumptions}.   
+
+効果を識別identifyしているならば成立しなくてはならない仮定: どのくらい現実的か=推計値の信頼度credibility of estimate
+
 In the absence of the policy: $\delta(A)$ reads "distribution of $A$"
 
+::: {.description-list}
 With-without
 :  $\delta(y_{i1}) \simeq \delta(y_{i0})$.
 
@@ -1059,6 +1065,7 @@ Before-after
 
 DID
 :  $\delta(\Delta y_{i1}) \simeq \delta(\Delta y_{i0})$.
+:::
 
 For DID we need:
 
@@ -1251,6 +1258,8 @@ CF=他期間生まれ
 * 死亡率が一定と期待する理由は不明なので、推計値の信頼性は不明
 * 戦争の影響を受けなければ、別年同月の死亡率は同じになると期待できるが、戦争の影響は何かあるはずなので、これはbig if
 
+. . .
+
 信頼性のより高いデザイン・推計方法(DID): 全ての地域のコーホート・パネル・データ
 
 * 地域: アムステルダムとその他地域生まれ
@@ -1271,12 +1280,12 @@ CF=他期間生まれ
 
 . . . 
 
-実験でなく、パネル・データが(=DIDができ)ないとき、どうすれば良いのか?  
+実験でなく、**パネル・データが(=DIDができ)ないとき、**どうすれば良いのか?  What can be done if we **do not have panel data**?
 
 . . . 
 
-Good news:  インパクト評価の範囲を狭くすれば、推計可能。
-Impacts can be estimated if we limit our attention to a narrower domain.
+Good news:  インパクト評価の**範囲を狭くすれば、推計可能。**
+Over **a narrower domain, impacts can be estimated**.
 
 . . .
 
@@ -1424,29 +1433,25 @@ Math
 :::
 ::::
 
-. . .
+::: {.description-list}
+Mean score
+: LHS (left hand side左辺) variable変数の平均値
 
-Mean score: LHS (left hand side左辺) variable変数の平均値
+(S.d.)
+: 標準偏差=LHS変数の散らばり程度  
 
-. . .
+Regressors
+: RHS (right hand side) variablesの係数
 
-(S.d.): 標準偏差=LHS変数の散らばり程度  
+Class size(学級サイズ=何人)
+: 上段は係数、下段は標準誤差
 
-. . .
+(数字)
+:<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
 
-Regressors: RHS (right hand side) variablesの係数
-
-. . .
-
-Class size(学級サイズ=何人): 上段は係数、下段は標準誤差
-
-. . .
-
-<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
-
-. . .
-
-N: サンプルサイズ
+N
+: サンプルサイズ
+:::
 
 ----
 
@@ -1460,7 +1465,8 @@ Using all sample, there is a negative relationship between class size and learni
 
 ----
 
-4th and 5th graders\\
+4th and 5th graders
+
 ![](ImpactEvaluation/figure/ALavy_Tab06.jpg){}
 
 For 5th graders, using discontinuity neighbourhood sample, there is a negative causal relationship between class size and learning in both reading and maths.
