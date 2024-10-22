@@ -1412,14 +1412,13 @@ knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
 
 推計結果の読み方
 
-推計式
 $$
 LHS = a+b_{1}*RHS_{1}+b_{2}*RHS_{2}+\dots+b_{k}*RHS_{k}+e
 $$
 
 ::::{.columns}
 ::: {.column width=30%}
-![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){width="50%"}
+![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){width="99%"}
 :::
 
 ::: {.column width=35%}
@@ -1428,6 +1427,8 @@ Reading comprehension
 国語読解の点数
 
 (1)...(6): 6つの推計式
+
+$+/5$ discontinuity sample: カットオフの$\pm$5点以内の標本のみを使った推計
 :::
 ::: {.column width=35%}
 Math
@@ -1435,6 +1436,8 @@ Math
 数学の点数
 
 (7)...(12): 6つの推計式
+
+カットオフ=学級サイズが急激に減少する人数(理論値)
 :::
 ::::
 
