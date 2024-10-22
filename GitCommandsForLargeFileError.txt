@@ -1,0 +1,2 @@
+git filter-branch --tree-filter 'rm -rf homeworks/2024/TinyTex.zip' HEAD
+git push origin main -f
