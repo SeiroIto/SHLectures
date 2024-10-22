@@ -24,5 +24,7 @@ Lecture slides etc. 2024 will be placed here.
    * [hw02, example output](https://seiroito.github.io/SHLectures/homeworks/2024/2/hw2_rmarkdown.html)  
 * Lecture 03  
    * [RP02](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP02.html)  
+* Lecture 04  
+   * [RP03](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP03.html)  
 
 

@@ -19,21 +19,20 @@ format:
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
+    css: 
+      - LecNoteStyles.css
+      - ../../seiro.css
     theme: [sky, sky-add.scss]
     linkcolor: red
     code-line-numbers: true
     code-copy: true
     code-block-border-left: "#31BAE9"
-    includes:
-      in_header: 
-        "../MathShorthand.html"
     toc: true
     toc-depth: 1
     template-partials: 
-      - toc-slide.html
-    include-after-body: toc-add.html
+      - ../../toc-slide.html
+    include-after-body: ../../toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
-    css: LecNoteStyles.css 
 lightbox: auto
 filters:
   - parse-latex
@@ -62,7 +61,7 @@ include-in-header:
       </style>
 include-before-body:
 #### latex math shorthand
-  file: ../MathShorthand.html 
+  file: ../../MathShorthand.html 
 bibliography: ../../seiro.bib
 resources:
   - 02.pdf
@@ -220,7 +219,7 @@ resources:
 : 	$A\Rightarrow B$ ("A causes B.")
 
 相関correlation
-: 	$\corr[A, B]\neq 0$ ("A is not correlated with B.")
+: 	$\corr[A, B]\neq 0$ ("A is correlated with B.")
 
 :::
 
@@ -509,19 +508,36 @@ CFは何か? What are the CFs?
 
 ----
 
-一定の仮定の下、政策の\textcolor{red}{平均治療効果average treatment effect (ATE)}を推計できるBut under a certain set of assumptions, we can estimate the average causal impacts of a policy, the \textcolor{red}{average treatment effect (ATE)}.
+何も仮定しないと、個人$i$の政策効果は計算できない
+
+. . .
+
+しかし、政策裨益をランダム化をすると、政策の\textcolor{red}{平均治療効果average treatment effect (ATE)}は推計できるBut under treatment randomisation, we can estimate the average causal impacts of a policy, the \textcolor{red}{average treatment effect (ATE)}.
 $$
 ATE=\E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=0].
 $$
 
 . . . 
 
-::: {style="font-size: 60%;line-height: 1.1;"}
+個人$i$のではなく、個人$i$の属する**母集団の**平均的な治療効果
+
+. . . 
+
+$\E$は母集団全体で平均を取っていることを示す期待値記号$\E$ is an expectation operator that indcates we are taking the mean over the entire population that $i$ belongs to
+
+----
+
+::: {style="font-size: 70%;line-height: 1.1;"}
 以下の思考実験を考えるConsider the following thought experiment.
 
-1. 多数$n$の個人に対し、ランダムに治療状態$D_{i}$をを割り当てる。Suppose there are a large number $n$ of individuals and we randomly assign the treatment status $D_{i}$ to everyone $i=1,\cdots, n$.  
+1. 多数$n$の個人に対し、ランダムに治療状態$D_{i}$をを割り当てる Suppose there are a large number $n$ of individuals and we randomly assign the treatment status $D_{i}$ to everyone $i=1,\cdots, n$.  
    * ランダム化がうまくできたとする(公平なコインを使うなど).  Assume the randomisation was done well (i.e., based on "a fair coin toss")  
-1. 両グループの$y_{i}$の分布は似通うはず。分布が近似していれば平均値も近似する。極限を取って$n\rightarrow\infty$($n$が無限大の場合)、両グループの分布は同一、平均値も同じになる。The distribution of $y_{i}$ of each group should look very similar, or in the limit where $n\rightarrow\infty$, they are identical. If the distributions are very similar, then their means are also very similar. Write the mean in the limit as $\mu_{0}$.  
+1. 両グループの$y_{i}$の分布は似通うはず。分布が近似していれば平均値も近似する。極限を取って$n\rightarrow\infty$($n$が無限大の場合)、両グループの分布は同一、平均値も同じになる。The distribution of $y_{i}$ of each group should look very similar, or in the limit where $n\rightarrow\infty$, they are identical. If the distributions are very similar, then their means are also very similar. Write the mean in the limit as $a$.  
+1. 政策がないとき、結果指標の平均値は$a$、政策効果は全員に同じの$b$だとする Suppose further that, in the absence of treatment, the mean of outcome is $a$, and the policy impact is the same for everyone ("homogeneous" impact) $b$. 
+1. 統御群の結果指標の平均値は$a$、処置群の結果指標の平均値は$a+b$
+$$
+ATE=\E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=0]=a+b-a=b.
+$$
 :::
 
 ----
@@ -538,7 +554,7 @@ ATEを(一致推計量consistent estimator [標本サイズが無限大になる
 
 . . . 
 
-1.が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。1. is of most importance at this stage. It is randomisation of treatment status among individuals that gave similarity of distributions.   
+1.が最も重要。ランダムに割り振ることによって、各グループの特徴の分布が近似。1. is of most importance at this stage. It is randomisation of treatment status among individuals that gives similarity in distributions.   
 
 * ATEの一致推計量を得るために、治験は患者をプラセボ(統御群)と治療群にランダムに割り振る。E.g., clinical trials use explict randomisation between the treated and the placebo to get a consistent estimate of ATE.
 
@@ -799,11 +815,11 @@ NGO: ノルウェイで養親候補を書類審査+面接、合格者の書類�
 
 :::: {.columns}
 
-::: {.column width="60%"}
-![](ImpactEvaluation/figure/FMR_Fig4.jpg){height=100%}
+::: {.column width="50%"}
+![](ImpactEvaluation/figure/FMR_Fig4.jpg){height="60%"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 ::: {.fragment}
 * 右上がり: 養親の純資産額が増える$\Rightarrow$養子の純資産額が増える(右縦軸)
 	* 実線: 推計値
@@ -825,6 +841,8 @@ NGO: ノルウェイで養親候補を書類審査+面接、合格者の書類�
 * 実験の場合に限り、OLS(普通の回帰式)で歪みのない効果が推計できる
 
 ----
+
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
 
 :::: {.columns}
 
@@ -852,7 +870,7 @@ ${\color{red}\beta}$: 養親から養子への純資産額^の伝播係数
 ::: {.fragment}
 $\beta$は以下の効果を除いた上で推計されたものです  
 
-* 1965年の効果$+\dots+$1986年の効果  
+* 1965年の効果 $+\dots+$ 1986年の効果  
 * 学歴(就学年数)の効果$+$養親のX歳効果$+$養子のX歳効果$+$縁組み日齢の効果$+$兄弟人数の効果$+$居住地域所得中央値の効果
 :::
 :::
@@ -860,22 +878,44 @@ $\beta$は以下の効果を除いた上で推計されたものです
 
 ----
 
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
+
 OLS推計結果
 
-* 純資産額の効果は60%程度が直接効果、40%程度が間接効果(養子の所得、学歴、養子への生前贈与、経済系の学位)を経由  
-   * 間接効果の80%が生前贈与
-   * 養子純資産額の68\%(直接効果の60%+40%の2割)が生前贈与以外のものが影響
-* では、教育か? No. 養親の純資産額は養子の学歴に僅少効果。
+* 養親純資産額&rarr;養子純資産額
+   * 直接効果(間接効果以外で親の純資産額と相関する部分): 60%程度
+   * 間接効果(観察できる変数経由の効果: 養子所得、学歴、養子への生前贈与、経済系の学位): 40%程度
+      * 間接効果の80%が生前贈与
+      * 養親純資産額&rarr;養子純資産額の68\%(直接効果の60%+40%の2割)が生前贈与以外のものが影響
+* 養親純資産額&rarr;養子学歴に僅少効果
    * ノルウェイが高学歴でより平等な社会だから差が出なかったのか?
-* 養親の純資産額は養子の所得に統計学的にゼロの効果  
-* ただし、リスク資産投資比率は養親から養子に直接効果あり  
+* 養親純資産額&rarr;養子所得に統計学的にゼロの効果  
+* 養親純資産額&rarr;リスク資産投資比率は統計学的に非ゼロ  
 
-. . . 
+----
+
+親の違いによる子の純資産額、所得、学歴、金融投資への影響  
+
+<br>
 
 **所得や学歴以外の家庭内の何か**が子の純資産額を高める  
 
 * 学校ではない...学校教育は平等化装置ではない(ノルウェイでは)
-* 何かが分からない...何をすれば貧しい家庭の子どもが同じリソースにアクセスできるのか
+* 何かが分からない...何をすれば貧困家庭の子どもが同じリソースにアクセスできるのか
+
+. . .
+
+参考: @BarthPapageorgeThom2020 take aways  
+
+* Gene-wealth gradient (教育に向いた遺伝子&rarr;資産) exists
+* Gene-wealth gradient=0 when compared within stock owners/nonowners
+
+. . .
+
+株式所有経由で資産格差を説明するのは共通  
+
+* 株式所有という情報が共通しているだけで、ほかの経路を否定していない
+* 鍵を捜す男
 
 ----
 
@@ -1015,7 +1055,7 @@ With-without
 :  $\delta(y_{i1}) \simeq \delta(y_{i0})$.
 
 Before-after
-:  $\delta(y_{i, \mbox{\scriptsize after}}) \simeq \delta(y_{i, \mbox{\scriptsize before}})$.
+:  $\delta(y_{i, \scriptsize{\mbox{after}}}) \simeq \delta(y_{i, \scriptsize{\mbox{before}}})$.
 
 DID
 :  $\delta(\Delta y_{i1}) \simeq \delta(\Delta y_{i0})$.
@@ -1029,7 +1069,7 @@ You need to get the control data even before the policy starts.
 
 ----
 
-### With-without{#sec-wwo1}  
+### With-without {#sec-wwo1}  
 
 * グラミン銀行メンバー=the treated、非メンバー=the control、マイクロファイナンス貸付の所得へのATE=各群の所得の平均値の差
 	* 貸付がないとき、所得分布は各群で似ているか?
@@ -1040,7 +1080,7 @@ You need to get the control data even before the policy starts.
 
 ----
 
-### Before-after{#sec-ba1}  
+### Before-after {#sec-ba1}  
 
 * とある集団で、運動開始後の体重=the treated、運動開始前の体重=the control、運動の体重へのATE=各群の平均体重の差
 	* 運動をしないとき、運動開始前と運動開始後の体重の分布は似ているか?
@@ -1053,8 +1093,12 @@ Before-after:
 
 * 技術支援前の時期の穀物反収=the control、技術支援後の時期の穀物反収=the treated、技術支援の穀物反収へのATE=各群の平均反収の差
 	* 技術支援がないときに、支援前の時期と支援後の時期で反収分布は似ているか?
-	* おそらく似ていない。穀物生産は気候などの時間を通じて変わるショックに曝されるため。反収変化がショックによる部分と技術支援による部分に分離することは難しい。
-	* 支援前のパネル・データ(支援2期前から支援1期前など)を使って反収のトレンドを計算し、このトレンドが続くと仮定すれば、ショック・トレンドによる部分と技術支援による部分に分解できる。
+	* おそらく似ていない。穀物生産は気候などの時間を通じて変わるショックに曝されるため。
+	* 反収変化=$f($ショック, 技術支援)$=a_{0}+a_{1}\mbox{ショック}+a_{0}\mbox{ショック}^{2}+b_{1}\mbox{技術支援}+b_{2}\mbox{技術支援}^{2}$$+c_{1}\mbox{ショック}*\mbox{技術支援}+\cdots$
+	* 技術支援による部分だけを分離して取り出すことは難しい
+* DID: 支援前のパネル・データ(支援2期前から支援1期前など)を使って反収のトレンドを計算
+   * トレンド: 技術支援以外の生産性やショックを含むトレンド
+   * このトレンドが同率で続くと仮定 &rArr; トレンドからの乖離&larr;技術支援の効果
 
 ----
 
@@ -1113,6 +1157,40 @@ With-without:
 	* おそらく似ていない。健康を自認する人ほど笑う頻度は高いはずだから。この場合、過大な効果推計になる。
 	* 厳密に笑いの効果を示すには、笑う頻度を各人にランダムに割り当てねばならない。そんな実験は可能か?
 	* ある程度までは可能。コメディや漫才の放送局の無料視聴権を与えて笑いの頻度を変えることはできるかもしれない。しかし、どのくらい実験を続けなくてはいけないか不明。おそらく、笑いの効果を研究すること自体が野心的すぎるかもしれない。
+
+----
+
+Before-after:
+
+::::{.columns}
+
+::: {.column width=35%}
+日経新聞10月21日(月)朝刊
+
+```{r , echo = F, out.width='35%'}
+knitr::include_graphics("2/Nikkei2024Oct21.jpg")
+```
+:::
+
+::: {.column width=65%}
+::: {.fragment}
+同意なきTOB(takeover bid, 株式公開買付)
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+> 事前同意のないTOBを受けた日本企業の業績を集計したところ、TOB実施年から2期後までに平均の営業利益率が2.4ポイント低下した。不採算事業の整理に加え、買収された企業が激しく抵抗することも多い。
+:::
+:::
+
+::: {.fragment}
+* 事実の経緯として表現しているので「効果」ではないExpress as facts  
+* でも、文意として同意なきTOBの効果のように書いているBut it seems to imply impacts  
+* 効果に関わる文章: 時系列変化・横断面変化の記述なのか、効果なのかの判断が微妙な文章が最も多いMany texts are unclear if it means to be a factual description or an impact  
+:::
+:::
+
+::::
+
+What is the CF?
 
 ----
 
@@ -1177,8 +1255,9 @@ CF=他期間生まれ
 
 * 地域: アムステルダムとその他地域生まれ
 * 同じ誕生日の人たちを他地域で見つければ良い
-   * 1987年時点までに死亡している女性はいる=より健康な女性のみが残っている=子どもの周産期死亡率は過小推計されるはずだが、アムステルダム標本でも生存選抜について何も対応していないので、他地域標本を加えない理由が見当たらない
+<!--   * 1987年時点までに死亡している女性はいる=より健康な女性のみが残っている=子どもの周産期死亡率は過小推計されるはずだが、アムステルダム標本でも生存選抜について何も対応していないので、他地域標本を加えない理由が見当たらない-->
 * 時期: 1944年8月-1946年4月生まれ
+* 対前月比の死亡率変化(difference)をアムステルダムとアムステルダム以外で差を取る=ロならば死亡率変化は地域間で同じ
 
 ----
 
@@ -1202,6 +1281,7 @@ Impacts can be estimated if we limit our attention to a narrower domain.
 . . .
 
 Consider a poverty reduction policy that gives a subsidy to the people below the poverty line.  
+
 *  "BPL" card in India.
 
 . . . 
@@ -1269,32 +1349,111 @@ teacher-pupil ratio $\Rightarrow$ exam score
 
 . . . 
 
-![](ImpactEvaluation/figure/maimonides-mishna.jpg){}
+::::{.columns}
 
-----
+::: {.column width=65%}
+![](ImpactEvaluation/figure/maimonides-mishna.jpg){width="90%"}
+:::
 
+::: {.column width=25%}
+::: {.fragment}
 ![](ImpactEvaluation/figure/maimonides.jpg){}
+:::
+:::
+
+::::
+
+
+
 
 ----
 
 The Government of Israel still holds it. 
 
-. . . 
-
-![](ImpactEvaluation/figure/AEvans_Fig01.jpg){}
-
-----
+. . .
 
 Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
 
-![](ImpactEvaluation/figure/AEvans_Fig02.jpg)
+::::{.columns}
+::: {.column width=25%}
+:::{.fragment}
+```{r , echo = F, out.width='70%'}
+knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig01.jpg")
+```
+:::
+:::
 
-Impact is more evident in smaller enrollment counts. Average score is increasing after 60 regardless of predicted class size. Possible reasons: Greater deviation of actual class size from predicted class size, different petagogical methods in large schools or more competition/learning among peers.
+::: {.column width=25%}
+:::{.fragment}
+```{r , echo = F, out.width='70%'}
+knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
+```
+:::
+:::
+
+::: {.column width=50%}
+* Impact is more evident in smaller enrollment counts. 
+* Average score is increasing after 60 regardless of predicted class size. 
+* Possible reasons: Greater deviation of actual class size from predicted class size, different petagogical methods in large schools or more competition/learning among peers.
+:::
+::::
 
 ----
 
-4th graders\\
-![](ImpactEvaluation/figure/AEvans_Tab05.jpg){}
+推計結果の読み方
+
+
+::::{.columns}
+::: {.column width=30%}
+![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){width="50%"}
+:::
+
+::: {.column width=35%}
+Reading comprehension
+
+国語読解の点数
+
+(1)...(6)
+:::
+::: {.column width=35%}
+Math
+
+数学の点数
+
+(7)...(12)
+:::
+::::
+
+. . .
+
+Mean score: LHS (left hand side左辺) variable変数の平均値
+
+. . .
+
+(S.d.): 標準偏差=LHS変数の散らばり程度  
+
+. . .
+
+Regressors: RHS (right hand side) variablesの係数
+
+. . .
+
+Class size(学級サイズ=何人): 上段は係数、下段は標準誤差
+
+. . .
+
+<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
+
+. . .
+
+N: サンプルサイズ
+
+----
+
+
+![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){}
+
+
 
 Using all sample, there is a negative relationship between class size and learning only in reading but not in maths. For 4th graders, no impacts of class size at discontinuity neighbourhood sample.
 

@@ -19,6 +19,7 @@ format:
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP02.html>
+    css: ../../seiro.css
     theme: [sky, sky-add.scss]
     linkcolor: red
     code-line-numbers: true
@@ -76,24 +77,6 @@ resources:
 # quarto render RP02.qmd
 ---
 ```{css, echo = F, results = "hide"}
-Red {
-  color: red;
-}
-Orange {
-  color: #e94e2c;
-}
-Blue {
-  color: blue;
-}
-.reveal .slides pre code {
-    max-height: 800px;
-}
-#TOC {
-  font-color: #e94e2c;
-}
-.big-code{
-  font-size: 110%  
-}
 #### Below is suggested by Claude
 #### .small-font-list {
 ####   font-size: 70%;

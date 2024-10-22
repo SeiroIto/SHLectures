@@ -1,0 +1,377 @@
+---
+title: "RP03"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP03.html>
+    css: ../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP03.pdf
+# quarto render RP03.qmd
+---
+```{css, echo = F, results = "hide"}
+#### Below is suggested by Claude
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list ol {
+####   list-style-type: none;
+####   padding-left: 0;
+####   margin-left: 0;
+####   counter-reset: item;
+#### }
+#### .small-font-list ol li {
+####   margin-bottom: 0.5em;
+####   display: flex;
+#### }
+#### .small-font-list ol li::before {
+####   content: counter(item) ". ";
+####   counter-increment: item;
+####   margin-right: 0.5em;
+####   flex-shrink: 0;
+#### }
+#### .small-font-list ol li > p:first-child {
+####   margin: 0;
+####   display: inline;
+#### }
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+研究の倫理についてお話しされていたと思います。コロナを意図的に感染させる研究が英国で倫理審査を通過したというニュースが最近話題になっていたことを思い出しました。
+
+<https://www.asahi.com/articles/ASP2L2F58P2KUHBI028.htm>
+
+第一印象だとよく通ったな、と言う感じなんですが、どうして通ったのかいい機会なので調べてみようと思います。
+:::
+</div>
+
+新薬開発のために、蔓延している感染症に健常者を意図的に感染させてよいのか、ということです  
+
+. . .
+
+許可=以下のように判断した:
+$$
+\mbox{被験者の負担} \leqslant\mbox{新薬開発される可能性}\times\mbox{その便益の大きさ}
+$$
+
+* 新薬の効果は不明 &rArr; 感染した人がどのような健康状態になるのか不明
+* 効果測定には統御群が必要 &rArr; 統御群参加者が治療されるまで時間がかかる 
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+研究の倫理についてお話しされていたと思います。コロナを意図的に感染させる研究が英国で倫理審査を通過したというニュースが最近話題になっていたことを思い出しました。
+
+<https://www.asahi.com/articles/ASP2L2F58P2KUHBI028.htm>
+
+第一印象だとよく通ったなと言う感じなんですが、どうして通ったのかいい機会なので調べてみようと思います
+:::
+</div>
+
+考えさせられる問いかけです。というのも、研究倫理審査という制度が始まったのは[Tuskeegeeの非人道的な実験(1932-1972)](https://www.cdc.gov/tuskegee/about/timeline.html)がきっかけだったからです。
+
+* 梅毒に感染した貧しい黒人に治療薬を投与しないで病状を観察し続けた研究  
+
+. . .
+
+Tuskeegeeとの相違点  
+
+* 感染後に治療薬投与を予定している
+* インフォームド・コンセントinformed consentを得ている
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+研究の倫理についてお話しされていたと思います。コロナを意図的に感染させる研究が英国で倫理審査を通過したというニュースが最近話題になっていたことを思い出しました。
+
+<https://www.asahi.com/articles/ASP2L2F58P2KUHBI028.htm>
+
+第一印象だとよく通ったなと言う感じなんですが、どうして通ったのかいい機会なので調べてみようと思います
+:::
+</div>
+
+容認される要素  
+
+* 重症化リスク(基礎疾患有無など)を判断し、低リスクの人対象で実験
+    * 高リスクの人への効果も知りたい&rarr;高リスク感染者対象に治験
+* 高リスク感染者対象の治験は緊急度が高い
+* いずれ感染する可能性が高ければ、被験者にとって不当なリスクではない
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近SNSで外国人（観光客・難民・移民など）が増えると犯罪率が増えるという主張を目にすることが多くそこに根拠も含め因果関係はあるのだろうかと疑問に思っているのですが、RCTではそういったことも検討できるのでしょうか。
+:::
+</div>
+
+多くの人の関心を呼ぶ質問だと思います。しかし、外国人を増やす実験というのは実施できないでしょう。そこで注目するのが自然実験natural experimentです。
+
+::: {style="font-size: 70%;"}
+@KnightTribin2023 による研究のまとめ
+
+> A large existing literature addresses a similar research question: does immigration increase crime? 
+
+The first approach: Legal status changes of already arrived immigrants ... employment&uarr; &rArr; crime&darr; 
+
+* Pinotti (2017) and Mastrobuoni and Pinotti (2015) : immigrant legalalization <Blue>reduce</Blue> both crime rates and recidivism rates. 
+* Hines and Peri (2019), Miles and Cox (2014), and Treyger et al. (2014): deportations did not <Blue>reduce</Blue> crime rates.
+* Freedman et al. (2018) an <Red>increase</Red> in felony charges against those residents negatively impacted by provisions of the law creating obstacles to employment. (San Antonio, Texas)
+* Butcher and Piehl (1998) <Blue>no correlation</Blue> between immigration patterns to crime rates in metro areas in the United States after controlling for local demographics
+* Spenkuch (2014): immigration <Red>increases</Red> crimes with financial motives and also for those immigrants most likely to have poor labor market outcomes 
+* Light and Miller (2018): immigration, if anything, <Blue>decreases</Blue> crime rates
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近SNSで外国人（観光客・難民・移民など）が増えると犯罪率が増えるという主張を目にすることが多くそこに根拠も含め因果関係はあるのだろうかと疑問に思っているのですが、RCTではそういったことも検討できるのでしょうか。
+:::
+</div>
+
+::: {style="font-size: 70%;"}
+The second approach: Immigrant shocks 
+
+* Bianchi et al. (2012): increased immigration leads to a small but positive <Red>increase</Red> in robberies but <Blue>no change</Blue> in the overall crime rate (Italy)
+* Chalfin (2014): finding <Blue>no link</Blue> between immigration from Mexico and crime in the United States. 
+* Piopiunik and Ruhose (2017): significant <Red>increases</Red> in crime after the collapse of the former Soviet Union and the subsequent immigration (Germany). 
+* Nunziata (2015) : immigration does <Blue>not increase</Blue> crime rates but does lead to an increase in the fear of crime, especially among natives with unfavorable attitudes towards immigrants　(Europe). 
+* Billy and Packard (2020) document an <Red>increase</Red> in crime in Miami, relative to a synthetic control group, following the Mariel Boatlift from Cuba in 1980. 
+:::
+
+. . . 
+
+::: {style="font-size: 70%;"}
+@KnightTribin2023: Border close/open: Increased homicide victimization of immigrants (Columbia&larr;Venezuela)
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近SNSで外国人（観光客・難民・移民など）が増えると犯罪率が増えるという主張を目にすることが多くそこに根拠も含め因果関係はあるのだろうかと疑問に思っているのですが、RCTではそういったことも検討できるのでしょうか。
+:::
+</div>
+
+* どのような移民かによって違うので、移民タイプを特定した一般化が必要
+   * 既存移民
+      * employment&uarr; &rArr; crime&darr;
+   * 新規移民
+      * ソ連崩壊後の移民、キューバ難民: マフィアも移民に
+      * ベネズエラ難民: 一般市民&larr;犯人側ではなく犠牲者側  
+
+<!--
+> A large existing literature addresses a similar research question: does immigration increase crime? Broadly speaking, the literature has used two approaches to answering this research question. The first approach uses changes in the legal treatment of already arrived immi- grants in the destination country. Pinotti (2017) and Mastrobuoni and Pinotti (2015) exploit exogenous variation in legalization treatment of immigrants in Italy, finding that legalization tends to reduce both crime rates and recidivism rates. Hines and Peri (2019), Miles and Cox (2014), and Treyger et al. (2014) study the Secure Communities program in the United States, finding that increased enforcement of immigration laws and associated deportations did not reduce crime rates in these communities. Freedman et al. (2018) study the Immigration Reform and Control Act of 1986, which granted legal resident status to some migrants but disadvantaged those who had arrived more recently. Using administrative data from San Antonio, Texas, they document an increase in felony charges against those residents negatively impacted by provisions of the law creating obstacles to employment. Our paper is more closely related to the second approach, which uses immigrant shocks, in both within-country and cross-country anal- yses, to study the link between immigration and crime. Butcher and Piehl (1998) link immigration patterns to crime rates in metro areas in the United States, finding no correlation between the two factors after controlling for local demographics in these metro areas. Spenkuch (2014) and Light and Miller (2018) address similar issues with an instrumental variables approaches, based upon ethnic differences in settlement patterns.5 While Light and Miller (2018) find that immi- gration, if anything, decreases crime rates, Spenkuch (2014) finds a link between immigration and crimes with financial motives and also for those immigrants most likely to have poor labor market outcomes.
+
+In a study of crime rates in Italy, Bianchi et al. (2012) use a similar approach based upon settlement patterns within Italy and changes in the number of migrants from origin countries to destination countries outside of Italy, finding that increased immigration leads to a small but positive increase in robberies but no change in the overall crime rate. Chalfin (2014) develops an instrument based upon rainfall shocks in Mexico, finding no link between immigration and crime in the United States. Piopiunik and Ruhose (2017) study the collapse of the former Soviet Union and the subsequent immigration of ethnic Germans to Ger- many. They exploit the exogenous allocation of these migrants across regions of Germany, finding significant increases in crime. Nunziata (2015) uses a split sample instrumental variables approach, finding that immigration does not increase crime rates but does lead to an increase in the fear of crime, especially among natives with unfavorable attitudes towards immigrants, consistent with a link between xenophobia and crime. Billy and Packard (2020) document an increase in crime in Miami, relative to a synthetic control group, following the Mariel Boatlift in 1980. 
+
+Billy and Packard (2022) abstract
+We describe crime attributable to the Mariel Boatlift, the 1980 Cuban refugee crisis that increased Miami’s population by nearly 10%. Using synthetic control methods to match Miami with cities that exhibit similar pre-intervention crime patterns, we find the phenomenon comparatively increased property crime and murder rates; we also document weaker but suggestive relative growth in violent crime. Compositional features of the newcomers partially drive results; the disproportionately young, male Cubans’ characteristics highly correlate with illicit activity. However, the degree of prior incarceration and psychiatric institutionalization likely explains the majority of the observed effects. Given the group’s unique composition and the absence of rigorous screening, it likely constitutes the worst observed migration event in terms of public safety in US history. The Marielitos bear little resemblance to other groups of newcomers. Hence, it would be imprudent to use crime connected with the 1980 event we study to inform immigration policy.
+-->
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+一致推計量の説明で、標本が無限大になると真の値になるというのは、予想した値とぴったり同じになるということですか。
+:::
+</div>
+
+* 特定の推計方法を使って得る推計値を**推計量estimator**といいます  
+* 標本サイズが無限大に向かうと推計値が真の値に収束する推計量を**一致推計量consistent estimator**といいます
+* 真の値=(無限大のサイズがある)母集団の値
+* estimation推計の手続き: 母集団から標本sampleし、標本を使って母集団の特徴(e.g., 標本平均値sample mean)を計算
+   * 一致性consistency: 無限大の標本サイズ: その(推計)値=母集団特徴の真の値、が求められます
+   * 理由: 一致推計量でなければ、推計する意味がないため
+      * 一致推計量ではない例: 母集団の右半分からしか標本しないと、標本サイズが無限大で計算しても母集団の特徴に一致しない
+* この手続きを使うのは標本学派frequentist &harr; ベイズ学派Bayesianはベイズ定理
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+. . .
+
+貧困の現状はキャッチアップを示しただけで、しっかりとは提示していません
+
+. . .
+
+数式: 方程式を示して、特定の因果関係を示すことができない、とお話ししました
+
+. . .
+
+貧困のデータや数式は、もう少し後に踏み込んで扱います
+
+使い方がより明確になると思います
+
+. . .
+
+<br>
+
+データを用いて示す=信憑性がある、とは考えない方が安全です  
+
+* 誤ったデータの使い方、誤った比較対象
+* 意図的な誤誘導mislead  
+
+. . .
+
+次回講義で扱う選抜問題を考えると、比較すべき対象は容易に得られないことが分かります
+
+----
+

@@ -1,0 +1,122 @@
+---
+title: "HW3: 効果推計"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
+    css: 
+      - LecNoteStyles.css
+      - ../../seiro.css
+    theme: [sky]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - ../../../toc-slide.html
+    include-after-body: ../../../toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: ../../../seiro.bib
+resources:
+  - hw3_tufte.pdf
+# quarto render hw3_tufte.qmd
+---
+
+```{css, echo=F}
+DBlue {
+  color: dodgerblue;
+}
+Blue {
+  color: blue;
+}
+Red {
+  color: red;
+}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+
+```{r setup, echo = F, results = "hide"} 
+#### include = F <==> echo=F & results = F
+library(knitr)
+library(tufte)
+#### invalidate cache when the tufte version changes
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = "", 
+  echo = T, cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+gc()
+```
+
+# What is CF?
+
+[日経新聞10月21日(月)朝刊連載コラム](../../../lec_slides/2024/02.html#/63)で、執筆した記者は、同意なきTOB成立して「2期後までに平均の営業利益率が2.4ポイント低下した」と書いています。講義では、事実のまとめながら、同意なきTOBの効果のように書いている点を指摘しました。
+
+1. この記事では「2期後...の営業利益率」を何と比較していますか。
+1. 仮にどんな実験でもできるとしたら、同意なきTOBが成立した2期後の効果を測るために、どのような実験をしますか。
+1. 講義で示したように、仮定無しには効果推計はできません。また、実験もできないとしましょう。このとき、同意なきTOBが成立した2期後の効果を測るためには、どのような仮定を置いて何と比較すべきですか。
+1. 記者の立場になり、「2.4ポイント低下」を効果として解釈・正当化できるための仮定を示してください。
+
+
