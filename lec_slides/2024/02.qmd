@@ -32,10 +32,11 @@ format:
       in_header: ../../sky_add_FilePointer.html
       after-body: ../../toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
-    css: 
-      - LecNoteStyles.css
+    css:
       - ../../seiro.css
-blightbox: auto
+#### Looks like seiro.css in sky_add_FilePointer.html does not work but local ../../seiro.css works
+#### Don't understand why
+lightbox: auto
 filters:
   - parse-latex
 include-in-header:
@@ -1411,6 +1412,10 @@ knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
 
 推計結果の読み方
 
+推計式
+$$
+LHS = a+b_{1}*RHS_{1}+b_{2}*RHS_{2}+\dots+b_{k}*RHS_{k}+e
+$$
 
 ::::{.columns}
 ::: {.column width=30%}
@@ -1422,18 +1427,19 @@ Reading comprehension
 
 国語読解の点数
 
-(1)...(6)
+(1)...(6): 6つの推計式
 :::
 ::: {.column width=35%}
 Math
 
 数学の点数
 
-(7)...(12)
+(7)...(12): 6つの推計式
 :::
 ::::
 
-::: {.description-list}
+
+::: {.desc-right-list}
 Mean score
 : LHS (left hand side左辺) variable変数の平均値
 
@@ -1441,13 +1447,13 @@ Mean score
 : 標準偏差=LHS変数の散らばり程度  
 
 Regressors
-: RHS (right hand side) variablesの係数
+: RHS (right hand side) variablesの係数 ($a, b_{1}, \dots, b_{k}$)
 
 Class size(学級サイズ=何人)
 : 上段は係数、下段は標準誤差
 
-(数字)
-:<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
+(括弧内の数字)
+: <Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
 
 N
 : サンプルサイズ
