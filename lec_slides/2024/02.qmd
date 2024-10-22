@@ -19,10 +19,7 @@ format:
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
-    css: 
-      - LecNoteStyles.css
-      - ../../seiro.css
-    theme: [sky, sky-add.scss]
+    theme: [sky]
     linkcolor: red
     code-line-numbers: true
     code-copy: true
@@ -35,7 +32,10 @@ format:
       in_header: ../../sky_add_FilePointer.html
       after-body: ../../toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
-lightbox: auto
+    css: 
+      - LecNoteStyles.css
+      - ../../seiro.css
+blightbox: auto
 filters:
   - parse-latex
 include-in-header:
@@ -216,7 +216,7 @@ resources:
 問題を理解するためには、インパクト評価のキー・タームを知る必要があります
 
 
-::: {description-list}
+::: {.description-list}
 因果causality
 : 	$A\Rightarrow B$ ("A causes B.")
 
@@ -397,7 +397,7 @@ $$
 「プロジェクトによって健康状態が改善された」"with the project, health status improved."
 
 
-::: {description-lb}
+::: {.description-list}
 問うべきこと
 : Counterfactual(比較\underline{すべき}対象)は何か? What is the CF (what \underline{should be} compared with)?
 
@@ -411,7 +411,7 @@ $$
 <br>
 
 
-::: {description-list}
+::: {.description-list}
 Before-after(例: @sec-wwo1)
 : 以前の自分 Previous self
 
@@ -700,7 +700,7 @@ Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean
 
 さまざまな効果推計量(実証研究の大半がITTかLATE)  
 
-:::{description-list}
+:::{.description-list}
 ATE
 : 	Average treatment effects: 全個人の平均効果 $$ATE = \E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=01].$$
 
@@ -721,7 +721,7 @@ $$
 
 ----
 
-:::{description-list}
+:::{.description-list}
 LATE
 : 	Local average treatment effects: 割当てられて初めて介入を受ける同意者compliers ($\alpha-\beta$だけいる)の平均効果、均一効果$\E[\Delta y_{i}|D_{i}=1, A_{i}=1]=\E[\Delta y_{i}|D_{i}=0, A_{i}=0]=\mu$を仮定$$
 \begin{aligned}
@@ -933,7 +933,7 @@ OLS推計結果
 
 被験者=目的意識を持って参加する人間なので、参加者と不参加者は特徴が異なるThis is because we are dealing with humans who participate purposefully.  
   
-:::{description-list}
+:::{.description-list}
 
 自己選抜self-selection
 : 	 対象者自身による選抜。<Red>参加利益のある人</Red>は参加。Selection by potential participants. People with a positive net participation benefit choose to participate.
