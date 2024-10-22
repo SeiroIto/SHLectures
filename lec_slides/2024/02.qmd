@@ -1373,9 +1373,6 @@ teacher-pupil ratio $\Rightarrow$ exam score
 
 ::::
 
-
-
-
 ----
 
 The Government of Israel still holds it. 
@@ -1398,6 +1395,34 @@ knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig01.jpg")
 ```{r , echo = F, out.width='70%'}
 knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
 ```
+:::
+:::
+
+::: {.column width=50%}
+* Impact is more evident in smaller enrollment counts. 
+* Average score is increasing after 60 regardless of predicted class size. 
+* Possible reasons: Greater deviation of actual class size from predicted class size, different petagogical methods in large schools or more competition/learning among peers.
+:::
+::::
+
+----
+
+The Government of Israel still holds it. 
+
+. . .
+
+Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
+
+::::{.columns}
+::: {.column width=25%}
+:::{.fragment}
+![](ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
+:::
+:::
+
+::: {.column width=25%}
+:::{.fragment}
+![](ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
 :::
 :::
 
