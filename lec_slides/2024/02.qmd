@@ -1492,18 +1492,19 @@ N
 
 ![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){}
 
-
-
-Using all sample, there is a negative relationship between class size and learning only in reading but not in maths. For 4th graders, no impacts of class size at discontinuity neighbourhood sample.
-
+* Class size $\SIMneg$ learning, in some specifications of all samples
+* For 4th graders, no impacts of class size at discontinuity neighbourhood sample
 
 ----
 
-4th and 5th graders
 
-![](ImpactEvaluation/figure/ALavy_Tab06.jpg){}
+::::{.columns}
+::: {.column width=99%}
+![4th and 5th graders, discontinuity samples](ImpactEvaluation/figure/ALavy_Tab06.jpg){width="70%"}
+:::
+::::
 
-For 5th graders, using discontinuity neighbourhood sample, there is a negative causal relationship between class size and learning in both reading and maths.
+* Class size $\SIMneg$ learning, class size $\SIMneg$ math, for 5th graders
 
 ----
 
@@ -1522,7 +1523,7 @@ For 5th graders, using discontinuity neighbourhood sample, there is a negative c
 
 ----
 
-赤林さんは中3国語で期待した成果が出なかったことに驚くが、以下のように解釈 {\footnotesize <https://synodos.jp/education/12530>}  
+赤林さんは中3国語で期待した成果が出なかったことに驚くが、以下のように解釈 <https://synodos.jp/education/12530>  
 
 . . . 
 
@@ -1540,9 +1541,7 @@ For 5th graders, using discontinuity neighbourhood sample, there is a negative c
 
 伸び代が高い生徒に注力(効率性重視)するか、成績の低い生徒に注力(公平性重視)するか  
 
-. . . 
-
-どうも地価の高い地域では成績が上がったようです(論文アクセスないので未読)  
+* どうも地価の高い地域では成績が上がったようです(論文アクセスないので未読)  
 
 . . . 
 
@@ -1554,78 +1553,43 @@ For 5th graders, using discontinuity neighbourhood sample, there is a negative c
 
 ----
 
-中室牧子さん: 35人学級は、2011年に公立小学校の1年生に対してのみ導入されました。財務省は、2011年以前と以後で、いじめ、暴力行為、不登校の平均値を比べると、いじめや暴力、不登校には大きな変化が見られないので、少人数学級には効果がない。したがって、「40人学級に戻すべき」と主張したのです。  
-![](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){}  
+::::{.columns}
+::: {.column width=60%}
+![](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){width="80%"}  
+:::
+
+::: {.column width=40%}
+* 割合が増えたか減ったかを見るのは良い  
+* しかし、その変化が統計学的に意味があるか(=ゼロと違うか)仮説検定していない  
+* 推計方法(識別仮定)の信頼性が低い
+* プラシーボ検定(私立1年生や公立2年生)もできる
+
+::: {style="font-size: 50%;line-height: 1.1;"}
 <https://diamond.jp/articles/-/66992>  
+:::
+:::
+::::
 
+::: {.fragment}
+中室牧子さん: 35人学級は、2011年に公立小学校の1年生に対してのみ導入されました。財務省は、2011年以前と以後で、いじめ、暴力行為、不登校の平均値を比べると、いじめや暴力、不登校には大きな変化が見られないので、少人数学級には効果がない。したがって、「40人学級に戻すべき」と主張したのです。
+:::
 
-. . . 
-
-この効果推計で不適切な点: 帰無仮説(効果ゼロ)の$p$値がない、推計方法(識別仮定)の信頼性が低い、プラシーボ検定(私立1年生や公立2年生)もできる
 
 ----
 
-日経新聞2020年12月17日(木)朝刊\\
-![](ImpactEvaluation/figure/Nikkei_35NinClass2020Dec17.jpg)
+::::{.columns}
+::: {.column width=40%}
+![日経新聞2020年12月17日(木)朝刊](ImpactEvaluation/figure/Nikkei_35NinClass2020Dec17.jpg){width="80%"}
+:::
 
-3密回避が動機  
-今回も(35人が良いとする)エビデンスに依拠せず  
-全国一律だと効果推計は難しい
+::: {.column width=60%}
+* 3密回避が動機  
+* 今回も(35人が良いとする)エビデンスに依拠せず  
+* 全国一律だと効果推計は難しい
+:::
+::::
 
-----
 
-* @LemieuxMilligan2008: In Quebec, unemployment benefits are increased once reaching the age of 30 for adults with no child. This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced.
-	* Will there be a jump in employment rates at 30 to the below?
-* @Lee2008: Being an incumbent can give an additional benefit in the next election. If this is true, at the vote share margin close to zero, an incumbent vs. non-incumbent contrast gives effects of this benefit. Most suitable data comes from the US state gubernatorial elections where there are effectively only two candidates/parties.
-	* Will there be a jump in winning probability at zero vote margin to the above?
-
-----
-
-@LemieuxMilligan2008. Age and unemployment benefits in Quebec.
-
-![](ImpactEvaluation/figure/Lemieux_Fig03.jpg)
-
-----
-
-@Lee2008. Margin of vote share in $t$ and probability of winning in $t+1$.
-
-![](ImpactEvaluation/figure/Lee_Fig02a.jpg){}
-
-----
-
-There is an indirect yet nice use of data to assess the logical coherence of the results.  
-
-. . . 
-
-Take a sample that should not be affected by the policy and test if there is an impact.   
-
-. . . 
-
-If there is an impact, then your main result is likely to be also picking up something different from the policy.  
-
-. . . 
-
-This is called a \textit{placebo test}.  
-
-. . . 
-
-A placebo test is run only when the main estimation indicates a non-zero effect.  
-
-. . . 
-
-If the main estimate has a low $p$ value (probability of null hypothesis `zero effect' being true), one tries to run a placebo test, in a hope of finding a large $p$ value in it, to get a further confidence that the result is not an accident.
-
-----
-
-Placebo tests in \citet{LemieuxMilligan2008}. Rest of Canada or post 1991 should not detect effects.
-
-![](ImpactEvaluation/figure/Lemieux_Tab03.jpg)
-
-----
-
-Placebo tests in @Lee2008. Margin of vote share in $t$ should not give a jump of events before $t$.
-
-![](ImpactEvaluation/figure/Lee_Fig02b.jpg)
 
 ----
 
@@ -1638,18 +1602,78 @@ Placebo tests in @Lee2008. Margin of vote share in $t$ should not give a jump of
 
 ----
 
-When applied to geographical boundaries, such as school zones, there may be parents who move across border for better education.  
+* @LemieuxMilligan2008: In Quebec, unemployment benefits are increased once reaching the age of 30 for adults with no child. This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced.
+	* Will there be a jump in employment rates at 30 to the below?
+* @Lee2008: Being an incumbent can give an additional benefit in the next election. If this is true, at the vote share margin close to zero, an incumbent vs. non-incumbent contrast gives effects of this benefit. Most suitable data comes from the US state gubernatorial elections where there are effectively only two candidates/parties.
+	* Will there be a jump in winning probability at zero vote margin to the above?
 
-. . . 
+----
 
-Then the cutoff becomes nondeterministic, or "fuzzy." If the jump does not happen exactly at the predetermined cutoff, RDD is said to have a \textit{fuzzy design}. 
+@LemieuxMilligan2008. Age and unemployment benefits in Quebec [@LemieuxMilligan2008]
 
-* There can be many instances of fuzzy RDD if one can fabricate the eligibility. In India's BPL example, the BPL card can be issued to a resident who pays a bribe. This introduces a noise in estimates, hence estimates become less precise.
-* Nonetheless, a fuzzy RDD can also give a consistent estimate of local impacts, as long as we have a large enough sample that complies with the cutoff.
+::::{.columns}
+::: {.column width=60%}
+![](ImpactEvaluation/figure/Lemieux_Fig03.jpg)
+:::
 
-. . . 
+::: {.column width=40%}
+* Unemployment benefits&uarr; once reaching the age of 30 (with no child). 
+* Create disincentives to work for age 30 and older? 
+* If so, at around 30, work outcomes will be reduced.
 
-If there is not cross cutoff movement, RDD is said to have a \textit{sharp design}.
+:::{.fragment}
+It is reduced.
+:::
+:::
+::::
+
+----
+
+@Lee2008. Margin of vote share in $t$ and probability of winning in $t+1$ [@Lee2008]
+
+::::{.columns}
+::: {.column width=60%}
+![](ImpactEvaluation/figure/Lee_Fig02a.jpg){}
+:::
+
+::: {.column width=40%}
+* An incumbent &rArr; additional benefit in the next election
+* &rArr; at the vote share margin close to zero, an incumbent vs. non-incumbent contrast = effects of this benefit
+* US state gubernatorial elections (effectively only two candidates/parties)
+
+:::{.fragment}
+There is an additional benefit
+:::
+:::
+::::
+
+----
+
+Placebo tests
+
+::::{.columns}
+::: {.column width=50%}
+![](ImpactEvaluation/figure/Lemieux_Tab03.jpg)
+
+Rest of Canada or post 1991 should not detect effects.
+:::
+
+::: {.column width=50%}
+![](ImpactEvaluation/figure/Lee_Fig02b.jpg)
+
+Margin of vote share in $t$ should not give a jump of events before $t$.
+:::
+::::
+
+----
+
+::: {style="text-align: center;"}
+# Synthetic control method
+:::
+
+
+----
+
 
 ----
 
