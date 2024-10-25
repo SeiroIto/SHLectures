@@ -1,0 +1,62 @@
+---
+title: "HW2: 簡単なrmarkdown&rarr;htmlの例"
+author: "作者の名前をここに書きます"
+date: "`r format(Sys.time(), '%Y年%m月%d日 %R')`"
+output:
+  tufte::tufte_html:
+    citation_package: natbib
+    toc: true
+header-includes:
+    - \usepackage{xltxtra} 
+    - \usepackage{zxjatype} 
+    - \usepackage[ipa]{zxjafont} 
+# setwd(path <- "c:/seiro/docs/external/seishin/homeworks/2024/"); rmarkdown::render(paste0(path, "2/hw2_minimal.Rmd"))
+---
+```{css, echo=F}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+```{r setup, echo = F, results = "hide"} 
+#### include = F <==> echo=F & results = F
+library(knitr)
+library(tufte)
+#### invalidate cache when the tufte version changes
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = "", 
+  class.source = "SeiroBenign", 
+  class.output = "SeiroLightGreen",
+  echo = T, cache = F
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+```
+
+# 大見出し
+## その次に大きな見出し
+
+# 2番目の大見出し
+
+こんにちは。
+
+Hello, world!
+
+* Oh, hi.  
+* Nice that you have joined the world.
+
+```{r}
+1+2
+```
+

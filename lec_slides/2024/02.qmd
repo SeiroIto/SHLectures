@@ -18,7 +18,7 @@ format:
     height: 900
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
-    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/02.html>
     theme: [sky]
     linkcolor: red
     code-line-numbers: true
@@ -581,13 +581,32 @@ ATEを(一致推計量consistent estimator [標本サイズが無限大になる
 
 実験をしてからの手順
 
-3. 推論の頑健性をチェック (robustness checks)
-	* ランダム化の確認
-		* Randomisation checks: 	実験前の特徴が両群で似ている=ランダム化が成功していることを検定、帰無仮説「実験前の(全)変数において、両群の平均値の差はゼロ」
-	* 他要因排除の確認: 他要因による効果を検定。効果が見出されたら、メインの結論もその要因が引き起こしたかも。
-		* Placebo tests: 	介入変数を編集して、効果が無いことを検定(e.g., 一部controlに介入=1と割当てる、介入量doseを変える)
-		* Falsification tests (negative controls): 	効果が発生し得ない標本や結果に介入=1と割当て、効果がないことを検定(e.g., 介入前の標本、ラマダン介入に影響され得ないラマダン下のキリスト教徒標本)
-		* 両方ともほぼ同じ内容。敢えて言うならば、placebo testsはどんなデータでも実施可能、falsification testsは特定の文脈を使って実施。後者は実施可能な対象を狭める文脈による限定があるので、後者は前者に含まれる概念。
+3. 推論の頑健性をチェック (robustness checks)  
+
+. . .
+
+* ランダム化の確認  
+
+
+:::{.description-list}
+Randomisation checks
+: 実験前の特徴が両群で似ている=ランダム化が成功していることを検定、帰無仮説「実験前の(全)変数において、両群の平均値の差はゼロ」
+:::
+
+
+* 他要因排除の確認: 他要因による効果を検定。効果が見出されたら、メインの結論もその要因が引き起こしたかも。
+
+
+:::{.description-list}
+Placebo tests
+: 介入変数を編集して、効果が無いことを検定(e.g., 一部controlに介入=1と割当てる、介入量doseを変える)、医学実験由来
+
+Falsification tests
+: 文脈から考えて効果が発生し得ない標本や結果に介入=1と割当て、効果がないことを検定(e.g., 介入前の標本、ラマダン介入に影響され得ないラマダン下の非イスラム教徒標本)
+
+* 両方ともほぼ同じ内容。敢えて言うならば、placebo testsはどんなデータでも実施可能、falsification testsは観察データで特定の文脈を使って実施。後者は実施可能な対象を狭める文脈による限定があるので、後者は前者に含まれる概念。
+:::
+
 
 ----
 
@@ -600,7 +619,14 @@ ATEを(一致推計量consistent estimator [標本サイズが無限大になる
 
 . . .
 
-5\%の$p$値をカットオフにして、5\%未満だったら「統計的に有意」、以上だったら「統計的に有意ではない」と表現されることが多いが、\textcolor{red}{推奨できない} 
+5\%をカットオフ
+
+* $p$値が5\%未満: 「統計的に有意」「効果あり」
+* $p$値が5\%以上: 「統計的に有意ではない」「効果は認められない」
+
+. . .
+
+と表現されることが多いが、\textcolor{red}{推奨できない} 
 
 . . .
 
@@ -621,8 +647,9 @@ $\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎ�
 1. 両グループのデータ全てを並べ、グループ名(a, b)をランダムに並べ替えてグループ"a"平均値を計算
 1. これを多数回繰り返すと、グループ"a"平均値の分布が描ける  
 1. 検定: 本当のグループa平均値=グループ"a"平均値?
-   * 帰無仮説が正しければ、本当のグループa平均値はグループ"a"平均値の分布の中央付近に位置するはず  
-   * 左右どちらかの端にあれば、グループaとグループbの分布は異なっていると判断できる。
+   * 帰無仮説が正しい &rArr; 本当のグループa, bの分布は同じ &rArr; どちらからサンプルしても平均値は同じ &rArr;    本当のグループa平均値はグループ"a"平均値の分布の中央付近に位置するはず  
+   * 帰無仮説が正しくない &rArr; 本当のグループa, bの分布は異なる &rArr; グループ"a"平均値の分布はグループa平均値から離れていく  &rArr; グループa平均値はグループ"a"平均値の分布の中央付近に位置しないはず  
+   * 左右どちらかの端にあれば、グループaとグループbの分布は異なると判断できる
 
 
 ----
@@ -666,7 +693,14 @@ Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean
 
 ::: {layout="[10,-2,20]" layout-valign="bottom"}
 
+
 :::{.fragment}
+::: {style="font-size: 70%;line-height: 1.1;"}
+[稲の収穫労働(2018年12月10日)](https://newnation.io/wp-content/uploads/2018/12/1544369171_9.jpg)
+
+[より鮮明な画像](https://thumbs.dreamstime.com/z/paddy-harvest-dhaka-bangladesh-bangladeshi-farmers-cutting-collects-saver-april-dominant-food-crop-292499358.jpg?w=992)
+:::
+
 ![ラマダンと期末試験](RamadanEvents.jpg)
 :::
 
@@ -731,7 +765,35 @@ LATE &= \frac{\alpha\E[\Delta y_{i}|D_{i}=1, A_{i}=1]-\beta\E[\Delta y_{i}|D_{i}
 \frac{(\alpha-\beta)\mu}{\alpha-\beta}=\mu.
 \end{aligned}
 $$
+:::
 
+. . .
+
+:::{style="font-size: 60%;line-height: 1.1;"}
+$$
+\mbox{割り当ての結果への効果}=\mbox{割り当ての参加への効果}\times\mbox{参加の結果への効果}
+$$
+:::
+
+. . . 
+
+:::{style="font-size: 60%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\mbox{参加}\Rightarrow\mbox{結果}
+&=
+\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{参加}},\\
+LATE=\mbox{介入}\Rightarrow\mbox{結果}
+&=
+\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{介入}},\\
+&=
+\frac{\mbox{割り当てによる結果の差}\alpha\mu - \beta\mu}{\mbox{割り当てによる介入比率の差}\alpha-\beta},\\
+&=\frac{\alpha \mu - \beta \mu}{\alpha-\beta}=\mu
+\end{aligned}
+$$
+:::
+
+:::{.description-list}
 ATC
 : 統御群の平均治療効果average treatment effects on the control (ATC)$$
 ATC = \E[y_{1i}|D_{i}=0]-\E[y_{0i}|D_{i}=0].
