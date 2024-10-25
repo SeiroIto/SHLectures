@@ -728,8 +728,8 @@ Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean
 
 非同意者を含む効果推計値を\textcolor{red}{治療意図に基づく効果intention-to-treat (ITT) effect}という。The estimator under partial compliance is called \textcolor{red}{intention-to-treat (ITT)} effect, and is like a down-to-earth version of ATE. 
 
-* 実験室での効力\textit{efficacy}ではなくフィールドでの有効性\textit{effectiveness}。It is about \textit{effectiveness} (impacts in the field) rather than \textit{efficacy} (impacts in the lab).
-* ATEを推計できる研究は少ない。Few study estimates ATE.  
+* 実験室での効力\textit{efficacy}ではなく現場での有効性\textit{effectiveness}。It is about \textit{effectiveness} (impacts in the field) rather than \textit{efficacy} (impacts in the lab).
+* ATEを推計できる研究は少ない。Few studies estimate ATE.  
 
 ----
 
@@ -740,12 +740,12 @@ ATE
 : 	Average treatment effects: 全個人の平均効果 $$ATE = \E[y_{i}|D_{i}=1]-\E[y_{i}|D_{i}=01].$$
 
 ITT
-: 	Intention-to-treat effects: 実施群非同意者(比率$1-\alpha\in[0, 1]$)と統御群非同意者(比率$1-\beta\in[0, 1]$)を含む全個人の平均効果, 実際の割当て$A_{i}=0, 1$ $$
+: 	Intention-to-treat effects: 実施群非同意者(比率$1-\alpha\in[0, 1]$)と統御群非同意者(比率$\beta\in[0, 1]$)を含む全個人の平均効果, 実際の割当て$A_{i}=0, 1$ $$
 \begin{aligned}
 ITT
 &= 
 \alpha\E[y_{i}|D_{i}=1, A_{i}=1]+(1-\alpha)\E[y_{i}|D_{i}=1, A_{i}=0] \\
-&\hspace{1em}-\beta\E[y_{i}|D_{i}=0, A_{i}=0]-(1-\beta)\E[y_{i}|D_{i}=0, A_{i}=1].
+&\hspace{1em}-(1-\beta)\E[y_{i}|D_{i}=0, A_{i}=0]-\beta\E[y_{i}|D_{i}=0, A_{i}=1].
 \end{aligned}
 $$
 
@@ -758,7 +758,7 @@ $$
 
 :::{.description-list}
 LATE
-: 	Local average treatment effects: 割当てられて初めて介入を受ける同意者compliers ($\alpha-\beta$だけいる)の平均効果、均一効果$\E[\Delta y_{i}|D_{i}=1, A_{i}=1]=\E[\Delta y_{i}|D_{i}=0, A_{i}=0]=\mu$を仮定$$
+: 	Local average treatment effects: 割当てによって初めて介入を受ける人の平均効果、介入前からの変化を$\Delta y_{i}$と書くと均一効果$\E[\Delta y_{i}|D_{i}=1, A_{i}=1]=\E[\Delta y_{i}|D_{i}=0, A_{i}=0]=\mu$を仮定、統御群に漏れた介入効果を補正$$
 \begin{aligned}
 LATE &= \frac{\alpha\E[\Delta y_{i}|D_{i}=1, A_{i}=1]-\beta\E[\Delta y_{i}|D_{i}=0, A_{i}=0]}{\alpha-\beta}\\
 &=
@@ -787,11 +787,14 @@ LATE=\mbox{介入}\Rightarrow\mbox{結果}
 &=
 \frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{介入}},\\
 &=
-\frac{\mbox{割り当てによる結果の差}\alpha\mu - \beta\mu}{\mbox{割り当てによる介入比率の差}\alpha-\beta},\\
-&=\frac{\alpha \mu - \beta \mu}{\alpha-\beta}=\mu
+\frac{\mbox{割り当てによる処置群と統御群の結果の差}\alpha\mu - \beta\mu}{\mbox{割り当てによる処置群と統御群の介入比率の差}\alpha-\beta},\\
+&=\frac{(\alpha - \beta)\mu}{\alpha-\beta}=\mu
 \end{aligned}
 $$
+
+[表と図: LATE = ITT per participant](ImpactEvaluation.pdf#page=163)
 :::
+
 
 :::{.description-list}
 ATC
@@ -810,7 +813,7 @@ $$
 ATE = b ATT + (1-b) ATC, \quad b= \frac{n_{\scriptsize{\mbox{treated}}}}{n_{\scriptsize{\mbox{control}}}+n_{\scriptsize{\mbox{treated}}}}.
 $$
 * ターゲティング(対象設定)が正しくても、実現するかは別問題
-* LATE: compliers (Yes, Yes) - compliers (No, No)
+* LATE: compliers (assigned = Yes, treated = Yes) - compliers (assigned = No, treated = No)
 
 ----
 
