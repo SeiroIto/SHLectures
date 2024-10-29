@@ -1,0 +1,532 @@
+---
+title: "RP04"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP04.html>
+    css: ../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP03.pdf
+# quarto render RP04.qmd
+---
+```{css, echo = F, results = "hide"}
+#### Below is suggested by Claude
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list {
+####   font-size: 70%;
+####   line-height: 1.2;
+#### }
+#### .small-font-list ol {
+####   list-style-type: none;
+####   padding-left: 0;
+####   margin-left: 0;
+####   counter-reset: item;
+#### }
+#### .small-font-list ol li {
+####   margin-bottom: 0.5em;
+####   display: flex;
+#### }
+#### .small-font-list ol li::before {
+####   content: counter(item) ". ";
+####   counter-increment: item;
+####   margin-right: 0.5em;
+####   flex-shrink: 0;
+#### }
+#### .small-font-list ol li > p:first-child {
+####   margin: 0;
+####   display: inline;
+#### }
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+
+<br>
+
+データを用いて示す=信憑性がある、とは考えない方が安全です  
+
+* 誤ったデータの使い方、誤った比較対象
+* 意図的な誤誘導mislead  
+
+. . .
+
+次回講義で扱う選抜問題を考えると、比較すべき対象は容易に得られないことが分かります
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+[れいわ新撰組の2024年衆議院選挙政見放送(04:45-)](https://youtu.be/XyyHqQ3mhkM&t=4m45s)
+
+:::::::::: {.columns}
+:::: {.column width=50%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending1.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=50%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending2.jpg){width="90%"}
+:::
+::::
+::::::::::
+
+. . .
+
+データを視覚化していて分かりやすいです
+
+. . .
+
+公約を視覚化データを使って説明しているのはれいわ新撰組だけでは? (エライ!)
+
+. . .
+
+しかし、分かりやすい=正しい、ではありません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+
+<br>
+
+
+
+:::::::::: {.columns}
+:::: {.column width=50%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending3.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=50%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending4.jpg){width="90%"}
+:::
+::::
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+<br>
+
+:::::::::: {.columns}
+:::: {.column width=30%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending3.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=30%}
+::: {.fragment}
+![](04/Reiwa_GrowthGovSpending4.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=40%}
+* 「政府支出が伸びていて経済成長している国は」
+ 政府支出 &rArr; 経済成長
+* 政府支出 &lArr; 経済成長でも同じグラフになります
+::::
+::::::::::
+
+* 見せかけの相関(適度なインフレ率 &rArr; 名目政府支出&uarr;、経済成長率&uarr;)の可能性
+* 適度なインフレ率だと民間投資などを通じて経済成長するといわれています
+   * 政府支出 &rArr; 経済成長、がないと仮定しても
+      * 適度なインフレ &rArr; 名目政府支出&uarr;
+      * 適度なインフレ &rArr; 民間投資&uarr; &rArr; 経済成長率&uarr; 
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+<br>
+
+れいわ新撰組の「国民の所得が増えないメカニズム」の説明=多くの経済学者の説明
+
+:::::::::: {.columns}
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_summary1.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_summary2.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_summary3.jpg){width="90%"}
+:::
+::::
+::::::::::
+
+:::::::::: {.columns}
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_summary4.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=66.6%}
+* 欧米に比して企業は設備投資せず内部留保&uarr; &larr; 政策無策
+* 誰でも株式を買うことはできる
+* しかし、所得のうち労働所得由来が大半の低所得者層は、株主還元によって豊かになる機会を逸している
+::::
+
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+<br>
+
+れいわ新撰組の「処方箋=減税」に至る説明=多くの経済学者が反対するであろう説明
+
+:::::::::: {.columns}
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_summary4.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Reiwa_Taxes.jpg){width="90%"}
+:::
+::::
+
+:::: {.column width=33.3%}
+::: {.fragment}
+![](04/Zaimusho_ConsumptionTaxFinance.jpg){width="90%"}
+:::
+::::
+::::::::::
+
+* 法人税減税とともに消費税増税が進行したのは事実
+* 処方箋=減税に誘導するときの「消費税使途の説明内容」が正しくありません
+   * 地方税以外はすべて社会保障(子ども子育て支援含む)に支出しています
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+ただし、money is fungibleお金には色が付いていない、[財務省の説明資料](https://www.mof.go.jp/tax_policy/summary/consumption/d05.htm)も意味不明
+
+::: {style="font-size: 85%;line-height: 1.1;"}
+* 仮想例: 
+   * 昔(消費税無し): 所得税20兆円+年金10兆円から30兆円を社会保障支出
+   * 今(消費税導入): 所得税4兆円+消費税33兆円+年金10兆円から47兆円を社会保障支出、所得税16兆円分を新型コロナ対策予算に支出
+      * 「消費税から社会保障費に支出した」のは33兆円
+      * しかし、消費税16兆円を新型コロナ対策予算、所得税20兆円+消費税17兆円+年金10兆円から47兆円を社会保障支出に支出した、ともいえます
+      * 新型コロナ対策予算16兆円は消費税由来か所得税由来か判断できません
+      * どこ由来かはどうでも良い、増税されて新型コロナ対策予算が増えたことが事実
+      * (安倍、管、岸田、石破各政権+)与党は未執行が出る(石破除く)くらい巨額の新型コロナ対策予算
+:::
+
+* **一部の税から一部予算が賄われたか議論するのは無駄、予算全体を見て増税と同時に何の支出が増えた・減ったかを見るべき**
+* お買物券、バラマキ財政赤字=将来世代に返済させる甘い考えが問題、全政党に共通
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+正直データや数式から貧困の現状を読み込むことはとても難しく感じました。しかし、データがあったほうがより信憑性があると思いました。
+:::
+</div>
+
+:::::::::: {.columns}
+:::: {.column width=60%}
+![](04/giseki.jpg){width="99%"}
+::::
+
+:::: {.column width=40%}
+れいわ大躍進!
+::::
+::::::::::
+
+----
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+LATEに関する部分では、leakageは本来介入を受けるべきでないグループが介入を受けた場合；exclusionは本来介入を受けるべきグループが介入を受けなかった場合で、この2つの状況はどちらも介入効果の推定に影響を与えますが、どの程度結果に影響を及ぼすのでしょうか。この影響を避けることはできるのでしょうか。
+:::
+</div>
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+ATTやATEなどの指標や効果を示す概念に関して私は全く知らなかったので、他にはどんなものがあるのか知りたい。
+:::
+</div>
+
+$$
+ITT=(\overbrace{\alpha}^{\scriptsize{\mbox{treated compliers}}}-\overbrace{\beta}^{\scriptsize{\mbox{control defiers}}})\mu, \quad 
+LATE=\frac{ITT}{\alpha-\beta}.
+$$
+なので、$\alpha$が小さいほど、$\beta$が大きいほど、ITTはATE$=\mu$から離れていきます。これを補正するのがLATEです。
+
+* LATEは個人の政策効果が均一=$\mu$という仮定の下での結果であり、政策効果が多様heterogenous treatment effectsなときには単純な方法で推計するのは困難です。
+
+ATE, ITT, ATTが最も多く使われていましたが、RDD推計量が増えるにつれ、LATEも増えてきました
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回のCOVID-19実験では、インフォームド・コンセントの取得や低リスク者のみを対象にした選抜が行われ、被験者の安全を可能な限り確保している。これが倫理審査を通過した要因であるが、やはり被験者には未知の健康リスクが残る点が不安である。新薬開発を早めるという目的があったとしても、被験者に負担が生じる以上、慎重に進めるべきだと考える。同時に、この実験が通過した背景には、倫理的枠組みが常に時代の変化や状況に応じて柔軟に再評価されるべきだという教訓が含まれていると感じる。感染症が世界的に拡大し、人命が失われる状況で、従来の倫理基準を絶対視せずに見直すことも必要なのかもしれないと思った。
+:::
+</div>
+
+**訂正・注意** 低リスク者のみを対象にした選抜が「可能」と説明しましたが、実際にそうしたのか知りません
+
+説得力のある意見だと思います
+
+* 新薬開発目的と照らし合わせても慎重に進めるべき
+* 従来の倫理基準を絶対視せずに見直すことも必要
+
+研究倫理における被験者保護 vs. 実験利益の線引きをどこでするのか、難しい課題です
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回のCOVID-19実験では、インフォームド・コンセントの取得や低リスク者のみを対象にした選抜が行われ、被験者の安全を可能な限り確保している。これが倫理審査を通過した要因であるが、やはり被験者には未知の健康リスクが残る点が不安である。新薬開発を早めるという目的があったとしても、被験者に負担が生じる以上、慎重に進めるべきだと考える。同時に、この実験が通過した背景には、倫理的枠組みが常に時代の変化や状況に応じて柔軟に再評価されるべきだという教訓が含まれていると感じる。感染症が世界的に拡大し、人命が失われる状況で、従来の倫理基準を絶対視せずに見直すことも必要なのかもしれないと思った。
+:::
+</div>
+
+研究がなぜできるのかを考えると、原則論としての考え方は定まります
+
+* 研究は社会と契約を結んで実施しています  
+* 研究倫理 = {狭義の研究倫理,  研究公正}  
+* 狭義の研究倫理=研究で対象社会に<Red>迷惑をかけない</Red>という原則  
+* 研究公正=研究で<Red>ごまかしをしない</red>という原則  
+* 最低限の原則なので、必ず守らねばなりません  
+
+. . .
+
+研究倫理は社会との契約なので、積極派や消極派など、多様な意見に耳を傾けねばなりません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回のCOVID-19実験では、インフォームド・コンセントの取得や低リスク者のみを対象にした選抜が行われ、被験者の安全を可能な限り確保している。これが倫理審査を通過した要因であるが、やはり被験者には未知の健康リスクが残る点が不安である。新薬開発を早めるという目的があったとしても、被験者に負担が生じる以上、慎重に進めるべきだと考える。同時に、この実験が通過した背景には、倫理的枠組みが常に時代の変化や状況に応じて柔軟に再評価されるべきだという教訓が含まれていると感じる。感染症が世界的に拡大し、人命が失われる状況で、従来の倫理基準を絶対視せずに見直すことも必要なのかもしれないと思った。
+:::
+</div>
+
+IC取得などの手続き、被験者の容態観察と実験停止や治療対応、既存罹患者のリソース確保など、迷惑を最小限にする措置が必要です  
+
+. . . 
+
+今後感染する患者を被験者にする場合にも、placeboに割り当てられた患者に待ち時間の負担があることも見逃せません
+
+:::::::::: {.columns}
+:::: {.column width=45%}
+:::{.fragment}
+重症化リスク考慮、蔓延期を外した時期選定、母集団を特定、が可能な被験者選定
+:::
+::::
+
+:::: {.column width=5%}
+:::{.fragment}
+ vs. 
+:::
+::::
+
+:::: {.column width=45%}
+:::{.fragment}
+新罹患者を要しない、蔓延期に最も向いている、母集団を特定しづらい、被験者選定
+:::
+::::
+::::::::::
+
+:::{.fragment}
+新薬治験を蔓延期にするのか、平時にするのか
+:::
+
+:::{.fragment}
+長短ありますが、平時の方が利は大きい気が僕にはします
+:::

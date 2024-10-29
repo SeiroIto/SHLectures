@@ -37,6 +37,7 @@ format:
 #### Looks like seiro.css in sky_add_FilePointer.html does not work but local ../../seiro.css works
 #### Don't understand why
 lightbox: auto
+displayMode: compact
 filters:
   - parse-latex
 include-in-header:
@@ -70,6 +71,14 @@ resources:
   - 02.pdf
 # quarto render 02.qmd
 ---
+```{css}
+.math.inline .MathJax  {
+  font-size: 80% !important;
+}
+.mermaid-render svg {
+    width: 70%; 
+}
+```
 
 ::: {style="text-align: center;"}
 # はじめに
@@ -1034,7 +1043,8 @@ Get data:
 
 * Treated group outcomes $y^{1}_{i,t}$ before and after the policy. If there are $n^{1}$ individuals, $\underbrace{y^{1}_{1,t}, \dots, y^{1}_{n^{1},t}}_{\mbox{year } t}, \underbrace{y^{1}_{1,t+1}, \dots, y^{1}_{n^{1}, t+1}}_{\mbox{year } t+1}$.  
 * Control group outcomes $y^{0}_{i,t}$ before and after the policy. If there are $n^{0}$ individuals, $\underbrace{y^{0}_{1,t}, \dots, y^{0}_{n^{0},t}}_{\mbox{year } t}, \underbrace{y^{0}_{1,t+1}, \dots, y^{0}_{n^{0}, t+1}}_{\mbox{year } t+1}$.  
-   * One needs individual level data, not just group level averages, to do inferences (=compute $p$ values). For testing a null hypothesis, one needs standard errors of the estimates, which need variances and covariances, which can only be computed with individual level data.  
+   * Need individual level data, not just group level averages, to do inferences (=compute $p$ values)  
+      * Testing a null hypothesis &larr; standard errors of the estimates &larr; variances and covariances &larr; individual level data 
 * Let us denote the smaller of $n^{1}, n^{0}$ as $n^{min}$. 
 
 ----
@@ -1077,9 +1087,9 @@ $$
 
 ----
 
-A simpler way: It can be shown that $y^{DID}=a_{3}$ in the following regression.  
+A simpler way: $y^{DID}=a_{3}$ of the following regression.  
 
-1. Regress $y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+e_{i,t}$ using $t, t+1$ data.  
+1. Regress $y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+e_{i,t}$  
 	* $D_{i}$: Treatment dummy variable. $D_{i}
 	=\left\{
 	\begin{array}{c}
@@ -1103,6 +1113,30 @@ A simpler way: It can be shown that $y^{DID}=a_{3}$ in the following regression.
 	\end{array}
 	\right.$
 1. Test $a_{3}=0$ and get its $p$ value.
+
+
+
+::: {.description-list}
+
+$a_{0}$
+: 「切片」=基準($D_{i}=0, after=0$、controlの$t$年)グループ平均値reference group mean
+
+$a_{1}$
+: $D_{i}=1$グループ(treated)平均値の乖離deviation of this group's mean from ref group mean
+
+$a_{2}$
+: $after=1$グループ($t+1$年)平均値の乖離deviation  of this group's mean from ref group mean
+
+$a_{3}$
+: $D_{i}=1, after=1$グループ(treatedの$t+1$年)平均値の乖離 &larr; $t+1$年のtreatedだけに(treatedの2期間を通じた平均値、$t+1$年の全体平均値と比べて)違いがあるか
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+* $a_{1}$は$a_{0}$からの乖離: 基準グループと同じ平均値なら$a_{1}=0$
+* $a_{3}$はcontrolの増え方からの乖離: controlの$t+1$での増え方=treatedの$t+1$での増え方 &rArr; $a_{3}=0$
+:::
 
 ----
 
@@ -1133,10 +1167,14 @@ DID
 :  $\delta(\Delta y_{i1}) \simeq \delta(\Delta y_{i0})$.
 :::
 
+. . . 
+
 For DID we need:
 
 * Before-after data.
 * For both the treated and the control.
+
+. . . 
 
 You need to get the control data even before the policy starts. 
 
@@ -1256,7 +1294,7 @@ knitr::include_graphics("2/Nikkei2024Oct21.jpg")
 
 ::: {.fragment}
 * 事実の経緯として表現しているので「効果」ではないExpress as facts  
-* でも、文意として同意なきTOBの効果のように書いているBut it seems to imply impacts  
+* でも、文意として同意なきTOBの効果のように書いているBut it looks it wants to imply impacts  
 * 効果に関わる文章: 時系列変化・横断面変化の記述なのか、効果なのかの判断が微妙な文章が最も多いMany texts are unclear if it means to be a factual description or an impact  
 :::
 :::
@@ -1269,7 +1307,7 @@ What is the CF?
 
 自然実験  
 
-オランダ飢餓の冬(1944-45)への胎内曝露 [@Lumey1997]
+オランダ飢餓の冬(1945年1月-4月)への胎内曝露 [@Lumey1997]
 
 成人1人当たり配給カロリー(飢餓の冬は1000カロリー/日)  
 
@@ -1287,20 +1325,100 @@ What is the CF?
 
 ----
 
-第3三半期曝露:  1945年2-6月生まれ
+::: {style="font-size: 170%;line-height: 1.1;"}
+::: {.description-list}
+第3三半期曝露
+:  1945年2-6月生まれ (2-4月では?)
 
-第2三半期曝露:  1945年5-9月生まれ
+第2三半期曝露
+:  1945年5-9月生まれ (5-7月では?)
 
-第1三半期曝露:  1945年8-12月生まれ
+第1三半期曝露
+:  1945年8-12月生まれ (8-11月では?)
 
-統御群: 	1944年8月-1945年1月、1946年1月-4月生まれ
+統御群
+: 	1944年8月-1945年1月、1946年1月-4月生まれ
+:::
+:::
 
-. . . 
+. . .
+
+```{mermaid}
+gantt
+    title 誕生年月によるtreatment status
+    dateFormat  YY-MM
+    axisFormat  %Y-%b
+    tickInterval 1month
+    Control 1: done, 1944-08, 6M
+    第3三半期曝露: crit, 1945-02, 5M
+    第2三半期曝露: crit, 1945-05, 5M
+    第1三半期曝露: crit, 1945-08, 5M
+    Control 2: done, 1946-01, 4M
+```
+
+<!--
+```{mermaid}
+gantt
+    title 妊娠年月によるtreatment status
+    dateFormat  YY-MM-DD
+    axisFormat  %Y-%b
+    tickInterval 1month
+    Famine: crit, 1945-01, 4M
+    第1三半期曝露(半月): 1945-04-15, 40w
+    第1三半期曝露(フル): 1945-02-01, 40w
+    第1三半期曝露(フル)+第2三半期曝露(半月): 1945-01-15, 40w
+    第1三半期曝露(半月)+第2三半期曝露(フル): 1944-10-15, 40w
+    第2三半期曝露(半月)+第3三半期曝露(フル): 1944-07-15, 40w
+    第3三半期曝露(半月): 1944-04-15, 40w
+```
+-->
+
+```{mermaid}
+---
+displayMode: compact
+---
+gantt
+    title 妊娠年月によるtreatment status
+    dateFormat  YY-MM-DD
+    axisFormat  %Y-%b
+    tickInterval 1month
+    section Treatment
+      Famine: crit, 1945-01, 4M
+    section 第1三半期曝露(半月)
+      第1三半期: done, crit, t11, 1945-04-15, 12w
+      第2三半期: active, t12, after t11, 12w
+      第3三半期: after t12, 12w
+    section 第1三半期曝露(フル)
+      第1三半期: done, crit, t21, 1945-02-06, 12w
+      第2三半期: active, t22, after t21, 12w
+      第3三半期: after t22, 12w
+    section 第1三半期曝露(フル)<br>+第2三半期曝露(半月)
+      第1三半期: done, crit, t31, 1945-01-22, 12w
+      第2三半期: active, t32, after t31, 12w
+      第3三半期: after t32, 12w
+    section 第1三半期曝露(半月)<br>+第2三半期曝露(フル)
+      第1三半期: done, crit, t41, 1944-10-09, 12w
+      第2三半期: active, t42, after t41, 12w
+      第3三半期: after t42, 12w
+    section 第2三半期曝露(半月)<br>+第3三半期曝露(フル)
+      第2三半期: done, crit, t51, 1944-07-17, 12w
+      第2三半期: active, t52, after t51, 12w
+      第3三半期: after t52, 12w
+    section 第3三半期曝露(半月)
+      第3三半期: done, crit, t61, 1944-05-12, 12w
+      第2三半期: active, t62, after t61, 12w
+      第3三半期: after t62, 12w
+```
+
+
+----
+
+
 
 $$
 \begin{aligned}
-\mbox{子どもの周産期(W22-D7)死亡率}
-&=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}\\
+\mbox{子どもの周産期}&(W22-D7)\mbox{死亡率}\\
+&\hspace{-4cm}=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}\\
 &\hspace{-2cm}
 +a_{2}*\mbox{第2三半期曝露}
 +a_{3}*\mbox{第3三半期曝露}+\mbox{誤差項}
