@@ -1492,12 +1492,16 @@ Estimate impacts by comparing BPL and APL near the poverty line.
 
 ----
 
-The narrower focus around cutoff gives us a "matched pair" or a pseudo counterfactual.   
+The narrower focus around cutoff gives us a "matched pair" of the treated and the control, or a pseudo counterfactual.   
 
 . . . 
 
 Interpretation of estimates: Policy impacts on the subpopulation near the cutoff. \pause 
-It is a local impact we are estimating, not a global impact such as ATE (or ATT, ATC).   
+It is a **local impact near the cutoff**, not a global impact such as ATE (or ATT, ATC).   
+
+. . . 
+
+Cutoff前後で資格が0から1に変わるため、RDD推計量をLATE推計量と表現する人もいる
 
 . . . 
 
@@ -1567,7 +1571,8 @@ Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
 ::::{.columns}
 ::: {.column width=25%}
 :::{.fragment}
-```{r , echo = F, out.width='70%'}
+![](ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
+```{r , eval = F, echo = F, out.width='70%'}
 knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig01.jpg")
 ```
 :::
@@ -1575,7 +1580,8 @@ knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig01.jpg")
 
 ::: {.column width=25%}
 :::{.fragment}
-```{r , echo = F, out.width='70%'}
+![](ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
+```{r , eval = F, echo = F, out.width='70%'}
 knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
 ```
 :::
@@ -1655,16 +1661,16 @@ Mean score
 : LHS (left hand side左辺) variable変数の平均値
 
 (S.d.)
-: 標準偏差=LHS変数の散らばり程度  
+: 標準偏差standard deviation=LHS変数の散らばり程度  
 
 Regressors
 : RHS (right hand side) variablesの係数 ($a, b_{1}, \dots, b_{k}$)
 
 Class size(学級サイズ=何人)
-: 上段は係数、下段は標準誤差
+: 推計された係数$b_{1}$
 
 (括弧内の数字)
-: <Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい
+: 標準誤差、<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい(だと$b_{1}\neq 0$かも)
 
 N
 : サンプルサイズ
@@ -1699,7 +1705,7 @@ N
 
 ----
 
-横浜市2009年40人学級: 中3国語(共通試験点数偏差値)\\
+横浜市2009年40人学級: 中3国語(共通試験点数偏差値)
 ![](ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaChu3.png)
 
 @Akabayashi2013
@@ -1776,6 +1782,7 @@ N
 
 ----
 
+<!--
 現在ではカットオフから遠い標本を使った多項式(曲線)をフィットさせることは誤りとされている  
 
 * カットオフから遠い標本は推計に重用されるべきではない
@@ -1784,6 +1791,8 @@ N
 現在は直線、もしくは、local linear regressionという遠い標本のウェイトを小さくして直線を推計する手法を使う
 
 ----
+-->
+
 
 * @LemieuxMilligan2008: In Quebec, unemployment benefits are increased once reaching the age of 30 for adults with no child. This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced.
 	* Will there be a jump in employment rates at 30 to the below?
@@ -1848,12 +1857,6 @@ Margin of vote share in $t$ should not give a jump of events before $t$.
 :::
 ::::
 
-----
-
-::: {style="text-align: center;"}
-# Synthetic control method
-:::
-
 
 ----
 
@@ -1881,6 +1884,163 @@ RDD	での識別仮定の信頼性チェック
 . . . 
 
 PTは論理的なチェックで傍証。DTはランダム化の検定。
+
+
+----
+
+::: {style="text-align: center;"}
+# Synthetic control method
+:::
+
+----
+
+2020年12月14日(月)GoToトラベル全国一斉一時停止
+
+::::::::: {.columns}
+::: {.column width="50%"}
+![FNNプライムニュース2020年11月25日(水)](ImpactEvaluation/figure/Suga_NoEvidenceCropped.jpg)
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+エビデンス=科学的な方法で明らかになった事象
+:::
+
+::: {.fragment}
+科学的な方法: 反証可能な命題が成立するか検定する方法
+:::
+
+::: {.fragment}
+「GoToトラベルやって感染拡大を絶対招いちゃったけど、エビデンスはないから」
+:::
+::: 
+:::::::::
+
+::: {.fragment}
+エビデンスがないのは事実
+:::
+
+* 政府は効果検証用にデータを収集していないため
+* 検証するつもりなし、と言っているに等しい
+
+::: {.fragment}
+利用可能なデータを前提にすると、どのような効果検証が可能か?
+:::
+
+----
+
+2020年12月14日(月)GoToトラベル全国一斉一時停止
+
+::: {style="font-size: 50%;line-height: 1.1;"}
+<http://www.kantei.go.jp/jp/99_suga/statement/2022/1214kaiken02.html>
+:::
+
+記者「GoToトラベルに感染拡大のエビデンスがないとの認識はあったか?」  
+
+(NHKサイトでは「GoToトラベルに感染拡大のエビデンスはないという認識は変わったのか」)
+
+. . .
+
+<br>
+
+管首相
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+「そこは、<Red>医師会の会長が申し上げている</Red>のではないでしょうか。それと、当時は<Red>移動によっては、感染を拡大しないということ、ここも提言もあります。</Red>そこについては変わりません。ただ、今回そうしたことの専門家の委員の先生方からそういう指摘をいただきましたので、この3000人、<Red>現実的に患者の方が出ていますから、</Red>年末年始、集中的に対応できる、そういうチャンスだと、そういう思いの中で私は判断しました。」
+:::
+
+<br>
+
+. . .
+
+エビデンスはなく(と会長が言っているだけで自分は言ってない)、移動は感染を広げないと(誰から?)聞いていたが、感染者数が増えたから停止、という主張
+
+----
+
+2020年12月14日(月)GoToトラベル全国一斉一時停止
+
+2020年11月18日(水)日本医師会会長中川氏
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+「GoToトラベル自体から感染者が急増したというエビデンス（根拠）はなかなかはっきりしないが、きっかけになったことは間違いないと私は思っている。感染者が増えたタイミングを考えると関与は十分しているだろう」
+:::
+
+* 原因ではないがきっかけ、というのは意味不明
+
+. . .
+
+2020年12月16日(水)衆院内閣閉院中審査: 新型コロナウィルス感染症対策分科会会長尾身氏
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+「50歳以下の人が移動して二次感染を起こしていることがはっきりしきたので、人の動きを止めることが重要で、その一環のなかでGoToトラベル(一時停止)もある」「本質は意図せず重症化が出るので、そのような文脈のなかでGoToトラベルも考えるべきと再三申し上げている」
+:::
+
+* 「移動は感染を拡大させない」という提言はない
+* 50歳以下が感染伝播の高リスク・グループと判明、この移動を制限すべき、と提言
+   * GoToトラベルによる感染拡大のエビデンスはないが、論理的帰結によって制限を結論
+
+
+----
+
+効果推計の例
+
+* 旅客人数: 前年度同月値との比較
+* 旅行支出: 推計した需要関数が正しいと前提に補助金の効果を試算
+* (有症率比較: GoToトラベル利用者 vs. 非利用者)
+* ビッグ・データによる人の移動: GoToトラベル開始前後の変化-昨年同時期の変化
+* グレンジャー因果性: 航空旅行客と感染者数の関係
+* 合成統御法: GTT東京追加と東京圏感染者数の関係
+
+----
+
+よくある比較
+
+
+GoToトラベル実施月の旅客人数を前年度同月値と比較して「x\%多かった」と示す
+
+. . . 
+
+昨年度と比較=GoToトラベルなしだと昨年と同じという(暗黙の?)仮定をしている
+
+<br>
+
+::: {style="font-size: 130%;line-height: 1.1;"}
+::: {.description-list}
+被説明変数
+:	旅客人数
+
+データ
+:	国土交通省データ
+
+識別仮定identification assumption
+:	「GoToトラベルがなければ、今年も昨年と同じ人の移動だった」
+:::
+:::
+
+. . .
+
+<br>
+
+このデザインでの効果推計値の信頼性=この識別仮定の現実妥当性
+
+----
+
+課題
+
+1. GoToトラベルなしのとき、移動人数が当該年と前年で同じと期待する理由はない。おそらく、GoToトラベル実施年はCOVID-19によって景気後退していたので旅客需要は減っていて、GoToトラベルなしだとその前年より少なかったはず。
+   * 「分母」=過大評価された比較対象=なしのときの水準を過大に設定している
+   * 効果を過小評価
+1. 2020年(GoToトラベル実施時)に入国制限されたインバウンド客を除外して2019年のデータを作成できるか? 
+
+. . .
+
+誰にでもできる分析なので、何と比較すべきかを考えずにやっている人が多いはず
+
+「今年はコロナウィルス流行によって大きく減っているという事情はありますが」などと、景気後退の影響について数字以外の補正をして説明するはず
+
+. . . 
+
+効果があったのかはっきりしないし、聞き手の主観が入り込む
 
 
 ----
