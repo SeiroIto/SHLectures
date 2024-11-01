@@ -283,17 +283,17 @@ Does laughter cause (self-reported) healthiness?
 
 $$
 \begin{aligned}
-\mbox{試験点数}&=20+20*D+e\\
+\mbox{試験点数}&=20+20*D+e  
 D&=
 \left\{
 \begin{array}{c}
-0\\
+0  
 1
 \end{array}
 \right. \quad \mbox{if 塾に週1時間以上}
 \left\{
 \begin{array}{l}
-\mbox{通わない}\\
+\mbox{通わない}  
 \mbox{通う}
 \end{array}
 \right.
@@ -453,7 +453,7 @@ We can say a policy changed $y_{i}$ when we can compute its causal impact on $y_
 
 $$
 \begin{aligned}
-(y_{i}|D_{i}=1) &- (y_{i}|D_{i}=0), \quad \mbox{or,}\\
+(y_{i}|D_{i}=1) &- (y_{i}|D_{i}=0), \quad \mbox{or,}  
 y_{i1}&-y_{i0}.%, \quad y_{i0}=y_{i}|D=0, \ y_{i1}=y_{i}|D=1.
 \end{aligned}
 $$
@@ -673,22 +673,22 @@ $\leftarrow$ 4.99\%と5.01\%の差は無視可能なのに表現が違いすぎ�
 
 ```{=latex}
 \begin{tabular}{>{\scriptsize\hfil$}p{3cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}>{\scriptsize\hfil$}p{1.5cm}<{$}}
-{variables} & {NonTradArm} & {TradArm} & {p-value.lower} & {p-value.mid} & {p-value.upper}\\
+{variables} & {NonTradArm} & {TradArm} & {p-value.lower} & {p-value.mid} & {p-value.upper}  
 HeadLiteracy & 0.116 & 0.100 & 0.498 & 0.545 & 0.591\\[-.2ex]
-HeadAge & 38.023 & 38.536 & 0.549 & 0.550 & 0.551\\
+HeadAge & 38.023 & 38.536 & 0.549 & 0.550 & 0.551  
 HHsize & 4.188 & 4.128 & 0.618 & 0.629 & 0.640\\[-.2ex]
-FloodInRd1 & 0.508 & 0.464 & 0.265 & 0.285 & 0.305\\
+FloodInRd1 & 0.508 & 0.464 & 0.265 & 0.285 & 0.305  
 HAssetAmount & 782 & 690 & 0.085 & 0.085 & 0.085\\[-.2ex]
-PAssetAmount & 1114 & 1083 & 0.823 & 0.823 & 0.823\\
+PAssetAmount & 1114 & 1083 & 0.823 & 0.823 & 0.823  
 LivestockValue & 5951 & 5184 & 0.328 & 0.328 & 0.328\\[-.2ex]
-NumCows & 0.266 & 0.237 & 0.458 & 0.472 & 0.487\\
-NetValue & 7675 & 6604 & 0.334 & 0.334 & 0.334\\
+NumCows & 0.266 & 0.237 & 0.458 & 0.472 & 0.487  
+NetValue & 7675 & 6604 & 0.334 & 0.334 & 0.334  
 n & 580 & 180 & && (rate: 0.237)
 \end{tabular}
 
 \begin{tabular}{>{\hfill\scriptsize}p{1cm}<{}>{\hfill\scriptsize}p{.25cm}<{}>{\scriptsize}p{10cm}<{\hfill}}
-Source:& & Estimated with GUK administrative and survey data.\\
-Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean covariates to conduct approximate permutation tests. \\
+Source:& & Estimated with GUK administrative and survey data.  
+Notes: & 1. & \textsf{R}'s package \textsf{coin} is used for baseline group mean covariates to conduct approximate permutation tests.   
 &2. & Number of repetition is set to 100000. Step-down method is used to adjust for multiple testing of a multi-factor grouping variable. 40 are lost to flood before arm assignment. 
 \end{tabular}
 ```
@@ -753,7 +753,7 @@ ITT
 \begin{aligned}
 ITT
 &= 
-\alpha\E[y_{i}|D_{i}=1, A_{i}=1]+(1-\alpha)\E[y_{i}|D_{i}=1, A_{i}=0] \\
+\alpha\E[y_{i}|D_{i}=1, A_{i}=1]+(1-\alpha)\E[y_{i}|D_{i}=1, A_{i}=0]   
 &\hspace{1em}-(1-\beta)\E[y_{i}|D_{i}=0, A_{i}=0]-\beta\E[y_{i}|D_{i}=0, A_{i}=1].
 \end{aligned}
 $$
@@ -769,7 +769,7 @@ $$
 LATE
 : 	Local average treatment effects: 割当てによって初めて介入を受ける人の平均効果、介入前からの変化を$\Delta y_{i}$と書くと均一効果$\E[\Delta y_{i}|D_{i}=1, A_{i}=1]=\E[\Delta y_{i}|D_{i}=0, A_{i}=0]=\mu$を仮定、統御群に漏れた介入効果を補正$$
 \begin{aligned}
-LATE &= \frac{\alpha\E[\Delta y_{i}|D_{i}=1, A_{i}=1]-\beta\E[\Delta y_{i}|D_{i}=0, A_{i}=0]}{\alpha-\beta}\\
+LATE &= \frac{\alpha\E[\Delta y_{i}|D_{i}=1, A_{i}=1]-\beta\E[\Delta y_{i}|D_{i}=0, A_{i}=0]}{\alpha-\beta}  
 &=
 \frac{(\alpha-\beta)\mu}{\alpha-\beta}=\mu.
 \end{aligned}
@@ -791,12 +791,12 @@ $$
 \begin{aligned}
 \mbox{参加}\Rightarrow\mbox{結果}
 &=
-\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{参加}},\\
+\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{参加}},  
 LATE=\mbox{介入}\Rightarrow\mbox{結果}
 &=
-\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{介入}},\\
+\frac{\mbox{割り当て}\Rightarrow\mbox{結果}}{\mbox{割り当て}\Rightarrow\mbox{介入}},  
 &=
-\frac{\mbox{割り当てによる処置群と統御群の結果の差}\alpha\mu - \beta\mu}{\mbox{割り当てによる処置群と統御群の介入比率の差}\alpha-\beta},\\
+\frac{\mbox{割り当てによる処置群と統御群の結果の差}\alpha\mu - \beta\mu}{\mbox{割り当てによる処置群と統御群の介入比率の差}\alpha-\beta},  
 &=\frac{(\alpha - \beta)\mu}{\alpha-\beta}=\mu
 \end{aligned}
 $$
@@ -928,9 +928,9 @@ $$
 \begin{aligned}
 Y_{i}
 &=
-\overbrace{\alpha_{1965}Z_{1965}+\cdots+\alpha_{1986}Z_{1986}}^{\scriptsize{\mbox{縁組年の固定効果}}}+{\color{red}\beta} W_{j}\\
+\overbrace{\alpha_{1965}Z_{1965}+\cdots+\alpha_{1986}Z_{1986}}^{\scriptsize{\mbox{縁組年の固定効果}}}+{\color{red}\beta} W_{j}  
 &\hspace{1em}
-+\underbrace{\eta_{1}x_{1j}+\cdots+\eta_{k}x_{kj}}_{\scriptsize{\mbox{養親の特徴の効果}}}\\
++\underbrace{\eta_{1}x_{1j}+\cdots+\eta_{k}x_{kj}}_{\scriptsize{\mbox{養親の特徴の効果}}}  
 &\hspace{1em}
 +\underbrace{\lambda_{1}x_{1i}+\cdots+\lambda_{m}x_{mi}}_{\scriptsize{\mbox{養子の特徴の効果}}} \\[-3ex]
 &\hspace{1em}
@@ -1075,7 +1075,7 @@ $$
 +\frac{\hat{\sigma}^{2}_{y^{0}_{t+1}}}{n^{0}}
 -2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{1}_{t}]}{n^{1}}
 -2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t+1}]}{n^{min}}
-+2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t}]}{n^{min}}\\
++2\frac{\widehat{\cov}[y^{1}_{t+1}, y^{0}_{t}]}{n^{min}}  
 &
 +2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t+1}]}{n^{min}}
 -2\frac{\widehat{\cov}[y^{1}_{t}, y^{0}_{t}]}{n^{min}}
@@ -1417,8 +1417,8 @@ gantt
 
 $$
 \begin{aligned}
-\mbox{子どもの周産期}&(W22-D7)\mbox{死亡率}\\
-&\hspace{-4cm}=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}\\
+\mbox{子どもの周産期}&(W22-D7)\mbox{死亡率}  
+&\hspace{-4cm}=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}  
 &\hspace{-2cm}
 +a_{2}*\mbox{第2三半期曝露}
 +a_{3}*\mbox{第3三半期曝露}+\mbox{誤差項}
@@ -1881,9 +1881,18 @@ RDD	での識別仮定の信頼性チェック
 	* 特定の特徴を持つ人たちが越境していないか: その他変数の平均値が境界内外で等しい(=帰無仮説: 越境がなく平均値の差が境界内外でゼロ)か検定
 	   * ...棄却 $\Rightarrow$ 越境あり
 
-. . . 
+---- 
 
 PTは論理的なチェックで傍証。DTはランダム化の検定。
+
+. . .
+
+Density testの例  
+
+![Figure 2, @BoschSchady2019](ImpactEvaluation/figure/BoschSchady_DensityTest.jpg)
+
+
+確率密度は境界でジャンプしていないことが視覚的に分かる(検定結果の統計値は-.007、標準誤差が.006)
 
 
 ----
@@ -2042,6 +2051,208 @@ GoToトラベル実施月の旅客人数を前年度同月値と比較して「x
 
 効果があったのかはっきりしないし、聞き手の主観が入り込む
 
+
+----
+
+::::::::::{.columns}
+
+:::{.column width="50%"}
+![論文: @Miyawaki2020](ImpactEvaluation/figure/TokyoShinbun_GoToCovid.jpg)
+:::
+
+:::{.column width="50%"}
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム
+
+2020年12月8日(火)
+:::
+::::::::::
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+研究デザイン
+
+* インターネット調査(楽天インサイト社実施)、22万4389人中2万8000人回答、2万5482人有効回答
+* 症状有無、GoToトラベル利用有無、社会経済変数、既往症
+
+. . .
+
+GoToトラベル利用者は非利用者よりも有症率が2倍
+
+. . .
+
+<br>
+
+解釈: 以下の可能性がある
+
+1. GoToトラベルで罹患
+1. 有症率(=罹患確率)の高い人がGoToトラベル利用
+
+. . .
+
+結論: 「リスクの低い人に経済活動の誘因を与え、高い人は自宅待機を促すべき」
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+閣僚の反応
+
+::: {style="font-size: 50%;line-height: 1.1;"}
+<https://news.tbs.co.jp/newseye/tbs_newseye4146048.htm?1607587275057>
+:::
+
+::: {style="font-size: 130%;line-height: 1.1;"}
+:::{.description-list}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+田村憲久厚労相
+:	「ちょっとエビデンスといえるものなのかどうなのか、ちょっと査読も終わっていないという話ですし。評価のしようがないというのが、正直なところでありますので」
+
+赤羽一嘉国交相
+:	「この論文についても、ちょっと正式に査読前という話もありましたし。現時点では全くコメントする段階でないと思っている」
+
+*	査読通ったら意見、対応するのか?
+
+加藤勝信官房長官
+:	「著者自らもですね、研究方法の限界として、GoToトラベルの利用が直接的に新型コロナ症状の増加につながったという因果関係は断定できないこと」
+
+*	実験は存在しないので因果関係は示せない。では、どんな事実があれば対応するのか?エビデンスなんて出てこないことを知っていながらの、何もしない言い訳では?
+*	単にケチ付けているだけでは?
+:::
+:::
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+<br>
+
+示した解釈が面白いし、明確な政策提言になっている  
+
+. . .
+
+結果の提示も慎重「因果関係を示している訳ではない」  
+
+. . .
+
+しかし... この研究には方法論として弱点があると思います  
+何でしょうか?  
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+<br>
+
+示したこと: 有症率(A)とGoToトラベル利用(B)の正の相関  
+
+. . .
+
+検討していない可能性: みせかけの相関  
+
+. . .
+
+その他の現象(C)が(A)と(B)を同時に動かしているのでは?  
+
+. . .
+
+<br>
+
+Cの例: 外出量  
+
+. . .
+
+外出好きな人は罹患確率[$\propto$有症率(A)]が高い  
+
+. . .
+
+&rArr; 外出好きな人は旅行をよくする(行くのだったら割引を使う)  
+
+. . .
+
+&rArr; 外出好きな人は罹患しやすく、旅行も頻繁にする、というだけでは?  
+
+. . .
+
+もしもそうだったら、結論は常識の範囲内
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+<br>
+
+政策提言が実施困難: どうやって個人の感染させるリスクを判断するのか?
+
+. . .
+
+年齢: 年齢差別になりかねず、違憲の可能性あり
+
+. . .
+
+もしも可能だったら...ランダムにGoToトラベル資格を配布する実験をする  
+
+. . .
+
+有資格者と無資格者の有症率の違いを検定する: 明確な因果関係  
+
+. . .
+
+でも、有資格者と周辺者が危険に曝される可能性があるので、研究倫理審査委員会が却下するかも  
+
+. . .
+
+<br>
+
+GoToトラベル=研究倫理審査委員会が却下しかねない政策
+
+----
+
+「GoToトラベル利用者感染リスク高い」東京大学など研究チーム  
+
+<br>
+
+普段の外出頻度を尋ねていれば、外出頻度を制御して有症率を比較
+
+. . .
+
+$$
+\Delta \Pr(\mbox{有症}|\mbox{外出多})=\Pr[\mbox{有症}|\mbox{外出多, } \color{red}{GoTo利用}]-\Pr[\mbox{有症}|\mbox{外出多, } \color{red}{GoTo非利用}].
+$$
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+条件付き確率$\Pr(A|B)$ probability of A given B: Bが起こるときにAが起こる確率
+:::
+
+. . .
+
+外出頻度ごとに帰無仮説を検定
+$$
+\begin{aligned}
+H_{01}&: \Delta \Pr(\mbox{有症}|\mbox{外出少})=0\\
+H_{02}&: \Delta \Pr(\mbox{有症}|\mbox{外出多})=0
+\end{aligned}
+$$
+
+. . .
+
+仮に、それぞれの帰無仮説において$p$ valueが小さい  
+
+. . .
+
+ $\Rightarrow$ 外出頻度同程度の人でGoToトラベルと有症率に正の相関関係  
+ $\Rightarrow$ GoToトラベルが有症率を高める因果関係と矛盾しない  
+
+. . .
+
+残念ながら、外出頻度は尋ねていない模様
+
+. . .
+
+デザイン段階でもう少し考えるべきだったかも?
 
 ----
 
