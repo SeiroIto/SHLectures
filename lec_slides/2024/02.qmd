@@ -1049,7 +1049,7 @@ Get data:
 
 ----
 
-Steps:
+Stjpg:
 
 ::: {style="font-size: 70%;line-height: 1.1;"}
 1. Compute before and after means for both groups. $$
@@ -1137,6 +1137,25 @@ $a_{3}$
 * $a_{1}$は$a_{0}$からの乖離: 基準グループと同じ平均値なら$a_{1}=0$
 * $a_{3}$はcontrolの増え方からの乖離: controlの$t+1$での増え方=treatedの$t+1$での増え方 &rArr; $a_{3}=0$
 :::
+
+----
+
+回帰式って何?
+
+まずはデータを用意します
+
+* Wooldridge教授の計量経済学教科書で使っているデータ
+   1. `wooldridge`パッケージをインストール
+   1. `library(wooldridge)`と入力し
+   1. `data("wagepan")`でRに読み込まれます
+
+```{r read wooldridge wagepan data, echo = T, eval = T}
+install.packages("wooldridge")
+library(wooldridge)
+data("wagepan")
+wagepan <- data.table(wagepan)
+wagepan
+```
 
 ----
 
@@ -1275,15 +1294,20 @@ Before-after:
 
 ::::{.columns}
 
-::: {.column width=35%}
+::: {.column width=20%}
+<!--
 日経新聞10月21日(月)朝刊
 
 ```{r , echo = F, out.width='35%'}
 knitr::include_graphics("2/Nikkei2024Oct21.jpg")
 ```
+knitr::include_graphics gives wierd scroll bar. For ![](){}, height="50%" does not work, only width does.
+-->
+
+![日経新聞10月21日(月)朝刊](2/Nikkei2024Oct21.jpg){width="60%"}
 :::
 
-::: {.column width=65%}
+::: {.column width=80%}
 ::: {.fragment}
 同意なきTOB(takeover bid, 株式公開買付)
 
@@ -1328,13 +1352,13 @@ What is the CF?
 ::: {style="font-size: 170%;line-height: 1.1;"}
 ::: {.description-list}
 第3三半期曝露
-:  1945年2-6月生まれ (2-4月では?)
+:  1945年2-6月生まれ 
 
 第2三半期曝露
-:  1945年5-9月生まれ (5-7月では?)
+:  1945年5-9月生まれ 
 
 第1三半期曝露
-:  1945年8-12月生まれ (8-11月では?)
+:  1945年8-12月生まれ 
 
 統御群
 : 	1944年8月-1945年1月、1946年1月-4月生まれ
@@ -1344,6 +1368,9 @@ What is the CF?
 . . .
 
 ```{mermaid}
+---
+displayMode: compact
+---
 gantt
     title 誕生年月によるtreatment status
     dateFormat  YY-MM
@@ -1354,6 +1381,32 @@ gantt
     第2三半期曝露: crit, 1945-05, 5M
     第1三半期曝露: crit, 1945-08, 5M
     Control 2: done, 1946-01, 4M
+    section Treatment
+      Famine: crit, 1945-01, 4M
+    section 第1三半期曝露(半月)
+      第1三半期: done, crit, t11, 1945-04-15, 12w
+      第2三半期: active, t12, after t11, 12w
+      第3三半期: after t12, 12w
+    section 第1三半期曝露(フル)
+      第1三半期: done, crit, t21, 1945-02-06, 12w
+      第2三半期: active, t22, after t21, 12w
+      第3三半期: after t22, 12w
+    section 第1三半期曝露(フル)<br>+第2三半期曝露(半月)
+      第1三半期: done, crit, t31, 1945-01-22, 12w
+      第2三半期: active, t32, after t31, 12w
+      第3三半期: after t32, 12w
+    section 第1三半期曝露(半月)<br>+第2三半期曝露(フル)
+      第1三半期: done, crit, t41, 1944-10-09, 12w
+      第2三半期: active, t42, after t41, 12w
+      第3三半期: after t42, 12w
+    section 第2三半期曝露(半月)<br>+第3三半期曝露(フル)
+      第2三半期: done, crit, t51, 1944-07-17, 12w
+      第2三半期: active, t52, after t51, 12w
+      第3三半期: after t52, 12w
+    section 第3三半期曝露(半月)
+      第3三半期: done, crit, t61, 1944-05-12, 12w
+      第2三半期: active, t62, after t61, 12w
+      第3三半期: after t62, 12w
 ```
 
 <!--
@@ -1371,7 +1424,6 @@ gantt
     第2三半期曝露(半月)+第3三半期曝露(フル): 1944-07-15, 40w
     第3三半期曝露(半月): 1944-04-15, 40w
 ```
--->
 
 ```{mermaid}
 ---
@@ -1409,6 +1461,7 @@ gantt
       第2三半期: active, t62, after t61, 12w
       第3三半期: after t62, 12w
 ```
+-->
 
 
 ----
@@ -1417,8 +1470,8 @@ gantt
 
 $$
 \begin{aligned}
-\mbox{子どもの周産期}&(W22-D7)\mbox{死亡率}  
-&\hspace{-4cm}=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}  
+\mbox{子どもの周産期}&(W22-D7)\mbox{死亡率}  \\
+&\hspace{-4cm}=\mbox{他期間生まれ}+a_{1}*\mbox{第1三半期曝露}  \\
 &\hspace{-2cm}
 +a_{2}*\mbox{第2三半期曝露}
 +a_{3}*\mbox{第3三半期曝露}+\mbox{誤差項}
@@ -1442,15 +1495,42 @@ CF=他期間生まれ
 * 死亡率が一定と期待する理由は不明なので、推計値の信頼性は不明
 * 戦争の影響を受けなければ、別年同月の死亡率は同じになると期待できるが、戦争の影響は何かあるはずなので、これはbig if
 
-. . .
+----
 
 信頼性のより高いデザイン・推計方法(DID): 全ての地域のコーホート・パネル・データ
 
+* アムステルダムの死亡率変化-その他地域の死亡率変化$\neq 0$?
 * 地域: アムステルダムとその他地域生まれ
-* 同じ誕生日の人たちを他地域で見つければ良い
+* 時期: 1944年8月-1946年4月生まれと「その1年前」=戦争開始前で同月
 <!--   * 1987年時点までに死亡している女性はいる=より健康な女性のみが残っている=子どもの周産期死亡率は過小推計されるはずだが、アムステルダム標本でも生存選抜について何も対応していないので、他地域標本を加えない理由が見当たらない-->
-* 時期: 1944年8月-1946年4月生まれ
-* 対前月比の死亡率変化(difference)をアムステルダムとアムステルダム以外で差を取る=ロならば死亡率変化は地域間で同じ
+
+. . .
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\mbox{Ams子どもの周産期}&\mbox{死亡率}=\mbox{Ams他期間生まれ}+a_{1}*\mbox{Ams第1三半期曝露}  \\
+\mbox{1年前産まれのAms子どもの周産期}&\mbox{死亡率}=\mbox{Ams他期間の1年前産まれ}+a_{1}*\mbox{Ams第1三半期曝露の1年前産まれ}  \\
+\mbox{Other子どもの周産期}&\mbox{死亡率}=\mbox{Other他期間生まれ}+a_{1}*\mbox{Other第1三半期曝露}  \\
+\mbox{1年前産まれのOther子どもの周産期}&\mbox{死亡率}=\mbox{Other他期間の1年前生まれ}+a_{1}*\mbox{Other第1三半期曝露の1年前産まれ}  \\
+\end{aligned}
+$$
+$$
+\begin{aligned}
+\mbox{Ams子どもの周産期}&\mbox{死亡率}-
+\mbox{1年前産まれのAms子どもの周産期}\mbox{死亡率}\\
+& - 
+(\mbox{Other子どもの周産期}\mbox{死亡率}-\mbox{1年前産まれのOther子どもの周産期}\mbox{死亡率})\\
+&\hspace{-6cm}=
+(\Delta\mbox{Ams他期間生まれ}-\Delta\mbox{Other他期間生まれ})\\
+&\hspace{-2cm}+
+a_{1}*(\Delta\mbox{Ams第1三半期曝露} - \Delta \mbox{Other第1三半期曝露})+\Delta \mbox{誤差項}
+\end{aligned}
+$$
+:::
+
+* 識別仮定: 飢餓の冬がなければ、アムステルダム死亡率変化=その他地域死亡率変化
+* こっちの方がだいぶ現実的=信頼性がより高い
 
 ----
 
@@ -1897,9 +1977,49 @@ Density testの例
 
 ----
 
+識別仮定の信頼性チェック
+
+1. RCT
+   * ランダム化の方法: 乱数発生プログラムか?
+   * ランダマイゼーション・テスト
+      * 並べ替え検定permutation test
+      * Mean equality test
+1. 自然実験
+   * Falsification/Placebo test: 介入があり得ない対象で効果はあるか?
+1. RDD
+   * Density test
+   * Propensity score test
+   * Falsification/Placebo test: 介入があり得ない対象で効果はあるか?
+
+----
+
+4. Synthetic control method
+   * Robustness checks
+      * Use different donor pools
+      * Use different donor selection algorithm
+   * Falsification/Placebo test: 介入があり得ない対象(pre-period)で効果はあるか?
+5. DID, event study design
+   * Pre-trend test
+   * Falsification/Placebo test: 介入があり得ない対象(pre-period)で効果はあるか?
+   * (Estimate "honest" DID with pre-trend, @RambachanRoth2023 )
+   * (Estimate synthetic-DID, @Arkhangelsky2021 )
+
+----
+
 ::: {style="text-align: center;"}
 # Synthetic control method
 :::
+
+----
+
+国や(関東など大きな)地方単位でインパクトを推計したいときもある
+
+* 社会科学分野の政策は大きな単位で実施することが多い。貿易自由化、経済自由化、アベノミクス、量的金融緩和政策、マイナス金利など。
+* 問題: 統御群(CFとなる国や地方)がない。インパクト評価の手法を使えない。
+   * マクロ経済学: マクロ経済モデル(マクロ経済を表す数理統計モデル、$Y=a+bX+e$が複数ある連立方程式)を作り、データを使ってモデルのパラメタ$a, b$を推計し、推計値$\hat{a},\hat{b}$をモデルに代入して影響を計算$Y_{1}=\hat{a}+\hat{b}X_{1}$する。
+   * CFはモデルで作っている。金利を下げると銀行貸出が(下げなかったときよりも)増えて企業の投資が(下げなかったときよりも)増え...などという設定は、CF(金利を下げなかったとき)との比較で示されている。\pause\textcolor{azure}{$\hat{a},\hat{b}$}や\textcolor{azure}{モデル}は\textcolor{red}{正しい?}
+* SCMはCFなしに効果推計をします
+* でも、用いている仮定が満たされるのか、相当怪しい場合もあります
 
 ----
 
@@ -2253,6 +2373,758 @@ $$
 . . .
 
 デザイン段階でもう少し考えるべきだったかも?
+
+----
+
+グレンジャー因果性Granger causality: $A$ Granger-causes $B$
+
+:::::::::: {.columns}
+::::{.column width="50%"}
+![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
+::::
+
+::::{.column width="50%"}
+「\textcolor{green}{統計的な因果関係は確認できない}」&rarr; 「グレンジャー因果関係は」
+
+:::{.fragment}
+上昇局面が関係を検出しやすい: 旅客数が先行、感染者数が追従
+:::
+
+:::{.fragment}
+\textcolor{green}{沖縄}と\textcolor{green}{福岡}: 推計するには感染ピーク前のデータが短かすぎる、もっと遡ってデータを使うべき
+:::
+
+:::{.fragment}
+下降局面は検出しにくい: 旅客数が減っても、モメンタム(市中感染による自然増)が減るとは限らない
+:::
+::::
+::::::::::
+
+----
+
+----
+
+グレンジャー因果性Granger causality: $A$ Granger-causes $B$
+
+:::::::::: {.columns}
+::::{.column width="50%"}
+![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
+::::
+
+::::{.column width="50%"}
+ラグ数: どこまで過去に遡るか? 最低2週間、3-4週間くらい?
+
+:::{.fragment}
+北海道: 10月1日以降の旅客数の増加によって1ヶ月後に感染者数が増えているようにも見える。推計でどこまで前を考慮しているか不明。
+:::
+
+:::{.fragment}
+なぜこの3道県だけ?
+:::
+
+:::{.fragment}
+東京のGoToトラベルは秋以降なので、北海道や沖縄よりも、近隣の紅葉のきれいなところや温泉地に行く人が多そう...静岡、山梨、栃木、福島とかを検討すればいいのでは?
+:::
+
+:::{.fragment}
+\textcolor{green}{沖縄}と\textcolor{green}{福岡}: 推計するには感染ピーク前のデータが短かすぎる、もっと遡ってデータを使うべき
+:::
+::::
+::::::::::
+
+----
+
+東京追加による東京圏(例: 静岡県)の新規感染者数の変化
+
+:::{.description-list}
+被説明変数
+:	各都道府県の新規感染者数
+
+データ
+:	厚労省の日次データ
+効果
+:	東京追加前後での: 静岡の変化-合成静岡(=非東京圏加重平均値)の変化
+
+推計量
+:	合成統御法(synthetic control method): 非東京圏のデータで「政策なしの静岡」の値を合成し、実際の静岡の値と合成値との差を政策の効果と見なす
+::::
+
+被説明変数と相関のある変数で、静岡の値と他の非東京圏道府県の加重平均値の差(の2乗和)を最小化するように加重平均ウェイトを選ぶ。このウェイトと非東京圏の被説明変数データを使って合成静岡の被説明変数値を計算する。
+
+----
+
+東京追加による東京圏(例: 静岡県)の新規感染者数の変化
+
+:::{.description-list}
+長所
+:	感染者数をそのものを取り上げている。データは長期のリードタイムがあってこの推計方法に向いている。
+
+短所
+:	トレンドが同じになる疫学的根拠なしには、信頼性が高いとはいえない。$\rightarrow$ 独自トレンドの県をドナー・プールから除外すればいい。
+
+識別仮定identification assumption
+:	「GoToトラベルによって東京との旅客移動の影響が無視し得る非東京圏(道府県)が複数あり、GoToトラベル東京追加なしの場合に、感染者数トレンドは静岡とこれら非東京圏で等しい」
+:::
+
+
+課題
+
+* 非東京圏が存在するか。
+* 非東京圏の道府県を決めるのに一定の恣意性があり、変えると結果が変わる可能性あり。
+* 加重平均ウェイトを選ぶときに観察可能な違い(観察可能な変数)のみを考慮している。
+
+----
+
+:::::::::: {.columns}
+::::{.column width="50%"}
+![](GoToTravelCovid/figure/Shizuoka/Daily/new/ImpactsDropTiesWithTokyo.pdf)
+
+![](GoToTravelCovid/figure/Shizuoka/Daily/new/SmokePlotsDropTiesWithTokyo.pdf)
+::::
+
+::::{.column width="50%"}
+GTT+東京による静岡県の新規感染者数変化
+
+:::{.fragment}
+非東京圏: 東京からの宿泊者数が全国平均よりも少ない道府県
+:::
+
+:::{.fragment}
+スモーク図smoke plot
+:::
+
+:::{.fragment}
+静岡と東京以外すべての道府県でインパクト推計し、灰色の線で示した
+:::
+
+:::{.fragment}
+GTT+東京に曝露されたと仮定: 他道府県のインパクト推計値と静岡県のインパクト推計値の比較。静岡の外れ度を示す。
+:::
+::::
+::::::::::
+
+----
+
+:::::::::: {.columns}
+::::{.column width="50%"}
+![リッジ密度図](GoToTravelCovid/figure/Shizuoka/Weekly/new/SmokeDensityDropTiesWithTokyo.pdf)
+::::
+
+::::{.column width="50%"}
+スモーク図と同じ情報を別の視覚化
+
+:::{.fragment}
+点が静岡、分布がその他道府県のインパクト推計値
+:::
+
+:::{.fragment}
+静岡インパクト推計値の外れ度を示す
+:::
+
+:::{.fragment}
+11月後半-12月初旬の3週間で他道府県に比べてインパクトが大きい
+:::
+::::
+::::::::::
+
+----
+
+実は、CFがなくてもインパクト評価を可能にする方法があるBut there is an ingenious way that allows impact evaluation
+
+. . .
+
+用いる仮定: 観察可能な変数による選抜selection on the observable
+
+観察可能な変数で統御群と治療群への選抜が説明可能
+=観察可能な特徴を考慮すれば、統御群と治療群への割り振りがランダム(選抜がない)と考えられる
+
+. . .
+
+ここで「ランダム」とは?
+
+
+. . .
+
+観察可能な特徴を考慮すれば、効果の大きさと治療状態が相関していないこと
+
+. . .
+
+=効果の大きい/小さい人ほど治療群になりやすい、がないこと
+
+. . .
+
+観察可能な特徴を考慮すれば、治療状態と結果が無相関/統計的に独立を条件付無相関conditional orthogonality/条件付独立conditional independenceという
+
+----
+
+selection on the observableは滅多に満たされない
+
+. . .
+
+人間は自分にとって得なことを選択する(=選抜がある)し、選抜に関わる観察不可能な情報が必ずある
+
+. . .
+
+では、なぜこんな仮定をおいてインパクト評価をするのか?
+
+. . .
+
+何もやらないよりも、仮定と限界を明示して作業する方が意義があるため
+
+. . .
+
+手法開発者の意図  
+* 叙述研究はCFを意識しないので信頼性が低い。数量研究はCFについて一定の仮定を満たさないと作業しない。
+* 中間がない。\underline{叙述研究と数量研究の橋渡し}をしたい。
+* 仮定を明示して、何が言えるかを示すことにも意義がある。
+
+. . .
+
+オリジナルの開発者の崇高な意志に反して仮定もよく考えずにインパクト評価をやってしまう例は多いが...
+
+----
+
+
+\citet{AbadieGardeazabal2003}: テロがバスク郡の経済成長に与える影響を推計。スペインでテロはバスク郡以外にはない。They want to estimate the terrorism impacts on growth of Basque county. Terrorism affected only Basque but nowhere else in Spain. 
+
+. . .
+
+アイディア: それ以外の郡すべて(``donor pool'')からCFを合成They proposed to synthesise a control observation out of all other counties (``donor pool''). 
+
+. . .
+
+$$
+ATT_{basque,t}=\underbrace{y_{basque, t}}_{\mbox{\footnotesize バスク}}-\underbrace{\sum_{j=1}^{J}w_{j}y_{j,t}}_{\mbox{\footnotesize \mpage{2cm}{\hfil バスク以外の\\ \hfil 加重平均}}}, \quad 0\leqslant w_{j} \leqslant 1, \ \sum_{j=1}^{J}w_{j}=1.
+$$
+
+. . .
+
+テロ開始前データを使って、テロ無しバスクと加重平均の誤差の2乗和が最小化するようにウェイト$w_{j}$を選ぶ
+
+
+* なぜ和ではなく2乗和? \pause 2乗和が最小化されたら、(その正の平方根の)和も最小化されるから問題ない
+* 2乗和にするのは数学上の都合: 2乗するとウェイトの関数(=誤差)を最小化(微分)して解を求められるから
+
+----
+
+![](ImpactEvaluation/figure/spain-states-map.jpg)
+
+----
+
+$w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)Computing $w_{j}$
+
+
+1. 計\fcolorbox{white}{pink}{$J$郡}$(j=1,\dots,J)$について結果変数(成長)に影響する\fcolorbox{white}{pink}{$I$個}の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期$t=\fcolorbox{white}{pink}{1, \dots ,T}$について集める。結果変数を全期間$t=\fcolorbox{white}{pink}{1, \dots , T}\fcolorbox{white}{paleblue}{$, T+1, T+2, \dots$}$について集める。Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.
+1. テロ前$T$期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.
+
+* 2乗和関数$\sum\limits_{i=1}^{\fcolorbox{white}{pink}{\scriptsize $I+1$}}\sum\limits_{t=1}^{\fcolorbox{white}{pink}{\scriptsize $T$}}\left(z_{ibt}-\sum\limits_{j=1}^{\fcolorbox{white}{pink}{\scriptsize $J$}}w_{j}z_{ijt}\right)^{2}$に最小化の一階条件を使う
+* $\sum\limits_{j=1}^{J}w^{*}_{j}y_{j\fcolorbox{white}{paleblue}{\scriptsize $T+1$}}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}w^{*}_{j}y_{j\fcolorbox{white}{paleblue}{\scriptsize $T+2$}}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
+
+----
+
+2乗和関数とは
+$$
+\begin{aligned}
+e_{it}(w_{1}, w_{2}, \dots, w_{J})^{2}
+&=
+\left\{t\mbox{期の変数$i$の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2},\\
+&=
+\left(z_{i\mbox{\scriptsize バスク}t}-w_{1}z_{i1t}-w_{2}z_{i2t}-\dots-w_{J}z_{iJt}\right)^{2}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+e_{i1}(w_{1}, &w_{2}, \dots, w_{J})^{2}+e_{i2}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{iT}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
+&=
+\left\{\mbox{各期の変数}i\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+\sum\limits_{i=1}^{I+1}&\sum\limits_{t=1}^{T}\left(z_{ibt}-\sum\limits_{j=1}^{J}w_{j}z_{ijt}\right)^{2}=
+e_{11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{1T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
+&\phantom{=}+
+e_{21}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{2T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
+&\phantom{=}\dots+
+e_{I+11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{I+1T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
+&=
+\left\{\mbox{各期の変数}1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}\\
+&\phantom{=}+
+\left\{\mbox{各期の変数}2\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}\\
+&\phantom{=}\dots
++\left\{\mbox{各期の変数}I+1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}
+\end{aligned}
+$$
+
+----
+
+![Terrorism impacts on growth: T=1969](ImpactEvaluation/figure/Abadie_Fig01.jpg)
+
+----
+
+![A placebo study: Catalonia: バスクに似ているがテロがない](ImpactEvaluation/figure/Abadie_Fig04.jpg)
+
+----
+
+SCMが適しているデータSCM can be applied to the study with a small number of cross sectional units but with a relatively long (e.g., 10-30 periods) pre-policy observation period (``training period'')
+
+* 治療群が少なく統御群(ドナー・プール)が多い
+* 「推計標本estimation sample」(=イベント発生前)の期間$T$が比較的長い(10-30期間など)
+
+推計期間での予測誤差が大きいとイベント後の予測も精度が低いので、使えないIf the fit of (within sample) prediction during training period is bad, there is nothing you can do.
+
+短所
+:どの程度の誤差なら良いのか現在は基準がない、共変数選定の基準がない、イベント前データが長期に必要	
+
+長所
+:比較対象の選択基準を客観化、プラセボ分析が可能
+
+----
+
+条件付き直交の意味
+
+治療群と統御群は観察可能な変数のみを基準に選抜された
+
+テロリストが(カタルーニャやマドリよりも)バスクを選んだのは成長率が下がって不満を持った市民や支持を得られそうと思った(=観察不可能な思い込み)、からではない」
+
+「成長を低めテロを育てるような要因(例: 分離独立運動)はない」
+
+「共変数$\bfx$を考慮すれば、テロがなければ成長はほぼ同じだった」
+
+「テロが起こるとすればバスクしかなかったが、テロの原因と成長とは関係がない」
+
+----
+
+SCMの考え方: 共変数が似ていれば結果も似ているはず 
+
+暗に仮定している共変数と結果の関係This assumes that the relationship (supposedly derived from a theoretical model but never explicitly shown) between predictors and outcomes are:
+
+1. 横断面に均質
+1. 安定的(=時系列に均質)
+
+
+強い仮定に思えるが、これらは叙述的研究も同じBut these may be the same for qualitative, narrative studies.
+
+叙述的研究と比べた長所
+
+1. 比較対象を選ぶ基準がある程度客観的
+    * ただし、共変数を変えるとウェイトも変わるのである程度操作可能
+    * よって、理論に照らし合わせて共変数を選ばねば(=共変数選択を理論によって制約しなければ)ならない=理論に即した選択で推計結果の信頼性を高められる
+1. 効果(=比較対象との差)を数値化して、その値がゼロに等しいか仮説検定が可能
+
+----
+
+@AbadieSCM2010 : 
+
+::::::::::: {.columns}
+:::: {.column width="50%"}
+![Tobacco tax in California and per capita cigarette sales](ImpactEvaluation/figure/abadie_tobacco_main.jpg)
+::::
+
+:::: {.column width="50%"}
+::: {.fragment}
+![Tobacco tax in California, placebo studies on all control states, lines show gap = actual - synthetic contro](ImpactEvaluation/figure/abadie_tobacco_placebo.jpg)
+:::
+:::: 
+:::::::::::
+
+----
+
+@Pinotti2015
+
+![Mafia violence on growth in Apulia and Basilicata](ImpactEvaluation/figure/Pinotti_mafia_Fig06.jpg)
+
+----
+
+@Pinotti2015
+
+![Apulia and Basilicata were new to violence](ImpactEvaluation/figure/Pinotti_mafia_Fig04.jpg)
+
+----
+
+@Pinotti2015
+
+![Mafia violence deters investments](ImpactEvaluation/figure/Pinotti_mafia_Fig09.jpg)
+
+----
+
+@Pinotti2015
+
+![Mafia violence slows industry (\% of provincial GDP)](ImpactEvaluation/figure/Pinotti_mafia_Fig12.jpg)
+
+----
+
+@Pinotti2015
+
+![Mafia violence placebo studies](ImpactEvaluation/figure/Pinotti_mafia_Fig10.jpg)
+
+----
+
+It is still possible that something other than mafia violence caused the slowdown of industrial growth of Apulia and Basilicata, starting from early 1970's. But what is it? If none is found, SCM (may not be very credible but) is convincing.
+
+. . .
+
+@Pinotti2015 also shows that;
+
+* Private investment dried up.
+* Public investment increased.
+* Private employment reduced.
+* Public employment increased but did not offset the reduction in private employment.
+
+. . .
+
+He argues that increased public investments were channeled to mafia activities through corrupt politicians, and quality of elected politicians reduced (shown in the companion paper).
+
+----
+
+
+@Pinotti2015
+
+![Private and public investment and employment](ImpactEvaluation/figure/Pinotti_mafia_Fig13.jpg)
+
+----
+
+@Billmeier2013
+
+![貿易自由化の効果、Asia](ImpactEvaluation/figure/Billmeier_Fig01.jpg)
+
+----
+
+@Billmeier2013
+
+![Latin America](ImpactEvaluation/figure/Billmeier_Fig02.jpg)
+
+----
+
+@Billmeier2013
+
+![Africa before 1987](ImpactEvaluation/figure/Billmeier_Fig03.jpg)
+
+----
+
+@Billmeier2013
+
+![Africa 1987-91](ImpactEvaluation/figure/Billmeier_Fig04.jpg)
+
+----
+
+@Billmeier2013
+
+![Africa after 1991](ImpactEvaluation/figure/Billmeier_Fig05.jpg)
+
+----
+
+@Billmeier2013
+
+怪しい結果に思える。貿易自由化していないdonor poolを使って加重平均を合成
+
+. . .
+
+共変数: 中等就学率、人口増加率、投資/GDP、インフレ率、民主主義インデックス
+
+. . .
+
+共変数が似ていて貿易自由化していなくても、成長率は人口規模、天然資源、気候変動、紛争などによっても影響される
+
+. . .
+
+どこまで共変数として含めれば良いのか、誰も説得的な議論はできない
+
+. . .
+
+しかし、叙述的研究はそういうことをやっている
+
+選定基準を明確化して数値化していることは貢献
+
+----
+
+It is fair to say that \textit{ex post} evaluation uses a poor method in estimating impacts which should not be taken too seriously. 
+::: {style="font-size: 40%;line-height: 1.1;"}
+<http://www.jica.go.jp/english/our_work/evaluation/tech_and_grant/project/ex_post/about.html>
+:::
+
+
+> We believe the policy had an impact, however, it is difficult to know. \hfill \textnormal{(honest!)}
+
+> Based on the responses from beneficiaries, it is confirmed ... was improved. \hfill \textnormal{(subjective)}
+
+> ...one can judge that the effect was an increase in income. \hfill \textnormal{(unsubstantiated)}
+
+> ...it is perceivable that the policy provided a support for growth. \hfill \textnormal{(unsubstantiated)}
+
+>... it is considered that the effects on job creation was sufficient. \hfill \textnormal{(subjective)}
+
+. . .
+
+We cannot learn which policy was effective.
+
+----
+
+CGD document: *When will we ever learn?* [@CGD2006]
+
+. . .
+
+Asking, do we know how to improve outcomes of the poor? After more than 50 years of aid business?
+
+. . .
+
+Donor agencies' evaluation professionals did not have a good answer.
+
+. . .
+
+We need to produce knowledge from past policies for future policies.
+
+----
+
+:::{.description-list}
+Millenium Villages (2004-2015)
+: ビッグプッシュ実験。サブサハラ・アフリカの14箇所(80ヵ村)で農業、保健、教育、インフラ、生産への投資。一人当たり1年120ドル$\times$50万人$\times$12=総額$\Sexpr{50*120*12/1000}$億ドル(\Sexpr{(50*120*12/1000)*120}億円)。コロンビア大学地球研究所ジェフリー・サックス教授主導、国連、世銀、各国政府が支援、民間企業も協賛。PRビデオ(MTV) <https://www.youtube.com/watch?v=uUHf_kOUM74>
+
+. . .
+
+RCTではないこと、統御群データがないことなどから、実施したインパクト評価(before-after)の信頼性credibilityは低く、成果がよく分からないまま終わった。壮大な実験であり得たのに、評価の準備をしていなかった。
+:::
+
+----
+
+@ODIMV2008 : Before-after比較
+
+![](ImpactEvaluation/figure/MVPhase1Evaluation.jpg)
+
+----
+
+::::::::::: {.columns}
+::::{.column width = "70%"}
+[](ImpactEvaluation/figure/Clemens_Demombynes_MilleniumVillageEvaluation_WP2010.pdf)
+::::
+
+::::{.column width = "30%"}
+@ClemensDemombynes2011 : DIDとbefore-afterを比較
+
+B-A比較が意外にDIDと類似...B-A比較が良いのか? DIDもダメか? B-AはDIDよりも効果推計値が上振れ
+::::
+
+----
+
+なぜ信頼性の高いインパクト評価が可能な準備をしなかったのか?
+
+. . .
+
+A short answer: インパクト評価に関する勘違い(もしくはその振りをした)
+
+. . .
+
+Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blogs.worldbank.org/impactevaluations/jeff-sachs-the-millennium-villages-project-and-misconceptions-about-impact-evaluation>)
+
+----
+
+1. 村は常に変化しているから、村レヴェルでの実験に統御群は作れない。
+    * 村が常に変化しているからこそ、実際の村が統御群に必要になる。
+1. 介入は村が自ら学んで改善するという過程を経る。この過程はRCTで評価できない。
+    * (率直に何を言っているのか理解できないほど)勘違いしている
+    * 学んで改善を記録するとはプロセス評価process evaluationのことで、必要性を誰も否定していない。学んで改善してもインパクトはまだ分からないから、インパクト評価は必要。プロセス評価とインパクト評価を混同。
+
+----
+
+3. 初年度は忙しくて統御地域を設定できなかった。既存の全国データがあるのに、少数の統御地域だけと比べる意味はあるのか。統御地域とペアにして比較しても、統御地域が経済的に変わったら比較する意味はあるのか。
+		* 最初に候補を作って治療群と統御群に割り振れば良いだけ(忙しいのは事実だけど)
+		* 既存の全国データには含まれないような情報を治療群では集めているので既存データでは不十分
+		* 変わるからこそ統御群が必要
+
+真の理由? 
+
+* 倫理的ではないから統御群を作らない、と2007年時点で\citet{SachsSanchez2007}が書いていた
+* しかし、2008年には比較村が誕生
+
+----
+
+全ての推計方法への批判1: multiple testing ($p$ hacking)
+
+
+* $p$値=帰無仮説(効果ゼロ)が正しい確率。効果の平均値がゼロの母集団から$n$回標本を集めて検定すると、推計結果は$p$の確率(=$np$回)しか発生しない、ということ。
+* $p$が小さいほど「外れ値」なので効果ゼロを疑問視して良い
+* $p=5\%$ $\Rightarrow$ 効果の平均値がゼロのとき、$n=100$回に$np=$5回は発生する結果、ということ
+* 少しずつ異なる推計式定式化を100回試すと、真の効果がゼロでも5回は推計値が外れ値になる
+* 外れ値を得るまで何度も推計式定式化を変えると、望む結果が(理論的には)必ず得られる
+* 似た結果指標(疲労と労働時間)への効果推計=multiple testingを無意識にやっている
+* 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う
+
+----
+
+全ての推計方法への批判2: small sample bias
+
+@GertlerHeckman2014, Jamaica: 早期児童発達介入で成人時所得が25\%増加(報告当初は42\%だったが訂正), 治療群+統御群=109人
+
+@HeckmanMoonPinto2010,  Perry preschool: 内部収益率7-10\% (研究当初は15-17\%だったが訂正), 治療群+統御群=123
+
+@CampbellConti2014, Abecederian: 成人時血圧など改善、治療群+統御群=111$\rightarrow$33(35歳)
+	
+* 先入観・常識: そんなに大きいはずがない<https://statmodeling.stat.columbia.edu/2013/11/05/how-much-do-we-trust-this-claim-that-early-childhood-stimulation-raised-earnings-by-42/>
+* 小標本=誤差が大きい=分散が大きい=分布の裾野が広い
+
+----
+
+* 平均ゼロ、大きな分散の分布で$p$値5\%: 推計値が大きくないと実現しない
+* $p$ hackingをすればいつかは大きな効果を推計できる
+* ずるではなく偶然大きな値になった可能性もある
+* placebo testでも$p$ hacking可能(プラシーボの効果がゼロを探索)
+* 小標本で大きな効果: 効果ゼロの可能性が高い
+* 小標本の研究は信頼性が低い
+* よほどのメリットがない限りやらない方が良い
+* Heckman curveは本当にあの形か? 水平線かも?\hfill\hyperlink{HeckmanCurve}{\beamergotobutton{Figure}}
+
+ヘックマンらの研究では認知能力(IQ)と非認知能力(中身=executive function、忍耐力、やる気grit、対人スキル)の両方が所得と関わっており、前者は3-5歳くらいまでに決まるが後者はそれ以降も変化する、としている
+
+
+----
+
+まとめ
+
+. . .
+
+効果推計の議論にはレヴェルがある: \textbf{\pause 初心者\pause 、プロ\pause 、応用}
+
+. . .
+
+相関関係: 3通りの因果関係、見せかけの相関
+
+. . .
+
+因果関係: 方向性のある関係
+
+. . .
+
+社会科学データで因果関係を直接観察できることは非常に稀
+
+. . .
+
+(&larr; 社会経済は相互依存: 原因も何かの結果)
+
+. . .
+
+多くの「効果」の議論: 相関関係を因果関係に解釈している可能性
+
+. . .
+
+(&larr; 因果関係と解釈した方が進化で生存可能性が高かった(説))
+
+. . .
+
+(回帰)式は左右が等しいことを示すだけ、因果の方向は示さない
+
+----
+
+効果$=$影響を受けたときの結果$-$影響を受けなかったときの結果
+
+. . .
+
+CF(多くの場合は統御群)を作り出す仮定が必要
+
+. . .
+
+この仮定が現実的=信頼性の高い効果推計値
+
+. . .
+
+多くの「効果」の議論: CF=beforeやwithout、信頼性が低い
+
+. . .
+
+&larr; 選抜があるため
+
+----
+
+因果関係を測定する推計方法
+
+::: {.description-list}
+RCT
+:	内的整合性あり、対象が限定され高価、仮定=実験が緻密に制御
+
+Natural experiment
+:	非倫理的でも実施、実験を探す必要、仮定=ランダム化あり、他要因なし
+
+DID
+:	実験不要、両群のパネル・データが必要、仮定=共通トレンド
+
+RDD
+:	実験不要、ローカルな効果、仮定=政策のみ離散的変化
+
+SCM
+:	大きな観察単位、長い事前データ必要、仮定=観察可能な選抜
+:::
+
+. . .
+
+(他にもある...Wald (instrumental variables) estimator、matching estimator)
+
+. . .
+
+with-withoutはRCTのみ、before-afterは統御群も必要
+
+. . .
+
+placebo test: 効果があり得ない部分で効果計測、効果検知すると推計値を疑問視、しかし、「出ないでほしい」という思いを叶えるような$p$ hacking可能
+
+. . .
+
+信頼性の高い推計方法でも、$p$ hacking, small sample biasは存在することに注意
+
+----
+
+仮に信頼性の高い効果推計値を得ても、外的整合性があるかは別問題
+
+. . .
+
+全ての推計方法は効果発現メカニズム(理論)を明らかにしない
+
+. . .
+
+メカニズムが分からないと適用可能性が分からない
+
+. . .
+
+しかし、メカニズムを示唆する検討が可能なこともある\\
+
+. . .
+
+例: マフィア$\Rightarrow$民間の投資・雇用低下、政府の投資・雇用増加$\Rightarrow$成長低下\\
+
+. . .
+
+イタリアで起こったことは日本でも起こるか?\\
+
+. . .
+
+現代日本で暴力団抗争が激化しても、同じメカニズムが働くとは限らない\\
+
+. . .
+
+理由: 警察が強いから。抗争に一般人を巻き込むと警察が弾圧。
+「賃金中央値までなら最低賃金引き上げは雇用を減らさない」「余地の大きい日本でも引き上げよう」\\
+
+. . .
+
+アメリカやイギリスでそう(DID)でも、日本でそうかは分からない\\
+ハンガリー: 引き上げの75\%が消費者に転嫁、10\%雇用減(DID)
+
+. . .
+
+理由: 産業構成(とくに貿易財比率)、雇用慣行、労働規制が違う
+
+----
+
+::: {.description-list}
+
+Poverty trap
+: A vicious cycle that keeps the economy in poverty.
+
+Big Push
+: A set of policies that moves the economy to a convergent path to ``high'' equilibria.
+\item[Millennium Development Villages] An attempt to mimic a Big Push that intervenes the African villages in every aspect of life.
+\item[J-PAL] A research centre focusing on randomised controlled trials (RCTs) to produce practical policy lessons.
+\item[internal validity] An unbiased causal inference.
+\item[external validity] An unbiased causal inference with applicability beyond studied subjects.
+:::
 
 ----
 

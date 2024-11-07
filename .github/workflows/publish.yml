@@ -49,6 +49,7 @@ jobs:
             any::ggplot2
             any::data.table
             any::tufte
+            any::wooldridge
 
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
