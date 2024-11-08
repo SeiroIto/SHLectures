@@ -1142,12 +1142,36 @@ $a_{3}$
 
 回帰式って何?
 
-まずはデータを用意します
+説明するよりも見る方が分かりやすいので、まずはデータを用意します
 
-* Wooldridge教授の計量経済学教科書で使っているデータ
+* Wooldridge教授の計量経済学教科書で使っているパネル・データ
    1. `wooldridge`パッケージをインストール
    1. `library(wooldridge)`と入力し
    1. `data("wagepan")`でRに読み込まれます
+* 個人ごとに賃金、組合union加入などの変数が1980-1987年
+
+<br>
+
+. . .
+
+データの種類
+
+:::{.description-list}
+横断面データcross sectional data
+: 単一時点、複数の個人・組織の変数
+
+時系列データtime series data
+: 複数時点、単一の個人・組織の変数
+
+pooled cross sectional data
+: 複数時点、複数の個人・企業の変数
+
+パネル・データpanel/longitudinal data
+: 複数時点、複数の同じ個人・企業の変数
+
+rotating panel data
+: 複数時点、複数の同じ個人・企業の変数、一部新規個人・企業と入れ替え
+:::
 
 ----
 
@@ -1164,9 +1188,9 @@ wagepan
 
 The [data](https://www.rdocumentation.org/packages/wooldridge/versions/1.4-3/topics/wagepan) was used for estimating union impacts on wages. 1980 to 1987. 
 
-* Let us keep only `nr, agric, black, construc, exper, hisp, poorhlth, hours, manuf, educ, union, lwage`. 
+* Let us keep variables only `nr, agric, black, construc, exper, hisp, poorhlth, hours, manuf, educ, union, lwage`. 
 * Let us use years only 1980, 1987.
-* Let us keep individuals union == 0 for both years (`dunion == 0`), or union == 0 in 1980 and union == 1 in 1987 (`dunion == 1`). 
+* DID: Let us keep individuals union == 0 for both years (`dunion == 0`, control), or union == 0 in 1980 and union == 1 in 1987 (`dunion == 1`, treated). 
 
 . . .
 
@@ -1177,7 +1201,7 @@ wagepan <- wagepan[, keepvar, with = F]
 wagepan <- wagepan[year == 1980 | year == 1987, ]
 setkey(wagepan, nr, year)
 wagepan[, dunion := diff(union), by = nr]
-wagepan <- wagepan[dunion >= 0, ]
+wagepan <- wagepan[dunion >= 0 & union[year == 1980] == 0, ]
 table(wagepan[, dunion])
 ```
 
@@ -1203,7 +1227,7 @@ summary(did1)
 
 * I(union*after) = $a_{3}$ (DID)
 * $p$ value = .002なので$a_{3}\neq 0$と統計学的に判断して良いと思います  
-* -.258という負の効果...少し驚きました
+* -.20という負の効果...少し驚きました
 
 ----
 
@@ -1243,7 +1267,6 @@ Summarise estimated results
 
 ```{r summarize estimated results, echo = T, eval = T}
 install.packages("modelsummary", repos = "http://cran.us.r-project.org")
-install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 install.packages("tinytable", repos = "http://cran.us.r-project.org")
 library(tinytable)
 library(modelsummary)
@@ -2573,6 +2596,7 @@ $$
 :	「GoToトラベルによって東京との旅客移動の影響が無視し得る非東京圏(道府県)が複数あり、GoToトラベル東京追加なしの場合に、感染者数トレンドは静岡とこれら非東京圏で等しい」
 :::
 
+. . .
 
 課題
 
@@ -2584,9 +2608,9 @@ $$
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![](GoToTravelCovid/figure/Shizuoka/Daily/new/ImpactsDropTiesWithTokyo.pdf)
+![](ImpactEvaluation/figure/ImpactsDropTiesWithTokyo.jpg)
 
-![](GoToTravelCovid/figure/Shizuoka/Daily/new/SmokePlotsDropTiesWithTokyo.pdf)
+![](ImpactEvaluation/figure/SmokePlotsDropTiesWithTokyo.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2614,7 +2638,7 @@ GTT+東京に曝露されたと仮定: 他道府県のインパクト推計値�
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![リッジ密度図](GoToTravelCovid/figure/Shizuoka/Weekly/new/SmokeDensityDropTiesWithTokyo.pdf)
+![リッジ密度図](ImpactEvaluation/figure/SmokeDensityDropTiesWithTokyo.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2681,6 +2705,7 @@ selection on the observableは滅多に満たされない
 . . .
 
 手法開発者の意図  
+
 * 叙述研究はCFを意識しないので信頼性が低い。数量研究はCFについて一定の仮定を満たさないと作業しない。
 * 中間がない。\underline{叙述研究と数量研究の橋渡し}をしたい。
 * 仮定を明示して、何が言えるかを示すことにも意義がある。
@@ -2701,7 +2726,7 @@ selection on the observableは滅多に満たされない
 . . .
 
 $$
-ATT_{basque,t}=\underbrace{y_{basque, t}}_{\mbox{\footnotesize バスク}}-\underbrace{\sum_{j=1}^{J}w_{j}y_{j,t}}_{\mbox{\footnotesize \mpage{2cm}{\hfil バスク以外の\\ \hfil 加重平均}}}, \quad 0\leqslant w_{j} \leqslant 1, \ \sum_{j=1}^{J}w_{j}=1.
+ATT_{basque,t}=\underbrace{y_{basque, t}}_{\scriptsize{\mbox{バスク}}}-\underbrace{\sum_{j=1}^{J}w_{j}y_{j,t}}_{\scriptsize{\mbox{バスク以外の加重平均}}}, \quad 0\leqslant w_{j} \leqslant 1, \ \sum_{j=1}^{J}w_{j}=1.
 $$
 
 . . .
@@ -2721,11 +2746,11 @@ $$
 $w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)Computing $w_{j}$
 
 
-1. 計\fcolorbox{white}{pink}{$J$郡}$(j=1,\dots,J)$について結果変数(成長)に影響する\fcolorbox{white}{pink}{$I$個}の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期$t=\fcolorbox{white}{pink}{1, \dots ,T}$について集める。結果変数を全期間$t=\fcolorbox{white}{pink}{1, \dots , T}\fcolorbox{white}{paleblue}{$, T+1, T+2, \dots$}$について集める。Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.
+1. 計<span style="color:white;background-color:pink;">$J$</span>郡$(j=1,\dots,J)$について結果変数(成長)に影響する<span style="color:white;background-color:pink;">$I$</span>個の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期<span style="color:white;background-color:pink;">$t=1, \dots ,T$</span>について集める。結果変数を全期間<span style="color:white;background-color:pink;">$t=1, \dots , T$</span><span style="color:white;background-color:blue;">$, T+1, T+2, \dots$</span>について集める。Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.
 1. テロ前$T$期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.
 
-* 2乗和関数$\sum\limits_{i=1}^{\fcolorbox{white}{pink}{\scriptsize $I+1$}}\sum\limits_{t=1}^{\fcolorbox{white}{pink}{\scriptsize $T$}}\left(z_{ibt}-\sum\limits_{j=1}^{\fcolorbox{white}{pink}{\scriptsize $J$}}w_{j}z_{ijt}\right)^{2}$に最小化の一階条件を使う
-* $\sum\limits_{j=1}^{J}w^{*}_{j}y_{j\fcolorbox{white}{paleblue}{\scriptsize $T+1$}}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}w^{*}_{j}y_{j\fcolorbox{white}{paleblue}{\scriptsize $T+2$}}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
+* 2乗和関数$\sum\limits_{i=1}^{I+1}\sum\limits_{t=1}^{T}\left(z_{ibt}-\sum\limits_{j=1}^{J}w_{j}z_{ijt}\right)^{2}$に最小化の一階条件を使う
+* $\sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+1}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+2}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
 
 ----
 
@@ -2734,16 +2759,16 @@ $$
 \begin{aligned}
 e_{it}(w_{1}, w_{2}, \dots, w_{J})^{2}
 &=
-\left\{t\mbox{期の変数$i$の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2},\\
+\{t\mbox{期の変数$i$の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2},\\
 &=
-\left(z_{i\mbox{\scriptsize バスク}t}-w_{1}z_{i1t}-w_{2}z_{i2t}-\dots-w_{J}z_{iJt}\right)^{2}
+(z_{i\scriptsize{\mbox{バスク}}t}-w_{1}z_{i1t}-w_{2}z_{i2t}-\dots-w_{J}z_{iJt})^{2}
 \end{aligned}
 $$
 $$
 \begin{aligned}
 e_{i1}(w_{1}, &w_{2}, \dots, w_{J})^{2}+e_{i2}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{iT}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
 &=
-\left\{\mbox{各期の変数}i\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}
+\{\mbox{各期の変数}i\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}
 \end{aligned}
 $$
 $$
@@ -2754,12 +2779,11 @@ e_{11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{1T}(w_{1}, w_{2}, \dots, w_{J})^
 e_{21}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{2T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
 &\phantom{=}\dots+
 e_{I+11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{I+1T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
-&=
-\left\{\mbox{各期の変数}1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}\\
-&\phantom{=}+
-\left\{\mbox{各期の変数}2\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}\\
-&\phantom{=}\dots
-+\left\{\mbox{各期の変数}I+1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\right\}^{2}\mbox{の和}
+&\hspace{-3cm}=
+\{\mbox{各期の変数}1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}+
+\{\mbox{各期の変数}2\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}\\
+&\phantom{=}+\dots
++\{\mbox{各期の変数}I+1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}
 \end{aligned}
 $$
 
@@ -2778,10 +2802,16 @@ SCMが適しているデータSCM can be applied to the study with a small numbe
 * 治療群が少なく統御群(ドナー・プール)が多い
 * 「推計標本estimation sample」(=イベント発生前)の期間$T$が比較的長い(10-30期間など)
 
+. . .
+
 推計期間での予測誤差が大きいとイベント後の予測も精度が低いので、使えないIf the fit of (within sample) prediction during training period is bad, there is nothing you can do.
+
+. . .
 
 短所
 :どの程度の誤差なら良いのか現在は基準がない、共変数選定の基準がない、イベント前データが長期に必要	
+
+. . .
 
 長所
 :比較対象の選択基準を客観化、プラセボ分析が可能
@@ -2790,13 +2820,23 @@ SCMが適しているデータSCM can be applied to the study with a small numbe
 
 条件付き直交の意味
 
+. . .
+
 治療群と統御群は観察可能な変数のみを基準に選抜された
+
+. . .
 
 テロリストが(カタルーニャやマドリよりも)バスクを選んだのは成長率が下がって不満を持った市民や支持を得られそうと思った(=観察不可能な思い込み)、からではない」
 
+. . .
+
 「成長を低めテロを育てるような要因(例: 分離独立運動)はない」
 
+. . .
+
 「共変数$\bfx$を考慮すれば、テロがなければ成長はほぼ同じだった」
+
+. . .
 
 「テロが起こるとすればバスクしかなかったが、テロの原因と成長とは関係がない」
 
@@ -2804,13 +2844,18 @@ SCMが適しているデータSCM can be applied to the study with a small numbe
 
 SCMの考え方: 共変数が似ていれば結果も似ているはず 
 
+. . .
+
 暗に仮定している共変数と結果の関係This assumes that the relationship (supposedly derived from a theoretical model but never explicitly shown) between predictors and outcomes are:
 
 1. 横断面に均質
 1. 安定的(=時系列に均質)
 
+. . .
 
 強い仮定に思えるが、これらは叙述的研究も同じBut these may be the same for qualitative, narrative studies.
+
+. . .
 
 叙述的研究と比べた長所
 
@@ -2986,11 +3031,12 @@ We need to produce knowledge from past policies for future policies.
 :::{.description-list}
 Millenium Villages (2004-2015)
 : ビッグプッシュ実験。サブサハラ・アフリカの14箇所(80ヵ村)で農業、保健、教育、インフラ、生産への投資。一人当たり1年120ドル$\times$50万人$\times$12=総額$\Sexpr{50*120*12/1000}$億ドル(\Sexpr{(50*120*12/1000)*120}億円)。コロンビア大学地球研究所ジェフリー・サックス教授主導、国連、世銀、各国政府が支援、民間企業も協賛。PRビデオ(MTV) <https://www.youtube.com/watch?v=uUHf_kOUM74>
+:::
 
 . . .
 
 RCTではないこと、統御群データがないことなどから、実施したインパクト評価(before-after)の信頼性credibilityは低く、成果がよく分からないまま終わった。壮大な実験であり得たのに、評価の準備をしていなかった。
-:::
+
 
 ----
 
@@ -3001,16 +3047,17 @@ RCTではないこと、統御群データがないことなどから、実施�
 ----
 
 ::::::::::: {.columns}
-::::{.column width = "70%"}
-[](ImpactEvaluation/figure/Clemens_Demombynes_MilleniumVillageEvaluation_WP2010.pdf)
+:::: {.column width="70%"}
+![](ImpactEvaluation/figure/ClemensDemombynes2010_MilleniumVillageEvaluation_Fig10.jpg)
 ::::
 
-::::{.column width = "30%"}
-@ClemensDemombynes2011 : DIDとbefore-afterを比較
-
-B-A比較が意外にDIDと類似...B-A比較が良いのか? DIDもダメか? B-AはDIDよりも効果推計値が上振れ
+:::: {.column width="30%"}
+* @ClemensDemombynes2011 : DIDとbefore-afterを比較
+* B-A比較が意外にDIDと類似...B-A比較が良いのか? DIDもダメか? 
+* B-AはDIDよりも効果推計値が上振れ
 ::::
-
+:::::::::::
+	
 ----
 
 なぜ信頼性の高いインパクト評価が可能な準備をしなかったのか?
@@ -3033,10 +3080,12 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
-3. 初年度は忙しくて統御地域を設定できなかった。既存の全国データがあるのに、少数の統御地域だけと比べる意味はあるのか。統御地域とペアにして比較しても、統御地域が経済的に変わったら比較する意味はあるのか。
-		* 最初に候補を作って治療群と統御群に割り振れば良いだけ(忙しいのは事実だけど)
-		* 既存の全国データには含まれないような情報を治療群では集めているので既存データでは不十分
-		* 変わるからこそ統御群が必要
+3. 初年度は忙しくて統御地域を設定できなかった。既存の全国データがあるのに、少数の統御地域だけと比べる意味はあるのか。統御地域とペアにして比較しても、統御地域が経済的に変わったら比較する意味はあるのか。  
+   * 最初に候補を作って治療群と統御群に割り振れば良いだけ(忙しいのは事実だけど)
+   * 既存の全国データには含まれないような情報を治療群では集めているので既存データでは不十分
+   * 変わるからこそ統御群が必要
+
+. . .
 
 真の理由? 
 
@@ -3064,7 +3113,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 @HeckmanMoonPinto2010,  Perry preschool: 内部収益率7-10\% (研究当初は15-17\%だったが訂正), 治療群+統御群=123
 
-@CampbellConti2014, Abecederian: 成人時血圧など改善、治療群+統御群=111$\rightarrow$33(35歳)
+@CampbellConti2014, Abecederian: 成人時血圧など改善、治療群+統御群=111&rarr;33(35歳)
 	
 * 先入観・常識: そんなに大きいはずがない<https://statmodeling.stat.columbia.edu/2013/11/05/how-much-do-we-trust-this-claim-that-early-childhood-stimulation-raised-earnings-by-42/>
 * 小標本=誤差が大きい=分散が大きい=分布の裾野が広い
@@ -3075,13 +3124,25 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 * $p$ hackingをすればいつかは大きな効果を推計できる
 * ずるではなく偶然大きな値になった可能性もある
 * placebo testでも$p$ hacking可能(プラシーボの効果がゼロを探索)
+
+::::::::::: {.columns}
+:::: {.column width="70%"}
 * 小標本で大きな効果: 効果ゼロの可能性が高い
 * 小標本の研究は信頼性が低い
 * よほどのメリットがない限りやらない方が良い
-* Heckman curveは本当にあの形か? 水平線かも?\hfill\hyperlink{HeckmanCurve}{\beamergotobutton{Figure}}
+* Heckman curveは本当にあの形か? 水平線かも?
+::::
 
+:::: {.column width="30%"}
+:::{.fragment}
+![](ImpactEvaluation/figure/heckman_returns.jpg){width="50%"}
+:::
+::::
+:::::::::::
+
+:::{.fragment}
 ヘックマンらの研究では認知能力(IQ)と非認知能力(中身=executive function、忍耐力、やる気grit、対人スキル)の両方が所得と関わっており、前者は3-5歳くらいまでに決まるが後者はそれ以降も変化する、としている
-
+:::
 
 ----
 
@@ -3190,47 +3251,49 @@ placebo test: 効果があり得ない部分で効果計測、効果検知する
 
 . . .
 
-しかし、メカニズムを示唆する検討が可能なこともある\\
+しかし、メカニズムを示唆する検討が可能なこともある
 
 . . .
 
-例: マフィア$\Rightarrow$民間の投資・雇用低下、政府の投資・雇用増加$\Rightarrow$成長低下\\
+例: マフィア$\Rightarrow$民間の投資・雇用低下、政府の投資・雇用増加$\Rightarrow$成長低下
 
 . . .
 
-イタリアで起こったことは日本でも起こるか?\\
+イタリアで起こったことは日本でも起こるか?
 
 . . .
 
-現代日本で暴力団抗争が激化しても、同じメカニズムが働くとは限らない\\
+現代日本で暴力団抗争が激化しても、同じメカニズムが働くとは限らない
 
 . . .
 
 理由: 警察が強いから。抗争に一般人を巻き込むと警察が弾圧。
-「賃金中央値までなら最低賃金引き上げは雇用を減らさない」「余地の大きい日本でも引き上げよう」\\
+「賃金中央値までなら最低賃金引き上げは雇用を減らさない」「余地の大きい日本でも引き上げよう」
 
 . . .
 
-アメリカやイギリスでそう(DID)でも、日本でそうかは分からない\\
+アメリカやイギリスでそう(DID)でも、日本でそうかは分からない
 ハンガリー: 引き上げの75\%が消費者に転嫁、10\%雇用減(DID)
 
 . . .
 
-理由: 産業構成(とくに貿易財比率)、雇用慣行、労働規制が違う
+理由: 労働市場集中度、産業構成(とくに貿易財比率)、雇用慣行、労働規制が違う
 
 ----
 
 ::: {.description-list}
 
-Poverty trap
-: A vicious cycle that keeps the economy in poverty.
+Millennium Development Villages
+: An attempt to mimic a Big Push that intervenes the African villages in every aspect of life.
 
-Big Push
-: A set of policies that moves the economy to a convergent path to ``high'' equilibria.
-\item[Millennium Development Villages] An attempt to mimic a Big Push that intervenes the African villages in every aspect of life.
-\item[J-PAL] A research centre focusing on randomised controlled trials (RCTs) to produce practical policy lessons.
-\item[internal validity] An unbiased causal inference.
-\item[external validity] An unbiased causal inference with applicability beyond studied subjects.
+J-PAL
+: A research centre focusing on randomised controlled trials (RCTs) to produce practical policy lessons.
+
+internal validity
+: An unbiased causal inference.
+
+external validity
+: An unbiased causal inference with applicability beyond studied subjects.
 :::
 
 ----
