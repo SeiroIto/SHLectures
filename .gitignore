@@ -1,5 +1,6 @@
 #### This is gitignore for Seishin
 /.quarto/
+/**/*.mp4
 /admin/
 /_extensions/
 /_freeze/
