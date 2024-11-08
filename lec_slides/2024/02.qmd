@@ -1148,7 +1148,7 @@ $a_{3}$
    1. `wooldridge`パッケージをインストール
    1. `library(wooldridge)`と入力し
    1. `data("wagepan")`でRに読み込まれます
-* 個人ごとに賃金、組合union加入などの変数が1980-1987年
+* 個人ごとに賃金(対数)、組合union加入などの変数が1980-1987年
 
 <br>
 
@@ -1213,7 +1213,13 @@ wagepan[, (factorcols) := lapply(.SD, as.factor), .SDcols = factorcols]
 wagepan[, after := 0L]
 wagepan[year == 1987, after := 1L]
 summary(wagepan)
-wagepan[, (factorcols) := lapply(.SD, as.numeric), .SDcols = factorcols] 
+wagepan[, (factorcols) := lapply(.SD, as.integer), .SDcols = factorcols] 
+```
+
+----
+
+```{r display data, echo = T, eval = T}
+wagepan
 ```
 
 ----
@@ -1225,7 +1231,7 @@ did1 <- lm(data = wagepan, lwage ~ union + after + I(union*after))
 summary(did1)
 ```
 
-* I(union*after) = $a_{3}$ (DID)
+* I(union*after) = $a_{3}$ (DID) &larr; Rは`*`に別の意味、文字通りのかけ算には`I()`を付ける
 * $p$ value = .002なので$a_{3}\neq 0$と統計学的に判断して良いと思います  
 * -.20という負の効果...少し驚きました
 
@@ -1253,7 +1259,7 @@ dm[, .(dmean.lwage = diff(meanw)), by = union][, diff(dmean.lwage)]
 DID estimation with covariates: $k$個の他要因$x_{1i}, \dots, x_{ki}$を制御してunion参加(union=0&rarr;1)というtreatmentが賃金に与える効果
 
 $$
-y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+b_{1}x_{1i}+dots+b_{k}x_{1k}+e_{i,t}
+y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+b_{1}x_{1i}+\dots+b_{k}x_{ki}+e_{i,t}
 $$
 
 ```{r DID2, echo = T, eval = T}
@@ -1335,7 +1341,7 @@ You need to get the control data even before the policy starts.
 	* 貸付がないとき、所得分布は各群で似ているか?
 	* ほぼ似ていない(はず)。メンバーは自己選抜\textit{self-select}して加入するため、メンバーだけの特徴が何かある(はず)。(連帯責任制の場合、メンバーは相互に選び合う) この加入過程は所得稼得能力の分布が各群で異なることを示唆している。そうであれば、介入がないときの所得の分布も各群で異なる(はず)。
 	* CF = 借り入れしていない状態のメンバーの所得
-* グラミン銀行のメンバーからランダムにサンプル=the treated、非メンバーからランダムにサンプル=the control、貸付の所得へのATE=各群の平均所得の差
+* グラミン銀行のメンバーからランダムにサンプル=the treated、非メンバーからランダムにサンプル=the control、貸付の所得へのATE$\neq$各群の平均所得の差
 	* ランダム・サンプリング $\neq$ (貸付の)ランダム割当
 
 ----
