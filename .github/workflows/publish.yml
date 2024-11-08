@@ -50,6 +50,7 @@ jobs:
             any::data.table
             any::tufte
             any::wooldridge
+            any::modelsummary
 
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2

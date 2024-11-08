@@ -1149,13 +1149,120 @@ $a_{3}$
    1. `library(wooldridge)`と入力し
    1. `data("wagepan")`でRに読み込まれます
 
+----
+
 ```{r read wooldridge wagepan data, echo = T, eval = T}
-install.packages("wooldridge")
+install.packages("wooldridge", repos = "http://cran.us.r-project.org")
 library(wooldridge)
+library(data.table)
 data("wagepan")
 wagepan <- data.table(wagepan)
 wagepan
 ```
+
+----
+
+The [data](https://www.rdocumentation.org/packages/wooldridge/versions/1.4-3/topics/wagepan) was used for estimating union impacts on wages. 1980 to 1987. 
+
+* Let us keep only `nr, agric, black, construc, exper, hisp, poorhlth, hours, manuf, educ, union, lwage`. 
+* Let us use years only 1980, 1987.
+* Let us keep individuals union == 0 for both years (`dunion == 0`), or union == 0 in 1980 and union == 1 in 1987 (`dunion == 1`). 
+
+. . .
+
+```{r trim data, echo = T, eval = T}
+keepvar <- c("nr", "year", "agric", "black", "construc", "exper", "hisp", "poorhlth", 
+  "hours", "manuf", "educ", "union", "lwage")
+wagepan <- wagepan[, keepvar, with = F]
+wagepan <- wagepan[year == 1980 | year == 1987, ]
+setkey(wagepan, nr, year)
+wagepan[, dunion := diff(union), by = nr]
+wagepan <- wagepan[dunion >= 0, ]
+table(wagepan[, dunion])
+```
+
+----
+
+```{r trim data2, echo = T, eval = T}
+factorcols <- c("agric", "black", "construc", "hisp", "poorhlth", "manuf", "union")
+wagepan[, (factorcols) := lapply(.SD, as.factor), .SDcols = factorcols] 
+wagepan[, after := 0L]
+wagepan[year == 1987, after := 1L]
+summary(wagepan)
+wagepan[, (factorcols) := lapply(.SD, as.numeric), .SDcols = factorcols] 
+```
+
+----
+
+DID estimation: union参加(union=0&rarr;1)というtreatmentが賃金に与える効果
+
+```{r DID, echo = T, eval = T}
+did1 <- lm(data = wagepan, lwage ~ union + after + I(union*after))
+summary(did1)
+```
+
+* I(union*after) = $a_{3}$ (DID)
+* $p$ value = .002なので$a_{3}\neq 0$と統計学的に判断して良いと思います  
+* -.258という負の効果...少し驚きました
+
+----
+
+Compute DID by hand...union wages are high at start
+
+```{r compute DID, echo = T, eval = T}
+dm <- wagepan[, .(meanw = mean(lwage)), by = .(union, after)]
+setkey(dm, union, after)
+dm
+dm[, .(dmean.lwage = diff(meanw)), by = union]
+dm[, .(dmean.lwage = diff(meanw)), by = union][, diff(dmean.lwage)]
+```
+
+回帰式の利点Advantages of regression
+
+* 統計プログラムが$p$値を計算してくれる
+* データが四角に整っていれば、1行のコードで済む
+* その他の要因を制御してDID推計できる
+
+
+----
+
+DID estimation with covariates: $k$個の他要因$x_{1i}, \dots, x_{ki}$を制御してunion参加(union=0&rarr;1)というtreatmentが賃金に与える効果
+
+$$
+y_{i,t}=a_{0}+a_{1}D_{i}+a_{2}after_{t+1}+a_{3}D_{i}*after_{t+1}+b_{1}x_{1i}+dots+b_{k}x_{1k}+e_{i,t}
+$$
+
+```{r DID2, echo = T, eval = T}
+did2 <- lm(data = wagepan, lwage ~ union + after + I(union*after) + educ + exper + hours + agric + construc + manuf + black + hisp + poorhlth)
+summary(did2)
+```
+
+----
+
+Summarise estimated results
+
+```{r summarize estimated results, echo = T, eval = T}
+install.packages("modelsummary", repos = "http://cran.us.r-project.org")
+install.packages("kableExtra", repos = "http://cran.us.r-project.org")
+install.packages("tinytable", repos = "http://cran.us.r-project.org")
+library(tinytable)
+library(modelsummary)
+ttb <- modelsummary(list("simple" = did1, "with covariates" = did2), 
+  statistic = 'p.value', output = "tinytable")
+ttb <- style_tt(ttb,
+   i = grep("^I\\(", ttb@data[, 1])+0:1,
+   j = 1:3,
+   background = "",
+   color = "red")
+```
+
+----
+
+::: {style="font-size: 50%;line-height: 1.1;"}
+```{r print estimated results, echo = F, eval = T}
+ttb
+```
+:::
 
 ----
 
