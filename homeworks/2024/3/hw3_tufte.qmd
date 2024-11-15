@@ -34,8 +34,6 @@ format:
     include-after-body: ../../../toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
 lightbox: auto
-filters:
-  - parse-latex
 include-in-header:
   - text: |
       <style>
