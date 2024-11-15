@@ -78,6 +78,9 @@ resources:
 .mermaid-render svg {
     width: 70%; 
 }
+gray {
+  color: #aeb6bf;
+}
 ```
 
 ::: {style="text-align: center;"}
@@ -1888,6 +1891,9 @@ Class size(学級サイズ=何人)
 (括弧内の数字)
 : 標準誤差、<Red>係数の絶対値/標準誤差>1.96</Red>であれば<Red>$p$値=5%</Red>くらい(だと$b_{1}\neq 0$かも)
 
+Root MSE
+: $\sqrt{MSE}$, MSE=mean squared error, 誤差の2乗和$\sum e^{2}_{i}$
+
 N
 : サンプルサイズ
 :::
@@ -1960,7 +1966,7 @@ N
 
 ::::{.columns}
 ::: {.column width=60%}
-![](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){width="80%"}  
+![ダイアモンド・オンライン2015年2月18日<https://diamond.jp/articles/-/66992>](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){width="80%"}  
 :::
 
 ::: {.column width=40%}
@@ -1969,9 +1975,6 @@ N
 * 推計方法(識別仮定)の信頼性が低い
 * プラシーボ検定(私立1年生や公立2年生)もできる
 
-::: {style="font-size: 50%;line-height: 1.1;"}
-<https://diamond.jp/articles/-/66992>  
-:::
 :::
 ::::
 
@@ -2010,9 +2013,9 @@ N
 -->
 
 
-* @LemieuxMilligan2008: In Quebec, unemployment benefits are increased once reaching the age of 30 for adults with no child. This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced.
+1. [@LemieuxMilligan2008] In Quebec (but only in Quebec and not in rest of Canada), from 1969 to August 1989, unemployment benefits are increased once reaching the age of 30 for adults with no child ($185&rarr;$507). This should have disincentives to work for age 30 and older. If this is true, at around 30, work outcomes will be reduced. 
 	* Will there be a jump in employment rates at 30 to the below?
-* @Lee2008: Being an incumbent can give an additional benefit in the next election. If this is true, at the vote share margin close to zero, an incumbent vs. non-incumbent contrast gives effects of this benefit. Most suitable data comes from the US state gubernatorial elections where there are effectively only two candidates/parties.
+1. [@Lee2008] Being an incumbent can give an additional benefit in the next election. If this is true, at the vote share margin close to zero, an incumbent vs. non-incumbent contrast gives effects of this benefit. Most suitable data comes from the US state gubernatorial elections where there are effectively only two candidates/parties.
 	* Will there be a jump in winning probability at zero vote margin to the above?
 
 ----
@@ -2079,9 +2082,19 @@ Margin of vote share in $t$ should not give a jump of events before $t$.
 
 ----
 
-RDDは局地的な実験と捉えられる  
-境界内外で越境があったとしても、treatment assignmentについて人々の意向が不正確にしか反映されなければ、ランダムな割当の要素があるから  
-実験と同様、density testはランダム化を達成できたか検定
+なぜRDD推計量は信頼性があるのか<gray>Why RDD estimator is credible</gray>
+
+. . .
+
+RDDは局地的な実験と捉えられるため<gray>Because RDD can be considered a localised experiment</gray>
+
+. . .
+
+境界内外で越境があったとしても、treatment assignmentについて人々の意向が不正確にしか反映されなければ、ランダムな割当の要素があるから<gray>Even if there are cross-border movements, when the treatment assignment imperfectly reflects people's intentions, there is an element randomess to it</gray>  
+
+. . .
+
+実験と同様、density testはランダム化を達成できたか検定<gray>Just as covariate mean equality tests in an RCT, density test is a test of randomisation</gray>
 
 ----
 
@@ -2128,6 +2141,8 @@ Density testの例
    * Falsification/Placebo test: 介入があり得ない対象で効果はあるか?
 
 ----
+
+識別仮定の信頼性チェック
 
 4. Synthetic control method
    * Robustness checks
@@ -2294,7 +2309,7 @@ GoToトラベル実施月の旅客人数を前年度同月値と比較して「x
 
 1. GoToトラベルなしのとき、移動人数が当該年と前年で同じと期待する理由はない。おそらく、GoToトラベル実施年はCOVID-19によって景気後退していたので旅客需要は減っていて、GoToトラベルなしだとその前年より少なかったはず。
    * 「分母」=過大評価された比較対象=なしのときの水準を過大に設定している
-   * 効果を過小評価
+   * 効果を過小評価="conservative" estimate
 1. 2020年(GoToトラベル実施時)に入国制限されたインバウンド客を除外して2019年のデータを作成できるか? 
 
 . . .
@@ -2512,7 +2527,7 @@ $$
 
 ----
 
-グレンジャー因果性Granger causality: $A$ Granger-causes $B$
+グレンジャー因果性Granger causality: $A$ Granger-causes $B$ [図](ImpactEvaluation.pdf#page=655)
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
@@ -2527,7 +2542,7 @@ $$
 :::
 
 :::{.fragment}
-\textcolor{green}{沖縄}と\textcolor{green}{福岡}: 推計するには感染ピーク前のデータが短かすぎる、もっと遡ってデータを使うべき
+\textcolor{green}{沖縄}(\textcolor{blue}{青線})と\textcolor{green}{福岡} (\textcolor{red}{赤線}): 推計するには感染ピーク前のデータが短かすぎる、もっと遡ってデータを使うべき
 :::
 
 :::{.fragment}
@@ -2666,68 +2681,68 @@ GTT+東京に曝露されたと仮定: 他道府県のインパクト推計値�
 
 ----
 
-実は、CFがなくてもインパクト評価を可能にする方法があるBut there is an ingenious way that allows impact evaluation
+実は、CFがなくてもインパクト評価を可能にする方法がある<gray>But there is an ingenious way that allows impact evaluation</gray>
 
 . . .
 
-用いる仮定: 観察可能な変数による選抜selection on the observable
+用いる仮定: **観察可能な変数による選抜selection on the observable**
 
 観察可能な変数で統御群と治療群への選抜が説明可能
-=観察可能な特徴を考慮すれば、統御群と治療群への割り振りがランダム(選抜がない)と考えられる
+=観察可能な特徴を考慮すれば、統御群と治療群への割り振りがランダム(選抜がない)と考えられる<gray>After adjusting for observable differencs, the treatment assignment can be considered as good as random</gray>
 
 . . .
 
-ここで「ランダム」とは?
+ここで「ランダム」とは?<gray>what do we mean by "random"?</gray>
 
 
 . . .
 
-観察可能な特徴を考慮すれば、効果の大きさと治療状態が相関していないこと
+観察可能な特徴を考慮すれば、効果の大きさと治療状態が相関していないこと<gray>After considering the observable differences, the impact size and treatment assignment are not correlated</gray>
 
 . . .
 
-=効果の大きい/小さい人ほど治療群になりやすい、がないこと
+=効果の大きい/小さい人ほど治療群になりやすい、がないこと<gray>Individuals/Units with lage/small impacts are more likely to be the treated, does not happen</gray>
 
 . . .
 
-観察可能な特徴を考慮すれば、治療状態と結果が無相関/統計的に独立を条件付無相関conditional orthogonality/条件付独立conditional independenceという
+観察可能な特徴を考慮すれば、治療状態と結果が無相関/統計的に独立を**条件付直交conditional orthogonality/条件付独立conditional independence**という
 
 ----
 
-selection on the observableは滅多に満たされない
+selection on the observableは滅多に満たされない<gray>is rarely satisfied in reality</gray>
 
 . . .
 
-人間は自分にとって得なことを選択する(=選抜がある)し、選抜に関わる観察不可能な情報が必ずある
+人間は自分にとって得なことを選択する(=選抜がある)し、選抜に関わる観察不可能な情報が必ずある<gray>humans choose what they benefit from (=there is selection), and there is always information that explains selection that is unobservable</gray>
 
 . . .
 
-では、なぜこんな仮定をおいてインパクト評価をするのか?
+では、なぜこんな仮定をおいてインパクト評価をするのか?<gray>then, why do we estimate impacts by invoking such an assumption?</gray>
 
 . . .
 
-何もやらないよりも、仮定と限界を明示して作業する方が意義があるため
+何もやらないよりも、仮定と限界を明示して作業する方が意義があるため<gray>it is worthwhile to estimate impacts while explicitly stating assumptions and limitations, than doing nothing</gray>
+
+----
+
+手法開発者の意図<gray>intentions of SCM developer</gray>  
+
+* 叙述研究はCFを意識しないので信頼性が低い。数量研究はCFについて一定の仮定を満たさないと作業しない。<gray>Descriptive/qualitative research often does not consider CF, therefore, has low credibility. Quantitative research does not get carried out unless certain assumptions about CF are met.</gray>
+* 中間がない。\underline{叙述研究と数量研究の橋渡し}をしたい。<gray>No middle ground. Want to bridge descriptive/qualitative and quantitative research.</gray>
+* 仮定を明示して、何が言えるかを示すことにも意義がある。<gray>Stating assumptions explicitly and show what can be drawn has some values.</gray>
 
 . . .
 
-手法開発者の意図  
-
-* 叙述研究はCFを意識しないので信頼性が低い。数量研究はCFについて一定の仮定を満たさないと作業しない。
-* 中間がない。\underline{叙述研究と数量研究の橋渡し}をしたい。
-* 仮定を明示して、何が言えるかを示すことにも意義がある。
-
-. . .
-
-オリジナルの開発者の崇高な意志に反して仮定もよく考えずにインパクト評価をやってしまう例は多いが...
+オリジナルの開発者の崇高な意志に反して仮定もよく考えずにインパクト評価をやってしまう例は多いが...<gray>Nonethless, there are many impact evaluations without thinking about the assumptions deeply, and do not take into account the noble intention of SCM developer...</gray>
 
 ----
 
 
-\citet{AbadieGardeazabal2003}: テロがバスク郡の経済成長に与える影響を推計。スペインでテロはバスク郡以外にはない。They want to estimate the terrorism impacts on growth of Basque county. Terrorism affected only Basque but nowhere else in Spain. 
+\citet{AbadieGardeazabal2003}: テロがバスク郡の経済成長に与える影響を推計。スペインでテロはバスク郡以外にはない。<gray>They want to estimate the terrorism impacts on growth of Basque county. Terrorism affected only Basque but nowhere else in Spain. </gray>
 
 . . .
 
-アイディア: それ以外の郡すべて(``donor pool'')からCFを合成They proposed to synthesise a control observation out of all other counties (``donor pool''). 
+アイディア: それ以外の郡すべて("donor pool")からCFを合成<gray>They proposed to synthesise a control observation out of all other counties ("donor pool"). </gray>
 
 . . .
 
@@ -2740,7 +2755,7 @@ $$
 テロ開始前データを使って、テロ無しバスクと加重平均の誤差の2乗和が最小化するようにウェイト$w_{j}$を選ぶ
 
 
-* なぜ和ではなく2乗和? \pause 2乗和が最小化されたら、(その正の平方根の)和も最小化されるから問題ない
+* なぜ和ではなく2乗和? \pause 2乗和が最小化 &rArr; (その正の平方根の)和が最小化
 * 2乗和にするのは数学上の都合: 2乗するとウェイトの関数(=誤差)を最小化(微分)して解を求められるから
 
 ----
@@ -2749,11 +2764,11 @@ $$
 
 ----
 
-$w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)Computing $w_{j}$
+$w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)<gray>Computing $w_{j}$</gray>
 
 
-1. 計<span style="color:white;background-color:pink;">$J$</span>郡$(j=1,\dots,J)$について結果変数(成長)に影響する<span style="color:white;background-color:pink;">$I$</span>個の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期<span style="color:white;background-color:pink;">$t=1, \dots ,T$</span>について集める。結果変数を全期間<span style="color:white;background-color:pink;">$t=1, \dots , T$</span><span style="color:white;background-color:blue;">$, T+1, T+2, \dots$</span>について集める。Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.
-1. テロ前$T$期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.
+1. 計<span style="color:white;background-color:pink;">$J$</span>郡$(j=1,\dots,J)$について結果変数(成長)に影響する<span style="color:white;background-color:pink;">$I$</span>個の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期<span style="color:white;background-color:pink;">$t=1, \dots ,T$</span>について集める。結果変数を全期間<span style="color:white;background-color:pink;">$t=1, \dots , T$</span><span style="color:white;background-color:blue;">$, T+1, T+2, \dots$</span>について集める。<gray>Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.</gray>
+1. テロ前$T$期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。<gray>Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.</gray>
 
 * 2乗和関数$\sum\limits_{i=1}^{I+1}\sum\limits_{t=1}^{T}\left(z_{ibt}-\sum\limits_{j=1}^{J}w_{j}z_{ijt}\right)^{2}$に最小化の一階条件を使う
 * $\sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+1}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+2}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
@@ -2803,32 +2818,32 @@ $$
 
 ----
 
-SCMが適しているデータSCM can be applied to the study with a small number of cross sectional units but with a relatively long (e.g., 10-30 periods) pre-policy observation period (``training period'')
+SCMが適しているデータ<gray>SCM can be applied to the study with a small number of cross sectional units but with a relatively long (e.g., 10-30 periods) pre-policy observation period ("training period")</gray>
 
-* 治療群が少なく統御群(ドナー・プール)が多い
-* 「推計標本estimation sample」(=イベント発生前)の期間$T$が比較的長い(10-30期間など)
+* 治療群が少なく統御群(ドナー・プール)が多い<gray>Small number of the treated, large number of the control</gray>
+* 「推計標本estimation sample」(=イベント発生前)の期間$T$が比較的長い(10-30期間など)<gray>Estimation sample (pre-period or training period) is relatively long (10-30)</gray>
 
 . . .
 
-推計期間での予測誤差が大きいとイベント後の予測も精度が低いので、使えないIf the fit of (within sample) prediction during training period is bad, there is nothing you can do.
+推計期間での予測誤差が大きいとイベント後の予測も精度が低いので、使えない<gray>If the fit of (within sample) prediction during training period is bad, there is nothing you can do.</gray>
 
 . . .
 
 短所
-:どの程度の誤差なら良いのか現在は基準がない、共変数選定の基準がない、イベント前データが長期に必要	
+:どの程度の誤差なら良いのか現在は基準がない、共変数選定の基準がない、イベント前データが長期に必要	<gray>No formal criteria about the minimum degree of training period fit, no guidance on covariate selection</gray>
 
 . . .
 
 長所
-:比較対象の選択基準を客観化、プラセボ分析が可能
+:比較対象の選択基準を客観化、プラセボ検定が可能<gray>Objective criteria of comparison group selection, can do placebo tests</gray>
 
 ----
 
-条件付き直交の意味
+条件付き直交の意味<gray>what we mean by conditional orthogonality</gray>
 
 . . .
 
-治療群と統御群は観察可能な変数のみを基準に選抜された
+治療群と統御群は観察可能な変数のみを基準に選抜された<gray>the treated and the control are assigned through the use only of the observable characteristics/variables</gray>
 
 . . .
 
@@ -2848,20 +2863,20 @@ SCMが適しているデータSCM can be applied to the study with a small numbe
 
 ----
 
-SCMの考え方: 共変数が似ていれば結果も似ているはず 
+SCMの考え方: 共変数が似ていれば結果も似ているはず <gray>Idear of SCM: If the covariates are similar, so are the impacts</gray>
 
 . . .
 
-暗に仮定している共変数と結果の関係This assumes that the relationship (supposedly derived from a theoretical model but never explicitly shown) between predictors and outcomes are:
+暗に仮定している共変数と結果の関係<gray>This assumes that the relationship (supposedly derived from a theoretical model but never explicitly shown) between predictors and outcomes are</gray>:
 
-1. 横断面に均質
-1. 安定的(=時系列に均質)
-
-. . .
-
-強い仮定に思えるが、これらは叙述的研究も同じBut these may be the same for qualitative, narrative studies.
+1. 横断面に均質<gray>cross-sectionally uniform</gray>
+1. 安定的(=時系列に均質)<gray>stable (uniform in time)</gray>
 
 . . .
+
+強い仮定に思えるが、これらは叙述的研究も同じ<gray>But these may be the same for qualitative, narrative studies.</gray>
+
+----
 
 叙述的研究と比べた長所
 
@@ -2888,31 +2903,31 @@ SCMの考え方: 共変数が似ていれば結果も似ているはず
 
 ----
 
-@Pinotti2015
+@Pinotti2015 on effects of mafia violence on growth
 
 ![Mafia violence on growth in Apulia and Basilicata](ImpactEvaluation/figure/Pinotti_mafia_Fig06.jpg)
 
 ----
 
-@Pinotti2015
+@Pinotti2015 on effects of mafia violence on growth
 
 ![Apulia and Basilicata were new to violence](ImpactEvaluation/figure/Pinotti_mafia_Fig04.jpg)
 
 ----
 
-@Pinotti2015
+@Pinotti2015 on effects of mafia violence on growth
 
 ![Mafia violence deters investments](ImpactEvaluation/figure/Pinotti_mafia_Fig09.jpg)
 
 ----
 
-@Pinotti2015
+@Pinotti2015 on effects of mafia violence on growth
 
 ![Mafia violence slows industry (\% of provincial GDP)](ImpactEvaluation/figure/Pinotti_mafia_Fig12.jpg)
 
 ----
 
-@Pinotti2015
+@Pinotti2015 on effects of mafia violence on growth
 
 ![Mafia violence placebo studies](ImpactEvaluation/figure/Pinotti_mafia_Fig10.jpg)
 
@@ -2924,10 +2939,10 @@ It is still possible that something other than mafia violence caused the slowdow
 
 @Pinotti2015 also shows that;
 
-* Private investment dried up.
-* Public investment increased.
-* Private employment reduced.
-* Public employment increased but did not offset the reduction in private employment.
+* Private investment dried up&darr;
+* Public investment increased&uarr;
+* Private employment reduced&darr;
+* Public employment increased&uarr; but did not offset the reduction in private employment&darr;
 
 . . .
 
@@ -2942,37 +2957,37 @@ He argues that increased public investments were channeled to mafia activities t
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 ![貿易自由化の効果、Asia](ImpactEvaluation/figure/Billmeier_Fig01.jpg)
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 ![Latin America](ImpactEvaluation/figure/Billmeier_Fig02.jpg)
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 ![Africa before 1987](ImpactEvaluation/figure/Billmeier_Fig03.jpg)
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 ![Africa 1987-91](ImpactEvaluation/figure/Billmeier_Fig04.jpg)
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 ![Africa after 1991](ImpactEvaluation/figure/Billmeier_Fig05.jpg)
 
 ----
 
-@Billmeier2013
+@Billmeier2013 on the effects of trade liberalisation on growth
 
 怪しい結果に思える。貿易自由化していないdonor poolを使って加重平均を合成
 
@@ -2996,7 +3011,18 @@ He argues that increased public investments were channeled to mafia activities t
 
 ----
 
+::: {style="text-align: center;"}
+# Various attitudes toward
+
+:::{style="font-size: 250%;line-height: 1.1;"}
+IMPACT EVALUATION
+:::
+:::
+
+----
+
 It is fair to say that \textit{ex post} evaluation uses a poor method in estimating impacts which should not be taken too seriously. 
+
 ::: {style="font-size: 40%;line-height: 1.1;"}
 <http://www.jica.go.jp/english/our_work/evaluation/tech_and_grant/project/ex_post/about.html>
 :::
@@ -3030,36 +3056,54 @@ Donor agencies' evaluation professionals did not have a good answer.
 
 . . .
 
-We need to produce knowledge from past policies for future policies.
+We need to produce knowledge from past policies to inform future policies.
 
 ----
 
 :::{.description-list}
 Millenium Villages (2004-2015)
-: ビッグプッシュ実験。サブサハラ・アフリカの14箇所(80ヵ村)で農業、保健、教育、インフラ、生産への投資。一人当たり1年120ドル$\times$50万人$\times$12=総額$\Sexpr{50*120*12/1000}$億ドル(\Sexpr{(50*120*12/1000)*120}億円)。コロンビア大学地球研究所ジェフリー・サックス教授主導、国連、世銀、各国政府が支援、民間企業も協賛。PRビデオ(MTV) <https://www.youtube.com/watch?v=uUHf_kOUM74>
+: ビッグプッシュ実験。サブサハラ・アフリカの14箇所(80ヵ村)で農業、保健、教育、インフラ、生産への投資。一人当たり1年120ドル×50万人×12=総額`r 50*120*12/1000`億ドル(`r ((50*120*12)/1000)*120`億円)。コロンビア大学地球研究所ジェフリー・サックス教授主導、国連、世銀、各国政府が支援、民間企業も協賛。PRビデオ(MTV) <https://www.youtube.com/watch?v=uUHf_kOUM74>
 :::
 
 . . .
 
-RCTではないこと、統御群データがないことなどから、実施したインパクト評価(before-after)の信頼性credibilityは低く、成果がよく分からないまま終わった。壮大な実験であり得たのに、評価の準備をしていなかった。
+RCTではないこと、統御群データがないことなどから、実施したインパクト評価(before-after)の信頼性credibilityは低く、成果がよく分からないまま終わった
 
+壮大な実験であり得たのに、評価の準備をしていなかった
+
+. . .
+
+なぜ?
 
 ----
 
 @ODIMV2008 : Before-after比較
 
+::::::::::: {.columns}
+:::: {.column width="50%"}
 ![](ImpactEvaluation/figure/MVPhase1Evaluation.jpg)
+::::
+
+:::: {.column width="50%"}
+* 穀物反収&uarr;
+* マラリア報告件数&darr;
+* 母子保健利用&uarr;
+* 医療サービス利用&uarr;
+::::
+:::::::::::
 
 ----
 
+@ClemensDemombynes2011, DID vs. before-after
+
 ::::::::::: {.columns}
 :::: {.column width="70%"}
-![](ImpactEvaluation/figure/ClemensDemombynes2010_MilleniumVillageEvaluation_Fig10.jpg)
+![@ClemensDemombynes2011, Figure 10](ImpactEvaluation/figure/ClemensDemombynes2010_MilleniumVillageEvaluation_Fig10.jpg){width="85%"}
 ::::
 
 :::: {.column width="30%"}
-* @ClemensDemombynes2011 : DIDとbefore-afterを比較
-* B-A比較が意外にDIDと類似...B-A比較が良いのか? DIDもダメか? 
+* B-A比較が意外にDIDと類似...B-A比較が良いのか? それとも、DIDもダメなのか? 
+   * Pre-trend検定がないので分からない...こういう評価デザインのプロジェクトなので、pre-periodのデータが1期間しかないかも
 * B-AはDIDよりも効果推計値が上振れ
 ::::
 :::::::::::
@@ -3078,11 +3122,13 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
-1. 村は常に変化しているから、村レヴェルでの実験に統御群は作れない。
-    * 村が常に変化しているからこそ、実際の村が統御群に必要になる。
+1. 村は常に変化しているから、村レヴェルでの実験に統御群は作れない
+    * 村が常に変化しているからこそ、実際の村が統御群として必要
 1. 介入は村が自ら学んで改善するという過程を経る。この過程はRCTで評価できない。
     * (率直に何を言っているのか理解できないほど)勘違いしている
-    * 学んで改善を記録するとはプロセス評価process evaluationのことで、必要性を誰も否定していない。学んで改善してもインパクトはまだ分からないから、インパクト評価は必要。プロセス評価とインパクト評価を混同。
+    * 学んで改善を記録するとはプロセス評価process evaluationのことで、必要性を誰も否定していない
+    * 学んで改善してもインパクトはまだ分からないから、インパクト評価は必要
+    * プロセス評価とインパクト評価を混同
 
 ----
 
@@ -3090,65 +3136,190 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
    * 最初に候補を作って治療群と統御群に割り振れば良いだけ(忙しいのは事実だけど)
    * 既存の全国データには含まれないような情報を治療群では集めているので既存データでは不十分
    * 変わるからこそ統御群が必要
+      * 確かに、統御群が別ショックの影響を受けるかも
+      * だから、そうした影響を受けそうにない近似した統御群を選ぶべき
+      * 統御群を用意しない理由にはならない
 
-. . .
+----
 
 真の理由? 
 
-* 倫理的ではないから統御群を作らない、と2007年時点で\citet{SachsSanchez2007}が書いていた
-* しかし、2008年には比較村が誕生
+* 倫理的ではない、政治的に難しいから統御群を作らない、と2007年時点で @SachsSanchez2007[p.16779]が書いていた
+
+. . .
+
+:::{style="font-size: 60%;line-height: 1.1;"}
+> For ethical and practical reasons, there are no formal ‘‘control’’ villages. Instead, project impact is assessed by rigorous before-andafter comparisons and detailed studies by sector. ... (snip) ... The ethical reasons relate to the fact that many core interventions (e.g., malaria control, access to safe water) are life-saving and would be ethically inappropriate to deny in a control village. The project also discovered that in some of the sites it was not politically feasible to be deeply involved in monitoring a control village without also offering a substantial package of beneficial interventions.
+:::
+
+* しかし、2008年には比較村が誕生、@Mitchell2018 は観察可能な変数の特徴が近似している5比較村/国との比較で効果推計
+   * どれだけ各変数が治療群村とマッチしているかで比較対象を選ぶmatching estimator
+   * マッチ対象候補村データはMVP開始以前に収集された2次データ(Demographic and Health Surveyなど)
+   * さらに、endlineで調査をして変数を収集
+
+
+----
+
+::::::::::: {.columns}
+:::: {.column width="70%"}
+   * matching estimator: 識別仮定=selection on the observable
+      1. 各治療村ごとに各変数の値が最も近い村をペアにする方法(covariate matching)
+      1. 各治療村の治療確率と近似するように比較村を選ぶ方法(propensity score matching)
+   * 効果=endlineでの治療群平均値-比較群平均値
+   * 批判に応えてこの評価デザインにした
+   * 事後的にどのような対応ができるかの好例、予算は相当ある場合
+::::
+
+:::: {.column width="30%"}
+![@Mitchell2018, Figure 2](ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig2.jpg){width="50%"}
+::::
+:::::::::::
+
+----
+
+::::::::::: {.columns}
+:::: {.column width="40%"}
+![@Mitchell2018, Figure 3A](ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig3A.jpg){width="50%"}
+::::
+
+:::: {.column width="60%"}
+* All indices show positive impacts
+::::
+:::::::::::
+
+
+----
+
+::: {style="text-align: center;"}
+# Rethink what estimated results tell us
+:::
 
 ----
 
 全ての推計方法への批判1: multiple testing ($p$ hacking)
 
+* $p$値=「帰無仮説(効果ゼロ)が正しい確率」。効果の平均値がゼロの母集団から$n$回標本を集めて検定すると、推計結果よりも極端な結果は$p$の確率(=$np$回)しか発生しない、ということ。<gray>$p$ value: Roughly, probability of the null hypothesis (of zero impact) being true. From the population of mean zero impacts, draw $n$ impact values, then you will get results more extreme than you currently have at $p$ percent probability ($np$ times). </gray>
+* $p$が小さいほど「外れ値」なので効果ゼロを疑問視して良い<gray>The smaller the $p$, the more extreme the current estimate, hence the more you can question the zero impact</gray>
+* $p=5\%$ $\Rightarrow$ 効果の平均値がゼロのとき、$n=100$回に$np$=5回は発生するかも<gray>If your threshold of extremeness is 5%, when the true mean impact is zero, you will have "extreme" ("statistically significant") impacts for $np=$5 times when you sample $n=100$ times </gray>
 
-* $p$値=帰無仮説(効果ゼロ)が正しい確率。効果の平均値がゼロの母集団から$n$回標本を集めて検定すると、推計結果は$p$の確率(=$np$回)しか発生しない、ということ。
-* $p$が小さいほど「外れ値」なので効果ゼロを疑問視して良い
-* $p=5\%$ $\Rightarrow$ 効果の平均値がゼロのとき、$n=100$回に$np=$5回は発生する結果、ということ
-* 少しずつ異なる推計式定式化を100回試すと、真の効果がゼロでも5回は推計値が外れ値になる
-* 外れ値を得るまで何度も推計式定式化を変えると、望む結果が(理論的には)必ず得られる
-* 似た結果指標(疲労と労働時間)への効果推計=multiple testingを無意識にやっている
-* 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う
+----
+
+全ての推計方法への批判1: multiple testing ($p$ hacking)
+
+* 少しずつ異なる推計式定式化を100回試すと、真の効果がゼロでも5回くらい推計値が外れ値になる<gray>If you estimate different but not too different (so the population is same for all) specifications 100 times, even when the true impact is zero, your estimate will be extreme for 5 times</gray>
+* 外れ値を得るまで何度も推計式定式化を変えると、望む結果が(理論的には)必ず得られる<gray>If you try different specifications as many times as necessary, you will get an estimate that you look for</gray>
+* 似た結果指標(例: 疲労と労働時間)への効果推計&larr;multiple testingを無意識にやっている<gray>similar outcome indicators (e.g., fatigue and work hours)&larr;unintentional multiple testing</gray>
+* 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う<gray>Countermeasures: use the mean of $p$ values of similar outcomes (called "family wise error rate")</gray>
 
 ----
 
 全ての推計方法への批判2: small sample bias
 
-@GertlerHeckman2014, Jamaica: 早期児童発達介入で成人時所得が25\%増加(報告当初は42\%だったが訂正), 治療群+統御群=109人
+* @GertlerHeckman2014, Jamaica: 早期児童発達介入で成人時所得が25\%増加(報告当初は42\%だったが訂正), 治療群+統御群=109人
+* @HeckmanMoonPinto2010,  Perry preschool: 内部収益率7-10\% (研究当初は15-17\%だったが訂正), 治療群+統御群=123
+* @CampbellConti2014, Abecederian: 成人時血圧など改善、治療群+統御群=111&rarr;33(35歳)
 
-@HeckmanMoonPinto2010,  Perry preschool: 内部収益率7-10\% (研究当初は15-17\%だったが訂正), 治療群+統御群=123
-
-@CampbellConti2014, Abecederian: 成人時血圧など改善、治療群+統御群=111&rarr;33(35歳)
+. . .
 	
-* 先入観・常識: そんなに大きいはずがない<https://statmodeling.stat.columbia.edu/2013/11/05/how-much-do-we-trust-this-claim-that-early-childhood-stimulation-raised-earnings-by-42/>
-* 小標本=誤差が大きい=分散が大きい=分布の裾野が広い
+先入観・常識: そんなに大きいはずがないprejudice/common sense: cannot be that large
+<https://statmodeling.stat.columbia.edu/2013/11/05/how-much-do-we-trust-this-claim-that-early-childhood-stimulation-raised-earnings-by-42/>
+
+. . .
+
+小標本=誤差が大きい=分散が大きい=分布の裾野が広いsmall sample=large errors=large variance=wider tails of distribution
 
 ----
 
-* 平均ゼロ、大きな分散の分布で$p$値5\%: 推計値が大きくないと実現しない
-* $p$ hackingをすればいつかは大きな効果を推計できる
-* ずるではなく偶然大きな値になった可能性もある
-* placebo testでも$p$ hacking可能(プラシーボの効果がゼロを探索)
+全ての推計方法への批判2: small sample bias
+
+* 平均ゼロ、大きな分散の分布で$p$値5\%: 推計値(の絶対値)が大きくないと実現しない<gray>distribution of mean zero, large variance: need a large estimate (in absolute value) to have a $p$ value=5%</gray>
+* $p$ hackingをすればいつかは大きな効果を推計できる<gray>if you $p$-hack, you will get a large estimate eventually</gray>
+* ずるではなく偶然大きな値になった可能性もある<gray>may be unintentional, may be by chance</gray>
+   * プロならば、小標本バイアスに警戒すべき<gray>if you are a professional, got be aware of the small sample bias</gray>
+* placebo testでも$p$ hacking可能(プラシーボの効果がゼロを探索)<gray>you can $p$-hack in placebo tests (look for a zero estimate of a placebo impact), too</gray>
+
+----
+
+全ての推計方法への批判2: small sample bias
+
+* 小標本で大きな効果: 効果ゼロの可能性が高い<gray>small sample, large impact: likely a zero impact</gray>
+* 小標本の研究は信頼性が低い<gray>small sample research has low credibility</gray>
+* よほどのメリットがない限りやらない方が良い<gray>if not with very good merits, advised not to carry out</gray>
 
 ::::::::::: {.columns}
 :::: {.column width="70%"}
-* 小標本で大きな効果: 効果ゼロの可能性が高い
-* 小標本の研究は信頼性が低い
-* よほどのメリットがない限りやらない方が良い
-* Heckman curveは本当にあの形か? 水平線かも?
+* Heckman curveは本当にあの形か? 水平線かも?<gray>Is the Heckman curve really shaped in that way? Can be a horizontal line?</gray>
 ::::
 
 :::: {.column width="30%"}
 :::{.fragment}
-![](ImpactEvaluation/figure/heckman_returns.jpg){width="50%"}
+![](ImpactEvaluation/figure/heckman_returns.jpg){width="30%"}
 :::
 ::::
 :::::::::::
 
 :::{.fragment}
-ヘックマンらの研究では認知能力(IQ)と非認知能力(中身=executive function、忍耐力、やる気grit、対人スキル)の両方が所得と関わっており、前者は3-5歳くらいまでに決まるが後者はそれ以降も変化する、としている
+ヘックマンらの研究では認知能力(IQ)と非認知能力(中身=executive function、忍耐力、やる気grit、対人スキル)の両方が所得と関わっており、前者は3-5歳くらいまでに決まるが後者はそれ以降も変化する、としている<gray>Studies by Heckman and coauthors indicate that the cognitive ability (IQ) and the noncognitive ability (executive function, perseverence, grit, interpersonal skills) are both related to incomes, and the former is determined by 3-5 years old while the latter changes even after that</gray>
 :::
+
+----
+
+External validity
+
+アフリカに関する経済学論文27,000本あまり(2000-2019)の地理分布
+
+::::::::::: {.columns}
+:::: {.column width="40%"}
+![@Porteous2022, Figure 1](ImpactEvaluation/figure/Porteus2022Fig1.jpg){width="100%"}
+::::
+
+:::: {.column width="20%"}
+![Source: freepik.com](ImpactEvaluation/figure/MapAfrica3.jpg){width="60%"}
+::::
+
+:::: {.column width="40%"}
+:::{.fragment}
+一国あたり本数の違いの93%が以下で説明可能 
+:::
+
+* 平和か
+* 政治体制
+* 海外観光客数
+* 公用語に英語
+* 人口
+::::
+:::::::::::
+
+. . .
+
+アフリカ経済学研究の知識の地理的分布には相当偏りがあります
+
+----
+
+External validity
+
+::::::::::: {.columns}
+:::: {.column width="40%"}
+![](ImpactEvaluation/figure/Porteus2022Tab1a.jpg){width="100%"}
+
+![](ImpactEvaluation/figure/Porteus2022Tab1b.jpg){width="100%"}
+
+@Porteous2022, Table 1
+::::
+
+:::: {.column width="60%"}
+* 人口が多い英語公用語国がトップ
+* 自国で学術雑誌を持っていると上位(e.g., South African Journal of Economics)
+::::
+
+:::: {.column width="70%"}
+::::
+
+:::: {.column width="30%"}
+:::{.fragment}
+:::
+::::
+:::::::::::
 
 ----
 
@@ -3192,7 +3363,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 . . .
 
-CF(多くの場合は統御群)を作り出す仮定が必要
+CFを作り出す仮定が必要
 
 . . .
 
@@ -3224,16 +3395,16 @@ RDD
 :	実験不要、ローカルな効果、仮定=政策のみ離散的変化
 
 SCM
-:	大きな観察単位、長い事前データ必要、仮定=観察可能な選抜
+:	実験不要、大きな観察単位・叙述研究・二国(群)間比較と親和的、長い事前データ必要、仮定=観察可能な選抜
 :::
 
 . . .
 
-(他にもある...Wald (instrumental variables) estimator、matching estimator)
+(他にもある...Wald (instrumental variables) estimator that gives LATE、matching estimator)
 
 . . .
 
-with-withoutはRCTのみ、before-afterは統御群も必要
+with-withoutはRCT・NEのみ、before-afterはDIDをすべきなので統御群も必要
 
 . . .
 
@@ -3274,6 +3445,9 @@ placebo test: 効果があり得ない部分で効果計測、効果検知する
 . . .
 
 理由: 警察が強いから。抗争に一般人を巻き込むと警察が弾圧。
+
+. . .
+
 「賃金中央値までなら最低賃金引き上げは雇用を減らさない」「余地の大きい日本でも引き上げよう」
 
 . . .
