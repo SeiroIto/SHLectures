@@ -190,6 +190,7 @@ ggplot(data = x2,
 
 ```{r, echo=FALSE, fig.cap = "見やすい図"}
 library(ggplot2)
+library(data.table)
 x2 <- data.table(groups = rep(letters[1:4], 125), x)
 ggplot(data = x2, 
     aes(x = x, y = y, fill = groups, color = groups, shape = groups)) +
