@@ -1,0 +1,448 @@
+---
+title: "RP07"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP04.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP07.pdf
+# quarto render RP07.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+回帰不連続の推計効率の読み方について、標準偏差が低いとなぜダメなのかがまだあまり良く分からなかったので、もし時間がありましたら説明していただけますと幸いです。
+:::
+</div>
+
+推計値の下の行の括弧の数値は、推計値の標準誤差standard error of the estimateです
+
+:::{.description-list}
+標準誤差
+: 標本を母集団から何度も繰り返し無作為抽出したとき、推計値がどれだけ散らばるか。繰り返し抽出して描いた標本推計値分布の標準偏差で計算。
+:::
+
+. . .
+
+標準誤差について丁寧な解説を聞きたい人は[Josh Starmer's StatQuest](https://youtu.be/XNgt7F6FqDU)がお薦め
+
+* とても分かりやすいのですが、なぜか彼の歌を必ず聴かされます
+   * 標準誤差の回はStatQuest初期なので遠慮していたらしく、歌は流れないので安心してください
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+回帰不連続の推計効率の読み方について、標準偏差が低いとなぜダメなのかがまだあまり良く分からなかったので、もし時間がありましたら説明していただけますと幸いです。
+:::
+</div>
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+例: 標本期待値(平均値)の標準誤差、目的: 真の期待値を推計したい
+
+1. 同じ母集団から$n$個の(観測)値を抽出sample $n$ values from the same population
+1. 期待値を計算compute expected value
+1. 1.-2.をM回繰り返すrepeat 1.-2. for M times
+1. M個の標本期待値=真の期待値(母集団期待値)の標本分布M sample means=sampling distribution of true mean
+   * 真の期待値の推計値=M個の標本期待値の平均値、がbest/natural guess
+   * 推計値の正確さも知りたい&rarr;真の期待値とその推計値の差の程度は?how different btw true mean and its estimate?
+   * 真の期待値の標本分布の標準偏差=標本期待値の「標準誤差」と呼ぶstandard deviation of sampling dist="standard error" of sample mean
+      * 標準偏差=標本の散らばり度合い尺度、式では、se=標本標準偏差/$\sqrt{n}$
+      * 標準誤差: 抽出samplingによる標本期待値のブレの程度・不確実さを示すshows uncertainty of sample mean due to sampling
+      * 期待値の標準偏差の導出は簡単
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+回帰不連続の推計効率の読み方について、標準偏差が低いとなぜダメなのかがまだあまり良く分からなかったので、もし時間がありましたら説明していただけますと幸いです。
+:::
+</div>
+
+母集団(真の期待値$\mu$, 真の分散$\sigma^{2}$)&rarr;独立サンプルindependently sample $n$ values, $S=x_{1}, x_{2}, \dots, x_{n}$
+
+. . .
+
+サンプル$S$の和の分散=$\NU\left[\sum S\right]=\NU[x_{1}]+\NU[x_{2}]+\dots+\NU[x_{n}]=n\sigma^{2}$
+
+. . .
+
+期待値$\bar{x}=\frac{\sum S}{n}$の分散=$\NU\left[\bar{x}\right]=\NU\left[\frac{\sum S}{n}\right]=\frac{\NU\left[\sum S\right]}{n^{2}}=\frac{\sigma^{2}}{n}$
+
+. . .
+
+標準偏差=$\sqrt{\mbox{分散}}$なのでM個の期待値の標準偏差=$\frac{\sigma}{\sqrt{nM}}$, 普通は抽出は1回のみなので$\frac{\sigma}{\sqrt{nM}}=\frac{\sigma}{\sqrt{n}}$
+
+* なぜ$\frac{\sigma}{\sqrt{nM}}$かは次ページ
+
+. . .
+
+真の分散は分からないので標本分散$\hat{\sigma^{2}}=\frac{\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}}{n-1}$で代用
+
+----
+
+Variance of M values of sample means $\bar{x}_{1}, \dots, \bar{x}_{M}$
+
+$$
+\begin{aligned}
+\NU\left[\bar{x}\right]
+&=
+\E\left[(\bar{x}_{j}-\bar{\bar{x}})^{2}\right],\\
+&=
+\E\left[\left(\sum_{i=1}^{N}\sum_{j=1}^{M}\frac{x_{ij}}{NM}-\bar{\bar{x}}\right)^{2}\right]
+=\E\left[\left(\sum_{i=1}^{N}\sum_{j=1}^{M}\frac{x_{ij}}{NM}-\sum_{i=1}^{N}\sum_{j=1}^{M}\frac{\bar{\bar{x}}}{NM}\right)^{2}\right],\quad \leftarrow \scriptsize{\bar{\bar{x}}=\frac{1}{NM}\sum_{i=1}^{N}\sum_{j=1}^{M}\bar{\bar{x}}}\\
+&=
+\frac{1}{N^{2}M^{2}}\E\left[\sum_{i=1}^{N}\sum_{j=1}^{M}\left(x_{ij}-\bar{\bar{x}}\right)^{2}+2cov(x_{ij}, x_{i'j})\right], \\
+&=
+\frac{1}{N^{2}M^{2}}\sum_{i=1}^{N}\sum_{j=1}^{M}\E\left[\left(x_{ij}-\bar{\bar{x}}\right)^{2}\right], \quad \leftarrow cov=0 \mbox{[independent sample]}\\
+&=
+\frac{1}{N^{2}M^{2}}\sum_{i=1}^{N}\sum_{j=1}^{M}\sigma^{2}
+=
+\frac{\sigma^{2}}{NM}.
+\end{aligned}
+$$
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+回帰不連続の推計効率の読み方について、標準偏差が低いとなぜダメなのかがまだあまり良く分からなかったので、もし時間がありましたら説明していただけますと幸いです。
+:::
+</div>
+
+
+標準誤差は、推計値に比べて各観測値が平均してどれだけ離れているかを推計値の計測単位で示します
+
+* 身長(cm)期待値=165、標準誤差=10 &rarr; 各観測値は平均して10cmくらい165cmから(正負両方向=絶対値で)離れている
+
+. . .
+
+標準誤差seは信頼区間を計算するときも使います
+$$
+\mbox{推計値の95%信頼区間}=\mbox{推計値}\pm 1.96×se
+$$
+
+* 推計値 $\pm$ 2×se内には各観測値の95%が含まれます、ということ
+* 推計値 $\pm$ 1×se内には各観測値の68%が含まれます
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+回帰不連続の推計効率の読み方について、標準偏差が低いとなぜダメなのかがまだあまり良く分からなかったので、もし時間がありましたら説明していただけますと幸いです。
+:::
+</div>
+
+回帰分析regression analysisで推計した係数の標準誤差=回帰線から平均してどれだけ各観察値が離れているか
+
+. . .
+
+reading exam score = $a+b_{1}ClassSize+b_{2}Disadvantaged+e$という回帰式の場合、$b_{1}=-.687$の標準誤差が0.197だとしましょう(Table VI of Angrist and Lavy)
+
+* 学級サイズの傾きの線-.687と各観察値とのズレの距離は平均して0.197(点)ということです
+   * 正確には、$y-a-b_{2}Disadvantaged$という各観察値の試験点数で(切片$a$とDisadvantagedで)説明されていない「残り」と学級サイズの傾きの線-.687との縦方向の距離の平均値が0.197(点)
+   * 平均点=70点台と比べると、このズレの程度は小さいと判断できます
+      * もちろん、点数がばらけていると平均値はあまり意味ないのですが...
+
+----
+
+::::::::::{.columns}
+
+:::::{.column width="70%"}
+:::: {.panel-tabset}
+
+### R code
+
+```{r AL data, echo = T, message = F, output = F}
+install.packages(c("DOS", "modelsummary", "tinytable", "data.table", "ggplot2"),
+  repos = "http://cran.us.r-project.org")
+library(tinytable); library(modelsummary); library(DOS)
+library(data.table); library(ggplot2)
+data("angristlavy")
+aldata <- data.table(angristlavy)
+lm1 <- lm(data = aldata, avgmath ~ clasz + tipuach)
+lm11 <- lm(data = aldata, avgmath ~ tipuach)
+lm12 <- lm(data = aldata, clasz ~ tipuach)
+#### residualised data (regression residuals of lm11 and lm12)
+rdata <- data.table(yres = lm11$res, xres = lm12$res)
+lm13 <- lm(data = rdata, yres ~ xres)
+#### iv1 <- fixest::feols(data = aldata, avgmath ~ tipuach | clasz ~ z)
+```
+
+### 説明
+
+:::{.nonincremental}
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+* 最初の3行: パッケージをインストールし、読み込みます
+* 4-5: DOSパッケージのangristlavyデータを読み込み、data.table形式にしてaldataというオブジェクトにする
+* 6: aldataを使って、avgmath = a + $b_{1}$clasz + $b_{2}$tipuachを推計、推計結果をlm1というオブジェクトにする
+* 7: aldataを使って、avgmath = a + $c_{1}$tipuachを推計、推計結果をlm11というオブジェクトにする
+* 8: aldataを使って、clasz = a + $d_{1}$tipuachを推計、推計結果をlm12というオブジェクトにする
+* 9: lm11の残差、lm12の残差を2列のデータにし、rdataというオブジェクトにする
+* 10: rdataを使って、avgmath = A + $B_{1}$claszを推計、推計結果をlm13というオブジェクトにする
+* 11: 行頭に#の付いたコメント行なのでRに無視される
+:::
+:::
+
+::::
+:::::
+
+:::::{.column width="30%"}
+:::{.nonincremental}
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+* 最初の4行: パッケージをインストールし、読み込みます
+* 5-6: DOSパッケージのangristlavyデータを読み込み、data.table形式にしてaldataというオブジェクトにする
+* 7: aldataを使って、avgmath = a + $b_{1}$clasz + $b_{2}$tipuachを推計、推計結果をlm1というオブジェクトにする
+* 8: aldataを使って、avgmath = a + $c_{1}$tipuachを推計、推計結果をlm11というオブジェクトにする
+* 9: aldataを使って、clasz = a + $d_{1}$tipuachを推計、推計結果をlm12というオブジェクトにする
+* 10: 行頭に#の付いたコメント行なのでRに無視される
+* 11: lm11の残差、lm12の残差を2列のデータにし、rdataというオブジェクトにする
+* 12: rdataを使って、avgmath = A + $B_{1}$claszを推計、推計結果をlm13というオブジェクトにする
+* 13: 行頭に#の付いたコメント行なのでRに無視される
+:::
+:::
+::::
+::::::::::
+
+----
+
+::: {.panel-tabset}
+
+### R code
+
+```{r AL reg summary code, echo = T, eval = F}
+summary(lm1)
+```
+
+### Output
+
+```{r AL reg summary, echo = T}
+summary(lm1)
+```
+
+:::
+
+
+claszの推計値は.01542、標準誤差は.08691、$p$ value=85.9%です
+
+----
+
+::: {.TallerOutput}
+```{r AL reg summary2, echo = T}
+summary(lm13)
+```
+:::
+
+lm1でのclaszの係数とlm13(=residualised dataを使った推計)のclaszの係数は同じになることが証明されています(Frisch-Waugh-Lovell theorem)
+
+* 大学院レヴェル計量経済学の定理なので、ここでは説明せず紹介だけです
+
+claszの推計値は.01542、標準誤差は.08665、$p$ value=85.9%です(ほぼ同じ、差は数値計算の誤差だと思います)
+
+----
+
+
+```{r AL reg plot}
+ggplot(rdata, aes(x = xres, y = yres)) +
+  geom_point(size = 1) +
+  geom_abline(intercept = 0, slope = lm1$coeff["clasz"], colour = "red")
+```
+
+係数の大きさに比して標準誤差が大きいと、係数を元に回帰線を引くと、各観察値の散らばりをほとんど説明できていないことが一目瞭然です
+
+係数の大きさ vs. 標準誤差 を対比させる理由
+
+* 推計された係数が(統計学的に)意味があるかを判断
+* 散らばりが大きい=標準誤差が大きい &rArr; 統計学的に意味がない=係数は統計学的にはゼロと判断可能
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+長期的に労働供給が上がるため賃金が下がり、それによって生産が増えるため景気が良くなり、財政赤字増加分が下がるとありましたが、賃金が下がるため物を買う人が減って景気が下がることは無いのかと疑問に思いました。
+:::
+</div>
+
+自分の頭で考えている疑問なので、簡潔で論理が分かりやすいです
+
+. . .
+
+下がる可能性あり: 労働者全体でどの程度の賃金&darr;、どの程度の所得変化かを考える必要
+
+* 壁を越えていた中高スキルの人たち: 賃金&darr; &rArr; 消費&darr; 
+* 壁が引き上げられた低スキルの人たち: 賃金&darr;&所得&uarr; &rArr; 消費&uarr; 
+
+. . .
+
+壁を越えていた人たち: 賃金&darr;?
+
+* 低スキル労働賃金&darr; &rArr; 中高スキル労働賃金&darr;?
+* そうではない場合=異なるスキルの労働者間の代替性が高くない場合
+   * 飲食業・小売業の接客職 vs. 上場企業のサラリーマン
+   * 機械化が難しいため(接客ロボットなしの場合)
+      * ロボットあり: 低スキル賃金&darr; &rArr; ロボット需要&darr;+中高スキル労働需要&darr;
+
+----
+
+#### References
+
+::: {#refs}
+:::
+
