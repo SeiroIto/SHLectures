@@ -2879,7 +2879,7 @@ SCMが適しているデータ<gray>SCM can be applied to the study with a small
 
 ----
 
-SCMの考え方: 共変数が似ていれば結果も似ているはず <gray>Idear of SCM: If the covariates are similar, so are the impacts</gray>
+SCMの考え方: 共変数が似ていれば結果も似ているはず <gray>Idea of SCM: If the covariates are similar, so are the outcomes</gray>
 
 . . .
 
