@@ -1601,18 +1601,13 @@ margin: 0;
 </div>
 <div id="tabset-1-2">
 <div>
-<div style="font-size: 70%;line-height: 1.1;">
 <ul>
-<li>最初の3行: パッケージをインストールし、読み込みます</li>
-<li>4-5: DOSパッケージのangristlavyデータを読み込み、data.table形式にしてaldataというオブジェクトにする</li>
-<li>6: aldataを使って、avgmath = a + <span class="math inline">\(b_{1}\)</span>clasz + <span class="math inline">\(b_{2}\)</span>tipuachを推計、推計結果をlm1というオブジェクトにする</li>
-<li>7: aldataを使って、avgmath = a + <span class="math inline">\(c_{1}\)</span>tipuachを推計、推計結果をlm11というオブジェクトにする</li>
-<li>8: aldataを使って、clasz = a + <span class="math inline">\(d_{1}\)</span>tipuachを推計、推計結果をlm12というオブジェクトにする</li>
-<li>9: lm11の残差、lm12の残差を2列のデータにし、rdataというオブジェクトにする</li>
-<li>10: rdataを使って、avgmath = A + <span class="math inline">\(B_{1}\)</span>claszを推計、推計結果をlm13というオブジェクトにする</li>
-<li>11: 行頭に#の付いたコメント行なのでRに無視される</li>
+<li>このコードだけで計算ができます</li>
+<li>まず、必要なパッケージをダウンロードしてインストールし、Rのメモリに読み込み</li>
+<li>DOSパッケージに含まれているAnglist and Lavy論文のデータをRに読み込み、data.table形式に変換</li>
+<li>回帰式を推計し、その係数と標準誤差を得ます</li>
+<li>散布図用に残差の回帰式を推計し、散布図+回帰線を描きます</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -1703,6 +1698,7 @@ F-statistic: 0.03165 on 1 and 170 DF,  p-value: 0.859</code></pre>
 <p>lm1でのclaszの係数とlm13(=residualised dataを使った推計)のclaszの係数は同じになることが証明されています(Frisch-Waugh-Lovell theorem)</p>
 <ul>
 <li class="fragment">大学院レヴェル計量経済学の定理なので、ここでは説明せず紹介だけです</li>
+<li class="fragment">なぜlm13を推計するか: 散布図を描くのに必要なため(散布図を描かないなら不要)</li>
 </ul>
 <p>claszの推計値は.01542、標準誤差は.08665、<span class="math inline">\(p\)</span> value=85.9%です(ほぼ同じ、差は数値計算の誤差だと思います)</p>
 </section>
@@ -3130,7 +3126,7 @@ window.QuartoSupport = function () {
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
