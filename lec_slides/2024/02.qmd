@@ -81,6 +81,16 @@ resources:
 gray {
   color: #aeb6bf;
 }
+Red {
+  color: Red;
+}
+Blue {
+  color: Blue;
+}
+RoyalBlue
+{
+  color: #4169e1;
+}
 ```
 
 ::: {style="text-align: center;"}
@@ -2100,19 +2110,22 @@ RDDは局地的な実験と捉えられるため<gray>Because RDD can be conside
 
 RDD	での識別仮定の信頼性チェック
 
-* placebo test: 	欠落変数の影響を確認: 政策変化のない点の推計値がゼロを検定
-   * ...棄却 $\Rightarrow$ 推計した効果に疑問
-* density test: 	非越境(local randomisation)の確認: 
+::: {style="font-size: 95%;line-height: 1.1;"}
+1. Placebo test: 	欠落変数の影響を確認: 政策変化のない点の推計値がゼロを検定
+   * ...棄却(「効果」あり) $\Rightarrow$ <Red>推計した効果に疑問</Red>
+1. Density test: 	非越境(local randomisation)の確認 
 	* 越境者が多ければ境界で標本が多くなり、分布に凹凸ができる: forcing variableの分布密度が境界内外で等しい(=帰無仮説: 越境がなく分布の差が境界内外でゼロ)か検定(density test or McCary test)
-	   * ...棄却 $\Rightarrow$ 越境あり 
+	   * ...棄却(凸凹あり) $\Rightarrow$ <Red>越境あり</Red>
+1. Equality test: 非越境(local randomisation)の確認
 	* 治療確率(propensity scoreという)の差が境界内外でゼロ(=帰無仮説: 越境が完全で治療確率に対し境界が無意味になる)か検定
-	   * ...棄却 $\Rightarrow$ 越境なし
+	   * ...棄却(確率異なる) $\Rightarrow$ <Blue>境界に意味あり</Blue>
 	* 特定の特徴を持つ人たちが越境していないか: その他変数の平均値が境界内外で等しい(=帰無仮説: 越境がなく平均値の差が境界内外でゼロ)か検定
-	   * ...棄却 $\Rightarrow$ 越境あり
+	   * ...棄却(特徴異なる) $\Rightarrow$ <Red>境界で棲み分けあり...越境</Red>
+:::
 
 ---- 
 
-PTは論理的なチェックで傍証。DTはランダム化の検定。
+PTは論理的なチェックで傍証。DT, ETはランダム化の検定。
 
 . . .
 
@@ -2168,9 +2181,9 @@ Density testの例
 * 社会科学分野の政策は大きな単位で実施することが多い。貿易自由化、経済自由化、アベノミクス、量的金融緩和政策、マイナス金利など。
 * 問題: 統御群(CFとなる国や地方)がない。インパクト評価の手法を使えない。
    * マクロ経済学: マクロ経済モデル(マクロ経済を表す数理統計モデル、$Y=a+bX+e$が複数ある連立方程式)を作り、データを使ってモデルのパラメタ$a, b$を推計し、推計値$\hat{a},\hat{b}$をモデルに代入して影響を計算$Y_{1}=\hat{a}+\hat{b}X_{1}$する。
-   * CFはモデルで作っている。金利を下げると銀行貸出が(下げなかったときよりも)増えて企業の投資が(下げなかったときよりも)増え...などという設定は、CF(金利を下げなかったとき)との比較で示されている。\pause\textcolor{azure}{$\hat{a},\hat{b}$}や\textcolor{azure}{モデル}は\textcolor{red}{正しい?}
+   * CFはモデルで作っている。金利を下げると銀行貸出が(下げなかったときよりも)増えて企業の投資が(下げなかったときよりも)増え...などという設定は、CF(金利を下げなかったとき)との比較で示されている。<RoyalBlue>$\hat{a},\hat{b}$</RoyalBlue>や<RoyalBlue>モデル</RoyalBlue>\textcolor{red}{正しい?}
 * SCMはCFなしに効果推計をします
-* でも、用いている仮定が満たされるのか、相当怪しい場合もあります
+* なので、用いている仮定が満たされるのか、相当怪しい場合もあります
 
 ----
 
