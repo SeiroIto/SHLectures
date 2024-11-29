@@ -1,0 +1,543 @@
+---
+title: "RP08"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP04.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP08.pdf
+# quarto render RP08.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+因果関係を直接証明することはできないが、時間的な相関関係を見ると、GoToトラベルが旅行の増加を引き起こし、その旅行増加と感染率の上昇が同時期に発生していることから、GoToトラベルと感染率との関係を間接的に推測することは可能だと思う。ただし、パンデミック中は経済が低迷しており、観光業が打撃を受けていたため、GoToトラベルのような観光業促進策が中止されると、経済回復が遅れる可能性もある。政策を決定する際には、これらのメリットとデメリットを天秤にかけて選ばなければならない。
+:::
+</div>
+
+効果はどんな対象にも推計できます
+
+. . .
+
+before-after, with-withoutなどの比較は容易
+
+. . .
+
+肝心なのは、効果推計を(可能と)する際の仮定の現実妥当性=用いたCFは妥当か
+
+. . .
+
+これが非現実的・不当だと、推計した効果の信頼性も低い
+
+. . .
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+<https://www3.nhk.or.jp/news/special/coronavirus/goto-travel/detail/detail_26.html>
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+因果関係を直接証明することはできないが、時間的な相関関係を見ると、GoToトラベルが旅行の増加を引き起こし、その旅行増加と感染率の上昇が同時期に発生していることから、GoToトラベルと感染率との関係を間接的に推測することは可能だと思う。ただし、パンデミック中は経済が低迷しており、観光業が打撃を受けていたため、GoToトラベルのような観光業促進策が中止されると、経済回復が遅れる可能性もある。政策を決定する際には、これらのメリットとデメリットを天秤にかけて選ばなければならない。
+:::
+</div>
+
+
+旅行量変化が時間で先行して、感染者数変化が後追いするときでも
+
+* 仮に、旅行と感染者がまったく無関係でも、こういう現象はあり得ます
+   * 別の理由で感染者数が変化しているとき、将来の感染者数増加を見越して、駆け込み的に旅行者数が増えたかもしれません
+* 人間は予想して動くので、時間の順序=因果関係、とは言い切れません
+   * これが効果推計の難しさ、面白さです
+
+. . .
+
+「間接的に」=ある程度は、ですが、どの程度か分からないと役立ちません
+
+. . .
+
+順序が示す相関関係=順序通りの因果関係+それ以外
+
+* 順序通りの因果関係の比率(=100%、50%、0%?)が分からないと役立ちません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+因果関係を直接証明することはできないが、時間的な相関関係を見ると、GoToトラベルが旅行の増加を引き起こし、その旅行増加と感染率の上昇が同時期に発生していることから、GoToトラベルと感染率との関係を間接的に推測することは可能だと思う。ただし、パンデミック中は経済が低迷しており、観光業が打撃を受けていたため、GoToトラベルのような観光業促進策が中止されると、経済回復が遅れる可能性もある。政策を決定する際には、これらのメリットとデメリットを天秤にかけて選ばなければならない。
+:::
+</div>
+
+観光業への補助は必要でした(以下は上限額)
+
+* 緊急事態宣言や外出自粛要請に基づく飲食業時短の影響を受けた事業者への一時支援金(中小企業60万円、2021年3月)
+* 緊急事態宣言下の月次支援金(中小企業20万円、2021年4月-10月)、家賃支援金(法人600万円、2020年7月-2021年2月)
+* 持続化給付金(中小企業200万円、個人100万円、2020年５月-2021年2月)
+* 感染対策費用(500万円、2021年4月)
+* 事業復活支援金(中小企業250万円、2022年1月-6月)
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+因果関係を直接証明することはできないが、時間的な相関関係を見ると、GoToトラベルが旅行の増加を引き起こし、その旅行増加と感染率の上昇が同時期に発生していることから、GoToトラベルと感染率との関係を間接的に推測することは可能だと思う。ただし、パンデミック中は経済が低迷しており、観光業が打撃を受けていたため、GoToトラベルのような観光業促進策が中止されると、経済回復が遅れる可能性もある。政策を決定する際には、これらのメリットとデメリットを天秤にかけて選ばなければならない。
+:::
+</div>
+
+補助金支出の方法
+
+::: {style="font-size: 90%;line-height: 1.1;"}
+1. 事業者への直接支給
+   * 長所: 事業者らの行動を変えないために歪みが少ない
+   * 短所: 事業収入情報は国税庁管理、共有・実施が政治的に不可能
+1. 事業者への融資、金利補助、減税などの間接支給
+   * 長所: 将来への投資、資金繰り平準化が可能
+   * 短所: ゼロ・ゼロ融資(2020年3月-、中小企業3億円、合計42兆円、4年目から利払い発生、滞納時は元本8-10割を信用保証協会が弁済)は貸し手に審査する誘因がなく、ゾンビ企業を大量生産
+1. 旅行代金への価格補助金(=GTT)
+   * 長所: 旅行者(市場)による対象選別
+   * 短所: 移動や外出の自粛と矛盾、停止に追い込まれる
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+東京大学のGoToトラベルの研究で、この結果が見せかけの相関にならないためには有症率AとGoToトラベルの利用B以外に外出頻度というその他の要因Cの調査が必要だというお話を聞いて、研究デザインを設計する時に欠けた部分をつくらないことの重要さがわかった。しかし、その他の要因Cには他にも色々な要素が当てはまりそうだと感じ、その中から「外出頻度」という設問は研究者が考えて導き出すしかないのか気になった。
+:::
+</div>
+
+ご指摘の通り、その他の要因Cには外出頻度以外にいろいろな内容が考えられます
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+* 外出頻度は僕が適当に考えただけです
+:::
+
+. . .
+
+1. 相関関係しか分からない
+1. であれば、ほかの因果関係(逆因果、見せかけの相関)を考え、そうした因果関係の要因を制御した上でGTTと有症率の相関関係を推計
+   1. 逆因果
+      * 諦観: 将来どうせ感染するから、今楽しんだ方がいい、主観的確率、既往歴、日常の感染リスクを訊く
+   1. 見せかけの相関
+      * 外出頻度: 外出好きはGTTを使いやすいし、感染もしやすい、外出頻度を訊く
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+Go toトラベルについての話に、関心を持ちましたが、内容が難しく、内容を正しく理解できないように感じます。国や地方単位でインパクトを計測したい時、Y＝a+bX+eの式の正確性が疑われているという話の内容をよく理解することができませんでした。Go toトラベルのような、大きなインパクトを計測したい時、それ与えた、社会的影響を測定することは難しいのではないかと感じました。検討する要素が多く、正確な因果関係の特定が難しいのではないかと感じたためです。
+:::
+</div>
+
+GTTの東京追加の効果はSCMを使って推計できます
+
+. . .
+
+マクロ経済学では$Y＝a+bX+e$のような方程式で効果を推計
+
+* CFをグループとして想定しません
+* CFを方程式で表現します
+   * X=1: 拡張的金融政策, X=0: 緊縮的金融政策
+   * 拡張的にするとYはbだけ変化します&larr;政策効果
+* その方程式は正しいか?
+   * 現実妥当性がモデルを使った効果推計の信頼性を決めます
+   * こんな方程式を知っていれば、実験は不要
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+テロがバスク郡の経済成長に与える影響...(中略)...直接的影響には投資の減少だったり観光業の衰退...(中略)...不安定な環境ではリスクが高いため、企業が進出や拡大をためらうことも多いそうです
+:::
+</div>
+
+SCMでは、まず、最も興味のある結果指標(=1人あたりGDP)への効果を推計します
+
+メカニズムを想像するために、他の中間指標(=投資、対内直接投資、観光産業GDP)への効果も推計します
+
+* @Pinotti2015 は成長率だけでなく公的・私的部門の投資と雇用への効果も推計
+
+. . .
+
+メカニズムを考慮すると、推計された結果指標への効果の信頼性がある程度判断できます
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+(GoToトラベルにおいて: 引用者追記)そもそも政府は効果検証用にデータを収集しておらず、こうしたエビデンスを政府自ら遠ざけて逃げていることは、あって良いものなのだろうか。またこうしたいわゆる「政府のエビデンス逃れ」は、世界中の政府機関で見られることなのか。
+:::
+</div>
+
+エビデンスに基づく政策立案evidence based policy making (EBPM)は世界の潮流です
+
+. . .
+
+失策がバレると捉えられているので、政府は政策効果の検証に消極的
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+* 基本的に役所は効果検証したくないと考えています
+   * 一部に積極的な官僚もいます
+   * TPOによって立場を変える: 35人学級への財務省 vs. 予算案査定時の財務省
+* 世論に押された政治家が決断しない限り、実現は難しいでしょう
+:::
+
+. . .
+
+効果推計はデータ収集やデザイン設計の費用あり、推計対象にする政策を選ぶべき
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+* 推計対象に選べない政策(例1): 全国民・企業が等しく影響を受ける政策(金融、防衛など)&rarr;マクロ経済モデル
+* 推計対象に選べない政策(例2): GTT、ふるさと納税&larr;管元首相の発案だから、[クール・ジャパン機構](https://www.cao.go.jp/cool_japan/aratana/pdf/gaiyou2.pdf#page=3)は[令和6年度末397億円累積赤字](https://www.cj-fund.co.jp/files/investment/report_r05_02.pdf#page=1)&larr;菅直人元首相下で戦略化、安倍元首相下でクールジャパン戦略担当大臣を設置し開始したから?
+:::
+
+. . .
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+> これらについて、様々な政策や政府の取組との直接的な因果関係を分析することは難しいが、全体として一定の成果が出ているものと考えられる。
+
+<div style="text-align: right"> [経産省によるクール・ジャパン機構の自己評価(2024年6月)](https://www.cao.go.jp/cool_japan/aratana/pdf/honbun.pdf#page=10) </div>
+
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+政策評価の手法を社会全体で共有し、透明性を持って政策効果を議論する文化が必要だと思う。例えば、「Go To Travel」のような政策では、施策の目的や効果だけでなく、潜在的なリスクや代替案についてもデータに基づいて議論されるべきだ。このような取り組みは、政策への信頼を高めるだけでなく、国民一人ひとりが政策に関心を持ち、議論に参加するきっかけにもなるのではないかと考えた。今回の授業を通じて、データ分析の技術的側面だけでなく、政策評価が社会全体の意思決定にどのように関与するかについても深く考える機会となった。
+:::
+</div>
+
+税金を使って政策を実施する以上、効果推計を含む検証作業は必須です
+
+* 民主主義を支える大事な柱の一つかもしれません
+
+. . .
+
+政策目的&larr;複数の手段 &rArr; どの手段のコスパが最も良いか納税者が知るべき
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+* 少子化family policies: 休職中の昇進保証(フランス)、所得税還付(アメリカ)、育休最長3年、出産一時金、保育費・子ども医療費無償化(日本)...[OECD加盟国の家族政策](https://www.oecd.org/en/data/datasets/oecd-family-database.html#123456)
+   * 金額だけでいえば、[日本は未就学児対象予算が多い](https://webfs.oecd.org/Els-com/Family_Database/PF3_1_Public_spending_on_childcare_and_early_education.pdf#page=2)が、[保育施設利用率は高くなく](https://webfs.oecd.org/Els-com/Family_Database/PF3_2_Enrolment_childcare_preschool.pdf#page=2)、[年齢別男女就業率格差](https://webfs.oecd.org/Els-com/Family_Database/LMF_1_4_Employment_profiles_over_life_course.pdf#page=3)と[男女就業時間格差](https://webfs.oecd.org/Els-com/Family_Database/LMF_2_1_Usual_working_hours_gender.pdf#page=2)は残る&larr;少子化抑制効果が小さいから(のはず)
+      * 家事・育児時間も
+:::
+
+::::::::::{.columns}
+::::{.column width="90%"}
+::: {style="font-size: 80%;line-height: 1.1;"}
+:::{.fragment}
+   * 高所得国: 女性のキャリアへの負の影響を減らせるか[@DoepkeKindermann2019; @Doepke2023]
+:::
+:::
+::::
+
+::::{.column width="10%"}
+::: {layout-ncol=2}
+![<span style="font-size: 30%;line-height: 0.3;">日経新聞2024年11月27日</span>](08/Nikkei2024Nov27.jpg){width="20%"}
+
+![](08/NikkeiKanrishoku2024Nov27.jpg){width="40%"}
+:::
+::::
+::::::::::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+政策評価の手法を社会全体で共有し、透明性を持って政策効果を議論する文化が必要だと思う。例えば、「Go To Travel」のような政策では、施策の目的や効果だけでなく、潜在的なリスクや代替案についてもデータに基づいて議論されるべきだ。このような取り組みは、政策への信頼を高めるだけでなく、国民一人ひとりが政策に関心を持ち、議論に参加するきっかけにもなるのではないかと考えた。今回の授業を通じて、データ分析の技術的側面だけでなく、政策評価が社会全体の意思決定にどのように関与するかについても深く考える機会となった。
+:::
+</div>
+
+「政策効果を議論する文化」は未成熟です
+
+* 政府が政策効果推計に関与する必要
+   * EBPMに消極的
+* 納税者が政策効果に関心を持つ必要
+   * 効果とは何か、政策目標と手段は、などのリテラシーが不十分
+      * 台湾のように、オンラインで一部の納税者がフォローするので十分かも
+   * バラマキに不信感を持ちにくい(住民税非課税世帯10万円支給の公明党議席減、財源を示さず現役世代減税の国民民主党躍進、[中央区ハッピー買物券](08/ChuokuHappyKen2024.jpg))
+
+----
+
+「ハッピー券、区議会議員」で検索したところ...
+
+. . .
+
+::: {style="font-size: 50%;line-height: 1.1;"}
+> まず本来令和6年度当初予算案に含まれる来年度の区内共通買物・食事券の発行について、例年より販売時期を2か月前倒して4月に販売を開始するため、本補正予算の債務負担行為に含めて計上をしているという点、およびプレミアム率を20％→30％に引き上げて拡大するという点、区民の皆様に早く届けて経済を活性化するという区の方針については<Red>感謝申し上げると共に高く評価致します</Red>。
+
+<div style="text-align: right"> [高橋元気区議会議員webページ](https://www.genki-takahashi.com/category/%e6%94%bf%e7%ad%96/%e5%9c%b0%e5%9f%9f%e6%8c%af%e8%88%88/%e3%83%8f%e3%83%83%e3%83%94%e3%83%bc%e8%b2%b7%e3%81%84%e7%89%a9%e5%88%b8/) </div>
+
+> 本日の中央区議会にて、9月の補正予算が賛成多数で可決されました。私の所属する中央区議会会派、かがやき中央はこの案に反対を表明しました。私たちの<Red>反対理由は一点で、高齢者向け区内共通買物・食事券の臨時給付</Red>に対するもののみです。
+> 【反対理由となった疑問点】
+>・なぜ65歳以上、一律給付なのか
+>・1人あたり12,000円分が妥当なのか
+>・なぜ今、高齢者への給付が必要なのか
+
+<div style="text-align: right"> [高橋まきこ区議会議員webページ(2022年)](https://makikot-chuo.com/2022/09/22/koreinotame/) </div>
+
+> 現在申込受付中のハッピー買物券について、詳しくお伝えします。Web申し込みは2024年3月24日（日）16時まで、です。<Red>お忘れなく！</Red>昨年度は区民（区内在住）は、事前申込の区民は全員購入することができました。
+
+<div style="text-align: right"> [高橋まきこ区議会議員webページ(2024年)](https://makikot-chuo.com/2024/03/22/omokutemendo/) </div>
+
+
+> 今年は、プレミアム20％かつ百貨店等大規模小売店でも利用できるお得な買物券です。<Red>ぜひ、ご購入をご検討ください。</Red>
+
+<div style="text-align: right"> [山本りえ区議会議員webページ(2020年)―買物する人も買物する店もハッピーに！―
+](https://ameblo.jp/yama-rie/entry-12606378325.html) </div>
+
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+低所得者の労働賃金の低下が中高所得者の労働賃金と連動することは少ないと知り、この状況の逆も言えるとしたらワーキングプアの説明ができると思いました。(中高所得者の賃金が上がる状況で、低所得者は低賃金のままで働き続けても貧困)
+:::
+</div>
+
+論理的な意見で素晴らしいと思います
+
+. . .
+
+類似の現象が労働経済学で関心を集めています
+
+::: {style="font-size: 90%;line-height: 1.1;"}
+:::{.des-list-boxed}
+職の二極化 job polarization
+: 職の分布で中技能が減り、低技能と高技能に二極化する傾向
+:::
+:::
+
+. . .
+
+US @Autor2019 [Fig4](08/Autor2019Fig4.jpg), [Fig5](08/Autor2019Fig5.jpg), David Autorのスライド [50](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=50), [52](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=52), [54](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=54), EU [53](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=53)
+
+日本 [経産省資料](https://www.meti.go.jp/shingikai/sankoshin/2050_keizai/pdf/006_05_00.pdf#page=19), [H30経済財政報告](https://www5.cao.go.jp/j-j/wp/wp-je18/pdf/p02011.pdf#page=3), 途上国は緩やか @MartinsNeto2023
+
+. . .
+
+ICTによって定型的作業(routine tasks)労働が代替できるようになったため、という解釈
+
+. . .
+
+アメリカ
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+* 都市近郊での中技能職の減少が顕著
+   * 都市部は高技能か(富裕層向け)パーソナル・サービスという低技能が増加
+:::
+
+* 高技能はAI/ICTと補完的&rarr;労働生産性&uarr;、高技能賃金&uarr;
+* 中技能はAI/ICTと代替的&rarr;中技能者+低技能者が低技能労働市場、低技能賃金&darr;
+
+----
+
+#### References
+
+::: {#refs}
+:::
+

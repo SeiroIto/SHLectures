@@ -1,0 +1,86 @@
+\def\xlow{3.83}
+\def\xadd{1.87}
+\def\xpivot{3.2}
+\def\xpivothalf{1.6}
+\def\xpivothalftwo{5.6}
+\def\xright2{4}
+\def\Xlim{9}
+\def\Ylim{8}
+\def\Ylimtwo{12}
+\def\yminus{-.25}
+
+%\def\xpivothalf{\divide \xpivot by 2}
+%\def\divider{2}
+%\def\xpivothalf{\xpivot / \divider}
+\def\ProdFunction{(0, 7) to [out=-10, in=170] (6.5, \xright2) }
+\def\afterline{(0, 4) to [out=20, in=190] (\Xlim, 7)}
+\tikzstyle{line} = [draw, very thick, -latex']
+\begin{frame}{M—p§–ñ‚Ì‰e‹¿}
+\begin{columns}[T]
+\column{.7\paperwidth}
+%\def\ProdFunction{(0, 3) parabola bend (5,4) (8, 4.44)}
+\hfil\begin{tikzpicture}[scale=.95]
+\onslide<1->{
+	\coordinate(origin) at (0, 3);
+	\coordinate(TopLeft) at (0, \Ylim);
+	\coordinate(BottomRight) at (\Xlim, 0);
+	\coordinate(XRight) at (\Xlim, 3);
+	\coordinate(TopRight) at (\Xlim, \Ylim);
+	\draw (origin) -- (\Xlim, 3) node[right] {ŠÔ};
+	\draw[->, line, name path = YAxis] 
+	  (origin) -- (0, \Ylim) node[above] {ŒÀŠEŒø—p};
+	\draw[draw = none, color=blue, thick,  > = latex, <->] 
+		($(origin) + (0, \yminus)$) -- ($(5, 0) + (0, \yminus)$) 
+		node[below = 2pt, pos = .5]{\scriptsize \phantom{AŠw}};
+	 \node[right]  at (\Xlim, 5) {\footnotesize \phantom{$u'(A)w$}};
+}
+\only<2->{
+	\draw (XRight) -- (TopRight) node[above] {24};
+}
+\only<3->{
+	\draw[name path=MPcurve0, draw, color=green!80, thick, densely dashed] 
+	  \ProdFunction node[right] {\footnotesize $\beta u'\left(c^{*}_{2}\right)h'(l^{*})$};
+	\draw[name path=MPcurve, draw, color=green!80, thick, yshift = -.5cm] 
+	  \ProdFunction node[right] {\footnotesize $\beta u'\left(\tilde{c}_{2}\right)h'(\tilde{l})$};
+}
+\only<4->{
+	\draw[name path=CLwage0, draw, color=darkred, thick, densely dashed] 
+	  \afterline ;
+	\draw[name path=CLwage, draw, color=darkred, thick, yshift = .5cm] 
+	  \afterline 
+	  node (w0) [right] {\footnotesize $u'(A)w$};
+	\draw[color=darkred] ($(TopRight) + (-1, -.75)$) node[above left]{\footnotesize $u'(\tilde{c}_{1})w$};
+	\path[name intersections= {of=CLwage and YAxis, by = int2}]; 
+	\coordinate[label = below: {}] (w0) at (int2);
+	\draw (w0) node[left]{\rotatebox{90}{\footnotesize$u'(w24+A)w$}};
+}
+\only<5->{
+	\path[name intersections= {of=MPcurve and CLwage, by = int1}]; 
+		\coordinate[label = below: {}] (b1) at (int1);
+		\node[fill = azure, inner sep = 2pt] at (b1){};
+		\draw ($(b1) + (1ex, 1.75ex)$) node{\scriptsize$a$};
+	\coordinate (b2) at (b1 |- origin);
+	\coordinate (b3) at (b1 |- TopLeft);
+	\draw[dashed] (b3) node[left] {ŠwZ} node[right] {™“¶˜J“­} -- (b2);
+	\path[name intersections= {of=MPcurve0 and CLwage0, by = int0}]; 
+		\coordinate[label = right: {}] (b0) at (int0);
+		\node[fill = azure, inner sep = 2pt] at (b0){};
+		\draw ($(b0) + (1ex, 1.75ex)$) node{\scriptsize$b$};
+	\draw[draw, color=azure, thick,  > = latex, <->] 
+		($(origin) + (0, \yminus)$) -- ($(b2) + (0, \yminus)$) 
+		node[below = 2pt, pos = .5]{\scriptsize AŠw};
+	\draw[draw, color=azure, thick,  > = latex, <->] 
+		($(b2) + (0, \yminus)$) -- ($(XRight) + (0, \yminus)$) 
+		node[below = 2pt, pos = .5]{\scriptsize A˜J};
+	\node[fill = azure, inner sep = 2pt] at (b1){};
+}
+\end{tikzpicture}
+\column{.3\paperwidth}
+\onslide<6->{‘æ2ŠúŠ“¾‚ğ­‚µ‚Å‚à‘æ1Šú‚ÉˆÚ“®‚³‚¹‚é‚½‚ß‚É™“¶˜J“­‚ğ‘‚â‚·}\\~\\
+\onslide<7->{$\beta \frac{h'(l)}{w}=\frac{u'(c_{1})}{u'(c_{2})}>\beta R$‚È‚Ì‚Å$Rw<h'(l)$‚Ìó‘Ô}\\~\\
+\onslide<8->{Ø“ü‚ª§ŒÀ‚³‚ê‚é‚ÆAAŠwŠÔ‚ÆŠ“¾‚ÍÅ“K…€‚æ‚è‚àŒ¸‚é}\\~\\
+\onslide<9->{M—p§–ñ‚ªbind‚·‚éê‡: ‘Y$A$‚ª­‚È‚¢ê‡=•n‚µ‚¢‰Æ’ë‚Ìê‡}
+
+\end{columns}
+\end{frame}
+

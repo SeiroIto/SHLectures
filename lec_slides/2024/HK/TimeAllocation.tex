@@ -1,0 +1,68 @@
+\def\xlow{3.83}
+\def\xadd{1.87}
+\def\xpivot{3.2}
+\def\xpivothalf{1.6}
+\def\xpivothalftwo{5.6}
+\def\xright2{4}
+\def\Xlim{9}
+\def\Ylim{8}
+\def\Ylimtwo{12}
+\def\yminus{-.25}
+
+%\def\xpivothalf{\divide \xpivot by 2}
+%\def\divider{2}
+%\def\xpivothalf{\xpivot / \divider}
+\def\ProdFunction{(0, 7) to [out=-10, in=170] (6.5, \xright2) }
+\def\afterline{(0, 4) to [out=20, in=190] (\Xlim, 7)}
+\tikzstyle{line} = [draw, very thick, -latex']
+
+\begin{frame}[t, label = FullTimeChildLabour]{ƒtƒ‹ƒ^ƒCƒ€™“¶˜J“­‚Ìê‡}
+\begin{columns}[T]
+\column{.75\textwidth}
+%\def\ProdFunction{(0, 3) parabola bend (5,4) (8, 4.44)}
+\hfil\begin{tikzpicture}[scale=.7]
+	\coordinate(origin) at (0, 3);
+	\coordinate(TopLeft) at (0, \Ylimtwo);
+	\coordinate(BottomRight) at (\Xlim, 0);
+	\coordinate(XRight) at (\Xlim, 3);
+	\coordinate(TopRight) at (\Xlim, \Ylimtwo);
+	\draw (origin) -- (\Xlim, 3) node[right] {time};
+	\pause
+	\draw[->, line, name path = YAxis] 
+	  (origin) -- (0, \Ylimtwo) node[above] {marginal utility};
+	\pause
+	\draw (XRight) -- (TopRight) node[above] {24};
+	\pause
+	\draw[name path=MPcurve, draw, color=green!80, thick] 
+	  \ProdFunction node[right] {\footnotesize $\beta u'\{h(l)+Rs\}h'(l)$};
+	\pause
+	\draw[name path=CLwage, draw, color=darkred, thick, yshift = 4cm] 
+	  \afterline 
+	  node (w0) [right] {\footnotesize $u'(A-Rs)w$};
+	\draw[color=darkred] ($(TopRight) + (-1, -1)$) node[left]{\scriptsize $u'\{w(24-l)+A-s\}w$};
+	%\draw (origin |- w0) node[left] {\mpage{1.85cm}{\hfil\footnotesize child labour\\\hfil wage}};
+	\path[name intersections= {of=CLwage and YAxis, by = int2}]; 
+		\coordinate[label = below: {}] (w0) at (int2);
+		\draw (w0) node[left]{\footnotesize$u'(w24+A-s)w$};
+	\path[name intersections= {of=MPcurve and YAxis, by = int3}]; 
+	\draw (int3) node[left]{\footnotesize$\beta u'\{h(0)+Rs\}h'(0)$};
+	%	pause for shaded area
+	\pause
+	\draw[draw, color=blue, thick,  > = latex, <->] 
+		($(origin) + (0, \yminus)$) -- ($(XRight) + (0, \yminus)$) 
+		node[below = 2pt, pos = .5]{\scriptsize A˜J};
+\end{tikzpicture}
+\column{.2\textwidth}
+\vspace{2cm}
+\onslide<6->{
+$w$‚ª‘å‚«‚­‚Ä$A$‚ª¬‚³‚¢ê‡\\~\\
+}
+\onslide<7->{
+$h(0)$‚ª‘å‚«‚¢ê‡\\~\\
+}
+\onslide<8->{
+$h'(0)$‚ª¬‚³‚¢ê‡
+}
+\end{columns}
+
+\end{frame}

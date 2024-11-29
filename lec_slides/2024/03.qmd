@@ -1,0 +1,596 @@
+---
+title: "開発経済論: 人的資本"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/03.html>
+    theme: [sky]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - ../../toc-slide.html
+    includes:
+      in_header: ../../sky_add_FilePointer.html
+      after-body: ../../toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+    css:
+      - ../../seiro.css
+#### Looks like seiro.css in sky_add_FilePointer.html does not work but local ../../seiro.css works
+#### Don't understand why
+lightbox: auto
+displayMode: compact
+filters:
+  - parse-latex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../MathShorthand.html 
+#### bib file at doc folder root
+bibliography: ../../../../seiro.bib
+resources:
+  - 03.pdf
+# quarto render 03.qmd
+---
+```{css}
+.math.inline .MathJax  {
+  font-size: 80% !important;
+}
+.mermaid-render svg {
+    width: 70%; 
+}
+gray {
+  color: #aeb6bf;
+}
+Red {
+  color: Red;
+}
+Blue {
+  color: Blue;
+}
+RoyalBlue
+{
+  color: #4169e1;
+}
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+```
+
+::: {style="text-align: center;"}
+# はじめに
+:::
+
+----
+
+::::::::::{.columns}
+::::{.column width="60%"}
+![School enrollment rates, 2020](HK/figure/SG.png){width="55%"}
+::::
+
+::::{.column width="40%"}
+$$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}
+::::
+::::::::::
+
+----
+
+![Under 5 stunting rate, 2020](HK/figure/HG.png){width="55%"}
+
+----
+
+![Infant mortality rate, 2020](HK/figure/MG.png){width="55%"}
+
+----
+
+人的資本とは
+
+. . .
+
+教育、訓練、健康(保健)など、人間の生産性を高める無形資産。
+
+. . .
+
+古くはアダム・スミスにその概念が見出されるが、近代になって提唱したのがアメリカの経済発展を研究した\citet{Schultz1960, Schultz1961}、賃金を職歴と教育水準に関連づける実証研究をした\citet{Mincer1974}、最適な人的資本投資に関する理論的貢献をした\citet{Becker1962, Becker1964}など。
+
+. . .
+
+教育水準や保健指標が優れているほど所得は高いので、教育や保健の普及が所得を増やすかもしれない...
+
+. . .
+
+貧困の罠では経済全体が豊かになるメカニズムとその障壁を考えた
+
+このセクションでは、個々の家計が豊かになるメカニズムを人的資本投資を通じて考える
+
+----
+
+::::::::::{.columns}
+
+::::{.column width="55%"}
+![被雇用者1人あたりGDP(労働生産性)](HK/figure/LabourProductivityPerEmployee.jpg){width="85%"}
+
+出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+::::
+
+::::{.column width="45%"}
+* 中国、韓国、インドの労働生産性は急速に成長、ただし、インドの水準はまだ低い
+* 南アフリカとインドネシアの労働生産性は低く、成長も遅い
+* リーマン・ショックを引き起こしたアメリカは、ショック後も労働生産性が成長
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="55%"}
+![被雇用者1人あたりGDP(労働生産性): 現在の高所得国のみ](HK/figure/LabourProductivityPerEmployee2.jpg){width="85%"}
+
+出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+::::
+
+::::{.column width="45%"}
+*	日本の労働生産性はバブル崩壊後も1996年頃までアメリカと似た成長率、それ以降は差が拡大
+*	1990年代末期は就職氷河期、デフレの始まり(CPI, 1998年9月)
+*	2011年大震災以降、労働生産性は僅かに上昇したが、アベノミクス以降も成長せず、COVID-19蔓延以前の2018年から低下
+::::
+::::::::::
+
+----
+
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![1人あたりGDP](HK/figure/GDPPerCapita.jpg){width="85%}
+
+出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+::::
+
+::::{.column width="30%"}
+* 1人当たりGDPは労働生産性とトレンドと近似
+* (ここでの)低所得国と高所得国の差は縮まっている
+* 南アフリカはインドネシアに追いつかれた
+* 1人当たりGDPでも日本は韓国に追いつかれた
+* 南アフリカは中国よりも労働生産性は高いが1人当たりGDPは低い
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![1人あたりGDP: 現在の高所得国のみ](HK/figure/GDPPerCapita2.jpg){width="85%}
+
+出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+::::
+
+::::{.column width="30%"}
+* 日本は1997年からアメリカとドイツとの格差拡大
+* 日本はアベノミクスの1年前から成長
+* 日本は労働生産性は低迷しているのに1人当たりGDPは成長
+   * 就労人数(時間人)が増えたため
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![資本分配率(=資本報酬/国民所得=1-労働分配率)](HK/figure/PikettySaezZucman.jpg){width="85%}
+
+出所: @PikettySaezZucman2018, Table A49より作成
+::::
+
+::::{.column width="30%"}
+* 大戦期以降-1990年前後: 資本分配率は低下
+* 1990年前後-: 資本分配率は上昇
+   * 人的資本は増えているのに労働分配率は低下
+   * 生産物市場の独寡占化oligopoly+労働市場の独寡占化oligopsony?
+::::
+::::::::::
+
+
+----
+
+```{r pc GDP, warning = F}
+# downloaded from https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD
+# GDP per capita, PPP (constant 2017 international $) GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP at purchaser's prices is the sum of gross value added by all resident producers in the country plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2017 international dollars.
+library(data.table)
+grepout <- function(str, x)
+  # returns element of match (not numbers)
+  x[grep(str, x, perl = T)]
+repseq <- function(seq, rep)
+#       returns a sequence with each elements repeated by rep times
+{z <- NULL; for (i in 1:length(seq)) z <- c(z,rep(seq[i],rep)); return(z)}
+y <- fread("1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
+  header = T, skip = 2, sep = ",")
+setnames(y, 
+  grepout("^1|^2", colnames(y))
+  , paste0("pcdgp.", grepout("^1|^2", colnames(y)))
+  )
+yL <- reshape(y, direction = "long", idvar = c("Country Name", "Country Code"),
+  varying = grepout("^pc", colnames(y)))
+yL[, c("indicator", "Indicator Name", "Indicator Code", "V67") := NULL]
+setnames(yL, c("name", "code", "year", "value"))
+# lag with n=1 and pad with NA (returns vector)
+setkey(yL, name, year)
+yL[, gY1 := shift(value, n=1, fill=NA, type="lag"), by = .(name)]
+yL[, gY := (value-gY1)/gY1]
+yL <- yL[year >= 1990]
+yL[, trend := 1:.N, by = code]
+lm1 <- lm(log(value) ~ trend, data = yL[grepl("JP", code) & year >= 1991 & year <= 2012, ])
+```
+```{r read labour force stat of japan, echo = F, warning = F, message = F, results = "hide"}
+# 総務省統計局、労働力調査、長期時系列データ, unit = 10 thousands
+#https://www.stat.go.jp/data/roudou/longtime/zuhyou/lt01-a10.xlsx
+lfj <- fread("HK/JapanLabourForce.prn", skip = 2, header = T)
+lfj <- lfj[-(1:2), ]
+lfj[, year := repseq(1953:2021, 12)]
+# okinawa is included from 1973 onwards
+lfj <- lfj[year >= 1973, ]
+lfj[, c("Mon", "star") := NULL]
+setnames(lfj, c("year", "month", 
+  paste(rep(grepout("L|E|U|N", colnames(lfj)), each = 3), c("t", "m", "f"), sep = ".")))
+lfjL <- reshape(lfj, direction = "long", idvar = c("year", "month"),
+  varying = grepout("L|E|U|N", colnames(lfj)))
+setnames(lfjL, c("year", "month", "GenderGroup",
+  "LForce", "Employed", "Employee", "Unemployed", "NLForce", "URate"))
+lfjL[, month := unlist(strsplit(month, "月"))]
+nv <- c("year", "month", "LForce", "Employed", "Employee", "Unemployed", "NLForce", "URate")
+lfjL[, (nv) := lapply(.SD, as.numeric), .SDcols = nv]
+# merge population census 人口推計, 政府統計コード=00200524, unit = thousand
+popj <- fread("HK/JapanPopulation.prn", skip = 1, header = T)
+popj2 <- fread("HK/JapanPop2015-2019.prn", skip = 5, header = T)
+popj2 <- popj2[grepl("総数", AgeGroup) & !grepl("%", unit), .(year, GenderGroup, value)]
+popj2[, gen := "t"]
+popj2[grepl("男$", GenderGroup), gen := "m"]
+popj2[grepl("女$", GenderGroup), gen := "f"]
+popj2[, GenderGroup := NULL]
+popj[, memo := NULL]
+popL <- reshape(popj, direction = "long", idvar = c("year"),
+  varying = grepout("pop", colnames(popj)))
+setnames(popL, "time", "GenderGroup")
+setnames(popj2, c("value", "gen"), c("pop", "GenderGroup"))
+pop <- rbindlist(list(popL, popj2), use.names = T)
+pop2 <- pop[year == 2019]
+pop2[, year := 2020]
+pop <- rbind(pop, pop2)
+setkey(pop, year, GenderGroup)
+setkey(lfjL, year, GenderGroup)
+lf <- pop[lfjL]
+lf[, Date := as.IDate(strftime(paste(year, month, 1, sep = "-"), format = "%Y-%m-%d"))]
+lf[, LFRate := LForce*10/pop]
+lf[, ERate := 1-URate/100]
+lf[, ELRate := LFRate*ERate]
+lf[, GenderGroup := factor(GenderGroup, levels = c("t", "f", "m"))]
+lf[, GenderGroup := factor(GenderGroup, labels = c("合計", "女", "男"))]
+lf <- lf[, .(Date, GenderGroup, LFRate, ERate, ELRate)]
+lf <- unique(lf)
+setnames(lf, 
+  c("LFRate", "ERate", "ELRate"), 
+  paste0("value.", c("LFRate", "ERate", "ELRate"))) 
+lfL <- reshape(lf, direction = "long", idvar = c("Date", "GenderGroup"),
+  varying = grepout("val", colnames(lf)))
+setnames(lfL, "time", "variable")
+lfL[, variable := factor(variable, levels = c("ELRate", "LFRate", "ERate"))]
+lfL[, variable := factor(variable, labels = c("就業率*労働力率", "労働力率", "就業率"))]
+lfL2 <- lfL[grepl("就業率\\*労働力率", variable) & grepl("合計", GenderGroup) & Date >= as.IDate("1991-01-01") & Date <= as.IDate("2012-12-01"), ]
+lfL2[, trend := 1:.N]
+lm2 <- lm(log(value) ~ trend, data = lfL2)
+```
+```{r read labour force stat of Japan at FRED, echo = F, warning = F, message = F, results = "hide"}
+# labour shares in japan
+ls <- fread("HK/LabourShareFromFRED.csv", header = T)
+setnames(ls, c("date", "value"))
+ls[, trend := 1:.N]
+ls[, Date := as.IDate(date)]
+lm3 <- lm(log(value) ~ trend, data = ls[Date >= as.IDate("1991-01-01") & Date <= as.IDate("2012-01-01")])
+```
+
+::::::::::{.columns}
+::::{.column width="40%"}
+![@ADKPV2020, Figure 1](HK/figure/ADKPV2021_Fig1small.jpg)
+::::
+
+::::{.column width="60%"}
+* 労働分配率は1980年代からすべての国で低下、日本では`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%低下
+* 1991-2012: 就業率*労働力率は`r formatC((exp(summary(lm2)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%変化(次2枚のスライド)、1人あたりGDPは`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%成長
+* 日本の労働分配率の低下の主な背景: 1人あたりGDP成長率(`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%)よりも平均労働所得の成長率(`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1+exp(summary(lm1)$coeff[2, 1]*22)-1-(exp(summary(lm2)$coeff[2, 1]*22)-1))*100, digits = 3, format = "f")`%)が低かったため
+   * 就業率や労働力率の影響は小さい
+   * 1人あたりGDPの増分から、労働者よりも多くを企業所有者が得た
+   * 所有者と株主が富を増やした
+::::
+::::::::::
+
+$$
+\mbox{労働分配率}
+=\frac{\mbox{労働所得}}{\mbox{GDP}}
+=\frac{\frac{\mbox{労働所得}}{\mbox{人口}}}{\frac{\mbox{GDP}}{\mbox{人口}}}
+=\frac{\frac{\mbox{労働所得}}{\mbox{労働者数}}\frac{\mbox{労働者数}}{\mbox{労働力}}\frac{\mbox{労働力}}{\mbox{人口}}}{\frac{\mbox{GDP}}{\mbox{人口}}}
+=\frac{\mbox{平均労働所得}\times\mbox{就業率}\times\mbox{労働力率}}{\mbox{1人あたりGDP}}.
+$$
+
+
+----
+
+
+@Schultz1960 の疑問と仮説
+
+
+1. 労働人口や資本の増加以上に生産が増えているのはなぜか
+
+* つまり、生産額/労働量=労働生産性、生産額/資本サービス価値=資本生産性が増えているのはなぜか
+   * 国内総生産(GDP)/人口=1人当たりGDP(労働人口$<$人口だが国単位での労働生産性を近似)も増えている。
+
+2. 労働分配率はなぜ上昇しているのか(1960年当時)\hfill\hyperlink{LShare<1>}{\beamergotobutton{先進国労働分配率}}
+
+. . .
+
+<br>
+
+人間への投資が労働生産性を高めているため
+
+. . .
+
+人間への投資の成果=人的資本human capital
+
+. . .
+
+人間を資本という物として捉えるのは当時(現在も?)「けしからん」
+
+. . .
+
+\citet{Becker1964}も\textit{Human Capital: A theoretical and empirical analysis, with special reference to education}などと副題を付けた
+
+----
+
+人的資本の分類
+
+:::{.des-list-boxed}
+知的能力
+: 知識、技能
+
+物的能力
+: 健康
+:::
+
+* 知識と技能は性質が異なる
+   * 技能: 人間に体化される&rarr;私的財
+   * 知識: 社会に蓄積されて共有される&rarr;公共財: 他者の消費は競合しないし排除もできない
+* 健康は運動能力と感染源(!)に分けると性質が異なる
+   * 運動能力: 人間に体化される&rarr;私的財
+   * 感染源: 社会に広める&rarr;外部性のある私的財: 他者への影響が市場で価格評価されないので、個人の行動は他者への感染を考慮しにくい
+      * 自分は軽症にしかならないから、感染予防努力を緩める
+      * 「マスク着用を強要するのは自由の侵害」...自由のためなら感染する覚悟がある?
+
+----
+
+知識生産=研究開発(R\&D)活動
+
+. . .
+
+模倣されると利益が減るので、知識生産は社会的に最適水準よりも少なくなりがち
+
+. . .
+
+特許patents、著作権copyright、商標trademarkなどで知的財産権を保護して少なくなりすぎないようにする
+
+. . .
+
+原則は理解されても、保護や違反摘発・懲罰の適切な水準に合意がない
+
+----
+
+* キムリア(白血病やリンパ腫、1回投与で3349万円)、ザインテグロ(ベータ・サラセミア、米承認3億円)
+* 保護下で薬価を高くし過ぎたために利用が進まない: Truvada(HIV予防治療薬)
+* 低所得者対象で利益が少ない+模倣されやすいために開発が進まない: マラリア治療薬、結核治療薬などのneglected tropical diseases
+* 厳しい罰則(日本: 商標権を侵害した場合は10年以下の懲役もしくは1000万円以下の罰金)、でも、生産地中国での摘発は...: 偽ブランド品販売
+* 著作権の保護期間を再三延ばすことで多額の利潤を保有権者が得る: ミッキーマウス(1923年生まれ、1998年期限切れ予定、1998年期限延長、2024年期限切れ予定[US])
+   * [I)t was ``basically the Gershwin family trust, grandchildren of Oscar Hammerstein, Disney, others of that ilk'' who pushed for ever-longer copyright terms.](https://arstechnica.com/tech-policy/2019/01/a-whole-years-worth-of-works-just-fell-into-the-public-domain/) (Dennis Karjala, Law professor, 2013)
+   * 商標はディズニーが半永久的に保有し続ける。ミッキーマウスの絵はpublic domainになるが、ミッキーの何々、という使い方は商標の使用許諾を得た上でライセンス料を支払う。
+
+----
+
+人の中で知的能力はどのように成長するでしょうか
+<gray>How does intellectual capacity grow in a person?</gray>
+
+. . .
+
+学校教育を考えます<gray>Let us consider schooling</gray>
+
+. . .
+
+通学すると学習し、人的資本(知的能力)を蓄積し、生産性が高まります<gray>If you go to a school, you learn, you will accummulate human capital (intellectual capacity), and you will become productive</gray>
+
+. . .
+
+生産性が高いほど稼ぎが増えます<gray>The more you are productive, the more you earn</gray>
+
+. . .
+
+では、できる限り長く学校に通うべきでしょうか?<gray>Then, shall we go to school as long as possible?<gray>
+\pause
+いいえ、ある段階で止めて働かねばなりません<gray>No. You need to stop at some point and start to work</gray>
+
+. . .
+
+いつ止めるかどのように決めるべきでしょうか<gray>How do we decide when to stop?</gray>
+
+. . .
+
+止めるタイミングを理解するには理論が必要になります<gray>We need a theory to understand.</gray>
+
+----
+
+@BalandRobinson2000 モデル: 2期間モデルを考えます<gray>Here comes @BalandRobinson2000: Let us consider a two-period model</gray>
+
+:::{.des-list-boxed}
+第1期
+:	子ども期: どのくらい学校に行くか、どのくらい働くか決めます。You choose how much to go to school, how much to work.
+
+第2期
+:	成人期: 労働所得を得ます。成人期所得は子ども期の就学期間に応じて増えます。You earn. Adulthood income is increasing in childhood schooling.
+:::
+
+----
+
+合理的な子ども: 便益と費用を考慮して教育水準を決める
+
+:::{.des-list-boxed}
+便益
+:	学歴を積むことによる成人所得増加分$\times$割引率
+
+費用
+:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費+児童労働所得)
+:::
+
+教育水準を決める=第1期の時間配分(就学 vs. 就労)を決める
+
+. . .
+
+単純化のため学費+制服・給食・通学その他費=0と仮定する
+
+* 以下の場合、親は子どもが判断するよりも児童労働就労時間を長くして、子どもの児童労働所得で自分の効用を高める
+   * 親が子どもの成人期所得効用を子どもが感じるよりも割り引くとき(将来よりも現在の家族の幸せ)
+   * 「成人したら仕送りを約束するから学校に行かせてほしい」と子どもが頼んでも、親が子どもの約束を信じないとき(子どもは将来裏切ることができるため)
+   * 意志決定者が子どもか親かによって人的資本投資額が変わる
+
+----
+
+教育の人的資本仮説: 学歴水準の決定=生産性向上手段
+
+* 人的資本仮説と補完的な見方: 
+
+:::{.des-list-boxed}
+シグナリング仮説
+:	学歴水準の決定=(雇用者への)能力情報伝達手段(あくまでもシグナルであって、生産性を変えても変えなくてもいい)
+:::
+
+* シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ
+
+人生効用最大化のために子どもは何を決めるか
+
+第1期時間配分、第1期と第2期の間の消費配分
+
+理解の段取り: 
+
+1. 第1期時間配分を最適に決め、人生を通じて所得合計を最大化する
+1. 各期への消費配分を決める
+
+----
+
+ミクロ経済学: 限界収入=限界費用(MR = MC)
+
+生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の時間配分)は下記を満たすはず
+$$
+\underbrace{\mbox{\small 成人所得増加による効用増加分}}_{\mbox{\footnotesize 就学の限界収入(を効用評価)}} = \underbrace{\mbox{\small 児童労働所得減少による効用減少分}}_{\mbox{\footnotesize 就学の限界費用(を効用評価)}}
+$$
+
+第1期の時間配分は現時点での(限界)費用と将来時点の(限界)便益をバランスさせるように決まる
+
+::::::::::{.columns}
+::::{column width="40%"}
+:::
+
+::::{column width="60%"}
+MR$>$MCのとき=$l<l^{*}$のとき、$l$を僅かに増やせば$MR-MC$だけ純利益を増やせる$\rightarrow l$を増やす
+
+. . .
+
+$\because$不等号ならば、$l$を増減することで限界的な純利益を拡大できるから。等号ならば、改善の余地がないということ。
+
+. . .
+
+連続関数の最大化: 限界収入=限界費用(MR-MC=0)、を図解できる (スライド: 微分)
+:::
+::::::::::
+
+----
+
+#### References
+
+::: {#refs}
+:::

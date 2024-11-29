@@ -2783,46 +2783,42 @@ $$
 $w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)<gray>Computing $w_{j}$</gray>
 
 
-1. 計<span style="color:white;background-color:pink;">$J$</span>郡$(j=1,\dots,J)$について結果変数(成長)に影響する<span style="color:white;background-color:pink;">$I$</span>個の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期<span style="color:white;background-color:pink;">$t=1, \dots ,T$</span>について集める。結果変数を全期間<span style="color:white;background-color:pink;">$t=1, \dots , T$</span><span style="color:white;background-color:blue;">$, T+1, T+2, \dots$</span>について集める。<gray>Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.</gray>
-1. テロ前$T$期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。<gray>Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.</gray>
+1. 計<span style="color:white;background-color:pink;">$J$</span>郡$(j=1,\dots,J)$について結果変数(成長)に影響する<span style="color:white;background-color:pink;">$I$</span>個の共変数predictors $x_{1jt}, \cdot, x_{Ijt}$をテロ前の時期<span style="color:white;background-color:pink;">$t=1, \dots ,T$</span>について集める。結果変数を全期間<span style="color:white;background-color:pink;">$t=1, \dots , T$</span><span style="color:white;background-color:blue;">$, T+1, T+2, \dots, T+L$</span>について集める。<gray>Pick variables correlated with growth (=growth predictors) in Basque. Form a vector $\bfx_{Bt}$ for all pre-terrorism periods $t=1,\cdots, T$. Do the same for other $J$ counties and form a matrix $\bfX_{t}=\left(\begin{array}{ccc} \bfx_{1t} & \cdots & \bfx_{Jt}\end{array}\right)$.</gray>
+1. テロ前<span style="color:white;background-color:pink;">$T$</span>期間データ(結果変数と共変数)を使い、バスクとバスク以外の加重平均の差の2乗和を最小化する各変数(結果変数と共変数)$z_{ibt}$共通の郡ウェイト$w^{*}_{1}, \dots, w^{*}_{J}$を選ぶ。<gray>Minimise normalised sum of square differences $\sum_{t=1}^{T}(\bfx_{Bt}-\bfX_{t}\bfw)'\bfV^{-1}(\bfx_{Bt}-\bfX_{t}\bfw)$ by choosing weighting vector $\bfw$ optimally. Denote the optimal weight as $\bfw^{*}$.</gray>
 
-* 2乗和関数$\sum\limits_{i=1}^{I+1}\sum\limits_{t=1}^{T}\left(z_{ibt}-\sum\limits_{j=1}^{J}w_{j}z_{ijt}\right)^{2}$に最小化の一階条件を使う
-* $\sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+1}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}w^{*}_{j}y_{jT+2}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
 
 ----
 
-2乗和関数とは
-$$
-\begin{aligned}
-e_{it}(w_{1}, w_{2}, \dots, w_{J})^{2}
-&=
-\{t\mbox{期の変数$i$の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2},\\
-&=
-(z_{i\scriptsize{\mbox{バスク}}t}-w_{1}z_{i1t}-w_{2}z_{i2t}-\dots-w_{J}z_{iJt})^{2}
-\end{aligned}
-$$
-$$
-\begin{aligned}
-e_{i1}(w_{1}, &w_{2}, \dots, w_{J})^{2}+e_{i2}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{iT}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
-&=
-\{\mbox{各期の変数}i\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}
-\end{aligned}
-$$
-$$
-\begin{aligned}
-\sum\limits_{i=1}^{I+1}&\sum\limits_{t=1}^{T}\left(z_{ibt}-\sum\limits_{j=1}^{J}w_{j}z_{ijt}\right)^{2}=
-e_{11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{1T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
-&\phantom{=}+
-e_{21}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{2T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
-&\phantom{=}\dots+
-e_{I+11}(w_{1}, w_{2}, \dots, w_{J})^{2}+\dots+e_{I+1T}(w_{1}, w_{2}, \dots, w_{J})^{2}\\
-&\hspace{-3cm}=
-\{\mbox{各期の変数}1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}+
-\{\mbox{各期の変数}2\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}\\
-&\phantom{=}+\dots
-+\{\mbox{各期の変数}I+1\mbox{の誤差}(w_{1}, w_{2}, \dots, w_{J})\}^{2}\mbox{の和}
-\end{aligned}
-$$
+事前<span style="color:white;background-color:pink;">$I$</span>個×<span style="color:white;background-color:pink;">$J$</span>主体×<span style="color:white;background-color:pink;">$T$</span>期間, 事後<span style="color:white;background-color:blue;">$1$</span>個×<span style="color:white;background-color:blue;">$J$</span>主体×<span style="color:white;background-color:blue;">$L$</span>期間
+
+* バスクの$t$期の$i$変数$x_{iBt}$の誤差$e_{it}=x_{iBt}-\sum\limits_{j=1}^{J}w_{j}x_{ijt}$
+   * バスクの$t$期の$i$変数$x_{iBt}$-その他地域$j(=1,\dots, J)$の$t$期の$i$変数$x_{iBt}$の加重平均値weighted mean
+   * $w_{j}$は$j$地域の加重weight, $w_{j}\in[0, 1]$、$\sum\limits_{j=1}^{J}w_{j}=1$
+* バスクの$i$変数$x_{iB}$の誤差2乗和$sse_{i}=\sum\limits_{t=1}^{T}e^{2}_{it}$
+* バスクの$I$個の変数ベクトル$x_{1Bt}, \dots, x_{IBt}$の誤差2乗和$sse=\sum\limits_{i=1}^{I}\frac{sse_{i}}{I}$
+
+. . .
+
+誤差2乗和$sse$を最小化するように$J$個の$w_{j}$を選ぶ&larr;数学の最小化問題、簡単です
+
+----
+
+* $I=1$は結果変数(=感染者数)のみを使うとき
+* $I=1$でも良いが、たいていは複数の変数(共変数covariates)を使って$w_{j}$を計算
+   * 共変数: 人口密度、投資率、各産業シェア、識字率その他学歴人口比率&larr;GDPに影響する変数
+
+* 2乗和関数$\sum\limits_{i=1}^{I}\sum\limits_{t=1}^{T}\left(x_{iBt}-\sum\limits_{j=1}^{J}w_{j}x_{ijt}\right)^{2}=\sum\limits_{i=1}^{I}\sum\limits_{t=1}^{T}e^{2}_{it}$に最小化の一階条件を使う
+* $\sum\limits_{j=1}^{J}\hat{w}_{j}y_{jT+1}=\hat{y}_{T+1}, \sum\limits_{j=1}^{J}\hat{w}_{j}y_{jT+2}=\hat{y}_{T+2}, \cdots$がテロ以降のテロ無し合成バスク。
+
+. . .
+
+結果変数と共変数という観察可能な変数を使ってCFを作っている
+
+* 観察可能な変数が似ていればcontrol &rarr; 観察可能な変数が似ていればtreated/controlの割り当てはランダムと想定
+
+. . .
+
+観察可能な変数$\bfx_{i}$で自己選抜が説明可能: **selection on the observable** $y_{i}\perp D_{i}|\bfx_{i}$
 
 ----
 
@@ -2855,7 +2851,7 @@ SCMが適しているデータ<gray>SCM can be applied to the study with a small
 
 ----
 
-条件付き直交の意味<gray>what we mean by conditional orthogonality</gray>
+観察可能な変数による選抜の意味<gray>what we mean by selection on the observable</gray>
 
 . . .
 
@@ -2875,7 +2871,7 @@ SCMが適しているデータ<gray>SCM can be applied to the study with a small
 
 . . .
 
-「テロが起こるとすればバスクしかなかったが、テロの原因と成長とは関係がない」
+「テロが起こるとすればバスクしかなかったが、共変数$\bfx$を考慮すれば、テロの原因と成長とは関係がない」
 
 ----
 
@@ -3005,25 +3001,21 @@ He argues that increased public investments were channeled to mafia activities t
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-怪しい結果に思える。貿易自由化していないdonor poolを使って加重平均を合成
+怪しい結果に思える<gray>questionable results</gray>
+
+* 貿易自由化していないdonor poolを使って加重平均を合成<gray>uses a donor pool that has not gone through trade liberalisation to construct a weighted mean</gray>
+* 共変数: 中等就学率、人口増加率、投資/GDP、インフレ率、民主主義インデックス<gray>covariates: secondary school enrollment rates, population groth rates, investmet rates, inflation rates, democracy index</gray>
+* 共変数が似ていて(貿易自由化していなくて)も、成長率は人口規模、天然資源、気候変動、紛争などによっても影響される<gray>even when covariates are similar, growth can be affected by population size, natural resource endowment, climate change, conflicts</gray>
 
 . . .
 
-共変数: 中等就学率、人口増加率、投資/GDP、インフレ率、民主主義インデックス
+どこまで共変数として含めれば良いのか、誰も説得的な議論はできない<gray>no convincing argument has been made for what variables should be used as covariates</gray>
 
 . . .
 
-共変数が似ていて貿易自由化していなくても、成長率は人口規模、天然資源、気候変動、紛争などによっても影響される
+しかし、叙述的研究はそういうことをやっている<gray>but descriptive research does these things, too</gray>
 
-. . .
-
-どこまで共変数として含めれば良いのか、誰も説得的な議論はできない
-
-. . .
-
-しかし、叙述的研究はそういうことをやっている
-
-選定基準を明確化して数値化していることは貢献
+* 選定基準を明確化して数値化しているだけまし<gray>better if we make selection criteria explicit and numerical</gray>
 
 ----
 
@@ -3118,7 +3110,9 @@ RCTではないこと、統御群データがないことなどから、実施�
 ::::
 
 :::: {.column width="30%"}
-* B-A比較が意外にDIDと類似...B-A比較が良いのか? それとも、DIDもダメなのか? 
+* B-A比較が意外にDIDと類似...
+   * B-A比較が良いのか? 
+   * それとも、DIDもダメなのか? 
    * Pre-trend検定がないので分からない...こういう評価デザインのプロジェクトなので、pre-periodのデータが1期間しかないかも
 * B-AはDIDよりも効果推計値が上振れ
 ::::
@@ -3138,9 +3132,9 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
-1. 村は常に変化しているから、村レヴェルでの実験に統御群は作れない
+1. 村は常に変化しているから、村レヴェルでの実験に統御群は作れない<gray>With communities, there are no true controls. Life changes everywhere, in the MVs and outside of them.</gray>
     * 村が常に変化しているからこそ、実際の村が統御群として必要
-1. 介入は村が自ら学んで改善するという過程を経る。この過程はRCTで評価できない。
+1. 介入は村が自ら学んで改善するという過程を経る。この過程はRCTで評価できない。<gray>The logic of simple randomized trials does not apply in a context of design with extensive learning by doing, where the main goal is to develop new tools and systems that are replicable and scalable and used by the community itself</gray>
     * (率直に何を言っているのか理解できないほど)勘違いしている
     * 学んで改善を記録するとはプロセス評価process evaluationのことで、必要性を誰も否定していない
     * 学んで改善してもインパクトはまだ分からないから、インパクト評価は必要
@@ -3149,6 +3143,11 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 ----
 
 3. 初年度は忙しくて統御地域を設定できなかった。既存の全国データがあるのに、少数の統御地域だけと比べる意味はあるのか。統御地域とペアにして比較しても、統御地域が経済的に変わったら比較する意味はあるのか。  
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+<gray>There has been much naïve talk about paired “comparison” villages...(snip)... in year 1 the considerable work required to create a foundation of community-driven strategies in the context of a very complex project took precedent...(snip)...Spending a great deal of time and personnel on one particular “comparison site” is misplaced concreteness. ..(snip)...The comparison village is definitely not a “control” village in the sense of a real, unchanged control, nor could it be…No place is standing still to be a control site … If the comparison site happens to get a new road or an extension of the power grid, this gives an artificial “small sample” error to the comparison with the MV.</gray>
+:::
+
    * 最初に候補を作って治療群と統御群に割り振れば良いだけ(忙しいのは事実だけど)
    * 既存の全国データには含まれないような情報を治療群では集めているので既存データでは不十分
    * 変わるからこそ統御群が必要
@@ -3200,6 +3199,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 :::: {.column width="60%"}
 * All indices show positive impacts
+* 最初から統御群を作っておけば良かったのに
 ::::
 :::::::::::
 
@@ -3212,11 +3212,19 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
+治療群と統御群が似ていても、推計結果の信頼性が低い場合、得られた知識が歪んでいる場合があります
+
+1. Multiple testing ($p$ hacking)
+1. Small sample bias
+1. Publication bias
+
+----
+
 全ての推計方法への批判1: multiple testing ($p$ hacking)
 
 * $p$値=「帰無仮説(効果ゼロ)が正しい確率」。効果の平均値がゼロの母集団から$n$回標本を集めて検定すると、推計結果よりも極端な結果は$p$の確率(=$np$回)しか発生しない、ということ。<gray>$p$ value: Roughly, probability of the null hypothesis (of zero impact) being true. From the population of mean zero impacts, draw $n$ impact values, then you will get results more extreme than you currently have at $p$ percent probability ($np$ times). </gray>
 * $p$が小さいほど「外れ値」なので効果ゼロを疑問視して良い<gray>The smaller the $p$, the more extreme the current estimate, hence the more you can question the zero impact</gray>
-* $p=5\%$ $\Rightarrow$ 効果の平均値がゼロのとき、$n=100$回に$np$=5回は発生するかも<gray>If your threshold of extremeness is 5%, when the true mean impact is zero, you will have "extreme" ("statistically significant") impacts for $np=$5 times when you sample $n=100$ times </gray>
+* $p=5\%$ $\Rightarrow$ 効果の平均値がゼロのとき、$n=100$回に$np$=5回は発生するかも、という「外れ」度<gray>If your threshold of extremeness is 5%, when the true mean impact is zero, you will have "extreme" ("statistically significant") impacts for $np=$5 times when you sample $n=100$ times </gray>
 
 ----
 
@@ -3224,8 +3232,26 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 * 少しずつ異なる推計式定式化を100回試すと、真の効果がゼロでも5回くらい推計値が外れ値になる<gray>If you estimate different but not too different (so the population is same for all) specifications 100 times, even when the true impact is zero, your estimate will be extreme for 5 times</gray>
 * 外れ値を得るまで何度も推計式定式化を変えると、望む結果が(理論的には)必ず得られる<gray>If you try different specifications as many times as necessary, you will get an estimate that you look for</gray>
+   * 対策: Pre-analysis planを公開する、最低でも研究再現性のために推計のコードと結果を公開する<gray>publish pre-analysis plan, or, at least, estimation code and outputs for reproducibility</gray>
+      * コードを公開して誰もが追試できれば、なぜこんな変数を右辺に使っているのか、なぜこんな定義にしているのか、のような細かな推計式定式化の選択について疑問点が自然と出てきて、外れ値を得るために何度も試行したかが分かります<gray>if you publish your estimation code, questions like, why does the author use this variable on RHS, why using such a definition, etc. will spawn out which may reveal if the author tried many specifications to get desired results</gray>
+
+----
+
+全ての推計方法への批判1: multiple testing ($p$ hacking)
+
 * 似た結果指標(例: 疲労と労働時間)への効果推計&larr;multiple testingを無意識にやっている<gray>similar outcome indicators (e.g., fatigue and work hours)&larr;unintentional multiple testing</gray>
-* 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う<gray>Countermeasures: use the mean of $p$ values of similar outcomes (called "family wise error rate")</gray>
+   * 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う、同じ結果指標グループを指数化する<gray>Countermeasures: use the mean of $p$ values of similar outcomes (called "family wise error rate"), create a single index of similar outcomes using the normalised estimates and their standard errors</gray>
+      * family wise error rateなどは似た推計値が幾つあっても$p$ hackingできない
+      * 指数化=効果を(結果指標の標準偏差で割ることで)標準偏差単位にして(標準化standardisationという)、結果指標1を指標1の標準偏差単位でx1単位高める、結果指標1を指標1の標準偏差単位でx1単位高める、と足し算できるようにし、標準化された効果の平均値とその標準誤差を計算し、$p$ valueを得る
+
+:::{style="font-size: 60%;line-height: 1.1;"}
+<gray>
+
+* You do not end up p-hacking even if you have many impact estimates so long as you use family wise error rate
+* You divide the impacts with standard deviation of the outcome measure to get impacts in terms of standard deviation units (this is called standardisation). Then you average all the standardised impacts of all the impact estimates (of the same family) and compute its standard errors (formula of "standard error of the mean" is simple) to get $p$ values.
+
+</gray>
+:::
 
 ----
 
@@ -3280,7 +3306,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
-External validity
+全ての推計方法への批判3: Publication bias
 
 アフリカに関する経済学論文27,000本あまり(2000-2019)の地理分布
 
@@ -3312,7 +3338,7 @@ External validity
 
 ----
 
-External validity
+全ての推計方法への批判3: Publication bias
 
 ::::::::::: {.columns}
 :::: {.column width="40%"}
@@ -3326,6 +3352,22 @@ External validity
 :::: {.column width="60%"}
 * 人口が多い英語公用語国がトップ
 * 自国で学術雑誌を持っていると上位(e.g., South African Journal of Economics)
+
+:::{.fragment}
+アフリカの経済研究で得られた知識=こうした地域からの知識
+:::
+
+:::{.fragment}
+知識の出自が偏っていることを知るべき
+:::
+
+* 西アフリカでも同じ結果?
+* アフリカ中央部でも同じ結果?
+
+:::{.fragment}
+自国での研究がないと、効果が異なる(かもしれない)のに政策が実施されてしまうかも、という意味で不利
+:::
+
 ::::
 
 :::: {.column width="70%"}
@@ -3404,7 +3446,7 @@ RCT
 Natural experiment
 :	非倫理的でも実施、実験を探す必要、仮定=ランダム化あり、他要因なし
 
-DID
+DID, event study design
 :	実験不要、両群のパネル・データが必要、仮定=共通トレンド
 
 RDD
@@ -3430,6 +3472,10 @@ placebo test: 効果があり得ない部分で効果計測、効果検知する
 
 信頼性の高い推計方法でも、$p$ hacking, small sample biasは存在することに注意
 
+. . .
+
+信頼性の高い推計方法、$p$ hacking, small sample biasがなくても、publication biasがあるので、適用範囲や一般化を考える際に注意
+
 ----
 
 仮に信頼性の高い効果推計値を得ても、外的整合性があるかは別問題
@@ -3440,7 +3486,7 @@ placebo test: 効果があり得ない部分で効果計測、効果検知する
 
 . . .
 
-メカニズムが分からないと適用可能性が分からない
+メカニズムが分からないと他所での適用可能性が分からない
 
 . . .
 
