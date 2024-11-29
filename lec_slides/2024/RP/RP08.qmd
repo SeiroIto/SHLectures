@@ -208,6 +208,37 @@ TallerOutput {
 }
 ```
 
+[Illusionary truth effect](https://www.psychologytoday.com/us/blog/psych-unseen/202001/illusory-truth-lies-and-political-propaganda)
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+> Repeat a lie often enough and people will eventually come to believe it.
+
+<div style="text-align: right">Joseph Goebbels (真偽不詳)</div>
+
+> If you say it enough and keep saying it, they’ll start to believe you.
+
+<div style="text-align: right">Donuld Trump, July 3, 2021 at Sarasota, FL.</div>
+
+> As long as you keep repeating something, it doesn't matter what you say.
+
+<div style="text-align: right">Donuld Trump, quoted by his ex-press secretary</div>
+
+> This is not about persuasion: This is about disorientation.
+
+<div style="text-align: right">Steve Bannon, ex-chief strategist of White House, quoted by Jonathan Rauch</div>
+:::
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+* アメリカ社会の分断
+   * 理由の1つ: 党派間で事実の共有ができていない
+* SNSによる情報伝達=echo chamber、disinformation
+   * 斉藤元彦氏の兵庫県知事再選
+   * 石丸伸二氏の東京都知事選第2位
+   * 広沢一郎氏の名古屋市長選挙当選
+:::
+
+----
+
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
 因果関係を直接証明することはできないが、時間的な相関関係を見ると、GoToトラベルが旅行の増加を引き起こし、その旅行増加と感染率の上昇が同時期に発生していることから、GoToトラベルと感染率との関係を間接的に推測することは可能だと思う。ただし、パンデミック中は経済が低迷しており、観光業が打撃を受けていたため、GoToトラベルのような観光業促進策が中止されると、経済回復が遅れる可能性もある。政策を決定する際には、これらのメリットとデメリットを天秤にかけて選ばなければならない。
