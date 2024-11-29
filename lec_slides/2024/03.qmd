@@ -152,7 +152,7 @@ RoyalBlue
 ::::
 
 ::::{.column width="40%"}
-$$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}
+$$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::
 ::::::::::
 
