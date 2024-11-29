@@ -18,7 +18,7 @@ format:
     height: 900
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
-    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/hw/hw2_rmarkdown0.html>
+    footer: <http://seiroito.github.io/SHLectures/homeworks/2024/3/hw3_tufte.html>
     css: 
       - LecNoteStyles.css
       - ../../seiro.css
@@ -27,8 +27,6 @@ format:
     code-line-numbers: true
     code-copy: true
     code-block-border-left: "#31BAE9"
-    toc: true
-    toc-depth: 1
     template-partials: 
       - ../../../toc-slide.html
     include-after-body: ../../../toc-add.html
@@ -110,7 +108,7 @@ gc()
 
 # What is CF?
 
-[日経新聞10月21日(月)朝刊連載コラム](../../../lec_slides/2024/02.html#/63)で、執筆した記者は、同意なきTOB成立して「2期後までに平均の営業利益率が2.4ポイント低下した」と書いています。講義では、事実のまとめながら、同意なきTOBの効果のように書いている点を指摘しました。
+[日経新聞10月21日(月)朝刊連載コラム](../../../lec_slides/2024/02.html#/74)で、執筆した記者は、同意なきTOB成立して「2期後までに平均の営業利益率が2.4ポイント低下した」と書いています。講義では、事実のまとめながら、同意なきTOBの効果のように書いている点を指摘しました。
 
 1. この記事では「2期後...の営業利益率」を何と比較していますか。
 1. 仮にどんな実験でもできるとしたら、同意なきTOBが成立した2期後の効果を測るために、どのような実験をしますか。

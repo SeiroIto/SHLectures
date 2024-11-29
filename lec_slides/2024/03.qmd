@@ -148,7 +148,7 @@ RoyalBlue
 
 ::::::::::{.columns}
 ::::{.column width="60%"}
-![School enrollment rates, 2020](HK/figure/SG.png){width="55%"}
+![School enrollment rates, 2020](HK/figure/SG.png){width="85%"}
 ::::
 
 ::::{.column width="40%"}
@@ -158,11 +158,11 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ----
 
-![Under 5 stunting rate, 2020](HK/figure/HG.png){width="55%"}
+![Under 5 stunting rate, 2020](HK/figure/HG.png){width="50%"}
 
 ----
 
-![Infant mortality rate, 2020](HK/figure/MG.png){width="55%"}
+![Infant mortality rate, 2020](HK/figure/MG.png){width="50%"}
 
 ----
 
