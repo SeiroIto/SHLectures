@@ -509,34 +509,39 @@ $$
 
 :::{.des-list-boxed}
 第1期
-:	子ども期: どのくらい学校に行くか、どのくらい働くか決めます。You choose how much to go to school, how much to work.
+:	子ども期: どのくらい学校に行くか、どのくらい働くか決めます<gray>You choose how much to go to school, how much to work</gray>
 
 第2期
-:	成人期: 労働所得を得ます。成人期所得は子ども期の就学期間に応じて増えます。You earn. Adulthood income is increasing in childhood schooling.
+:	成人期: 労働所得を得ます。成人期所得は子ども期の就学期間に応じて増えます。<gray>You earn. Adulthood income is increasing in childhood schooling.</gray>
 :::
 
 ----
 
-合理的な子ども: 便益と費用を考慮して教育水準を決める
+合理的な子ども: 便益と費用を考慮して教育水準を決める<gray>a rational child: weighs costs and benefits to decide schooling level</gray>
 
 :::{.des-list-boxed}
-便益
-:	学歴を積むことによる成人所得増加分$\times$割引率
+便益benefits
+:	学歴を積むことによる成人所得増加分$\times$割引率<gray>increased adult income/discount rate</gray>
 
-費用
-:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費+児童労働所得)
+費用costs
+:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費+児童労働所得)<gray>costs of schooling(tuition*school unifom+school meals+commuting costs+child labour incomes)</gray>
 :::
-
-教育水準を決める=第1期の時間配分(就学 vs. 就労)を決める
 
 . . .
 
-単純化のため学費+制服・給食・通学その他費=0と仮定する
+教育水準を決める=第1期の時間配分(就学 vs. 就労)を決める<gray>deciding on schooling level=deciding on time allocation (schooling vs. work) in period 1</gray>
 
-* 以下の場合、親は子どもが判断するよりも児童労働就労時間を長くして、子どもの児童労働所得で自分の効用を高める
-   * 親が子どもの成人期所得効用を子どもが感じるよりも割り引くとき(将来よりも現在の家族の幸せ)
-   * 「成人したら仕送りを約束するから学校に行かせてほしい」と子どもが頼んでも、親が子どもの約束を信じないとき(子どもは将来裏切ることができるため)
-   * 意志決定者が子どもか親かによって人的資本投資額が変わる
+. . .
+
+単純化のため学費+制服・給食・通学その他費=0と仮定する<gray>for simplicity, we assume all costs other than child labour income are zero</gray>
+
+----
+
+以下の場合、親は子どもが判断するよりも児童労働就労時間を長くして、子どもの児童労働所得で自分の効用を高める<gray>Under the following conditions, a parent may increase the work hours than the child would have and increases the parental utility with the child's labour income</gray>
+
+* 親が子どもの成人期所得効用を子どもが感じるよりも割り引くとき(将来よりも現在の家族の幸せ)<gray>a parent discounts more of future utility (happiness of today weights more than of tomorrow)</gray>
+* 「成人したら仕送りを約束するから学校に行かせてほしい」と子どもが頼んでも、親が子どもの約束を信じないとき(子どもは将来裏切ることができるため)<gray>a parent does not believe that the child's promise that he/she will pay back the costs in future</gray>
+* 意志決定者が子どもか親かによって人的資本投資額が変わる<gray>depending on the decision maker, the amount of human capital investment may differ</gray>
 
 ----
 
@@ -551,9 +556,15 @@ $$
 
 * シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ
 
+. . .
+
 人生効用最大化のために子どもは何を決めるか
 
+. . .
+
 第1期時間配分、第1期と第2期の間の消費配分
+
+. . .
 
 理解の段取り: 
 
@@ -564,28 +575,37 @@ $$
 
 ミクロ経済学: 限界収入=限界費用(MR = MC)
 
+. . .
+
 生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の時間配分)は下記を満たすはず
 $$
-\underbrace{\mbox{\small 成人所得増加による効用増加分}}_{\mbox{\footnotesize 就学の限界収入(を効用評価)}} = \underbrace{\mbox{\small 児童労働所得減少による効用減少分}}_{\mbox{\footnotesize 就学の限界費用(を効用評価)}}
+\underbrace{\mbox{ 成人所得増加による効用増加分}}_{\scriptsize{\mbox{就学の限界収入(を効用評価)}}} = \underbrace{\mbox{ 児童労働所得減少による効用減少分}}_{\scriptsize{\mbox{就学の限界費用(を効用評価)}}}
 $$
+
+. . .
 
 第1期の時間配分は現時点での(限界)費用と将来時点の(限界)便益をバランスさせるように決まる
 
 ::::::::::{.columns}
-::::{column width="40%"}
+::::{.column width="40%"}
+:::{.fragment}
+![](HK/figure/MRMC.jpg)
+:::
+::::
+
+::::{.column width="60%"}
+:::{.fragment}
+MR$>$MCのとき=$l<l^{*}$のとき、$l$を僅かに増やせば$MR-MC$だけ純利益を増やせる$\rightarrow l$を増やす
 :::
 
-::::{column width="60%"}
-MR$>$MCのとき=$l<l^{*}$のとき、$l$を僅かに増やせば$MR-MC$だけ純利益を増やせる$\rightarrow l$を増やす
-
-. . .
-
+:::{.fragment}
 $\because$不等号ならば、$l$を増減することで限界的な純利益を拡大できるから。等号ならば、改善の余地がないということ。
+:::
 
-. . .
-
+:::{.fragment}
 連続関数の最大化: 限界収入=限界費用(MR-MC=0)、を図解できる (スライド: 微分)
 :::
+::::
 ::::::::::
 
 ----
