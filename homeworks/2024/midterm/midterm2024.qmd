@@ -107,9 +107,9 @@ gc()
 
 Copyright: Getty images
 
-![b. Photo by Warren K. Leffler](DC1970.jpg){width="50%"}
+![b. Photo by Warren K. Leffler](DC1970_big.jpg){width="50%"}
 
-U.S. News & World Report Magazine/Library of Congress, Washington, D.C. (digital. id. ppmsca 03425)
+U.S. News & World Report Magazine/[Library of Congress, Washington, D.C. (digital. id. ppmsca 03425)](https://loc.gov/pictures/resource/ppmsca.03425/)
 :::
 
 世界銀行では、イスラム教信者の多い国でジェンダー教育を進めました。イスラム教徒が大半を占める国では、女性と男性の権利が著しく不平等だからです。とあるプログラムでは、高位のイマム(聖職者)が各モスクに所属している信者向けに「ジェンダー教育に参加するように」というテキスト・メッセージを(ショート・メッセージ・サービスSMSで)送りました。
