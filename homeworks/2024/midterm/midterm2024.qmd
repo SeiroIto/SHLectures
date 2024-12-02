@@ -1,0 +1,147 @@
+---
+title: "開発経済論中間試験"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+    number-depth: 2
+    embed-resources: true
+    smooth-scroll: true
+    anchor-sections: true
+    grid:
+      margin-width: 350px
+theme: 
+  - litera
+  - ../../../seirosky.scss
+reference-location: margin
+citation-location: margin
+lightbox: auto
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: ../../../seiro.bib
+resources:
+  - midterm2024.pdf
+# quarto render midterm2024.qmd
+---
+
+```{css, echo=F}
+DBlue {
+  color: dodgerblue;
+}
+Blue {
+  color: blue;
+}
+Red {
+  color: red;
+}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+
+```{r setup, echo = F, results = "hide"} 
+#### include = F <==> echo=F & results = F
+library(knitr)
+library(tufte)
+#### invalidate cache when the tufte version changes
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = "", 
+  echo = T, cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+gc()
+```
+
+
+
+## ジェンダー教育実験
+
+::: {.column-margin}
+[a. NYC, 1968](https://media.gettyimages.com/id/2053340/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/women-hold-up-signs-demanding-equal-rights-during-a-demonstration-for-womens-liberation-new.jpg?s=1024x1024&w=gi&k=20&c=pLfP7jw2sJo2kd5ee51QfjK_rMzGUvglSXxJ6tdz73Y=)
+
+Copyright: Getty images
+
+![b. Photo by Warren K. Leffler](DC1970.jpg){width="50%"}
+
+U.S. News & World Report Magazine/Library of Congress, Washington, D.C. (digital. id. ppmsca 03425)
+:::
+
+世界銀行では、イスラム教信者の多い国でジェンダー教育を進めました。イスラム教徒が大半を占める国では、女性と男性の権利が著しく不平等だからです。とあるプログラムでは、高位のイマム(聖職者)が各モスクに所属している信者向けに「ジェンダー教育に参加するように」というテキスト・メッセージを(ショート・メッセージ・サービスSMSで)送りました。
+
+1. イマムがテキスト・メッセージを送ることの効果を計測するには、どのような実験が必要でしょうか。
+1. 女性権利擁護のプログラムやイベントは、以下のa.とb.では効果が違うかもしれません。a.とb.の効果の違いを計測するには、どのような実験デザインにすべきでしょうか。
+   a. 女性だけを対象にして実施するとき
+   b. 男女を対象にするとき
+1. あなたの考えた実験デザインでは、a.とb.のどちらの効果がより大きくなるか、予想できるでしょうか
+   c. できる、できない、のいずれかを選び、その根拠を述べてください
+   d. c.での回答を前提に、この政策を実験することの意義を考察してください
+
+## 09回講義へのRP
+
+::: {.column-margin}
+![Taylor Swift's birth home in Wyomissing, PA](TaylorSwiftBirthHome.jpg)
+
+[Photo](https://commons.wikimedia.org/wiki/File:Grandview_Blvd_76,_Wyomissing_PA.JPG) by Shuvaev, 2015, [CC-BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/) 
+:::
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近のニュースだと「ワールドツアーを行うテイラースウィフトによる経済効果」がニュースとなっていた。米旅行協会によると、ツアーに伴う支出を含み、テイラーは米国内での公演5ヶ月で100億ドル以上の経済効果をもたらしたとされている。実際に日本公演でも、経済効果として341億円を記録したと毎日新聞が報道していた。テロとは異なる観点だが、こうした世界的アーティストによる経済効果、経済成長への影響についてもっと調べてみたいと感じた。
+:::
+</div>
+
+テイラー・スウィフトの日本ツアー経済効果はどのようにして計測できるでしょうか。以下の問いに答えながら、最後の問いでどのように計測するか答えてください。
+
+1. 通常は(ツアーによる)支出拡大を経済効果といいます。つまり、ツアーありのときの支出-ツアー無しのときの支出、が経済効果です。どのようなデータ(支出項目)を使うべきでしょうか。どのようなデータがどのくらいの頻度で公開されているのか調べて支出項目を挙げてください。
+1. [Bloombergによると](https://www.bloomberg.co.jp/news/articles/2024-02-06/S87WGXT1UM0W00)[東京都市大学の江頭氏の推計では](https://economicimpact.net/2024/01/31/240131)「チケット、グッズ、観光消費、事業費などを含めて算出した」そうです。原典を調べると、同氏が代表の[世界スポーツ支援開発機構一般社団法人OASISジャパン](https://oasis-jp.org/org/org.html)が計算した[内訳](https://economicimpact.net/wp-content/uploads/2024/01/FIG01-2.gif)は、直接効果(来場者支出や公演事業費など)+波及効果(産業連関表を用いて計算)です。つまり、効果を計算する上で、CF=ゼロ円、と想定しています。このCFの現実妥当性を述べてください。
+1. テイラー・スウィフトほど観客動員力のあるアーティストは、公演をした地域以外でも支出に影響を与えます。^[東京ドームで公演すると泊まりがけで来る福島県民の支出が高まる、などです。その前後で支出を控えるなどの影響もあるかもしれません。]効果推計では、波及効果が及ぶ範囲すべてを含めるように治療群(treatment unit)を定義すべきだ、という考え方があります。^[Stable unit treatment value assumption (SUTVA)と言います。東京公演は東京への影響が最大のはずですが、福島県も影響を受けます。この県は影響を受けないと言い切れないので、SUTVAを満たすように治療群を定義すると、全都道府県への影響を合計した支出額合計を考える、ということになります。]この例では、波及効果が及ぶ都道府県全てを治療群にする、という考え方です。仮に、テイラー・スウィフト公演という治療を受けるのが日本全体だとすると、効果推計にとってどのような難点がありますか。
+1. あなたならば、どのような方法で経済効果を推計しますか。どのようにしてCFを得るのか明示して答えてください。
+
+
+
