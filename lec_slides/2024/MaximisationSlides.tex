@@ -1,7 +1,7 @@
-%  library(knitr); setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2022/"); system("recycle c:/seiro/docs/external/seishin/lec_slides/2022/MaximisationSlides/cache/"); knit("MaximisationSlides.rnw", "MaximisationSlides.tex"); system("platex MaximisationSlides"); system("pbibtex MaximisationSlides"); system("dvipdfmx MaximisationSlides")
+%  library(knitr); setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/"); system("recycle c:/seiro/docs/external/seishin/lec_slides/2024/MaximisationSlides/cache/"); knit("MaximisationSlides.rnw", "MaximisationSlides.tex"); system("platex MaximisationSlides"); system("pbibtex MaximisationSlides"); system("dvipdfmx MaximisationSlides")
 
-%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
-\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble_ho.rnw}
 \definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
@@ -46,7 +46,7 @@ linkcolor = blue!50, urlcolor = green!80
 \title[4]{\large 微分}
 \author[Ito]{Seiro Ito}
 \institute[IDE, Sacred Heart]{Institute of Developing Economies, Japan}
-\date[Fall, 2022]{Fall, 2022\\\vspace{1ex} Department of International Exchange, Sacred Heart University}
+\date[Fall, 2024]{Fall, 2024\\\vspace{1ex} Department of International Exchange, Sacred Heart University}
 \logo{SHU, IDE}
 
 
@@ -379,9 +379,9 @@ background rectangle/.style = {fill = gray90},
 \begin{dinglist}{43}
 \vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
 \pause
-\item	$f(x)=1+2x\textcolor{darkpastelgreen}{-}.25x^{2}\pause , f'(x)=2-.5x\pause , f''(x)=-.5<0$. \pause よって、$f'(x)=2-.5x=0$が示す点は最\textcolor{darkpastelgreen}{大}化点。\pause $f(x)$を最大化する$x$は$f'(x)=2-.5x=0 \Rightarrow x=4.$
+\item	$f(x)=1+2x\textcolor{darkpastelgreen}{-}.25x^{2}\pause , f'(x)=2-.5x\pause , \textcolor{darkpastelgreen}{f''(x)=-.5<0}$. \pause よって、$f'(x)=2-.5x=0$が示す点は最\textcolor{darkpastelgreen}{大}化点。\pause $f(x)$を最大化する$x$は$f'(x)=2-.5x=0 \Rightarrow x=4.$
 \pause
-\item	$f(x)=1+2x\textcolor{darkpastelgreen}{+}.25x^{2}\pause , f'(x)=2+.5x\pause , f''(x)=.5>0$.\pause  よって、$f'(x)=2+.5x=0$が示す点は最\textcolor{darkpastelgreen}{小}化点。\pause $f(x)$を最小化する$x$は$f'(x)=2+.5x=0 \Rightarrow x=-4.$
+\item	$f(x)=1+2x\textcolor{darkpastelgreen}{+}.25x^{2}\pause , f'(x)=2+.5x\pause , \textcolor{darkpastelgreen}{f''(x)=.5>0}$.\pause  よって、$f'(x)=2+.5x=0$が示す点は最\textcolor{darkpastelgreen}{小}化点。\pause $f(x)$を最小化する$x$は$f'(x)=2+.5x=0 \Rightarrow x=-4.$
 \end{dinglist}
 \end{frame}
 
@@ -660,41 +660,19 @@ $f(x)$が$g\{h(x)\}$という$g(h)$, $h(x)$の二重の関数になっている�
 \onslide<8->{\underbrace{\rightarrow g\mbox{が変化}}_{\textcolor{aqua}{g'(h)}}}
 \]
 \column{.6\textwidth}
-\onslide<9->{$g(h)=2h+1, h(x)=2x^{2}+x-1$の場合\\}
+\onslide<9->{
+$f(x)=g\{h(x)\}=2(2x^{2}+1x-1)+1$\\
+$g(h)=2h+1, h(x)=2x^{2}+x-1$の場合\\}
 \onslide<10->{$g'(h)=2$, $h'(x)=4x+1$}
 \onslide<11->{なので、$f'(x)=g'(h)h'(x)=2\times (4x+1)=8x+2$. }
 \onslide<12->{$f(x)=g\{h(x)\}=2(2x^{2}+1x-1)+1=4x^{2}+2x-1$だから、微分すると$f'(x)=8x+2$で同じになることが確認できる。\\~\\}
-\onslide<13->{$g(h)=\frac{1}{h}, h(t)=N(t)$、つまり、$f(t)=\frac{1}{N(t)}$の場合\\}
-\onslide<14->{$g'(h)=-\frac{1}{h^{2}}, h'(t)=N'(t)$}
-\onslide<15->{だから、$f'(t)=g'(h)h'(t)=-\frac{1}{h^{2}}\times h'(t)$、}
-\onslide<16->{ここで$h(t)=N(t)$を代入して$f'(t)=-\frac{1}{h^{2}}\times h'(t)=-\frac{1}{N^{2}(t)}\times N'(t)$.}
 \end{columns}
 \end{frame}
 
 \begin{frame}[t]{}
 \begin{columns}[T]
 \column{.5\textwidth}
-\[
-f(x)=\frac{1}{1+\frac{1}{2}x^{2}}.
-\]
-$g(h)=\frac{1}{h}, h(j)=1+j, j(x)=\frac{1}{2}x^{2}$とすると
-\[
-g'(h)=-\frac{1}{h^{2}}, h'(j)=1, j'(x)=x.
-\]
-チェーンルールを使うと
-\[
-\begin{aligned}
-f(x)
-&=
-g\left[h\{j(x)\}\right],\\
-f'(x)
-&=
-g'(h)h'(j)j'(x)=-\frac{1}{h^{2}}\cdot 1\cdot x,\\
-&=-\frac{1}{h^{2}}x=-\frac{x}{\left(1+\frac{1}{2}x^{2}\right)^{2}}.
-\end{aligned}
-\]
-\column{.5\textwidth}
-$f(l)=\beta u\{h(l)+Rs\}$の微分で$g(c_{2})=\beta u(c_{2})$, $c_{2}(l)=h(l)+Rs$とおく
+$f(l)=\beta u\{h(l)+Rs\}$で$f(l)=\beta u\{c_{2}(l)\}=g\left\{c_{2}(l)\right\}$、つまり、$g(c_{2})=\beta u(c_{2})$, $c_{2}(l)=h(l)+Rs$とおく
 \[
 g'(c_{2})=\beta u'(c_{2}), \; c_{2}'(l)=h'(l).
 \]
@@ -715,33 +693,105 @@ g'(c_{2})c'_{2}(l),\\
 \]
 \pause
 $g, h$を微分して乗じても手数は変わらないですが、計算の誤りが減ります。
+\column{.5\textwidth}
+\pause
+$u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最大化
+
+\pause
+{\tiny \textcolor{green}{1.} $l$について微分してゼロとおく \; \textcolor{green}{2.} $s$について微分してゼロとおく}
+
+\pause
+$F(l)=u\left\{c_{1}(l)\right\}+\beta u\{c_{2}(l)\}$、つまり、$c_{1}(l)=w(24-l)+A-s$, $c_{2}(l)=h(l)+Rs$
+\pause
+$U(s)=u\left\{c_{1}(s)\right\}+\beta u\left\{c_{2}(s)\right\}$、つまり、$c_{1}(s)=w(24-l)+A-s$, $c_{2}(s)=h(l)+Rs$
+\pause
+\[
+\begin{aligned}
+F'(l)
+&=
+u'\left(c_{1}\right)c'_{1}(l)&+\beta u'(c_{2})c'_{2}(l)&=0,\\
+U'(s)
+&=
+u'\left(c_{1}\right)c'_{1}(s)&+\beta u'(c_{2})c'_{2}(s)&=0.
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c'_{2}(l)}{c'_{1}(l)}, \\
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c'_{2}(s)}{c'_{1}(s)}. 
+\end{aligned}
+\]
 \end{columns}
 \end{frame}
 
 \begin{frame}[t]{}
-\begin{columns}[T]
-\column{.5\textwidth}
-$F(x)=(1-x)w+\beta \{\ln (a+x)+\ln n\}=(1-x)w+f(x)$の最大化。$g(h)=\beta (h+\ln n), h(j)=\ln j, j(x)=a+x$:
-\[
-g'(h)=\beta, h'(j)=\frac{1}{j}, j'(x)=1.
-\]
-チェーンルールを使うと
-\[
-f'(x)=g'(h)h'(j)j'(x)=\beta\cdot \frac{1}{j}\cdot 1=\beta\frac{1}{a+x}.
-\]
-\[
-F'(x)=-w+f'(x)=-w+\beta\frac{1}{a+x}=0.
-\]
-\[
-w(a+x)=\beta \quad \Rightarrow \quad x=\frac{\beta}{w}-a.
-\]
-\column{.5\textwidth}
-\end{columns}
+$F(l, s)=u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最大化
 
+\pause
+{\scriptsize 1. $l$について微分してゼロとおく \; 2. $s$について微分してゼロとおく}
+\[
+\begin{aligned}
+\frac{\partial F(l, s)}{\partial l}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial l}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial l}=0, 
+\pause
+\quad 
+&\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+&=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial l}}{\frac{\partial c_{1}(l, s)}{\partial l}},\\
+\pause
+\frac{\partial F(l, s)}{\partial s}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial s}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial s}=0, 
+\pause
+\quad
+&\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+&=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial s}}{\frac{\partial c_{1}(l, s)}{\partial s}}.
+\end{aligned}
+\]
+\pause
+$c_{1}(l, s)=w(24-l)+A-s$\pause, $\frac{\partial c_{1}(l, s)}{\partial l}=-w$, $\frac{\partial c_{1}(l, s)}{\partial s}=-1$, 
+
+\pause
+$c_{2}(l, s)=h(l)+Rs$\pause, $\frac{\partial c_{2}(l, s)}{\partial l}=h'(l)$, $\frac{\partial c_{2}(l, s)}{\partial s}=R$.
+\begin{columns}[T]
+\column{.7\textwidth}
+\pause
+\[
+\begin{aligned}
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+\pause
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial l}}{\frac{\partial c_{1}(l, s)}{\partial l}}
+\pause
+=-\beta\frac{h'(l)}{-w}=\beta\frac{h'(l)}{w},\\
+\pause
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+\pause
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial s}}{\frac{\partial c_{1}(l, s)}{\partial s}}
+\pause
+=-\beta\frac{R}{-1}=\beta R. 
+\end{aligned}
+\]
+\column{.3\textwidth}
+\pause
+\[
+\beta wR=h'(l).
+\]
+$F(l, s)$を2変数$l, s$で最大化すると、この条件が成り立っていなければならない
+\end{columns}
 \end{frame}
 
 \begin{frame}{}
-純便益の構成要素の粗便益と費用が$x$の関数だとしましょう。粗便益$b(x)$、費用$c(x)$と関数表記します。
+純便益=粗便益-費用です。
+\pause
+粗便益も費用も$x$の関数だとしましょう。粗便益$b(x)$、費用$c(x)$と関数表記します。
 \pause 
 経済学では2階微分の符号を以下のように仮定することが多いです。
 \[
@@ -764,11 +814,11 @@ b'(x) > 0, \quad b''(x)<0, \quad c'(x)>0, \quad c''(x)>0 \; \mbox{for all }x\in\
 
 \vspace{2ex}
 \pause 
-経済学では$b'(x)$を限界便益marginal benefits、$c'(x)$を限界費用marginal costsと呼びます。
+経済学では$b'(x)$を\textcolor{red}{限界便益marginal benefits}、$c'(x)$を\textcolor{red}{限界費用marginal costs}と呼びます。
 \end{frame}
 
 \begin{frame}{}
-関数の最大化を思い出して下さい。純便益$=b(x)-c(x)$を最大化するには、微分してその値をゼロとおきます。つまり、最大値では
+純便益$=b(x)-c(x)$を最大化するには、微分してその値をゼロとおきます。つまり、最大値では
 \[
 b'(x)-c'(x)=0
 \]
@@ -872,60 +922,8 @@ c''(x)&>0 \mbox{ for all }x\in\mathbb R_{+} &&[\Leftrightarrow &&c'(x)\mbox{は�
 \end{frame}
 
 \begin{frame}[t]{}
-遠隔教育に粗便益と費用があり、遠隔教育時間が増えると限界粗便益が減少し、限界費用が増加する状況を仮定します。
-\begin{dinglist}{43}\footnotesize
-\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-\item	この仮定が現実的だというもっともらしい理由付けを以下で示します。\\[2ex]
-\end{dinglist}
-
-\pause
-教育による人的資本量を考えます。教育の総時間は決まっていて、遠隔教育時間と対面教育時間に分けられます。人的資本量を遠隔教育時間の関数として考えます。
-\begin{itemize}
-\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-\item	遠隔教育を受ける時間を$x$とし、粗便益が遠隔教育による人的資本量、費用が対面授業をしないことで失う人的資本量だとします。
-\pause
-\item	対面教育に参加できない人も遠隔教育には参加できると仮定します。
-\end{itemize}
-\begin{dinglist}{43}
-\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-\item	遠隔教育時間を0から延ばすに従い、遠隔教育に参加できる人数は減るため、遠隔教育の粗便益は増え方が減る=限界粗便益は減少する、と仮定します。
-	\begin{dinglist}{45}\footnotesize
-	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-	\item	「逓減限界便益」diminishing marginal benefitsといいます。
-	\end{dinglist}
-\pause
-\item	遠隔教育時間を0から延ばすに従い、対面教育の時間が減り対面教育による人的資本量は減ります。対面教育が1時間減ることで失われる人的資本量は増えていく(対面教育の粗便益は対面教育時間が短いほど大きい=便益逓減である)ため、遠隔教育の費用は加速度的に増える=限界費用は増加する、と仮定します。
-	\begin{dinglist}{45}\footnotesize
-	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-	\item	「逓増限界費用」increasing marginal costsといいます。
-	\end{dinglist}
-\end{dinglist}
-\end{frame}
-
-\begin{frame}[t]{}
-\begin{dinglist}{45}
-\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\item	限界便益=限界費用となる$x=x^{*}$時間の遠隔教育、つまり、限界純便益がゼロとなる$x$が純便益を最大化します。なぜならば、(最大値の2階条件が満たされていれば)これよりも短い時間だと限界便益$>$限界費用なので、もう少し$x$を増やすことで純便益を増やせます。これよりも長い時間だと限界便益$<$限界費用なので、もう少し$x$を減らすことで純便益を増やせます。
-\pause
-\item	最適な遠隔教育によって$b(x^{*})-c(x^{*})$の純便益が得られます。遠隔授業の時間がゼロのときの純便益は$b(0)-c(0)$だとしましょう。
-	\begin{itemize}
-	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
-\pause
-	\item	$b(x^{*})-c(x^{*})\geqslant b(0)-c(0)$であれば、遠隔教育を$x^{*}$時間すると社会の純便益が最大化できます[等号を含んでいるのは、純便益が同じであればやっても(やらなくても)よいということです]。
-\pause
-	\item	$x^{*}<0$で$b(x^{*})-c(x^{*})>b(0)-c(0)$であっても、遠隔教育を負の時間することはできません。このため、遠隔教育を$0$時間すると社会の純便益が最大化できます。
-	\end{itemize}
-\end{dinglist}
-純便益$b(x)-c(x)$を$f(x)$と表記します。
-\end{frame}
-\begin{frame}[t]{}
 %\hfil\adjustbox{max height=.3\paperheight}{
-\input{c:/seiro/docs/external/seishin/lec_slides/2022/MaximisationSlides/NonnegativityConstraint.tex}\\
+\input{c:/seiro/docs/external/seishin/lec_slides/2024/MaximisationSlides/NonnegativityConstraint.tex}\\
 %}
 \vspace{1.0ex}
 $x=0$が最大値となる場合は上図の右2つのケースです。
@@ -947,7 +945,7 @@ $x=0$が最大値となる場合は上図の右2つのケースです。
 \end{frame}
 
 \begin{frame}[t]{}
-\input{c:/seiro/docs/external/seishin/lec_slides/2022/MaximisationSlides/NonnegativityConstraint.tex}
+\input{c:/seiro/docs/external/seishin/lec_slides/2024/MaximisationSlides/NonnegativityConstraint.tex}
 \begin{dinglist}{43}
 \vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
 \pause
@@ -955,7 +953,7 @@ $x=0$が最大値となる場合は上図の右2つのケースです。
 \pause
 \item	非負制約がbindしていれば接線の傾きは負、bindしていなければゼロなので、非負制約つき最大化問題の解では、目的関数(純便益関数)の傾きが負かゼロ、つまり、非正であること、$f'(x)\leqslant 0$が必要です(これが非負制約つき最大化問題の一階条件first order conditionです)。
 \pause
-\item	中央や右の図の場合、遠隔授業をせず、すべてを対面授業にすれば社会の純便益を最大化できます。
+%\item	中央や右の図の場合、遠隔授業をせず、すべてを対面授業にすれば社会の純便益を最大化できます。
 \end{dinglist}
 \end{frame}
 
@@ -1048,7 +1046,7 @@ pA\alpha K^{\alpha-1}L^{\alpha}-r=0 \quad \Rightarrow \quad r=MPK=\alpha \frac{p
 \[
 \alpha=\frac{rK}{pY}.
 \]
-$1-\alpha$は労働分配率に等しくなります。
+別の言い方をすれば、コブ・ダグラス型生産関数では、資本報酬$=\alpha\times$収入が成り立つ。
 \end{frame}
 
 \begin{frame}[t]{}
@@ -1068,7 +1066,7 @@ K^{*}=\alpha \frac{pY}{r}, \quad L^{*}=(1-\alpha)\frac{pY}{w}.
 \[
 \pi^{*}=pY-r\alpha \frac{pY}{r}-w(1-\alpha)\frac{pY}{w}=pY-pY=0.
 \]
-コブ・ダグラス型生産関数では、価格$p, w, r$を所与とした利潤最大化では、収入$pY$は資本と労働に完全分配されて利潤が０になります。
+コブ・ダグラス型生産関数では、価格$p, w, r$を所与とした完全競争下の利潤最大化では、収入$pY$は資本と労働に完全分配されて利潤が０になります。
 % FOCsを比に取ると
 % \[
 % \frac{w}{r}=\frac{MPL}{MPK}=
@@ -1126,3 +1124,58 @@ d\tilde{A}=bdA.
 \end{frame}
 
 \end{document}
+
+\begin{frame}[t]{}
+\begin{columns}[T]
+\column{.5\textwidth}
+$f(l)=u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$で
+\pause
+$f(l)=u\left\{c_{1}(l)\right\}+\beta u\{c_{2}(l)\}$、つまり、$c_{1}(l)=w(24-l)+A-s$, $c_{2}(l)=h(l)+Rs$とおく
+\pause
+チェーンルール
+\[
+\begin{aligned}
+f'(l)
+&=
+u'\left(c_{1}\right)c'_{1}(l)+g'(c_{2})c'_{2}(l),\\
+&=
+u'\left(c_{1}\right)*(-w)+\beta u'(c_{2})h'(l),\\
+&=
+0
+\end{aligned}
+\]
+$\Leftrightarrow$
+\[
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}=\beta \frac{h'(l)}{w}.
+\]
+\column{.5\textwidth}
+$w(24-l)+A-s=c_{1}$のとき、普通の微分をして0とおく
+\[
+\begin{aligned}
+U(s)
+&=
+u\left\{w(24-l)+A-s\right\}\\
+&\hspace{1em} +\beta u\left\{h(l)+Rs\right\},\\
+U'(s)
+&=
+u'\left\{w(24-l)+A-s\right\}*(-1)\\
+&\hspace{1em} +\beta u'\left\{h(l)+Rs\right\}R,\\
+&=
+0.
+\end{aligned}
+\]
+\[
+\Leftrightarrow
+\]
+\[
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}
+=
+\beta R.
+\]
+\end{columns}
+\hspace{7cm} $\Leftrightarrow$
+\[
+h'(l)=Rw.
+\]
+
+\end{frame}

@@ -19,7 +19,9 @@ format:
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/03.html>
-    theme: [sky]
+    theme: 
+      - sky
+      - ../../seirosky.scss
     linkcolor: red
     code-line-numbers: true
     code-copy: true
@@ -40,6 +42,7 @@ lightbox: auto
 displayMode: compact
 filters:
   - parse-latex
+  - nutshell
 include-in-header:
   - text: |
       <style>
@@ -188,15 +191,35 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ----
 
+## : Labour productivity
+
+<!-- * $\large{労働生産性}=\frac{\mbox{GDP}}{\large{\mbox{雇用者数}}}$-->
+
+* 労働生産性=GDP/雇用者数
+   * ここでの労働生産性の計算方法
+      * 長所: GDP関連統計(国民経済計算)だけで計算可能
+      * 短所: 労働時間を考慮していない
+   * 通常は生産量/総労働時間、生産金額/総労働時間などで計算
+
+## :x LProd2
+
+----
+
 ::::::::::{.columns}
 
 ::::{.column width="55%"}
 ![被雇用者1人あたりGDP(労働生産性)](HK/figure/LabourProductivityPerEmployee.jpg){width="85%"}
 
-出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
 ::::
 
 ::::{.column width="45%"}
+* [:労働生産性](#LabourProductivity)
 * 中国、韓国、インドの労働生産性は急速に成長、ただし、インドの水準はまだ低い
 * 南アフリカとインドネシアの労働生産性は低く、成長も遅い
 * リーマン・ショックを引き起こしたアメリカは、ショック後も労働生産性が成長
@@ -209,7 +232,12 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::{.column width="55%"}
 ![被雇用者1人あたりGDP(労働生産性): 現在の高所得国のみ](HK/figure/LabourProductivityPerEmployee2.jpg){width="85%"}
 
-出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
 ::::
 
 ::::{.column width="45%"}
@@ -226,7 +254,12 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::{.column width="70%"}
 ![1人あたりGDP](HK/figure/GDPPerCapita.jpg){width="85%}
 
-出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
 ::::
 
 ::::{.column width="30%"}
@@ -244,7 +277,12 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::{.column width="70%"}
 ![1人あたりGDP: 現在の高所得国のみ](HK/figure/GDPPerCapita2.jpg){width="85%}
 
-出所: [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
 ::::
 
 ::::{.column width="30%"}
@@ -261,7 +299,13 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::{.column width="70%"}
 ![資本分配率(=資本報酬/国民所得=1-労働分配率)](HK/figure/PikettySaezZucman.jpg){width="85%}
 
-出所: @PikettySaezZucman2018, Table A49より作成
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> @PikettySaezZucman2018, Table A49より作成
+<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
 ::::
 
 ::::{.column width="30%"}
@@ -512,41 +556,48 @@ $$
 :	子ども期: どのくらい学校に行くか、どのくらい働くか決めます<gray>You choose how much to go to school, how much to work</gray>
 
 第2期
-:	成人期: 労働所得を得ます。成人期所得は子ども期の就学期間に応じて増えます。<gray>You earn. Adulthood income is increasing in childhood schooling.</gray>
+:	成人期: 子ども期の就学時間に応じた労働所得を得ます<gray>You earn. Adulthood income is increasing in childhood schooling.</gray>
 :::
 
-----
+. . .
 
 合理的な子ども: 便益と費用を考慮して教育水準を決める<gray>a rational child: weighs costs and benefits to decide schooling level</gray>
 
 :::{.des-list-boxed}
 便益benefits
-:	学歴を積むことによる成人所得増加分$\times$割引率<gray>increased adult income/discount rate</gray>
+:	学歴を積むことによる成人所得増加分$\times$割引率<gray>increased adult income * discount rate</gray>
 
 費用costs
-:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費+児童労働所得)<gray>costs of schooling(tuition*school unifom+school meals+commuting costs+child labour incomes)</gray>
+:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費用+児童労働所得)の発生<gray>costs of schooling(tuition+school unifom+school meals+commuting costs+child labour incomes)</gray>
 :::
 
 . . .
 
-教育水準を決める=第1期の時間配分(就学 vs. 就労)を決める<gray>deciding on schooling level=deciding on time allocation (schooling vs. work) in period 1</gray>
-
-. . .
-
-単純化のため学費+制服・給食・通学その他費=0と仮定する<gray>for simplicity, we assume all costs other than child labour income are zero</gray>
+教育水準を決める=**第1期の時間配分(就学 vs. 就労)**を決める<gray>deciding on schooling level=deciding on time allocation (schooling vs. work) in period 1</gray>
 
 ----
 
+単純化の仮定
+
+1. 学費+制服・給食・通学その他費用=0<gray>for simplicity, we assume all costs other than child labour income are zero</gray>
+1. 親と子どもの利害は完全に一致
+
+. . .
+
 以下の場合、親は子どもが判断するよりも児童労働就労時間を長くして、子どもの児童労働所得で自分の効用を高める<gray>Under the following conditions, a parent may increase the work hours than the child would have and increases the parental utility with the child's labour income</gray>
 
-* 親が子どもの成人期所得効用を子どもが感じるよりも割り引くとき(将来よりも現在の家族の幸せ)<gray>a parent discounts more of future utility (happiness of today weights more than of tomorrow)</gray>
+* 親が子どもの成人期所得効用を子どもよりも割り引くとき(将来よりも現在の家族の幸せ)<gray>a parent discounts more of future utility (happiness of today weights more than of tomorrow)</gray>
 * 「成人したら仕送りを約束するから学校に行かせてほしい」と子どもが頼んでも、親が子どもの約束を信じないとき(子どもは将来裏切ることができるため)<gray>a parent does not believe that the child's promise that he/she will pay back the costs in future</gray>
-* 意志決定者が子どもか親かによって人的資本投資額が変わる<gray>depending on the decision maker, the amount of human capital investment may differ</gray>
+
+. . .
+
+意志決定者が子どもか親かによって人的資本投資額が変わる<gray>depending on the decision maker, the amount of human capital investment may differ</gray>
 
 ----
 
 教育の人的資本仮説: 学歴水準の決定=生産性向上手段
 
+* 教育に関する最も代表的な仮説
 * 人的資本仮説と補完的な見方: 
 
 :::{.des-list-boxed}
@@ -555,8 +606,10 @@ $$
 :::
 
 * シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ
+* 人的資本仮説とシグナリング仮説: 補完的であり両立可能
+* 本講義では説明しません
 
-. . .
+----
 
 人生効用最大化のために子どもは何を決めるか
 
@@ -573,11 +626,11 @@ $$
 
 ----
 
-ミクロ経済学: 限界収入=限界費用(MR = MC)
+ミクロ経済学: 限界収入=限界費用(MR = MC)<gray>marginal revenue = marginal costs</gray>
 
 . . .
 
-生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の時間配分)は下記を満たすはず
+生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の就学時間)は下記を満たすはず
 $$
 \underbrace{\mbox{ 成人所得増加による効用増加分}}_{\scriptsize{\mbox{就学の限界収入(を効用評価)}}} = \underbrace{\mbox{ 児童労働所得減少による効用減少分}}_{\scriptsize{\mbox{就学の限界費用(を効用評価)}}}
 $$
