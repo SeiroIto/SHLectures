@@ -40,8 +40,6 @@ format:
 #### Don't understand why
 lightbox: auto
 displayMode: compact
-filters:
-  - parse-latex
 include-in-header:
   - text: |
       <style>
