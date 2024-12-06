@@ -39,7 +39,11 @@ Lecture slides etc. 2024 will be placed here.
    * [RP08](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP08.html)  
 * Lecture 10  
    * [03](https://seiroito.github.io/SHLectures/lec_slides/2024/03.html)  
+   * [RP09](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP09.html)  
    * [maximisation](https://seiroito.github.io/SHLectures/lec_slides/2024/MaximisationSlides_HO.pdf)  
    * [midterm](https://seiroito.github.io/SHLectures/homeworks/2024/midterm/midterm2024.html)  
+* Lecture 11  
+   * [hw03 answer key](https://seiroito.github.io/SHLectures/homeworks/2024/3/hw3Answers_tufte.html)  
+   * [RP10](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP10.html)  
 
 
