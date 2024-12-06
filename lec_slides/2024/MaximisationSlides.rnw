@@ -1,7 +1,7 @@
 %  library(knitr); setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/"); system("recycle c:/seiro/docs/external/seishin/lec_slides/2024/MaximisationSlides/cache/"); knit("MaximisationSlides.rnw", "MaximisationSlides.tex"); system("platex MaximisationSlides"); system("pbibtex MaximisationSlides"); system("dvipdfmx MaximisationSlides")
 
-\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
-%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble_ho.rnw}
 \definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
@@ -786,7 +786,7 @@ $c_{2}(l, s)=h(l)+Rs$\pause, $\frac{\partial c_{2}(l, s)}{\partial l}=h'(l)$, $\
 \column{.3\textwidth}
 \pause
 \[
-\beta wR=h'(l).
+wR=h'(l).
 \]
 $F(l, s)$を2変数$l, s$で最大化すると、この条件が成り立っていなければならない
 \end{columns}

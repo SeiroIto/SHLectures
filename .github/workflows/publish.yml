@@ -49,7 +49,7 @@ jobs:
             any::ggplot2
             any::data.table
             any::tufte
-            any::wooldridge
+            # any::wooldridge this gives an error, because it is not on CRAN anymore
             any::modelsummary
 
       - name: Render

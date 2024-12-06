@@ -85,8 +85,14 @@ resources:
 gray {
   color: #aeb6bf;
 }
+Green {
+  color: #1DCA09;
+}
 Red {
   color: Red;
+}
+DarkRed {
+  color: #b40404;
 }
 Blue {
   color: Blue;
@@ -94,6 +100,9 @@ Blue {
 RoyalBlue
 {
   color: #4169e1;
+}
+Aqua {
+  color: #07aafc;
 }
 #### description with a font size control (not effective)
 /* Main container for the description list */
@@ -536,7 +545,10 @@ $$
 . . .
 
 では、できる限り長く学校に通うべきでしょうか?<gray>Then, shall we go to school as long as possible?<gray>
-\pause
+
+. . .
+
+
 いいえ、ある段階で止めて働かねばなりません<gray>No. You need to stop at some point and start to work</gray>
 
 . . .
@@ -595,34 +607,34 @@ $$
 
 ----
 
-教育の人的資本仮説: 学歴水準の決定=生産性向上手段
+教育の人的資本仮説: 学歴水準の決定=生産性向上手段<gray>human capital hypothesis of education: schooling = a means to increase productivity</gray>
 
-* 教育に関する最も代表的な仮説
-* 人的資本仮説と補完的な見方: 
+* 教育に関する最も代表的な仮説<gray>the most representative hypothesis on education</gray>
+* 人的資本仮説と補完的な見方: <gray>a complementary view to human capital hypothesis</gray>
 
 :::{.des-list-boxed}
 シグナリング仮説
-:	学歴水準の決定=(雇用者への)能力情報伝達手段(あくまでもシグナルであって、生産性を変えても変えなくてもいい)
+:	学歴水準の決定=(雇用者への)能力情報伝達手段(あくまでもシグナルであって、生産性を変えても変えなくてもいい)<gray>schooling=a means to signal ability (to employers) (strictly a signal and does not have to change productivity)</gray>
 :::
 
-* シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ
-* 人的資本仮説とシグナリング仮説: 補完的であり両立可能
+* シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ<gray>In signaling models, people with lower costs of schooling/learning choose high schooling levels</gray>
+* 人的資本仮説とシグナリング仮説: 補完的であり両立可能<gray>humal capital and signaling: complementary and not mutually exclusive (nor complete)</gray>
 * 本講義では説明しません
 
 ----
 
-人生効用最大化のために子どもは何を決めるか
+人生効用最大化のために子どもは何を決めるか<gray>what does a child decide to maximise the lifetime utility?</gray>
 
 . . .
 
-第1期時間配分、第1期と第2期の間の消費配分
+第1期時間配分、第1期と第2期の間の消費配分<gray>first period time allocation, consumption allocation between first and second periods</gray>
 
 . . .
 
-理解の段取り: 
+理解の段取り: <gray>how we understand the model</gray>
 
-1. 第1期時間配分を最適に決め、人生を通じて所得合計を最大化する
-1. 各期への消費配分を決める
+1. 第1期時間配分を最適に決め、人生を通じて所得合計を最大化する<gray>a child choose the first period time allocation optimally, and maximises the lifetime earning</gray>
+1. 各期への消費配分を決める<gray>decides on consumption allocation to each periods</gray>
 
 ----
 
@@ -630,7 +642,7 @@ $$
 
 . . .
 
-生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の就学時間)は下記を満たすはず
+生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の就学時間)は下記を満たすはず<gray>optimal schooling level $l^{*}$ that maximises the lifetime utiluty must satisfy the below</gray>
 $$
 \underbrace{\mbox{ 成人所得増加による効用増加分}}_{\scriptsize{\mbox{就学の限界収入(を効用評価)}}} = \underbrace{\mbox{ 児童労働所得減少による効用減少分}}_{\scriptsize{\mbox{就学の限界費用(を効用評価)}}}
 $$
@@ -648,18 +660,799 @@ $$
 
 ::::{.column width="60%"}
 :::{.fragment}
-MR$>$MCのとき=$l<l^{*}$のとき、$l$を僅かに増やせば$MR-MC$だけ純利益を増やせる$\rightarrow l$を増やす
+MR$>$MCのとき=$l<l^{*}$のとき
+
+&rArr; $l$&uarr; &rArr; $MR-MC$だけ純利益&uarr;
+:::
+:::{.fragment}
+MR$<$MCのとき=$l>l^{*}$のとき
+
+&rArr; $l$&darr; &rArr; $MR-MC$だけ純利益&uarr;
 :::
 
 :::{.fragment}
-$\because$不等号ならば、$l$を増減することで限界的な純利益を拡大できるから。等号ならば、改善の余地がないということ。
+&rArr; 等号(MR=MC)ならば純利益改善の余地がない
 :::
 
 :::{.fragment}
-連続関数の最大化: 限界収入=限界費用(MR-MC=0)、を図解できる (スライド: 微分)
+連続関数の最大化: 限界収入=限界費用(MR-MC=0) ([図解: 微分](MaximisationSlides.pdf))
 :::
 ::::
 ::::::::::
+
+----
+
+$t$期の消費$c_{t}$よる効用$u(c_{t})$, $t=1,2$
+
+. . .
+
+
+初期資産$A$、貯蓄$s$、就学時間$l$、児童労働賃金$w$
+
+```{r }
+tb <- read.table(textConnection(
+"就労時間 24-l
+児童労働所得 w×(24-l)
+児童期消費 w×(24-l)+A-s
+児童期効用 u{w(24-l)+A-s}=u(c1)
+成人所得 h(l)
+成人期消費 h(l)+Rs
+成人期効用 u{Rs+h(l)}=u(c2)"))
+tb <- data.table(tb)
+setnames(tb, c("日本語", "数式"))
+tinytable::tt(tb)
+```
+
+----
+
+* 児童労働所得は(24時間から就学時間$l$を引いた)就労時間*児童労働賃金。成人所得は就学時間の増加関数。
+* 児童労働時間は児童労働所得を増やして成人所得を減らす$=$就学時間は児童労働所得を減らして成人所得を増やす
+* 児童労働時間の決定には今期所得と将来所得のトレードオフがある
+   * トレードオフをどのように選ぶかを考えるのが経済学
+
+----
+
+生涯効用最大化問題として今期所得と来期所得のトレードオフを考える
+生涯効用最大化問題として児童労働時間=$24-$就学時間=$24-$人的資本投資時間を考える
+$$
+\begin{aligned}
+\max_{\{s, l\}}
+\;\;\; & u(c_{1})+\beta u(c_{2}) \hspace{1cm} &&\color{blue}{\scriptsize{\mbox{$s,l$を操作して生涯効用$u(c_{1})+\beta u(c_{2})$を最大化}}}\\
+\st \;\;\; 
+& c_{1}=w(24-l)+A-s  &&\color{blue}{\scriptsize{\mbox{$c_{1}$は児童労働所得+資産-貯蓄}}}\\
+& c_{2}=h(l)+Rs  &&\color{blue}{\scriptsize{\mbox{$c_{2}$は成人所得$+R*$貯蓄}}}
+\end{aligned}
+$$
+2つの制約を目的関数に代入すると、制約条件を組み込んだ目的関数になる
+$$
+\max_{\{s, l\}}
+\;\;\; u\left\{w(24-l)+A-s\right\}+\beta u\left\{h(l)+Rs\right\}
+$$
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\begin{aligned}
+\frac{\partial F(l, s)}{\partial l}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial l}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial l}=0, \\
+\frac{\partial F(l, s)}{\partial s}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial s}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial s}=0.
+\end{aligned}
+$$
+:::
+
+----
+
+FOCs
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial l}}{\frac{\partial c_{1}(l, s)}{\partial l}}
+=-\beta\frac{h'(l)}{-w}=\beta\frac{h'(l)}{w},\\
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial s}}{\frac{\partial c_{1}(l, s)}{\partial s}}
+=-\beta\frac{R}{-1}=\beta R. 
+\end{aligned}
+$$
+:::
+
+$$
+wR=h'(l^{*}).
+$$
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+$$
+\mbox{時間1単位wで働いて貯蓄したときの第2期所得増加分}=\mbox{時間1単位就学したときの第2期所得増加分}
+$$
+:::
+
+児童労働の限界収益=人的資本投資の限界収益、となるようにすれば時間配分が最適になる
+
+:::{.description-list}
+最適
+: 何らかの最大化(最小化)問題の解となっている状態を指す
+:::
+
+. . .
+
+この条件式の特徴
+
+* 効用最大化を考えたのに効用関数が含まれていない
+* 生涯所得を最大化&larr;生涯所得を最大化しつつ、貯蓄(=消費配分)によって効用を最大化
+
+----
+
+FOCs
+
+$$
+\underbrace{u'\left(c_{1}\right)}_{\scriptsize{\mbox{$c_{1}$を減らした(貯蓄を増やした)ときの効用増分}}}
+=
+\underbrace{\beta Ru'\left(c_{2}\right)}_{\scriptsize{\mbox{$c_{2}$を増やした($R*$貯蓄を増やした)ときの効用増分の割引$\beta$現在価値}}} 
+$$
+
+$s$を通じて消費を再配分することで各期の限界効用の合計は増えない
+
+* $\beta$第2期限界効用=第1期限界効用を高めるうえでの費用
+   * 第1期限界効用-$\beta$第2期限界効用=第1期限界効用-第1期限界費用=0
+      *  &rArr; 第1期限界効用=第1期限界費用
+* 所与の生涯所得の下での効用は最大化されている
+  * 生涯所得が与えられたとき、貯蓄をこの条件のように(「最適に」)決めることで、その生涯所得における効用は最大化される
+  * 生涯所得が最大化されているかはこの条件は何も語っていない
+
+----
+
+FOCs
+
+$$
+\begin{aligned}
+\hspace{-10cm}\underbrace{wu'\left(c_{1}\right)}_{\scriptsize{\mbox{就学時間$l$を増やして所得が$w$減ったときの第1期効用減分}}}
+&=
+\underbrace{u'\left(c_{2}\right)h'(l)}_{\scriptsize{\mbox{$l$を増やしたときの第2期効用増分}}}\\
+\scriptsize{\mbox{就学の限界費用(を効用評価)}}
+&=
+\scriptsize{\mbox{就学の限界収入(を効用評価)}}
+\end{aligned}
+$$
+
+$l$を通じて各期所得を変化させることで各期の限界効用の合計は増えない
+
+* $w$第1期限界効用=第2期限界効用を高めるうえでの費用
+   * 第2期限界効用-$w$第1期限界効用=第2期限界効用-第2期限界費用=0
+      *  &rArr; 第2期限界効用=第2期限界費用
+* 就学費用$w$、人的資本投資の効率$h'(l)$、各期の限界効用(追加的消費変化がどれだけ効用に影響するか)を考慮し、人的資本投資量$l$を決めている
+
+
+----
+
+経済学でよく使われる仮定
+
+::: {style="font-size: 85%;line-height: 1.1;"}
+:::{.des-list-boxed}
+限界生産力逓減の仮定
+:	技術が変わらずに生産要素が増えると、生産の増加幅は低下するという仮定<gray>diminishing marginal product: an assumption that an increase in production to the same additional unit of factor of production will decline, if without changing the technology</gray>
+
+*	「同じ土地に機械を投入し続けると、混み合うので生産の増加幅はゼロに近づく」
+*	$h(l)$: 就学$l$のときの成人所得
+*	$h'(l)$: 就学$l$で$l$を増やしたときの成人所得変化 \hspace{1cm} <gray>$l$での$h(l)$の傾き</gray>
+*	$h'(l)$は$l\in\mathbb R_{+}$で非負 \hspace{1cm} <gray>$R_{+}$=正の実数すべての集合</gray>
+*	$h'(l)$は$l$とともに減少、$h''(l)<0$ \hspace{1cm} <gray>$l$での$h(l)$の傾きは減っていく</gray>
+
+限界効用逓減の仮定
+:	消費水準が増えると、効用の増加幅は低下するという仮定<gray>an assumption that an increase in utility to the same unit of additional consumption will decline</gray>
+
+*	「同じものを食べ続けると、飽きるので追加的な満足度はゼロに近づく」
+*	$u'(c)$は$c\in\mathbb R_{+}$で非負
+*	$u'(c_{t})$は$c_{t}$とともに減少、$u''(c_{t})<0$
+
+:::
+:::
+
+----
+
+$$
+wu'\left\{w(24-l)+A-s\right\}=\beta u'\left\{h(l)+Rs\right\}h'(l).
+$$
+
+<br>
+
+$wu'\left\{w(24-l)+A-s\right\}$は$l$が大きいほど括弧$\left\{\cdot\right\}$の中が小さい 
+
+$\implies$ $u'\left\{\cdot\right\}$が大きい ($\because$限界効用逓減) 
+
+$\implies$ \textcolor{darkred}{左辺$u'\left\{\cdot\right\}$は$l$の増加関数}
+
+<br>
+
+$u'\left\{h(l)+Rs\right\}h'(l)$は$l$が大きいほど$u'\left\{h(l)+Rs\right\}$も$h'(l)$も小さくなる ($\because$限界効用逓減、限界生産力逓減)
+
+ $\implies$ \textcolor{darkgreen}{右辺$u'\left\{h(l)+Rs\right\}h'(l)$は$l$の減少関数}
+
+----
+
+<center>
+![](HK/figure/109_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/110_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/111_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/112_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/113_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](D_HK.gif)
+</center>
+
+----
+
+<center>
+$wu'\left\{w(24-l)+A-s\right\}$と$\beta u'\left\{h(l)+Rs\right\}h'(l)$が交わるために必要な条件
+
+<br>
+
+\hspace{-5cm}$y$軸上($l=0$)で<DarkRed>$wu'\left\{w(24-l)+A-s\right\}$</DarkRed>$<$<Green>$\beta u'\left\{h(l)+Rs\right\}h'(l)$</Green>
+
+$l=24$で<DarkRed>$wu'\left\{w(24-l)+A-s\right\}$</DarkRed>$>$<Green>$\beta u'\left\{h(l)+Rs\right\}h'(l)$</Green>
+
+:::{.fragment}
+<br>
+$\iff$
+
+<br>
+$$
+\begin{aligned}
+wu'\left\{24w+A-s\right\}&<\beta u'\left\{h(0)+Rs\right\}h'(0)\\
+wu'\left\{A-s\right\}&>\beta u'\left\{h(24)+Rs\right\}h'(24)
+\end{aligned}
+$$
+:::
+
+</center>
+
+----
+
+$$
+\begin{aligned}
+wu'\left\{24w+A-s\right\}&<\beta u'\left\{h(0)+Rs\right\}h'(0)\\
+wu'\left\{A-s\right\}&>\beta u'\left\{h(24)+Rs\right\}h'(24)
+\end{aligned}
+$$
+
+
+1番目の不等式が成立しやすい条件
+
+* $h(0)$が[$h(+)$に比べて]小さい: 未就学時の人的資本が(就学時に比べて)小さい
+* $h'(0)$が大きい: 未就学から少しでも就学すると、人的資本の増加分が十分に大きい
+
+. . .
+
+これら条件下では2番目の不等式も成立しやすい
+
+----
+
+
+----
+
+<center>
+![](HK/figure/115_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/116_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/117_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/118_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/119_D_HK.jpg)
+</center>
+
+----
+
+::::::::::{.columns}
+:::{.column width="75%"}
+![](HK/figure/119_D_HK.jpg){width="133.333%"}
+:::
+
+:::{.column width="25%"}
+* 人的資本投資=0のとき、限界効用<限界費用
+* $w$が大きくて$A$が小さい場合
+* $h(0)$が大きい場合
+* $h'(0)$が小さい場合
+:::
+::::::::::
+
+----
+
+<center>
+![](HK/figure/D2_HK.gif)
+</center>
+
+----
+
+最適な就学時間を選ぶと第1期の消費が少なすぎる場合、借入をして第2期に返済する
+
+. . .
+
+$\gets$ 第2期の消費を第1期に移動させる
+
+. . .
+
+でも、借入に限度があって必要なだけ借りられないかも=**信用制約credit constaint**がある場合
+
+. . .
+
+$$
+\underbrace{\mbox{第1期の限界効用}}_{u'(c_{1})}>
+\underbrace{\mbox{第2期の限界効用}}_{\beta Ru'(c_{2})}
+$$
+
+. . .
+
+第1期消費が少なすぎると第1期の限界効用が最適水準よりも高すぎる
+
+. . .
+
+信用制約 &rArr; 第1期消費が過小=$u'(c_{1})$は最適よりも大きい &rArr; 図で$u'(c_{1})w$線は上方
+
+信用制約 &rArr; 第2期消費は過大=$u'(c_{2})$は最適よりも小さい &rArr; 図で$u'(c_{2})h'(l)$線は下方
+
+----
+
+<center>
+![](HK/figure/138_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/139_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/140_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/141_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/142_D_HK.jpg)
+</center>
+
+----
+
+::::::::::{.columns}
+:::{.column width="75%"}
+![](HK/figure/D3_HK.gif)
+:::
+
+:::{.column width="25%"}
+* 第2期所得を少しでも第1期に移動させるために児童労働を増やす
+* 借入が制限されると、就学時間と所得は最適水準よりも減る
+* 信用制約がbindする場合: 資産$A$が少ない場合=貧しい家庭の場合
+:::
+::::::::::
+
+----
+
+数学: 信用制約がbindするとき最大化の一階条件の2式が示すこと。
+
+$s$は負が最適だが、非負制約によって0が次善
+$$
+\begin{aligned}
+u_{s}
+&=-u'\left\{w(24-l)+A-s\right\}+\beta Ru'\left\{h(l)+Rs\right\}{\color{red}<}0,\\
+u_{l}
+&=-wu'\left\{w(24-l)+A-s\right\}+\beta h'(l)u'\left\{h(l)+Rs\right\}=0.
+\end{aligned}
+$$
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\frac{u'(c_{1})}{u'(c_{2})}&=\frac{u'\left\{w(24-l)+A-s\right\}}{u'\left\{h(l)+Rs\right\}}{\color{red}>}\beta R,\\
+\frac{u'(c_{1})}{u'(c_{2})}&=\frac{u'\left\{w(24-l)+A-s\right\}}{u'\left\{h(l)+Rs\right\}}=\beta \frac{h'(l)}{w}.
+\end{aligned}
+$$
+:::
+
+$$
+Rw\color{red}{<}h'(l).
+$$
+意味: 追加で微少時間就労して$w$を稼いで貯蓄して成人消費が増える分=$Rw<h'(l)$=追加で微少時間就学して成人消費が増える分 &rArr; 限界費用<限界収入 &rArr; 児童期の<Red>就学時間が過少</Red>
+
+$A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &rArr; $-u'\left\{w24+A-s\right\}+\beta Ru'\left\{h(0)+Rs\right\}>0$になるかも &rArr; 交点を持つ
+
+----
+
+この枠組みでは、第1期目に投資、第2期目に回収する
+
+. . .
+
+投資は資金投下と回収の時期が違う: 他者の資金が必要な場合、ファイナンスされないことがある
+
+. . .
+
+第1期目に第2期の投資収益を利用できれば=借入ができれば、効用を最大化するように最適な人的資本投資ができる
+
+. . .
+
+しかし、第2期目の所得を担保に借入ができなければ、資産が少ない家計では第1期の消費を優先して就学時間が過小になる
+
+. . .
+
+収益性の高い投資機会が失われるので、当の子どもだけでなく社会にとっても損失
+
+. . .
+
+信用市場の失敗: 収益性の高い投資に資金を提供できない
+
+. . .
+
+政府などが奨学金を貸与すると解決できる、贈与は不要
+
+* 近年の奨学金負債: 返済できない人&rArr;人的投資の収益率を計算しているか(=合理的か)?
+* 借入可能であれば、$A$と最適人的資本投資量は正の関係: 一定の$A$以下だけに贈与する理由?
+
+----
+
+人々の学習などの成果が人的資本として生産性を高め、物的資本や物的労働量以上に経済を発展させていく
+
+. . .
+
+人々は現在の(児童労働)賃金(=就学費用)と将来の賃金増加を勘案して人的資本投資を決める
+
+. . .
+
+では、現在と将来の賃金はどのように決まるのか?
+
+. . .
+
+労働市場の需要と供給を均衡させるように決まる
+
+. . .
+
+では、労働需要と労働供給はどのように決まるのか?
+
+. . .
+
+より対象を絞って考えると、人的資本投資をして技能が向上した労働への需要はどのように決まるのか?
+
+
+----
+
+インドの経済政策目標: inclusive growth
+
+. . .
+
+高卒や大卒の中産階級が増えて、都市部で近代的な生活を始める
+
+. . .
+
+準技能(semi-skilled)労働を求めた海外直接投資(FDI)、中産階級の消費が成長をもたらす
+
+
+. . .
+
+しかし、恩恵は貧困層になかなか及ばない
+
+. . .
+
+労働需要が高まっている部門・職業に雇用される必要がある
+
+. . .
+
+「成長過程に貧困層が参加することが必要」と言われるが、低技能労働需要は少ない
+
+. . .
+
+2000年以降のインドの経済成長は小卒程度の学力しか持たない農村貧困層への労働需要を飛躍的に高めるとは思えない
+
+. . .
+
+農村部での公教育の質改善無しにはexclusive growthになる
+
+----
+
+@Tinbergen1975, @KatzMurphy1992, @Acemoglu1998, @Acemoglu2002, @GoldinKatz2009 のアイディア
+
+. . .
+
+<center>
+
+技能のプール
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+技能偏向的技術変化
+
+skill-biased technological change
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+企業による技能偏向的技術の採用
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+技能労働需要
+
+</center>
+
+. . .
+
+<br>
+技能のプールが発生するきっかけは?
+
+----
+
+アメリカ20世紀初頭high school movement
+
+* 高校修了の高収益率、連邦制による分権化 &rArr; 公立高校建設
+* 高校教育の普及 &rArr; 高卒技能偏向的技術変化
+* 技能偏向的技術採用によって技能保有者(高卒)ホワイト・カラー労働需要が増える
+* アメリカ中流階級の黄金期
+
+. . .
+
+アメリカ1970年代
+
+* ヴェトナム戦争徴兵忌避によって大学進学者が 24\%(1960) &rarr; 36\% (1969) &rarr; 27\%(mid-1970's)と増える(``College enrollment linked to vietnam war,'' {\footnotesize\textit{NY Times}, Page 24, Sep 04, 1984}) &rArr; 技能偏向的技術変化
+* 技能偏向的技術採用によって技能保有者(大卒)ホワイト・カラー労働需要が増える
+* 1980年代になると高卒と大卒者の格差が拡大し始める&rarr;現在も継続
+
+----
+
+<center>
+![](HK/figure/192/1_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/2_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/3_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/4_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/5_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/6_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/7_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/8_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/9_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/10_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/11_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/12_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/13_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/14_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/15_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/16_D_HK.jpg)
+</center>
+
+----
+
+技能の高い人口が増えると技術が開発され、採用され、(高)技能労働への需要が増える
+
+* 技術変化には特定の生産要素(労働、資本など)をより多く使う方向性がある(特定生産要素を増減する方向性のある技術変化をdirected technical changeといいます)
+* 理由: (高)技能人口が増えると、技術開発をして技術を売る企業にとって(高)技能偏向的技術開発の利潤が高まるため[@Acemoglu2002]
+	* 価格効果: (高)技能人口が増えると、相対的に稀少になった(低技能)労働を多く使う財の価格が高くなるので、(低技能)労働偏向的技術が開発される
+	* 市場規模効果: (高)技能偏向的技術を使う財の市場規模が大きければ、(高)技能偏向的技術が開発される
+	* 殆どの場合、市場規模効果は価格効果を上回るので、(高)技能人口が増えると(高)技能偏向的技術が多くなる
+
+----
+
+技能偏向的技術変化があるとき
+
+. . .
+
+人的資本投資へのアクセスが容易で技能労働供給が潤沢ならば、技能を積んで収入を高める人が増え、賃金格差は減りつつ経済成長が高まる
+
+. . .
+
+人的資本投資へのアクセスが一部のみが可能であれば、技能労働供給が限られ、賃金格差は増えつつ経済成長が低迷する
+
+* 1980-2005年: 大卒賃金プレミアム
+
+:::{.des-list-boxed}
+拡大
+:	アメリカ、イギリス、日本(プレミアム水準はアメリカの半分)
+
+変化なし
+:	フランス、ドイツ
+:::
+
+. . .
+
+アメリカで大卒人口が増えないのは教育産業の容量上限ではない
+
+* 他国では増えている
+* 高校ドロップアウトや高卒の学力が不足[@GoldinKatz2009, p.347]
+* 大学の学費が高騰、ベビーブーマー世代が大学学齢になったとき奨学金が不足=credit constrained[@GoldinKatz2009, p.349]
+
+----
+
+<center>
+![](HK/figure/CollegePremiumInJapan.jpg){width="70%"}
+</center>
+
+----
+
+<center>
+![](HK/figure/218/1_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/2_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/3_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/4_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/5_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/6_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/7_D_218_D_HK.jpg)
+</center>
 
 ----
 

@@ -44,7 +44,7 @@ linkcolor = blue!50, urlcolor = green!80
 \setlength{\baselineskip}{12pt}
 
 
-<<option setting 1, cache = F, child='c:/migrate/R/knitrPreamble/knitr_initial_option_setting_chunk.rnw'>>=
+<<option setting 1, cache = F, child='c:/seiro/settings/Rsetting/knitrPreamble/knitr_initial_option_setting_chunk.rnw'>>=
 <<option setting 2, cache = F, warning = F>>=
 opts_knit$set(base.dir = 'c:/seiro/docs/external/seishin/lec_slides/2022/')
 dir.create(paste0(path, "HK/figure/"), recursive = T)
@@ -1848,6 +1848,11 @@ g <- ggplot(data = shLL[grepl("Premium1", variable), ],
     strip.text.y = element_text(color = "blue", size = 8, 
       margin = margin(.5, 0, .5, 0, "cm"))
   )
+ggsave(
+  paste0(path, "HK/figure/CollegePremiumInJapan.jpg")
+  , g,
+    , width=14*1.5, height=10*1.5, units = "cm", dpi = 300
+ )
 cairo_pdf(
   paste0(path, "HK/figure/CollegePremiumInJapan.pdf")
   , width=14*1.5/2.54, height=10*1.5/2.54, family = "Meiryo")

@@ -1,0 +1,117 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Acemoglu]{Acemoglu}{1998}{Acemoglu1998}
+{\bf Acemoglu, Daron}, ``{Why do new technologies complement skills? Directed
+  technical change and wage inequality*},'' {\it The Quarterly Journal of
+  Economics}, 11 1998, {\it 113} (4), 1055--1089.
+
+\harvarditem[Acemoglu]{Acemoglu}{2002}{Acemoglu2002}
+{\bf \bysame{}}, ``Directed technical change,'' {\it The Review of Economic
+  Studies}, 2002, {\it 69} (4), 781--809.
+
+\harvarditem[Autor et al.]{Autor, Dorn, Katz, Patterson and
+  Van~Reenen}{2020}{ADKPV2020}
+{\bf Autor, David, David Dorn, Lawrence~F. Katz, Christina Patterson, and
+  John~Van Reenen}, ``{The fall of the labor share and the rise of superstar
+  firms},'' {\it The Quarterly Journal of Economics}, 02 2020, {\it 135} (2),
+  645--709.
+
+\harvarditem[Baland and Robinson]{Baland and
+  Robinson}{2000}{BalandRobinson2000}
+{\bf Baland, Jean-Marie and James~A. Robinson}, ``Is Child Labor
+  Inefficient?,'' {\it Journal of Political Economy}, August 2000, {\it 108}
+  (4), 663--679.
+
+\harvarditem[Becker]{Becker}{1962}{Becker1962}
+{\bf Becker, Gary~S.}, ``Investment in Human Capital: A Theoretical Analysis,''
+  {\it Journal of Political Economy}, 1962, {\it 70} (5), pp. 9--49.
+
+\harvarditem[Becker]{Becker}{1964}{Becker1964}
+{\bf \bysame{}}, {\it Human Capital: A theoretical and empirical analysis, with
+  special reference to education}, National Bureau of Economic Research;
+  distributed by Columbia University Press (New York), 1964.
+
+\harvarditem[Gilligan et al.]{Gilligan, Karachiwalla, Kasirye, Lucas and
+  Neal}{2019}{Gilligan2019}
+{\bf Gilligan, Daniel~O., Naureen Karachiwalla, Ibrahim Kasirye, Adrienne~M.
+  Lucas, and Derek Neal}, ``Educator incentives and educational triage in rural
+  primary schools,'' {\it Journal of Human Resources}, 2019.
+
+\harvarditem[Goldin and Katz]{Goldin and Katz}{2009}{GoldinKatz2009}
+{\bf Goldin, Claudia~Dale and Lawrence~F Katz}, {\it The race between education
+  and technology}, Harvard University Press, 2009.
+
+\harvarditem[Jerzmanowski and Tamura]{Jerzmanowski and
+  Tamura}{2019}{JerzmanowskiTamura2019}
+{\bf Jerzmanowski, Michal and Robert Tamura}, ``Directed technological change
+  and cross-country income differences: A quantitative analysis,'' {\it Journal
+  of Development Economics}, 2019, {\it 141}, 102372.
+
+\harvarditem[Katz and Murphy]{Katz and Murphy}{1992}{KatzMurphy1992}
+{\bf Katz, Lawrence~F. and Kevin~M. Murphy}, ``{Changes in Relative Wages,
+  1963-1987: Supply and Demand Factors*},'' {\it The Quarterly Journal of
+  Economics}, 02 1992, {\it 107} (1), 35--78.
+
+\harvarditem[Leaver et al.]{Leaver, Ozier, Serneels and
+  Zeitlin}{2021}{Leaver2021}
+{\bf Leaver, Clare, Owen Ozier, Pieter Serneels, and Andrew Zeitlin},
+  ``Recruitment, effort, and retention effects of performance contracts for
+  civil servants: Experimental evidence from Rwandan primary schools,'' {\it
+  American Economic Review}, July 2021, {\it 111}, 2213--2246.
+
+\harvarditem[Mbiti et al.]{Mbiti, Muralidharan, Romero, Schipper, Manda and
+  Rajani}{2019}{Mbiti2019}
+{\bf Mbiti, Isaac, Karthik Muralidharan, Mauricio Romero, Youdi Schipper,
+  Constantine Manda, and Rakesh Rajani}, ``{Inputs, incentives, and
+  complementarities in education: Experimental evidence from Tanzania},'' {\it
+  The Quarterly Journal of Economics}, 04 2019, {\it 134} (3), 1627--1673.
+
+\harvarditem[Mincer]{Mincer}{1974}{Mincer1974}
+{\bf Mincer, Jacob}, ``Schooling, experience and earnings New York,'' {\it
+  Columbia University}, 1974.
+
+\harvarditem[Nekoei and Seim]{Nekoei and Seim}{2022}{NekoeiSeim2022}
+{\bf Nekoei, Arash and David Seim}, ``{How do inheritances shape wealth
+  inequality? Theory and evidence from Sweden},'' {\it The Review of Economic
+  Studies}, 03 2022.
+\newblock rdac016.
+
+\harvarditem[Okoye]{Okoye}{2016}{Okoye2016}
+{\bf Okoye, Dozie}, ``Appropriate technology and income differences,'' {\it
+  International Economic Review}, 2016, {\it 57} (3), 955--996.
+
+\harvarditem[Piketty]{Piketty}{2014}{Piketty2014}
+{\bf Piketty, Thomas}, {\it Capital in the 21st century}, Harvard University
+  Press, Cambridge, MA, 2014.
+
+\harvarditem[Piketty and Saez]{Piketty and Saez}{2014}{PikettySaez2014}
+{\bf \bysame{} and Emmanuel Saez}, ``Inequality in the long run,'' {\it
+  Science}, 2014, {\it 344} (6186), 838--843.
+
+\harvarditem[Piketty et al.]{Piketty, Saez and
+  Zucman}{2018}{PikettySaezZucman2018}
+{\bf \bysame{}, \bysame{}, and Gabriel Zucman}, ``{Distributional National
+  Accounts: Methods and Estimates for the United States},'' {\it The Quarterly
+  Journal of Economics}, 5 2018, {\it 133} (2), 553--609.
+
+\harvarditem[Pratham]{Pratham}{2019}{Pratham2018}
+{\bf Pratham}, ``Annual Status of Education Report (Rural) 2018, provisional,''
+  \url{https://pratham.org/wp-content/uploads/2019/06/ASER-2018-1.pdf} January
+  2019.
+
+\harvarditem[Schultz]{Schultz}{1960}{Schultz1960}
+{\bf Schultz, Theodore~W.}, ``Capital Formation by Education,'' {\it Journal of
+  Political Economy}, 1960, {\it 68} (6), 571--583.
+
+\harvarditem[Schultz]{Schultz}{1961}{Schultz1961}
+{\bf \bysame{}}, ``Investment in human capital,'' {\it The American economic
+  review}, 1961, pp.~1--17.
+
+\harvarditem[Tinbergen]{Tinbergen}{1975}{Tinbergen1975}
+{\bf Tinbergen, Jan~J}, {\it Income distribution: Analysis and policies}, North
+  Holland, Amsterdam, 1975.
+
+\end{thebibliography}
