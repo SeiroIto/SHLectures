@@ -42,7 +42,6 @@ lightbox: auto
 displayMode: compact
 filters:
   - parse-latex
-  - nutshell
 include-in-header:
   - text: |
       <style>
@@ -714,6 +713,9 @@ tinytable::tt(tb)
 
 生涯効用最大化問題として今期所得と来期所得のトレードオフを考える
 生涯効用最大化問題として児童労働時間=$24-$就学時間=$24-$人的資本投資時間を考える
+
+. . .
+
 $$
 \begin{aligned}
 \max_{\{s, l\}}
@@ -723,11 +725,16 @@ $$
 & c_{2}=h(l)+Rs  &&\color{blue}{\scriptsize{\mbox{$c_{2}$は成人所得$+R*$貯蓄}}}
 \end{aligned}
 $$
+
+. . .
+
 2つの制約を目的関数に代入すると、制約条件を組み込んだ目的関数になる
 $$
 \max_{\{s, l\}}
 \;\;\; u\left\{w(24-l)+A-s\right\}+\beta u\left\{h(l)+Rs\right\}
 $$
+
+. . .
 
 ::: {style="font-size: 70%;line-height: 1.1;"}
 FOCs
@@ -795,18 +802,18 @@ $$
 FOCs
 
 $$
-\underbrace{u'\left(c_{1}\right)}_{\scriptsize{\mbox{$c_{1}$を減らした(貯蓄を増やした)ときの効用増分}}}
+\underbrace{u'\left(c_{1}\right)}_{\scriptsize{\mbox{$c_{1}$を減らした(貯蓄を増やした)ときの効用減少分}}}
 =
-\underbrace{\beta Ru'\left(c_{2}\right)}_{\scriptsize{\mbox{$c_{2}$を増やした($R*$貯蓄を増やした)ときの効用増分の割引$\beta$現在価値}}} 
+\underbrace{\beta Ru'\left(c_{2}\right)}_{\scriptsize{\mbox{$c_{2}$を増やした($R*$貯蓄を増やした)ときの効用増加分の割引$\beta$現在価値}}} 
 $$
 
-$s$を通じて消費を再配分することで各期の限界効用の合計は増えない
+所与の生涯所得の下、$s$を通じて消費を再配分することで各期の限界効用の合計は増えない状態
 
-* $\beta$第2期限界効用=第1期限界効用を高めるうえでの費用
-   * 第1期限界効用-$\beta$第2期限界効用=第1期限界効用-第1期限界費用=0
-      *  &rArr; 第1期限界効用=第1期限界費用
+* 第1期限界効用=$\beta R$第2期限界効用を高めるうえでの費用
+   * 第1期限界効用-$\beta R$第2期限界効用=$\beta R$第2期限界費用-$\beta R$第2期限界効用=0
+      *  &rArr; 第2期限界効用=第2期限界費用
 * 所与の生涯所得の下での効用は最大化されている
-  * 生涯所得が与えられたとき、貯蓄をこの条件のように(「最適に」)決めることで、その生涯所得における効用は最大化される
+  * 生涯所得が与えられたとき、貯蓄をこの条件のように( 「最適に」optimally )決めることで、その生涯所得における効用は最大化される
   * 生涯所得が最大化されているかはこの条件は何も語っていない
 
 ----
@@ -817,7 +824,7 @@ $$
 \begin{aligned}
 \hspace{-10cm}\underbrace{wu'\left(c_{1}\right)}_{\scriptsize{\mbox{就学時間$l$を増やして所得が$w$減ったときの第1期効用減分}}}
 &=
-\underbrace{u'\left(c_{2}\right)h'(l)}_{\scriptsize{\mbox{$l$を増やしたときの第2期効用増分}}}\\
+\underbrace{\beta u'\left(c_{2}\right)h'(l)}_{\scriptsize{\mbox{$l$を増やしたときの第2期効用増分の割引$\beta$現在価値}}}\\
 \scriptsize{\mbox{就学の限界費用(を効用評価)}}
 &=
 \scriptsize{\mbox{就学の限界収入(を効用評価)}}
@@ -826,10 +833,10 @@ $$
 
 $l$を通じて各期所得を変化させることで各期の限界効用の合計は増えない
 
-* $w$第1期限界効用=第2期限界効用を高めるうえでの費用
-   * 第2期限界効用-$w$第1期限界効用=第2期限界効用-第2期限界費用=0
+* $w$第1期限界効用=$\beta$第2期限界効用を高めるうえでの費用
+   * $\beta$第2期限界効用-$w$第1期限界効用=$\beta$第2期限界効用-$\beta$第2期限界費用=0
       *  &rArr; 第2期限界効用=第2期限界費用
-* 就学費用$w$、人的資本投資の効率$h'(l)$、各期の限界効用(追加的消費変化がどれだけ効用に影響するか)を考慮し、人的資本投資量$l$を決めている
+* 就学費用$w$、人的資本投資の効率$h'(l)$、各期の限界効用(追加的消費変化がどれだけ効用に影響するか)を考慮し、最適な人的資本投資量$l$を決めている
 
 
 ----
@@ -1133,18 +1140,20 @@ $A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &
 
 . . .
 
-収益性の高い投資機会が失われるので、当の子どもだけでなく社会にとっても損失
+収益性の高い投資機会が失われるので、当の<Red>子どもだけでなく社会にとっても損失</Red>
 
 . . .
 
-信用市場の失敗: 収益性の高い投資に資金を提供できない
+**信用市場の失敗credit market failure:** 収益性の高い投資に資金を提供できない
 
 . . .
 
-政府などが奨学金を貸与すると解決できる、贈与は不要
+政府などが**奨学金を貸与**すると解決できる、**贈与は不要**
 
-* 近年の奨学金負債: 返済できない人&rArr;人的投資の収益率を計算しているか(=合理的か)?
-* 借入可能であれば、$A$と最適人的資本投資量は正の関係: 一定の$A$以下だけに贈与する理由?
+* 近年の奨学金負債: 返済できない人&larr;人的投資の収益率を計算しているか(=合理的か)?
+* $A$&uarr; &rArr; 最適人的資本投資量$l^{*}$&uarr; 
+   * $A$&uarr; &rArr; <Red>$u'(c_{1})w$線</Red>&darr;
+   * お金持ちは最適人的資本投資量が大きい&rarr;所得格差縮小目的ならば、一定の$A$以下だけに贈与する理由にはなる
 
 ----
 
@@ -1266,7 +1275,7 @@ skill-biased technological change
 
 アメリカ1970年代
 
-* ヴェトナム戦争徴兵忌避によって大学進学者が 24\%(1960) &rarr; 36\% (1969) &rarr; 27\%(mid-1970's)と増える(``College enrollment linked to vietnam war,'' {\footnotesize\textit{NY Times}, Page 24, Sep 04, 1984}) &rArr; 技能偏向的技術変化
+* ヴェトナム戦争徴兵忌避によって大学進学者が 24\%(1960) &rarr; 36\% (1969) &rarr; 27\%(mid-1970's)と増える("College enrollment linked to vietnam war," *NY Times*, Page 24, Sep 04, 1984) &rArr; 技能偏向的技術変化
 * 技能偏向的技術採用によって技能保有者(大卒)ホワイト・カラー労働需要が増える
 * 1980年代になると高卒と大卒者の格差が拡大し始める&rarr;現在も継続
 
@@ -1372,8 +1381,8 @@ skill-biased technological change
 
 * 技術変化には特定の生産要素(労働、資本など)をより多く使う方向性がある(特定生産要素を増減する方向性のある技術変化をdirected technical changeといいます)
 * 理由: (高)技能人口が増えると、技術開発をして技術を売る企業にとって(高)技能偏向的技術開発の利潤が高まるため[@Acemoglu2002]
-	* 価格効果: (高)技能人口が増えると、相対的に稀少になった(低技能)労働を多く使う財の価格が高くなるので、(低技能)労働偏向的技術が開発される
-	* 市場規模効果: (高)技能偏向的技術を使う財の市場規模が大きければ、(高)技能偏向的技術が開発される
+	* 価格効果: (高)技能人口が増えると、相対的に稀少になった(低技能)労働を多く使う財の価格が高くなるのでその産業の利潤率が高まり、(低技能)労働偏向的技術が開発される
+	* 市場規模効果: (高)技能偏向的技術を使う財の市場規模が大きければ、技術開発企業の利潤が高まるので、(高)技能偏向的技術が開発される
 	* 殆どの場合、市場規模効果は価格効果を上回るので、(高)技能人口が増えると(高)技能偏向的技術が多くなる
 
 ----
@@ -1382,11 +1391,11 @@ skill-biased technological change
 
 . . .
 
-人的資本投資へのアクセスが容易で技能労働供給が潤沢ならば、技能を積んで収入を高める人が増え、賃金格差は減りつつ経済成長が高まる
+人的資本投資へのアクセスが容易で技能労働供給が潤沢 &rArr; 技能を積んで収入を高める人&uarr;  &rArr; 賃金格差&darr;, 経済成長&uarr;
 
 . . .
 
-人的資本投資へのアクセスが一部のみが可能であれば、技能労働供給が限られ、賃金格差は増えつつ経済成長が低迷する
+人的資本投資へのアクセスが一部のみが可能 &rArr; 技能労働供給が限られる &rArr; 賃金格差&uarr;, 経済成長&darr;
 
 * 1980-2005年: 大卒賃金プレミアム
 
@@ -1403,10 +1412,12 @@ skill-biased technological change
 アメリカで大卒人口が増えないのは教育産業の容量上限ではない
 
 * 他国では増えている
-* 高校ドロップアウトや高卒の学力が不足[@GoldinKatz2009, p.347]
+* 高校ドロップアウト増や高卒の学力が不足[@GoldinKatz2009, p.347]
 * 大学の学費が高騰、ベビーブーマー世代が大学学齢になったとき奨学金が不足=credit constrained[@GoldinKatz2009, p.349]
 
 ----
+
+日本の大卒新卒賃金プレミアム
 
 <center>
 ![](HK/figure/CollegePremiumInJapan.jpg){width="70%"}
@@ -1453,6 +1464,204 @@ skill-biased technological change
 <center>
 ![](HK/figure/218/7_D_218_D_HK.jpg)
 </center>
+
+----
+
+近年の格差: MITのDavid Autor\href{https://economics.mit.edu/people/faculty/david-h-autor/courses}{労働経済学講義14.662 Lecture 1スライド}を引用
+
+* 所得
+	*	所得格差拡大[[6](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=6), [8](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=8)]、中間層の縮小[[9](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=9)]、トップ層の超富裕化[[61](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=61), [68](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=68)]、賃金格差拡大[[12](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=12), [15](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=15)-[21](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=21)]、世代間可動性低下[[23](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=23)]、低所得層の固定化[[27](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=27)]
+	*	大卒プレミアム上昇[[48](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=48)]、大卒賃金プロファイルのフラット化[[58](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=58)-[59](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=59)]
+	*	職業2極化occupational polarization[[50](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=50), [52](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=52), [54](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=54)]
+*	資産 [[69](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=69), [74](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=74)]
+
+----
+
+近年の格差の原因: 諸仮説
+
+:::{.des-list-boxed}
+技能労働需給
+:	技能偏向的技術変化、技能労働需要の高まりに比して技能労働供給が少なかったため[@KatzMurphy1992, @GoldinKatz2009]。人的資本投資補助。&larr;近年ではAIやロボットがルーティーン作業の職種を代替し中間層が減り、さらに、大卒の賃金プロファイルもフラット化
+
+資本収益率が高い
+:	資本収益率が経済成長率よりも高いために資産が集中する[@Piketty2014]。相続資産収益率は富裕層が高くその他層は費消するので、相続を通じて資産格差が拡大[@NekoeiSeim2022]。資産への累進課税。
+
+階級的特権
+:	あまり詳細に示しておらず、さまざまな原因を挙げているが、教育アクセスの差を重要視[@Piketty2014]。1980年代半ば以降、トップ0.1\%、1\%が資産所得と経営者報酬で所得急増、高額所得者の実効税率の低下、課税逃れなど[@PikettySaez2014, @PikettySaezZucman2018]。教育機会の均等や資産への累進課税。
+
+スーパースター企業の成長
+:	大企業が成長しスーパースター企業となり、その他の企業は市場シェアを落とした。生産のシェアが高まったスーパースター企業の労働分配率は低いので、平均労働所得増加率が減った[@ADKPV2020]。スーパースター企業の所有者は富を得たが、それ以外はじり貧。
+:::
+
+----
+
+先進国では人的資本投資の停滞や労働需要の質変化が格差の原因として考えられる
+
+. . .
+
+アメリカなど(先進国)では高等教育へのアクセスが不十分なために高技能供給が停滞
+
+. . .
+
+1980年代以降の技能偏向的技術進歩による高技能需要の高まりが高技能供給停滞と相まって高技能賃金を高め、高技能保有者とそれ以外の格差を拡大
+
+. . .
+
+2000年前後の対策: 高技能供給を増やすことが格差縮小手段の1つのはずだった
+
+. . .
+
+現在: アルゴリズム化できる技能codifiable skillsはAIに代替されるため、高技能でもアルゴリズム化しにくい内容という制約が加わった
+
+. . .
+
+技能偏向的でデータ集約的技術進歩で求められる技能=AIとAIが用いるデータを補完する高技能、であれば、データ集約的な技術進歩とともに労働需要が高まる
+
+----
+
+途上国の場合、自国で技術開発されることは少なく、多くが輸入された技術
+
+. . .
+
+@JerzmanowskiTamura2019: 各国の技能別人口データを使って推計
+
+. . .
+
+* 途上国は人口の技能に準じた技術を導入していないために成長が遅い
+* 途上国は人口の技能水準をアメリカと同じまで引き上げるよりも、現在の技能水準にあった技術を導入する方が所得の増加幅が大きい
+
+. . .
+
+@Okoye2016: 「適正技術論」の内容(途上国は低技能労働者に適正な技術を採用していないので変えるべき)は現実と逆
+
+* 技能労働者の物的環境は先進国より途上国の方が劣悪
+* 技能労働者の物的環境を改善する技術変化で所得を増やせる
+* つまり、途上国は低技能労働者を優先し過ぎた技術を採用している
+* 技能労働者の物的環境を改善する技術が採用されない理由: 既得権益、資本市場の失敗、インフラストラクチュア未整備$\leftarrow$証拠なしで議論
+
+. . .
+
+政府による政策選択が違いをもたらすかもしれない
+
+----
+
+
+\textcolor{azure}{中国:} 準技能の低賃金労働に適した大量生産技術=FDI
+
+* 貧困層の所得を増やしつつ成長
+
+. . .
+
+最近では賃金上昇と需要の細分化(多品種少量生産): 生産の自動化
+
+. . .
+
+\textcolor{Azure}{インド:} 自由化(1991年)後も保護・規制を継続、交通・エネルギーのインフラ整備不足、準技能英語使用の低賃金労働に適した技術
+
+
+* コールセンター、会計、ICT設計など都市部でのサービス業務オフショア化労働需要
+* 技能供給: 農村部公立教育はダメ、農村部私立教育も大差ない
+
+. . .
+
+\textcolor{Azure}{南アフリカ:} 解雇の難しい低技能の中賃金労働、高技能の白人層
+
+* 現場監督の技能の需要が高まる
+* 高校教育: 質の格差が大きく、労働市場で高卒の評価は低い
+* 大学教育の収益率は初等教育や中等教育よりも高い
+* 格差を減らしながらの成長は難しい
+
+----
+
+@BalandRobinson2000 model relates to MDGs (Milleneum Development Goals) and SDGs (Sustainable Development Goals)
+
+::::::::::{.columns}
+::::{.column width="40%"}
+![](HK/figure/MDG.jpg)
+::::
+
+::::{.column width="40%"}
+![](HK/figure/SDGs.jpg)
+::::
+::::::::::
+
+. . .
+
+「(成長過程に参加して)豊かになる手段としての人的資本投資」で考えるべきこと
+
+* どの学歴水準を得るか(初等教育までならばMDGs)
+* その学歴で得られる技能水準はどれくらいか(SDGs)
+* その技能水準への労働需要は高いか
+&larr; なかなか議論されない
+
+
+----
+
+SDGs: 質の高い教育機会を保証することに留まり、どこまで技能を得れば最適か(生涯効用が最大化するか)は議論していない
+政府は、進学しそうな人数、進学してほしい人数を想定して、教育機会を供給するはず%
+%進学を考える人数は、(個人が合理的ならば)技能別労働需要の展望に依存するはず
+
+
+* 技能形成は積み上げなので、初等教育の質が低ければ中等教育も頓挫する
+* 順番: 幅広く質の高い初等教育、次いでの幅広さで質の高い中等教育を供給できるか
+* 質の高い教育機会の提供方法は?
+
+----
+
+India: Rights to Education Act (April, 2010)\\
+
+. . .
+
+Free and compulsory education. Obligation of Central and State governments.
+
+. . .
+
+Affirmative action: Makes a provision for any school to admit low caste children.
+
+
+. . .
+
+What happened after RTE?
+
+. . .
+
+Classes were flooded with children, even after constructing new schools. \pause Many schools had to run multi grade classes.
+
+. . .
+
+Requirements for unlicensed private schools to satisfy facility requirements led to closure schools. Wow.
+
+. . .
+
+It is good to send children to schools. 
+
+. . .
+
+Only if they are learning.
+
+----
+
+::::::::::{.columns}
+
+::::{.column width="80%"}
+
+::: {layout="[[1,1], [1]]"}
+![](HK/figure/Pratham2018GovPvtReading.jpg)
+
+![](HK/figure/Pratham2018GovPvtArithmetic.jpg)
+
+![](HK/figure/Pratham2018Gender.jpg)
+
+出所: @Pratham2018, p.52-54
+:::
+::::
+
+::::{.column width="20%"}
+進級しているが、学力が伴っていない。公立、私立、男女、いずれも低い。
+
+SDGs04: Quality education for everyone質の高い教育をみんなに
+::::
+::::::::::
 
 ----
 
