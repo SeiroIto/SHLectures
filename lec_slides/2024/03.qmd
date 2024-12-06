@@ -67,7 +67,8 @@ include-before-body:
 #### latex math shorthand
   file: ../../MathShorthand.html 
 #### bib file at doc folder root
-bibliography: ../../../../seiro.bib
+bibliography: ../../seiro.bib
+####../../../../seiro.bib
 resources:
   - 03.pdf
 # quarto render 03.qmd
