@@ -3212,7 +3212,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ----
 
-治療群と統御群が似ていても、推計結果の信頼性が低い場合、得られた知識が歪んでいる場合があります
+治療群と統御群が似ていても、研究デザインの信頼性が低い場合や対象母集団が特殊である場合は、得られた知識が歪んでいる場合があります
 
 1. Multiple testing ($p$ hacking)
 1. Small sample bias
@@ -3242,7 +3242,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 * 似た結果指標(例: 疲労と労働時間)への効果推計&larr;multiple testingを無意識にやっている<gray>similar outcome indicators (e.g., fatigue and work hours)&larr;unintentional multiple testing</gray>
    * 対策: 同じ結果指標グループの$p$値平均値family wise error rateを使う、同じ結果指標グループを指数化する<gray>Countermeasures: use the mean of $p$ values of similar outcomes (called "family wise error rate"), create a single index of similar outcomes using the normalised estimates and their standard errors</gray>
       * family wise error rateなどは似た推計値が幾つあっても$p$ hackingできない
-      * 指数化=効果を(結果指標の標準偏差で割ることで)標準偏差単位にして(標準化standardisationという)、結果指標1を指標1の標準偏差単位でx1単位高める、結果指標1を指標1の標準偏差単位でx1単位高める、と足し算できるようにし、標準化された効果の平均値とその標準誤差を計算し、$p$ valueを得る
+      * 指数化=効果を(結果指標の標準偏差で割ることで)標準偏差単位にして(標準化standardisationという)、結果指標1を(結果指標1の)標準偏差単位でx1単位高める、結果指標2を(結果指標2の)標準偏差単位でx2単位高める、と足し算できるようにし、標準化された効果の平均値とその標準誤差を計算し、$p$ valueを得る
 
 :::{style="font-size: 60%;line-height: 1.1;"}
 <gray>
@@ -3263,12 +3263,12 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 . . .
 	
-先入観・常識: そんなに大きいはずがないprejudice/common sense: cannot be that large
+先入観・常識: そんなに大きいはずがない<gray>prejudice/common sense: cannot be that large</gray>
 <https://statmodeling.stat.columbia.edu/2013/11/05/how-much-do-we-trust-this-claim-that-early-childhood-stimulation-raised-earnings-by-42/>
 
 . . .
 
-小標本=誤差が大きい=分散が大きい=分布の裾野が広いsmall sample=large errors=large variance=wider tails of distribution
+小標本=誤差が大きい=分散が大きい=分布の裾野が広い<gray>small sample=large errors=large variance=wider tails of distribution</gray>
 
 ----
 
@@ -3277,7 +3277,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 * 平均ゼロ、大きな分散の分布で$p$値5\%: 推計値(の絶対値)が大きくないと実現しない<gray>distribution of mean zero, large variance: need a large estimate (in absolute value) to have a $p$ value=5%</gray>
 * $p$ hackingをすればいつかは大きな効果を推計できる<gray>if you $p$-hack, you will get a large estimate eventually</gray>
 * ずるではなく偶然大きな値になった可能性もある<gray>may be unintentional, may be by chance</gray>
-   * プロならば、小標本バイアスに警戒すべき<gray>if you are a professional, got be aware of the small sample bias</gray>
+   * プロならば、小標本バイアスに警戒すべき<gray>if you are a professional, got to be aware of the small sample bias</gray>
 * placebo testでも$p$ hacking可能(プラシーボの効果がゼロを探索)<gray>you can $p$-hack in placebo tests (look for a zero estimate of a placebo impact), too</gray>
 
 ----
@@ -3515,6 +3515,7 @@ placebo test: 効果があり得ない部分で効果計測、効果検知する
 . . .
 
 アメリカやイギリスでそう(DID)でも、日本でそうかは分からない
+
 ハンガリー: 引き上げの75\%が消費者に転嫁、10\%雇用減(DID)
 
 . . .
