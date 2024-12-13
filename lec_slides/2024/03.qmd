@@ -88,6 +88,9 @@ gray {
 Green {
   color: #1DCA09;
 }
+Yellow {
+  color: #fff000;
+}
 Red {
   color: Red;
 }
@@ -1210,11 +1213,11 @@ $A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &
 
 . . .
 
-「成長過程に貧困層が参加することが必要」と言われるが、低技能労働需要は少ない
+inclusive growth「成長過程に貧困層が参加すること」が必要と言われるが、低技能労働需要は少ない
 
 . . .
 
-2000年以降のインドの経済成長は小卒程度の学力しか持たない農村貧困層への労働需要を飛躍的に高めるとは思えない
+2000年以降のインドの経済成長は(良くて)小卒程度の学力しか持たない農村貧困層への労働需要を飛躍的に高めるとは思えない
 
 . . .
 
@@ -1488,13 +1491,13 @@ skill-biased technological change
 
 :::{.des-list-boxed}
 技能労働需給
-:	技能偏向的技術変化、技能労働需要の高まりに比して技能労働供給が少なかったため[@KatzMurphy1992, @GoldinKatz2009]。人的資本投資補助。&larr;近年ではAIやロボットがルーティーン作業の職種を代替し中間層が減り、さらに、大卒の賃金プロファイルもフラット化
+:	技能偏向的技術変化、技能労働需要の高まりに比して技能労働供給が少なかったため[@KatzMurphy1992; @GoldinKatz2009]。人的資本投資補助。&larr;近年ではAIやロボットがルーティーン作業の職種を代替し中間層が減り、さらに、大卒の賃金プロファイルもフラット化
 
 資本収益率が高い
 :	資本収益率が経済成長率よりも高いために資産が集中する[@Piketty2014]。相続資産収益率は富裕層が高くその他層は費消するので、相続を通じて資産格差が拡大[@NekoeiSeim2022]。資産への累進課税。
 
 階級的特権
-:	あまり詳細に示しておらず、さまざまな原因を挙げているが、教育アクセスの差を重要視[@Piketty2014]。1980年代半ば以降、トップ0.1\%、1\%が資産所得と経営者報酬で所得急増、高額所得者の実効税率の低下、課税逃れなど[@PikettySaez2014, @PikettySaezZucman2018]。教育機会の均等や資産への累進課税。
+:	あまり詳細に示しておらず、さまざまな原因を挙げているが、教育アクセスの差を重要視[@Piketty2014]。1980年代半ば以降、トップ0.1\%、1\%が資産所得と経営者報酬で所得急増、高額所得者の実効税率の低下、課税逃れなど[@PikettySaez2014; @PikettySaezZucman2018]。教育機会の均等や資産への累進課税。
 
 スーパースター企業の成長
 :	大企業が成長しスーパースター企業となり、その他の企業は市場シェアを落とした。生産のシェアが高まったスーパースター企業の労働分配率は低いので、平均労働所得増加率が減った[@ADKPV2020]。スーパースター企業の所有者は富を得たが、それ以外はじり貧。
@@ -1530,21 +1533,32 @@ skill-biased technological change
 
 . . .
 
+::: {style="font-size: 70%;line-height: 1.1;"}
 @JerzmanowskiTamura2019: 各国の技能別人口データを使って推計
-
-. . .
 
 * 途上国は人口の技能に準じた技術を導入していないために成長が遅い
 * 途上国は人口の技能水準をアメリカと同じまで引き上げるよりも、現在の技能水準にあった技術を導入する方が所得の増加幅が大きい
+:::
 
 . . .
 
-@Okoye2016: 「適正技術論」の内容(途上国は低技能労働者に適正な技術を採用していないので変えるべき)は現実と逆
+::: {style="font-size: 70%;line-height: 1.1;"}
+@Okoye2016: 「適正技術論」の内容は現実と逆
+
+:::{.des-list-boxed}
+適正技術論
+: 途上国は低技能労働者に適正な技術を採用していないので変えるべき
+:::
 
 * 技能労働者の物的環境は先進国より途上国の方が劣悪
 * 技能労働者の物的環境を改善する技術変化で所得を増やせる
 * つまり、途上国は低技能労働者を優先し過ぎた技術を採用している
 * 技能労働者の物的環境を改善する技術が採用されない理由: 既得権益、資本市場の失敗、インフラストラクチュア未整備$\leftarrow$証拠なしで議論
+:::
+
+. . .
+
+どのような産業を呼び込むか、どのような労働供給を想定するかによって、自国で用いられる技術は変わる
 
 . . .
 
@@ -1553,7 +1567,7 @@ skill-biased technological change
 ----
 
 
-\textcolor{azure}{中国:} 準技能の低賃金労働に適した大量生産技術=FDI
+<blue>中国:</blue> 準技能の低賃金労働に適した大量生産技術=FDI
 
 * 貧困層の所得を増やしつつ成長
 
@@ -1563,7 +1577,7 @@ skill-biased technological change
 
 . . .
 
-\textcolor{Azure}{インド:} 自由化(1991年)後も保護・規制を継続、交通・エネルギーのインフラ整備不足、準技能英語使用の低賃金労働に適した技術
+<Yellow>インド:</Yellow> 自由化(1991年)後も保護・規制を継続、交通・エネルギーのインフラ整備不足、準技能英語使用の低賃金労働に適した技術
 
 
 * コールセンター、会計、ICT設計など都市部でのサービス業務オフショア化労働需要
@@ -1571,11 +1585,11 @@ skill-biased technological change
 
 . . .
 
-\textcolor{Azure}{南アフリカ:} 解雇の難しい低技能の中賃金労働、高技能の白人層
+<orange>南アフリカ:</orange> 解雇の難しい低技能の中賃金労働、高技能の白人層
 
 * 現場監督の技能の需要が高まる
-* 高校教育: 質の格差が大きく、労働市場で高卒の評価は低い
-* 大学教育の収益率は初等教育や中等教育よりも高い
+* 高校教育: 質の格差が大きく、労働市場で高卒の評価は低い、現場監督には不十分
+* 大学教育: 収益率は初等教育や中等教育よりも高い&larr;?
 * 格差を減らしながらの成長は難しい
 
 ----
@@ -1605,46 +1619,41 @@ skill-biased technological change
 ----
 
 SDGs: 質の高い教育機会を保証することに留まり、どこまで技能を得れば最適か(生涯効用が最大化するか)は議論していない
-政府は、進学しそうな人数、進学してほしい人数を想定して、教育機会を供給するはず%
-%進学を考える人数は、(個人が合理的ならば)技能別労働需要の展望に依存するはず
 
+政府は、進学しそうな人数、進学してほしい人数を想定して、教育機会を供給するはず
 
-* 技能形成は積み上げなので、初等教育の質が低ければ中等教育も頓挫する
-* 順番: 幅広く質の高い初等教育、次いでの幅広さで質の高い中等教育を供給できるか
+* 技能形成は積み上げ &rArr; 提供される初等教育の質が低ければ中等教育も頓挫
+* 順番: 質の高い初等教育機会 &rarr; 質の高い中等教育機会
 * 質の高い教育機会の提供方法は?
 
 ----
 
-India: Rights to Education Act (April, 2010)\\
+India: Rights to Education Act (April, 2010)
 
 . . .
 
-Free and compulsory education. Obligation of Central and State governments.
+Free and compulsory education: obligation of Central and State governments
 
 . . .
 
-Affirmative action: Makes a provision for any school to admit low caste children.
-
+Affirmative action: Makes a provision for any school to admit low caste children
 
 . . .
 
 What happened after RTE?
 
-. . .
 
-Classes were flooded with children, even after constructing new schools. \pause Many schools had to run multi grade classes.
-
-. . .
-
-Requirements for unlicensed private schools to satisfy facility requirements led to closure schools. Wow.
+* Classes were flooded with children, even after constructing new schools
+* Many schools had to run multi grade classes
+* Requirements for unlicensed private schools to satisfy facility requirements led to closure schools. Wow.
 
 . . .
 
-It is good to send children to schools. 
+It is good to send children to schools
 
 . . .
 
-Only if they are learning.
+Only if they are learning
 
 ----
 
