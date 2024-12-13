@@ -1,7 +1,7 @@
 %  library(knitr); setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/"); system("recycle c:/seiro/docs/external/seishin/lec_slides/2024/MaximisationSlides/cache/"); knit("MaximisationSlides.rnw", "MaximisationSlides.tex"); system("platex MaximisationSlides"); system("pbibtex MaximisationSlides"); system("dvipdfmx MaximisationSlides")
 
-%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
-\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble.rnw}
 %\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble_ho.rnw}
 \definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
@@ -91,7 +91,7 @@ linkcolor = blue!50, urlcolor = green!80
 
 \begin{frame}[t, label=fx]{}
 \onslide<1->{以下は$y=f(x)$という1変数$x$の関数$f(x)$を描いています。\\~\\}
-\onslide<3->{関数の微分は$f'(x)$と表記しますが、その意味は$x$での$f(x)$の傾きのことです。\\~\\}
+\onslide<3->{関数の微分は$f'(x)$と表記しますが、その意味は\textcolor{red}{$x$での$f(x)$の傾き}のことです。\\~\\}
 \onslide<4->{微分とは変数$x$が僅かに変化したときの関数$f$の反応を計算したものだからです。微分してゼロとなる地点とは、傾きがゼロ$f'(x)=0$となる$x$のことを指します。}\\~\\
 %\onslide<5->{$f(x)=1+2x\textcolor{azure}{-.25}x^{2}$のような2次関数で\textcolor{azure}{2次の係数が負}の場合は、最大値が1つだけあります。よって、$f'(x)=0$を満たす$x$は関数の最大値を与えます。}
 
@@ -148,7 +148,7 @@ f'(x)=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}.
 
 \begin{frame}[t, label=fx]{}
 \onslide<1->{以下は$y=f(x)$という1変数$x$の関数$f(x)$を描いています。\\~\\}
-\onslide<1->{関数の微分は$f'(x)$と表記しますが、その意味は$x$での$f(x)$の傾きのことです。\\~\\}
+\onslide<1->{関数の微分は$f'(x)$と表記しますが、その意味は\textcolor{red}{$x$での$f(x)$の傾き}のことです。\\~\\}
 \onslide<1->{微分とは変数$x$が僅かに変化したときの関数$f$の反応を計算したものだからです。微分してゼロとなる地点とは、傾きがゼロ$f'(x)=0$となる$x$のことを指します。}\\~\\
 %\onslide<5->{$f(x)=1+2x\textcolor{azure}{-.25}x^{2}$のような2次関数で\textcolor{azure}{2次の係数が負}の場合は、最大値が1つだけあります。よって、$f'(x)=0$を満たす$x$は関数の最大値を与えます。}
 
@@ -364,7 +364,7 @@ background rectangle/.style = {fill = gray90},
 	\begin{dinglist}{43}
 	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
 \pause
-	\item	2階微分は加速度を表します。
+	\item	2階微分は\textcolor{red}{加速度}を表します。
 \pause
 	\item	2階微分(加速度)が負とは、最初の図の$x>4$[``最大値の右側'']部分のように1階微分が負の関数では、傾きが率を高めて負値で小さくなっていく(絶対値では大きくなっていく)ことを意味します。よって、最大値の場合、2階微分は負$f''(x)<0$です。
 \pause
@@ -661,8 +661,9 @@ $f(x)$が$g\{h(x)\}$という$g(h)$, $h(x)$の二重の関数になっている�
 \]
 \column{.6\textwidth}
 \onslide<9->{
+$g(h)=2h+1, h(x)=2x^{2}+x-1$の場合\\
 $f(x)=g\{h(x)\}=2(2x^{2}+1x-1)+1$\\
-$g(h)=2h+1, h(x)=2x^{2}+x-1$の場合\\}
+}
 \onslide<10->{$g'(h)=2$, $h'(x)=4x+1$}
 \onslide<11->{なので、$f'(x)=g'(h)h'(x)=2\times (4x+1)=8x+2$. }
 \onslide<12->{$f(x)=g\{h(x)\}=2(2x^{2}+1x-1)+1=4x^{2}+2x-1$だから、微分すると$f'(x)=8x+2$で同じになることが確認できる。\\~\\}

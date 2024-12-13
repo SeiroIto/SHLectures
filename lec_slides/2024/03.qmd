@@ -318,6 +318,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::
 
 ::::{.column width="30%"}
+* 労働分配率(=1-資本報酬/国民所得)も1960年代人的資本論の着目点
 * 大戦期以降-1990年前後: 資本分配率は低下
 * 1990年前後-: 資本分配率は上昇
    * 人的資本は増えているのに労働分配率は低下
@@ -429,6 +430,8 @@ lm3 <- lm(log(value) ~ trend, data = ls[Date >= as.IDate("1991-01-01") & Date <=
 ::::
 
 ::::{.column width="60%"}
+先進国での1970年代以降の傾向
+
 * 労働分配率は1980年代からすべての国で低下、日本では`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%低下
 * 1991-2012: 就業率*労働力率は`r formatC((exp(summary(lm2)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%変化(次2枚のスライド)、1人あたりGDPは`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%成長
 * 日本の労働分配率の低下の主な背景: 1人あたりGDP成長率(`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%)よりも平均労働所得の成長率(`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1+exp(summary(lm1)$coeff[2, 1]*22)-1-(exp(summary(lm2)$coeff[2, 1]*22)-1))*100, digits = 3, format = "f")`%)が低かったため
@@ -464,7 +467,7 @@ $$
 
 <br>
 
-人間への投資が労働生産性を高めているため
+人間への投資が労働生産性を高めているため (注意: 資本の質も高まっている、AI/ICT)
 
 . . .
 
@@ -476,7 +479,7 @@ $$
 
 . . .
 
-\citet{Becker1964}も\textit{Human Capital: A theoretical and empirical analysis, with special reference to education}などと副題を付けた
+@Becker1964 も*Human Capital: A theoretical and empirical analysis, with special reference to education*などと副題を付けた
 
 ----
 
@@ -496,8 +499,8 @@ $$
 * 健康は運動能力と感染源(!)に分けると性質が異なる
    * 運動能力: 人間に体化される&rarr;私的財
    * 感染源: 社会に広める&rarr;外部性のある私的財: 他者への影響が市場で価格評価されないので、個人の行動は他者への感染を考慮しにくい
-      * 自分は軽症にしかならないから、感染予防努力を緩める
-      * 「マスク着用を強要するのは自由の侵害」...自由のためなら感染する覚悟がある?
+      * 「自分は軽症にしかならないから」感染予防努力を緩める
+      * 「マスク着用を強要するのは自由の侵害」...自由のためなら感染する/させる覚悟がある?
 
 ----
 
@@ -517,11 +520,11 @@ $$
 
 ----
 
-* キムリア(白血病やリンパ腫、1回投与で3349万円)、ザインテグロ(ベータ・サラセミア、米承認3億円)
+* キムリア(白血病やリンパ腫、1回投与で3349万円)、ザインテグロ([ベータ・サラセミア](https://www.shouman.jp/disease/details/09_08_015/)、米承認3億円)
 * 保護下で薬価を高くし過ぎたために利用が進まない: Truvada(HIV予防治療薬)
-* 低所得者対象で利益が少ない+模倣されやすいために開発が進まない: マラリア治療薬、結核治療薬などのneglected tropical diseases
+* 低所得者対象で利益が少ない+模倣されやすいために開発が進まない: マラリア治療/[予防薬](https://www.cdc.gov/malaria/php/public-health-strategy/malaria-vaccines.html)、結核治療薬などの[neglected tropical diseases](https://www.who.int/news-room/questions-and-answers/item/neglected-tropical-diseases)
 * 厳しい罰則(日本: 商標権を侵害した場合は10年以下の懲役もしくは1000万円以下の罰金)、でも、生産地中国での摘発は...: 偽ブランド品販売
-* 著作権の保護期間を再三延ばすことで多額の利潤を保有権者が得る: ミッキーマウス(1923年生まれ、1998年期限切れ予定、1998年期限延長、2024年期限切れ予定[US])
+* 著作権の保護期間を再三延ばすことで多額の利潤を保有権者が得る: ミッキーマウス(1923年生まれ、1998年期限切れ予定、1998年期限延長、[2024年1月1日期限切れ](https://web.law.duke.edu/cspd/mickey/), US, [Mickey Mouse 1.0のみ](https://youtu.be/M63yOUQ9RVM))
    * [I)t was ``basically the Gershwin family trust, grandchildren of Oscar Hammerstein, Disney, others of that ilk'' who pushed for ever-longer copyright terms.](https://arstechnica.com/tech-policy/2019/01/a-whole-years-worth-of-works-just-fell-into-the-public-domain/) (Dennis Karjala, Law professor, 2013)
    * 商標はディズニーが半永久的に保有し続ける。ミッキーマウスの絵はpublic domainになるが、ミッキーの何々、という使い方は商標の使用許諾を得た上でライセンス料を支払う。
 
@@ -529,6 +532,8 @@ $$
 
 人の中で知的能力はどのように成長するでしょうか
 <gray>How does intellectual capacity grow in a person?</gray>
+
+* 知的能力=技能+知識
 
 . . .
 
@@ -625,16 +630,15 @@ $$
 
 人生効用最大化のために子どもは何を決めるか<gray>what does a child decide to maximise the lifetime utility?</gray>
 
-. . .
-
-第1期時間配分、第1期と第2期の間の消費配分<gray>first period time allocation, consumption allocation between first and second periods</gray>
+1. 第1期時間配分<gray>first period time allocation</gray>
+1. 第1期と第2期の間の消費配分<gray>consumption allocation between first and second periods</gray>
 
 . . .
 
 理解の段取り: <gray>how we understand the model</gray>
 
 1. 第1期時間配分を最適に決め、人生を通じて所得合計を最大化する<gray>a child choose the first period time allocation optimally, and maximises the lifetime earning</gray>
-1. 各期への消費配分を決める<gray>decides on consumption allocation to each periods</gray>
+1. 生涯効用を最大化するように各期への消費配分を決める<gray>decides on consumption allocation to each periods</gray>
 
 ----
 
@@ -713,6 +717,7 @@ tinytable::tt(tb)
 ----
 
 生涯効用最大化問題として今期所得と来期所得のトレードオフを考える
+
 生涯効用最大化問題として児童労働時間=$24-$就学時間=$24-$人的資本投資時間を考える
 
 . . .
@@ -796,7 +801,7 @@ $$
 この条件式の特徴
 
 * 効用最大化を考えたのに効用関数が含まれていない
-* 生涯所得を最大化&larr;生涯所得を最大化しつつ、貯蓄(=消費配分)によって効用を最大化
+* &larr;生涯所得を最大化しつつ、貯蓄(=消費配分)によって効用を最大化
 
 ----
 
@@ -814,6 +819,7 @@ $$
    * 第1期限界効用-$\beta R$第2期限界効用=$\beta R$第2期限界費用-$\beta R$第2期限界効用=0
       *  &rArr; 第2期限界効用=第2期限界費用
 * 所与の生涯所得の下での効用は最大化されている
+  * 各期の限界効用、割引率$\beta$、利子率$R$を考慮し、最適な消費配分を決めている
   * 生涯所得が与えられたとき、貯蓄をこの条件のように( 「最適に」optimally )決めることで、その生涯所得における効用は最大化される
   * 生涯所得が最大化されているかはこの条件は何も語っていない
 
@@ -877,13 +883,13 @@ $wu'\left\{w(24-l)+A-s\right\}$は$l$が大きいほど括弧$\left\{\cdot\right
 
 $\implies$ $u'\left\{\cdot\right\}$が大きい ($\because$限界効用逓減) 
 
-$\implies$ \textcolor{darkred}{左辺$u'\left\{\cdot\right\}$は$l$の増加関数}
+$\implies$ \color{DarkRed}{左辺$u'\left\{\cdot\right\}$は$l$の増加関数}
 
 <br>
 
 $u'\left\{h(l)+Rs\right\}h'(l)$は$l$が大きいほど$u'\left\{h(l)+Rs\right\}$も$h'(l)$も小さくなる ($\because$限界効用逓減、限界生産力逓減)
 
- $\implies$ \textcolor{darkgreen}{右辺$u'\left\{h(l)+Rs\right\}h'(l)$は$l$の減少関数}
+ $\implies$ \color{Green}{右辺$u'\left\{h(l)+Rs\right\}h'(l)$は$l$の減少関数}
 
 ----
 
@@ -1095,9 +1101,9 @@ $$
 
 ----
 
-数学: 信用制約がbindするとき最大化の一階条件の2式が示すこと。
+信用制約がbindするとき最大化の一階条件の2式の意味
 
-$s$は負が最適だが、非負制約によって0が次善
+$s$は負が最適だが、非負制約によって0が次善の選択
 $$
 \begin{aligned}
 u_{s}
@@ -1121,7 +1127,7 @@ Rw\color{red}{<}h'(l).
 $$
 意味: 追加で微少時間就労して$w$を稼いで貯蓄して成人消費が増える分=$Rw<h'(l)$=追加で微少時間就学して成人消費が増える分 &rArr; 限界費用<限界収入 &rArr; 児童期の<Red>就学時間が過少</Red>
 
-$A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &rArr; $-u'\left\{w24+A-s\right\}+\beta Ru'\left\{h(0)+Rs\right\}>0$になるかも &rArr; 交点を持つ
+$A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &rArr; $u_{l}(0)=-u'\left\{w24+A-s\right\}+\beta Ru'\left\{h(0)+Rs\right\}>0$になるかも &rArr; 交点を持つ
 
 ----
 
