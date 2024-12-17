@@ -1,0 +1,861 @@
+---
+title: "RP11"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP11.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: 
+  match: auto
+  desc-position: left
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP11.pdf
+# quarto render RP11.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+gray {
+  color: #aeb6bf;
+}
+```
+
+```{r, echo = F}
+asc <- function(x)
+{
+  if (!is.factor(x)) x <- as.factor(unlist(x))
+  return(levels(x)[as.integer(x)])
+}
+seqrep <- function(seqn, repvec)
+{
+  Vec <- NULL
+  for (i in 1:length(repvec)) Vec <- c(Vec, paste(rep(seqn, repvec[i]), sep = "", collapse = ""))
+  return(Vec)
+}
+putzeroontop <- function(z, autozero = T, totaldigits = F)
+#  autozero: if numeric, add the given digit of zero on top
+#  totaldigits: if numeric, total digits will be set (001 is 3) if maximum 0s to be added is smaller
+#    modified to accept NA in z: July 18, 2016
+{
+  iic <- grep("\\D", z, perl = T)
+  iina <- which(is.na(z))
+  iin <- grep("\\d", z, perl = T)
+  digs <- nchar(asc(z))
+  adddig <- max(digs, na.rm = T) - digs
+  if (is.numeric(autozero)) 
+  {
+    maxadd <- max(max(digs, na.rm = T) - digs, na.rm = T)
+    if (autozero > maxadd) adddig <- adddig + (autozero - maxadd)
+  }
+  if (is.numeric(totaldigits))
+    if (totaldigits > max(digs, na.rm = T)) 
+    adddig <- adddig + (totaldigits - max(digs, na.rm = T))
+  adddig[c(iic, iina)] <- 0
+  z <- paste(seqrep("0", adddig), z, sep = "")
+  z[grep("NA", z)] <- NA
+  return(z)
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+上記文章には2つの問いがあると思います
+
+1. 人的資本はどう蓄積するか
+1. 人的資本が他の生産要素と組み合わさることで労働生産性はどう変わるか
+
+. . .
+
+人的資本投資の方法
+
+* 就学(通信学科やホーム・スクーリングを含む)
+* 日常生活での経験
+* 就労&larr;作業の熟達learning-by-doing
+
+. . .
+
+日常生活における人的資本蓄積&darr;? 
+
+* 論理的思考、知識、調べ方・学び方などをAIに一任し、人的資本=AIに尋ねる能力、となる人たちが出現?
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+就労でも人的資本は増えます
+
+* Cordon Blu, Londonのパティシエ
+* Baland and Robinsonモデルは就学に焦点を当てるために、learning-by-doingは起こらないと想定
+   * 起こると想定しても、就学の機会費用が減るだけで、結論は質的に変わりません
+
+. . .
+
+同じ学校教育でも、教授法pedagogyが違えば人的資本蓄積度合いも変わるはずです
+
+* 教育学には教授法の効果推計がたくさんあります
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+人的資本は他の生産要素とどのように組み合わさり、組み合わせによって労働生産性はどのように変わるか
+
+生産関数: 資本$K$と労働$L$を使って財・サービス$y$を産出する技術的関係$\mathbb R_{+}\times\mathbb R_{+}\to\mathbb R_{+}$ (正の実数×正の実数の組み合わせ$\to$正の実数というマッピング)
+$$
+y=f(K,L).
+$$
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+$$
+\frac{\partial f(K,L)}{\partial K}>0, \ \frac{\partial f(K,L)}{\partial L}>0
+$$
+
+* $\frac{\partial f(K,L)}{\partial K}$: 資本の限界生産力は正=資本投入が増えれば生産も増える (すべての正の$K, L$において)
+* $\frac{\partial f(K,L)}{\partial L}$: 労働の限界生産力は正=労働投入が増えれば生産も増える ($\forall K, L\in\mathbb R_{+}^{2}$)
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+$$
+\frac{\partial\left(\frac{\partial f(K,L)}{\partial L}\right)}{\partial K}=\frac{\partial^{2} f(K,L)}{\partial K\partial L}=\frac{\partial^{2} f(K,L)}{\partial L\partial K}\lesseqgtr 0.
+$$
+
+* $\frac{\partial^{2} f(K,L)}{\partial K\partial L}$: 資本と労働の交差限界生産力=労働の限界生産力は資本が増えると$\lesseqgtr 0$減る・増える・変化無し?
+
+. . .
+
+$$
+\frac{\partial^{2} f(K,L)}{\partial K\partial L}
+\left\{
+\begin{array}{c}
+<\\
+=\\
+>
+\end{array}
+\right.
+ 0 \quad \Leftarrow \quad 
+ y=
+ \left\{
+ \begin{array}{l}
+\mbox{該当無し}\\
+ K+L\\
+ KL
+ \end{array}
+ \right.
+$$
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+$$
+\frac{\partial^{2} f(K,L)}{\partial K\partial L}>0
+$$
+
+限界労働生産力(労働を僅かに増やすことの生産増)は資本が増えると大きくなる
+
+* 農業: 手作業の人を増やす vs. トラクターを使う人を増やす
+
+. . .
+
+$$
+\frac{\partial^{2} f(K,L)}{\partial K\partial L}=0
+$$
+
+限界労働生産力(労働を僅かに増やすことの生産増)は資本の大きさと関係ない
+
+* 工場: 製品を機械だけで生産し、人だけで製品を箱詰めする工程
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
+:::
+</div>
+
+AIを資本と見立てると労働限界生産力をどう変えるでしょうか
+
+* 無関係$\partial^{2}f/\partial K\partial L=0$の職種・作業もあります
+* $\partial^{2}f/\partial K\partial L>0$の職種・作業は労働の限界生産力を高めます。
+  * AIが廉価になって$K$の費用が十分に低くなれば、$K$が多用され、同じ作業に関わる労働$L$の需要を減らす可能性もあります
+  * $K$が多用されても、今までに無かった職種・作業が開発され、労働の需要は減らない可能性もあります
+  * いずれの場合でも、労働生産性は高まります
+  * AIが発達=資本生産性が高まる
+
+----
+
+おまけ: 労働の限界(価値)生産力=賃金<gray>marginal (value) product of labour=wage</gray>
+
+. . .
+
+生産物価格$p$、賃金$w$と資本レンタル料$r$、生産技術$f(K, L)$を所与(=「完全競争市場」perfectly competitive markets)、$K, L$を最適に選んで利潤最大化する企業
+
+$$
+\max_{\{K, L\}}\;\;\;
+\pi=pf(K, L)-rK-wL
+$$
+
+. . .
+
+FOCs(微分してゼロと等しいとする)
+
+$$
+\begin{aligned}
+\frac{\partial\pi}{\partial K}=p\frac{\partial f(K, L)}{\partial K}-r&=0, &\quad 
+\frac{\partial\pi}{\partial L}=p\frac{\partial f(K, L)}{\partial L}-w&=0,\\
+\underbrace{p\frac{\partial f(K, L)}{\partial K}}_{\scriptsize{\mbox{資本の限界価値生産力}}}&=\underbrace{r}_{\scriptsize{\mbox{資本レンタル料}}}, &\quad
+\underbrace{p\frac{\partial f(K, L)}{\partial L}}_{\scriptsize{\mbox{労働の限界価値生産力}}}&=\underbrace{w}_{\scriptsize{\mbox{賃金}}}
+\end{aligned}
+$$
+
+----
+
+おまけ2: 労働の買い手独占企業は労働の限界(価値)生産力>賃金<gray>marginal (value) product of labour>wage, if monopsonist</gray>
+
+買い手独占: 雇用量が賃金に影響する=雇用&uarr; &rArr; 賃金&uarr; &rarr; $w=w(L), w'(L)>0$
+
+. . .
+
+価格$p$、労働供給関数$w(L)$、生産技術$f(L)$を所与(=「労働の不完全競争市場」imperfectly competitive labour market)、$L$で利潤最大化する企業
+
+$$
+\max_{\{L\}}\;\;\;
+\pi=pf(L)-w(L)L
+$$
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\pi_{L}
+=
+pf'(L)-w-\frac{\partial w(L)}{\partial L}L=0.
+$$
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+pf'(L)=w+\frac{\partial w(L)}{\partial L}L, \quad 
+1=\frac{w}{pf'(L)}+\frac{\partial w(L)}{\partial L}\frac{L}{w}\frac{w}{pf'(L)}=\frac{w}{pf'(L)}\left(1+a\right), 
+\quad 
+a := \frac{dw}{dL}\frac{L}{w}>0.
+$$
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+\color{red}{\mbox{wage markdown}}=\frac{w}{pf'(L)}=\frac{1}{1+a}=\frac{1}{1+\theta^{-1}}<1, \quad
+\theta:=a^{-1}=\frac{\frac{dL}{L}}{\frac{dw}{w}} \quad (\mbox{労働供給の賃金弾力性})
+$$
+:::
+
+----
+
+おまけ3: 独占企業の価格>完全競争の価格<gray>monopolist price>competitive price</gray>
+
+. . .
+
+独占企業: 供給が価格に影響する=生産量が増えると価格が下がる$p=p(q), p'(q)<0$.
+
+. . .
+
+需要曲線$p(q)$、賃金$w$と資本レンタル料$r$、生産技術$f(L)$を所与(=「生産物の不完全競争市場」imperfectly competitive product markets)、$L$で利潤最大化する企業
+
+$$
+\max_{\{L\}}\;\;\;
+\pi=p[f(L)]f(L)-wL
+$$
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\pi_{L}
+=
+\frac{\partial p(q)}{\partial q}f'(L)f(L)+p(q)f'(L)-w=0.
+$$
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+p(q)f'(L)\left\{1+\frac{\partial p(q)}{\partial q}\frac{q}{p(q)}\right\}=w,
+\quad
+p(q)=\frac{w}{f'(L)\left(1-b\right)}>\frac{w}{f'(L)}=p_{\scriptsize{\mbox{pc}}},
+\quad b := -\frac{dp}{dq}\frac{q}{p}>0.
+$$
+$$
+\color{red}{\mbox{markup}}=\frac{p(q)}{p_{\scriptsize{\mbox{pc}}}}=\frac{1}{1-b}=\frac{1}{1-\eta^{-1}}>1, \quad
+\eta:=b^{-1}=-\frac{\frac{dq}{q}}{\frac{dp}{p}} \quad (\mbox{需要の価格弾力性})
+$$
+:::
+
+----
+
+おまけ4: 技術的限界代替率=相対要素価格<gray>technical marginal rate of substitution=relative factor price</gray>
+
+. . .
+
+生産物価格$p$、賃金$w$と資本レンタル料$r$、特定の生産量$q$, 生産技術$f(K, L)$を所与(=「完全競争市場」)、$K, L$を最適に選んで費用最小化する企業
+
+$$
+\begin{aligned}
+\min_{\{K, L\}}\;\;\;&
+c=rK+wL\\
+\st \;\;\;& q\geqslant f(K,L)
+\end{aligned}
+$$
+ラグランジアン: 制約付き最大化・最小化問題で使う関数
+$$
+\mathcal L=rK+wL+\lambda[q-f(K,L)]
+$$
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\begin{aligned}
+\mathcal L_{K}
+&=
+r-\lambda f_{K}(K, L)=0,\\
+\mathcal L_{L}
+&=
+w-\lambda f_{L}(K, L)=0,\\
+\mathcal L_{\lambda}
+&=
+q- f(K, L)=0.
+\end{aligned}
+\quad \Longrightarrow \quad\underbrace{\frac{f_{K}(K, L)}{f_{L}(K, L)}}_{\scriptsize{\mbox{技術的限界代替率}}}=\frac{w}{r}, \quad q=f(K, L).
+$$
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+人的資本は増加している一方、労働分配率は低下していた理由として、モノの価格が高過ぎて、家計に還元されていなかったという内容を聞いて、インフレ時に物価が上昇しているが賃金の上昇が追いついていない状況に似ていると感じました。先進国での1970年代以降の傾向として、労働者所得の成長率が低かったという内容があり、その背景には、企業所有者と株主が所得を増やし、労働者まで十分に還元されなかった点があるという内容が印象的でした。
+:::
+</div>
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+* デフレが長かったので、大学生がインフレを肌身感覚として持っていることに新鮮な驚きを感じます
+:::
+
+. . .
+
+若干の誤解があります
+
+. . .
+
+講義: 労働分配率低下 &#x2B55;原因の候補、&#x274C;確定原因
+
+. . .
+
+税金=0と仮定すると、企業の手残り資金=収入-各種生産要素への支払
+
+::: {style="font-size: 80%;line-height: 1.1;"}
+$$
+労働分配率=\frac{労働への支払}{収入-各種生産要素への支払}=\frac{賃金+その他}{価格×販売量-各種生産要素への支払}
+$$
+:::
+
+. . .
+
+低下要因: 
+
+* 賃金増加幅の低下&larr;労働市場の独寡占
+* 価格増加幅の上昇&larr;生産物市場の独寡占
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+人的資本は増加している一方、労働分配率は低下していた理由として、モノの価格が高過ぎて、家計に還元されていなかったという内容を聞いて、インフレ時に物価が上昇しているが賃金の上昇が追いついていない状況に似ていると感じました。先進国での1970年代以降の傾向として、労働者所得の成長率が低かったという内容があり、その背景には、企業所有者と株主が所得を増やし、労働者まで十分に還元されなかった点があるという内容が印象的でした。
+:::
+</div>
+
+現代の日本でも、人的資本&uarr; &rArr; 労働生産性&uarr; &rArr; 賃金&uarr;は起こっているはずです 
+
+. . .
+
+しかし、労働生産性が伸びた分だけ賃金が上昇しているか、さらに言えば、ミクロ経済学で示される以下の関係が成り立っているか分かりません
+$$
+\mbox{労働の限界生産力}=\mbox{賃金}
+$$
+
+* 労働市場の買い手寡占labour market oligoposony &rArr; 労働の限界生産力>賃金
+   * 企業が労働から上がる成果の一部を取る&larr;雇用者間の競争が限られているため
+   * wage markdown: 賃金/労働の限界生産力
+
+. . .
+
+アメリカ: 資本主義の活力=競争、が失われているという指摘
+
+----
+
+<!--
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+人的資本は増加している一方、労働分配率は低下していた理由として、モノの価格が高過ぎて、家計に還元されていなかったという内容を聞いて、インフレ時に物価が上昇しているが賃金の上昇が追いついていない状況に似ていると感じました。先進国での1970年代以降の傾向として、労働者所得の成長率が低かったという内容があり、その背景には、企業所有者と株主が所得を増やし、労働者まで十分に還元されなかった点があるという内容が印象的でした。
+:::
+</div>
+
+企業活力business dynamismに関する定型化された10の事実[@AkcigitAtes2019]
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+1. Market concentration&uarr;
+2. Average markups(価格/限界費用)&uarr;
+3. Profit share of GDP&uarr;
+4. Labor share of output&darr;
+5. Market concentration&uarr; $\stackrel{+}{\sim}$ labor share&darr;
+::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig01.jpg){width="40%"}
+
+![](11/AA2021Fig02.jpg){width="40%"}
+
+![](11/AA2021Fig03.jpg){width="40%"}
+
+![](11/AA2021Fig04.jpg){width="40%"}
+
+![](11/AA2021Fig05.jpg){width="40%"}
+::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+6. (Labour) Productivity gap between frontier and laggard firms&uarr;
+7. Firm entry rate&darr;
+8. Share of young firms&darr;
+9. Job reallocation&darr;
+10. dispersion of firm growth&darr;
+:::
+::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig06.jpg){width="40%"}
+
+![](11/AA2021Fig07.jpg){width="40%"}
+
+![](11/AA2021Fig08.jpg){width="40%"}
+
+![](11/AA2021Fig09.jpg){width="40%"}
+
+![](11/AA2021Fig10.jpg){width="40%"}
+
+![](11/AA2021Fig11.jpg){width="40%"}
+::::
+
+::::::::::
+
+----
+-->
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+人的資本は増加している一方、労働分配率は低下していた理由として、モノの価格が高過ぎて、家計に還元されていなかったという内容を聞いて、インフレ時に物価が上昇しているが賃金の上昇が追いついていない状況に似ていると感じました。先進国での1970年代以降の傾向として、労働者所得の成長率が低かったという内容があり、その背景には、企業所有者と株主が所得を増やし、労働者まで十分に還元されなかった点があるという内容が印象的でした。
+:::
+</div>
+
+企業活力business dynamismに関する定型化された10の事実[@AkcigitAtes2019]
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+1. Market concentration&uarr;
+:::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig01.jpg){width="80%"}
+:::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+6. (Labour) Productivity gap between frontier and laggard firms&uarr;
+:::
+:::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig06.jpg){width="80%"}
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+2. Average markups&uarr;
+:::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig02.jpg){width="80%"}
+:::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+7. Firm entry rate&darr;
+:::
+:::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig07.jpg){width="80%"}
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+3. Profit share of GDP&uarr;
+:::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig03.jpg){width="80%"}
+:::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+8. Share of young firms&darr;
+:::
+:::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig08.jpg){width="80%"}
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+4. Labor share of output&darr;
+:::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig04.jpg){width="80%"}
+:::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+9. Job reallocation&darr;
+:::
+:::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig09.jpg){width="80%"}
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+5. Market concentration&uarr; $\stackrel{+}{\sim}$ L share&darr;
+:::::
+:::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig05.jpg){width="80%"}
+:::::
+
+:::::{.column width="45%"}
+::: {style="font-size: 90%;line-height: 1.1;"}
+10. dispersion of firm growth&darr;
+:::
+:::::
+
+:::::{.column width="5%"}
+![](11/AA2021Fig10.jpg){width="80%"}
+
+![](11/AA2021Fig11.jpg){width="80%"}
+:::::
+::::::::::
+
+
+----
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+
+$n$個の値$x_{i}$, $i=1,\dots, n$が期待値$\mu$、分散$\sigma^{2}$をもつ同じ(independently, identically distributed, i.i.d.)母集団から無作為抽出されているとき、母集団平均値推計量$\hat{\mu}$とその分散$\hat{\sigma}^{2}$は下記
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+$$
+\begin{aligned}
+\E\left[\bar{x}\right]
+&=
+\E\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
+&=
+\frac{1}{n}\E\left[x_{1}+\dots+x_{n}\right], &&\scriptsize{\because \E[a+bx]=a+b\E[x]}\\
+&=
+\frac{1}{n}n\mu, &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
+&=
+\mu.
+\end{aligned}
+$$
+$\bar{x}$の期待値=$\mu$なので、母集団平均値推計量$\hat{\mu}=\bar{x}$とする
+::::
+
+:::::{.column width="50%"}
+$$
+\begin{aligned}
+\NU\left[\bar{x}\right]
+&=
+\NU\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
+&=
+\frac{1}{n^{2}}\NU\left[x_{1}+\dots+x_{n}\right], \quad &&\scriptsize{\because\NU[a+bx]=b^{2}\NU[x]}\\
+&=
+\frac{1}{n^{2}}n\sigma^{2}, \quad &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
+&=
+\frac{\sigma^{2}}{n}.&&
+\end{aligned}
+$$
+$\sigma^{2}$は不可知なので、標本分散$s^{2}_{B}=\frac{sse}{n}$で代用
+
+::::
+::::::::::
+:::
+
+
+----
+
+
+#### References
+
+::: {#refs}
+:::
+
