@@ -250,6 +250,74 @@ putzeroontop <- function(z, autozero = T, totaldigits = F)
 }
 ```
 
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$$
+2^{0}=1?
+$$
+:::
+</div>
+
+::::::::::{.columns}
+
+::::{.column width="70%"}
+::: {style="font-size: 65%;line-height: .8;"}
+べき乗のパタン
+
+$$
+\begin{aligned}
+2^{3}
+&=
+& 2\cdot 2\cdot 2\cdot 1&=8\\
+2^{2}
+&=
+& 2\cdot 2\cdot 1&=4\\
+2^{1}
+&=
+& 2\cdot 1&=2\\
+2^{0}
+&=
+& 1&=1
+\end{aligned}
+$$
+
+べき乗のパタン2
+
+$$
+\begin{aligned}
+2^{2}
+&=
+\frac{2^{3}}{2}=\frac{8}{2}=4\\
+2^{1}
+&=
+\frac{2^{2}}{2}=\frac{4}{2}=2\\
+2^{0}
+&=
+\frac{2^{1}}{2}=\frac{2}{2}=1
+\end{aligned}
+$$
+
+
+べき乗の加法
+
+$$
+2=2^{1}=2^{1+0}=2^{1}\cdot 2^{0}=2\cdot 2^{0} \quad \Longrightarrow \quad 2^{0}=1.
+$$
+:::
+::::
+
+::::{.column width="30%"}
+上の2つは証明ではありません
+
+べき乗の加法法則を使ったものは証明ぽいです
+::::
+::::::::::
+
+
+----
+
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
 生成AIの登場により、思考低下が懸念される。また、学校へ行かない（ホームスクール制度、通信）など、学習方法の多様性が見られる。こうした時代の変化の中で、今後労働生産性、資本生産性は向上していくのか。
@@ -273,7 +341,9 @@ putzeroontop <- function(z, autozero = T, totaldigits = F)
 
 日常生活における人的資本蓄積&darr;? 
 
+::: {style="font-size: 80%;line-height: .8;"}
 * 論理的思考、知識、調べ方・学び方などをAIに一任し、人的資本=AIに尋ねる能力、となる人たちが出現?
+:::
 
 ----
 
@@ -400,8 +470,8 @@ AIを資本と見立てると労働限界生産力をどう変えるでしょう
 
 * 無関係$\partial^{2}f/\partial K\partial L=0$の職種・作業もあります
 * $\partial^{2}f/\partial K\partial L>0$の職種・作業は労働の限界生産力を高めます。
-  * AIが廉価になって$K$の費用が十分に低くなれば、$K$が多用され、同じ作業に関わる労働$L$の需要を減らす可能性もあります
-  * $K$が多用されても、今までに無かった職種・作業が開発され、労働の需要は減らない可能性もあります
+  * AIが廉価になって$K$の費用が十分に低くなれば、$K$が多用され、**同じ作業に関わる労働**の需要を減らします
+  * $K$が多用されても、今までに無かった職種・作業が開発され、**労働の総需要**は減らない可能性もあります
   * いずれの場合でも、労働生産性は高まります
   * AIが発達=資本生産性が高まる
 
@@ -802,6 +872,106 @@ $$
 ![](11/AA2021Fig10.jpg){width="80%"}
 
 ![](11/AA2021Fig11.jpg){width="80%"}
+:::::
+::::::::::
+
+
+----
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+1. Market concentration&uarr;
+
+* (ビッグ・)データ、業務のデジタル化&larr;規模の経済
+* ICT利用度 $\stackrel{+}{\sim}$ 市場集中度
+:::
+:::::
+
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+6. (Labour) Productivity gap between frontier and laggard firms&uarr;
+
+* 暗黙知tacit knowledgeの重要性
+* 知識拡散の低下&larr;労働移動の低下、知的財産保護の強化
+:::
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+2. Average markups&uarr;
+
+* 産業のDX率 $\stackrel{+}{\sim}$  マークアップ
+   * DX: Digital transformation, ICTツールを使い職場・作業を効率化すること
+:::
+:::::
+
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+
+7. Firm entry rate&darr;
+
+   * 出生率の低下
+   * 簡単な発明機会の喪失
+
+:::
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+3. Profit share of GDP&uarr;
+
+   * 理由は労働分配率低下と同じ
+:::
+:::::
+
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+8. Share of young firms&darr;
+
+   * 出生率の低下
+:::
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+4. Labor share of output&darr;
+
+* superstar企業: 生産性が高くマークアップ率も高いが労働分配率が低い
+:::
+:::::
+
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+9. Job reallocation&darr;
+
+   * 規制
+:::
+:::::
+::::::::::
+
+::::::::::{.columns}
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+5. Market concentration&uarr; $\stackrel{+}{\sim}$ L share&darr;
+
+* superstar企業: 生産性が高くマークアップ率も高いが労働分配率が低い
+:::
+:::::
+
+:::::{.column width="50%"}
+::: {style="font-size: 70%;line-height: 1.1;"}
+10. dispersion of firm growth&darr;
+
+* 知識拡散の低下&larr;労働移動の低下、知的財産保護の強化
+* 反トラスト法運用の弱体化: 競争法におけるシカゴ学派台頭&harr;ニュー・ブランダイス学派
+:::
 :::::
 ::::::::::
 

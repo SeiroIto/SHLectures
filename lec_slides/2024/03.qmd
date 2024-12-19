@@ -669,16 +669,16 @@ $$
 :::{.fragment}
 MR$>$MCのとき=$l<l^{*}$のとき
 
-&rArr; $l$&uarr; &rArr; $MR-MC$だけ純利益&uarr;
+&rArr; $l$&uarr; &rArr; $MR-MC$だけ純収益&uarr;
 :::
 :::{.fragment}
 MR$<$MCのとき=$l>l^{*}$のとき
 
-&rArr; $l$&darr; &rArr; $MR-MC$だけ純利益&uarr;
+&rArr; $l$&darr; &rArr; $MR-MC$だけ純収益&uarr;
 :::
 
 :::{.fragment}
-&rArr; 等号(MR=MC)ならば純利益改善の余地がない
+&rArr; 等号(MR=MC)ならば純収益改善の余地がない
 :::
 
 :::{.fragment}

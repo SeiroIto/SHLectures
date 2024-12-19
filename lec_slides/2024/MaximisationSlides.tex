@@ -696,30 +696,30 @@ g'(c_{2})c'_{2}(l),\\
 $g, h$を微分して乗じても手数は変わらないですが、計算の誤りが減ります。
 \column{.5\textwidth}
 \pause
-$u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最大化
+2変数の関数$u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最大化
 
 \pause
-{\tiny \textcolor{green}{1.} $l$について微分してゼロとおく \; \textcolor{green}{2.} $s$について微分してゼロとおく}
+{\tiny \textcolor{green}{1.} $l$について\textcolor{green}{偏微分}してゼロとおく \; \textcolor{green}{2.} $s$について\textcolor{green}{偏微分}してゼロとおく}
 
 \pause
-$F(l)=u\left\{c_{1}(l)\right\}+\beta u\{c_{2}(l)\}$、つまり、$c_{1}(l)=w(24-l)+A-s$, $c_{2}(l)=h(l)+Rs$
+$F(l, s)=u\left\{c_{1}(l, s)\right\}+\beta u\{c_{2}(l, s)\}$、つまり、$c_{1}(l, s)=w(24-l)+A-s$, $c_{2}(l, s)=h(l)+Rs$
 \pause
-$U(s)=u\left\{c_{1}(s)\right\}+\beta u\left\{c_{2}(s)\right\}$、つまり、$c_{1}(s)=w(24-l)+A-s$, $c_{2}(s)=h(l)+Rs$
-\pause
+{\small
 \[
 \begin{aligned}
-F'(l)
+F_{l}(l, s)
 &=
-u'\left(c_{1}\right)c'_{1}(l)&+\beta u'(c_{2})c'_{2}(l)&=0,\\
-U'(s)
+u'\left(c_{1}\right)c_{1l}(l, s)+\beta u'(c_{2})c_{2l}(l, s)=0,\\
+F_{s}(l, s)
 &=
-u'\left(c_{1}\right)c'_{1}(s)&+\beta u'(c_{2})c'_{2}(s)&=0.
+u'\left(c_{1}\right)c_{1s}(l, s)+\beta u'(c_{2})c_{2s}(l, s)=0.
 \end{aligned}
 \]
+}
 \[
 \begin{aligned}
-\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c'_{2}(l)}{c'_{1}(l)}, \\
-\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c'_{2}(s)}{c'_{1}(s)}. 
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c_{2l}(l, s)}{c_{1l}(l, s)}, \\
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=-\beta \frac{c_{2s}(l, s)}{c_{1s}(l, s)}. 
 \end{aligned}
 \]
 \end{columns}
@@ -729,7 +729,7 @@ u'\left(c_{1}\right)c'_{1}(s)&+\beta u'(c_{2})c'_{2}(s)&=0.
 $F(l, s)=u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最大化
 
 \pause
-{\scriptsize 1. $l$について微分してゼロとおく \; 2. $s$について微分してゼロとおく}
+{\scriptsize 1. $l$について偏微分してゼロとおく \; 2. $s$について偏微分してゼロとおく}
 \[
 \begin{aligned}
 \frac{\partial F(l, s)}{\partial l}
@@ -753,13 +753,16 @@ $F(l, s)=u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$を2変数$l, s$で最�
 -\beta \frac{\frac{\partial c_{2}(l, s)}{\partial s}}{\frac{\partial c_{1}(l, s)}{\partial s}}.
 \end{aligned}
 \]
+
+\begin{columns}[T]
+\column{.7\textwidth}
 \pause
 $c_{1}(l, s)=w(24-l)+A-s$\pause, $\frac{\partial c_{1}(l, s)}{\partial l}=-w$, $\frac{\partial c_{1}(l, s)}{\partial s}=-1$, 
 
 \pause
 $c_{2}(l, s)=h(l)+Rs$\pause, $\frac{\partial c_{2}(l, s)}{\partial l}=h'(l)$, $\frac{\partial c_{2}(l, s)}{\partial s}=R$.
-\begin{columns}[T]
-\column{.7\textwidth}
+
+\vspace{-1ex}
 \pause
 \[
 \begin{aligned}
@@ -786,6 +789,9 @@ $c_{2}(l, s)=h(l)+Rs$\pause, $\frac{\partial c_{2}(l, s)}{\partial l}=h'(l)$, $\
 wR=h'(l).
 \]
 $F(l, s)$を2変数$l, s$で最大化すると、この条件が成り立っていなければならない
+
+\pause
+限界収益が時間の2使途で同じ
 \end{columns}
 \end{frame}
 
