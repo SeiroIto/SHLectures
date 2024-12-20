@@ -353,6 +353,10 @@ $$
 :::
 </div>
 
+Baland and Robinsonモデルの単純化の仮定: 人的資本投資=通学=均一効果
+
+<br>
+
 就労でも人的資本は増えます
 
 * Cordon Blu, Londonのパティシエ
@@ -376,7 +380,13 @@ $$
 
 人的資本は他の生産要素とどのように組み合わさり、組み合わせによって労働生産性はどのように変わるか
 
-生産関数: 資本$K$と労働$L$を使って財・サービス$y$を産出する技術的関係$\mathbb R_{+}\times\mathbb R_{+}\to\mathbb R_{+}$ (正の実数×正の実数の組み合わせ$\to$正の実数というマッピング)
+. . .
+
+生産関数: 資本$K$と労働$L$を使って財・サービス$y$を産出する技術的関係
+
+. . .
+
+$\mathbb R_{+}\times\mathbb R_{+}\to\mathbb R_{+}$ (正の実数×正の実数の組み合わせ$\to$正の実数というマッピング)
 $$
 y=f(K,L).
 $$
@@ -389,12 +399,20 @@ $$
 :::
 </div>
 
+2変数関数$f(K, L)$を1つの変数で微分=偏微分partial differentiation
+
 $$
 \frac{\partial f(K,L)}{\partial K}>0, \ \frac{\partial f(K,L)}{\partial L}>0
 $$
 
-* $\frac{\partial f(K,L)}{\partial K}$: 資本の限界生産力は正=資本投入が増えれば生産も増える (すべての正の$K, L$において)
-* $\frac{\partial f(K,L)}{\partial L}$: 労働の限界生産力は正=労働投入が増えれば生産も増える ($\forall K, L\in\mathbb R_{+}^{2}$)
+* $\frac{\partial f(K,L)}{\partial K}>0$: **資本の限界生産力**は正=資本投入が増えれば生産も増える (すべての正の$K, L$において)
+* $\frac{\partial f(K,L)}{\partial L}>0$: **労働の限界生産力**は正=労働投入が増えれば生産も増える ($\forall K, L\in\mathbb R_{+}^{2}$)
+
+. . .
+
+<br>
+
+限界生産力=偏微分
 
 ----
 
@@ -408,7 +426,7 @@ $$
 \frac{\partial\left(\frac{\partial f(K,L)}{\partial L}\right)}{\partial K}=\frac{\partial^{2} f(K,L)}{\partial K\partial L}=\frac{\partial^{2} f(K,L)}{\partial L\partial K}\lesseqgtr 0.
 $$
 
-* $\frac{\partial^{2} f(K,L)}{\partial K\partial L}$: 資本と労働の交差限界生産力=労働の限界生産力は資本が増えると$\lesseqgtr 0$減る・増える・変化無し?
+* $\frac{\partial^{2} f(K,L)}{\partial K\partial L}$: 資本と労働の**交差限界生産力**cross marginal product=労働の限界生産力は資本が増えると$\lesseqgtr 0$減る・増える・変化無し?
 
 . . .
 
@@ -553,11 +571,11 @@ $$
 
 . . .
 
-独占企業: 供給が価格に影響する=生産量が増えると価格が下がる$p=p(q), p'(q)<0$.
+独占企業: 供給が価格に影響する=生産量&uarr; &rArr; 価格&darr; &rarr; $p=p(q), p'(q)<0$.
 
 . . .
 
-需要曲線$p(q)$、賃金$w$と資本レンタル料$r$、生産技術$f(L)$を所与(=「生産物の不完全競争市場」imperfectly competitive product markets)、$L$で利潤最大化する企業
+需要曲線$p(q)$、賃金$w$、生産技術$f(L)$を所与(=「生産物の不完全競争市場」imperfectly competitive product markets)、$L$で利潤最大化する企業
 
 $$
 \max_{\{L\}}\;\;\;
@@ -975,54 +993,7 @@ $$
 :::::
 ::::::::::
 
-
 ----
-
-::: {style="font-size: 70%;line-height: 1.1;"}
-
-$n$個の値$x_{i}$, $i=1,\dots, n$が期待値$\mu$、分散$\sigma^{2}$をもつ同じ(independently, identically distributed, i.i.d.)母集団から無作為抽出されているとき、母集団平均値推計量$\hat{\mu}$とその分散$\hat{\sigma}^{2}$は下記
-
-::::::::::{.columns}
-:::::{.column width="50%"}
-$$
-\begin{aligned}
-\E\left[\bar{x}\right]
-&=
-\E\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
-&=
-\frac{1}{n}\E\left[x_{1}+\dots+x_{n}\right], &&\scriptsize{\because \E[a+bx]=a+b\E[x]}\\
-&=
-\frac{1}{n}n\mu, &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
-&=
-\mu.
-\end{aligned}
-$$
-$\bar{x}$の期待値=$\mu$なので、母集団平均値推計量$\hat{\mu}=\bar{x}$とする
-::::
-
-:::::{.column width="50%"}
-$$
-\begin{aligned}
-\NU\left[\bar{x}\right]
-&=
-\NU\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
-&=
-\frac{1}{n^{2}}\NU\left[x_{1}+\dots+x_{n}\right], \quad &&\scriptsize{\because\NU[a+bx]=b^{2}\NU[x]}\\
-&=
-\frac{1}{n^{2}}n\sigma^{2}, \quad &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
-&=
-\frac{\sigma^{2}}{n}.&&
-\end{aligned}
-$$
-$\sigma^{2}$は不可知なので、標本分散$s^{2}_{B}=\frac{sse}{n}$で代用
-
-::::
-::::::::::
-:::
-
-
-----
-
 
 #### References
 
