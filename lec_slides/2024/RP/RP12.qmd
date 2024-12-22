@@ -422,17 +422,6 @@ $$
 
 ----
 
-::: {style="font-size: 70%;line-height: 1.1;"}
-FOCs
-$$
-\pi_{L}
-=
-\frac{\partial p(q)}{\partial q}f'(L)f(L)+p(q)f'(L)-w=0.
-$$
-:::
-
-----
-
 #### References
 
 ::: {#refs}
