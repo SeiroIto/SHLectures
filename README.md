@@ -48,5 +48,7 @@ Lecture slides etc. 2024 will be placed here.
    * [midterm answer key](https://seiroito.github.io/SHLectures/homeworks/2024/midterm/midterm2024AnswerKey.html)  
 * Lecture 12  
    * [RP11](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP11.html)  
+* Lecture 13  
+   * [RP12](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP12.html)  
 
 

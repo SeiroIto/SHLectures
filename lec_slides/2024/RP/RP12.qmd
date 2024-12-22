@@ -1,0 +1,440 @@
+---
+title: "RP12"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP12.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: 
+  match: auto
+  desc-position: left
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP12.pdf
+# quarto render RP12.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+gray {
+  color: #aeb6bf;
+}
+```
+
+```{r, echo = F}
+asc <- function(x)
+{
+  if (!is.factor(x)) x <- as.factor(unlist(x))
+  return(levels(x)[as.integer(x)])
+}
+seqrep <- function(seqn, repvec)
+{
+  Vec <- NULL
+  for (i in 1:length(repvec)) Vec <- c(Vec, paste(rep(seqn, repvec[i]), sep = "", collapse = ""))
+  return(Vec)
+}
+putzeroontop <- function(z, autozero = T, totaldigits = F)
+#  autozero: if numeric, add the given digit of zero on top
+#  totaldigits: if numeric, total digits will be set (001 is 3) if maximum 0s to be added is smaller
+#    modified to accept NA in z: July 18, 2016
+{
+  iic <- grep("\\D", z, perl = T)
+  iina <- which(is.na(z))
+  iin <- grep("\\d", z, perl = T)
+  digs <- nchar(asc(z))
+  adddig <- max(digs, na.rm = T) - digs
+  if (is.numeric(autozero)) 
+  {
+    maxadd <- max(max(digs, na.rm = T) - digs, na.rm = T)
+    if (autozero > maxadd) adddig <- adddig + (autozero - maxadd)
+  }
+  if (is.numeric(totaldigits))
+    if (totaldigits > max(digs, na.rm = T)) 
+    adddig <- adddig + (totaldigits - max(digs, na.rm = T))
+  adddig[c(iic, iina)] <- 0
+  z <- paste(seqrep("0", adddig), z, sep = "")
+  z[grep("NA", z)] <- NA
+  return(z)
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+
+::::{.nonincremental}
+1. $F(l,s)$とはなんですか。
+1. 児童期効用・成人期効用の、効用の意味があまりよくわかりませんでした。
+1. 式の中のβやαの意味は何ですか。
+::::
+
+:::
+</div>
+
+. . .
+
+説明不足な点を突いている良い質問です
+
+1. $F(l,s)$
+
+* 2変数$l, s$の関数$F$という意味です
+* $F(l, s)=u\left\{w(24-l)+A-s\right\}+\beta u\{h(l)+Rs\}$には5つの変数$l, s, w, A, R$
+* $F(l, s, w, A, R)$と書くべきところ&larr;$F(l, s, w, A, R)=F(l, s)$と書き、$F$を$w, A, R$の関数ではないと宣言
+   * $F(l, s, w, A, R)=F(l, s| w, A, R)$: Function $F$ of $l$ and $s$ given $w, A, R$
+   * $l, s$はモデル内で決まる内生変数endogenous variables
+   * $w, A, R$はパラメタで外から与えられる
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+::::{.nonincremental}
+1. $F(l,s)$とはなんですか。
+1. 児童期効用・成人期効用の、効用の意味があまりよくわかりませんでした。
+1. 式の中のβやαの意味は何ですか。
+::::
+:::
+</div>
+
+2. 効用の意味
+
+. . .
+
+このモデル: 
+
+* 人生=児童期+成人期
+* 児童期に評価した人生の幸せ=児童期効用+$\beta$成人期効用
+   * 各期の効用は各期の消費の関数
+   * 効用関数: 消費量$\in\mathbb R_{+}\to$実数$\mathbb R$というマッピング
+* 児童期に評価した人生の幸せを最大化するように就学時間と貯蓄額を決める
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+::::{.nonincremental}
+1. $F(l,s)$とはなんですか。
+1. 児童期効用・成人期効用の、効用の意味があまりよくわかりませんでした。
+1. 式の中のβやαの意味は何ですか。
+::::
+:::
+</div>
+
+3. $\beta$の意味
+
+. . .
+
+* 児童期に評価した人生の幸せ=児童期効用+$\beta$成人期効用
+* $\beta$: 割引率discount factor, $\beta\in[0, 1]$
+* 児童期での意思決定で成人期効用を$\beta$のウェイトで考慮
+   * $\beta\simeq 1$&rarr;忍耐のある人
+   * $\beta\ll 1$&rarr;刹那的な人
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+限界生産力逓減の仮定は、「技術が変わらずに生産要素が増えると、生産の増加幅が低下する」というものでしたが、それは生産要素が増えても労働力が増えないため、生産の増加が止まるということなのでしょうか？
+:::
+</div>
+
+. . .
+
+「生産の増加が止まる」=生産が増加しなくなる、以外は正しいです
+
+. . .
+
+限界生産力逓減の仮定: 
+
+* 労働を例に取ると、労働の限界生産力逓減の仮定
+   * 労働を微小単位ずつ増やしていくと、生産の増加分が減少
+   * 現実に適合: 労働だけ増やすと増産分(限界生産力)は逓減しがち
+   * 労働**だけ**=偏微分概念
+   * 資本: 資本を増やしていくと、生産の増加分が減少
+* ただし、労働以外にその他すべての生産要素も同時に増やすと、増加分が減るとは限りません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+限界生産力逓減の仮定は、「技術が変わらずに生産要素が増えると、生産の増加幅が低下する」というものでしたが、それは生産要素が増えても労働力が増えないため、生産の増加が止まるということなのでしょうか？
+:::
+</div>
+
+* すべての生産要素を$a>1$倍したときに生産量がどう変わるか(increasing/constant/decreasing returns to scale)
+
+. . .
+
+$$
+f(aK, aL) 
+\left\{
+\begin{array}{c}
+>\\
+=\\
+<
+\end{array}
+\right.
+af(K, L), \ a\in(1, \infty)\quad
+\mbox{規模に関して収穫}
+\left\{
+\begin{array}{l}
+\mbox{逓増}\\
+\mbox{一定}\\
+\mbox{逓減}
+\end{array}
+\right.
+$$
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+就学便益の限界効用が就学時間によって下がるのは、勉強する期間が長いほど急激な成長がなくなるということだと分かったのですが、就学費用の限界効用は費用をかけるほど良い教育を受けられるという意味で上がっているのでしょうか？
+:::
+</div>
+
+* 就学費用=逸失労働所得は第1期に発生
+* 就学の限界費用を考える
+* 第1期効用$u\{w(24-l)+A-s\}$を就学時間$l$で微分$wu'\{w(24-l)+A-s\}$&larr;単位時間あたり逸失労働所得$w$×その限界効用$u'\{w(24-l)+A-s\}$
+* この表現に人的資本$h(l)$は含まれていない&rarr;「良い教育」は無関係
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+就学便益の限界効用が就学時間によって下がるのは、勉強する期間が長いほど急激な成長がなくなるということだと分かったのですが、就学費用の限界効用は費用をかけるほど良い教育を受けられるという意味で上がっているのでしょうか？
+:::
+</div>
+
+$wu'\{w(24-l)+A-s\}$が$l$に関する増加関数&larr;二階微分で増加か減少か判定
+
+. . .
+
+$$
+\begin{aligned}
+\frac{\partial wu'\{w(24-l)+A-s\}}{\partial l}
+&=
+wu''\{w(24-l)+A-s\}\times -w\\
+&=
+-w^{2}u''\{w(24-l)+A-s\}>0.
+\end{aligned}
+$$
+
+* $l$&uarr; &rarr; $w(24-l)$&darr; &rarr; $u'\{w(24-l)+A-s\}$&uarr;
+* 第1期所得が減るので第1期限界効用が増える&larr;$u''(c_{1})<0$ (限界効用逓減の仮定)
+
+. . .
+
+回答: 就学時間$l$を増やすと(第2期所得は増えるが)第1期所得が減り、(限界)効用単位でその費用が逓増するため、$wu'\{w(24-l)+A-s\}$は$l$に対して右上がり
+
+----
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\pi_{L}
+=
+\frac{\partial p(q)}{\partial q}f'(L)f(L)+p(q)f'(L)-w=0.
+$$
+:::
+
+----
+
+#### References
+
+::: {#refs}
+:::
+
