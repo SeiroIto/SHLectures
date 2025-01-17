@@ -1,0 +1,349 @@
+\begin{frame}[fragile]{}
+スペースシャトル・コロンビア大気圏再突入爆発事故(2003年)\\~\\
+\pause
+打ち上げ時に断熱材破損、破片$\rightarrow$機体に衝突\\~\\
+\pause
+映像によりNASAはこのことに気付き、12日後の大気圏再突入までに危険を検討した\\~\\
+\pause
+燃料タンクのspray-on form insulation吹き付け式断熱材\\~\\
+\pause
+損傷を決める要因
+\begin{description}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\pause
+\item[エネルギー量]	体積(\Sexpr{round(20*10*6*2.54^(3)/1000, 2)}リットル)$\times$(時速960km)$^{2}$
+\pause
+\item[衝突箇所の素材]	RCC(炭素繊維強化炭素複合材料)かタイルか
+\pause
+\item[衝突角度]	21度か4-13度か
+\end{description}
+\vspace{1ex}
+\pause
+RCCの方が脆く、角度が急なので損傷は大きい\\~\\
+\pause
+データ視覚化の技法というより、安全軽視のガバナンスの問題\\~\\
+\pause
+情報公開法: \url{https://www.nasa.gov/columbia/foia/index.html}
+\end{frame}
+{
+\setbeamercolor{background canvas}{bg=}
+\includepdf[angle = 0]{\Sexpr{paste0(path, "/DataVisualisation/BoeingDebrisAngle_Page6_2003Jan21Slides.pdf")}}
+}
+\begin{frame}{}
+\begin{columns}[T]
+\column{.4\paperwidth}
+ボーイング社の専門家が3つの報告書を提出、説明\\~\\
+\pause
+「結論: タイル複数枚喪失が基準値以上の熱を引き起こさなければ、損傷しても安全に帰還(複数枚の熱分析は計算中)」\\~\\
+\pause
+$\rightarrow$大気圏再突入時にシャトル爆発\\~\\
+\column{.55\paperwidth}
+\visible<3->{\hfil\includegraphics[width = .556\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/ScottLieberman_ShuttleColumbiaAccident.jpg")}}}
+\end{columns}
+\end{frame}
+
+
+
+%{
+%\setbeamercolor{background canvas}{bg=}
+%\includepdf[angle = 90]{\Sexpr{paste0(path, "/DataVisualisation/BoeingDebrisTile_Page7_2003Jan23Slides.pdf")}}
+%}
+
+
+\colorlet{MyBlu}{blue!70!green}
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\begin{frame}{}
+\begin{columns}[T]
+\column{.85\paperwidth}
+\vspace*{-1.2cm}
+\begin{tikzpicture}[inner sep=0pt, remember picture]
+\onslide<1->{\node at (0, 0) {
+\hspace{-1cm}
+\includegraphics[scale = .475]{\Sexpr{paste0(path, "/DataVisualisation/BoeingDebrisTile_Page7_2003Jan23Slides.pdf")}}};}
+
+\onslide<2->{
+\node (sts50) [draw, rectangle, thick, minimum height = .35cm, minimum width = 1.0cm, ao, anchor = south west] 
+  at (2.85, 2.6cm){};
+\node (sts107) [draw, rectangle, thick, minimum height = .30cm, minimum width = 1.1cm, ao, anchor = south west] 
+  at (-3.375, 1.36cm){};
+\node (sts50text) [ao] at ($(sts50) + (1, 1cm)$){\scriptsize 以前のフライト};
+\node (sts107text) [ao] at ($(sts107) + (-1.5, 2cm)$){\scriptsize コロンビア};
+}
+
+\onslide<5->{
+\node (a) [draw, rectangle, thick, minimum height = .35cm, minimum width = 8.5cm, red, anchor = south west] 
+  at (-5.975, 1.75cm){};
+}
+\onslide<6->{
+\node (b) [draw, rectangle, thick, minimum height = .35cm, minimum width = 7.75cm, red, anchor = south west] 
+  at (-5.975, 1.35cm){};
+}
+\onslide<4->{
+\draw [decorate, decoration = {brace, amplitude = 10pt}, 
+    xshift = -4pt, yshift = 0pt, very thick, color = ao]
+    (-4.5, -1.25) -- (-4.5, .9) node [color = ao, midway, xshift = -.9cm] 
+    {\mpage{1cm}{\scriptsize (体積\hfill\\\hfill 固定)\\ 速度$V$\\ と角度\\ と貫通\\\hfill 深度}};
+\node (c) [draw, rectangle, thick, minimum height = 1.9cm, minimum width = .6cm, ao, anchor = south west] 
+  at (-0.05, -1.325cm){};
+}
+\onslide<7->{
+  \draw [decorate, decoration = {brace, amplitude = 10pt}, 
+    xshift = 4pt, yshift = 0pt, very thick, color = azure]
+    (1, -1.5) -- (1, -3.5) node [color = azure, midway, xshift = 2cm] 
+    {\mpage{2.75cm}{\scriptsize (角度と密度固定)\\ 体積と\\ RCC貫通速度$V^{*}$}};
+\node (d) [draw, rectangle, thick, minimum height = .2cm, minimum width = 1.4cm, azure, anchor = south west] 
+  at (-4.05, -3.3cm){};
+}
+\end{tikzpicture}
+\column{.15\paperwidth}
+\hspace{-1.5cm}\begin{tikzpicture}[inner sep=0pt, remember picture]
+\node (m0) at (0, 0) {\mpage{.225\paperwidth}{\footnotesize タイル耐性の分析}};
+\onslide<3->{
+\node (m00) at (0, -1) {\mpage{.225\paperwidth}{\footnotesize 過去の事故事例との比較}};
+}
+\onslide<5->{
+\node (m1) at (0, -2.5) {\mpage{.225\paperwidth}{\footnotesize 衝突角度が少しでも大きいと、エネルギーが増えてダメージが大きくなる\setlength{\baselineskip}{10pt}}};
+}
+\onslide<6->{
+\node (m2) at (0, -4) {\mpage{.225\paperwidth}{\footnotesize コロンビアの衝突角度は参考事例よりも大きいと予測 \setlength{\baselineskip}{10pt}}};
+}
+\onslide<8->{
+\node (m3) at (0, -5.5) {\mpage{.225\paperwidth}{\footnotesize SOFIの体積は実験データ最大体積の640倍あるので、貫通速度は著しく低い \setlength{\baselineskip}{10pt}}};
+}
+\end{tikzpicture}
+\begin{tikzpicture}[remember picture, overlay]
+\onslide<2->{
+\draw[ao, very thick, >= latex', ->] (sts50text.west) to [out=180, in=90] (sts50.north);
+\draw[ao, very thick, >= latex', ->] (sts107text.east) to [out=0, in=90] (sts107.north);
+}
+\onslide<5->{
+\draw[red, very thick, >= latex', ->] (m1.west) to [out=180, in=0] (c.east);
+}
+\onslide<6->{
+\draw[red, very thick, >= latex', ->] (m2.west) to [out=180, in=0] (b.east);
+}
+\onslide<8->{
+\draw[red, very thick, >= latex', ->] (m3.west) to [out=180, in=0] (d.east);
+}
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}[T]
+\column{.69\paperwidth}
+\vspace*{-1.0cm}
+%\onslide<1->{\makebox[.825\linewidth]{\rotatebox{0}{\includegraphics[scale = .45]{\Sexpr{paste0(path, "/DataVisualisation/BoeingDebrisRCC_Page8_2003Jan23Slides.pdf")}}}}}\\
+\begin{tikzpicture}[inner sep=0pt, remember picture]
+\onslide<1->{\node at (0, 0) {\hspace{-1.0cm}\includegraphics[scale = .425]{\Sexpr{paste0(path, "/DataVisualisation/BoeingDebrisRCC_Page8_2003Jan23Slides.pdf")}}};}
+\onslide<3->{
+\node (a) [draw, rectangle, thick, rounded corners, minimum height = .35cm, minimum width = .5cm, red] 
+  at (-3.85, .75cm){};
+\node (b) [draw, rectangle, thick, rounded corners, minimum height = .35cm, minimum width = .7cm, red] 
+  at (1.0, .75cm){};
+\node (c) [draw, rectangle, thick, rounded corners, minimum height = .35cm, minimum width = .7cm, red] 
+  at (2.725, -1.1cm){};
+}
+\onslide<4->{
+\node (d) [draw, rectangle, thick, rounded corners, minimum height = .35cm, minimum width = 1.5cm, MyBlu] 
+  at (2.5, -1.6cm){};
+}
+\onslide<5->{
+\coordinate (w1) at (-3.2, -2.2);
+\coordinate (w2) at (2.4, -2.7);
+\draw[decorate, decoration = {snake, amplitude = .25mm, segment length = 2mm}, color = orange, very thick]  
+    ($(w1) + (-2, 0)$) -- (w1);
+\draw[decorate, decoration = {snake, amplitude = .25mm, segment length = 2mm}, color = orange, very thick]  
+    ($(w2) + (-3.4, 0)$) -- (w2);
+}
+\onslide<6>{
+\node (e) [draw, rectangle, very thick, rounded corners, minimum height = .35cm, minimum width = 1.75cm, blue, fill = blue!10, fill opacity = .4] 
+  at ($(w1) + (1.5, 1.5)$){};
+}
+\end{tikzpicture}
+\\
+
+%  \vspace*{-5.65cm}
+%  \onslide<2->{
+%    \hspace{1.2cm}\Rect{.5}{.35}{red}\hspace{4.1cm}\Rect{.7}{.35}{red}
+%  }\\
+\vspace*{1.35cm}
+\onslide<3->{
+  \hspace{7.65cm}\Rect{.7}{.35}{red}
+}\\
+\vspace*{.15cm}
+\onslide<4->{
+  \hspace{7.5cm}\Rect{2.4}{.35}{MyBlu}
+}\onslide<5->{%
+  \hspace*{-.2cm}\SnakeLine{1.0}{0}{orange}\\[-.25ex]
+  \hspace{1.1cm}\SnakeLine{2.2}{0}{orange}\\[1.5ex]
+  \hspace{5.5cm}%\Rect{1.6}{.375}{MyBlu}
+  \SnakeLine{3.6}{0}{orange}%\hspace{.2cm}\SnakeLine{2.1}{0}{orange}
+}
+\column{.35\paperwidth}
+\hspace{-.5cm}\begin{tikzpicture}[inner sep=0pt, remember picture]
+\onslide<1->{
+\node (m0) at (0, 0) {\mpage{.35\paperwidth}{RCCコーティング耐性の分析}};
+\node (m1) at (0, -1.5) {\mpage{.32\paperwidth}{「氷データベースでの衝突角度15度以上でのRCCへの予測ダメージ」}};
+}
+\onslide<2->{
+\node (m2) at (0, -3) {\mpage{.32\paperwidth}{(推定衝突角度でRCCを貫通するかを氷で考えた)}};
+}
+\onslide<3->{
+\node (m3) at (0, -4.5) {\mpage{.32\paperwidth}{「RCの厚さが.23なので氷で衝突角度15度まで大丈夫」}};
+}
+\onslide<5->{
+\node (m4) at (0, -6) {\mpage{.32\paperwidth}{「氷よりも柔らかいSOFIならば最大推定衝突角度21度でも大丈夫」}};
+}
+\end{tikzpicture}
+\begin{tikzpicture}[remember picture, overlay]
+\onslide<4->{
+\draw[red, very thick, >= latex', ->] (m3.west) to [out=180, in=0] (a.east);
+\draw[red, very thick, >= latex', ->] (m3.west) to [out=180, in=0] (b.east);
+\draw[red, very thick, >= latex', ->] (m3.west) to [out=180, in=0] (c.east);
+}
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+<<correct plot, warning = F, eval = F, cache = F, echo = F, results = "hide", message = F, fig.align='center', fig.height = 5, fig.cap = "correct plot", fig.lp = 'Figure'>>=
+dummy.tile <- data.table(material = "form on tile (page 7)",
+  angle = c(3.2, 5.2, 10), volume = 1920,
+#  v.adj = c(69, 361, 700), 
+  energy=c(100, 264, 551), damage.depth = c(.53, 1.6, 2.49),
+  material.depth = .5)
+dummy.rcc <- data.table(material = "ice on rcc (page 8)",
+  angle = seq(5, 25, 5), volume = 20*10*6,
+  energy = seq(100, 300, 50), # arbitrary entries, because there is no energy data in the table of p.8 of boeing slide
+  damage.depth = c(.11, .18, .23, .28, .33), 
+  material.depth = .233)
+dummy <- rbind(dummy.tile, dummy.rcc)
+dummy[, damage.rate := damage.depth/material.depth]
+dummy[, debris.volume.considered := paste0(round((20*10*6/1920)*100, 0), "% of factual")]
+dummy[volume == 1920, debris.volume.considered := "100% of factual"]
+dummy[, debris.volume.considered := 
+  factor(debris.volume.considered, levels = paste(c("62%", "100%"), "of factual"))]
+dummy[, material := factor(material, levels = c("ice on rcc (page 8)","form on tile (page 7)"))]
+#library(ggplot2)
+ann_text <- data.table(
+    angle = 8, damage.rate = 1.2, 
+    lab = "material depth", 
+    debris.volume.considered = "100% of factual",
+    material = factor("form on tile (page 7)", levels = c("ice on rcc (page 8)","form on tile (page 7)"))
+  )
+p <- ggplot(data = dummy, 
+  aes(x = angle, y = damage.rate, group = material, 
+    shape = debris.volume.considered, colour = debris.volume.considered)) +
+  geom_point(aes(colour = debris.volume.considered, 
+    shape = debris.volume.considered))+
+  scale_colour_manual(values = c("blue", "red"))+
+  scale_shape_manual(values = c(15, 16))+
+  geom_hline(yintercept = 1, colour = "orange") +
+  geom_text(data = ann_text, show.legend = F,
+    aes(x = angle, y = damage.rate, label = lab)) +
+  scale_y_continuous("damage depth/material depth") +
+  theme(
+    axis.text.y = element_text(size = 10), 
+    axis.title = element_text(size = 10), 
+    strip.text.x = element_text(color = "blue", size = 9, 
+      margin = margin(0, 1.25, 0, 1.25, "cm")), 
+    strip.text.y = element_text(color = "blue", size = 9, 
+      margin = margin(1.5, 0, 1.5, 0, "cm")),
+    legend.position = "bottom")+
+  facet_wrap(~ material, scales = "free_x")
+pdf(file =
+  paste0(path, "/DataVisualisation/ColumbiaCorrectFigure.pdf")
+  , width = 12/2.54, height = 10/2.54)
+print(p)
+whatever <- dev.off()
+@
+
+\begin{frame}{}
+\begin{columns}[T]
+\column{.8\paperwidth}
+\vspace*{-0.5cm}
+\begin{tikzpicture}[inner sep=0pt, remember picture]
+\node at (0, 0) {\hspace{-1.0cm}\includegraphics[scale = .45]{\Sexpr{paste0(path, "/DataVisualisation/page10_Boeing2003Jan23.pdf")}}};
+\onslide<2->{
+\node (a) [draw, rectangle, thick, minimum height = .4cm, minimum width = 2.8cm, red] 
+  at (0.5, 1.1cm){};
+}
+\onslide<3->{
+\node (b) [draw, rectangle, thick, minimum height = .4cm, minimum width = 1.5cm, red] 
+  at (3.2, .7cm){};
+}
+\end{tikzpicture}
+\column{.2\paperwidth}
+各種想定下の熱による破壊の分析\\~\\
+\onslide<2->{
+RCCコーティングはなくなったが炭素素材は無傷という仮定で計算\\~\\
+}
+\onslide<3->{
+炭素素材の厚さ以下の穴しか空かないので大丈夫と結論
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{}
+p.7(タイル耐性?): 過去フライトとタイル実験データ。タイルの危険示唆あり。
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}\footnotesize
+\pause
+\item	
+「重量(体積*密度)*角度*速度が大きいと(``small variations in energy input'')損傷を甚大にする」
+\pause
+\item	「STS-107(コロンビア)の衝突角度はSTS-50(他のフライト)よりも深い」\\~\\
+\end{itemize}
+p.8(RCCコーティング耐性?): 氷を使った実験データ。RCCコーティングの厚さは.233インチなので、「角度15度(穴の深さ.23インチ)までの損傷なら堪えられる」。「断熱材は柔らかいので最大21度でも問題ない」。
+\begin{dinglist}{43}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\footnotesize\pause
+\item	実際のSOFI体積=1920 in$^{3}\cdots$ 「スーツケース・サイズ」
+\pause
+\item	想定体積=20*10*6=\Sexpr{20*10*6} in$^{3}$=実際の\Sexpr{round((20*10*6)/1920, 2)}倍\\~\\
+\end{dinglist}
+\pause
+p.10(RCCコーティング剥離): 熱による破壊の分析。損傷はRCCコーティングのみ、炭素素材に穴はないと仮定して、
+\[
+\mbox{炭素素材厚さ}=.193>.09=\mbox{再突入時にできる穴の深さ}
+\]
+なので熱に耐えうると結論\\~\\
+\pause
+実際よりも40\%も小さい体積を想定し、衝突角度もより高いと認識していたが、軽微な想定で計算し、「ダメージはRCCコーティングのみ」$\Rightarrow$「熱に耐えられる」
+\end{frame}
+
+\begin{frame}[fragile]{}
+\pause
+もしかすると...「判断が難しい」がメッセージだったかもしれない\\~\\
+\pause
+危険と判断されても、救援作戦は時間がかかり、他に方策がなかったかも?\\~\\
+\begin{columns}[T]
+\column{.575\paperwidth}
+\pause
+\includegraphics[width = .28\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/ColumbiaAttlantisRescue.jpg")}}\includegraphics[width = .28\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/ColumbiaEV1.jpg")}}
+\column{.4\paperwidth}
+\pause
+Atlantisによる救援...は同じリスクを冒すことになるので難しかったが、期限内に離陸は可能だった。修理は材料と可動範囲で難点があった。\\~\\
+他の宇宙船(ソユーズ、アリアン)やステーションも位値やソフトウェア開発で無理\citep[][Appendix D13]{CAIB2003}。
+\\~\\
+\end{columns}
+\pause
+でも、乗員は可能な限りの修理をしたかっただろうし、Atlantisの乗員はどう思っただろうか。
+\end{frame}
+
+\begin{frame}[fragile,label=ShouldHaveColumbia]{}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<3->{\hfil\includegraphics[height = 7.5cm]{\Sexpr{paste0(path, "/DataVisualisation/ColumbiaCorrectFigure.pdf")}}}\\
+\onslide<5->{\hfill\hyperlink{CAIBSummary1}{\beamergotobutton{意思決定過程}}}
+\column{.4\paperwidth}
+コロンビア事故: 事故前にすべきだったこと\\~\\
+\onslide<2->{\mpage{.4\paperwidth}{衝突場所を究明するためのあらゆる努力}}\\~\\
+\onslide<3->{\mpage{.4\paperwidth}{用意すべきだった図: 素材別パネル、実際の体積をもとにした角度 vs. 損傷(+損傷上限)\\~\\
+これを見ればさすがに危険と気づくのでは?\\~\\
+}}
+\onslide<4->{\mpage{.4\paperwidth}{過去のSOFI剥離事例を軽視せず、安全性への影響を慎重に検討すべきだった\\~\\}}
+\end{columns}
+
+\end{frame}
+

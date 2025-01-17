@@ -1,0 +1,266 @@
+---
+title: "RP13"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP11.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: 
+  match: auto
+  desc-position: left
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP13.pdf
+# quarto render RP13.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+gray {
+  color: #aeb6bf;
+}
+```
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+「限界労働生産力は、資本の大きさと関係ない」という点がよくわかりませんでした。事例として、工業、製品を機械だけで生産し、人だけで、製品を箱詰めする工程とありましたが１つの機械での生産性＝一人の人間の生産性という認識であっているのでしょうか。
+:::
+</div>
+
+* 労働者一人あたりの生産性、機械一台あたりの生産性を議論しているのではありません
+* 労働を微小時間だけ増やしたときの生産増分=労働の限界生産力、それが機械の多寡によってどう変わるかを議論しています
+   * 労働の(手作業箱詰め)工程が機械の生産工程と完全に分かれているとき、機械が何台あろうが、労働時間を増やしたときの箱詰量の増加分は変わりません
+   * このとき交差限界生産力はゼロです
+   * 木材の切り出し工程を機械、成型工程を僅かな工具を使う櫛職人、完成した櫛の箱詰め工程を機械でする生産過程も交差限界生産力はゼロです
+   * 例は少し現実離れしているかもしれません
+* こうした生産過程は珍しいので現実離れしているように思えますが、数学で示した符号条件を現実に投影するとこういう状況だ、ということを示しました
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+貧しい家庭が、第１期目に教育投資を行うことができないことが第２期の賃金に影響して、さらにその子供が第１期目に十分な教育投資を行うことのできなくなってしまうというような負の連鎖が続いてしまう場合があると思いました。
+:::
+</div>
+
+::::::::::{.columns}
+::::{.column width="75%"}
+* 貧困の罠、貧困の再生産といわれるものです
+* 学期初に説明しましたが、貧困の再生産は「貧しいから投資が少ない」という漠然とした原因でした
+* Baland and Robinsonモデルは「貧しいから信用制約下にあって投資が少ない」という明確な原因を示しています
+   * このため、**どのような介入が必要か明確**という長所があります
+   * より強調すべき: 最適化する個人を想定している&rarr;政府が学費融資をすると最適に人的資本投資に使う、という**自発的な反応を通じた厚生改善方法**を示すことができます
+   * 貧困の罠の議論には最適な反応をする個人は含まれていません
+::::
+
+::::{.column width="25%"}
+![](PovertyTrapChart.jpg)
+
+:::{.fragment}
+![](142_D_HK.jpg)
+:::
+::::
+::::::::::
+
+----
+
+
+
+#### References
+
+::: {#refs}
+:::
+

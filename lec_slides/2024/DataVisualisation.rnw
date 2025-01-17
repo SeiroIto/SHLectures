@@ -1,0 +1,1611 @@
+%  library(knitr); setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2022"); system("recycle c:/seiro/docs/external/seishin/lec_slides/2022/DataVisualisation/cache/"); knit("DataVisualisation.rnw", "DataVisualisation.tex"); system("platex DataVisualisation"); system("pbibtex DataVisualisation"); system("dvipdfmx DataVisualisation")
+
+\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+\definecolor{bondiaqua}{rgb}{0.0, 0.58, 0.71}
+\definecolor{bondibluelight}{rgb}{0.0, 0.3, 0.41}
+\definecolor{aqua}{rgb}{0.0, 1.0, 1.0}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{azure}{rgb}{0.0, 0.5, 1.0}
+%\setbeamercolor{background canvas}{bg=bondibluelight}
+\setbeamercolor{background canvas}{bg=darkdarkblue}
+\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{item}{fg=aqua}
+\setbeamercolor{title}{fg=white, bg=blue!80}
+\mode<handout>{\setbeamercolor{item}{fg=aqua!70!black}}
+\mode<handout>{\setbeamercolor{background canvas}{bg=white}}
+\mode<handout>{\setbeamercolor{normal text}{fg=black}}
+\mode<handout>{\setbeamercolor{title}{fg=black, fg=aqua!20}}
+\hypersetup{
+%linkcolor = lightblue, urlcolor = lightblue
+linkcolor = blue!50, urlcolor = green!80
+, citecolor = blue!50
+}
+\usepackage{pdfpages}
+\usepackage{centernot}
+\usetikzlibrary{automata}
+\usepackage{tkz-euclide}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\usepackage{ascmac}
+\usepackage{listings}
+\usepackage{framed}
+\lstset{language=R,
+    basicstyle=\scriptsize\ttfamily,
+    stringstyle=\color{darkgreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen}
+}
+\newcommand{\myul}[2][black]{\setulcolor{#1}\ul{#2}\setulcolor{black}}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\makebox[0pt][l]{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}\hspace{-2.5pt}}
+\newcommand{\ShowSexpr}[1]{\texttt{{\char`\\}Sexpr\{#1\}}}
+\newcommand{\Rect}[3]{
+  \begin{tikzpicture}
+  \draw[color = #3, very thick]  (0, 0) rectangle ++(#1, #2);
+  \end{tikzpicture}%
+}
+\newcommand{\SnakeLine}[3]{
+  \begin{tikzpicture}
+  \draw[decorate, decoration = {snake, amplitude = .25mm, segment length = 2mm}, color = #3, very thick]  
+    (0, 0) -- (#1, #2);
+  \end{tikzpicture}%
+}
+\newcommand{\LeftBrace}[5]{
+  \begin{tikzpicture}
+  \draw [decorate, decoration = {brace, amplitude = 10pt}, 
+    xshift = -4pt, yshift = 0pt, very thick, color = #5]
+    (#1, #1) -- (#1, #2) node [color = #5, midway, xshift = #4] 
+    {#3};
+  \end{tikzpicture}%
+}
+\newcommand{\RightBrace}[5]{
+  \begin{tikzpicture}
+  \draw [decorate, decoration = {mirror, brace, amplitude = 10pt}, 
+    xshift = 4pt, yshift = 0pt, very thick, color = #5]
+    (#1, #1) -- (#1, #2) node [color = #5, midway, xshift = #4] 
+    {#3};
+  \end{tikzpicture}%
+}
+
+
+
+\begin{document}
+\setlength{\baselineskip}{12pt}
+
+
+<<option setting 1, cache = F, child='c:/migrate/R/knitrPreamble/knitr_initial_option_setting_chunk.rnw'>>=
+<<option setting 2, cache = F, warning = F>>=
+opts_knit$set(base.dir = 'c:/seiro/docs/external/seishin/lec_slides/2022/')
+dir.create(pathToHere <- paste0(path, "/DataVisualisation/"))
+opts_chunk$set(fig.path='DataVisualisation/figure/', cache.path='DataVisualisation/cache/', echo = F, results = 'markup')
+@
+
+\title[4]{\large データ視覚化}
+\author[Ito]{伊藤成朗}
+\institute[IDE, Sacred Heart]{アジア経済研究所}
+\date[2022年秋]{2022年秋学期\\\vspace{1ex} 国際交流学科, 聖心女子大学}
+\logo{Sacred Heart, IDE}
+
+
+\frame{\titlepage}
+\setcounter{page}{1}
+
+%\setbeamercovered{transparent = 40}
+%\setbeamercolor{normal text}{fg=turquoiseblue2, bg=}
+%\setbeamercolor{alerted text}{fg=black, bg=}
+%\usebeamercolor{normal text}
+\setbeamercovered{invisible}
+
+
+
+\begin{frame}[fragile]{}
+参考文献\\
+
+\begin{columns}[T]
+\column{.45\paperwidth}
+\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/Tufte2001Cover.jpg")}}\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/Tufte1997Cover.jpg")}}\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/Tufte2006Cover.jpg")}}\\[2ex]
+\column{.5\paperwidth}
+Edward Tufte [独創的、読み物的、チャートジャンクの指摘、多彩な例]\\
+\end{columns}
+
+\vspace{1ex}
+\begin{columns}[T]
+\column{.45\paperwidth}
+\hfil\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/Cleveland1985Cover.jpg")}}\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/Cleveland1993Cover.jpg")}}\\[2ex]
+\column{.5\paperwidth}
+William Cleveland [学術的、視認性]
+\end{columns}
+
+\vspace{1ex}
+\begin{columns}[T]
+\column{.45\paperwidth}
+\hfil\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/WilkeBookCover.png")}}\\[2ex]
+\column{.5\paperwidth}
+Claus O. Wilke [分類的、教科書的、コード{\footnotesize \url{https://github.com/clauswilke/dataviz}}]\\
+無料閲覧{\footnotesize\url{https://clauswilke.com/dataviz/}}
+\end{columns}
+
+\vspace{1ex}
+\begin{columns}[T]
+\column{.45\paperwidth}
+\hfil\includegraphics[height = 2cm]{\Sexpr{paste0(path, "/DataVisualisation/HealyBookCover.jpg")}}\\
+\column{.5\paperwidth}
+Kieran Healy [マニュアル的、ggplot2, dplyr多用、\href{https://github.com/kjhealy/socviz/blob/master/inst/resources/dataviz_course_notes.zip}{補助教材}あり]\\
+無料閲覧{\footnotesize\url{https://socviz.co/index.html}}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[c, label = CoverMotivation]{}
+\begin{tikzpicture}[overlay, remember picture]
+\node[anchor=center] at (current page.center) {
+\begin{beamercolorbox}[center, ht=3ex, dp = 1.5ex]{title}
+{\Large 視覚化の動機}
+\end{beamercolorbox}};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[t, label=MotivationSummary]{視覚化の動機(要約)}
+データをそのまま見ていても何が何やら分からない。\\~\\
+\pause
+データから傾向(変数間の関係、メッセージ)を見出すのが最初。\\~\\
+\pause
+伝えたい傾向がもっとも良く伝わるように視覚化の方法を選ぶ。\\~\\
+\pause
+受取手が何度も視線を動かしたり、計算をしなくてはいけない視覚化は避ける。思考させなければ傾向はより伝わる。\\~\\
+\pause
+伝えたい内容にこだわって視覚化の方法を歪めてはいけない。データ改ざんはもっての外。
+\end{frame}
+
+\begin{frame}[fragile]{}
+NASAスペースシャトル・チャレンジャー打ち上げ分解事故(1986年)\\
+
+\begin{columns}[T]
+\column{.3\paperwidth}
+\hfil\includegraphics[height = 4cm]{\Sexpr{paste0(path, "/DataVisualisation/ChallengerExplosion.jpg")}}\\
+\column{.65\paperwidth}
+\pause
+データ視覚化が効果的だったら、惨事を防げたかもしれない事例\\~\\
+\pause
+もちろん、危険軽視のガバナンスの問題は残る...\\~\\
+\pause
+乗員7名全員死亡
+\end{columns}
+\begin{description}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\pause
+\item[原因]	: 燃料タンク接続部分が打ち上げ時加圧で開いたこと、接続部分のゴム製Oリングが打ち上げ当日の低温で硬直化して密閉しなかったこと
+\pause
+\item[事故顛末]	高温の燃料漏れによって燃焼破損した燃料タンクがロケット・ブースター接続部分を破壊、ブースターが回転して異常な方向への空圧を発生させてシャトル機体が分解、乗組員キャビンが空中に放出、高度20kmから海面に激突
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/ShuttleRockets2.jpg")}}
+\end{frame}
+\begin{frame}[fragile]{}
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/BoosterSegment.jpg")}}
+\end{frame}
+\begin{frame}[fragile]{}
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/ChallengerLiftOff.jpg")}}
+\end{frame}
+\begin{frame}[fragile]{}
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/ChallengerCrew.jpg")}}
+\end{frame}
+
+\begin{frame}[fragile]{}
+打ち上げ前夜、エンジンを製作したMorton Thiokol社の技術者は天気予報の低温を理由に打ち上げに反対\\~\\
+\onslide<2->{
+MT社技術者が反対のために準備した資料(13枚): 
+}
+\begin{columns}[T]
+\column{.75\paperwidth}
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\onslide<3->{
+\item	最も大事な気温 vs. Oリング破損の関係提示: \textcolor{red}{無し}
+}
+\onslide<4->{
+\item	SRM15[気温11.6度]とSRM22[気温23.9度]でのOリング破損情報提示
+}
+\onslide<5->{
+\item	Oリング破損があった7件の破損状況の表\textcolor{darkgreen}{(気温情報なし)}
+}
+\onslide<6->{
+\item	試作段階エンジンテスト4件とSRM15とSRM22の気温一覧表(その他12件の打ち上げ情報なし、Oリング破損情報なし)
+}
+\end{itemize}
+\column{.2\paperwidth}
+\onslide<4->{
+SRM: MT社内で使用された打ち上げ番号
+}
+\end{columns}
+
+\vspace{2ex}
+\onslide<7->{
+「11.6度以上が打ち上げの条件」という結論
+}
+\vspace{3ex}
+\onslide<8->{
+主張は明快だが根拠が不明快
+}
+\end{frame}
+
+\begin{frame}[fragile]{}
+NASA幹部らは度重なる打ち上げ延期を気にしており、早期に打ち上げたいと考えていた\citep{Berkes2012}\\~\\
+\pause
+Manager of the Solid Rocket Booster project, George Hardy told Thiokol:
+\begin{quotation}
+I am appalled. I am appalled by your recommendation.
+\end{quotation}
+\pause
+Lawrence Mulloy, George C. Marshall Space Flight Center's Manager for the SRB project, said:
+\begin{quotation}
+My God, Thiokol, when do you want me to launch---next April?
+\end{quotation} 
+
+\vspace{4ex}
+\pause
+NASA幹部たちは打ち上げ延期に反対し、危険である証拠を要求\\~\\
+\pause
+最終的にMT社幹部も打ち上げに賛同\\~\\
+\pause
+お薦め: Netflixドキュメンタリー\textit{Challenger} (監督Daniel Junge, Steven Leckart), Episode 3, 00:18:00-00:27:00に技術者反対から打ち上げ決定までの詳細あり
+
+\end{frame}
+
+\begin{frame}[fragile]{}
+\begin{columns}[T]
+\column{.75\paperwidth}
+MT社技術者が用意すべきだった図\citep[][p.45]{Tufte2006}\\
+\includegraphics[width = 12cm]{\Sexpr{paste0(path, "/DataVisualisation/TufteCorrectedDisplayOfShuttle.png")}}\\
+\column{.2\paperwidth}
+損傷指数(damage index)は損傷の内容を考慮した総合損傷度合い、事故調査委員会資料で計算された\\~\\
+\end{columns}
+
+
+\vspace{3ex}
+\pause
+複数の損傷内容を1つの数字にまとめると、結果を見やすくする\\~\\
+%あとは原因(=気温)を結びつけるだけ\\~\\
+\pause
+気温$\Rightarrow$損傷の程度、という因果関係を見るという目的$\rightarrow$損傷無しの事例(右下部分)も載せる\\~\\
+\pause
+今回の打ち上げの参考にする$\rightarrow$今回の気温も含める
+\end{frame}
+
+\begin{frame}[fragile]{}
+\begin{columns}[T]
+\column{.5\paperwidth}
+事故調査委員会報告書(1986年)の図示\\
+\hfil\includegraphics[width = .5\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/ShuttleRockets1.png")}}
+\column{.4\paperwidth}\footnotesize
+悪い点\citep[][pp.47-48]{Tufte2006}\\~\\
+\pause
+\textcolor{azure}{凡例なし:} マークの意味が分からない\\~\\
+\pause
+\textcolor{azure}{データ・インク比率が小さい:}	data-ink ratio=インク量のうちデータに使われる比率、が多いほど単純明快な図になりやすい。装飾などのチャート・ジャンク(chart junk、データ以外のゴミ情報)を無くすべき。\\~\\
+\pause
+\textcolor{azure}{明快な関係提示なし:}	因果関係($p\Rightarrow q$)ならば$p, q$が際立って表示されるべき。因果関係に沿わない順序(気温と破損の因果関係で日付に順序としての意味はない)をやめて気温順に配列すべき。図で因果関係・相関関係が明快でない=分析者の理解も明快でない(=自分が分かっていないことを説明している)。
+\end{columns}
+
+\vspace{2ex}
+\pause
+{\footnotesize 正式に気温と破損の因果関係を示すならば、気温を変化させながら、ゴムが硬直化する(ために高温ガスを遮断できない)か観察する実験が必要}
+\end{frame}
+
+\begin{frame}[fragile]{}
+氷水とゴムを使った実験\\
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/IcedRubberExperiment.jpg")}}
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+事故調委員リチャード・ファインマンの結びの言葉\\
+
+\begin{quotation}
+技術を結実させるためには、広報よりも現実を優先させなければならない、自然は騙すことができないから。\\
+For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.
+\end{quotation}
+
+\pause
+\vspace{2ex}
+効果的にデータを視覚化できていれば、説得力を以て危険性を示すことができた\\~\\
+\pause
+解決策: 気温が高い時期まで打ち上げ延期\\~\\
+\pause
+打ち上げを決めた人たち: 自分が乗組員でも同じ判断をするか\\~\\
+
+\pause
+NASAの目標重視、安全性軽視は変わったのか
+\end{frame}
+
+
+
+
+<<columbia, child = "c:/seiro/docs/external/seishin/lec_slides/2022/DataVisualisation/Columbia.rnw">>=
+@
+\begin{frame}[fragile]{}
+チャレンジャー事故: 事故前にすべきだったこと\\~\\
+\begin{columns}[T]
+\column{.65\paperwidth}
+\onslide<1->{仮説は何かを考える}\\
+\[
+\begin{aligned}
+\onslide<2->{
+\mbox{低気温}&\Rightarrow}\onslide<3->{\mbox{ゴムの密閉性を喪失}}\\
+&\onslide<4->{\Rightarrow}\onslide<5->{\mbox{\mpage{5cm}{高温ガスがブースター接続部分から漏洩して引火、\\ タンク破損、シャトル分解}}}
+\end{aligned}
+\]
+\column{.3\paperwidth}
+\onslide<6->{仮説の前半[$\mbox{低気温}\Rightarrow\mbox{ゴムの密閉性を喪失}$]を示すだけで十分}\\~\\
+\end{columns}
+
+\vspace{2ex}
+\onslide<7->{
+\textcolor{red}{仮説の検証を目的にデータを視覚化する}}\\~\\
+\onslide<8->{
+\textcolor{red}{見ている人に暗算や思考実験を強いない直截な比較}}\\~\\
+\onslide<9->{
+実験で示すことが理想だが、「時間がない」ならば過去のデータを示す}\\~\\
+\onslide<10->{
+Tufteの散布図}\\~\\
+\onslide<11->{
+もちろん、因果関係ではないが、相関関係でも危険が示されれば延期するのに十分な判断材料}
+\end{frame}
+
+\begin{frame}[c, label=CoverVisualisationRules]{}
+\begin{tikzpicture}[overlay, remember picture]
+\node[anchor=center] at (current page.center) {
+\begin{beamercolorbox}[center, ht=3ex, dp = 1.5ex]{title}
+{\Large 比較内容 $\Rightarrow$ 視覚化の方法}
+\end{beamercolorbox}};
+\end{tikzpicture}
+\end{frame}
+
+
+
+<<palettes in Wilke, results = F, message = F, cache = F, echo = F, warning = F>>=
+library(colorspace)
+# palettes
+npal <- 5
+# earth-brown (Amounts)
+pal_earth_brown <- sequential_hcl(n = npal, h1 = 71, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+<<eval = F>>=
+# brown-green (Proportions)
+pal_brown_green <- sequential_hcl(n = npal, h1 = 86, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+# green-brown (Geospatial data)
+pal_green_brown <- sequential_hcl(n = npal, h1 = -265, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+# burgundy-red 
+pal_red_brown <- sequential_hcl(n = npal, h1 = 28, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+# brown-red (Uncertainty)
+pal_brown_red <- sequential_hcl(n = npal, h1 = 41, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+# ocean-blue (Distributions)
+pal_ocean_blue <- sequential_hcl(n = npal, h1 = 241, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+# steel-blue (x-y relationships)
+pal_steel_blue <- sequential_hcl(n = npal, h1 = 257, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+pal_steel_blue_inv <- sequential_hcl(n = npal, h1 = 257-180, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5)
+<<data in Wilke, echo = F, results = F, message = F, warning = F>>=
+# data sets
+library(dplyr)
+library(ggforce)
+set.seed(5142)
+n <- 15
+x <- rnorm(n)
+y <- .4*x + .6*rnorm(n)
+df_scatter_xy <- data.table(x, y)
+df_one_dist <- data.table(x = c(rnorm(1000, 1., 1.6), rnorm(300, 4, .4)))
+df_one_normal <- data.table(x = rnorm(20))
+df_fractions <- data.table(y = c(.3, .39, .48, .6, .25, .13, .22, .24, .45, .48, .3, .16),
+                 x = factor(rep(1:4, 3)),
+                 type = rep(c("A", "B", "C"), each = 4))
+set.seed(2474)
+n <- 8
+x <- rnorm(n)
+y <- .4*x + .6*rnorm(n)
+z <- .5*x + .3*rnorm(n)
+z <- (z - min(z) + 0.1)^2
+df_scatter_xyz <- data.table(x, y, z)
+df_props = data.table(
+  value = c(55, 30, 15),
+  group = c("A", "B", "C"))
+set.seed(5012)
+df_multi_amounts <- data.table(mutate(df_fractions,
+                           y = c(1.0, 1.1, 1.4, 1.2)[x]*y))
+df_multi_amounts[, type := factor(type)]
+n <- 70
+df_multi_dist <- data.table(y = c(rnorm(n, 1, .8), rnorm(n, 2, .7), rnorm(n, 0, .5)),
+                 type = rep(c("A", "B", "C"), each = n),
+                 number = rep(c(2, 1, 3), each = n))
+df_multi_props <- data.table(
+  var1 = rep(c("C", "B", "A"), 3),
+  var2 = rep(c("A", "B", "C"), each = 3),
+  count = c(4, 1, 2, 12, 9, 5, 4, 5, 4)
+) %>% group_by(var2) %>%
+  mutate(group_count = sum(count))
+df_multi_props2 <- data.table(
+  var1 = rep(c("B", "A"), 9),
+  var2 = rep(c("E", "E", "D", "D", "C", "C"), 3),
+  var3 = rep(c("H", "G", "F"), each = 6),
+  count = c(5, 8, 0, 0, 0, 0, 0, 3, 2, 7, 0, 0, 4, 0, 4, 2, 7, 4)
+)
+df_sets <- gather_set_data(df_multi_props2, 1:3)
+df_one_line <- data.table(
+  x = 1:5,
+  y = c(3.1, 3.3, 4.0, 3.8, 4.4)
+)
+set.seed(9681)
+n1 <- 1500/5
+n2 <- 800/5
+x1 <- rnorm(n1, 0, .7)
+y1 <- 2 * x1 + rnorm(n1, 0, .8)
+x2 <- rnorm(n2, 0, 0.4)
+y2 <- 1.5 * x2 + rnorm(n2, .5, .8)
+df_dense_scatter <- na.omit(
+  data.table(
+    x = scales::censor(c(x1, x2 + 2.2), c(-2, 4)),
+    y = scales::censor(c(y1, y2 + 1.5), c(-3.5, 4.5))
+  )
+)
+y1 <- 2 * x1 + rnorm(n1, 0, 1.6)
+y2 <- 1.5 * x2 + rnorm(n2, .5, 1.6)
+df_dense_scatter_sample <- na.omit(
+  data.table(
+    x = scales::censor(c(x1, x2 + 2.2), c(-2, 4)),
+    y = scales::censor(c(y1, y2 + 1.5), c(-3.5, 4.5))
+  )
+) %>% sample_n(50)
+df_connected_scatter <- data.table(
+  x = c(1.9, 1.5, 2.2, 3, 3.3, 2.7, 1.7, 1),
+  y = c(0.3, -1, -2.0, -0.9, .6, 1.8, 2, 0.7),
+  t = 1:8
+)
+df_paired <- data.table(
+  y = c(6, 5.3, 3.8, 2.8, 2,
+        4.3, 6.1, 5.1, 3.3, 2.4),
+  x = rep(c("A", "B"), each = 5),
+  group = rep(1:5, 2)
+)
+df_uncertain <- data.table(
+  type = c("A", "B", "C"),
+  x = c(1.5, 2.2, 3.4),
+  y = c(3.2, 5.1, 3.9),
+  dx = c(.25, .3, .35),
+  dy = c(.5, .4, .6)
+)
+Dprops2 = data.table(
+  value = c(60, 57, 50, 43, 40),
+  id = factor(c("A", "B", "C", "D", "E")))
+HRYears <-   c(
+  "令和3(2021)年", 
+  "令和2(2020)年", 
+  "令和元(2019)年",
+  "平成31(2019)年",
+  "平成30(2018)年"
+  )
+Dprops2[, Group := factor(HRYears, levels = rev(HRYears))]
+<<set themes, echo = F>>=
+ThemeTitleOnly <- theme(
+  aspect.ratio = 1,
+  legend.position = "none",
+  axis.title = element_text(size = 12),
+  axis.text.x = element_text(size = 8, hjust = .5, angle = 0),
+  axis.text.y = element_text(size = 8, hjust = 1)
+)
+<<barplot, echo = F, results = "hide", warning = F, message = F>>=
+palette <- pal_earth_brown
+library(ggplot2)
+p0 <- ggplot(Dprops2, aes(x = Group, y = value, width = .5)) + 
+  geom_col(
+    position="identity", color = palette[npal],
+    fill = palette[3], width = 0.8
+  ) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 60), expand = c(0, 0)) +
+  scale_fill_manual(values = palette[2:4]) +
+  labs(title = "Bar plot") + ThemeTitleOnly + theme(aspect.ratio = .5)
+p0f <- ggplot(Dprops2, aes(x = Group, y = value)) + 
+  geom_col(
+    position="identity", color = palette[npal],
+    fill = palette[3], width = 0.8
+  ) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_fill_manual(values = palette[2:4]) +
+  labs(title = "Bar plot") + ThemeTitleOnly + coord_flip()
+library(cowplot)
+g <- plot_grid(p0, p0f, nrow = 1, rel_widths = c(1.5, 1), scale = .9)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/Barplots.pdf")
+  , width=14*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(g)
+whatever <- dev.off()
+<<piechart, echo = F, results = "hide", warning = F, message = F>>=
+Dprops3 = copy(Dprops2)
+setorder(Dprops3, value)
+#Dprops3[, prop := (value/sum(value))*100]
+Dprops3[, position := cumsum(value) - 0.5*value]
+p0pie <- 
+ggplot(Dprops3, aes(x = "", y = value, fill = id)) + 
+  geom_bar(stat = "identity") + 
+  coord_polar(theta = "y", start=0, direction = -1) +
+  geom_text(aes(y = position, label = value), color = "white") +
+  labs(title = "Pie chart") + ThemeTitleOnly 
+# for an incomprehensible reason, pie chart plots counter clockwise, so I have to flip it with direction = -1
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/Piechart.pdf")
+  , width=6*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(p0pie)
+whatever <- dev.off()
+<<wrong barplot, echo = F, results = "hide", warning = F, message = F>>=
+Dprops3 = copy(Dprops2)
+p0w <- 
+ggplot(Dprops3, aes(x = id, y = value)) + 
+  geom_histogram(
+    stat = "identity",
+    color = palette[npal],
+    fill = palette[3]
+  ) +
+  scale_x_discrete() +
+   coord_cartesian(ylim=c(35, 60)) +
+  labs(title = "(Wrong) Truncated bar plot") + ThemeTitleOnly
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/WrongBarplots.pdf")
+  , width=6*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(p0w)
+whatever <- dev.off()
+<<correct barplot, echo = F, results = "hide", warning = F, message = F>>=
+p0c <- 
+ggplot(Dprops3, aes(x = id, y = value)) + 
+  geom_col(
+    stat = "identity",
+    color = palette[npal],
+    fill = palette[3]
+  ) +
+  scale_x_discrete() +
+  scale_y_continuous() +
+  scale_fill_manual(values = rep(palette[3], 3)) +
+  labs(title = "(Correct) Bar plot") + ThemeTitleOnly
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/CorrectBarplot.pdf")
+  , width=6*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(p0c)
+whatever <- dev.off()
+<<dotplot, echo = F, results = "hide", warning = F, message = F>>=
+library(scales)
+p0d <- ggplot(Dprops3, aes(x = rev(id), y = value)) + 
+  geom_segment(aes(x=id, xend=id, y=min(value)-2, yend=max(value)+2), 
+               colour = "gray", linetype="solid", size=0.1) +   # Draw gray lines
+  geom_point(col="tomato2", size=3) +
+  scale_x_discrete(expand = c(0, .8), name = "グループ") +
+  scale_y_continuous(expand = c(0, .2)) +
+  labs(
+    title="Dot plot", 
+    caption="注: 水準ではなく差を表現している。"
+  ) +  
+  coord_flip()  + theme_classic() + theme(
+    aspect.ratio = 1/5,
+    plot.caption = element_text(size = 8),
+    plot.margin = margin(t = 0,  # Top margin
+                             r = 0,  # Right margin
+                             b = 0,  # Bottom margin
+                             l = 0)) # Left margin
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/Dotplot.pdf")
+  , width=12*1.5/2.54, height=4*1.5/2.54, family = "Meiryo")
+print(p0d)
+whatever <- dev.off()
+<<dotplot2, echo = F, results = "hide", warning = F, message = F>>=
+library(scales)
+p0d2 <- p0d + theme(aspect.ratio = 1/2)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/Dotplot2.pdf")
+  , width=6*1.5/2.54, height=4*1.5/2.54, family = "Meiryo")
+print(p0d2)
+whatever <- dev.off()
+<<grouped bar plots me, echo = F, results = "hide">>=
+p3me <- ggplot(filter(df_multi_amounts, x!=4), 
+     aes(x=type, y=y, group = x, fill = type)) + 
+  geom_col(position="dodge", color = palette[npal], width = .7) +
+  scale_fill_manual(values = palette[2:4]) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, .7)) +
+  labs(title = "Grouped bar plot") + ThemeTitleOnly
+p4me <- p3me + coord_flip()
+g <- plot_grid(p3me, p4me, nrow = 1, scale = .9)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/GroupedBarplots.pdf")
+  , width=12*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(g)
+whatever <- dev.off()
+<<grouped bar plots Wilke, echo = F, results = "hide">>=
+p3 <- ggplot(filter(df_multi_amounts, x!=4), aes(x, y,
+                                   fill=factor(type, levels = c("A", "B", "C")))) + 
+  geom_col(position="dodge", color = palette[npal], width = .7) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, .7)) +
+  scale_fill_manual(values = palette[2:4]) +
+  labs(title = "Grouped bar plot") + ThemeTitleOnly
+p4 <- ggplot(filter(df_multi_amounts, x!=4), aes(x, y,
+                                   fill=factor(type, levels = c("B", "C", "A")))) + 
+  geom_col(position="dodge", color = palette[npal],
+           width = .7) +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, .7)) +
+  scale_fill_manual(values = rev(palette[2:4])) +
+  coord_flip() +
+  labs(title = "Grouped bar plot") + ThemeTitleOnly
+g <- plot_grid(p3, p4, nrow = 1, scale = .9)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/GroupedBarplotsWilke.pdf")
+  , width=12*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(g)
+whatever <- dev.off()
+<<point line plots for colour vision deficiency, echo = F, results = "hide">>=
+set.seed(20211119)
+dtPoints <- data.table(Group = factor(letters[1:3]), time = rep(1:10, each = 3), value = rpois(30, 10))
+CDcolours <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+CDcolours2 <- c("orange", "sky blue", "bluish green", "yellow", "blue", "vermilion", "reddish purple")
+
+library(viridis)
+pPv <- 
+ggplot(dtPoints, aes(x = time, y = value, fill = Group, shape = Group, group = Group)) + 
+  geom_point(aes(colour = Group)) +
+  geom_line(aes(colour = Group)) +
+  scale_x_continuous(breaks = 1:10, minor_breaks = NULL) +
+  scale_y_continuous() +
+  scale_colour_viridis(discrete = T) + # not fill, colour
+  scale_shape_manual(values = c(1:2, 0)) +
+  labs(title = "Grouped point line plot") + ThemeTitleOnly
+pPm <- 
+ggplot(dtPoints, aes(x = time, y = value, fill = Group, shape=Group, linetype = Group)) + 
+  geom_point(aes(colour = Group, fill = Group), size = 1.75) +
+  geom_line(aes(colour = Group), size = 1.0) +
+  scale_x_continuous(breaks = 1:10, minor_breaks = NULL) +
+  scale_y_continuous() +
+  scale_colour_manual(values = CDcolours[4:6]) +
+  scale_shape_manual(values = c(1:2, 0)) +
+  labs(title = "Grouped point line plot") + ThemeTitleOnly
+g <- plot_grid(pPv, pPm, nrow = 1, scale = .9)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/ColourDeficiencyLinePoint.pdf")
+  , width=12*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(g)
+whatever <- dev.off()
+<<heatmap of female life expectancy, echo = F, results = "hide">>=
+library(viridis)
+library(data.table)
+fle <- fread(paste0(path, "/DataVisualisation/WB_FemaleLifeExpectancy.csv"), skip = 1, header = T)
+setnames(fle, grepout("^19|^20", colnames(fle)), 
+  paste0("value.", grepout("^19|^20", colnames(fle))))
+setnames(fle, grepout(" ", colnames(fle)), gsub(" ", "", grepout(" ", colnames(fle))))
+fle[, c("V66", "value.2020") := NULL]
+fleL <- reshape(fle, direction = "long", idvar = c("CountryName", "CountryCode", "IndicatorName", "IndicatorCode"),
+  varying = grepout("^va", colnames(fle)))
+setnames(fleL, "time", "year")
+NonCountryNames <- "stern|IDA|IBRD|UN|income|indeb|Fragi|Euro|Asia|World|Sub-Sa|Latin|Class|demogr|OECD|Middle E|small"
+fleL <- fleL[!grepl(NonCountryNames, CountryName), ]
+fleL[, OrderingVal := 1/value[year == 2019], by = CountryName]
+pheat <- 
+ggplot(subset(fleL, !is.na(OrderingVal)), 
+    aes(x = year, y = reorder(CountryName, -OrderingVal), fill = value)) + 
+  geom_tile(color = "white", size = 0.25) +
+  scale_fill_viridis_c(
+    option = "D", begin = 0.05, end = 0.98,
+    name = "Female life expectancy (years)",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      label.position = "bottom",
+      title.position = "top",
+      ticks = FALSE,
+      barwidth = grid::unit(3.5, "cm"),
+      barheight = grid::unit(0.2, "cm")
+    )
+  ) +
+  scale_x_continuous(expand = c(0, 0), name = NULL) +
+  scale_y_discrete(name = NULL, position = "right", 
+    guide = guide_axis(n.dodge=3)) +
+  labs(title = "Heatmap") + 
+  theme(
+    axis.line = element_blank(),
+    axis.text.y = element_text(size = 6, hjust = 0),
+    axis.ticks = element_blank(),
+    axis.ticks.length = grid::unit(1, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.title.align = 0.5,
+    legend.title = element_text(size = 12*12/14)
+  )
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/HeatmapFemaleLifeExpectancy.pdf")
+  , width=12*1.5/2.54, height=18*1.5/2.54, family = "Meiryo")
+print(pheat)
+whatever <- dev.off()
+<<heatmap of female life expectancy selected, echo = F, results = "hide">>=
+library(viridis)
+library(data.table)
+# select 1 in 5 countries
+fleL2 <- fleL[!is.na(OrderingVal), ]
+fleL2 <- fleL2[OrderingVal %in% unique(OrderingVal)[seq(2, 200, 7)], ]
+pheat2 <- 
+ggplot(fleL2, 
+    aes(x = year, y = reorder(CountryName, -OrderingVal), fill = value)) + 
+  geom_tile(color = "white", size = 0.25) +
+  scale_fill_viridis_c(
+    option = "D", begin = 0.05, end = 0.98,
+    name = "Female life expectancy (years)",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      label.position = "bottom",
+      title.position = "top",
+      ticks = FALSE,
+      barwidth = grid::unit(3.5, "cm"),
+      barheight = grid::unit(0.2, "cm")
+    )
+  ) +
+  scale_x_continuous(expand = c(0, 0), name = NULL) +
+  scale_y_discrete(name = NULL, position = "right") +
+  labs(title = "Heatmap") + 
+  theme(
+    axis.line = element_blank(),
+    axis.text.y = element_text(size = 10, hjust = 0),
+    axis.ticks = element_blank(),
+    axis.ticks.length = grid::unit(1, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.title.align = 0.5,
+    legend.title = element_text(size = 12*12/14)
+  )
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/HeatmapFemaleLifeExpectancySelected.pdf")
+  , width=12*1.5/2.54, height=15*1.5/2.54, family = "Meiryo")
+print(pheat2)
+whatever <- dev.off()
+<<heatmap of excess female life expectancy, echo = F, results = "hide">>=
+library(viridis)
+library(data.table)
+mle <- fread(paste0(path, "/DataVisualisation/WB_MaleLifeExpectancy.csv"), skip = 1, header = T)
+setnames(mle, grepout("^19|^20", colnames(mle)), 
+  paste0("value.", grepout("^19|^20", colnames(mle))))
+setnames(mle, grepout(" ", colnames(mle)), gsub(" ", "", grepout(" ", colnames(mle))))
+mle[, c("V66", "value.2020") := NULL]
+mleL <- reshape(mle, direction = "long", idvar = c("CountryName", "CountryCode", "IndicatorName", "IndicatorCode"),
+  varying = grepout("^va", colnames(mle)))
+setnames(mleL, "time", "year")
+NonCountryNames <- "stern|IDA|IBRD|UN|income|indeb|Fragi|Euro|Asia|World|Sub-Sa|Latin|Class|demogr|OECD|Middle E|[sS]mall"
+mleL <- mleL[!grepl(NonCountryNames, CountryName), ]
+mleL[, c("CountryCode", "IndicatorName", "IndicatorCode") := NULL]
+setnames(fleL, "value", "value.f")
+setnames(mleL, "value", "value.m")
+setkey(fleL, CountryName, year); setkey(mleL, CountryName, year)
+fmleL <- mleL[fleL]
+fmleL[, FMvalue := value.f - value.m]
+fmleL2 <- fmleL[!(CountryName %in% CountryName[year > 2000 & value.m<50]), ]
+fmleL2[, OrderingVal := 1/FMvalue[year == 2019], by = CountryName]
+# select 1 in 5 countries
+fmleL2 <- fmleL2[!is.na(OrderingVal), ]
+fmleL2 <- fmleL2[OrderingVal %in% unique(OrderingVal)[seq(2, 200, 7)], ]
+pheat3 <- ggplot(subset(fmleL2, !is.na(OrderingVal)), 
+    aes(x = year, y = reorder(CountryName, -OrderingVal), fill = FMvalue)) + 
+  geom_tile(color = "white", size = 0.25) +
+  scale_fill_viridis_c(
+    option = "D", begin = 0.05, end = 0.98,
+    name = "Excess female life expectancy (years)",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      label.position = "bottom",
+      title.position = "top",
+      ticks = FALSE,
+      barwidth = grid::unit(3.5, "cm"),
+      barheight = grid::unit(0.2, "cm")
+    )
+  ) +
+  scale_x_continuous(expand = c(0, 0), name = NULL) +
+  scale_y_discrete(name = NULL, position = "right") +
+  labs(title = "Heatmap") + 
+  theme(
+    axis.line = element_blank(),
+    axis.text.y = element_text(size = 10, hjust = 0),
+    axis.ticks = element_blank(),
+    axis.ticks.length = grid::unit(1, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.title.align = 0.5,
+    legend.title = element_text(size = 12*12/14)
+  )
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/HeatmapExcessFemaleLifeExpectancyRandomlySelected.pdf")
+  , width=12*1.5/2.54, height=15*1.5/2.54, family = "Meiryo")
+print(pheat3)
+whatever <- dev.off()
+<<heatmap of excess female life expectancy of fle countries, echo = F, results = "hide">>=
+# excess fle of countries selected in "female life expectancy selected"
+fmleL3 <- fmleL[CountryName %in% fleL2[, CountryName], ]
+setnames(fmleL3, "OrderingVal", "OderingVal0")
+fleL3 <- unique(fleL2[, .(CountryName, OrderingVal)])
+setkey(fmleL3, CountryName)
+setkey(fleL3, CountryName)
+fmleL3 <- fleL3[fmleL3]
+# select 1 in 5 countries
+fmleL3 <- fmleL3[!is.na(OrderingVal), ]
+pheat4 <- 
+ggplot(fmleL3, aes(x = year, y = reorder(CountryName, -OrderingVal), fill = FMvalue)) + 
+  geom_tile(color = "white", size = 0.25) +
+  scale_fill_viridis_c(
+    option = "D", begin = 0.05, end = 0.98,
+    name = "Excess female life expectancy (years)",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      label.position = "bottom",
+      title.position = "top",
+      ticks = FALSE,
+      barwidth = grid::unit(3.5, "cm"),
+      barheight = grid::unit(0.2, "cm")
+    )
+  ) +
+  scale_x_continuous(expand = c(0, 0), name = NULL) +
+  scale_y_discrete(name = NULL, position = "right") +
+  labs(title = "Heatmap") + 
+  theme(
+    axis.line = element_blank(),
+    axis.text.x = element_text(size = 10, hjust = 0),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    axis.ticks.length = grid::unit(1, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.title.align = 0.5,
+    legend.title = element_text(size = 12*12/14)
+  )
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/HeatmapExcessFemaleLifeExpectancySelected.pdf")
+  , width=9.5*1.5/2.54, height=15*1.5/2.54, family = "Meiryo")
+print(pheat4)
+whatever <- dev.off()
+<<echo = F, eval = F, results = "hide">>=
+p1 <- ggplot(df_props, aes(x = group, y = value)) + 
+  geom_col(
+    position="identity", color = palette[npal],
+    fill = palette[3], width = 0.8
+  ) +
+  scale_y_continuous(limits = c(0, 66), expand = c(0, 0)) +
+  scale_fill_manual(values = palette[2:4]) +
+  labs(title = "Bars") + ThemeTitleOnly
+p2 <- ggplot(df_props, aes(x = fct_rev(group), y = value)) + 
+  geom_col(position="identity", color = palette[npal], fill = palette[3],
+           width = .8) +
+  scale_y_continuous(limits = c(0, 66), expand = c(0, 0)) +
+  scale_fill_manual(values = palette[2:4]) +
+  coord_flip() +
+  labs(title = "Bars") + ThemeTitleOnly
+p3 <- ggplot(filter(df_multi_amounts, x!=4), aes(x, y,
+                                   fill=factor(type, levels = c("A", "C", "B")))) + 
+  geom_col(position="dodge", color = palette[npal], width = .7) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, .7)) +
+  scale_fill_manual(values = palette[2:4]) +
+  labs(title = "Grouped bar plot") + ThemeTitleOnly
+p4 <- ggplot(filter(df_multi_amounts, x!=4), aes(x, y,
+                                   fill=factor(type, levels = c("B", "C", "A")))) + 
+  geom_col(position="dodge", color = palette[npal],
+           width = .7) +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, .7)) +
+  scale_fill_manual(values = rev(palette[2:4])) +
+  coord_flip() +
+  labs(title = "Grouped bar plot") + ThemeTitleOnly
+p5 <- ggplot(df_multi_amounts, aes(x, y, fill=factor(type, levels = c("B", "C", "A")))) + 
+  geom_col(position="stack", color = palette[npal]) +
+  scale_y_continuous(limits = c(0, 1.55),
+                     expand = c(0, 0)) +
+  scale_fill_manual(values = rev(palette[2:4])) +
+  labs(title = "Stacked bar plot") + ThemeTitleOnly
+p6 <- p5 + coord_flip()
+p7 <- ggplot(df_props, aes(x = fct_rev(group), y = value)) + 
+  geom_point(color = palette[2], size = 2) +
+  scale_y_continuous(limits = c(0, 66), expand = c(0, 0)) +
+  coord_flip() + 
+  labs(title = "Dots") + ThemeTitleOnly
+p8 <- ggplot(filter(df_multi_amounts, x != 4), aes(x, y = factor(type, levels = c("A", "C", "B")), fill = y)) + 
+  geom_tile(color = palette[5], size = 1.5) +
+  scale_fill_continuous_sequential(
+    h1 = 71, c1 = 80, c2 = 10, l1 = 18, l2 = 97, p1 = 1.5,
+    begin = 0.2, end = 0.75,
+    rev = FALSE
+  ) +
+  labs(
+    title = "Heatmap", 
+    y = "y"
+  ) + ThemeTitleOnly
+
+library(cowplot)
+g <- plot_grid(p3, p4, p5, p6, p8, nrow = 1, scale = .9)
+cairo_pdf(
+  paste0(path, "/DataVisualisation/Wilke/DirectoryOfVisualization1.pdf")
+  , width=28*1.5/2.54, height=6*1.5/2.54, family = "Meiryo")
+print(g)
+whatever <- dev.off()
+@
+
+\begin{frame}[t, label=Barplots]{}
+\begin{columns}[T]
+\column{.675\paperwidth}
+\onslide<1->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/Barplots.pdf")}}\\}
+\onslide<2->{棒グラフ: \textcolor{azure}{絶対量}を長さで示す\\~\\}
+\onslide<3->{だから、\textcolor{red}{0から表示する。}}\onslide<4->{$\approx$で軸を削ってはいけない。長さを削っては駄目だから。}\\~\\
+\onslide<9->{差が少ない比較なので、(横)棒だと塗りつぶしの棒中心に視線が行く。ドット図の方が右端に視線が行きやすい。}\\~\\
+\column{.3\paperwidth}
+\onslide<5->{縦棒はグループのラベルが長いと隙間を要するのでスペースを使うし、離れているために比較が難しい。左図:右図を1.5:1にしないと左図のラベルが重なり読めなくなる。\\~\\}
+\onslide<6->{横棒にすると解決する。\\~\\}
+\onslide<7->{でも、時間変化は縦棒の方が把握しやすい。\\~\\}
+\onslide<8->{ラベルを小さくする、縦書きにする、略記する方が良いかも。}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=PieCharts]{}
+\begin{columns}[T]
+\column{.4\paperwidth}
+\onslide<1->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/Piechart.pdf")}}\\~\\}
+\onslide<5->{\textcolor{red}{円グラフを使ってはいけない。}\\~\\}
+\column{.55\paperwidth}
+\onslide<2->{円グラフpie chart: 絶対量を角度で表す。\\~\\}
+\onslide<3->{人間の目は角度を比べるのは不得意。比較には不適。}\\~\\
+\onslide<4->{3次元円グラフ: さらに不適。斜め上から見ると角度も分からない。}\\~\\
+\onslide<6->{絶対量比較だったら棒グラフ、差比較だったら点グラフ、変化比較だったら折れ線グラフを使えばいい。\\~\\}
+\onslide<7->{\href{https://drive.google.com/file/d/16adOOxaj96wOWybGBvVQ0x8fKEapDA8t/view?usp=share_link}{専門家の判定}}
+\end{columns}
+\hfill\hyperlink{WordCloud}{\beamergotobutton{word cloud}}
+\end{frame}
+
+
+\begin{frame}[t, label=WrongBarplots]{}
+\begin{columns}[T]
+\column{.575\paperwidth}
+\onslide<1->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WrongBarplots.pdf")}}}\onslide<4->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/CorrectBarplot.pdf")}}\\~\\}
+\onslide<2->{グラフの下部分をカットして上部分を引き延ばす。\\~\\}
+\onslide<3->{差が強調される。}\\~\\
+\column{.4\paperwidth}
+\onslide<5->{\textcolor{red}{差を不当に強調}してデータから得られるメッセージを変えようとしている。\\~\\}
+\onslide<6->{下部分をカットしたいなら折れ線グラフや点グラフを使えばいい。\\~\\}
+\onslide<7->{差を不当に強調したい理由、データから何を見せたいかを考えてみるべき。\\~\\}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=Dotplots]{}
+\begin{columns}[T]
+\column{.575\paperwidth}
+\onslide<1->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/Dotplot.pdf")}}\\}\onslide<7->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/Dotplot2.pdf")}}\\~\\}
+\onslide<2->{ドット図: グループ間の差を比較。\\~\\}
+\onslide<3->{グラフの下部分をカットして上部分を引き延ばす。}\\~\\
+\column{.4\paperwidth}
+\onslide<5->{差を不当に強調していない。点グラフは各点の位置と相対距離を伝える。\\~\\}
+\onslide<6->{各点を直線で結ばない。グループAはグループBに変化しないので、各点をつながない方が良い。\\~\\}
+\onslide<8->{グループ数に比して差が小さい方が傾向を把握しやすい。数(横軸)の方向に間隔が空きすぎないように図の縮尺を調整する。}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[t, label=WilkeHeatmap]{}
+\begin{columns}[T]
+\column{.675\paperwidth}
+\onslide<1->{ヒートマップ: グループ間の差を色彩で比較。\\}
+\onslide<1->{\includegraphics[scale = .2]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WilkeHeatmapFig615.jpg")}}}\\
+出所: \citet[][Figure 6.15]{Wilke2019}
+\column{.3\paperwidth}
+\onslide<2->{上下限への距離を色で表現\\~\\}
+\onslide<3->{色彩変化で全体的傾向を読む\\~\\}
+\onslide<4->{軸の順番は色の濃淡が連続的に出るように選ぶと意図が伝わりやすい\\~\\}
+\onslide<5->{インターネット接続率20\%を超えた年順に縦軸を並べる}\\~\\
+\onslide<6->{傾向を把握してから並べ方を決める\\~\\}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=HeatmapFemaleMortality]{}
+\begin{columns}[T]
+\column{.4\paperwidth}
+\onslide<1->{\includegraphics[scale = .3]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/HeatmapFemaleLifeExpectancy.pdf")}}\\}
+\column{.55\paperwidth}
+\onslide<2->{国数が多過ぎ。}\\~\\
+\onslide<3->{グループ(cross sectional units)数が多いと、まとめる、標本抽出するなどしない限り、視覚化に向かないこともある。統計学を使ってデータ削減すべき。}\\~\\
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=HeatmapSelectedExcessFemaleMortality]{}
+\begin{columns}[T]
+\column{.7\paperwidth}
+\begin{tikzpicture}[
+  inner sep=0pt, remember picture]
+\onslide<1->{\node at (0, 0) {
+\includegraphics[scale = .35]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/HeatmapFemaleLifeExpectancySelected.pdf")}}};}
+\coordinate (kuwait) at (0, 0);
+\onslide<6->{\node (ku) [rectangle, thick, anchor = south west, minimum height = .2cm, minimum width = .5cm, fill = red, draw=red, fill opacity=.1] at ($(kuwait) + (1.575, -.875)$){};}
+\onslide<6->{\node (ku) [rectangle, thick, anchor = south west, minimum height = .2cm, minimum width = .6cm, fill = blue, draw=blue, fill opacity=.1] at ($(ku) + (-.25, .375)$){};}
+\end{tikzpicture}\onslide<2->{\includegraphics[scale = .35]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/HeatmapExcessFemaleLifeExpectancySelected.pdf")}}}\\
+\column{.275\paperwidth}
+\onslide<3->{Excess female life expectancy: 女性余命-男性余命\\~\\}
+\onslide<4->{2019年のFLE値の大きい順から5カ国目ごとにサンプル。\\~\\}
+\onslide<5->{FLEとEFLEの時系列を組み合わせることで見えることもある。\\~\\}
+\begin{tikzpicture}[scale = .5, inner sep=0pt, remember picture]
+\onslide<6->{\node (vk) at (0, 0) {\mpage{.275\paperwidth}{FLEは似ているが、クウェイトはEFLEが低い。クウェイトは所得が高いのにFLEが低い。}};}
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=ColourVisionImpairedLinePointPlot]{}
+色覚異常があっても判読できる色彩
+\begin{columns}[T]
+\column{.575\paperwidth}
+\onslide<1->{\includegraphics[scale = .5]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/ColourDeficiencyLinePoint.pdf")}}\\}
+\onslide<2->{左は\textsf{viridis}ライブラリ、右は色覚異常に対応するOkabe-Itoパレットから指定}
+
+\column{.4\paperwidth}
+\onslide<3->{Approximately 8\% of males and 0.5\% of females suffer from some sort of color-vision deficiency, and deuteranomaly is the most common form whereas tritanomaly is relatively rare \citep[][Section 19.3]{Wilke2019}.\\~\\}
+\onslide<4->{Deuteranomaly: Red–green color-vision deficiency.\\}
+\onslide<5->{Tritanomaly: Blue–yellow color-vision deficiency. .01\%.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=GroupedBarplots]{}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<1->{\includegraphics[scale = .45]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/GroupedBarplotsWilke.pdf")}}}
+\column{.4\paperwidth}
+\onslide<2->{各時点で絶対量グループ間比較}
+\end{columns}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<3->{\includegraphics[scale = .45]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/GroupedBarplots.pdf")}}}
+\column{.4\paperwidth}
+\onslide<4->{全体的傾向のグループ間比較\\~\\}
+\onslide<5->{色を変える必要は無い(比較のために色彩の違いを残した)\\~\\}
+\onslide<6->{こちらの方が見る人に思考を要求しない}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=StackedBarplots1]{}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<1->{\includegraphics[scale = .55]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/CasesByGender.pdf")}}}
+\column{.4\paperwidth}
+\onslide<2->{Stacked bar plot: 全体の高さとグループ内訳を示す\\~\\}
+\onslide<3->{ここまでデータが長く変動が激しいと内訳を比較するのは難しい\\~\\}
+\onslide<4->{最下層に来るデータによって印象が変わる}
+\end{columns}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<5->{\includegraphics[scale = .55]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/CasesByGenderRowPanel.pdf")}}}
+\column{.4\paperwidth}
+\onslide<6->{行ごとの縮尺共通: グループごとの高さを示す\\~\\}
+\onslide<7->{色を変える必要は無い\\~\\}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=StackedBarplots2]{}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<1->{\includegraphics[scale = .55]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/CasesByAgeGroup.pdf")}}}
+\column{.4\paperwidth}
+\onslide<2->{全体の高さとグループ内訳を示す\\~\\}
+\onslide<3->{ここまでデータが長く変動が激しいと内訳を比較するのは難しい\\~\\}
+\onslide<4->{最下層に来るデータによって印象が変わる}
+\end{columns}
+\begin{columns}[T]
+\column{.55\paperwidth}
+\onslide<5->{\includegraphics[scale = .55]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/CasesByAgeGroupRowPanel.pdf")}}}
+\column{.4\paperwidth}
+\onslide<6->{行ごとに縮尺変化: グループごとの趨勢を示す\\~\\}
+\onslide<7->{色を変える必要は無い\\~\\}
+\onslide<8->{底が揃っているとピークを見つけやすい\\~\\}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t, label=WilkeScatter]{}
+\onslide<1->{\includegraphics[scale = .15]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WilkeScatterFig1211.jpg")}}}
+\onslide<2->{\includegraphics[scale = .15]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WilkeScatterFig1212.jpg")}}}
+\onslide<3->{\includegraphics[scale = .15]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WilkeScatterFig1213.jpg")}}}\\
+出所: \citet[][Figure 12.11-12.13]{Wilke2019}\\~\\
+\onslide<4->{散布図scatter plot: 全体的な分布を示す、45度線で増減を示す\\~\\}
+\onslide<5->{Slopegraph: 変化の程度(傾斜)を示す、2時点以上も可}
+\end{frame}
+
+\begin{frame}[t, label=WilkeChoropleth]{}
+\begin{columns}[T]
+\column{.675\paperwidth}
+\onslide<1->{\includegraphics[scale = .25]{\Sexpr{paste0(path, "/DataVisualisation/Wilke/WilkeChoroplethFig1513.jpg")}}}\\
+出所: \citet[][Figure 15.13]{Wilke2019}
+\column{.3\paperwidth}
+\onslide<2->{Choropleth: 地図上に分布を示す\\~\\}
+\onslide<3->{境界線で変化することを強調\\~\\}
+\onslide<4->{色彩を単調に変化させるべき\\~\\}
+\onslide<5->{境界区分が粗すぎると傾向を誤って示す可能性がある\\~\\}
+\onslide<6->{見る人が地図を熟知していると前提}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[c]{}
+\begin{tikzpicture}[overlay, remember picture]
+\node[anchor=center] at (current page.center) {
+\begin{beamercolorbox}[center, ht=3ex, dp = 1.5ex]{title}
+{\Large 視覚化の実例}
+\end{beamercolorbox}};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{}
+ジョン・スノウのロンドン・コレラ患者地図(1855年)\\
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/SnowPumpMap.jpg")}}\\
+\pause
+感染経路の仮説: 汚染水源$\Rightarrow$コレラ発症
+\end{frame}
+
+\begin{frame}{}
+スノウの視覚化の長所\citep{Tufte1997}
+\begin{enumerate}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\pause
+\item	仮説検証に効果的な視覚化: 死亡記録(名前、日付、状況)を地図に投影
+\pause
+\item	数値で比較
+\pause
+\item	反証試験(falsification test): 統御群=工場とビール醸造所で患者数は少ないはず
+\pause
+\item	付録の文章でデータ間違いの可能性について解説
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{}
+ウィリアム・クリーブランドの黒点\citep{Cleveland1994}\\
+\begin{columns}[T]
+\column{.4\paperwidth}
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/ClevelandSunspots.jpg")}}
+\column{.55\paperwidth}
+判読しやすいアスペクト比の選び方: 一部の傾きが45度になるように縦横の尺を選ぶ\\~\\
+クリーブランドの視覚化によって分かること\citep{Tufte1997}
+\begin{enumerate}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\pause
+\item	増減の非対称性: 増えるのは急だが減るのは緩慢
+\pause
+\item	非対称性はピークが高いほど強調されること
+\end{enumerate}
+
+\vspace{2ex}
+\pause
+一部の傾きを45度にすることで、急か緩慢か見やすくなる\\~\\
+\pause
+45度は目測でも正確に判断できるらしい...
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=StephCurry, fragile]{}
+\onslide<1->{ベンジャミン・モリスによるステフ・カリーのシュート\citep{Morris2015}\\}
+\onslide<3->{\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/Curry.jpg")}}}\onslide<2->{\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/Steph.jpg")}}\\
+\vspace{-1ex}\hfill\includegraphics[height = .25cm]{\Sexpr{paste0(path, "/DataVisualisation/by-sa.eps")}}\href{https://commons.wikimedia.org/wiki/File:Stephen_Curry_(24180454343).jpg}{\tiny Keith Allison}\\}
+\onslide<4->{両軸は数値、時間の変化を線でつないで表現}\\
+\onslide<5->{年を追うごとに、シュート数が増えながら成功率も増えている}
+\end{frame}
+
+
+\begin{frame}[t]{}
+\begin{columns}[T]
+\column{.5\paperwidth}
+\includegraphics[height = 8cm]{\Sexpr{paste0(path, "/DataVisualisation/CongressPhone.jpg")}}
+\column{.4\paperwidth}
+\pause
+線グラフ=新聞記事700単語分の情報
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+チェック項目と推奨する原則\citep{Tufte2001}
+\begin{description}
+\vspace{1.0ex}\setlength{\itemsep}{1.5ex}\setlength{\baselineskip}{12pt}
+\pause
+\item[嘘比率lie factor]	図での大きさ/数値の大きさ。数値を図で誇張・矮小化している比率。1でなければならない。
+\pause
+\item[データ・インク比率data-ink ratio]	全ての線や模様のなかでデータの占める比率。合理的範囲で高めるべし。
+\pause
+\item[非データ・インク比率nondata-ink ratio]	全ての線や模様のなかでデータ以外の占める比率。1-データ・インク比率。チャート・ジャンク。合理的範囲で減らすべし。
+\pause
+\item[冗長なデータ・インクredundant data-ink ratio] 全ての線や模様で同じ情報が重複している比率。減らすべし。
+\pause
+\item[デザイン変更design variation]	一部だけデザインを変えて誇張・矮小化すること。やってはいけない。
+\pause
+\item[図の次元graphical dimensions]	面積(2)、体積(3)。データの次元に合わせるべし。
+\pause
+\item[データ密度data density]	面積当たりデータ表示の比率。図を縮小することで多くの図を詰め込むべし。
+\end{description}
+\end{frame}
+
+\begin{frame}{}
+燃費規制(は厳しすぎる、と主張したい): NY Times (1978Aug9)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/FuelEconomy.jpg")}}\\
+嘘比率=$\frac{\frac{5.3-.6}{.6}}{\frac{27.5-18}{18}}$=$\frac{783\%}{53\%}=14.3$ %\quad 図の次元: 線(1)で良いのに面(2)
+\end{frame}
+\begin{frame}{}
+燃費規制について嘘を見せなくて良い\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/FuelEconomyCorrected.jpg")}}\\
+\end{frame}
+
+\begin{frame}{}
+アメリカの科学が(このままでは危機、と主張したい): 国立科学財団NSF\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/USNovel.jpg")}}\\
+デザイン変更: 1970年代だけ前半5年間のみ
+\end{frame}
+\begin{frame}{}
+NSFが嘘を見せなくて良い\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/USNovelCorrected.jpg")}}\\
+デザインを変更しないと天井知らず
+\end{frame}
+
+\begin{frame}{}
+石油価格が(高すぎる、と主張したい): NY Times (1978Dec19)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/OilPrices1.jpg")}}\\
+前に出過ぎ
+\end{frame}
+\begin{frame}{}
+石油価格が(高すぎる、と主張したい): Time Magazine (1979Apr9) \\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/OilPrices2.jpg")}}\\
+嘘比率=$\frac{6700\%}{708\%}=9.5$、チャートジャンク、図の次元がデータ次元の3倍
+\end{frame}
+\begin{frame}{}
+石油価格が(高すぎる、と主張したい): Washington Post (1979Mar28)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/OilPrices3.jpg")}}\\
+嘘比率高い、チャートジャンク多過ぎ
+\end{frame}
+\begin{frame}{}
+真っ当な図: Sunday Times (1979Dec16)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/OilPricesCorrected1.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+真っ当な図: Economist (1979Dec29)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/OilPricesCorrected2.jpg")}}\\
+\end{frame}
+
+\begin{frame}{}
+州財政支出が自治体への補助金で(このままでは危機、と主張したい)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/BudgetTooLarge.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+chartjunkを削る\\
+\hfil\includegraphics[width = 10cm]{\Sexpr{paste0(path, "/DataVisualisation/BudgetTooLargeCorrected.jpg")}}\\
+落ち着いてデータだけ見ることができる
+\end{frame}
+\begin{frame}{}
+分母を揃える\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/BudgetTooLargeCorrected2.jpg")}}\\
+\end{frame}
+
+\begin{frame}{}
+GPが減っている(このままでは危機、と主張したい): LA Times (1979Aug5)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/Doctor.jpg")}}\\
+1964年から1990年で人口比は\Sexpr{round(c(172, 410, 172*410, 2247)/c(306, 872, 306*872, 4232), 2)[4]}倍、医者人形の面積は\Sexpr{round(c(172, 410, 172*410, 2247)/c(306, 872, 306*872, 4232), 2)[3]}倍、図の次元がデータ次元の2倍
+\end{frame}
+\begin{frame}{}
+近年も共産主義が優越(と主張したい): Pravda (1982May24)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/Pravda.jpg")}}\\
+逆に懐かしい感じがする...面積だけでなく期間もばらばら
+\end{frame}
+
+\begin{frame}{}
+厳罰の効果(あった、と主張したい)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/CT_Punish1.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+前後年を加える\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/CT_Punish2.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+近隣州を加える\\
+\begin{columns}[T]
+\column{.5\paperwidth}
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/CT_PunishCorrected.jpg")}}\\
+\column{.4\paperwidth}
+\pause
+厳罰化の効果とはいえそうにない?\\
+\pause
+近隣州に効果が及んだ?\\
+\pause
+計量経済学: Difference-in-differences estimator, first-difference estimator, event study design estimator
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+日本の新聞は多変数の図示が優れているそうだ\citep[][p.83]{Tufte2001}\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/GraphicalSophistication.jpg")}}\\
+赤旗、朝日、日経など。日経はひどいけど...
+\end{frame}
+\begin{frame}{}
+理由は学校教育(大学受験)にもあるそうだ\citep[][p.86]{Tufte2001}\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/GraphicalSophistication2.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+日経のひどい図: 償還・利払い費用は増え続けている(2015年12月25日朝刊)\\
+\begin{columns}[T]
+\column{.5\paperwidth}
+\hfil\includegraphics[height = 6cm]{\Sexpr{paste0(path, "/DataVisualisation/NikkeiZaisei.jpg")}}
+\column{.4\paperwidth}
+増えているのは事実だから、敢えて嘘を組み込まなくていい\\~\\
+8兆円分表示、16兆円をカット$\rightarrow$嘘比率$=\frac{16+8}{8}=3$\\~\\
+横軸=長期金利、縦軸=利払い・償還、20年くらい遡ってステフ・カリーのシュート図のように描けば、今の時代の異様さが際立つはず
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+日経のひどい図: 雇用者報酬は増えても消費は増えない(2016年2月22日朝刊)
+\begin{columns}[T]
+\column{.4\paperwidth}
+\includegraphics[width = .4\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/NikkeiEconoFocus.jpg")}}\\
+「回復傾向(上向き矢印!)」でも誤差レヴェルの増加\\
+8億円分を図示、256億円分をカット$\rightarrow$嘘比率$=\frac{8+256}{8}=33$
+\column{.55\paperwidth}
+ちゃんと下を加えた棒グラフにする(mm = pixel * 25.4mm / dpi) (2兆円が119ピクセル$\Rightarrow$(256/2)*119*(25.4/300)=\Sexpr{round((256/2)*119*(25.4/300), 0)}mm\\
+% height 4.7cm image => shrink by 24 times, 128.9cm image => shrink by 24 times => 5.37cm
+\hfil\includegraphics[height = \Sexpr{round(4.7/24, 4)}cm, width = 5.1cm]{\Sexpr{paste0(path, "/DataVisualisation/NikkeiEconoFocusCloseUp2.jpg")}}\\
+\hfil\fbox{\vbox to \Sexpr{128.9/24}cm {\vfil
+\hbox to 5.1cm{\mpage{5cm}{ここに棒グラフの下の部分があるはず}}%
+\vfil
+}}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+雇用者報酬は経済全体での総額\\~\\
+\pause
+一人当たりで見ないと意味がない\\~\\
+\pause
+しかも、全体からすれば誤差レヴェルの増加\\~\\
+\pause
+安倍首相は総額が増えたと強調している\\~\\
+\pause
+全職種を平均した実質賃金は下がっているので、消費が増えないのは当然\\~\\
+\pause
+要するに、増えた仕事の多くが賃金の低い非正規雇用なので消費は増えない
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}[T]
+\column{.7\paperwidth}
+子どもへの投資額: アエラ(2016年3月14日)\\
+\hfil\includegraphics[width = .7\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/aera.jpg")}}
+\column{.275\paperwidth}
+\pause
+円グラフは図の次元が1つ多い、人間の視覚には不適切\\~\\
+\pause
+円グラフは比較対象がないので、「大きい」「多い」を越えた情報が伝わらない
+\end{columns}
+約900万円分を図示、300万円分をカット$\rightarrow$嘘比率$=\frac{12}{9}=\Sexpr{round(12/9, 2)}$\\
+\pause
+並べた順番は学歴高$\rightarrow$低? 金額順に並べると、高卒$\simeq$国内大学院、エリート(海外+国内トップ大学) vs.非エリート
+\end{frame}
+
+\begin{frame}{}
+湯島のマンション: 新日鉄興和不動産(売主、2017年11月広告)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/okachimachi_mansion.jpg")}}\\
+30\%分を図示、80\%分をカット$\rightarrow$嘘比率$=\frac{110}{30}=\Sexpr{round(11/3, 2)}$\\
+資産価値が高い=価格が高い、なので、何が言いたいのだろうか
+\end{frame}
+
+\begin{frame}[t, label=ChinaHoldingUSGovBond]{}
+中国政府の陰謀!!: 産経web(2018年10月8日)
+\begin{columns}[T]
+\column{.6\paperwidth}
+\hfil\includegraphics[width = .6\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/sankei_USTB_2018-10-11.jpg")}}
+\column{.35\paperwidth}
+700億ドル分を図示、1兆4000億ドル分をカット$\rightarrow$嘘比率$=\frac{147}{7}=21$、産経が日経に負けるとは不甲斐ない...\\~\\
+118が117になった: 殆ど誤差\\~\\
+2017年の7月も低いので単なる季節変動では?\\~\\
+横軸下の点はチャートジャンク
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}[T]
+\column{.6\paperwidth}
+ポイント還元「イメージ」: ヨドバシカメラ店頭(2017年8月)\\
+\hfil\includegraphics[width = .6\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/yodobashi.jpg")}}
+\column{.35\paperwidth}
+2000円分を図示、15000円分をカット$\rightarrow$嘘比率$=\frac{17000}{2000}=8.5$\\~\\
+10万3千円のうち857+714+571+429+286+143 = \Sexpr{857+714+571+429+286+143}円お得になる\\~\\
+分割手数料ゼロなら、グラフなし数字(「3000円還元」)だけが良い気もする\\~\\
+なぜ500円ずつ引かないのか...
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+コイン・ランドリー: NHKおはよう日本(2017年12月)\\
+\begin{columns}[T]
+\column{.65\paperwidth}
+\hfil\includegraphics[height = 6cm]{\Sexpr{paste0(path, "/DataVisualisation/NHK_laundry2.jpg")}}\\
+\column{.325\paperwidth}
+約12000を図示、8000をカット$\rightarrow$嘘比率$=\frac{20000}{12000}=\Sexpr{round(20/12, 2)}$\\~\\
+\pause
+11000$\rightarrow$17000で50\%くらい増えているように見えるが「+30\%」\\
+\pause
+矢印は最初はフラットで上昇: 最近急増した印象を与えたいのか?\\~\\
+\pause
+右側だけ棒グラフの上がオレンジに変色(デザイン変更): 視線を集めやすい (画面全体がカラフルなのでグラフもカラフルに?)
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+睡眠実験: NHK(2017年12月)\\
+\hfil\includegraphics[height = 6cm]{\Sexpr{paste0(path, "/DataVisualisation/NHK_CaveTrial2.jpg")}}\\
+約70を図示、30をカット$\rightarrow$嘘比率$=\frac{10}{7}=\Sexpr{round(10/7, 2)}$\\
+\pause
+80-100は不要なので20分を下に延ばせば、嘘比率1.1程度になる\\
+\pause
+それよりも、実験ならば、誤差範囲幅standard error bandを表示させ、73.0と62.3の差が統計学的に意味があるのか表示すべき
+\end{frame}
+
+\begin{frame}{}
+棒グラフもチャートジャンク多い、棒と隙間が全て等間隔で見づらい\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/BarChart.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+棒グラフを濃縮\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/BarChartJunk.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+チャートジャンクだけ\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/BarChartCorrected.jpg")}}\\
+\end{frame}
+\begin{frame}{}
+棒グラフの分解\\
+\hfil\includegraphics[height = 6cm]{\Sexpr{paste0(path, "/DataVisualisation/BarChartDecomposition.jpg")}}\\
+\end{frame}
+\begin{frame}[t]{}
+棒グラフの悪例(経済学)\\
+\begin{columns}[T]
+\column{.6\paperwidth}
+\hfil\includegraphics[width = .6\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/BarChartEcon.jpg")}}
+\column{.35\paperwidth}
+模様がうるさすぎて視線が全体の分布に行かない\\~\\
+ラベルは図(棒の中など)に書き込めば模様はいらない
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{}
+人口ピラミッドもチャートジャンク多い\\
+\begin{columns}[T]
+\column{.6\paperwidth}
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/PopPyramid.jpg")}}
+\column{.35\paperwidth}
+\end{columns}
+\end{frame}
+\begin{frame}[t]{}
+\begin{columns}[T]
+\column{.6\paperwidth}
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/PopPyramidCorrected.jpg")}}
+\column{.35\paperwidth}
+データだけ、格子をデータ内部だけ\\
+ピラミッドの形が鮮明になる、以前はピラミッド外側を見ていたことに気付く\\
+格子の色も黒だとうるさいのでグレーで良い
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+散布図scatter plot\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/ScatterPlot.jpg")}}\\
+研究でも良く使われる
+\end{frame}
+\begin{frame}{}
+範囲フレーム図(range-frame plot)\\
+\hfil\includegraphics[height = 7cm]{\Sexpr{paste0(path, "/DataVisualisation/RangeFramePlot.jpg")}}\\
+左下コーナーに目が行っていたことに気付く
+\end{frame}
+
+\begin{frame}{}
+なぜ?\\~\\
+\pause
+無意識にデフォルトのデザインを使う人が多い\\~\\
+\pause
+Excel: デフォルト設定にチャートジャンクが多いので、データ・インク比率も低い\\~\\
+\pause
+歪ませていると気付かずに、嘘比率の高い図を描く人も多い\\~\\
+\pause
+原因: 単なる知識不足、訓練不足\\~\\
+\pause
+意識的に嘘比率の高い図を描く人(プロ?)もいる\\~\\
+\pause
+現在の日経新聞など\\~\\
+\pause
+欧米の新聞は大分前に足を洗った\\~\\
+\pause
+嘘比率を確認すると記事の意図が分かるし、首相・政権バンザイの記事も分かる\\~\\
+\pause
+何のために記者になったのやら...やれやれ
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{References}
+\scriptsize
+\setlength{\baselineskip}{8pt}
+\bibliographystyle{aer}
+\bibliography{c:/seiro/settings/TeX/seiro.bib}
+\end{frame}
+
+\begin{frame}[t, fragile]{}
+想定体積=20*10*6 in$^{3}=$\Sexpr{20*10*6}in$^{3}$=$\frac{20}{12}*\frac{10}{12}*\frac{6}{12}$ feet$^{3}$=\Sexpr{round((20/12)*(10/12)*(6/12), 3)} feet$^{3}$\\~\\
+数値例の想定体積: 1920 in$^{3}$ = \Sexpr{1920*2.54} mm$^{3}$\\~\\
+
+想定密度=2.4lb/feet$^{3}$
+\[
+\mbox{想定重量}=\underbrace{\frac{\mbox{重量}}{\mbox{体積}}}_{\mbox{\footnotesize 想定密度}}\times\mbox{想定体積}=2.4\times\Sexpr{round((20/12)*(10/12)*(6/12), 3)}=\Sexpr{round(2.4*(20/12)*(10/12)*(6/12), 3)}\mbox{lb}=\Sexpr{round(2.4*(20/12)*(10/12)*(6/12)*0.4535924, 3)}\mbox{kg}
+\]
+\vspace{2ex}
+1 inch = 2.54cm
+\end{frame}
+
+\defcitealias{CAIB2003vol1}{CAIB2003-1}
+
+\begin{frame}[t, label=CAIBSummary1]{}
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	離陸2日目の金曜日に、管理職(head, Shuttle Program Office of Vehicle Engineering、Manager, United Space Alliance、manager, Mission Evaluation Room)は危険度がないと判断\citepalias[][142]{CAIB2003vol1}。映像が入手できる月曜日まで分析を止めることを指示。
+\item	にも関わらず、3連休の週末にBoeing社の(不慣れな)エンジニアはSTS-50データ、RCCの氷衝突データをベースに損傷を試算\citepalias[][143-145]{CAIB2003vol1}。角度が急だと貫通する可能性を指摘。
+\item	Debris Assessment TeamのエンジニアたちはタイルとRCCに危険性はないと判断
+\citepalias[][145]{CAIB2003vol1}。
+	\begin{itemize}
+	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+	\item	タイル: 試算プログラムは損傷を多めに算出する設計
+	\item	タイル: 外層よりも厚い内層を考慮していない試算
+	\item	RCC: 衝突場所は12のうち1つだけがRCCに21度で衝突と予測
+	\item	RCC: 氷は15度で貫通寸前だが柔らかいSOFIは21度までokと計算せずに結論
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t, label=CAIBSummary2]{}
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	DATが挙げた「国防省にコロンビアの写真を要請」もchair, Mission Management Teamによって取り消された。
+	\begin{dinglist}{43}
+	\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+	\item	これら幹部がDATの懸念を取り上げず、DATは通常と異なるルートで要請し、幹部によって取り消される
+	\end{dinglist}
+\item	離陸後9日目にBoeingとUnited Space Allianceのエンジニアがmanager, Mission Evaluation Roomにスライドを報告した。廊下に立ち見が出るくらい関心を集めた。結果の依拠する不確実性を強調したが、safety-of-flight issueは確認されなかったという幹部のまとめになった。
+\begin{itemize}
+\vspace{1.0ex}\setlength{\itemsep}{1.0ex}\setlength{\baselineskip}{12pt}
+\item	どこに衝突したか
+\item	用いた体積が400倍
+\end{itemize}
+\end{itemize}
+\hfill\hyperlink{ShouldHaveColumbia<5>}{\beamergotobutton{go back}}
+\end{frame}
+
+
+\begin{frame}[label=WordCloud]{}
+\begin{columns}[T]
+\column{.75\paperwidth}
+\vspace*{-0.5cm}
+\begin{tikzpicture}[inner sep=0pt, remember picture]
+\onslide<1->{\node at (0, 0) {
+\includegraphics[width = .7\paperwidth]{\Sexpr{paste0(path, "/DataVisualisation/WordCloudsAreLame.jpg")}}};
+}
+\end{tikzpicture}\\
+{\scriptsize Source: \url{https://towardsdatascience.com/word-clouds-are-lame-263d9cbc49b7}}\\
+\onslide<3->{\hfill\hyperlink{PieCharts<7>}{\beamergotobutton{go back}}}
+\column{.25\paperwidth}
+きれい\\~\\
+メッセージ?\\~\\
+順位?\\~\\
+色や形?\\~\\
+``word clouds the pie chart of text data.''\\~\\
+視覚化の方法としてはお薦めできません\\~\\
+テキスト分析には他の視覚化がよい
+\end{columns}
+\end{frame}
+
+
+\end{document}
+

@@ -52,5 +52,6 @@ Lecture slides etc. 2024 will be placed here.
    * [RP12](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP12.html)  
 * Lecture 14  
    * [final](https://seiroito.github.io/SHLectures/homeworks/2024/final/final2024.html)  
-
+   * [RP13](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP13.html)  
+   * [DataVis](https://seiroito.github.io/SHLectures/lec_slides/2024/DataVis.html)  
 

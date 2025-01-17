@@ -50,6 +50,8 @@ jobs:
             any::data.table
             any::tufte
             any::modelsummary
+            any::treemap
+            any::ggfittext
 
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
