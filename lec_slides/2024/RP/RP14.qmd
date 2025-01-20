@@ -1,0 +1,309 @@
+---
+title: "RP14"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP11.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: 
+  match: auto
+  desc-position: left
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP14.pdf
+# quarto render RP14.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+gray {
+  color: #aeb6bf;
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+アメリカで大卒人口が増えないのは高校のドロップアウトが増加したことや、高卒の学力不足が理由とされているとあり、興味深かったです。ドロップアウトも学力不足も、治安の悪化や貧富の格差の広がりが原因の一つとして考えられるのではないでしょうか？治安が悪化したり、資金が不足したりすれば学校に通い、自宅で勉強をすることが難しくなると思います。
+:::
+</div>
+
+* 最近の情報を調べずにいたので、講義で誤ったことをお話しした可能性があります
+* [voxの記事](https://www.vox.com/the-highlight/23428166/college-enrollment-population-education-crash): 今年以降、アメリカの高等就学率は低下する見込み
+   * 大卒人口の減少は2000年前後から
+   * 原因: 出生率低下
+      * 若年人口減はそれよりも前からあったが、高卒率と大学就学率が高まり、大卒人口は減らなかった
+      * 2008年のGreat Recession(リーマン・ショック)で出生率が一段と下がり、大卒人口が減少し始めました
+   * @GoldinKatz2009 が主張したようなドロップアウトや学力不足は主な原因ではないようです
+* [CPSデータ](https://www2.census.gov/programs-surveys/demo/tables/school-enrollment/time-series/cps-historical-time-series/tablea-5a.xlsx)で高等就学率が得られます
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+発展を促すための政策を打つ際には、教育を受けることができるように教育制度・環境を整えるだけでなく、同時にその後就職することができる環境（教育を受けた内容に合った労働需要）を設けることも同時に行うことが必要なのではないかと考えました。
+:::
+</div>
+
+* 良い視点ですが、順序が逆ではないでしょうか
+* 労働需要は市場が決めるので、政府が抗うことは難しいからです
+* 労働需要の方向を見極め、教育機会がその方向に沿うよう、政府は環境整備すべき
+* ただし、どの程度の将来time horizonを見据えるのか、考えねばなりません
+   * 日本政府はデータ・サイエンス教育・訓練を振興しています
+   * 誰かが書いたコードを切り貼りするだけの「ユーザとしてのプログラミング能力」は近い未来(5年以内?)にAIに代替され陳腐化します
+      * 伝聞ですが、テック最大手では、新規コードの多くをAIが書いています
+      * でも、geminiにコードを質問、かなり的外れの誤答ばかり、回答が正しいlevel of confidenceを0-100で示してと尋ねると、「95」「99」&larr;「無知の知」が欠如
+      * 陳腐化するのはもう少し先かもしれません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+発展を促すための政策を打つ際には、教育を受けることができるように教育制度・環境を整えるだけでなく、同時にその後就職することができる環境（教育を受けた内容に合った労働需要）を設けることも同時に行うことが必要なのではないかと考えました。
+:::
+</div>
+
+::::::::::{.columns}
+
+::::{.column width="60%"}
+![](14/muchinochi.jpg){width="90%"}
+::::
+
+::::{.column width="40%"}
+* 意思を持たないAIが「...ようになりたい」と表現するのは、できの悪いSFに似ています
+* 機械ぽくではなく、人間ぽく回答を装飾する方が企業の利潤を増やすのでしょう
+::::
+
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+発展を促すための政策を打つ際には、教育を受けることができるように教育制度・環境を整えるだけでなく、同時にその後就職することができる環境（教育を受けた内容に合った労働需要）を設けることも同時に行うことが必要なのではないかと考えました。
+:::
+</div>
+
+   * 何を問うか、視点の斬新さ、どのような因果関係を捉えるか、などはAIには代替されません
+      * AIは既存のものの組み合わせで答えを予測します
+      * 既存のものの組み合わせではないものが問われます
+      * コードの例で言えば、どういう大枠にして、各部品をどのように設計・連携させるか、ということを発注できる技能は、AIではなく人間の方が得意だと思います
+        * ただし、先行事例とそのコード公開が積み上がると、その分野・サービスでコードを書く技能はルーティーン化し、AIに代替されます
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+**第一に、**視覚化は単に情報を見やすくする手段ではなく、正確かつ効率的に本質を伝えるための重要なツールであることを理解した。適切なグラフや図表を用いることで、データの関係性や傾向を直感的に伝え、複雑な情報を受け手が短時間で理解できる形に変換する力がある。...(中略)...
+
+**第二に、**視覚化の質はデータ分析者自身の理解力に依存するという点に気づいた。データの本質を理解していなければ、適切な視覚化を選ぶことも、それを通じて説得力のある説明を行うこともできない。...(中略)...
+
+**第三に、**視覚化における「データ・インク比率」や「因果関係の明確化」といった基本原則を守る重要性を学んだ。無駄な装飾（チャート・ジャンク）を排除し、必要な情報を際立たせることで、視覚化がより効果的になることを確認した。...(中略)...
+
+データの視覚化は分析者にとって責任を伴う行為であり、正確性と簡潔性を両立させる必要があると考えた。また、視覚化を通じて伝えたいメッセージが何であるかを常に意識し、そのメッセージを最も効果的に伝える手段を選ぶべきだと思った。
+:::
+</div>
+
+* 包括的で簡潔なまとめだと思います
+* 以下の点に特に同意します
+   * 正確性と簡潔性を両立
+   * メッセージを最も効果的に伝える手段を選ぶ
+
+----
+
+#### References
+
+::: {#refs}
+:::
+
