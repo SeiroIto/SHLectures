@@ -56,5 +56,5 @@ Lecture slides etc. 2024 will be placed here.
    * [DataVis](https://seiroito.github.io/SHLectures/lec_slides/2024/DataVis.html)  
 * Final section
    * [RP14](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP14.html)  
-   * [final answer key](https://seiroito.github.io/SHLectures/lec_slides/2024/RP/final2024AnswerKey.html)  
+   * [final answer key](https://seiroito.github.io/SHLectures/lec_slides/2024/final/final2024AnswerKey.html)  
 
