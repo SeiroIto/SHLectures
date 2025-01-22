@@ -1,0 +1,240 @@
+---
+title: "開発経済論期末試験回答例"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+    number-depth: 2
+    embed-resources: true
+    smooth-scroll: true
+    anchor-sections: true
+    grid:
+      margin-width: 350px
+    css: ../../../seiro.css
+theme: 
+  - litera
+  - ../../../seirosky.scss
+filters:
+  - nutshell
+reference-location: margin
+citation-location: margin
+lightbox: auto
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: ../../../seiro.bib
+resources:
+  - final2024AnswerKey.pdf
+# quarto render final2024AnswerKey.qmd
+---
+
+```{css, echo=F}
+DBlue {
+  color: dodgerblue;
+}
+Blue {
+  color: blue;
+}
+Red {
+  color: red;
+}
+.SeiroBenign {
+  background-color: #FFEBCD;
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+.SeiroLightGreen {
+  background-color: #D0F0C0; /* Tea green */
+  padding: 0.5em; /*文字まわり（上下左右）の余白*/
+  font-family: Noto Sans;
+  /* border: 1px solid yellow; */
+  /* font-weight: bold; */
+}
+```
+
+```{r setup, echo = F, results = "hide"} 
+#### include = F <==> echo=F & results = F
+library(knitr)
+library(tufte)
+#### invalidate cache when the tufte version changes
+knitr::opts_chunk$set(
+  tidy = FALSE, cache.extra = packageVersion('tufte'), 
+  margin_references = TRUE,
+  #### remove leading hashes in html output
+  comment = "", 
+  echo = T, cache = F, 
+  class.source = "SeiroBenign", class.output = "SeiroLightGreen"
+  )
+options(htmltools.dir.version = FALSE, width = 100)
+gc()
+```
+
+
+
+## 子ども向け給付
+
+アメリカには17歳未満の子どもがいる家庭への補助金給付(所得税還付child tax credit)があります。
+
+* 補助金は会計年度(1月1日開始、12月31日終了)ごとに給付され、予算確保の都合上、申請するとその年ではなく翌会計年度1月1日から給付されます。
+* 単純化のため、すべての子どもの親が産まれた当日に申請し、一回目の給付は1月1日と仮定します。
+
+あなたはこの政策の担当者で、補助金給付が新生児の3歳時点での身長に与える効果を計測したいと考えています。あなたの手元には、2010-2011年に産まれたすべての子どもの誕生日、3歳時点での身長のデータが揃っています。
+
+3歳時身長に対する新生児補助金給付のどのような効果ならば推計できるでしょうか。統御群をどのように設定するのかを明示して答えてください。^[ヒント: この制度の特徴をうまく利用する推計方法を選んでください。]また、推計した効果はどのような母集団に対する何の効果なのか、解釈を示してください。
+
+
+<div class=answers>
+* 12月31日生まれの子どもは1日後から受給し、1月1日生まれの子どもは365日後から受給します
+* そこで、誕生日が1日しか違わないながら、受給までの待ち日数が1日と365日という離散的変化を利用したRDDで推計します
+   * 識別仮定: 12月31日生まれと1月1日生まれの間で、受給待ち期間以外の身長に影響を与える変数が離散的に変化していないこと
+* 12月31日生まれの子どもの統御群は1月1日生まれの子どもです
+* 治療群=誕生1日後から受給した子ども vs. 統御群=誕生365日後から受給した子ども
+* 解釈: 母集団=年末年始(12月後半から1月初旬)に産まれる子ども、効果=生後翌日受給と生後1年後受給の差(=生後1年間補助金を受給する/しないことの効果、より正確には、生後1日後から3歳まで補助金を受給する効果-生後365日後から3歳まで補助金を受給する効果)
+</div>
+
+
+
+## 学費無償化
+
+多くの国で初等教育は就学率が100%近くになっています。そこで就学率に関する次の目標は中等教育に移り、中等教育の学費を無償化する政府が増えています。
+
+あなたはとある途上国の教育省高官です。この国ではすでに半分の州で学費無償化が実施されていますが、残り半分の州では実施されていません。学費無償化の就学率に与える効果を推計しようとしています。教育省は州ごとの就学率のデータを集めています。
+
+1. 就学率に与える効果はどのようなデータを使ってどのように推計すればいいでしょうか。
+1. 識別仮定を述べてください。
+1. この推計方法とその結果が信頼できることを示すために、どのようなデータを使った仮説検定が必要ですか。
+
+<!-- -->
+
+<div class=answers>
+1. 推計方法
+* すべての州の就学率のデータ、実施前から実施後まで使う
+* 治療群=実施済みの州、統御群=未実施の州
+* 推計方法: DID
+
+2. 識別仮定
+* 両群で政策が実施されない場合、就学率が同じように推移するcommon trend assumptionが満たされること
+
+3. 信頼性を示すための検討
+* 少なくとも実施2期前からデータを取得し
+   * 帰無仮説: 両群間の実施前common trendの検定(そして棄却されないこと)
+   * もしくは、両群間の実施前トレンドの差を外挿して、その差を考慮したDIDを推計すること
+</div>
+
+## @BalandRobinson2000 モデル: $h(\ell)=ah^{\frac{1}{2}}$
+
+@BalandRobinson2000 モデルで$h(\ell)=a\ell^{\frac{1}{2}}=a\sqrt{\ell}$と仮定します。簡単化のため、信用制約はないと仮定します。
+
+1. 最適な就学時間を求めてください。^[ヒント: 2つのFOCsを使って導出した関係式に$h(\ell)=a\ell^{\frac{1}{2}}$を当てはめて、$\ell=...$と解きます。微分の公式を参照してください。]
+1. $a$が大きい人とはどのような人と解釈できるでしょうか。
+1. $a$が大きい人と$a$が小さい人がいるとします。最適な$\ell$がより大きいのはどちらの人でしょうか。
+1. 最適な$\ell$は$w$が上昇すると増えるでしょうか、それとも、減るでしょうか。増える・減るを示し、式を見てなぜかを説明してください。
+
+<!-- -->
+
+<div class=answers>
+1. 最適な就学時間
+$$
+Rw=h'(\ell)=\frac{1}{2}a\ell^{-\frac{1}{2}}
+$$
+よって
+$$
+\begin{aligned}
+a\ell^{-\frac{1}{2}}
+&=
+2Rw,\\
+\left(a\ell^{-\frac{1}{2}}\right)^{2}
+&=
+\left(2Rw\right)^{2},\\
+a^{2}\ell^{-1}
+&=
+\left(2Rw\right)^{2},\\
+\ell
+&=
+\left(\frac{a}{2Rw}\right)^{2}.
+\end{aligned}
+$$
+
+2. $a$の解釈
+   * 人的資本投資の限界生産性・限界収益
+   * $a$の大きい人=人的資本投資の限界生産性・限界収益の高い人
+   * 同じ$\ell$でも、$a$が大きい人ほど成人期所得$h(l)=a\ell^{\frac{1}{2}}$がより高い
+
+3. $a$の違いによる最適な就学時間の違い
+   * $\ell=\left(\frac{a}{2Rw}\right)^{2}$なので、$a$が大きい人ほど最適な就学時間は長くなる
+
+4. $w$上昇の最適な$\ell$への効果
+   * $\ell=\left(\frac{a}{2Rw}\right)^{2}$なので、$w$が上昇すると最適な就学時間は減る
+   * 解釈: 就労の限界リターンが上昇するので、より長く就労する方が生涯効用を高められるため
+</div>
+
+## クローニー・キャピタリズムと株価
+
+::: {.column-margin}
+![日経新聞1月11日(土)朝刊](UMACStockPrices.jpg)
+:::
+
+独裁的な国家元首・与党にすり寄り、(競争からの)保護や腐敗(違法行為の見逃し)によって利潤を上げる企業が多い体制を縁故資本主義crony capitalism, cronyismといいます。かつてのフィリピンのマルコス前大統領体制が代表例です。^[マルコス現大統領は前大統領の息子です。]利権を得ると利潤が増えるので、利権を得るとこうした企業の株価は上昇する傾向があります。
+
+トランプ氏が大統領になるにあたり、長男のトランプ・ジュニア氏が選挙後の11月末に顧問に就任したドローン部品製造企業Unusual Machines (UMAC)と、同じく選挙後の12月にトランプ・ジュニア氏が取締役に就任した電子商取引企業PSQホールディングス(PSQH)の株価が急騰しています。
+
+
+政権との癒着がこの2企業の株価に与える効果をどのように推計すれば良いでしょうか。推計方法、統御群の選定方法を明示して答えてください。
+
+<div class=answers>
+* 同一産業、異業種をドナー・プールとするsynthetic control method
+   * 同一業種のドローン部品製造だと、競争劣位になることから直接的に株価が負の影響を受ける可能性があるため、統御群に用いると株価が低落することから過大評価になる可能性が高い
+* 前年同一期の株価を使ってドナー・プールに用いるウェイトを推計、このウェイトを使って合成UMACや合成PSQHを計算する
+</div>
+
+(参考)
+
+![日経新聞1月11日(土)朝刊](Nikkei2025Jan11.jpg)
+
+
+
+<!--
+## 学費無償化
+
+
+
+
+多くの国で初等教育は就学率が100%近くになっています。そこで就学率に関する次の目標は中等教育に移り、中等教育の学費を無償化する政府が増えています。しかし、途上国では、中等教育学費無償化に対する就学率の増加スピードは、初等教育学費無償化と比べてゆっくりです。
+
+講義で扱った@BalandRobinson2000 モデルでは、学費をゼロと仮定しています。
+
+単純化のため、すべての子どもにとって通学距離は無視可能と仮定します。
+に依拠しながら、学費無償化後に中等就学率の上昇が初等就学率に比べて遅い理由を考えてください。^[ヒント: 就学時間$l$が長い=就学率が高い、と読み替えると議論が簡単になります。この場合、$l$が]
+-->
