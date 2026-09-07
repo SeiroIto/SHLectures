@@ -31,3 +31,5 @@
 /lec_slides/2024/ImpactEvaluation/figure/lineas*/
 /lec_slides/2024/ImpactEvaluation/figure/*.zip
 /lec_slides/2024/ImpactEvaluation/figure/*.eps
+
+**/*.quarto_ipynb
