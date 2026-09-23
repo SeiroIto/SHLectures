@@ -3084,6 +3084,13 @@ BTB政策研究のその後
 # 開発の概観
 :::
 
+----
+
+:::{.r-fit-text}
+Section 3: 
+
+開発の概観
+:::
 
 ----
 
@@ -3232,12 +3239,18 @@ Source: World Bank [https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD](http
 
 ----
 
-The message is clear.  
-Poor countries are not catching up the rich countries.  
+Up to 1980's
+
+* The message is clear.  
+* Poor countries are not catching up the rich countries.  
 
 . . .
 
-なお、1990年代以降は貧しい国も先進国にキャッチアップしつつあるという研究が最近出てきています[@KremerWillisYou2022]が、事実は認識されたものの、推計方法への注文が付いており[@AcemogluMolina2021]、ゆっくりキャッチアップしつつある理由、持続するかなど、解釈にはコンセンサスができていません
+After 1990's
+
+* Poor countries are catching up [@KremerWillisYou2022]
+* Catch up is confirmed, yet some raised issues in estimation [@AcemogluMolina2021]
+* Why catch up speed is slow, can it sustain, catch up interpretations... no concensus
 
 <!--
 * 人口大国(1980年代以降の中国、90年代以降のインド)で市場自由化が進んだことが理由  
@@ -3246,7 +3259,7 @@ Poor countries are not catching up the rich countries.
 
 . . .
 
-低所得国と近かった中所得国が高所得国との差を縮めると各国間の所得不平等は減るが、中所得国がさらに高所得国に近づくと低所得国と中所得国の差が広がるため、いずれは各国間の所得不平等が増すという指摘もあります[@Kanbur2022]
+低所得国と近かった中所得国が高所得国との差を縮めると各国間の所得不平等は減るが、中所得国がさらに高所得国に近づくと低所得国と中所得国の差が広がるため、いずれは各国間の所得不平等が増すという指摘もあります[@Kanbur2022] When middle income countries gorw faster and catch up, it reduces the inequality between the countries, but it will increase the inequality relative to low income countries, so the world may become more unequal at the end
 
 ----
 
@@ -3257,16 +3270,16 @@ Poor countries are not catching up the rich countries.
 :::
 
 ::: {.column width="30%"}
-* 2009年に書かれた経済成長理論の入門教科書に掲載されている図  
-* 2000年までのデータを使っています
+* 2009年に書かれた経済成長理論の入門教科書に掲載されている図 a figure taken from a textbook written in 2009 
+* 2000年までのデータを使っています data up to 2000 is used
 * convergence=収斂、キャッチアップ  
-* キャッチアップするには所得の低い国ほど成長率が高い必要あり  
 :::
 
 ::::
 
-* 横軸1960年の1人当たり対数所得、縦軸1960-2000年成長率とすると、右下がりの関係が必要  
-* 僅かに右上がり=キャッチアップなし
+* キャッチアップするには所得の低い国ほど成長率が高い必要あり for catching up, need: lower the income, higher the growth 
+* 横軸1960年の1人当たり対数所得、縦軸1960-2000年成長率とすると、右下がりの関係が必要 need: a downwardly sloping relationship 
+* 僅かに右上がり=キャッチアップなし no catching up
 
 ----
 
@@ -3287,7 +3300,7 @@ Poor countries are not catching up the rich countries.
 
 ---- 
 
-$t$年の一人あたりGDP成長率$\Delta y_{it}$を前年($t-1$年)の一人あたりGDP(の対数)に回帰
+$t$年の一人あたりGDP成長率$\Delta y_{it}$を前年($t-1$年)の一人あたりGDP(の対数)に回帰 regress year $t$ pc GDP growth rate on year $t-1$ pc GDP
 $$
 \Delta y_{it}=a_{t}+\beta_{t}y_{it-1}+e_{it}
 $$
@@ -3320,11 +3333,11 @@ $$
 
 :::: {.columns}
 
-::: {.column width="65%"}
-![Figure 1, @Hartley2026](1/2020sConvergence.jpg){width="55%"}
+::: {.column width="50%"}
+![Figure 1, @Hartley2026](1/2020sConvergence.jpg){width="45%"}
 :::
 
-::: {.column width="30%"}
+::: {.column width="45%"}
 
 * 1960-1994: 拡大
 * 1995-2020: 収斂
