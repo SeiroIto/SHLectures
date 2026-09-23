@@ -1,0 +1,120 @@
+/* my.css ― 使い回す小さなクラス置き場
+   使い方: YAML の css: に並べ、スライド本文では fenced div で当てる
+     format:
+       revealjs:
+         css: [my.css]
+     ::: {.myindent}
+     本文
+     :::
+*/
+
+/* 段落やブロックを字下げする。数値は好みで。
+   !important が要る理由: quarto の段組みルール
+   ".reveal .columns > .column:last-child > :not(ul, ol) { margin-left: 0.5rem }"
+   の方が詳細度が高く、::: {.columns} の中では 8px に上書きされてしまう
+   （2026-09-15 実測）。段組みの外では !important 無しでも効く */
+.reveal .myindent1 { margin-left: 1em !important; }
+.reveal .myindent2 { margin-left: 2em !important; }
+.reveal .myindent3 { margin-left: 3em !important; }
+.reveal .myindent4 { margin-left: 4em !important; }
+.reveal .myindent5 { margin-left: 5em !important; }
+.reveal .myindent6 { margin-left: 6em !important; }
+
+/* ---------------------------------------------------------------- */
+/* 以下、ユーザー提供の定義をそのまま取り込み（2026-09-15）           */
+/* 1点だけ変更: 元は "#### description with..." という行があったが、  */
+/* これはCSSでは構文エラーになるためコメントに直した                 */
+/* ---------------------------------------------------------------- */
+
+/* NOTE (measured 2026-09-15): the colours only work as ELEMENT selectors —
+   <Red>文字</Red>. As a class, <span class="Red"> stays default rgb(34,34,34),
+   because the selector is Red, not .Red. Write ".Red, Red { color: red; }"
+   if you want both. */
+Red {
+  color: red;
+}
+Orange {
+  color: #e94e2c;
+}
+Blue {
+  color: blue;
+}
+Gray {
+  color: gray;
+}
+.reveal .slides pre code {
+    max-height: 800px;
+}
+/* NOTE (measured 2026-09-15): this does nothing. There is no font-color
+   property in CSS — the browser discards the declaration entirely
+   (style.cssText = 'font-color: red' leaves the declaration list empty).
+   The property is color. Separately, revealjs has no #TOC element; that
+   selector is for HTML documents. */
+#TOC {
+  font-color: #e94e2c;
+}
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;
+  line-height: 1.2 !important;
+}
+.description-list dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-list dt {
+  font-weight: bold;
+  display: inline;
+  margin-right: 0.5em;
+}
+.description-list dd {
+  display: inline;
+  margin-left: 0;
+}
+.description-list dd p {
+  display: inline;
+  margin: 0;
+}
+.description-list dd::after {
+  content: "";
+  display: block;
+  margin-bottom: 0.5em;
+}
+/* description with a line break between item header and texts */
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;
+}
+.description-lb dd p {
+  margin: 0;
+}
+.ListArrow {
+  width: var(--list-width, auto);
+}
+.ListArrow .arrow-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.3em;
+}
+.ListArrow .arrow-left {
+  flex: 0 0 var(--left-width, 45%);
+}
+.ListArrow .arrow {
+  flex: 0 0 var(--arrow-width, 5%);
+  text-align: center;
+}
+.ListArrow .arrow-right {
+  flex: 0 0 var(--right-width, 50%);
+}

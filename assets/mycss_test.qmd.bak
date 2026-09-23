@@ -1,0 +1,77 @@
+---
+title: "my.css check"
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    width: 1600
+    height: 900
+    css: [my.css]
+---
+
+## 字下げ
+
+基準（インデントなし）の段落。
+
+::: {.myindent}
+myindent を当てた段落
+:::
+
+::: {.myindent2}
+myindent2 を当てた段落
+:::
+
+## 色
+
+<Red>Red 要素セレクタ</Red> / <span class="Red">span.Red</span>
+
+<Orange>Orange 要素セレクタ</Orange> / <span class="Orange">span.Orange</span>
+
+<Blue>Blue 要素セレクタ</Blue> / <span class="Blue">span.Blue</span>
+
+<Gray>Gray 要素セレクタ</Gray> / <span class="Gray">span.Gray</span>
+
+## 定義リスト（description-list）
+
+::: {.description-list}
+用語A
+:   説明A の本文。見出しと同じ行に続く。
+
+用語B
+:   説明B の本文。
+:::
+
+## 定義リスト（description-lb）
+
+::: {.description-lb}
+用語A
+:   説明A の本文。見出しの下に改行して置く。
+
+用語B
+:   説明B の本文。
+:::
+
+## ListArrow
+
+::: {.ListArrow}
+::: {.arrow-row}
+::: {.arrow-left}
+左：投入
+:::
+::: {.arrow}
+&rarr;
+:::
+::: {.arrow-right}
+右：産出
+:::
+:::
+:::
+
+## コードと TOC
+
+```r
+x <- 1
+y <- 2
+```
+
+<div id="TOC">TOC のダミー</div>

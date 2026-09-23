@@ -1,0 +1,47 @@
+\begin{tikzpicture}[ 
+axis/.style={very thick, ->, >=stealth'},
+dashed line/.style={dashed, thin},
+every node/.style={color=white!70!blue},
+background rectangle/.style = {fill = gray90},
+]
+\begin{axis}[
+  scale = 1.5,
+  axis equal image, % forces a square plot
+  clip = false, % allows plotting outside axis bounds
+  axis x line=center, axis y line=center,
+  xlabel = {量$x$}, ylabel = {価格$p$},
+  xtick={100}, ytick={100}, % effectively drops axis ticks
+  xlabel style={below right}, ylabel style={above left},
+  xmin=0, xmax=11,
+  ymin=0, ymax=10]
+\path[name path=xaxis] (0, 0) -- (10, 0);
+\path[name path=yaxis] (0, 0) -- (0, 10);
+\coordinate (origin) at (0, 0);
+\coordinate (i11) at (axis cs: .5, 9);
+\coordinate (i12) at (axis cs: 1.0, 6);
+\coordinate (i13) at (axis cs: 2.0, 4);
+\coordinate (i14) at (axis cs: 4, 3);
+\coordinate (i15) at (axis cs: 8, 2);
+\coordinate (e1) at (axis cs: 1.75, 4.4);
+\coordinate (e2) at (axis cs: 3.25, 2.25);
+\coordinate (a) at (axis cs: 0, 7);
+\coordinate (c) at (axis cs: 6, 1);
+\coordinate (b) at (axis cs: 0, 1);
+\coordinate (d) at (axis cs: 7, 6);
+\node[left] (dum1) at (axis cs: 0, 2) {\phantom{$p^{*}$}};
+\node[below] (dum2)  at (axis cs: 2, 0) {\phantom{$x^{*}$}};
+\node at (axis cs: 7.5, 10) {\phantom{\mpage{6cm}{需要曲線$D$は右下がり\\ $\Rightarrow$ 消費者は価格が低いと買いたい量も増えるため}}};
+  \draw[name path=Dline1, color = green, line width = 1.5pt] 
+  plot coordinates {(a) (c)} node[right]{$D$};
+  \node at (axis cs: 7.5, 10) {\mpage{6cm}{需要曲線$D$は右下がり\\ $\Rightarrow$ 消費者は価格が低いと買いたい量も増えるため}};
+  \node at (axis cs: 7.5, 7.5) {\mpage{6cm}{供給要曲線$S$は右上がり\\ $\Rightarrow$ 生産者は価格が高いと売りたい量も増えるため}};
+  \draw[name path=Sline1, color = blue, line width = 1.5pt] 
+    plot coordinates {(b) (d)} node[right]{$S$};
+  \path [name intersections={of=Dline1 and Sline1, by={e}}];
+  \coordinate (x1) at (e |- origin) ;
+  \coordinate (y1) at (e -| origin) ;
+  \draw[name path=yline1, dashed, line width = .5pt] (e) to node[midway, left] {} (y1) node[left] {$p^{*}$};
+  \draw[name path=xline1, dashed, line width = .5pt] (e) to node[midway, below] {} (x1) node[below] {$x^{*}$};
+  \fill[red] (e) circle (3pt) node[above, yshift = .1cm] {$e^{*}$};
+\end{axis}
+\end{tikzpicture}

@@ -1,5 +1,6 @@
 #### This is gitignore for Seishin
 /.quarto/
+/.claude/
 /**/*.mp4
 /admin/
 /_extensions/
@@ -31,5 +32,10 @@
 /lec_slides/2024/ImpactEvaluation/figure/lineas*/
 /lec_slides/2024/ImpactEvaluation/figure/*.zip
 /lec_slides/2024/ImpactEvaluation/figure/*.eps
+/lec_slides/2026/01*
+/lec_slides/*.zip
+/lec_slides/*/cache/
+/lec_slides/2026/Da*/GBD*.prn
+
 
 **/*.quarto_ipynb

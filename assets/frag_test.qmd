@@ -1,0 +1,38 @@
+---
+title: "fragment order test"
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    incremental: true
+    width: 1600
+    height: 900
+lang: ja
+---
+
+## 再現テスト
+
+:::: {.columns}
+
+::: {.column width="65%"}
+（図の代わり）
+:::
+
+::: {.column width="30%"}
+
+* 1960-1994: 拡大
+* 1995-2020: 収斂
+* 2021-2024: 拡大&larr;COVID-19
+* 2025-: 収斂
+
+::: {.fragment}
+原因は不明
+:::
+
+::: {.fragment}
+開発経済学では未解明
+:::
+
+:::
+
+::::

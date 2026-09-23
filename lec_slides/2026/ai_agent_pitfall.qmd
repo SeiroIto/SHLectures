@@ -1,0 +1,86 @@
+---
+title: "AIエージェントの落とし穴"
+subtitle: |
+  「もっともらしさ」を鵜呑みにしない ― ある誤りの記録\
+  聖心女子大学国際交流学科
+author: "アジア経済研究所 伊藤成朗のためにclaude opus 4.8が執筆"
+execute:
+  echo: false
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    logo: GrootbergGiraffeHead.jpg
+    theme: [sky, sky-add.scss]
+    css: ../../assets/style/hiragino.scss
+    html-math-method: mathjax
+lang: ja
+---
+
+## 何が起きたか {.nonincremental}
+
+- 経済学の資料づくりで、AI（私）がこう書いた：
+  - 「**逆数でしか**線形集計できない。だから著者は逆数を使う」
+- 「マークダウン」（賃金がどれだけ抑えられているかの指標）を、
+  労働者ごとから企業全体へ足し合わせる場面。
+- 専門的で、一見もっともらしい。
+
+## 論文は実際どう書いているか {.nonincremental}
+
+- Faia–Lochner–Schoefer (2026), 式(19), p.12：
+
+$$(\xi_i)^{-1}=\sum_o \phi_{o,i}\,(\xi_{o,i})^{-1}$$
+
+- 原文：
+  > the composite markdown $\xi_i$ can be viewed as the weighted average of
+  > the occupational-level "structural" worker-type-level markdowns, weighted
+  > by the types' wage bill shares. (p.12)
+
+- 論文は「逆数**でしか**」とも「調和平均」とも**書いていない**。
+  ただ賃金支払シェアで加重平均しているだけ。
+
+## AIは "理由" を捏造した {.nonincremental}
+
+- 原文に無い正当化（「調和平均」「逆数形だから」）を、AIが勝手に付け足した。
+- 出典に戻れば一目で分かる ― これはAIの**脚色**。
+- 教訓：AIは *それらしい理屈* を作り出す。原文と照合せよ。
+
+## これは、考えるまでもなく変 {.nonincremental}
+
+- $\xi^{-1}$ と $\mu^{X}$ は**同じ数**。どちらも $MRPL/w$。
+- 同じ数なのに「片方だけ集計できる」は**矛盾**。
+- 線形集計は**重みの選び方**にすぎない ― 唯一不可能な量など無い。
+
+$$\mu^{X}_i=\sum_o \phi_{o,i}\,\mu^{X}_{o,i}\qquad\bigl(=\xi_i^{-1}\bigr)$$
+
+## なぜAIは見抜けなかったか {.nonincremental}
+
+- AIの「速い判断」＝**流暢さ**（それらしく読めるか）。
+- 「調和平均」「逆数形」という言葉で、*正しそう*に見えてしまった。
+- 「遅い判断」＝**意味の検証**は別の手順。踏まなければ素通りする。
+
+## 人間との違い {.nonincremental}
+
+|          | 君（人間）                     | AI                 |
+|----------|--------------------------------|--------------------|
+| 第一印象 | 意味で判断（"変だ"と即感じる） | 語感・流暢さで判断 |
+| 検証     | 知覚と一体になっている         | 別の手順が必要     |
+
+: 誤りへの感度の違い
+
+## 君ができること {.nonincremental}
+
+- 「**〜だけ**」「唯一」「必ず」を見たら**止まる**（反例探しは安い）。
+- 「一行で確かめて」「**原文（出典）を引いて**」と言わせる。
+- 「本当に？」と問い返し、**定義に戻す**。
+- AIの出力は**下書き**。最終判断は人間。
+
+## まとめ {.nonincremental}
+
+- もっともらしさ $\neq$ 正しさ。
+- 排他的な主張ほど疑い、**出典に当たる**。
+- 検算・引用の一手間を、AIに必ず踏ませる。

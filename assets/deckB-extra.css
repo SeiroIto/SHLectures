@@ -1,0 +1,21 @@
+/* Explicit font size for slides that need to be bigger than .smaller but
+   still fit the 900px stage. Applied instead of .smaller. */
+.reveal section.mid { font-size: 0.76em; }
+
+/* Prose on .mid slides is larger, but tables stay at the size they had under
+   .smaller: 0.664 / 0.76 = 0.874 of the slide's own font size. */
+.reveal section.mid table { font-size: 0.874em; }
+
+/* Lee's slide is the tallest, so it takes a smaller bump than .mid.
+   Its tables are pinned back the same way: 0.664 / 0.70 = 0.949. */
+.reveal section.mid2 { font-size: 0.70em; }
+.reveal section.mid2 table { font-size: 0.949em; }
+
+/* Third step, for slides with room to spare. Tables pinned back as before:
+   0.664 / 0.90 = 0.738. */
+.reveal section.mid3 { font-size: 0.90em; }
+.reveal section.mid3 table { font-size: 0.738em; }
+
+/* A nested list set smaller than the slide's own size, without touching the
+   other nested lists on that slide. Used for Stadler's 課題 breakdown. */
+.reveal .sublist { font-size: 0.82em; margin-left: 1.6em; }

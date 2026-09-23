@@ -1,2 +1,2 @@
 filters:
-  - filters/ListArrow.lua
+  - assets/filters/ListArrow.lua

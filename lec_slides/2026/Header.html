@@ -1,0 +1,42 @@
+<style>
+/* 1. Define Font Faces */
+@font-face {
+  font-family: 'HiraKakuHeader';
+  src: url('../../assets/style/fonts/HiraKakuProW6.otf') format('opentype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'HiraKakuMain';
+  src: url('../../assets/style/fonts/HiraKakuProW3.otf') format('opentype');
+  font-weight: normal;
+}
+
+/* 2. Apply to Main Text */
+/* 
+.reveal .slides section {
+  font-family: 'HiraKakuMain', sans-serif !important; 
+  line-height: 1.5;
+}
+*/
+
+/* 3. Apply to Headers & Title */
+.reveal h1, 
+.reveal h2, 
+.reveal h3, 
+.reveal .title {
+  font-family: 'HiraKakuHeader', sans-serif !important;
+  text-transform: none !important; /* Prevents auto-shrinking alphabets */
+  line-height: 1.2 !important;
+  font-weight: bold;
+}
+
+/* Keep your centering logic */
+.center-xy {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

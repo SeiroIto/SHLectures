@@ -1,0 +1,351 @@
+---
+title: "AIは学びに何をしているか ― 証拠の質で読む"
+subtitle: |
+  強い研究から順に。弱い研究は弱いと言うだけ\
+  聖心女子大学国際交流学科
+author: "アジア経済研究所 伊藤成朗の指示のもと claude opus 5 が作成"
+execute:
+  echo: false
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: false
+    width: 1600
+    height: 900
+    logo: GrootbergGiraffeHead.jpg
+    theme: [sky, sky-add.scss]
+    css: [../../assets/style/hiragino.scss, ../papers/AICogAbility/deckB-extra.css]
+    html-math-method: mathjax
+lang: ja
+---
+
+
+## 結論から {.nonincremental}
+
+- AIを使うと提出物の点数・評価は上がる可能性がある
+- しかし、点数=短期記憶(=学びの材料)、ではない
+  - 実験: AI利用して調査結果を書いた直後、何も見ずに一文も引用できなかった者が 83.3%
+  - 独力、検索エンジンを使ったグループはともに11.1%
+  - 指令を出して終わりがちなAIだと、記憶に残りにくいため
+- 現状: AI利用が思考能力に与える効果について、ほぼ何も分かっていない
+- 懸念は必要だが、思考能力を下げるなどと早計に書いてはいけない
+
+## 参照した論文 {.nonincremental .mid}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "研究" = c("[Deng et al. (2025)](https://doi.org/10.1016/j.compedu.2024.105224)", "[Kosmyna et al. (2025)](https://arxiv.org/abs/2506.08872)", "[Stadler et al. (2024)](https://doi.org/10.1016/j.chb.2024.108386)",
+             "[Heung & Chiu (2025)](https://doi.org/10.1016/j.caeai.2025.100361)", "[Lee et al. (2025)](https://doi.org/10.1145/3706598.3713778)",
+             "[Abbas et al. (2024)](https://doi.org/10.1186/s41239-024-00444-7)", "[Gerlich (2025)](https://doi.org/10.3390/soc15010006)",
+             "[Zhai et al. (2024)](https://doi.org/10.1186/s40561-024-00316-7)", "[Vendrell & Johnston (2026)](https://doi.org/10.1016/j.caeai.2026.100572)"),
+  "設計" = c("実験のみのメタ分析", "無作為割付＋脳波", "無作為割付実験", "メタ分析",
+             "調査＋混合効果回帰", "3波・時差つき調査", "横断調査", "系統的レビュー", "概念的分析"),
+  "規模" = c("62本（平均106名）", "54（第4回18）", "91", "17本・1,735名",
+             "319（課題936）", "494（＋開発165）", "666", "14本", "―"),
+  "無作為化" = c("39/62本", "あり", "あり", "6/17本", "なし", "なし", "なし", "―", "―"),
+  "使えるか" = c("◎", "◎", "◎", "○", "○", "△", "△", "✕", "✕"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.28, 0.20, 0.20, 0.10, 0.10))
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+format_tt(tab, j = 1, markdown = TRUE)
+```
+
+- [Forbes誌記事](https://www.forbes.com/sites/lisabodell/2025/11/13/outsourcing-our-minds-how-generative-ai-is-rewiring-how-we-think/)を起点&rarr;[Vendrell & Johnston (2026)](https://doi.org/10.1016/j.caeai.2026.100572)、[Gerlich (2025)](https://doi.org/10.3390/soc15010006)、[Lee et al. (2025)](https://doi.org/10.1145/3706598.3713778)から引用文献をリスト
+- 並び順 ≠ 証拠の質の高さ順
+- 証拠の質が高い研究 = 他の経路を消して、想定した因果関係のみを捉えている研究
+
+## 強い証拠① [Deng et al. (2025)](https://doi.org/10.1016/j.compedu.2024.105224) の設計 {.nonincremental .mid2}
+
+- 5つのデータベース、2022–2024年、査読誌と学会論文、実験研究
+- 72 &rarr; 論文の質 &rarr; 69 &rarr; 変数が足りない &rarr; 62
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "結果変数" = c("1. 学業成績 ― 試験・課題の点",
+                 "2. やる気と気持ち ― 興味、楽しさ、打ち込み",
+                 "3. 高次思考 ― 批判的・創造的に考えられたか",
+                 "4. 課題をやり遂げられるという自信",
+                 "5. 認知的負荷 ― 頭を使った感覚の量"),
+  "件数" = c(51, 20, 15, 7, 4),
+  "平均効果量" = c(0.712, 0.881, 0.703, 0.441, -0.675),
+  "95%信頼区間" = c("[0.50, 0.93]", "[0.53, 1.23]", "[0.35, 1.06]",
+                    "[-0.14, 1.02]", "[-1.27, -0.08]"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.40, 0.08, 0.10, 0.15), caption = "AI利用: 相関および効果")
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+tab <- style_tt(tab, j = 2:4, align = "rdc")
+format_tt(tab, j = 3, digits = 3, num_fmt = "decimal")
+```
+
+- ある研究の効果量 = 正規化した平均点差 =
+  （処置群の平均点 − 対照群の平均点）÷ 点の標準偏差
+- 平均効果量 = 各研究の効果量の加重平均（重みは分散の逆数）。
+  分散が小さい=推計精度が高い、ので重みを高くする
+- しかし、推計精度が高い $\neq$ 証拠の質が高い(=因果関係をクリーンに示せている)
+
+扱っている証拠の質が高くない
+
+- 小標本研究（18名-600名、平均106 = ChatGPTを使う治療群 + 使わない対照群）が大半
+- 証拠の質を考慮せず(推計精度だけを考慮して)各研究結果をまとめている
+
+## 著者自身の警告 {.nonincremental .mid}
+
+1. 学業成績 = AIの出来、かも (p.20)
+    * 介入後の確認試験は、理解なしにChatGPTの答えを写していることを排除できない
+1. 動機付けの向上 = 目新しさ、かも (p.19)
+    * なぜAI&uarr; &rArr; 動機付け&uarr;となるのか? 著者らは説明していない
+        * 疑問に即答してくれ新たな知見を得られる &rArr; 学びの動機付け&uarr;か?
+    * 自己申告による動機付け = やる気 &rArr; 飽きると低下&larr;期間 &uarr; &rArr; 効果 &darr; (1〜4週 1.231 → 10週超 0.754)
+1. 高次思考は自己申告 &rarr; 人によって定義が違うかも (p.9)
+1. 必要な標本サイズを実験前に計算しないなど設計が杜撰、結果の信頼性が低い (p.20)
+1. 62本は同じ現象を測っていない可能性=同じ現象(批判的思考への影響)としてまとめることが不適切な可能性、を無視できない (pp.12-13)
+    * I² = 研究間のばらつきのうち、現象が異なるためと解釈できる割合
+    * 約90%（75%超で「大きい」とされる）
+
+## 強い証拠② [Kosmyna et al. (2025)](https://arxiv.org/abs/2506.08872) {.nonincremental}
+
+- 処置: 参加者を無作為に3群へ割当て、同じ小論文課題を書かせる
+    - AI利用群 / 検索エンジン群 / 道具なし群
+- 標本: 大学生各群18名 $\times$ 3回、第4回は群を入れ替え各群9名
+- 測定: 小論文執筆中の脳波、自然言語処理指標、
+  人間の教員とAIの両方による採点
+- 結果1: 脳内結合の強さ
+    * 道具なし > 検索エンジン > AI利用
+- 結果2: 「いま書いた小論文から一文を引用せよ」の正答率
+
+    * 道具なし $\times$ 3 &rarr; AI利用 > 道具なし $\times$ 4 = 検索エンジン $\times$ 4 > AI利用 $\times$ 4 > AI利用 $\times$ 3 &rarr; 道具なし
+
+## この研究への批判 {.nonincremental .mid3}
+
+Stankovic et al. (arXiv:2601.00856, 2025年12月) が具体的な批判を出している。
+
+- 標本が小さい ― 著者自身が使った効果量から逆算すると159名必要。実際は54名、
+  第4回は18名
+- 図によっては 2〜4本の小論文だけから描かれている
+- 多重比較の補正 (FDR) を「必要なときに」としか書かず、どこに適用したか不明。
+  F値が省かれ p値だけ載る箇所がある
+- 55名が全回を終えたと書きながら、分析は54名。除外理由が書かれていない
+- 83.3%の根拠である「正しく引用できたか」の判定手順が書かれていない。
+  一文を言えたかどうかが理解を測れているのかも疑わしい、と指摘する
+
+## 強い証拠③ [Stadler et al. (2024)](https://doi.org/10.1016/j.chb.2024.108386) {.nonincremental .mid3}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "使った道具" = c("Google検索", "ChatGPT"),
+  "挙げた論点数の平均" = formatC(c(1.87, 1.20), format = "f", digits = 2),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.175, 0.175), captio = "専門家の回答と学生の答案から作った論点リストとの一致数")
+tab <- style_tt(tab, j = 2, align = "d")
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+format_tt(tab, j = 2, digits = 2, num_fmt = "decimal")
+```
+
+- 処置: 大学生 91人をくじ引きで ChatGPT群 と Google群 に分けた
+- 課題:
+  - 友人「ポール」が日焼け止めのナノ粒子を心配している
+  - 調査時間は 20分
+  - その後、調べたものを見ずに推奨と理由を書く
+      - 学生は最初に課題の全体を知らされている。20分後に書くことは分かっていた。
+- GPT-3.5、AIへのプロンプト（尋ね方）の訓練なし
+  - GPT-5.6 Luna なら、尋ね方が初歩的でも優れた論点を得られたかもしれない
+
+## 中位の証拠 [Lee et al. (2025)](https://doi.org/10.1145/3706598.3713778) {.nonincremental .mid2}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "説明変数" = c("1. その課題でAIにどれだけ自信があったか",
+                 "2. ふだん生成AIをどれだけ信頼しているか"),
+  "係数" = c(-0.69, -0.01),
+  "p" = c("<0.001", "0.967"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.45, 0.1, 0.1), 
+  caption = "「その課題を批判的に考えたか」と説明変数の相関")
+tab <- style_tt(tab, j = 2:3, align = "dc")
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+format_tt(tab, j = 2, digits = 2, num_fmt = "decimal")
+```
+
+- 知識労働者 319名・課題936件。無作為化なし、自己申告7問のみ。職業は
+  情報・数学系 18.5%、芸術・デザイン 13.8%、事務 11.9%、金融 11.0%、教育 7.2% と幅広い
+
+1. その課題で批判的思考をした人ほど、その課題でAIを信頼していない
+    - その課題で信頼しないから批判的思考をする（= 信頼するから批判的思考をしない）、というのは当然のこと
+    - どの課題でも信頼するのなら、2. も同じ結果になるはず
+2. その課題での批判的思考の程度と日常の生成AIへの信頼度は無相関\
+   「AIを信頼すると考えなくなる」\
+    &rArr; 日常のAI信頼度&uarr; ~ 日常の批判的思考&darr; \
+    &rArr; 日常のAI信頼度&uarr; ~ その課題での批判的思考&darr; &larr; 「その課題」は「日常」の一部だから
+    * 計測された関係と異なる &rArr; 「日常のAI信頼度&uarr; &rArr; 日常の批判的思考&darr;」とは言えない
+- 「AIに頼ると考えなくなる」と本研究を引用する人たちは、1.だけを取り上げ2.を無視している
+
+## 根拠の弱い論文は「弱い」「その理由」だけ書いて先へ進む {.nonincremental .mid3}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "研究" = c("Zhai et al. (2024)", "Abbas et al. (2024)", "Gerlich (2025)", "Vendrell & Johnston (2026)"),
+  "なぜ使わないか" = c(
+    "14本中6本 (43%) がデータの無い意見論文。しかも論文自身の除外基準に反する (p.8, p.9)。検定ゼロ、信頼区間ゼロ",
+    "「原因と結果」「効果」と書くが無作為割付は無く、示せるのは相関まで。3波とはいえ1〜2週間おきに3回尋ねただけで、継続的な追跡ではない。第1波840名→第3波494名、41%が脱落 (p.10)。「客観指標」と称する成績は学生の自己申告CGPA (p.11)",
+    "横断調査で因果が言えない。加えて雑誌が訂正記事を出した（Table 4 が Table 3 の複製、doi 10.3390/soc15090252）。分散分析表にAI利用の行が無いのに p<0.001 と書く。標本に無い層と比較する",
+    "著者自身が「実証研究ではない」と明記 (p.2)"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.26, 0.5))
+style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+```
+
+- Zhai・Gerlich・V&J の3本は同じ論文を引用していて独立ではない。V&J → Gerlich・Zhai、Gerlich → Zhai [25]
+
+## 意見論文はこう見分ける {.nonincremental .mid3}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "区分" = c("narrative review", "viewpoint", "Special Report", "commentary"),
+  "意味" = c("著者が読む論文を自分で選ぶ。検索式・選抜基準・流れ図が無く再現できない",
+             "JMIR誌の「意見記事」区分。データ無し",
+             "NEJM の区分。データや方法論の節が無い",
+             "論評・随筆"),
+  "Zhai の該当例" = c("Dergaa, Grassini", "Abd-Alrazaq", "[Lee (2023, NEJM)](https://doi.org/10.1056/nejmsr2214184)",
+                      "Koos & Wachsmann, Pokkakillath & Suleri"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.18, 0.4, 0.2))
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+format_tt(tab, j = 3, markdown = TRUE)
+```
+
+- Zhai が「研究」として数えた14本のうち6本は意見論文
+- Zhai の除外基準は「review articles」「editorials or opinion pieces」を
+  除くと明記 (p.8, p.9)。自分の手順を自分で破っている
+
+## まとめ論文の一行要約は、証拠ではない {.nonincremental .mid3}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "原典" = c("[Fisher et al. (2025)](https://arxiv.org/abs/2410.06415)", "[Darvishi et al. (2024)](https://doi.org/10.1016/j.compedu.2023.104967)", "[Pardos & Bhandari (2024)](https://doi.org/10.1371/journal.pone.0304013)",
+             "[Fan et al. (2024)](https://doi.org/10.1111/bjet.13544)", "[Yatani et al. (2024)](https://arxiv.org/abs/2409.09218)", "[Karataş et al. (2024)](https://doi.org/10.1007/s10639-024-12574-6)"),
+  "実際の設計" = c("無作為割付実験 299名", "無作為割付実験 1,625名",
+                   "無作為割付実験 274名", "無作為割付実験 117名",
+                   "提案論文。実験は無い", "面接調査 13名。検定は無い"),
+  "一行要約は合っていたか" = c("○", "○",
+    "✕ 数学の点数を「創造性」と言及",
+    "✕ 悪い結果だけ言及",
+    "✕ 実験結果として言及", "✕ 効果の証拠として言及"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.30, 0.24, 0.40))
+tab <- style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+format_tt(tab, j = 1, markdown = TRUE)
+```
+
+- Vendrell & Johnston (2026) が一行ずつ紹介していた6本を、原典まで開いて確かめた。
+- 6本中4本で、紹介文が原典と食い違っていた
+- しかも Pardos は、AIの助言が対照群に勝ち、人間の教師の助言は勝たなかった実験。
+  紹介文とは向きが逆である
+- 教訓 ― まとめ論文の一行は出発点であって、証拠ではない。
+  原典を開くまで、その一行を引用してはいけない
+
+## 何が言えて、何が言えないか {.nonincremental}
+
+- 言える
+  - AIを使うと
+      * 調査結果を見ずに書く議論の根拠づけが弱くなった（Stadler, n=91）
+      * 書いた直後に一文すら引用できない人が多数派（Kosmyna, 83.3%, p<0.001）
+  - 知識労働者の批判的思考はAI信頼度と無相関 (Lee et al.)
+- 言えない
+  - AI &uarr; &rArr; 思考力 &darr; という**因果関係を示した論文は無い**
+  - 62本の実験で質の高い研究だけを総合すると、提出物の評価は上がるかは不明（Deng）
+
+まとめ
+
+* AI利用が思考能力に与える効果について、ほぼ何も分かっていない
+
+## このデッキはどう変わったか ① AI要約を疑いつつ読む {.nonincremental .mid2}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "前" = c(
+    "V&J と Gerlich を軸に構成。題名はAIの実害を前提",
+    "「69本を精査し62本を統合」とだけ",
+    "供給された Lee の PDF をそのまま使用",
+    "「Gerlich は Table 5 と 6 で自己矛盾している」",
+    "β=−0.36 は認知的オフロードの係数。「著者は因果を認めていない」",
+    "批判論文は査読前なので無視",
+    "弱い論文を12枚かけて解剖"),
+  "指摘" = c(
+    "put less weights on V&J and Gerlich (V&J is peer reviewed but literature survey is repepetive, Gerlich leaves too few ambiguity)",
+    "Deng はどう論文を絞ったか。証拠の質を考慮しているか",
+    "この Lee は V&J が引く Lee と別人では",
+    "研究者はそんな初歩的な誤りをしない。見つけたと思ったら、まず自分を疑え",
+    "全デッキに敵対的検証をかけよ",
+    "査読前だからと無視する態度は今後決してとるな",
+    "decks are too long / for low quality papers, just state so"),
+  "後" = c(
+    "強い証拠（Deng・Kosmyna・Stadler）を先頭に再構成。題名を「AIは学びに何をしているか」に変更",
+    "123本→51本除外→72本→質で3本除外→69本→変数が揃わず7本除外→62本 (p.6)。無作為化・標本数・質を記録しながら、まとめる際に一切使っていない (Table 8, p.13)",
+    "DOI 10.1145/3706598.3713778 で照合、同一と確認",
+    "単項目 vs 合成尺度で別物の可能性。「論文からは判定できない」に格下げ",
+    "β=−0.36 は Deep Thinking Activities（Table 7 にオフロード項は無い）。後者は私の推論だったので撤回",
+    "読んで1枚に。さらにその批判自体を原典と照合し、1点は再現しないと明記",
+    "40枚 → 15枚。弱い論文は理由を一行書いて終わり"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.27, 0.30, 0.43), theme = "striped")
+style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+```
+
+## このデッキはどう変わったか ② 何を測ったのかを問う {.nonincremental .mid2}
+
+```{r}
+library(tinytable)
+d <- data.frame(
+  "前" = c(
+    "「動機・情意」「自己効力感」",
+    "「動機が上がる」とだけ",
+    "「高次思考が上がる」",
+    "「有意でない」",
+    "Stadler の結果のみ提示",
+    "Lee の表を「測定の教訓」として提示",
+    "Abbas を論文の言葉どおり「原因と結果」「効果」",
+    "この頁の草案＝太字の数・文字の大きさ・枚数"),
+  "指摘" = c(
+    "情意とは何か。理解不能な訳語を作ってはいけない",
+    "なぜAIを使うと動機付けが強まるのか、説明されているか",
+    "自己申告なら人によって思い描く定義が違うのでは",
+    "統計的有意という言葉を絶対に使うな",
+    "GPT-3.5、AIへのプロンプト（尋ね方）の訓練なし",
+    "2問は同じことを聞いていないか。その課題で信頼していれば批判的に考えないのは当然",
+    "相関が因果のように書かれている",
+    "not superficial edits, but more of substance"),
+  "後" = c(
+    "「やる気と気持ち」「課題をやり遂げられるという自信」。Deng の定義 (p.9) を日本語に",
+    "Deng は仕組みを説明していない。介入中に繰り返し測った研究は1本も無い (p.19)",
+    "「高次思考は自己申告 → 人によって定義が違うかも (p.9)」と明記",
+    "「誤差が大きく、上がったか下がったかを判定できない」。判定列そのものを削除",
+    "限界として明記。GPT-4.x なら初歩的な尋ね方でも違った可能性を併記",
+    "相関として提示し直し、2点の読みを明記。「同じ内容を2つの質問として書き換えただけではないか」",
+    "無作為割付が無いので相関までと明記。「客観指標」と称する成績は自己申告CGPA (p.11)",
+    "中身の変化に書き直し（この2枚）"),
+  check.names = FALSE
+)
+tab <- tt(d, width = c(0.27, 0.30, 0.43), theme = "striped")
+style_tt(tab, i = 0, align = "c", background = "#8FDDFA")
+```
+
+- 要約に頼ると上のどれも出てこなかった。原典を開き、指摘されて初めて直った。
+  このデッキ自体が、AIに任せきりにすると何が起きるかの実例

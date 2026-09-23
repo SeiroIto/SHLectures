@@ -1,0 +1,43 @@
+/* hiragino.scss */
+/* 1. Define Font Faces */
+@font-face {
+  font-family: 'HiraKaku';
+  src: url('fonts/HiraKakuProW3.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'HiraMaru';
+  src: url('fonts/HiraMaruProW4.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'HiraMincho';
+  src: url('fonts/HiraMinProW3.otf') format('opentype');
+}
+
+/* 2. Apply to Reveal.js elements */
+.reveal {
+  /* Default body text: Hiragino Kaku */
+  font-family: 'HiraKaku', sans-serif;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  /* Headers: Hiragino Kaku (or Maru if you prefer a softer look) */
+  font-family: 'HiraMaru', sans-serif;
+  font-weight: bold;
+  
+  /* Fix for the "smaller alphabet" look: 
+     Adjusting line-height and letter-spacing helps alignment */
+  line-height: 1.2;
+  letter-spacing: -0.01em; 
+}
+
+/* Optional: use Maru or Mincho for specific classes if needed */
+.maru {
+  font-family: 'HiraMaru', sans-serif;
+}
+
+.mincho {
+  font-family: 'HiraMin', serif;
+}

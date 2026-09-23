@@ -18,11 +18,11 @@ format:
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2026/1.html>
-    theme: [sky, sky-add.scss]
+    theme: [sky, ../../assets/style/sky-add.scss]
     #### CSS bypasses the Sass compiler's internal search logic
     #### theme: [sky, sky-add.scss, ../../style/hiragino.scss] error
     #### theme: [sky, sky-add.scss, /style/hiragino.scss] error
-    css: ../../style/hiragino.scss 
+    css: [../../assets/style/hiragino.scss, ../../assets/my.css] 
     lightbox: true
     linkcolor: red
     code-line-numbers: true
@@ -31,12 +31,14 @@ format:
     toc: true
     toc-depth: 1
     template-partials: 
-      - ../../style/toc-slide.html
-    include-after-body: ../../style/toc-add.html
+      - ../../assets/style/toc-slide.html
+    include-after-body: ../../assets/style/toc-add.html
     toc-bg-image: "../../GrootbergGiraffe3.jpg"
 filters:
   - parse-latex
-  - ../../filters/ListArrow.lua
+  - ../../_extensions/seiro/tikzja/tikzja.lua
+  - ../../assets/filters/ListArrow.lua
+  - ../../_extensions/schochastics/nutshell/nutshell.lua
 include-in-header:
   - header.html
   - text: |
@@ -46,99 +48,9 @@ include-in-header:
 bibliography: ../../seiro.bib
 resources:
   - 01.pdf
-  - ../../style/fonts/
-# quarto render 01.qmd
+  - ../../assets/style/fonts/
+#### quarto render 01.qmd
 ---
-```{css }
-Red {
-  color: red;
-}
-Orange {
-  color: #e94e2c;
-}
-Blue {
-  color: blue;
-}
-Gray {
-  color: gray;
-}
-.reveal .slides pre code {
-    max-height: 800px;
-}
-#TOC {
-  font-color: #e94e2c;
-}
-/* Main container for the description list */
-.description-list {
-  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
-  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
-}
-/* Styles for the description list element */
-.description-list dl {
-  margin-left: 0;  /* Removes default left margin */
-  padding-left: 0;  /* Removes default left padding */
-}
-/* Styles for the term (header) in the description list */
-.description-list dt {
-  font-weight: bold;  /* Makes the term text bold */
-  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
-  margin-right: 0.5em;  /* Adds some space after the term */
-}
-/* Styles for the description in the description list */
-.description-list dd {
-  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
-  margin-left: 0;  /* Removes default left margin */
-}
-/* Styles for paragraphs within the description */
-.description-list dd p {
-  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
-  margin: 0;  /* Removes default paragraph margins */
-}
-/* Creates a new line and adds space between list items */
-.description-list dd::after {
-  content: "";  /* Necessary for the pseudo-element to render */
-  display: block;  /* Creates a line break */
-  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
-}
-#### description with a line break between item header and texts
-.description-lb {
-  font-size: 70%;
-  line-height: 1.2;
-}
-.description-lb dl {
-  margin-left: 0;
-  padding-left: 0;
-}
-.description-lb dt {
-  font-weight: bold;
-  margin-bottom: 0.2em;
-}
-.description-lb dd {
-  margin-left: 0;
-  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
-}
-.description-lb dd p {
-  margin: 0;
-}
-.ListArrow {
-  width: var(--list-width, auto);
-}
-.ListArrow .arrow-row {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 0.3em;
-}
-.ListArrow .arrow-left {
-  flex: 0 0 var(--left-width, 45%);
-}
-.ListArrow .arrow {
-  flex: 0 0 var(--arrow-width, 5%);
-  text-align: center;
-}
-.ListArrow .arrow-right {
-  flex: 0 0 var(--right-width, 50%);
-}
-```
 
 ::: {style="text-align: center;"}
 # はじめに
@@ -308,7 +220,7 @@ AIは
 :::::
 
 
-
+<!--
 ----
 
 ## AI利用の考え方と方法
@@ -328,7 +240,7 @@ Claudeはtoo verbose/wordy
     * 違うプロセスを自動立ち上げ&rarr;長い文章をチェック、改めて文章を返す
 
 計算負担を減らす(思考・情報収集の節約、ルールの無視をする)ように指導(学習訓練)されているのではないか
-
+-->
 
 
 ----
@@ -338,19 +250,139 @@ Claudeはtoo verbose/wordy
 
 ### 間違い予防
 
-::: {.fragment fragment-index="1"}
+::: {.fragment}
 * Hallucination対策 
     1. 情報源を固定: Retrieval-augmented generation (RAG)
        * 対処: 情報収集作業の偏り
-       * 手つかず: 要約作業での偏り
     1. AIの回答後に事実検証質問を作成させ、別のエージェントに確認させる[Chain-of-Verification (CoVe)](https://arxiv.org/abs/2309.11495)
+       * 対処: 要約作業での偏り
        * 事実に関わる内容(文献、参照内容、推計値の数値、事件の日付)に限定
-       * 手つかず: 情報収集作業の偏り
     1. 「分かりません」回答を許す&rarr;すぐに「分かりません」と回答するので匙加減が難しい
 :::
-::: {.fragment fragment-index="2"}
-RAG+CoVe &rArr; 単純な事実誤認ならば(ある程度)回避可能
+::: {.fragment}
+RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱うと不正確な推測になる
 :::
+
+---
+
+## AI利用の考え方と方法
+
+### 間違い予防
+
+* Hallucination対策: AIにどうやって情報源の偏りを認識させるか
+
+* 情報源を固定(source-grounded)しても要約に不可解な偏りが出る(ことを予期すべき)
+* NotebookLMで極貧層向けマイクロファイナンスについて50論文pdfから文献サーベイさせた
+  * スライド・デックを作成させると視覚的な完成度は高い、しかし
+      * 断定調、論文では慎重な表現&rarr;原典参照は必須
+      * 印象操作に似たdata visualisationあり
+  * 似たプロンプト2つでほぼ正反対の要約を提示
+
+---
+
+## AI利用の考え方と方法
+
+### 間違い予防
+
+* Hallucination対策: AIにどうやって情報源の偏りを認識させるか
+
+:::::::::: {.columns}
+::::: {.column width = "50%"}
+[Deck 1](1/Deck1_TheGraduationModelBlueprint.pdf)![](1/NotebookLM_SlideDeck1.jpg){height=80}
+
+:::: {.incremental}
+* 通常のMFは全く駄目と断定
+* 大型家畜移転+トレーニング+現金補助こそがsilver bullet
+* 貧困の罠を克服するための高額な介入をスケールアップすることの可否ばかりを論じる(podcastも)
+* 影響力のある研究者の特定論文[@BanerjeeKarlanetal2022]の主張
+::::
+::::: 
+
+::::: {.column width = "50%"}
+[Deck 2](1/Deck2_MicrocreditAndPovertyRealities.pdf)![](1/NotebookLM_SlideDeck2.jpg){height=80}
+
+:::: {.incremental}
+* 貧困の罠は存在しないと断定
+* 高金利によるデフォルトは頻発しない(メディアが騒いでいるだけ)
+* 通常のMFで長期に支援することを主張
+* 2論文[@Antman2007; @Angelucci2015]のみに依拠
+::::
+::::: 
+::::::::::
+
+----
+
+## AI利用の考え方と方法
+
+### 間違い予防: 
+
+* Hallucination対策: 要約作業での偏り・誤り
+
+:::: {style="font-size: 100%;" .fragment fragment-index=1}
+
+::: {.nonincremental}
+* RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
+:::
+
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=2}
+> microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=3}
+<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](1/ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
+
+> (00:00)「あの、もし私がですよ、極度の貧困状態にある人にヤギを4頭無料でプレゼントするとしますよね」「はい」「そしたら、3年後には、なんと<Red>何も支援しなかった場合よりもさらに貧困になってしまう</Red>と言ったら、これ信じられますか」「いやあ、直感的には信じがたいですよね」「ですよね...今日私たちが深掘りしていくのは、まさにこの直感を根底から崩す、非常に興味深い、そしてちょっと考えさせられるテーマなんです」
+
+> (11:48) 「<Red>資産を無料で与えられたことで、却って全体的な家畜の価値を下げてしまった</Red>という、完全に直感に反するショッキングな結果でした」
+
+<Red>[Escape_Velocity_and_the_Poverty_Trap.m4a](1/あEscape_Velocity_and_the_Poverty_Trap.m4a)</Red> [(台本)](1/Transcript_EscapeVelocity.html)
+
+> (18:50) The households that received just the goats actually saw <Red>their overall wealth decrease compared to the control group.</Red>
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=4}
+Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。家畜の合計価値は不変。
+::::
+
+----
+
+## AI利用の考え方と方法
+
+### 間違い予防
+
+* Hallucination対策: 要約作業での偏り・誤り
+
+:::: {style="font-size: 50%;" .fragment fragment-index=1}
+
+::: {style="font-size: 100%;"}
+::: {.nonincremental}
+* RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
+:::
+:::
+
+> microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=2}
+<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
+
+> (14:00) そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<Red>資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</Red>ということが、この研究から導き出された最も重要な結論なんですよ。
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=3}
+* 過度の一般化: 組み合わせると上手くいく事例、資産+現金給付、資産+ノウハウでも上手くいく可能性あり、現金給付=セーフティネットではなく経常投入費支援かも&rarr;「特効薬は存在しませんでした」「三位一体の多角的アプローチが...不可欠だった」
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=4}
+> (15:33) 「バンドウィドス・タックスという言葉を聞いたことがあるかもしれません」「おびいきはば(帯域幅?)への課税ですか」「人は明日のご飯をどうしようという強烈な不安に直面しているとき、脳の認知的余裕、つまり、おびいきはばの殆どをその短期的な問題に奪われてしまうのです」「あー」「長期的な計画を立てたり、新しいスキルを学んだりする余裕が完全にゼロになってしまうのです」「分かります、私も仕事でもう極限まで追い詰められている時は、1年後のキャリアプランなんて絶対に考えられませんもん。」
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=5}
+* Hallucination: 「介入&rArr;cognition&uarr;」という結果は出なかったのに、現金補助を組み合わせて効果が高くなったことを説明するために「scarcity&uarr;&rArr;cognition&darr;」で説明
+::::
+
 
 ----
 
@@ -382,7 +414,9 @@ RAG+CoVe &rArr; 単純な事実誤認ならば(ある程度)回避可能
     
          > <Gray>本学では皆さんが</Gray>「自らの意見を自らの言葉で発信する力」<Gray>を身につけて卒業・修了することを大事な使命と考えています。</Gray>
     1. 自らが表現しない(執筆しない)ならば、替え玉を講義に出席させているようなもの
-    1. より深刻な問題: 深い思考能力が育たず、論理演繹や研究過程(=作業)管理の<Red>知的能力が退化</Red>する
+    1. より深刻な問題: 深い思考能力が育たず、論理演繹や研究過程(=作業)管理の知的能力が退化すると言われているが、[現在は科学的根拠がほぼゼロ](AICriticalThinking_ja_verified.html)
+        * 長期的な影響はこれから発生するから計測できていない
+        * しかし、悪影響の可能性を気にとめておく方が慎重
 
 ----
 
@@ -423,143 +457,37 @@ RAG+CoVe &rArr; 単純な事実誤認ならば(ある程度)回避可能
 
 AIはユーザを喜ばせようと賛同する傾向が強い
 
-「批判せよ」と指示すると有益な視点を得られる(adversarial agentを使うようなアイディア)
+::: {.fragment}
+質問するだけでは賛辞・同意が主体
+:::
 
-::: {style="font-size:50%;"}
+::: {.fragment}
+「批判せよ」と指示すると有益な視点を得られる
+:::
+
+:::: {style="font-size:50%;"}
+::: {.fragment}
 あなたは暗黙に
 
 > 研究公正は研究者（または研究チーム）が遵守可能な行為規範であるべき
+:::
 
+::: {.fragment}
 という立場を取っています。研究公正を狭く捉える代表例としてU.S. Office of Research Integrityがあります。ORIは基本的に
+:::
 
 * fabrication
 * falsification
 * plagiarism
 
+::: {.fragment}
 中心です。つまり個人が制御できる行為に焦点を当てる。あなたの立場はむしろORIに近い。
 :::
+::::
 
+::: {.fragment}
 思考の練度を上げるには有益
-
----
-
-## AI利用の考え方と方法
-
-### 伸ばす{background-color="#010638"}
-
-AIにどうやって情報源の偏りを認識させるか
-
-* 情報源を固定(source-grounded)しても要約に不可解な偏りが出る(ことを予期すべき)
-* NotebookLMで極貧層向けマイクロファイナンスについて50論文pdfから文献サーベイさせた
-  * スライド・デックを作成させると視覚的な完成度は高い、しかし
-      * 断定調、論文では慎重な表現&rarr;原典参照は必須
-      * 印象操作に似たdata visualisationあり
-  * 似たプロンプト2つでほぼ正反対の要約を提示
-
----
-
-## AI利用の考え方と方法
-
-### 伸ばす{background-color="#010638"}
-
-AIにどうやって情報源の偏りを認識させるか
-
-:::::::::: {.columns}
-::::: {.column width = "50%"}
-[Deck 1](1/Deck1_TheGraduationModelBlueprint.pdf)![](1/NotebookLM_SlideDeck1.jpg){height=80}
-
-:::: {.incremental}
-* 通常のMFは全く駄目と断定
-* 大型家畜移転+トレーニング+現金補助こそがsilver bullet
-* 貧困の罠を克服するための高額な介入をスケールアップすることの可否ばかりを論じる(podcastも)
-* 影響力のある研究者の特定論文[@BanerjeeKarlanetal2022]の主張
-::::
-::::: 
-
-::::: {.column width = "50%"}
-[Deck 2](1/Deck2_MicrocreditAndPovertyRealities.pdf)![](1/NotebookLM_SlideDeck2.jpg){height=80}
-
-:::: {.incremental}
-* 貧困の罠は存在しないと断定
-* 高金利によるデフォルトは頻発しない(メディアが騒いでいるだけ)
-* 通常のMFで長期に支援することを主張
-* 2論文[@Antman2007; @Angelucci2015]のみに依拠
-::::
-::::: 
-::::::::::
-
-----
-
-## AI利用の考え方と方法
-
-### 伸ばす{background-color="#010638"}
-
-:::: {style="font-size: 100%;" .fragment fragment-index=1}
-要約作業での偏り・誤り
-
-::: {.nonincremental}
-* RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
 :::
-
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=2}
-> microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=3}
-<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](1/ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
-
-> (00:00)「あの、もし私がですよ、極度の貧困状態にある人にヤギを4頭無料でプレゼントするとしますよね」「はい」「そしたら、3年後には、なんと<Red>何も支援しなかった場合よりもさらに貧困になってしまう</Red>と言ったら、これ信じられますか」「いやあ、直感的には信じがたいですよね」「ですよね...今日私たちが深掘りしていくのは、まさにこの直感を根底から崩す、非常に興味深い、そしてちょっと考えさせられるテーマなんです」
-
-> (11:48) 「<Red>資産を無料で与えられたことで、却って全体的な家畜の価値を下げてしまった</Red>という、完全に直感に反するショッキングな結果でした」
-
-<Red>[Escape_Velocity_and_the_Poverty_Trap.m4a](1/あEscape_Velocity_and_the_Poverty_Trap.m4a)</Red> [(台本)](1/Transcript_EscapeVelocity.html)
-
-> (18:50) The households that received just the goats actually saw <Red>their overall wealth decrease compared to the control group.</Red>
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=4}
-Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。家畜の合計価値は不変。
-::::
-
-----
-
-## AI利用の考え方と方法
-
-### 伸ばす{background-color="#010638"}
-
-要約作業での偏り・誤り
-
-:::: {style="font-size: 50%;" .fragment fragment-index=1}
-
-::: {style="font-size: 100%;"}
-::: {.nonincremental}
-* RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
-:::
-:::
-
-> microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=2}
-<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
-
-> (14:00) そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<Red>資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</Red>ということが、この研究から導き出された最も重要な結論なんですよ。
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=3}
-* 過度の一般化: 組み合わせると上手くいく事例、資産+現金給付、資産+ノウハウでも上手くいく可能性あり、現金給付=セーフティネットではなく経常投入費支援かも&rarr;「特効薬は存在しませんでした」「三位一体の多角的アプローチが...不可欠だった」
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=4}
-> (15:33) 「バンドウィドス・タックスという言葉を聞いたことがあるかもしれません」「おびいきはば(帯域幅?)への課税ですか」「人は明日のご飯をどうしようという強烈な不安に直面しているとき、脳の認知的余裕、つまり、おびいきはばの殆どをその短期的な問題に奪われてしまうのです」「あー」「長期的な計画を立てたり、新しいスキルを学んだりする余裕が完全にゼロになってしまうのです」「分かります、私も仕事でもう極限まで追い詰められている時は、1年後のキャリアプランなんて絶対に考えられませんもん。」
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=5}
-* Hallucination: 「介入&rArr;cognition&uarr;」という結果は出なかったのに、現金補助を組み合わせて効果が高くなったことを説明するために「scarcity&uarr;&rArr;cognition&darr;」で説明
-::::
-
 
 ----
 
@@ -1211,6 +1139,206 @@ p
 
 ### 利用例: vive coding (計算・演算・プログラミングの委託)
 
+* Find countries that started out as lowest pc income and now belongs to middle or higher income countries
+* Show their trajectories using the same style of graph
+
+<!-- #### CLAUDE new: 2026-09-07, edited 2026-09-08. Fig 1 = escapees + Japan
+     (as escape_income.qmd), extended with Botswana/Thailand as gray near-miss
+     lines + a dashed $8,000 threshold (per user: near-miss = just these two,
+     not an auto-detected band). Fig 2 = fast growers, natural scale, 1960
+     start (as the polished .scratch/ProduFunction.qmd FastGrowers, not the
+     2000-start escape_income.qmd original) -- the log-scale twin panel was
+     dropped 2026-09-08 per user ("ditch fig 2nd from left"). 3rd panel is
+     new: same fast growers, redrawn with unlabelled gray lines for every
+     OTHER country within a single 1960-income band (-20% of the group's min,
+     Myanmar, to +20% of the group's max, Bangladesh -- verified against a
+     live WDI fetch 2026-09-08; Ethiopia/Cambodia/Viet Nam have no 1960 row in
+     WDI so they do not enter the min/max), per user: no extra growth-rate
+     filter, just the income band, to contrast "similar starting point, did
+     not grow as fast". All combined in one row via patchwork. -->
+```{r EscapeIncomeThreePanel, cache = T}
+#| fig-width: 17
+#| fig-height: 5.2
+library(WDI)
+library(ggplot2)
+library(viridis)
+library(ggrepel)
+library(patchwork)
+
+#### 1. Fetch. NY.GDP.PCAP.KD = GDP per capita, constant 2015 US$, from 1960.
+#### SP.POP.TOTL = pop. Alias "gdppc" (not "income"): extra=TRUE adds a
+#### CHARACTER income-GROUP column literally named "income" that clobbers a
+#### same-named numeric alias (see CLAUDE_CHANGES.md .scratch/escape_income.qmd bug).
+raw_data <- WDI(
+  indicator = c("gdppc" = "NY.GDP.PCAP.KD", "pop" = "SP.POP.TOTL"),
+  start = 1960, end = 2023, extra = TRUE
+)
+raw_data <- raw_data[, setdiff(names(raw_data), "income")]
+names(raw_data)[names(raw_data) == "gdppc"] <- "income"
+
+#### 2. Clean (no pipes): drop aggregates, keep needed cols, drop NA income
+clean_data <- raw_data[raw_data$region != "Aggregates", c("country", "year", "income", "pop")]
+clean_data <- clean_data[!is.na(clean_data$income), ]
+
+#### 3a. Exclude small/city economies: initial-year population < 2M
+pop_obs <- clean_data[!is.na(clean_data$pop), c("country", "year", "pop")]
+first_year <- aggregate(year ~ country, data = pop_obs, FUN = min)
+init_pop <- merge(first_year, pop_obs, by = c("country", "year"))
+big_countries <- init_pop$country[init_pop$pop > 2000000]
+clean_data <- clean_data[clean_data$country %in% big_countries, ]
+
+#### 3b. Exclude oil-rich (same 10-country list as escape_income.qmd)
+oil_rich <- c(
+  "Qatar", "United Arab Emirates", "Saudi Arabia", "Kuwait", "Oman",
+  "Bahrain", "Libya", "Gabon", "Brunei Darussalam", "Equatorial Guinea"
+)
+clean_data <- clean_data[!(clean_data$country %in% oil_rich), ]
+
+#### 4. Escape filter: low at earliest year AND middle/high at latest year
+low_cut  <- 1500
+high_cut <- 8000
+
+start_years <- aggregate(year ~ country, data = clean_data, FUN = min)
+start_inc   <- merge(start_years, clean_data, by = c("country", "year"))
+names(start_inc)[names(start_inc) == "income"] <- "start_income"
+end_years <- aggregate(year ~ country, data = clean_data, FUN = max)
+end_inc   <- merge(end_years, clean_data, by = c("country", "year"))
+names(end_inc)[names(end_inc) == "income"] <- "end_income"
+
+low_start <- start_inc$country[start_inc$start_income < low_cut]
+high_end  <- end_inc$country[end_inc$end_income   > high_cut]
+escapees  <- intersect(low_start, high_end)
+
+target_countries <- unique(c(escapees, "Japan"))
+plot_data <- clean_data[clean_data$country %in% target_countries, ]
+
+#### 5. Colour by income at earliest year (viridis); Japan red; Botswana/
+#### Thailand added as gray near-miss lines (cleared the $1,500 low-start bar,
+#### stayed just under $8,000 -- see escape_income.qmd text).
+sy <- aggregate(year ~ country, data = plot_data, FUN = min)
+si <- merge(sy, plot_data, by = c("country", "year"))
+si <- si[order(si$income), ]
+country_order <- si$country
+color_palette <- viridis(length(country_order))
+names(color_palette) <- country_order
+if ("Japan" %in% names(color_palette)) color_palette["Japan"] <- "#FF0000"
+
+near_miss <- c("Botswana", "Thailand")
+near_miss <- near_miss[near_miss %in% clean_data$country]
+plot_data1 <- rbind(plot_data, clean_data[clean_data$country %in% near_miss, ])
+color_palette[near_miss] <- "gray60"
+
+#### 6. Labels at each line's latest year
+ly <- aggregate(year ~ country, data = plot_data1, FUN = max)
+label_data1 <- merge(ly, plot_data1, by = c("country", "year"))
+
+#### 7. Fig 1: escapees + Japan + near-miss, dashed $8,000 threshold line
+p_fig1 <- ggplot(plot_data1, aes(x = year, y = income, color = country, group = country))
+p_fig1 <- p_fig1 + geom_hline(yintercept = high_cut, linetype = "dashed", color = "gray40")
+p_fig1 <- p_fig1 + geom_line(aes(linewidth = (country == "Japan")), alpha = 0.7)
+p_fig1 <- p_fig1 + geom_text_repel(
+    data = label_data1, aes(label = country), size = 3,
+    nudge_x = 2, direction = "y", hjust = 0,
+    segment.size = 0.2, segment.alpha = 0.4, max.overlaps = Inf
+  )
+p_fig1 <- p_fig1 + scale_color_manual(values = color_palette)
+p_fig1 <- p_fig1 + scale_linewidth_manual(values = c("TRUE" = 1.3, "FALSE" = 0.5), guide = "none")
+p_fig1 <- p_fig1 + scale_y_continuous(labels = scales::dollar_format())
+p_fig1 <- p_fig1 + scale_x_continuous(breaks = seq(1960, 2020, 20), expand = expansion(mult = c(0.02, 0.10)))
+p_fig1 <- p_fig1 + labs(title = "Escaping Low Income (Red = Japan, Gray = near miss)",
+    x = "Year", y = "Constant 2015 US Dollars")
+p_fig1 <- p_fig1 + theme_minimal(base_size = 12)
+p_fig1 <- p_fig1 + theme(legend.position = "none", panel.grid.minor = element_blank(),
+                          plot.title = element_text(face = "bold", size = 10.5))
+
+#### 8. Fast growers, 1960 start per .scratch/ProduFunction.qmd. INCLUSION RULE
+#### (from .scratch/growth_scan.R, verified live 2026-09-08, pop>2M non-oil,
+#### ranked by 2000-2023 CAGR): top 5 overall EXCLUDING post-Soviet/transition
+#### economies (Armenia/Georgia/Azerbaijan/Turkmenistan/Tajikistan/Uzbekistan/
+#### Albania all rank above some of these 5 -- excluded because their high CAGR
+#### is largely a rebound off the 1991 USSR-collapse trough, not sustained
+#### organic growth) -> China #1 7.8%, Myanmar #4 6.1%, Cambodia #7 5.6%,
+#### Viet Nam #11 5.1%, India #15 4.8%. PLUS 3 more picked NOT for topping the
+#### CAGR list but for being fast AND still low-income at 2023 (latest < $2,500,
+#### CAGR > 3%) -- Ethiopia #8 5.5%, Bangladesh #13 5.0%, Rwanda #14 4.9% --
+#### to make the point that growth rate alone doesn't escape low income if the
+#### starting base is too low.
+sel <- c("China", "Viet Nam", "Cambodia", "Bangladesh", "India",
+         "Myanmar", "Ethiopia", "Rwanda")
+d <- clean_data[clean_data$country %in% sel & clean_data$year >= 1960,
+                c("country", "year", "income")]
+d <- d[!is.na(d$income), ]
+
+o   <- d[d$year == 2000, ]
+o   <- o[order(o$income), ]
+pal <- viridis(nrow(o))
+names(pal) <- o$country
+lab <- d[d$year == max(d$year), ]
+
+base <- ggplot(d, aes(year, income, colour = country, group = country))
+base <- base + geom_line(linewidth = 0.9)
+base <- base + geom_text_repel(data = lab, aes(label = country), size = 3,
+          nudge_x = 1, direction = "y", hjust = 0, segment.alpha = 0.4,
+          max.overlaps = Inf)
+base <- base + scale_colour_manual(values = pal)
+base <- base + scale_x_continuous(expand = expansion(mult = c(0.02, 0.20)))
+base <- base + theme_minimal(base_size = 12)
+base <- base + theme(legend.position = "none", panel.grid.minor = element_blank())
+
+p_fig2_nat <- base + scale_y_continuous(labels = scales::label_dollar(accuracy = 1))
+p_fig2_nat <- p_fig2_nat + labs(title = "Fast growers: natural scale", x = "Year", y = "GDP per capita")
+
+#### 9. New panel: fast growers vs peers within a single 1960-income band
+#### -- -20% of the group's MIN 1960 income to +20% of the group's MAX 1960
+#### income -- who did NOT keep pace (gray, unlabelled, per user: one shared
+#### band, not a per-grower band; no extra CAGR filter, income-band membership
+#### alone decides "peer"). Verified against a live WDI fetch 2026-09-08:
+#### min = Myanmar (129.8), max = Bangladesh (429.4); Ethiopia/Cambodia/Viet
+#### Nam have no 1960 row in WDI, so na.rm=TRUE below correctly drops them
+#### from the min/max (they still appear as coloured lines elsewhere, from
+#### their own first available year).
+income1960 <- clean_data[clean_data$year == 1960, c("country", "income")]
+income1960 <- income1960[!is.na(income1960$income), ]
+grower_income1960 <- income1960$income[match(sel, income1960$country)]
+
+lo <- min(grower_income1960, na.rm = TRUE) * 0.8
+hi <- max(grower_income1960, na.rm = TRUE) * 1.2
+peers <- income1960$country[income1960$income >= lo & income1960$income <= hi]
+peers <- setdiff(peers, sel)
+
+d_peers <- clean_data[clean_data$country %in% peers & clean_data$year >= 1960,
+                       c("country", "year", "income")]
+d_peers <- d_peers[!is.na(d_peers$income), ]
+
+p_fig_new <- ggplot()
+p_fig_new <- p_fig_new + geom_line(data = d_peers,
+    aes(year, income, group = country), colour = "gray70", linewidth = 0.4, alpha = 0.6)
+p_fig_new <- p_fig_new + geom_line(data = d,
+    aes(year, income, colour = country, group = country), linewidth = 0.9)
+p_fig_new <- p_fig_new + geom_text_repel(data = lab,
+    aes(year, income, label = country, colour = country), size = 3,
+    nudge_x = 1, direction = "y", hjust = 0, segment.alpha = 0.4, max.overlaps = Inf,
+    show.legend = FALSE)
+p_fig_new <- p_fig_new + scale_colour_manual(values = pal)
+p_fig_new <- p_fig_new + scale_y_log10(labels = scales::label_dollar(accuracy = 1))
+p_fig_new <- p_fig_new + scale_x_continuous(expand = expansion(mult = c(0.02, 0.20)))
+p_fig_new <- p_fig_new + labs(title = "Fast growers vs peers (1960 income: -20% min to +20% max)",
+    x = "Year", y = "GDP per capita (log10)")
+p_fig_new <- p_fig_new + theme_minimal(base_size = 12)
+p_fig_new <- p_fig_new + theme(legend.position = "none", panel.grid.minor = element_blank())
+
+#### 10. All four in one row (patchwork, not facet_grid -- see tag note above)
+p_fig1 + p_fig2_nat + p_fig_new + plot_layout(nrow = 1)
+```
+
+* Fast growers: 1990年代から成長率が高まる&rarr;キャッチアップ?
+----
+
+
+## AI利用の考え方と方法
+
+### 利用例: vive coding (計算・演算・プログラミングの委託)
+
 <br>
 <br>
 <br>
@@ -1415,6 +1543,71 @@ p_gni2 <- p_gni2 + theme(legend.position = "bottom",
                          legend.text = element_text(size = 7))
 ```
 
+```{r GNITraj}
+#### CLAUDE new: 2026-09-17. p_traj_gni replaces p_sc in the right column.
+#### p_sc was a y-axis variant of p_gni2 (ratio - 1 vs ratio): same points,
+#### same labels, same story told twice.
+#### Own chunk, uncached, ON PURPOSE: editing GDPvsGNI above would invalidate
+#### its cache and re-run its WDI() call. Nothing here fetches -- clean_data
+#### and lab_data are lazy-loaded from that cache.
+#### 1990 start is a data limit, not a choice: no locally saved file holds GNI
+#### per capita before 1990 (.scratch/wdi_pcap*.rds reach 1960 but carry GDP).
+library(ggplot2)
+library(ggrepel)
+library(viridis)
+
+traj <- clean_data[!is.na(clean_data$gni), ]
+highlight <- unique(as.character(lab_data$country))
+traj_hi <- traj[traj$country %in% highlight, ]
+traj_bg <- traj[!(traj$country %in% highlight), ]
+
+#### one colour per highlighted country, ordered by final-year GNI so the
+#### palette still reads top-to-bottom without a legend. Japan red, as in p_gni.
+ord_hi <- traj_hi[traj_hi$year == max(traj_hi$year), ]
+ord_hi <- ord_hi[order(ord_hi$gni), ]
+hi_lv <- as.character(ord_hi$country)
+hi_lv <- unique(c(hi_lv, setdiff(highlight, hi_lv)))
+traj_hi$country <- factor(traj_hi$country, levels = hi_lv)
+
+traj_cols <- viridis(length(hi_lv))
+names(traj_cols) <- hi_lv
+traj_cols["Japan"] <- "red"
+
+#### label each country at ITS OWN last non-NA year, not at a common year:
+#### West Bank and Gaza and Lebanon stop reporting before 2023.
+last_yr <- aggregate(year ~ country, data = traj_hi, FUN = max)
+end_pts <- merge(last_yr, traj_hi, by = c("country", "year"))
+
+#### grey background layer carries no colour aesthetic, so the ~119 unlabelled
+#### countries cannot reach the scale and the legend stays empty.
+p_traj_gni <- ggplot(mapping = aes(x = year, y = gni))
+p_traj_gni <- p_traj_gni + geom_line(data = traj_bg, aes(group = country),
+                                     colour = "grey85", linewidth = 0.3)
+p_traj_gni <- p_traj_gni + geom_line(data = traj_hi, aes(colour = country),
+                                     linewidth = 0.8)
+p_traj_gni <- p_traj_gni + geom_text_repel(
+    data = end_pts, aes(label = country, colour = country),
+    size = 2.3, direction = "y", hjust = 0, nudge_x = 1,
+    segment.size = 0.2, segment.alpha = 0.4, max.overlaps = Inf
+  )
+p_traj_gni <- p_traj_gni + scale_colour_manual(values = traj_cols)
+p_traj_gni <- p_traj_gni + scale_y_log10(labels = scales::label_dollar(accuracy = 1))
+p_traj_gni <- p_traj_gni + scale_x_continuous(breaks = seq(1990, 2020, 10),
+                                              expand = expansion(mult = c(0.02, 0.30)))
+p_traj_gni <- p_traj_gni + labs(
+    title = "GNI per capita (PPP), 1990-2023",
+    subtitle = paste("Coloured: the countries labelled at left. Grey: all others.",
+                     "Starts 1990: no earlier GNI per capita held locally.",
+                     sep = "\n"),
+    x = "Year", y = "Constant 2021 international $"
+  )
+p_traj_gni <- p_traj_gni + theme_minimal(base_size = 11)
+p_traj_gni <- p_traj_gni + theme(legend.position = "none",
+                                 panel.grid.minor = element_blank(),
+                                 plot.title = element_text(face = "bold"),
+                                 plot.subtitle = element_text(size = 7))
+```
+
 ::::: {.columns}
 :::: {.column width="35%"}
 ```{r}
@@ -1428,7 +1621,7 @@ p_gni2
 ```{r}
 #| fig-width: 5.4
 #| fig-height: 4.8
-p_sc
+p_traj_gni
 ```
 ::::
 
@@ -1620,6 +1813,38 @@ p_sc <- p_sc + theme(legend.position = "bottom",
                      plot.title = element_text(face = "bold"),
                      plot.subtitle = element_text(size = 7),
                      legend.text = element_text(size = 7))
+
+#### CLAUDE new: 2026-09-08. Ratio-scale twin of p_sc, mirroring the
+#### GDPvsGNI chunk's p_gni2 (this figure never got the same treatment --
+#### user: "you fail to work on switch y axis to GDP/GNI scale in Ireland
+#### related figs"). y = GDP/GNI (ratio, not ratio-1); hline at 1, not 0.
+d23$ratio <- d23$gdp / d23$gni
+lab_data$ratio <- lab_data$gdp / lab_data$gni
+p_gni2 <- ggplot(d23, aes(x = gni, y = ratio))
+p_gni2 <- p_gni2 + geom_hline(yintercept = 1, linetype = "dashed", colour = "grey40")
+p_gni2 <- p_gni2 + geom_point(aes(colour = grp, size = grp == "Japan"), alpha = 0.85)
+p_gni2 <- p_gni2 + geom_text_repel(data = lab_data, aes(label = country, colour = grp),
+                                   size = 2.5, max.overlaps = Inf, seed = 1,
+                                   show.legend = FALSE)
+p_gni2 <- p_gni2 + scale_colour_manual(values = grp_cols)
+p_gni2 <- p_gni2 + scale_size_manual(values = c("TRUE" = 2.6, "FALSE" = 1.5),
+                                     guide = "none")
+p_gni2 <- p_gni2 + scale_x_log10(labels = scales::dollar_format())
+p_gni2 <- p_gni2 + labs(
+    title = "GDP / GNI ratio, 2023",
+    subtitle = paste("Dashed line: GDP = GNI (ratio 1).",
+                     "Labelled: |deviation| > 15%, plus Japan.",
+                     "Also low / lower-middle income with |GDP/GNI - 1| > 0.1.",
+                     sep = "\n"),
+    x = "GNI per capita (log scale)", y = "GDP / GNI",
+    colour = NULL
+  )
+p_gni2 <- p_gni2 + theme_minimal(base_size = 11)
+p_gni2 <- p_gni2 + theme(legend.position = "bottom",
+                         panel.grid.minor = element_blank(),
+                         plot.title = element_text(face = "bold"),
+                         plot.subtitle = element_text(size = 7),
+                         legend.text = element_text(size = 7))
 ```
 
 ::::: {.columns}
@@ -1627,7 +1852,7 @@ p_sc <- p_sc + theme(legend.position = "bottom",
 ```{r}
 #| fig-width: 5.4
 #| fig-height: 4.8
-p_gni
+p_gni2
 ```
 ::::
 
@@ -1640,10 +1865,10 @@ p_sc
 ::::
 
 :::: {.column width="30%" .nonincremental}
-* GDP = gross domestic product 国内で生まれた付加価値
-* GNI = gross national income 居住者が国内外から得る所得-国外へ流出する利益
+* GDP = gross domestic product 国内(自国人+外国人)で計上される付加価値
+* GNI = gross national income 国内に留まる付加価値
 <!-- * 多国籍企業が本社機能と知的財産をアイルランドに移し利益を本国に送金 -->
-* 海外純所得を計上する: 
+* 国外流出分を計上する: 
 
     ⭕国内総生産 (G<span style="text-decoration: underline;">D</span>P)
     
@@ -1652,7 +1877,7 @@ p_sc
 :::::
 
 ::: {.fragment fragment-index=3}
-* アイルランド、シンガポール、DRC: 外国人(企業)の海外純所得が負(国外に所得を流出)
+* アイルランド、シンガポール、アンゴラ、DRC: 外国人(企業)の国外への送金が多額
 :::
 
 
@@ -1662,184 +1887,196 @@ p_sc
 
 ### 利用例: vive coding (計算・演算・プログラミングの委託)
 
-* Find countries that started out as lowest pc income and now belongs to middle or higher income countries
-* show their trajectories using the same style of graph
-
-```{r PPPIncomePlotLessOilRich2, eval = F, cache = T}
-library(WDI)
-library(ggplot2)
-library(viridis)
-library(ggrepel)
-
-#### 1. Fetch Data
-#### NY.GDP.PCAP.PP.KD: GDP per capita, PPP (constant 2021 international $)
-#### SP.POP.TOTL: Total Population
-raw_data <- WDI(
-  indicator = c("income" = "NY.GDP.PCAP.PP.KD", "pop" = "SP.POP.TOTL"), 
-  start = 1960, 
-  end = 2023, 
-  extra = TRUE
-)
-
-#### 2. Data Cleaning (No Pipes)
-#### Select only essential columns to avoid "duplicate column" errors later
-clean_data <- raw_data[raw_data$region != "Aggregates", c("country", "year", "income", "pop")]
-clean_data <- clean_data[!is.na(clean_data$income), ]
-
-#### Filter: Exclude small nations (initial-year pop < 2 Million)
-#### CLAUDE bug1: 2026-07-09 the old line filtered country-YEARS, not
-#### countries, so a country below the cutoff in 1990 lost its early years
-#### (Singapore -20y, Ireland -30y). Decide inclusion once per country from
-#### its initial-year population, then keep every year of that country.
-#### Threshold 2M sits above Luxembourg (382k) and below Singapore (3.05M).
-#### 5M was also wrong: it excluded Singapore and Ireland outright.
-#### Latent: `pop > thr` is NA where pop is NA, and logical subsetting with
-#### NA injects all-NA rows. No NA pop in the current WDI vintage; the
-#### aggregate below is NA-safe regardless.
-#### clean_data <- clean_data[clean_data$pop > 5000000, ]
-pop_obs <- clean_data[!is.na(clean_data$pop), c("country", "year", "pop")]
-first_year <- aggregate(year ~ country, data = pop_obs, FUN = min)
-init_pop <- merge(first_year, pop_obs, by = c("country", "year"))
-big_countries <- init_pop$country[init_pop$pop > 2000000]
-clean_data <- clean_data[clean_data$country %in% big_countries, ]
-
-#### Filter: Exclude major Oil/Resource-reliant states
-#### CLAUDE com: 2026-07-09 Norway kept — user's call: it did not start out
-#### resource-reliant. Note the sample begins 1990, by which time Norwegian
-#### petroleum (from 1971) was already dominant, so the distinction is not
-#### visible in this window.
-#### oil_list <- c(
-####   "Qatar", "United Arab Emirates", "Saudi Arabia", "Kuwait", "Oman",
-####   "Bahrain", "Norway", "Libya", "Gabon", "Brunei Darussalam"
-#### )
-oil_list <- c(
-  "Qatar", "United Arab Emirates", "Saudi Arabia", "Kuwait", "Oman",
-  "Bahrain", "Libya", "Gabon", "Brunei Darussalam"
-)
-clean_data <- clean_data[!(clean_data$country %in% oil_list), ]
-
-#### 3. Identify Top 30 Countries by Income (Ever)
-years <- sort(unique(clean_data$year))
-top_30_ever <- c()
-
-for (y in years) {
-  year_subset <- clean_data[clean_data$year == y, ]
-  #### Sort by income decreasing
-  ord <- order(year_subset$income, decreasing = TRUE)
-  year_sorted <- year_subset[ord, ]
-  #### Take top 30 names
-  top_names <- head(year_sorted$country, 30)
-  top_30_ever <- c(top_30_ever, top_names)
-}
-
-#### Final country list (Top 30 ever + Japan)
-target_countries <- unique(c(top_30_ever, "Japan"))
-plot_data <- clean_data[clean_data$country %in% target_countries, ]
-
-#### 4. Color Mapping: Based on earliest available income
-#### Find the first year for each country
-earliest_years <- aggregate(year ~ country, data = plot_data, FUN = min)
-#### Merge to get income for those years (specifically selecting columns to avoid duplicates)
-start_data <- merge(earliest_years, plot_data, by = c("country", "year"))
-#### Sort by income to apply viridis scale correctly
-start_data <- start_data[order(start_data$income), ]
-
-#### Create named color vector
-country_order <- start_data$country
-color_vals <- viridis(length(country_order))
-names(color_vals) <- country_order
-
-#### Force Japan to Red
-if ("Japan" %in% names(color_vals)) {
-  color_vals["Japan"] <- "#FF0000"
-}
-
-#### 5. Label Data: Latest available point for each country
-latest_years <- aggregate(year ~ country, data = plot_data, FUN = max)
-label_data <- merge(latest_years, plot_data, by = c("country", "year"))
-
-#### 6. Create Plot
-#### We use size aesthetic to make Japan stand out
-p <- ggplot(plot_data, aes(x = year, y = income, color = country, group = country))
-p <- p + geom_line(aes(linewidth = (country == "Japan")), alpha = 0.7)
-
-#### Labels at the end of lines
-p <- p + geom_text_repel(
-  data = label_data,
-  aes(label = country),
-  size = 3,
-  nudge_x = 5,
-  direction = "y",
-  hjust = 0,
-  segment.size = 0.2,
-  segment.alpha = 0.3,
-  max.overlaps = Inf
-)
-
-#### Custom scales
-p <- p + scale_color_manual(values = color_vals)
-p <- p + scale_linewidth_manual(values = c("TRUE" = 1.2, "FALSE" = 0.5), guide = "none")
-p <- p + scale_y_continuous(labels = scales::dollar_format())
-p <- p + scale_x_continuous(expand = expansion(mult = c(0.02, 0.25)))
-
-#### Theming
-p <- p + labs(
-  title = "GDP Per Capita (PPP) Trend of Major Economies",
-  #### CLAUDE com: 2026-07-09 subtitle tracked the old 5M row-wise cutoff
-  subtitle = "Countries reaching Top 30 (initial pop > 2M, Non-Oil). Japan highlighted in Red.",
-  x = "Year",
-  y = "PPP (Constant 2021 International $)",
-  caption = "Source: World Bank WDI. Note: PPP data availability typically starts ~1990."
-)
-p <- p + theme_minimal(base_size = 14)
-p <- p + theme(
-  legend.position = "none",
-  panel.grid.minor = element_blank(),
-  plot.title = element_text(face = "bold")
-)
-```
-
-::::: {.columns}
-:::: {.column width="70%"}
-```{r}
-#| fig-width: 11
-#| fig-height: 5.5
-p
-```
-::::
-
-:::: {.column width="30%"}
-<!-- #### CLAUDE spl: 2026-07-09 the blockquote is not a list, so
-     incremental: true never made it a fragment and it showed on slide
-     entry, before the label bullet it belongs to. Explicit order:
-     1 = label, 2 = quote. -->
-::: {.nonincremental .fragment fragment-index=1}
-* 以下をリクエスト
-:::
-
-::: {.fragment fragment-index=2}
-> another code with no oil rich and small city nations
-
-> top 30
-:::
-::::
-:::::
-
-----
-
-## AI利用の考え方と方法
-
-### 利用例: vive coding (計算・演算・プログラミングの委託)
-
-scraping=webページから情報を抜き出す
+Scraping=webページから情報を抜き出す
 
 * 方法: マシン同士が会話する文法(application programming interface, API)を使う
 * APIに則ってコードを書くのは面倒なので、通常はPythonを使う
     * でも、Pythonコードを自分で書かないといけない
 * AIのCLI (command line interface)ならば「このサイトからこの部分を抜き出してきて」
+    * 動的サイト(&hArr;静的サイト)でもAIはjavascriptを理解しているので問題なし
+* 注意
     * 同じサイトからscrapeするならば、アクセスの間隔をあけてサーバの負担にならないようにする
     * 間隔をあけずに繰り返しアクセスするとbotと判断されてアクセス拒否される
-    * 動的サイト(&hArr;静的サイト)でもAIはjavascriptを理解しているので問題なし
+
+----
+
+## AI利用の考え方と方法
+
+### 利用例: vive coding (計算・演算・プログラミングの委託)
+
+Porting(あるコード・内容を別のプログラム用に書き換えること)
+
+* Use cases (会社員、コンサルタントなど)
+    * (Word)文書に散りばめられた各部分 &rArr; 表計算プログラム(Excel)の指定フォーマット
+    * CSVデータ &rArr; (Excelで)表にする &rArr; スライド・ファイルに載せる
+    * Webページ &rArr; PDF
+* よりヘビーなuse cases
+    * stataコード &rArr; Rコード
+    * pdf &rArr; 特定スタイル(css)のhtml
+    * 画像 &rArr; テキストやデータ
+    * サーバから得たxml/json &rArr; csv
+
+
+----
+
+## AI利用の考え方と方法
+
+### 利用例: vive coding (計算・演算・プログラミングの委託)
+
+Data cleaning
+
+* 大量、かつ、異なるファイル形式に対して同じ指示を出す
+    * エクセル・ファイル、テキスト形式ファイル(csv, tsv)、データベース・ファイル、文書ファイル
+* 集計して少数のファイルに保存
+* 指示
+    * データのコーディング方法(e.g., はい=0、いいえ=1)
+    * グループごとの統計量計算
+    * 指定した形式でデータ視覚化
+
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+<!--
+* AI利用&uarr; &rArr; 批判的思考能力&darr;?
+    * 因果関係は確立されていないが相関関係はある
+    * 思考作業の部分的外注cognitive offloading
+        * 批判的思考能力&uarr; &larr; 知的能力の利用効率&darr;
+        * 批判的思考能力&darr; &larr; 知的能力&darr; &larr; 不適切な外注
+    * 外注する思考作業の選別次第で批判的思考能力が低下する
+* 大学教育の一つ=批判的思考能力の養成
+* 高等教育就学の目的を損なうようなAI利用はself defeating
+
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+-->
+
+
+* 電球が発明されて火のおこし方を知らなくても灯りを得られるようになった
+    * 暗い環境での生産性が高まった
+    * 火のおこし方の知識がなくなっても生産性は大きく落ちなかった
+* PCを利用できるようになり、集積回路の仕組みや二進法を知らなくても、PCで作業できるようになった
+    * 情報伝達・計算が容易になって生産性が高まった
+    * PCを上手に使わない人は便益を得られなかった&larr;価格、適性
+    * 見た目(字、図表、計算結果)は「きれい」でも使いこなせていない成果が出てきた
+        * 内容が乏しい
+        * 作成者が理解していないので内容が的外れ
+    * 手書き作業(執筆、計算、図解)が下手になった&larr;使いすぎ
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+::: {.fragment}
+* AIが発明されて知的作業(プログラミング、計算、質問への回答)を委託できるようになり、作業方法を知らなくても、知的作業結果を得られるようになった
+    * 作業実行範囲と速度が増えて生産性が高まった
+    * AIを上手に使わない人は便益を得られなかった&larr;価格、適性
+    * 表面的に「きれい」でも使いこなせていない成果が出てきた
+        * 内容が乏しい
+        * 作成者が理解していないので内容が的外れ
+    * 思考自体を委託する(「どうしよう?」「これって正しい?」)と思考が下手になった&larr;思考の中枢まで委託
+:::
+
+::: {.fragment}
+お薦め: 自分=主人・頭脳、AI=手足
+:::
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+* (伊藤も含め)多くのプロフェッショナルがAIを使って作業させ、自分は監修作業しかやらなくなっている
+* 監修・指導している
+    * 論文を読まずに読み方を
+    * 数学モデルを解かずに解き方を
+    * コードを書かずに書き方を
+* AI=研究助手、論文指導している学生
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+* 論文を読まずに論文を理解できるか、モデルを解かずにモデルを理解できるか
+    * 凡人伊藤の場合: できない
+        * 数式を解いて「なぜこの項があるのか」と疑問を持ち、どの時点で仕込まれたか、どの仮定がこのモデルの特徴か、と辿って全容をようやく理解できる
+        * よくできた要約でも、論理の一般性に釣り合うほどの説明がないため、「こういう場合は?」などの疑問が残る
+            * これらをAIに尋ねるのはok
+            * しかし、AIを信頼できず自分でも確認するので、回答は目当て程度に利用
+* ではなぜ監修だけに留めているのか
+    * 怠惰、時間制約、仕事引き受けすぎ、工程監理が非効率
+    * 理解度を試す質問で確認可能(かも)
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+* 「目線だけ高い研究者になってはいけません」
+    * 地道な作業に価値がある&larr;論文にはヘッドラインの結果と派手ではない議論がある
+    * 派手ではない議論を考えているときに新しい着想が生まれれやすい(気がする)
+* 「このデータでこの方法をこの手続きでやる」研究者(マニュアル君、誘導型研究者)
+    * 表面的な理由は言えるが、その手続きで良い理由を真に理解していない
+        * 自分で証明をなぞったり、計算をしていないから
+    * 量産型、研究内容がマニュアル的、競合多し&larr;AI
+    * マニュアル執筆者の知的奴隷
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+どこで止めるか
+
+* 実証研究の要素で1つが全く新しければ量産型研究ではない
+    * 仮説(research question)
+    * データ
+    * 実証方法
+* 人間は新しいことをやり、量産型研究をAIに任せれば良い
+* 今までよりも
+    * 時間と予算をかけて良い、その代わり、
+    * 研究をする人を選んだ方がいい
+* どこで止めるか: 量産型研究に近い使い方をするなら止めた方がいい
+
+<!--
+
+----
+
+## AI利用の考え方と方法
+
+### どこまで委託するか
+
+* AIが知的作業を代替すると、人間は論理の選択、工程管理、物理制御の生産(機械操作)、物的な対人サービスなどのスキルで社会経済活動に貢献するようになった
+    * 計算能力の民主化democratization of computational power
+        * [民主化=アクセスだけでは不十分、全員にとって参加が有意義になる仕組み・支援が必要](https://www.davidmonnerat.com/technology/the-democratization-of-everything/#Conclusion)
+* Problem framing, prompt engineering, oversight, validation
+-->
 
 ----
 
@@ -1848,7 +2085,7 @@ scraping=webページから情報を抜き出す
 
 クラウド
 
-講義資料は[伊藤のサイトhttps://github.com/SeiroIto/SHLectures](https://github.com/SeiroIto/SHLectures)で共有します  
+講義資料は[伊藤のサイトhttps://github.com/SeiroIto/SHLectures/2026](https://github.com/SeiroIto/SHLectures/2026)で共有します  
 
 . . .
 
@@ -1868,12 +2105,53 @@ scraping=webページから情報を抜き出す
 
 プログラム
 
-受講者には、RというプログラムとrmarkdownというRのライブラリを使い、文書(html, pdf, docxなど)を作成できるようになってほしいです  
+使途: 
 
- * [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdownのための道具として考えてください  
-   * Rは統計計算や描画で最も使われているプログラムです  
- * rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
- * [markdown](https://ja.wikipedia.org/wiki/Markdown)文法は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
+1. Rというプログラムを使ってデータ視覚化、簡単な統計分析をする
+1. rmarkdownというRのライブラリ(もしくは[quarto](https://quarto.org/))を使い、Rのプログラム計算(コード+結果)を含む文書(html, pdf, docxなど)を作成する
+
+* [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdownのための道具として考えてください  
+    * Rは統計計算や描画で最も使われているプログラムです
+* rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
+* [markdown](https://ja.wikipedia.org/wiki/Markdown)文法は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
+
+----
+
+プログラム
+
+使途: 
+
+* quartoのインストレーションは[ここ(Mac, Win)](https://kazuyanagimoto.com/course-kobe-firstyear-2026/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)や[ここ(Mac)](https://kumaroot.readthedocs.io/ja/latest/quarto/quarto-install.html)が分かりやすいです
+    * インストール後、ターミナルで`quarto render bunsho.qmd`と打ち込んで動かします
+    * `bunsho.qmd`を書くためにテキスト・エディタを使います
+    * `bunsho.qmd`はヘッダ部分(YAML header)と本文(main text)から成ります
+    * YAMLヘッダに`format: html`, `format: pdf`, `format: docx`と書いて出力形式を選びます(1ファイルで複数の出力形式も指定できます)
+    * [Windows用インストール・設定ガイド](https://seiroito.github.io/SHLectures/lec_slides/2026/QuartoSetupWindows.html)(画面写真つき、作例2本)
+
+
+----
+
+プログラム
+
+::: {.fragment}
+AIに任せるのが最も容易です
+:::
+
+* Rのインストレーション、実行を許可して文書を作らせる
+* Gitのインストレーション、実行を許可してGithubを利用する
+
+::: {.fragment}
+独創的な製品を作らない限り、コードを書く能力はすでに不要
+
+* 「AIを使ってプログラムを動かす技量」を蓄えてください
+:::
+
+::: {.fragment}
+token数に余裕のある有料版AI(Claude, codex(chatGPT)など)を使うことをお薦めします
+:::
+
+----
+
 
 . . .
 
@@ -1887,10 +2165,10 @@ scraping=webページから情報を抜き出す
 ----
 
 ::: {style="text-align: center;"}
-オンライン講義
+オンライン講義(変更の可能性あり)
 
-* 10月25日(金)
-* 11月1日(金)
+* 11月20日(金)
+* 11月27日(金)
 
 Google classroomのMeetで実施します
 
@@ -1904,8 +2182,19 @@ Google classroomのMeetで実施します
 
 ----
 
+### :x de01
+
+* 発展地域を分析する経済学の一分野。
+
+----
+
+<!--
 * 開発経済学とは?:  
    * 発展地域を分析する経済学の一分野。
+-->
+
+[: 開発経済学とは?](#de01)
+
 * クラスで習う普通の経済学と違うものですか?  
    * 同じです。 
 * では、なぜ開発経済学が必要なのですか?  
@@ -1917,7 +2206,7 @@ Google classroomのMeetで実施します
 
 * What is development economics?  
   * It is a branch of economics that studies the developing areas.  
-* Is it different from regular, economics that we learn in a class?
+* Is it different from regular, economics that we learn in the class?
   * No.  
 * Then, why do we need development economics?
    * There is a debate if we need one. We may not need a special economics, but we definitely need economics to understand the nature of problems in developing areas.   
@@ -2121,7 +2410,7 @@ Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicD
 
 . . . 
 
-共感能力が乏しくても、論理的に整理することで、問題を理解して<Red>解決策を提示</Red>できる
+共感能力が乏しくても、環境を特定し論理的に整理することで、問題を理解して<Red>解決策を提示</Red>できる
 
 <!--
 
@@ -2299,11 +2588,11 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 
 . . . 
 
-養育費用とは子どもの保護者が養育のために支払う費用  
+養育費用=子どもの保護者が養育のために支払う費用  
 
 ::: {.incremental}
 * 直接費用: 子どもの生活費、保育費、教育費など。  
-* 機会費用: 子どものために時間を使うことで失う所得。高所得者ほど大きい。  
+* 機会費用: 子どものために使うことで失うその他活動時間の価値(仕事、家事、介護...)。市場価格で評価して計算。高所得者ほど大きい。
 :::
 
 . . . 
@@ -2316,6 +2605,13 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 * 直接費用は上昇する可能性はあるが、所得と比べて相対的に低下  
 :::
 
+. . . 
+
+一国内で見ると
+
+* 直接費用支援: 低所得者に最も強く影響を与える
+* 機会費用支援: 全所得者に影響を与える
+
 ----
 
 では、どうすれば養育費用を下げられるか。  
@@ -2324,15 +2620,24 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 
 今は直接費用を低下させる政策が主  
 
-* 保育園や学校への補助金、保育無償化・減免  
+* 保育園や学校への補助金、保育無償化・減免、子ども医療費無償化  
 
 . . . 
 
 機会費用を下げる政策  
 
-* 保育時間を減らす手段(保育サービス供給)拡大  
-* 子どもペナルティ軽減義務化(出産育児休業の整備、mommy track禁止・休業復帰後の地位保全)  
-* 子ども手当は可処分所得を増やすので、子どもを持つことの機会費用を減らす  
+* 保育時間を減らす手段(保育、休日保育、病児保育のサービス供給)増加  
+    * マニラ在住女性「少しでも体調悪いとnunnyに任せて休ませるから、園での感染はない」
+* 保育手段(遊具付き公園、図書館、温水プール、児童館)の質改善
+    * 保育手段の質&uarr; &rArr; 子どもの満足時間&uarr; &rArr; 保護者負担&darr;
+* 民間家事サービス供給&uarr; &rArr; 結果的に(高所得者の)保護者者負担&darr;
+* 子どもペナルティ軽減義務化(出産育児休業の整備、「兄姉保育園停園」禁止、テレワーク拡大、mommy track禁止・休業復帰後の地位保全) 
+* 子ども手当は可処分所得を増やすので、子どもを持つことの機会費用(の一部である所得稼得活動の逸失)を減らす  
+
+
+----
+
+では、どうすれば養育費用を下げられるか。  
 
 . . . 
 
@@ -2344,8 +2649,190 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 
 . . . 
 
-日本: 待機児童、待機学童、女性の管理職登用目標30%(2022年、課長で11.5%)
 
+* 女性育児休業取得月数-男性育児休業取得月数[12.2月(令和3年度)&rarr;11.2月(令和5年度)&rarr;11.3月(令和7年度)![](1/spark_ikukyu_gap.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
+* 女性の管理職登用目標30%[課長以上で10.2%(2009年)&rarr;12.7%(2022年)&rarr;13.1%(2024年)![](1/spark_kacho.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
+
+
+
+----
+
+![](1/ikukyu_kikan.png){width=80%}
+
+* 女性は6か月以上が9割超
+* 男性は2週間～3か月未満が約6割
+
+----
+
+![](1/ikukyu_kikan_regular.png){width=80%}
+
+* 2か月刻みの等間隔階級に再配分(公表階級を階級内一様分布と仮定、総和は保存)
+* 育児休暇は男女同時に取得できない: 父+母=法定最長3年、企業によってはそれ以上も
+
+----
+
+中国の少子化対策のその後
+
+:::::: {.columns}
+
+::: {.column width="45%"}
+![@ChenXiongTang2024](1/FangLiuYang_ChinaFertilityFig.jpg){width=50%}
+:::
+
+::: {.column width="50%"}
+@d1 [: China's birth rate hits record low](https://www.bbc.com/news/articles/c79r7v7qr53o)
+
+@d2 [: China offers parents $1,500 (per child under the age of three)](https://www.bbc.com/news/articles/c776xgex02jo)
+
+* 塾授業料価格統制は全く効果なかった様子
+:::
+::::::
+
+:::::: {.columns}
+
+::: {.column width="70%"}
+```{.tikz libraries="arrows.meta,calc" width="1250"}
+\tikzset{
+  box/.style={draw, rectangle, font=\Large, inner sep=5pt,
+              minimum width=2.4cm, minimum height=1.1cm},
+  lbl/.style={font=\Large},
+  seq/.style={-{Triangle[length=2.5mm,width=3mm]}, double,
+              double distance=2.5pt, line width=1.1pt},
+  cost/.style={-{Stealth[length=1.6mm]}, line width=0.9pt}
+}
+\node[box] (tanshin) at (0,0)  {単身};
+\node[box] (kekkon)  at (7,0)  {結婚};
+\node[box] (shussan) at (14,0) {出産};
+\draw[seq] (tanshin) -- (kekkon);
+\draw[seq] (kekkon)  -- (shussan);
+\coordinate (m1) at ($(tanshin)!0.5!(kekkon)$);
+\coordinate (m2) at ($(kekkon)!0.5!(shussan)$);
+\coordinate (m1u) at ($(m1)+(0,0.45)$);
+\coordinate (m1d) at ($(m1)-(0,0.45)$);
+\coordinate (m2u) at ($(m2)+(0,0.45)$);
+\coordinate (m2d) at ($(m2)-(0,0.45)$);
+
+\node[lbl] (kk_k) at (0.2,1.95)  {結婚機会費用};
+\node[lbl] (kk_c) at (0.2,-1.95) {結婚直接費用};
+\draw[cost] (kk_k) -| (m1u);
+\draw[cost] (kk_c) -| (m1d);
+
+\node[lbl] (ik_k) at (7.8,1.95)  {育児機会費用};
+\node[lbl] (ik_c) at (7.8,-1.95) {育児直接費用};
+\draw[cost] (ik_k) -| (m2u);
+\draw[cost] (ik_c) -| (m2d);
+
+\node[lbl] (juku) at (7.8,-3.8) {塾授業料};
+\draw[cost] (juku) -- (ik_c);
+```
+:::
+
+::: {.column width="28%"}
+* 塾授業料$\downarrow$\
+ &rArr; 育児直接費用$\downarrow$\
+ &rArr; 出産$\uparrow$
+* 育児費用&darr; &rArr; 婚姻&uarr;
+* しかし、婚姻率&darr;を変えるほどの効果はない &rArr; 減少している婚姻家計のみに出産効果&uarr;
+:::
+
+::::::
+
+----
+
+中国の少子化対策のその後
+
+* @ChenXiongTang2024: (学生結婚、婚外子を無視した簡便法)
+
+:::: {.fragment}
+::: {style="margin-bottom:-7.5cm"}
+$$
+\begin{aligned}
+\mbox{TFR}
+&=\frac{\mbox{births}}{\mbox{female population}}=
+\frac{\mbox{graduated}}{\mbox{female population}}\frac{\mbox{married}}{\mbox{graduated}}\frac{\mbox{births}}{\mbox{married}}\\
+\phantom{g\left(\mbox{TFR}\right)}
+&\phantom{=
+\underbrace{g\left(\mbox{graduation rate}\right)}_{-22\%}
++
+\underbrace{g\left(\mbox{marital rate}\right)}_{-90\%}
++
+\underbrace{g\left(\mbox{birth rate}\right)}_{+12\%}}
+\end{aligned}
+$$
+:::
+::::
+
+
+:::: {.fragment}
+$$
+\begin{aligned}
+\phantom{\mbox{TFR}}
+&\phantom{=\frac{\mbox{births}}{\mbox{female population}}=
+\frac{\mbox{graduated}}{\mbox{female population}}\frac{\mbox{married}}{\mbox{graduated}}\frac{\mbox{births}}{\mbox{married}}}\\
+g\left(\mbox{TFR}\right)
+&=
+\underbrace{g\left(\mbox{graduation rate}\right)}_{-22\%}
++
+\underbrace{g\left(\mbox{marital rate}\right)}_{-90\%}
++
+\underbrace{g\left(\mbox{birth rate}\right)}_{+12\%}
+\end{aligned}
+$$
+::::
+
+:::::: {.columns}
+
+::: {.column width="35%"}
+:::: {.fragment}
+![](1/ChinaFertilityDecompFig1.jpg){width="60%"}
+::::
+:::
+
+::: {.column width="60%"}
+:::: {.fragment}
+* 背景: 一人っ子政策による縮小傾向+性比率歪み(男性過多)
+* 女性婚姻率&darr;が既婚女性出産率&darr;の最大要素
+* 教育水準&uarr; &rArr; 婚姻時期遅れる
+    * 就学年数分
+    * 結婚「適齢期」延伸
+:::
+::::
+::::::
+
+
+
+----
+
+* 日本も中国も政策は育児の直接費用ばかり
+    * 簡単だから
+* 高所得化につれて機会費用を下げる政策も必要
+    * 構造的な政策が多いので実施は難しく、実現するのに時間がかかる
+    * 集票や官僚の業績に反映しにくいので、実施されにくい
+* 女性の育児負担&uarr; &rArr; 出生率&darr; と説明する研究[@DoepkeKindermann2019]　([紹介](https://www.ide.go.jp/Japanese/IDEsquare/Column/ISQ000002/ISQ000002_035.html))
+
+:::::: {.columns}
+
+::: {.column width="35%"}
+:::: {.fragment}
+::: {layout-ncol=2}
+![](1/DoepkeKindermann_Fig2.jpg){}
+
+![](1/DoepkeKindermann_6TaskShareQuestions.jpg){width="20%"}
+:::
+::::
+:::
+
+::: {.column width="60%"}
+:::: {.fragment}
+* 女性が出産に反対し男性が賛成している比率-男性が出産に反対し女性が賛成している比率
+* 女性がより強く出産に反対している指標
+    * 両方が同じ意志だったら検討対象にしない
+* 男性の育児負担率と負の相関
+    * 着替え、就寝、看病、遊び、宿題、送り迎えの6項目で男性が主たる実施者の割合
+* 自分が今よりも大変になる(転退職で所得が減る)のであれば、結婚も出産も女性は拒否する
+:::
+::::
+::::::
 
 ----
 
@@ -2524,7 +3011,7 @@ $$
 
 * もしも、全ての人がアフリカ系だったら、BTB政策は効果が無いはず。  
   * 全ての人を却下できないため。アフリカ系人口比率の高い南部では効果は無かった。  
-* 労働市場が緩むと代替できるグループの人数が増えるので、BTB政策の効果が大きくなるはず。  
+* 失業率が高いと、犯罪歴を持つ人の代わりになるグループの人数が増えるので、BTB政策の効果が大きくなるはず。  
   * 失業率が高い地域・時期ではBTB政策の影響が強まった。  
 
 . . . 
@@ -2534,10 +3021,11 @@ $$
 ----
 
 * 若いアフリカ系男性を採用候補に考えないことが、職場犯罪を避ける安価な方法になってしまっています。
-* 採用には多額の費用がかかるため、後で犯罪歴を尋ねて落とし、採用費用を無駄にする可能性が高い人をそもそも選考対象にしない方が費用が低い。  
+* 採用には多額の費用がかかるため、「犯罪歴を尋ねたときに採用費用を無駄にする可能性の高い人」をそもそも選考対象にしない方が費用が低い。  
 * 雇用主から情報を奪うことで、職場犯罪を防ぐという根源的な問題を解決できません。
-* 犯罪歴のある人の雇用を増やしたいのであれば、犯罪歴のある人を訓練し、雇うことで利益が増えるようなインセンティブを企業に与える必要があります。
+* 犯罪歴のある人の雇用を増やしたいのであれば、犯罪歴のある人を訓練し雇う&rArr;利益&uarr;となるインセンティブを企業に与える必要があります。
    * 例えば、補助金など。
+   * 補助金を正当化できる理由: 雇用で再犯率を下げ、治安を改善すると社会全体に利益が及ぶので、社会が企業に報酬を与えるのは正当
 
 ---- 
 
@@ -2546,6 +3034,33 @@ $$
 * 意図はよいが、雇用主の反応を考えない政策。基本的な経済理論(「同じものなら安い方が選ばれる」)を考えれば、雇用主の反応は予想できたはず。残念。  
 * BTB政策は若いアフリカ系男性の雇用を奪うことで、雇われていれば何もしなかった人を犯罪に走らせた可能性すらあります。重ねて残念。
 
+
+### :x btb01
+
+* 使うデータセットによって結果が異なる
+* @DoleacHansen2020 が主要結果に使ったCurrent Population Survey (CPS)だと同じ結果だが、American Community Survey (ACS)だとマイノリティへの効果は検知できない
+* CPSは小標本、その10倍程度の標本サイズのACSの方が信頼できる
+* マイノリティへの効果はもっと和らぐ
+
+### :x btb02
+
+* CPSの期間を延長して推計
+* マイノリティへの効果は検知できない
+* ただし、CPSは小標本なので確たる判断はできない
+
+### :x btb03
+
+* Criminal Justice Administrative Records System (CJARS)
+
+----
+
+BTB政策研究のその後 
+
+* 結果が疑問視されている
+    @d1.  [: @BurtonWasser2025](#btb01)
+    @d2.  [: @KaestnerWang2024](#btb02)
+* データを吟味し、仮説を統計学的に検証して効果を考える
+* 学派などに依るのではなく虚心坦懐にデータを検証する
 
 ----
 
@@ -2560,7 +3075,7 @@ $$
 * 80-90年代:  市場の不完全性とインセンティブに注目。情報の非対称性、不完備契約、家計内資源配分。市場の失敗を修正する介入で厚生改善。  
 * 00年代:  制度・慣行への注目と実験(ランダム化比較試験randomised controlled trials, RCTs)の流行。制度・慣行は市場の失敗への対応として捉える。実験は"Let's take the con out of econometrics"への対応[@Leamer1983]。  
 * 10年代:  認知バイアスに注目。心理学と経済学の融合=行動経済学の応用。貧しくて非合理的。誰もが非合理的。  
-* 20年代:  非調査目的データへの着目。行政データや衛星画像などの活用。AIなどデータを基盤とした予測技術の利用。  
+* 20年代:  非調査目的データへの着目。行政データ、衛星画像、ビッグデータなどの活用。AIなどデータを基盤とした予測技術の利用。  
 
 
 ----
@@ -2743,6 +3258,7 @@ Poor countries are not catching up the rich countries.
 
 ::: {.column width="30%"}
 * 2009年に書かれた経済成長理論の入門教科書に掲載されている図  
+* 2000年までのデータを使っています
 * convergence=収斂、キャッチアップ  
 * キャッチアップするには所得の低い国ほど成長率が高い必要あり  
 :::
@@ -2768,6 +3284,65 @@ Poor countries are not catching up the rich countries.
 :::
 
 ::::
+
+---- 
+
+$t$年の一人あたりGDP成長率$\Delta y_{it}$を前年($t-1$年)の一人あたりGDP(の対数)に回帰
+$$
+\Delta y_{it}=a_{t}+\beta_{t}y_{it-1}+e_{it}
+$$
+
+\begin{equation*}
+\beta_{t} \left\{
+\begin{array}{c}
+>\\
+=\\
+<
+\end{array}
+\right. 0 \quad \Rightarrow \quad
+\mbox{所得が低いほど成長率が}
+\left\{
+\begin{array}{l}
+\mbox{低い}\\
+\mbox{同じ}\\
+\mbox{高い}
+\end{array}
+\right.
+\quad \Leftrightarrow \quad
+\mbox{所得格差が}\left\{
+\begin{array}{l}
+\mbox{拡大}\\
+\mbox{不変}\\
+\mbox{収斂}
+\end{array}
+\right.
+\end{equation*}
+
+:::: {.columns}
+
+::: {.column width="65%"}
+![Figure 1, @Hartley2026](1/2020sConvergence.jpg){width="55%"}
+:::
+
+::: {.column width="30%"}
+
+* 1960-1994: 拡大
+* 1995-2020: 収斂
+* 2021-2024: 拡大&larr;COVID-19
+* 2025-$\phantom{xxx}$: 収斂
+
+::: {.fragment}
+原因は不明
+:::
+
+::: {.fragment}
+開発経済学では未解明
+:::
+
+:::
+
+::::
+
 
 ---- 
 
@@ -2816,7 +3391,167 @@ $$
 
 ::::
 
-----
+---- 
+
+「製造業の労働生産性は収斂している」[@Rodrik2013]
+
+::: {.fragment}
+$$
+\mbox{労働生産性}=\mbox{労働1単位あたりの生産量}=\frac{\mbox{生産額}}{労働量(総時間)}
+$$
+:::
+
+
+:::::: {.columns}
+:::: {.column width="49%"}
+* これはビッグニュースだった
+
+::: {.fragment}
+製造業の労働生産性が収斂\ 
+:::
+::: {.fragment}
+&rArr; 製造業の労働者一人あたり所得が収斂\
+:::
+::: {.fragment}
+&rArr; 経済全体の労働者一人あたり所得が収斂
+:::
+::::
+
+:::: {.column width="49%"}
+::: {.fragment}
+古典的な経済発展初期のメカニズム:\
+:::
+::: {.fragment}
+農村から都市に労働者が移動\
+:::
+::: {.fragment}
+=(農業から労働生産性のより高い)製造業に労働者が移動\
+:::
+::: {.fragment}
+ &rArr; 平均の労働生産性&uarr;\
+:::
+::: {.fragment}
+ &rArr; 一人あたり所得&uarr;
+:::
+::::
+::::::
+
+* しかし、製造業での収斂には疑義が唱えられ、農業とサービス業でのみ労働生産性の収斂(過程)を確認[@HerrendorfRogersonValentinyi2026]
+
+<!--
+
+---- 
+
+「製造業の労働生産性は収斂している」[@Rodrik2013]
+
+:::::: {.columns}
+:::: {.column width="50%"}
+
+::: {#fig-Herrendorf}
+![](1/HerrFig1ABC.jpg){width="100%"}
+
+@HerrendorfRogersonValentinyi2026, Figure 1
+:::
+
+::::
+
+:::: {.column width="45%"}
+* 全産業の労働者生産性比率(=途上国/アメリカ)\
+= 国全体でどれだけ低生産性か
+* これと比べた各産業ごとの労働生産性比率(=途上国/アメリカ)\
+= 各産業は国全体よりもどれだけアメリカと労働生産性が違うか
+    * 農業: 低い
+    * 製造業: 高い
+    * サービス業: 高い
+::::
+::::::
+-->
+
+---- 
+
+「製造業の労働生産性は収斂している」[@Rodrik2013]
+
+:::::: {.columns}
+:::: {.column width="30%"}
+![Figure 2AB, @HerrendorfRogersonValentinyi2026](1/HerrFig2AB.jpg){width="75%"}
+::::
+
+:::: {.column width="65%"}
+* @Rodrik2013 は正規部門formal sectorだけのUNIDOデータを使っていた(B)
+* 非正規部門informal sectorを含むGCDCデータ(1995-2005)では製造業での収斂はなかった(A)
+::::
+::::::
+
+:::::: {.columns}
+:::: {.column width="30%"}
+![Figure 2CD, @HerrendorfRogersonValentinyi2026](1/HerrFig2CD.jpg){width="75%"}
+::::
+
+:::: {.column width="65%"}
+::: {.fragment}
+UNIDOデータとGCDCデータの不一致点
+:::
+
+* 最貧22か国の1995年労働生産性: 相関係数=34%
+    * すべての国では相関係数=82%　(C)
+    * 低所得国の労働生産性: UNIDO>GCDC
+* 比較可能な全48か国の1995-2005年労働生産性成長率: 相関係数=26% (D)
+::::
+::::::
+
+---- 
+
+「製造業の労働生産性は収斂している」[@Rodrik2013]
+
+::: {.fragment}
+非正規部門: 政府に認知されていない活動全般&rarr;生産者だと非納税企業、非納税雇用
+:::
+
+::: {.fragment}
+労働生産性: 正規部門>非正規部門
+:::
+
+:::::: {.columns}
+:::: {.column width="30%"}
+::: {.fragment}
+非正規部門を含めると
+:::
+::::
+
+:::: {.column width="65%"}
+* 労働生産性水準が下がる
+* 労働生産性成長率が下がる
+::::
+::::::
+
+:::::: {.columns}
+:::: {.column width="30%"}
+![Figure 3B](1/HerrFig3B.jpg){width="30%"}
+::::
+
+:::: {.column width="68%"}
+* 製造業雇用: UNIDO/GCDC="coverage ratio"
+    * coverage ratio&darr;(=捉えていない非正規部門雇用&uarr;) ~ UNIDOデータ労働生産性成長率&uarr;
+    * coverage ratio&darr; ~ ILO formal employment ratio&darr;
+::::
+::::::
+
+::: {.fragment}
+途上国のデータを扱うときに気をつける点
+:::
+
+* 質 &rarr; 低いならば使わない &larr; 別データで分析可能か考える
+* カバーする範囲 &rarr; 範囲制約を意識して分析する
+
+
+---- 
+
+* 2000年代以降所得は収斂しつつあるかもしれないが、COVID-19で停止
+* 収斂しているといっても所得平均値
+* 平均値が増えているのは富裕層が出てきているため
+* 富裕層ではない貧困層はまだ残る
+
+---- 
 
 ::: {style="text-align: center;"}
 # 貧困の罠

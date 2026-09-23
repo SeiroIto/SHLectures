@@ -1,0 +1,175 @@
+---
+title: "my.css check ― 書き方と結果"
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    width: 1600
+    height: 900
+    css: [my.css]
+---
+
+## 字下げ {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+書き方
+
+````
+::: {.myindent}
+myindent を当てた段落
+:::
+
+::: {.myindent2}
+myindent2 を当てた段落
+:::
+````
+:::
+::: {.column width="55%"}
+結果
+
+基準（インデントなし）の段落。
+
+::: {.myindent}
+myindent を当てた段落
+:::
+
+::: {.myindent2}
+myindent2 を当てた段落
+:::
+:::
+::::
+
+## 色 {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+書き方
+
+````
+<Red>Red 要素セレクタ</Red>
+<span class="Red">span.Red</span>
+````
+
+要素として書けば効く。クラスとしては効かない
+:::
+::: {.column width="55%"}
+結果
+
+<Red>Red 要素セレクタ</Red> / <span class="Red">span.Red</span>
+
+<Orange>Orange 要素セレクタ</Orange> / <span class="Orange">span.Orange</span>
+
+<Blue>Blue 要素セレクタ</Blue> / <span class="Blue">span.Blue</span>
+
+<Gray>Gray 要素セレクタ</Gray> / <span class="Gray">span.Gray</span>
+:::
+::::
+
+## description-list（見出しと本文を同じ行に） {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+書き方
+
+````
+::: {.description-list}
+用語A
+:   説明A の本文。
+
+用語B
+:   説明B の本文。
+:::
+````
+:::
+::: {.column width="55%"}
+結果
+
+::: {.description-list}
+用語A
+:   説明A の本文。見出しと同じ行に続く。
+
+用語B
+:   説明B の本文。
+:::
+:::
+::::
+
+## description-lb（見出しの下で改行） {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+書き方
+
+````
+::: {.description-lb}
+用語A
+:   説明A の本文。
+
+用語B
+:   説明B の本文。
+:::
+````
+:::
+::: {.column width="55%"}
+結果
+
+::: {.description-lb}
+用語A
+:   説明A の本文。見出しの下に改行して置く。
+
+用語B
+:   説明B の本文。
+:::
+:::
+::::
+
+## ListArrow {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+書き方
+
+````
+::: {.ListArrow}
+::: {.arrow-row}
+::: {.arrow-left}
+左：投入
+:::
+::: {.arrow}
+&rarr;
+:::
+::: {.arrow-right}
+右：産出
+:::
+:::
+:::
+````
+:::
+::: {.column width="55%"}
+結果
+
+::: {.ListArrow}
+::: {.arrow-row}
+::: {.arrow-left}
+左：投入
+:::
+::: {.arrow}
+&rarr;
+:::
+::: {.arrow-right}
+右：産出
+:::
+:::
+:::
+:::
+::::
+
+## コードブロックの高さ {.smaller}
+
+`.reveal .slides pre code { max-height: 800px; }` が効いている（実測 800px）
+
+```r
+x <- 1
+y <- 2
+```

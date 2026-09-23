@@ -1,0 +1,13 @@
+/* my.css ― 使い回す小さなクラス置き場
+   使い方: YAML の css: に並べ、スライド本文では fenced div で当てる
+     format:
+       revealjs:
+         css: [my.css]
+     ::: {.myindent}
+     本文
+     :::
+*/
+
+/* 段落やブロックを字下げする。数値は好みで */
+.reveal .myindent  { margin-left: 3em; }
+.reveal .myindent2 { margin-left: 6em; }

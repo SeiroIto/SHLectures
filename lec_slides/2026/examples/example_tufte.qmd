@@ -1,0 +1,98 @@
+---
+title: "作例2: Tufte 風(傍注レイアウト)"
+subtitle: "作例1と中身は同じ。ヘッダだけが違う"
+author: "アジア経済研究所 伊藤成朗の指示のもと claude opus 5 が作成"
+date: today
+lang: ja
+engine: knitr
+format:
+  html:
+    grid:
+      margin-width: 350px
+    toc: false
+    embed-resources: true
+    theme: cosmo
+reference-location: margin
+citation-location: margin
+cap-location: margin
+---
+
+## 何が違うか
+
+右に広い余白があります。脚注・図・注記がその余白に出ます。[^1]
+
+[^1]: これが傍注です。`[^1]` と書くだけで、ページ下ではなく右余白に出ます。
+
+ヘッダに足したのは次の4行だけです。
+
+```yaml
+format:
+  html:
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+cap-location: margin
+```
+
+## 余白に文章を置く
+
+`::: {.column-margin}` ではさんだものは余白に出ます。
+
+::: {.column-margin}
+余白の注記です。本文の流れを止めずに、補足や出典を置けます。
+:::
+
+本文はふつうに続きます。箇条書きも**太字**も作例1と同じです。
+
+* `margin-width` を大きくすると余白が広がります
+* `reference-location: margin` が脚注を余白に送ります
+* `cap-location: margin` が図の説明文を余白に送ります
+
+## 余白に図を置く
+
+チャンクに `#| column: margin` を足すと、図が余白に入ります。
+
+```{r}
+#| label: fig-ozone-margin
+#| fig-cap: "気温とオゾン濃度(ニューヨーク市, 1973年5〜9月)"
+#| column: margin
+#| fig-width: 4
+#| fig-height: 3
+#| warning: false
+#| message: false
+library(ggplot2)
+#### 図の中で日本語を使う準備(Windowsのみ)
+if (.Platform$OS.type == "windows") {
+  windowsFonts(JP = windowsFont("Meiryo"))
+  jpfont <- "JP"
+} else jpfont <- ""
+d <- subset(airquality, !is.na(Ozone) & !is.na(Temp))
+ggplot(d, aes(x = Temp, y = Ozone)) +
+  geom_point(colour = "steelblue", alpha = .7) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE, colour = "firebrick") +
+  labs(x = "気温 (華氏)", y = "オゾン濃度 (ppb)") +
+  theme_minimal(base_size = 9) +
+  theme(text = element_text(family = jpfont))
+```
+
+@fig-ozone-margin は余白に置いた図です。本文の幅を狭めずに図を見せられます。
+
+## 本文いっぱいに広げる
+
+逆に `#| column: page` を足すと、余白まで使って横に広がります。
+
+```{r}
+#| label: fig-ozone-wide
+#| fig-cap: "同じデータを月ごとに分けたもの"
+#| column: page
+#| fig-width: 10
+#| fig-height: 3
+d$月 <- factor(d$Month, levels = 5:9, labels = paste0(5:9, "月"))
+ggplot(d, aes(x = Temp, y = Ozone)) +
+  geom_point(colour = "steelblue", alpha = .7) +
+  facet_wrap(~ 月, nrow = 1) +
+  labs(x = "気温 (華氏)", y = "オゾン濃度 (ppb)") +
+  theme_minimal(base_size = 10) +
+  theme(text = element_text(family = jpfont))
+```

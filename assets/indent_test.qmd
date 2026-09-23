@@ -1,0 +1,30 @@
+---
+title: "indent test"
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    width: 1600
+    height: 900
+---
+
+## 方法の比較
+
+基準（インデントなし）の段落。
+
+::: {style="margin-left: 3em"}
+A. 直接 style を書いた div
+:::
+
+::: {.myindent}
+B. CSS クラスを当てた div
+:::
+
+> C. 引用ブロック
+
+- D. リスト項目
+  - D の入れ子
+
+<style>
+.reveal .myindent { margin-left: 3em; }
+</style>

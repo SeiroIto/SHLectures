@@ -1,0 +1,31 @@
+// Shared Quarto revealjs fixes — canonical source.
+// Import from a theme's scss:rules section:  @import "<rel>/style/quarto-fixes";
+//
+// FIX 1: phantom 3px vertical scrollbar on slides whose plot sizes its container.
+//   Quarto renders plot <img> as display:inline inside div.cell-output-display,
+//   which it also styles overflow-x:auto. Per CSS spec, when overflow-x is auto
+//   and overflow-y is visible, overflow-y computes to auto. The inline image sits
+//   on the text baseline, so the line box reserves ~3px of descender space below
+//   it — and the container renders a scrollbar for those 3px.
+//
+//   Overflow is a constant 3px regardless of fig-height, which is why resizing the
+//   figure never removes the bar. It only appears when the figure determines its
+//   container's height; where a neighbouring column is taller, the slack absorbs it.
+//
+//   display:block removes the baseline strut. Verified 2026-07-09 against a real
+//   render: overflow 3px -> 0px on all four affected slides, and the image regains
+//   the ~13px the scrollbar was occupying. vertical-align:middle also works;
+//   vertical-align:bottom does NOT.
+//
+//   Note: setting fig-align: center does NOT fix this, despite quarto-cli
+//   Discussion #1477 implying centred figures get block display. Measured: a
+//   .quarto-figure-center image still computes to display:inline.
+.reveal div.cell-output-display figure img {
+  display: block;
+}
+
+// display:block would left-align centred figures; restore their centring.
+.reveal div.cell-output-display .quarto-figure-center img {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,87 @@
+---
+title: "作例1: 本文・Rコード・図"
+subtitle: "quarto の最小の書き方"
+author: "アジア経済研究所 伊藤成朗の指示のもと claude opus 5 が作成"
+date: today
+lang: ja
+engine: knitr
+format:
+  html:
+    toc: true
+    toc-title: 目次
+    number-sections: true
+    embed-resources: true
+    theme: cosmo
+---
+
+## 見出しの書き方
+
+`#` の数が見出しの深さです。`##` が大見出し、`###` が中見出しです。
+
+箇条書きは行頭に `*` を置きます。
+
+* ふつうの項目
+* **太字**は `**` ではさみます
+* *斜体*は `*` ではさみます
+* `コード`は backtick ではさみます
+* リンクは [quarto 公式サイト](https://quarto.org/) のように書きます
+
+段落を変えるときは、空行を1つ入れます。
+
+## Rのコードを書く
+
+コードは ```` ```{r} ```` と ```` ``` ```` ではさみます。この作例では
+`echo: true` にしているので、コードも結果も両方出ます。
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+library(ggplot2)
+#### 図の中で日本語を使う準備(Windowsのみ)。これをしないと文字が四角になります
+if (.Platform$OS.type == "windows") {
+  windowsFonts(JP = windowsFont("Meiryo"))
+  jpfont <- "JP"
+} else jpfont <- ""
+d <- subset(airquality, !is.na(Ozone) & !is.na(Temp))
+nrow(d)
+```
+
+`airquality` は R に最初から入っているデータです。ダウンロードは要りません。
+
+```{r}
+summary(d[, c("Ozone", "Temp")])
+```
+
+## 図を作る
+
+チャンクに `#| label: fig-` で始まる名前と `#| fig-cap:` を付けると、図に番号が
+付き、本文から参照できます。
+
+```{r}
+#| label: fig-ozone
+#| fig-cap: "気温とオゾン濃度(ニューヨーク市, 1973年5〜9月)"
+#| fig-width: 6
+#| fig-height: 4
+g <- ggplot(d, aes(x = Temp, y = Ozone)) +
+  geom_point(colour = "steelblue", alpha = .7) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE, colour = "firebrick") +
+  labs(x = "気温 (華氏)", y = "オゾン濃度 (ppb)") +
+  theme_minimal(base_size = 11) +
+  theme(text = element_text(family = jpfont))
+print(g)
+```
+
+@fig-ozone のように書くと「図 1」という番号が自動で入ります。番号を自分で
+数える必要はありません。
+
+## 出力形式を変える
+
+冒頭のヘッダ(YAML header)の `format:` を書き換えるだけです。
+
+| 書き方 | 出力 |
+|---|---|
+| `format: html` | ウェブページ |
+| `format: docx` | Word |
+| `format: pdf` | PDF (別途 LaTeX が要ります) |
+| `format: revealjs` | スライド |

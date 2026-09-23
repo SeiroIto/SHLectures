@@ -1,0 +1,1706 @@
+---
+title: "開発経済論: 人的資本"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+filters:
+  - nutshell
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/03.html>
+    theme: 
+      - sky
+      - ../../assets/style/seirosky.scss
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - ../../assets/style/toc-slide.html
+    includes:
+      in_header: ../../assets/style/sky_add_FilePointer.html
+      after-body: ../../assets/style/toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+    css:
+      - ../../assets/style/seiro.css
+#### Looks like seiro.css in sky_add_FilePointer.html does not work but local ../../assets/style/seiro.css works
+#### Don't understand why
+lightbox: auto
+displayMode: compact
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../assets/style/MathShorthand.html 
+#### bib file at doc folder root
+bibliography: ../../seiro.bib
+####../../../../seiro.bib
+resources:
+  - 03.pdf
+# quarto render 03.qmd
+---
+```{css}
+.math.inline .MathJax  {
+  font-size: 80% !important;
+}
+.mermaid-render svg {
+    width: 70%; 
+}
+gray {
+  color: #aeb6bf;
+}
+Green {
+  color: #1DCA09;
+}
+Yellow {
+  color: #fff000;
+}
+Red {
+  color: Red;
+}
+DarkRed {
+  color: #b40404;
+}
+Blue {
+  color: Blue;
+}
+RoyalBlue
+{
+  color: #4169e1;
+}
+Aqua {
+  color: #07aafc;
+}
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+```
+
+::: {style="text-align: center;"}
+# はじめに
+:::
+
+----
+
+::::::::::{.columns}
+::::{.column width="60%"}
+![School enrollment rates, 2020](HK/figure/SG.png){width="85%"}
+::::
+
+::::{.column width="40%"}
+$$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
+::::
+::::::::::
+
+----
+
+![Under 5 stunting rate, 2020](HK/figure/HG.png){width="50%"}
+
+----
+
+![Infant mortality rate, 2020](HK/figure/MG.png){width="50%"}
+
+----
+
+人的資本とは
+
+. . .
+
+教育、訓練、健康(保健)など、人間の生産性を高める無形資産。
+
+. . .
+
+古くはアダム・スミスにその概念が見出されるが、近代になって提唱したのがアメリカの経済発展を研究した @Schultz1960;  @Schultz1961; 賃金を職歴と教育水準に関連づける実証研究をした @Mincer1974; 最適な人的資本投資に関する理論的貢献をした @Becker1962;  @Becker1964 など。
+
+. . .
+
+教育水準や保健指標が優れているほど所得は高いので、教育や保健の普及が所得を増やすかもしれない...
+
+. . .
+
+貧困の罠では経済全体が豊かになるメカニズムとその障壁を考えた
+
+このセクションでは、個々の家計が豊かになるメカニズムを人的資本投資を通じて考える
+
+----
+
+## : Labour productivity
+
+<!-- * $\large{労働生産性}=\frac{\mbox{GDP}}{\large{\mbox{雇用者数}}}$-->
+
+* 労働生産性=GDP/雇用者数
+   * ここでの労働生産性の計算方法
+      * 長所: GDP関連統計(国民経済計算)だけで計算可能
+      * 短所: 労働時間を考慮していない
+   * 通常は生産量/総労働時間、生産金額/総労働時間などで計算
+
+## :x LProd2
+
+----
+
+::::::::::{.columns}
+
+::::{.column width="55%"}
+![被雇用者1人あたりGDP(労働生産性)](HK/figure/LabourProductivityPerEmployee.jpg){width="85%"}
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
+::::
+
+::::{.column width="45%"}
+* [:労働生産性](#LabourProductivity)
+* 中国、韓国、インドの労働生産性は急速に成長、ただし、インドの水準はまだ低い
+* 南アフリカとインドネシアの労働生産性は低く、成長も遅い
+* リーマン・ショックを引き起こしたアメリカは、ショック後も労働生産性が成長
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="55%"}
+![被雇用者1人あたりGDP(労働生産性): 現在の高所得国のみ](HK/figure/LabourProductivityPerEmployee2.jpg){width="85%"}
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
+::::
+
+::::{.column width="45%"}
+*	日本の労働生産性はバブル崩壊後も1996年頃までアメリカと似た成長率、それ以降は差が拡大
+*	1990年代末期は就職氷河期、デフレの始まり(CPI, 1998年9月)
+*	2011年大震災以降、労働生産性は僅かに上昇したが、アベノミクス以降も成長せず、COVID-19蔓延以前の2018年から低下
+::::
+::::::::::
+
+----
+
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![1人あたりGDP](HK/figure/GDPPerCapita.jpg){width="85%}
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
+::::
+
+::::{.column width="30%"}
+* 1人当たりGDPは労働生産性とトレンドと近似
+* (ここでの)低所得国と高所得国の差は縮まっている
+* 南アフリカはインドネシアに追いつかれた
+* 1人当たりGDPでも日本は韓国に追いつかれた
+* 南アフリカは中国よりも労働生産性は高いが1人当たりGDPは低い
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![1人あたりGDP: 現在の高所得国のみ](HK/figure/GDPPerCapita2.jpg){width="85%}
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> [OECD](https://stats.oecd.org/Index.aspx?DataSetCode=PDB_LV)<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
+::::
+
+::::{.column width="30%"}
+* 日本は1997年からアメリカとドイツとの格差拡大
+* 日本はアベノミクスの1年前から成長
+* 日本は労働生産性は低迷しているのに1人当たりGDPは成長
+   * 就労人数(時間人)が増えたため
+::::
+::::::::::
+
+----
+
+::::::::::{.columns}
+::::{.column width="70%"}
+![資本分配率(=資本報酬/国民所得=1-労働分配率)](HK/figure/PikettySaezZucman.jpg){width="85%}
+
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ujxzdfjx.json"
+    trigger="hover"
+    style="width:30px;height:30px">
+</lord-icon> @PikettySaezZucman2018, Table A49より作成
+<div style="text-align: right; font-size: 12px"><a href="https://lordicon.com/">Animated icons by Lordicon.com</a></div>
+::::
+
+::::{.column width="30%"}
+* 労働分配率(=1-資本報酬/国民所得)も1960年代人的資本論の着目点
+* 大戦期以降-1990年前後: 資本分配率は低下
+* 1990年前後-: 資本分配率は上昇
+   * 人的資本は増えているのに労働分配率は低下
+   * 生産物市場の独寡占化oligopoly+労働市場の独寡占化oligopsony?
+::::
+::::::::::
+
+
+----
+
+```{r pc GDP, warning = F}
+# downloaded from https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD
+# GDP per capita, PPP (constant 2017 international $) GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP at purchaser's prices is the sum of gross value added by all resident producers in the country plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2017 international dollars.
+library(data.table)
+grepout <- function(str, x)
+  # returns element of match (not numbers)
+  x[grep(str, x, perl = T)]
+repseq <- function(seq, rep)
+#       returns a sequence with each elements repeated by rep times
+{z <- NULL; for (i in 1:length(seq)) z <- c(z,rep(seq[i],rep)); return(z)}
+y <- fread("1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
+  header = T, skip = 2, sep = ",")
+setnames(y, 
+  grepout("^1|^2", colnames(y))
+  , paste0("pcdgp.", grepout("^1|^2", colnames(y)))
+  )
+yL <- reshape(y, direction = "long", idvar = c("Country Name", "Country Code"),
+  varying = grepout("^pc", colnames(y)))
+yL[, c("indicator", "Indicator Name", "Indicator Code", "V67") := NULL]
+setnames(yL, c("name", "code", "year", "value"))
+# lag with n=1 and pad with NA (returns vector)
+setkey(yL, name, year)
+yL[, gY1 := shift(value, n=1, fill=NA, type="lag"), by = .(name)]
+yL[, gY := (value-gY1)/gY1]
+yL <- yL[year >= 1990]
+yL[, trend := 1:.N, by = code]
+lm1 <- lm(log(value) ~ trend, data = yL[grepl("JP", code) & year >= 1991 & year <= 2012, ])
+```
+```{r read labour force stat of japan, echo = F, warning = F, message = F, results = "hide"}
+# 総務省統計局、労働力調査、長期時系列データ, unit = 10 thousands
+#https://www.stat.go.jp/data/roudou/longtime/zuhyou/lt01-a10.xlsx
+lfj <- fread("HK/JapanLabourForce.prn", skip = 2, header = T)
+lfj <- lfj[-(1:2), ]
+lfj[, year := repseq(1953:2021, 12)]
+# okinawa is included from 1973 onwards
+lfj <- lfj[year >= 1973, ]
+lfj[, c("Mon", "star") := NULL]
+setnames(lfj, c("year", "month", 
+  paste(rep(grepout("L|E|U|N", colnames(lfj)), each = 3), c("t", "m", "f"), sep = ".")))
+lfjL <- reshape(lfj, direction = "long", idvar = c("year", "month"),
+  varying = grepout("L|E|U|N", colnames(lfj)))
+setnames(lfjL, c("year", "month", "GenderGroup",
+  "LForce", "Employed", "Employee", "Unemployed", "NLForce", "URate"))
+lfjL[, month := unlist(strsplit(month, "月"))]
+nv <- c("year", "month", "LForce", "Employed", "Employee", "Unemployed", "NLForce", "URate")
+lfjL[, (nv) := lapply(.SD, as.numeric), .SDcols = nv]
+# merge population census 人口推計, 政府統計コード=00200524, unit = thousand
+popj <- fread("HK/JapanPopulation.prn", skip = 1, header = T)
+popj2 <- fread("HK/JapanPop2015-2019.prn", skip = 5, header = T)
+popj2 <- popj2[grepl("総数", AgeGroup) & !grepl("%", unit), .(year, GenderGroup, value)]
+popj2[, gen := "t"]
+popj2[grepl("男$", GenderGroup), gen := "m"]
+popj2[grepl("女$", GenderGroup), gen := "f"]
+popj2[, GenderGroup := NULL]
+popj[, memo := NULL]
+popL <- reshape(popj, direction = "long", idvar = c("year"),
+  varying = grepout("pop", colnames(popj)))
+setnames(popL, "time", "GenderGroup")
+setnames(popj2, c("value", "gen"), c("pop", "GenderGroup"))
+pop <- rbindlist(list(popL, popj2), use.names = T)
+pop2 <- pop[year == 2019]
+pop2[, year := 2020]
+pop <- rbind(pop, pop2)
+setkey(pop, year, GenderGroup)
+setkey(lfjL, year, GenderGroup)
+lf <- pop[lfjL]
+lf[, Date := as.IDate(strftime(paste(year, month, 1, sep = "-"), format = "%Y-%m-%d"))]
+lf[, LFRate := LForce*10/pop]
+lf[, ERate := 1-URate/100]
+lf[, ELRate := LFRate*ERate]
+lf[, GenderGroup := factor(GenderGroup, levels = c("t", "f", "m"))]
+lf[, GenderGroup := factor(GenderGroup, labels = c("合計", "女", "男"))]
+lf <- lf[, .(Date, GenderGroup, LFRate, ERate, ELRate)]
+lf <- unique(lf)
+setnames(lf, 
+  c("LFRate", "ERate", "ELRate"), 
+  paste0("value.", c("LFRate", "ERate", "ELRate"))) 
+lfL <- reshape(lf, direction = "long", idvar = c("Date", "GenderGroup"),
+  varying = grepout("val", colnames(lf)))
+setnames(lfL, "time", "variable")
+lfL[, variable := factor(variable, levels = c("ELRate", "LFRate", "ERate"))]
+lfL[, variable := factor(variable, labels = c("就業率*労働力率", "労働力率", "就業率"))]
+lfL2 <- lfL[grepl("就業率\\*労働力率", variable) & grepl("合計", GenderGroup) & Date >= as.IDate("1991-01-01") & Date <= as.IDate("2012-12-01"), ]
+lfL2[, trend := 1:.N]
+lm2 <- lm(log(value) ~ trend, data = lfL2)
+```
+```{r read labour force stat of Japan at FRED, echo = F, warning = F, message = F, results = "hide"}
+# labour shares in japan
+ls <- fread("HK/LabourShareFromFRED.csv", header = T)
+setnames(ls, c("date", "value"))
+ls[, trend := 1:.N]
+ls[, Date := as.IDate(date)]
+lm3 <- lm(log(value) ~ trend, data = ls[Date >= as.IDate("1991-01-01") & Date <= as.IDate("2012-01-01")])
+```
+
+::::::::::{.columns}
+::::{.column width="40%"}
+![@ADKPV2020, Figure 1](HK/figure/ADKPV2021_Fig1small.jpg)
+::::
+
+::::{.column width="60%"}
+先進国での1970年代以降の傾向
+
+* 労働分配率は1980年代からすべての国で低下、日本では`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%低下
+* 1991-2012: 就業率*労働力率は`r formatC((exp(summary(lm2)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%変化(次2枚のスライド)、1人あたりGDPは`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%成長
+* 日本の労働分配率の低下の主な背景: 1人あたりGDP成長率(`r formatC((exp(summary(lm1)$coeff[2, 1]*22)-1)*100, digits = 3, format = "f")`%)よりも平均労働所得の成長率(`r formatC((exp(summary(lm3)$coeff[2, 1]*22)-1+exp(summary(lm1)$coeff[2, 1]*22)-1-(exp(summary(lm2)$coeff[2, 1]*22)-1))*100, digits = 3, format = "f")`%)が低かったため
+   * 就業率や労働力率の影響は小さい
+   * 1人あたりGDPの増分から、労働者よりも多くを企業所有者が得た
+   * 所有者と株主が富を増やした
+::::
+::::::::::
+
+$$
+\mbox{労働分配率}
+=\frac{\mbox{労働所得}}{\mbox{GDP}}
+=\frac{\frac{\mbox{労働所得}}{\mbox{人口}}}{\frac{\mbox{GDP}}{\mbox{人口}}}
+=\frac{\frac{\mbox{労働所得}}{\mbox{労働者数}}\frac{\mbox{労働者数}}{\mbox{労働力}}\frac{\mbox{労働力}}{\mbox{人口}}}{\frac{\mbox{GDP}}{\mbox{人口}}}
+=\frac{\mbox{平均労働所得}\times\mbox{就業率}\times\mbox{労働力率}}{\mbox{1人あたりGDP}}.
+$$
+
+
+----
+
+
+@Schultz1960 の疑問と仮説
+
+
+1. 労働人口や資本の増加以上に生産が増えているのはなぜか
+
+* つまり、生産額/労働量=労働生産性、生産額/資本サービス価値=資本生産性が増えているのはなぜか
+   * 国内総生産(GDP)/人口=1人当たりGDP(労働人口$<$人口だが国単位での労働生産性を近似)も増えている。
+
+2. 労働分配率はなぜ上昇しているのか(1960年当時)\hfill\hyperlink{LShare<1>}{\beamergotobutton{先進国労働分配率}}
+
+. . .
+
+<br>
+
+人間への投資が労働生産性を高めているため (注意: 資本の質も高まっている、AI/ICT)
+
+. . .
+
+人間への投資の成果=人的資本human capital
+
+. . .
+
+人間を資本という物として捉えるのは当時(現在も?)「けしからん」
+
+. . .
+
+@Becker1964 も*Human Capital: A theoretical and empirical analysis, with special reference to education*などと副題を付けた
+
+----
+
+人的資本の分類
+
+:::{.des-list-boxed}
+知的能力
+: 知識、技能
+
+物的能力
+: 健康
+:::
+
+* 知識と技能は性質が異なる
+   * 技能: 人間に体化される&rarr;私的財
+   * 知識: 社会に蓄積されて共有される&rarr;公共財: 他者の消費は競合しないし排除もできない
+* 健康は運動能力と感染源(!)に分けると性質が異なる
+   * 運動能力: 人間に体化される&rarr;私的財
+   * 感染源: 社会に広める&rarr;外部性のある私的財: 他者への影響が市場で価格評価されないので、個人の行動は他者への感染を考慮しにくい
+      * 「自分は軽症にしかならないから」感染予防努力を緩める
+      * 「マスク着用を強要するのは自由の侵害」...自由のためなら感染する/させる覚悟がある?
+
+----
+
+知識生産=研究開発(R\&D)活動
+
+. . .
+
+模倣されると利益が減るので、知識生産は社会的に最適水準よりも少なくなりがち
+
+. . .
+
+特許patents、著作権copyright、商標trademarkなどで知的財産権を保護して少なくなりすぎないようにする
+
+. . .
+
+原則は理解されても、保護や違反摘発・懲罰の適切な水準に合意がない
+
+----
+
+* キムリア(白血病やリンパ腫、1回投与で3349万円)、ザインテグロ([ベータ・サラセミア](https://www.shouman.jp/disease/details/09_08_015/)、米承認3億円)
+* 保護下で薬価を高くし過ぎたために利用が進まない: Truvada(HIV予防治療薬)
+* 低所得者対象で利益が少ない+模倣されやすいために開発が進まない: マラリア治療/[予防薬](https://www.cdc.gov/malaria/php/public-health-strategy/malaria-vaccines.html)、結核治療薬などの[neglected tropical diseases](https://www.who.int/news-room/questions-and-answers/item/neglected-tropical-diseases)
+* 厳しい罰則(日本: 商標権を侵害した場合は10年以下の懲役もしくは1000万円以下の罰金)、でも、生産地中国での摘発は...: 偽ブランド品販売
+* 著作権の保護期間を再三延ばすことで多額の利潤を保有権者が得る: ミッキーマウス(1923年生まれ、1998年期限切れ予定、1998年期限延長、[2024年1月1日期限切れ](https://web.law.duke.edu/cspd/mickey/), US, [Mickey Mouse 1.0のみ](https://youtu.be/M63yOUQ9RVM))
+   * [I)t was ``basically the Gershwin family trust, grandchildren of Oscar Hammerstein, Disney, others of that ilk'' who pushed for ever-longer copyright terms.](https://arstechnica.com/tech-policy/2019/01/a-whole-years-worth-of-works-just-fell-into-the-public-domain/) (Dennis Karjala, Law professor, 2013)
+   * 商標はディズニーが半永久的に保有し続ける。ミッキーマウスの絵はpublic domainになるが、ミッキーの何々、という使い方は商標の使用許諾を得た上でライセンス料を支払う。
+
+----
+
+人の中で知的能力はどのように成長するでしょうか
+<gray>How does intellectual capacity grow in a person?</gray>
+
+* 知的能力=技能+知識
+
+. . .
+
+学校教育を考えます<gray>Let us consider schooling</gray>
+
+. . .
+
+通学すると学習し、人的資本(知的能力)を蓄積し、生産性が高まります<gray>If you go to a school, you learn, you will accummulate human capital (intellectual capacity), and you will become productive</gray>
+
+. . .
+
+生産性が高いほど稼ぎが増えます<gray>The more you are productive, the more you earn</gray>
+
+. . .
+
+では、できる限り長く学校に通うべきでしょうか?<gray>Then, shall we go to school as long as possible?<gray>
+
+. . .
+
+
+いいえ、ある段階で止めて働かねばなりません<gray>No. You need to stop at some point and start to work</gray>
+
+. . .
+
+いつ止めるかどのように決めるべきでしょうか<gray>How do we decide when to stop?</gray>
+
+. . .
+
+止めるタイミングを理解するには理論が必要になります<gray>We need a theory to understand.</gray>
+
+----
+
+@BalandRobinson2000 モデル: 2期間モデルを考えます<gray>Here comes @BalandRobinson2000: Let us consider a two-period model</gray>
+
+:::{.des-list-boxed}
+第1期
+:	子ども期: どのくらい学校に行くか、どのくらい働くか決めます<gray>You choose how much to go to school, how much to work</gray>
+
+第2期
+:	成人期: 子ども期の就学時間に応じた労働所得を得ます<gray>You earn. Adulthood income is increasing in childhood schooling.</gray>
+:::
+
+. . .
+
+合理的な子ども: 便益と費用を考慮して教育水準を決める<gray>a rational child: weighs costs and benefits to decide schooling level</gray>
+
+:::{.des-list-boxed}
+便益benefits
+:	学歴を積むことによる成人所得増加分$\times$割引率<gray>increased adult income * discount rate</gray>
+
+費用costs
+:	学歴を積むことによる就学費用(=学費+制服・給食・通学その他費用+児童労働所得)の発生<gray>costs of schooling(tuition+school unifom+school meals+commuting costs+child labour incomes)</gray>
+:::
+
+. . .
+
+教育水準を決める=**第1期の時間配分(就学 vs. 就労)**を決める<gray>deciding on schooling level=deciding on time allocation (schooling vs. work) in period 1</gray>
+
+----
+
+単純化の仮定
+
+1. 学費+制服・給食・通学その他費用=0<gray>for simplicity, we assume all costs other than child labour income are zero</gray>
+1. 親と子どもの利害は完全に一致
+
+. . .
+
+以下の場合、親は子どもが判断するよりも児童労働就労時間を長くして、子どもの児童労働所得で自分の効用を高める<gray>Under the following conditions, a parent may increase the work hours than the child would have and increases the parental utility with the child's labour income</gray>
+
+* 親が子どもの成人期所得効用を子どもよりも割り引くとき(将来よりも現在の家族の幸せ)<gray>a parent discounts more of future utility (happiness of today weights more than of tomorrow)</gray>
+* 「成人したら仕送りを約束するから学校に行かせてほしい」と子どもが頼んでも、親が子どもの約束を信じないとき(子どもは将来裏切ることができるため)<gray>a parent does not believe that the child's promise that he/she will pay back the costs in future</gray>
+
+. . .
+
+意志決定者が子どもか親かによって人的資本投資額が変わる<gray>depending on the decision maker, the amount of human capital investment may differ</gray>
+
+----
+
+教育の人的資本仮説: 学歴水準の決定=生産性向上手段<gray>human capital hypothesis of education: schooling = a means to increase productivity</gray>
+
+* 教育に関する最も代表的な仮説<gray>the most representative hypothesis on education</gray>
+* 人的資本仮説と補完的な見方: <gray>a complementary view to human capital hypothesis</gray>
+
+:::{.des-list-boxed}
+シグナリング仮説
+:	学歴水準の決定=(雇用者への)能力情報伝達手段(あくまでもシグナルであって、生産性を変えても変えなくてもいい)<gray>schooling=a means to signal ability (to employers) (strictly a signal and does not have to change productivity)</gray>
+:::
+
+* シグナリング・モデルでは、就学や学習の費用が低い人ほど教育水準を高く選ぶ<gray>In signaling models, people with lower costs of schooling/learning choose high schooling levels</gray>
+* 人的資本仮説とシグナリング仮説: 補完的であり両立可能<gray>humal capital and signaling: complementary and not mutually exclusive (nor complete)</gray>
+* 本講義では説明しません
+
+----
+
+人生効用最大化のために子どもは何を決めるか<gray>what does a child decide to maximise the lifetime utility?</gray>
+
+1. 第1期時間配分<gray>first period time allocation</gray>
+1. 第1期と第2期の間の消費配分<gray>consumption allocation between first and second periods</gray>
+
+. . .
+
+理解の段取り: <gray>how we understand the model</gray>
+
+1. 第1期時間配分を最適に決め、人生を通じて所得合計を最大化する<gray>a child choose the first period time allocation optimally, and maximises the lifetime earning</gray>
+1. 生涯効用を最大化するように各期への消費配分を決める<gray>decides on consumption allocation to each periods</gray>
+
+----
+
+ミクロ経済学: 限界収入=限界費用(MR = MC)<gray>marginal revenue = marginal costs</gray>
+
+. . .
+
+生涯効用を最大化する最適な学歴水準$l^{*}$(第1期の就学時間)は下記を満たすはず<gray>optimal schooling level $l^{*}$ that maximises the lifetime utiluty must satisfy the below</gray>
+$$
+\underbrace{\mbox{ 成人所得増加による効用増加分}}_{\scriptsize{\mbox{就学の限界収入(を効用評価)}}} = \underbrace{\mbox{ 児童労働所得減少による効用減少分}}_{\scriptsize{\mbox{就学の限界費用(を効用評価)}}}
+$$
+
+. . .
+
+第1期の時間配分は現時点での(限界)費用と将来時点の(限界)便益をバランスさせるように決まる
+
+::::::::::{.columns}
+::::{.column width="40%"}
+:::{.fragment}
+![](HK/figure/MRMC.jpg)
+:::
+::::
+
+::::{.column width="60%"}
+:::{.fragment}
+MR$>$MCのとき=$l<l^{*}$のとき
+
+&rArr; $l$&uarr; &rArr; $MR-MC$だけ純収益&uarr;
+:::
+:::{.fragment}
+MR$<$MCのとき=$l>l^{*}$のとき
+
+&rArr; $l$&darr; &rArr; $MR-MC$だけ純収益&uarr;
+:::
+
+:::{.fragment}
+&rArr; 等号(MR=MC)ならば純収益改善の余地がない
+:::
+
+:::{.fragment}
+連続関数の最大化: 限界収入=限界費用(MR-MC=0) ([図解: 微分](MaximisationSlides.pdf))
+:::
+::::
+::::::::::
+
+----
+
+$t$期の消費$c_{t}$よる効用$u(c_{t})$, $t=1,2$
+
+. . .
+
+
+初期資産$A$、貯蓄$s$、就学時間$l$、児童労働賃金$w$
+
+```{r }
+tb <- read.table(textConnection(
+"就労時間 24-l
+児童労働所得 w×(24-l)
+児童期消費 w×(24-l)+A-s
+児童期効用 u{w(24-l)+A-s}=u(c1)
+成人所得 h(l)
+成人期消費 h(l)+Rs
+成人期効用 u{Rs+h(l)}=u(c2)"))
+tb <- data.table(tb)
+setnames(tb, c("日本語", "数式"))
+tinytable::tt(tb)
+```
+
+----
+
+* 児童労働所得は(24時間から就学時間$l$を引いた)就労時間*児童労働賃金。成人所得は就学時間の増加関数。
+* 児童労働時間は児童労働所得を増やして成人所得を減らす$=$就学時間は児童労働所得を減らして成人所得を増やす
+* 児童労働時間の決定には今期所得と将来所得のトレードオフがある
+   * トレードオフをどのように選ぶかを考えるのが経済学
+
+----
+
+生涯効用最大化問題として今期所得と来期所得のトレードオフを考える
+
+生涯効用最大化問題として児童労働時間=$24-$就学時間=$24-$人的資本投資時間を考える
+
+. . .
+
+$$
+\begin{aligned}
+\max_{\{s, l\}}
+\;\;\; & u(c_{1})+\beta u(c_{2}) \hspace{1cm} &&\color{blue}{\scriptsize{\mbox{$s,l$を操作して生涯効用$u(c_{1})+\beta u(c_{2})$を最大化}}}\\
+\st \;\;\; 
+& c_{1}=w(24-l)+A-s  &&\color{blue}{\scriptsize{\mbox{$c_{1}$は児童労働所得+資産-貯蓄}}}\\
+& c_{2}=h(l)+Rs  &&\color{blue}{\scriptsize{\mbox{$c_{2}$は成人所得$+R*$貯蓄}}}
+\end{aligned}
+$$
+
+. . .
+
+2つの制約を目的関数に代入すると、制約条件を組み込んだ目的関数になる
+$$
+\max_{\{s, l\}}
+\;\;\; u\left\{w(24-l)+A-s\right\}+\beta u\left\{h(l)+Rs\right\}
+$$
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+FOCs
+$$
+\begin{aligned}
+\frac{\partial F(l, s)}{\partial l}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial l}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial l}=0, \\
+\frac{\partial F(l, s)}{\partial s}
+&=
+\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}\frac{\partial c_{1}(l, s)}{\partial s}
++\beta \frac{\partial u(c_{2})}{\partial c_{2}}\frac{\partial c_{2}(l, s)}{\partial s}=0.
+\end{aligned}
+$$
+:::
+
+----
+
+FOCs
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial l}}{\frac{\partial c_{1}(l, s)}{\partial l}}
+=-\beta\frac{h'(l)}{-w}=\beta\frac{h'(l)}{w},\\
+\frac{u'\left(c_{1}\right)}{u'\left(c_{2}\right)}&=
+\frac{\frac{\partial u\left(c_{1}\right)}{\partial c_{1}}}{\frac{\partial u\left(c_{2}\right)}{\partial c_{2}}}
+=
+-\beta \frac{\frac{\partial c_{2}(l, s)}{\partial s}}{\frac{\partial c_{1}(l, s)}{\partial s}}
+=-\beta\frac{R}{-1}=\beta R. 
+\end{aligned}
+$$
+:::
+
+$$
+wR=h'(l^{*}).
+$$
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+$$
+\mbox{時間1単位wで働いて貯蓄したときの第2期所得増加分}=\mbox{時間1単位就学したときの第2期所得増加分}
+$$
+:::
+
+児童労働の限界収益=人的資本投資の限界収益、となるようにすれば時間配分が最適になる
+
+:::{.description-list}
+最適
+: 何らかの最大化(最小化)問題の解となっている状態を指す
+:::
+
+. . .
+
+この条件式の特徴
+
+* 効用最大化を考えたのに効用関数が含まれていない
+* &larr;生涯所得を最大化しつつ、貯蓄(=消費配分)によって効用を最大化
+
+----
+
+FOCs
+
+$$
+\underbrace{u'\left(c_{1}\right)}_{\scriptsize{\mbox{$c_{1}$を減らした(貯蓄を増やした)ときの効用減少分}}}
+=
+\underbrace{\beta Ru'\left(c_{2}\right)}_{\scriptsize{\mbox{$c_{2}$を増やした($R*$貯蓄を増やした)ときの効用増加分の割引$\beta$現在価値}}} 
+$$
+
+所与の生涯所得の下、$s$を通じて消費を再配分することで各期の限界効用の合計は増えない状態
+
+* 第1期限界効用=$\beta R$第2期限界効用を高めるうえでの費用
+   * 第1期限界効用-$\beta R$第2期限界効用=$\beta R$第2期限界費用-$\beta R$第2期限界効用=0
+      *  &rArr; 第2期限界効用=第2期限界費用
+* 所与の生涯所得の下での効用は最大化されている
+  * 各期の限界効用、割引率$\beta$、利子率$R$を考慮し、最適な消費配分を決めている
+  * 生涯所得が与えられたとき、貯蓄をこの条件のように( 「最適に」optimally )決めることで、その生涯所得における効用は最大化される
+  * 生涯所得が最大化されているかはこの条件は何も語っていない
+
+----
+
+FOCs
+
+$$
+\begin{aligned}
+\hspace{-10cm}\underbrace{wu'\left(c_{1}\right)}_{\scriptsize{\mbox{就学時間$l$を増やして所得が$w$減ったときの第1期効用減分}}}
+&=
+\underbrace{\beta u'\left(c_{2}\right)h'(l)}_{\scriptsize{\mbox{$l$を増やしたときの第2期効用増分の割引$\beta$現在価値}}}\\
+\scriptsize{\mbox{就学の限界費用(を効用評価)}}
+&=
+\scriptsize{\mbox{就学の限界収入(を効用評価)}}
+\end{aligned}
+$$
+
+$l$を通じて各期所得を変化させることで各期の限界効用の合計は増えない
+
+* $w$第1期限界効用=$\beta$第2期限界効用を高めるうえでの費用
+   * $\beta$第2期限界効用-$w$第1期限界効用=$\beta$第2期限界効用-$\beta$第2期限界費用=0
+      *  &rArr; 第2期限界効用=第2期限界費用
+* 就学費用$w$、人的資本投資の効率$h'(l)$、各期の限界効用(追加的消費変化がどれだけ効用に影響するか)を考慮し、最適な人的資本投資量$l$を決めている
+
+
+----
+
+経済学でよく使われる仮定
+
+::: {style="font-size: 85%;line-height: 1.1;"}
+:::{.des-list-boxed}
+限界生産力逓減の仮定
+:	技術が変わらずに生産要素が増えると、生産の増加幅は低下するという仮定<gray>diminishing marginal product: an assumption that an increase in production to the same additional unit of factor of production will decline, if without changing the technology</gray>
+
+*	「同じ土地に機械を投入し続けると、混み合うので生産の増加幅はゼロに近づく」
+*	$h(l)$: 就学$l$のときの成人所得
+*	$h'(l)$: 就学$l$で$l$を増やしたときの成人所得変化 \hspace{1cm} <gray>$l$での$h(l)$の傾き</gray>
+*	$h'(l)$は$l\in\mathbb R_{+}$で非負 \hspace{1cm} <gray>$R_{+}$=正の実数すべての集合</gray>
+*	$h'(l)$は$l$とともに減少、$h''(l)<0$ \hspace{1cm} <gray>$l$での$h(l)$の傾きは減っていく</gray>
+
+限界効用逓減の仮定
+:	消費水準が増えると、効用の増加幅は低下するという仮定<gray>an assumption that an increase in utility to the same unit of additional consumption will decline</gray>
+
+*	「同じものを食べ続けると、飽きるので追加的な満足度はゼロに近づく」
+*	$u'(c)$は$c\in\mathbb R_{+}$で非負
+*	$u'(c_{t})$は$c_{t}$とともに減少、$u''(c_{t})<0$
+
+:::
+:::
+
+----
+
+$$
+wu'\left\{w(24-l)+A-s\right\}=\beta u'\left\{h(l)+Rs\right\}h'(l).
+$$
+
+<br>
+
+$wu'\left\{w(24-l)+A-s\right\}$は$l$が大きいほど括弧$\left\{\cdot\right\}$の中が小さい 
+
+$\implies$ $u'\left\{\cdot\right\}$が大きい ($\because$限界効用逓減) 
+
+$\implies$ \color{DarkRed}{左辺$u'\left\{\cdot\right\}$は$l$の増加関数}
+
+<br>
+
+$u'\left\{h(l)+Rs\right\}h'(l)$は$l$が大きいほど$u'\left\{h(l)+Rs\right\}$も$h'(l)$も小さくなる ($\because$限界効用逓減、限界生産力逓減)
+
+ $\implies$ \color{Green}{右辺$u'\left\{h(l)+Rs\right\}h'(l)$は$l$の減少関数}
+
+----
+
+<center>
+![](HK/figure/109_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/110_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/111_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/112_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/113_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](D_HK.gif)
+</center>
+
+----
+
+<center>
+$wu'\left\{w(24-l)+A-s\right\}$と$\beta u'\left\{h(l)+Rs\right\}h'(l)$が交わるために必要な条件
+
+<br>
+
+\hspace{-5cm}$y$軸上($l=0$)で<DarkRed>$wu'\left\{w(24-l)+A-s\right\}$</DarkRed>$<$<Green>$\beta u'\left\{h(l)+Rs\right\}h'(l)$</Green>
+
+$l=24$で<DarkRed>$wu'\left\{w(24-l)+A-s\right\}$</DarkRed>$>$<Green>$\beta u'\left\{h(l)+Rs\right\}h'(l)$</Green>
+
+:::{.fragment}
+<br>
+$\iff$
+
+<br>
+$$
+\begin{aligned}
+wu'\left\{24w+A-s\right\}&<\beta u'\left\{h(0)+Rs\right\}h'(0)\\
+wu'\left\{A-s\right\}&>\beta u'\left\{h(24)+Rs\right\}h'(24)
+\end{aligned}
+$$
+:::
+
+</center>
+
+----
+
+$$
+\begin{aligned}
+wu'\left\{24w+A-s\right\}&<\beta u'\left\{h(0)+Rs\right\}h'(0)\\
+wu'\left\{A-s\right\}&>\beta u'\left\{h(24)+Rs\right\}h'(24)
+\end{aligned}
+$$
+
+
+1番目の不等式が成立しやすい条件
+
+* $h(0)$が[$h(+)$に比べて]小さい: 未就学時の人的資本が(就学時に比べて)小さい
+* $h'(0)$が大きい: 未就学から少しでも就学すると、人的資本の増加分が十分に大きい
+
+. . .
+
+これら条件下では2番目の不等式も成立しやすい
+
+----
+
+
+----
+
+<center>
+![](HK/figure/115_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/116_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/117_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/118_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/119_D_HK.jpg)
+</center>
+
+----
+
+::::::::::{.columns}
+:::{.column width="75%"}
+![](HK/figure/119_D_HK.jpg){width="133.333%"}
+:::
+
+:::{.column width="25%"}
+* 人的資本投資=0のとき、限界効用<限界費用
+* $w$が大きくて$A$が小さい場合
+* $h(0)$が大きい場合
+* $h'(0)$が小さい場合
+:::
+::::::::::
+
+----
+
+<center>
+![](HK/figure/D2_HK.gif)
+</center>
+
+----
+
+最適な就学時間を選ぶと第1期の消費が少なすぎる場合、借入をして第2期に返済する
+
+. . .
+
+$\gets$ 第2期の消費を第1期に移動させる
+
+. . .
+
+でも、借入に限度があって必要なだけ借りられないかも=**信用制約credit constaint**がある場合
+
+. . .
+
+$$
+\underbrace{\mbox{第1期の限界効用}}_{u'(c_{1})}>
+\underbrace{\mbox{第2期の限界効用}}_{\beta Ru'(c_{2})}
+$$
+
+. . .
+
+第1期消費が少なすぎると第1期の限界効用が最適水準よりも高すぎる
+
+. . .
+
+信用制約 &rArr; 第1期消費が過小=$u'(c_{1})$は最適よりも大きい &rArr; 図で$u'(c_{1})w$線は上方
+
+信用制約 &rArr; 第2期消費は過大=$u'(c_{2})$は最適よりも小さい &rArr; 図で$u'(c_{2})h'(l)$線は下方
+
+----
+
+<center>
+![](HK/figure/138_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/139_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/140_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/141_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/142_D_HK.jpg)
+</center>
+
+----
+
+::::::::::{.columns}
+:::{.column width="75%"}
+![](HK/figure/D3_HK.gif)
+:::
+
+:::{.column width="25%"}
+* 第2期所得を少しでも第1期に移動させるために児童労働を増やす
+* 借入が制限されると、就学時間と所得は最適水準よりも減る
+* 信用制約がbindする場合: 資産$A$が少ない場合=貧しい家庭の場合
+:::
+::::::::::
+
+----
+
+信用制約がbindするとき最大化の一階条件の2式の意味
+
+$s$は負が最適だが、非負制約によって0が次善の選択
+$$
+\begin{aligned}
+u_{s}
+&=-u'\left\{w(24-l)+A-s\right\}+\beta Ru'\left\{h(l)+Rs\right\}{\color{red}<}0,\\
+u_{l}
+&=-wu'\left\{w(24-l)+A-s\right\}+\beta h'(l)u'\left\{h(l)+Rs\right\}=0.
+\end{aligned}
+$$
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+$$
+\begin{aligned}
+\frac{u'(c_{1})}{u'(c_{2})}&=\frac{u'\left\{w(24-l)+A-s\right\}}{u'\left\{h(l)+Rs\right\}}{\color{red}>}\beta R,\\
+\frac{u'(c_{1})}{u'(c_{2})}&=\frac{u'\left\{w(24-l)+A-s\right\}}{u'\left\{h(l)+Rs\right\}}=\beta \frac{h'(l)}{w}.
+\end{aligned}
+$$
+:::
+
+$$
+Rw\color{red}{<}h'(l).
+$$
+意味: 追加で微少時間就労して$w$を稼いで貯蓄して成人消費が増える分=$Rw<h'(l)$=追加で微少時間就学して成人消費が増える分 &rArr; 限界費用<限界収入 &rArr; 児童期の<Red>就学時間が過少</Red>
+
+$A$が大きい &rArr; $-u'\left\{w(24-l)+A-s\right\}$の絶対値が小さい &rArr; $u_{l}(0)=-u'\left\{w24+A-s\right\}+\beta Ru'\left\{h(0)+Rs\right\}>0$になるかも &rArr; 交点を持つ
+
+----
+
+この枠組みでは、第1期目に投資、第2期目に回収する
+
+. . .
+
+投資は資金投下と回収の時期が違う: 他者の資金が必要な場合、ファイナンスされないことがある
+
+. . .
+
+第1期目に第2期の投資収益を利用できれば=借入ができれば、効用を最大化するように最適な人的資本投資ができる
+
+. . .
+
+しかし、第2期目の所得を担保に借入ができなければ、資産が少ない家計では第1期の消費を優先して就学時間が過小になる
+
+. . .
+
+収益性の高い投資機会が失われるので、当の<Red>子どもだけでなく社会にとっても損失</Red>
+
+. . .
+
+**信用市場の失敗credit market failure:** 収益性の高い投資に資金を提供できない
+
+. . .
+
+政府などが**奨学金を貸与**すると解決できる、**贈与は不要**
+
+* 近年の奨学金負債: 返済できない人&larr;人的投資の収益率を計算しているか(=合理的か)?
+* $A$&uarr; &rArr; 最適人的資本投資量$l^{*}$&uarr; 
+   * $A$&uarr; &rArr; <Red>$u'(c_{1})w$線</Red>&darr;
+   * お金持ちは最適人的資本投資量が大きい&rarr;所得格差縮小目的ならば、一定の$A$以下だけに贈与する理由にはなる
+
+----
+
+人々の学習などの成果が人的資本として生産性を高め、物的資本や物的労働量以上に経済を発展させていく
+
+. . .
+
+人々は現在の(児童労働)賃金(=就学費用)と将来の賃金増加を勘案して人的資本投資を決める
+
+. . .
+
+では、現在と将来の賃金はどのように決まるのか?
+
+. . .
+
+労働市場の需要と供給を均衡させるように決まる
+
+. . .
+
+では、労働需要と労働供給はどのように決まるのか?
+
+. . .
+
+より対象を絞って考えると、人的資本投資をして技能が向上した労働への需要はどのように決まるのか?
+
+. . .
+
+<br>
+
+賃金格差を説明することもできる
+
+. . .
+
+需要の高まる技能を修得する人 vs. 需要の高まらない技能を修得する人 &rarr; 賃金格差
+
+* 低・中技能=製造業と親和的な技能 vs. ICTと親和的な技能=高技能 
+* 80年代まで vs. 90年代以降
+
+----
+
+インドの経済政策目標: inclusive growth
+
+. . .
+
+高卒や大卒の中産階級が増えて、都市部で近代的な生活を始める
+
+. . .
+
+準技能(semi-skilled)労働を求めた海外直接投資(FDI)、中産階級の消費が成長をもたらす
+
+
+. . .
+
+しかし、恩恵は貧困層になかなか及ばない
+
+. . .
+
+労働需要が高まっている部門・職業に雇用される必要がある
+
+. . .
+
+inclusive growth「成長過程に貧困層が参加すること」が必要と言われるが、低技能労働需要は少ない
+
+. . .
+
+2000年以降のインドの経済成長は(良くて)小卒程度の学力しか持たない農村貧困層への労働需要を飛躍的に高めるとは思えない
+
+. . .
+
+農村部での公教育の質改善無しにはexclusive growthになる
+
+----
+
+@Tinbergen1975, @KatzMurphy1992, @Acemoglu1998, @Acemoglu2002, @GoldinKatz2009 のアイディア
+
+. . .
+
+<center>
+
+技能のプール
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+技能偏向的技術変化
+
+skill-biased technological change
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+企業による技能偏向的技術の採用
+
+</center>
+
+. . .
+
+<center>
+
+&#8681;
+
+技能労働需要
+
+</center>
+
+. . .
+
+<br>
+技能のプールが発生するきっかけは?
+
+----
+
+アメリカ20世紀初頭high school movement
+
+* 高校修了の高収益率、連邦制による分権化 &rArr; 公立高校建設
+* 高校教育の普及 &rArr; 高卒技能偏向的技術変化
+* 技能偏向的技術採用によって技能保有者(高卒)ホワイト・カラー労働需要が増える
+* アメリカ中流階級の黄金期
+
+. . .
+
+アメリカ1970年代
+
+* ヴェトナム戦争徴兵忌避によって大学進学者が 24\%(1960) &rarr; 36\% (1969) &rarr; 27\%(mid-1970's)と増える("College enrollment linked to vietnam war," *NY Times*, Page 24, Sep 04, 1984) &rArr; 技能偏向的技術変化
+
+. . .
+
+アメリカ1980年代
+
+* 技能偏向的技術採用によって技能保有者(大卒)ホワイト・カラー労働需要が増える
+* 高卒と大卒者の<Red>格差が拡大</Red>し始める&rarr;現在も継続
+
+----
+
+<center>
+![](HK/figure/192/1_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/2_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/3_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/4_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/5_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/6_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/7_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/8_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/9_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/10_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/11_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/12_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/13_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/14_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/15_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/192/16_D_HK.jpg)
+</center>
+
+----
+
+この現象の説明を試みる経済理論directed technical change
+
+高技能人口&uarr; &rArr; 高技能集約的技術が開発 &rArr; 採用企業数&uarr; &rArr; (高)技能労働への需要&uarr;
+
+* 技術変化には特定の生産要素(労働、資本など)をより多く使う方向性がある(特定生産要素を増減する方向性のある技術変化をdirected technical changeといいます)
+* 理由: (高)技能人口が増えると、技術開発をして技術を売る企業にとって(高)技能偏向的技術開発の利潤が高まるため[@Acemoglu2002]
+	* 価格効果$(-)$: (高)技能人口が増えると、相対的に稀少になった(低技能)労働を多く使う財の価格が高くなるのでその産業の利潤率が高まり、(低技能)労働偏向的技術が開発される
+	* 市場規模効果$(+)$: (高)技能偏向的技術を使う財の市場規模が大きければ、技術開発企業の利潤が高まるので、(高)技能偏向的技術が開発される
+	* 殆どの場合、市場規模効果は価格効果を上回るので、(高)技能人口が増えると(高)技能偏向的技術が多くなる
+
+----
+
+技能偏向的技術変化があるとき
+
+. . .
+
+人的資本投資へのアクセスが容易で技能労働供給が潤沢 &rArr; 技能を積んで収入を高める人&uarr;  &rArr; 賃金格差&darr;, 経済成長&uarr;
+
+. . .
+
+人的資本投資へのアクセスが一部のみが可能 &rArr; 技能労働供給が限られる &rArr; 賃金格差&uarr;, 経済成長&darr;
+
+* 1980-2005年: 大卒賃金プレミアム
+
+:::{.des-list-boxed}
+拡大
+:	アメリカ、イギリス、日本(プレミアム水準はアメリカの半分)
+
+変化なし
+:	フランス、ドイツ
+:::
+
+. . .
+
+アメリカで大卒人口が増えないのは教育産業の容量上限ではない
+
+* 他国では増えている
+* 高校ドロップアウト増や高卒の学力が不足[@GoldinKatz2009, p.347]
+* 大学の学費が高騰、ベビーブーマー世代が大学学齢になったとき奨学金が不足=credit constrained[@GoldinKatz2009, p.349]
+
+----
+
+日本の大卒新卒賃金プレミアム
+
+<center>
+![](HK/figure/CollegePremiumInJapan.jpg){width="70%"}
+</center>
+
+----
+
+<center>
+![](HK/figure/218/1_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/2_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/3_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/4_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/5_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/6_D_218_D_HK.jpg)
+</center>
+
+----
+
+<center>
+![](HK/figure/218/7_D_218_D_HK.jpg)
+</center>
+
+----
+
+近年の格差: MITのDavid Autor\href{https://economics.mit.edu/people/faculty/david-h-autor/courses}{労働経済学講義14.662 Lecture 1スライド}を引用
+
+* 所得
+	*	所得格差拡大[[6](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=6), [8](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=8)]、中間層の縮小[[9](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=9)]、トップ層の超富裕化[[61](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=61), [68](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=68)]、賃金格差拡大[[12](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=12), [15](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=15)-[21](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=21)]、世代間可動性低下[[23](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=23)]、低所得層の固定化[[27](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=27)]
+	*	大卒プレミアム上昇[[48](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=48)]、大卒賃金プロファイルのフラット化[[58](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=58)-[59](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=59)]
+	*	職業2極化occupational polarization[[50](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=50), [52](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=52), [54](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=54)]
+*	資産 [[69](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=69), [74](https://economics.mit.edu/sites/default/files/inline-files/14.662-Spring2018-Lecture1-An%20Overview%20of%20Topics%20and%20Questions.pdf#page=74)]
+
+----
+
+近年の格差の原因: 諸仮説
+
+:::{.des-list-boxed}
+技能労働需給
+:	技能偏向的技術変化、技能労働需要の高まりに比して技能労働供給が少なかったため[@KatzMurphy1992; @GoldinKatz2009]。人的資本投資補助。&larr;近年ではAIやロボットがルーティーン作業の職種を代替し中間層が減り、さらに、大卒の賃金プロファイルもフラット化
+
+資本収益率が高い
+:	資本収益率が経済成長率よりも高いために資産が集中する[@Piketty2014]。相続資産収益率は富裕層が高くその他層は費消するので、相続を通じて資産格差が拡大[@NekoeiSeim2022]。資産への累進課税。
+
+階級的特権
+:	あまり詳細に示しておらず、さまざまな原因を挙げているが、教育アクセスの差を重要視[@Piketty2014]。1980年代半ば以降、トップ0.1\%、1\%が資産所得と経営者報酬で所得急増、高額所得者の実効税率の低下、課税逃れなど[@PikettySaez2014; @PikettySaezZucman2018]。教育機会の均等や資産への累進課税。
+
+スーパースター企業の成長
+:	大企業が成長しスーパースター企業となり、その他の企業は市場シェアを落とした。生産のシェアが高まったスーパースター企業の労働分配率は低いので、平均労働所得増加率が減った[@ADKPV2020]。スーパースター企業の所有者は富を得たが、それ以外はじり貧。
+:::
+
+----
+
+先進国では人的資本投資の停滞や労働需要の質変化が格差の原因として考えられる
+
+. . .
+
+アメリカなど(先進国)では高等教育へのアクセスが不十分なために高技能供給が停滞
+
+. . .
+
+1980年代以降の技能偏向的技術進歩による高技能需要の高まりが高技能供給停滞と相まって高技能賃金を高め、高技能保有者とそれ以外の格差を拡大
+
+. . .
+
+2000年前後の対策: 高技能供給を増やすことが格差縮小手段の1つのはずだった
+
+. . .
+
+現在: アルゴリズム化できる技能codifiable skillsはAIに代替されるため、高技能でもアルゴリズム化しにくい内容という制約が加わった
+
+. . .
+
+技能偏向的でデータ集約的技術進歩で求められる技能=AIとAIが用いるデータを補完する高技能、であれば、データ集約的な技術進歩とともに労働需要が高まる
+
+----
+
+途上国の場合、自国で技術開発されることは少なく、多くが輸入された技術
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+@JerzmanowskiTamura2019: 各国の技能別人口データを使って推計
+
+* 途上国は人口の技能に準じた技術を導入していないために成長が遅い
+* 途上国は人口の技能水準をアメリカと同じまで引き上げるよりも、現在の技能水準にあった技術を導入する方が所得の増加幅が大きい
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+@Okoye2016: 「適正技術論」の内容は現実と逆
+
+:::{.des-list-boxed}
+適正技術論
+: 途上国は低技能労働者に適正な技術を採用していないので変えるべき
+:::
+
+* 技能労働者の物的環境は先進国より途上国の方が劣悪
+* 技能労働者の物的環境を改善する技術変化で所得を増やせる
+* つまり、途上国は低技能労働者を優先し過ぎた技術を採用している
+* 技能労働者の物的環境を改善する技術が採用されない理由: 既得権益、資本市場の失敗、インフラストラクチュア未整備$\leftarrow$証拠なしで議論
+:::
+
+. . .
+
+どのような産業を呼び込むか、どのような労働供給を想定するかによって、自国で用いられる技術は変わる
+
+. . .
+
+政府による政策選択が違いをもたらすかもしれない
+
+----
+
+
+<blue>中国:</blue> 準技能の低賃金労働に適した大量生産技術=FDI
+
+* 貧困層の所得を増やしつつ成長
+
+. . .
+
+最近では賃金上昇と需要の細分化(多品種少量生産): 生産の自動化
+
+. . .
+
+<Yellow>インド:</Yellow> 自由化(1991年)後も保護・規制を継続、交通・エネルギーのインフラ整備不足、準技能英語使用の低賃金労働に適した技術
+
+
+* コールセンター、会計、ICT設計など都市部でのサービス業務オフショア化労働需要
+* 技能供給: 農村部公立教育はダメ、農村部私立教育も大差ない
+
+. . .
+
+<orange>南アフリカ:</orange> 解雇の難しい低技能の中賃金労働、高技能の白人層
+
+* 現場監督の技能の需要が高まる
+* 高校教育: 質の格差が大きく、労働市場で高卒の評価は低い、現場監督には不十分
+* 大学教育: 収益率は初等教育や中等教育よりも高い&larr;?
+* 格差を減らしながらの成長は難しい
+
+----
+
+@BalandRobinson2000 model relates to MDGs (Milleneum Development Goals) and SDGs (Sustainable Development Goals)
+
+::::::::::{.columns}
+::::{.column width="40%"}
+![](HK/figure/MDG.jpg)
+::::
+
+::::{.column width="40%"}
+![](HK/figure/SDGs.jpg)
+::::
+::::::::::
+
+. . .
+
+「(成長過程に参加して)豊かになる手段としての人的資本投資」で考えるべきこと
+
+* どの学歴水準を得るか(初等教育までならばMDGs)
+* その学歴で得られる技能水準はどれくらいか(SDGs)
+* その技能水準への労働需要は高いか
+&larr; なかなか議論されない
+
+
+----
+
+SDGs: 質の高い教育機会を保証することに留まり、どこまで技能を得れば最適か(生涯効用が最大化するか)は議論していない
+
+政府は、進学しそうな人数、進学してほしい人数を想定して、教育機会を供給するはず
+
+* 技能形成は積み上げ &rArr; 提供される初等教育の質が低ければ中等教育も頓挫
+* 順番: 質の高い初等教育機会 &rarr; 質の高い中等教育機会
+* 質の高い教育機会の提供方法は?
+
+----
+
+India: Rights to Education Act (April, 2010)
+
+. . .
+
+Free and compulsory education: obligation of Central and State governments
+
+. . .
+
+Affirmative action: Makes a provision for any school to admit low caste children
+
+. . .
+
+What happened after RTE?
+
+
+* Classes were flooded with children, even after constructing new schools
+* Many schools had to run multi grade classes
+* Requirements for unlicensed private schools to satisfy facility requirements led to closure schools. Wow.
+
+. . .
+
+It is good to send children to schools
+
+. . .
+
+Only if they are learning
+
+----
+
+::::::::::{.columns}
+
+::::{.column width="80%"}
+
+::: {layout="[[1,1], [1]]"}
+![](HK/figure/Pratham2018GovPvtReading.jpg)
+
+![](HK/figure/Pratham2018GovPvtArithmetic.jpg)
+
+![](HK/figure/Pratham2018Gender.jpg)
+
+出所: @Pratham2018, p.52-54
+:::
+::::
+
+::::{.column width="20%"}
+進級しているが、学力が伴っていない。公立、私立、男女、いずれも低い。
+
+SDGs04: Quality education for everyone質の高い教育をみんなに
+::::
+::::::::::
+
+----
+
+#### References
+
+::: {#refs}
+:::
