@@ -1,7 +1,4 @@
 project:
-  type: website
-  output-dir: posts
-
   render:
     - "lec_slides/2026/"
     - "!assets/*.qmd"

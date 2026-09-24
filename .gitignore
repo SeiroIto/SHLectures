@@ -8,6 +8,7 @@
 **/*.quarto_ipynb
 /admin/
 /_freeze/
+/posts/
 /homeworks/201*/
 /homeworks/2020/
 /homeworks/2021/
