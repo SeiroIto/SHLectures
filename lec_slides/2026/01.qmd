@@ -17,7 +17,7 @@ format:
     height: 900
     preview-links: auto
     logo: GrootbergGiraffeHead.jpg
-    footer: <http://seiroito.github.io/SHLectures/lec_slides/2026/1.html>
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2026/01.html>
     theme: [sky, ../../assets/style/sky-add.scss]
     #### CSS bypasses the Sass compiler's internal search logic
     #### theme: [sky, sky-add.scss, ../../style/hiragino.scss] error

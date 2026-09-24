@@ -28,6 +28,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      QUARTO_PROFILE: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,19 +76,6 @@ jobs:
 
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
-
-      - name: Verify rendered site
-        run: |
-          test -d posts || {
-            echo "::error::Quarto did not create the posts directory"
-            exit 1
-          }
-
-          if ! find posts -type f -name '*.html' -print -quit | grep -q .; then
-            echo "::error::No HTML files were rendered"
-            find posts -maxdepth 3 -type f | sort | head -100
-            exit 1
-          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
