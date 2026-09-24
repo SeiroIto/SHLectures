@@ -52,10 +52,12 @@ jobs:
             any::tufte
             any::modelsummary
             any::treemap
+            any::cowplot
             any::ggfittext
             any::ggrepel
             any::patchwork
             any::qs2
+            any::treemap
             any::viridis
             any::WDI
             any::wooldridge
