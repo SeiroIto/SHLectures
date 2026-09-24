@@ -55,6 +55,7 @@ jobs:
             any::ggfittext
             any::ggrepel
             any::patchwork
+            any::qs
             any::viridis
             any::WDI
             any::wooldridge

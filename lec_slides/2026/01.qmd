@@ -2694,9 +2694,9 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 ```{r}
 #| echo: false
 #| output: asis
-# tikzja needs lualatex; that's present locally but not on GitHub's build
-# runner, so render live only when lualatex is actually on PATH, otherwise
-# fall back to the pre-rendered static image (BirthDiagram.*).
+#### tikzja needs lualatex; that's present locally but not on GitHub's build
+#### runner, so render live only when lualatex is actually on PATH, otherwise
+#### fall back to the pre-rendered static image (BirthDiagram.*).
 fence <- strrep("`", 3)
 tikz_body <- r"(\tikzset{
   box/.style={draw, rectangle, font=\Large, inner sep=5pt,
@@ -2804,7 +2804,7 @@ $$
 ::: {.column width="60%"}
 :::: {.fragment}
 * 背景: 一人っ子政策による縮小傾向+性比率歪み(男性過多)
-* 女性婚姻率&darr;が既婚女性出産率&darr;の最大要素
+* 女性婚姻率&darr;が出産率&darr;の最大要素
 * 教育水準&uarr; &rArr; 婚姻時期遅れる
     * 就学年数分
     * 結婚「適齢期」延伸
@@ -2821,7 +2821,7 @@ $$
 * 高所得化につれて機会費用を下げる政策も必要
     * 構造的な政策が多いので実施は難しく、実現するのに時間がかかる
     * 集票や官僚の業績に反映しにくいので、実施されにくい
-* 女性の育児負担&uarr; &rArr; 出生率&darr; と説明する研究[@DoepkeKindermann2019]　([紹介](https://www.ide.go.jp/Japanese/IDEsquare/Column/ISQ000002/ISQ000002_035.html))
+* 女性の育児負担&uarr; &rArr; 出生率&darr; [@DoepkeKindermann2019]　([紹介](https://www.ide.go.jp/Japanese/IDEsquare/Column/ISQ000002/ISQ000002_035.html))
 
 :::::: {.columns}
 
