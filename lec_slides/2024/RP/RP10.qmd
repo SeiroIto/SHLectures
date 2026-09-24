@@ -1,0 +1,834 @@
+---
+title: "RP10"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP09.html>
+    css: ../../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+include-before-body:
+#### latex math shorthand
+  file: ../../../MathShorthand.html 
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP10.pdf
+# quarto render RP10.qmd
+---
+```{css, echo = F, results = "hide"}
+TallerOutput {
+  height: 800px;
+}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+
+#### description with a font size control (not effective)
+/* Main container for the description list */
+.des-list-boxed {
+    font-size: 60% !important;  /* Default font size */
+    line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Specific font size override */
+.des-list-boxed[data-font-size] {
+    font-size: attr(data-font-size string, 60%) !important;
+}
+.des-list-boxed dl {
+    margin-left: 0;  /* Removes default left margin */
+    padding-left: 0;  /* Removes default left padding */
+    width: 100%;  /* Ensures the container takes full width */
+}
+.des-list-boxed dt {
+    font-weight: bold;  /* Makes the term text bold */
+    text-align: right;  /* Right aligns the term text */
+    padding-right: 1em;  /* Adds spacing after the term */
+    float: left;  /* Allows description to wrap around header */
+    white-space: nowrap;  /* Prevents item header from wrapping */
+}
+.des-list-boxed dd {
+    margin-left: 0;  /* Removes default left margin */
+    overflow: hidden;  /* Clears float */
+}
+.des-list-boxed dd p {
+    margin: 0;  /* Removes default paragraph margins */
+    word-wrap: break-word;  /* Allows description to wrap */
+    overflow-wrap: break-word;  /* Modern alternative to word-wrap */
+}
+.des-list-boxed dd p:first-child {
+    /* First line of description */
+    /* No special styling needed, will naturally wrap around header */
+}
+.des-list-boxed dd p:not(:first-child) {
+    /* Lines after the first line */
+    display: block;  /* Ensures full width */
+    margin-left: 1em;  /* Indentation for subsequent lines */
+}
+.des-list-boxed dd::after {
+    content: "";  /* Necessary for the pseudo-element to render */
+    display: block;  /* Creates a line break */
+    margin-bottom: 0.5em;  /* Adds space between items */
+    clear: both;  /* Clears the float */
+}
+
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+gray {
+  color: #aeb6bf;
+}
+```
+
+```{r, echo = F}
+asc <- function(x)
+{
+  if (!is.factor(x)) x <- as.factor(unlist(x))
+  return(levels(x)[as.integer(x)])
+}
+seqrep <- function(seqn, repvec)
+{
+  Vec <- NULL
+  for (i in 1:length(repvec)) Vec <- c(Vec, paste(rep(seqn, repvec[i]), sep = "", collapse = ""))
+  return(Vec)
+}
+putzeroontop <- function(z, autozero = T, totaldigits = F)
+#  autozero: if numeric, add the given digit of zero on top
+#  totaldigits: if numeric, total digits will be set (001 is 3) if maximum 0s to be added is smaller
+#    modified to accept NA in z: July 18, 2016
+{
+  iic <- grep("\\D", z, perl = T)
+  iina <- which(is.na(z))
+  iin <- grep("\\d", z, perl = T)
+  digs <- nchar(asc(z))
+  adddig <- max(digs, na.rm = T) - digs
+  if (is.numeric(autozero)) 
+  {
+    maxadd <- max(max(digs, na.rm = T) - digs, na.rm = T)
+    if (autozero > maxadd) adddig <- adddig + (autozero - maxadd)
+  }
+  if (is.numeric(totaldigits))
+    if (totaldigits > max(digs, na.rm = T)) 
+    adddig <- adddig + (totaldigits - max(digs, na.rm = T))
+  adddig[c(iic, iina)] <- 0
+  z <- paste(seqrep("0", adddig), z, sep = "")
+  z[grep("NA", z)] <- NA
+  return(z)
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+問い=帰無仮説<gray>research question=null hypothesis</gray>
+
+<br>
+
+. . .
+
+<center>
+政策実施後所得の標本平均値 $\bar{x}$=特定の値(たとえば政策実施前所得の平均値 $\mu$)?
+</center>
+
+<center>
+<gray>pre-policy mean $\bar{x}$=specific value (e.g., pre-policy mean $\mu$)?</gray>
+</center>
+
+. . .
+
+<br>
+
+仮説検定は以下の手順を踏んでいると想定しています<gray>a hypothesis testing considers the following steps</gray>
+
+1. 母集団から$n$個の標本を抽出する<gray>sample $n$ values from population</gray>
+1. 標本平均値を計算する<gray>compute a sample mean</gray>
+1. 1.と2.を無限大の回数繰り返す<gray>repeat 1. and 2. for infinite times</gray>
+
+. . .
+
+無限大回数繰り返す($\simeq$何度も標本抽出する)ことで、母集団平均値の分布を描くことができます<gray>by sampling infinitely many times, one can draw distribution of population mean</gray>
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+* 母集団=政策実施前所得の集合<gray>population=a collection of pre-policy incomes</gray>
+* 母集団平均値$\mu$=不可知、その近似分布=可知&larr;繰り返し抽出<gray>population mean=cannot be known, its distribution=<gray>can be known&larr;repeated sampling</gray>
+
+. . .
+
+母集団平均値分布で$\bar{x}$が外れ値 &rArr; $\bar{x}$と$\mu$の差が大きい<gray>$\bar{x}$ is an outlier in population mean distribution &rArr; $\bar{x}-\mu$ is large</gray>
+
+. . .
+
+&hArr;
+
+. . .
+
+::::::::::{.columns}
+::::{.column width="80%"}
+:::{.fragment}
+$\bar{x}$の右部分の面積(=$p$ value)が小さい<gray>an area right of $\bar{x}$ is small</gray>
+:::
+::::
+
+::::{.column width="20%"}
+:::{.fragment}
+![](10/FigForPValue.gif){width="20%"}
+:::
+::::
+::::::::::
+
+. . .
+
+&hArr;
+
+. . .
+
+帰無仮説(政策効果なし)の分布では極端な事象<gray>an extreme event under the null dist.</gray>
+
+. . .
+
+&hArr;
+
+. . .
+
+政策効果なしは疑問視(「政策効果あり」)<gray>zero policy impact is questioned</gray>
+
+----
+
+<center>
+![null and measured mean](10/FigForPValue1.jpg)
+</center>
+
+----
+
+<center>
+![null and measured mean](10/FigForPValue2.jpg)
+</center>
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+でも、通常は、母集団からの標本抽出などできません<gray>but we usually cannot sample from population</gray>
+
+* 入手可能であれば、政策実施前と考えられるデータを使います<gray>if available, use the data that are considered as pre-policy</gray>
+   * 統御群データ<gray>control group data</gray>
+
+. . .
+
+手元にあるデータが唯一の場合<gray>if the only data is the one in your hands</gray>
+
+* **標本サイズ$n$が大きい場合:** \color{red}{正規分布}で近似できる&larr;中心極限定理($n\to\infty$)の漸近近似<gray>large $n$: approximated by normal distribution&larr;central limit theorem($n\to\infty$)</gray>
+* **標本サイズ$n$が小さい場合:** <gray>small $n$</gray>
+   1. **変数が正規分布に従う場合:** \color{red}{$t$分布}を想定<gray>if sample $\sim$ $N(\mu,\sigma^{2})$: use $t$ tests</gray>
+   1. 変数が正規分布に従わない場合: 標本をもっと集める<gray>if the sample is off normality: get more sample</gray>
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+```{r sample example, echo = T}
+library(ggplot2)
+library(data.table)
+set.seed(12345)
+alpha <- 1
+beta <- 4	
+n <- 3
+base <- ggplot() + xlim(alpha-1, beta+1)
+m2 <- NULL
+for (i in 1:5) {
+  m1 <- runif(n, min = alpha, max = beta)
+  m1 <- data.table(x=m1, y = 0-i/(5*5), z = i)
+  m2 <- rbind(m2, m1)
+}
+m2[, z := factor(z)]
+m3 <- m2[, .(mean = mean(x), y = mean(y)), by = z]
+g <- base + 
+  geom_point(data=m2, aes(x=x, y=y, group = z, shape = z, colour = z)) +
+  stat_function(aes(colour = "state 1"), fun = dunif, args = list(alpha, beta), n = 10001) +
+  geom_point(data=m3, aes(x=mean, y=y, group = z), shape = 10, colour = "blue") +
+  geom_point(data=m3, aes(x=mean, y=0), shape = 10, colour = "blue") +
+  theme(
+    legend.position = "none"
+  )
+g <- g + geom_density(data = m3, aes(x=mean))
+```
+抽出回数=50で上記Rコードを繰り返します。
+
+----
+
+```{r sample1}
+library(ggplot2)
+alpha <- 1
+beta <- 4	
+N <- c(3, 10, 20, 50, 500)
+J <- seq(5, 50, 5)
+m4 <- NULL
+#### Sample size loop
+set.seed(12345)
+for (n in 1:length(N)) {
+  #### Resampling size loop
+  ## Resample max(J) times
+  m2 <- NULL
+  for (i in 1:max(J)) {
+    m1 <- runif(N[n], min = alpha, max = beta)
+    m1 <- data.table(x=m1, y = 0-i/(5*5), z = i)
+    m2 <- rbind(m2, m1)
+  }
+  m3 <- m2[, .(mean = mean(x), y = mean(y)), by = z]
+  m4 <- rbind(m4, data.table(N=N[n], m3))
+  #### save first 5 runs under N=3
+  if (n == 1) {
+    for (i in 1:5) {
+      g <- ggplot() + xlim(alpha-1, beta+1) + ylim(-.2, 1.5) + 
+        geom_point(data=m2[z <= i, ], aes(x=x, y=y, group = factor(z)), color = "green") +
+        stat_function(fun = dunif, args = list(alpha, beta), n = 10001) +
+        geom_point(data=m3[z <= i, ], aes(x=mean, y=y, group = z), shape = 3, colour = "blue") +
+        geom_point(data=m3[z <= i, ], aes(x=mean, y=0), shape = 3, colour = "blue") +
+        theme(
+          legend.position = "none"
+        )
+      g <- g + geom_density(data = m3[z <= i, ], aes(x=mean), color = "blue")
+      ggsave(
+         paste0("10/U_SampleSize", N[n], "ResamplingRun", putzeroontop(J[1], totaldigits=2), "_", i, ".jpg")
+        , g, width = 14*2, height = 8*2, units = "cm",
+        dpi = 300
+      )
+    }
+  }
+  #### Print every 5 in resampling loop
+  base <- ggplot() + xlim(alpha-1, beta+1) + ylim(-1*(max(J)/25), 10)
+  for (j in 1:length(J)) {
+    g <- base + 
+      geom_point(data=m2[z<J[j], ], aes(x=x, y=y, group = factor(z)), color = "green") +
+      stat_function(fun = dunif, args = list(alpha, beta), n = 10001) +
+      geom_point(data=m3[1:J[j], ], aes(x=mean, y=y, group = z), shape = 3, colour = "blue") +
+      geom_point(data=m3[1:J[j], ], aes(x=mean, y=0), shape = 3, colour = "blue") +
+      theme(
+        legend.position = "none"
+      )
+    g <- g + geom_density(data = m3[1:J[j], ], aes(x=mean), color = "blue")
+    ggsave(
+       paste0("10/U_SampleSize", N[n], "ResamplingRun", putzeroontop(J[j], totaldigits=2), ".jpg")
+      , g, width = 14*2, height = 8*2, units = "cm",
+      dpi = 300
+    )
+  }
+}
+#### Print all densities in a single plot
+m4[, N := factor(N)] 
+g <- ggplot(data=m4, aes(x=mean, group = N, colour = N, fill = N)) + 
+  xlim(alpha-1, beta+1) + ylim(-1*(max(J)/25), 10) +
+  stat_function(fun = dunif, colour = "red", args = list(alpha, beta), n = 10001) +
+  geom_density(alpha = 0.1) +
+  theme(
+    legend.position = "none"
+  )
+ggsave(
+   paste0("10/U_density.jpg")
+  , g, width = 14*2, height = 8*2, units = "cm",
+  dpi = 300
+)
+
+
+```
+
+::::::::::{.columns}
+::::{.column width="50%"}
+:::{.fragment}
+![抽出1回目](10/U_SampleSize3ResamplingRun05_1.jpg){width="80%"}
+:::
+
+:::{.fragment}
+![抽出2回目](10/U_SampleSize3ResamplingRun05_2.jpg){width="80%"}
+:::
+
+::::
+
+::::{.column width="50%"}
+:::{.fragment}
+![抽出3回目](10/U_SampleSize3ResamplingRun05_3.jpg){width="80%"}
+:::
+
+:::{.fragment}
+![抽出4回目](10/U_SampleSize3ResamplingRun05_4.jpg){width="80%"}
+:::
+::::
+::::::::::
+
+
+----
+
+::::::::::{.columns}
+::::{.column width="33%"}
+:::{.fragment}
+![n=3](10/U_SampleSize03.gif)
+:::
+
+:::{.fragment}
+![n=10](10/U_SampleSize10.gif)
+:::
+::::
+
+::::{.column width="33%"}
+:::{.fragment}
+![n=20](10/U_SampleSize20.gif)
+:::
+
+:::{.fragment}
+![n=50](10/U_SampleSize50.gif)
+:::
+::::
+
+::::{.column width="33%"}
+:::{.fragment}
+![n=500](10/U_SampleSize500.gif)
+:::
+
+:::{.fragment}
+![確率密度関数density functions](10/U_density.jpg)
+:::
+::::
+::::::::::
+
+----
+
+```{r sample2}
+pop <- c(rep(2, 3), 4, rep(5, 2), rep(6, 2), rep(7, 0), rep(8, 0), 
+   rep(9, 0), rep(10, 1), rep(11, 3))
+popdat <- data.table(x=pop)
+set.seed(3456)
+N <- c(3, 10, 20, 50, 500)
+J <- seq(5, 50, 5)
+#### w4: mean data
+w4 <- NULL
+for (n in 1:length(N)) {
+  #### Resampling size loop
+  ## Resample max(J) times
+  w2 <- sample(pop, N[n]*max(J), replace=TRUE)
+  w2 <- data.table(x=w2, y = 0-rep(1:length(J), each = N[n])/(5*5), z = rep(1:max(J), each = N[n]))
+  w3 <- w2[, .(mean = mean(x), y = mean(y)), by = z]
+  w4 <- rbind(w4, data.table(N=N[n], w3))
+  #### save first 5 runs under N=3
+  xrange <- c(min(pop)-1, max(pop)+1)
+  if (n == 1) {
+    for (i in 1:5) {
+      g <- ggplot(data=popdat, aes(x=x)) + ylim(-1*(max(J)/(5*5*5)), 4) +
+        geom_histogram(bins=max(pop)-min(pop)+1+2, fill = "white", color = "gray")+ 
+        scale_x_continuous(breaks = xrange[1]:xrange[2], limits = xrange)+
+        geom_point(data=w2[z <= i, ], aes(x=x, y=y, group = factor(z)), color = "green") +
+        geom_point(data=w3[z <= i, ], aes(x=mean, y=y, group = z), shape = 3, colour = "blue") +
+        geom_point(data=w3[z <= i, ], aes(x=mean, y=0), shape = 3, colour = "blue") +
+        theme(
+          legend.position = "none"
+        )
+      g <- g + geom_density(data = w3[z <= i, ], aes(x=mean), color = "blue")
+      ggsave(
+         paste0("10/D_SampleSize", N[n], "ResamplingRun", putzeroontop(J[1], totaldigits=2), "_", i, ".jpg")
+        , g, width = 14*2, height = 8*2, units = "cm",
+        dpi = 300
+      )
+    }
+  }
+  #### Print every 5 in resampling loop
+  for (j in 1:length(J)) {
+    g <- ggplot(data=popdat, aes(x=x)) + ylim(-1*(max(J)/(5*4)), 4) +
+      geom_histogram(bins=max(pop)-min(pop)+1+2, fill = "white", color = "gray")+ 
+      scale_x_continuous(breaks = xrange[1]:xrange[2], limits = xrange)+
+      geom_point(data=w2[z<J[j], ], aes(x=x, y=y, group = factor(z)), color = "green") +
+      geom_point(data=w3[1:J[j], ], aes(x=mean, y=y, group = z), shape = 3, colour = "blue") +
+      geom_point(data=w3[1:J[j], ], aes(x=mean, y=0), shape = 3, colour = "blue") +
+      theme(
+        legend.position = "none"
+      )
+    g <- g + geom_density(data = w3[1:J[j], ], aes(x=mean), color = "blue")
+    ggsave(
+       paste0("10/D_SampleSize", N[n], "ResamplingRun", putzeroontop(J[j], totaldigits=2), ".jpg")
+      , g, width = 14*2, height = 8*2, units = "cm",
+      dpi = 300
+    )
+  }
+}
+#### Print all densities in a single plot
+w4[, N := factor(N)] 
+setnames(w4, "mean", "x")
+g <- ggplot(data=popdat, aes(x=x)) + ylim(-1*(max(J)/(5*5*5)), 4) +
+  geom_histogram(bins=max(pop)-min(pop)+1+2, fill = "white", color = "gray")+ 
+  scale_x_continuous(breaks = xrange[1]:xrange[2], limits = xrange)+
+  geom_density(data=w4, alpha = 0.1, aes(group = N, colour = N, fill = N)) +
+  theme(
+    legend.position = "none"
+  )
+ggsave(
+   paste0("10/D_density.jpg")
+  , g, width = 14*2, height = 8*2, units = "cm",
+  dpi = 300
+)
+#### Print population
+g <- ggplot(data=popdat, aes(x=x)) + ylim(-1*(max(J)/(5*5*5)), 4) +
+  geom_histogram(bins=max(pop)-min(pop)+1+2, fill = "white", color = "gray")+
+  theme(
+    legend.position = "none"
+  )
+ggsave(
+   paste0("10/D_population.jpg")
+  , g, width = 14*2, height = 8*2, units = "cm",
+  dpi = 300
+)
+```
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+特定の確率密度関数=母集団から抽出
+
+::: {.des-list-boxed}
+中心極限定理
+:	<gray>central limit theorem</gray>母集団がどんな形状でも、moment generating functionがゼロ近傍で存在すれば、標本平均値の分布は標本サイズが無限大になるにつれて、正規分布に近づいていく<gray>for any population distribution, if the moment generating function exists around the neighbourhood of zero, the sample means start to follow a normal distribution as we increase the sample size</gray>
+:::
+
+::::::::::{.columns}
+::::{.column width="30%"}
+:::{.fragment}
+![母集団](10/D_Population.jpg)
+:::
+::::
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+::::::::::{.columns}
+::::{.column width="33%"}
+:::{.fragment}
+![n=3](10/D_SampleSize03.gif)
+:::
+
+:::{.fragment}
+![n=10](10/D_SampleSize10.gif)
+:::
+::::
+
+::::{.column width="33%"}
+:::{.fragment}
+![n=20](10/D_SampleSize20.gif)
+:::
+
+:::{.fragment}
+![n=50](10/D_SampleSize50.gif)
+:::
+::::
+
+::::{.column width="33%"}
+:::{.fragment}
+![n=500](10/D_SampleSize500.gif)
+:::
+
+:::{.fragment}
+![確率密度関数density functions](10/D_density.jpg)
+:::
+::::
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+手元にあるデータが唯一の場合
+
+* 標本サイズ$n$が大きい場合: 正規分布を想定できる
+   * 分布の期待値$\hat{\mu}$と分散$\hat{\sigma}^{2}$は公式がある
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+
+$n$個の値$x_{i}$, $i=1,\dots, n$が期待値$\mu$、分散$\sigma^{2}$をもつ同じ(independently, identically distributed, i.i.d.)母集団から無作為抽出されているとき、母集団平均値推計量$\hat{\mu}$とその分散$\hat{\sigma}^{2}$は下記
+
+::::::::::{.columns}
+::::{.column width="50%"}
+$$
+\begin{aligned}
+\E\left[\bar{x}\right]
+&=
+\E\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
+&=
+\frac{1}{n}\E\left[x_{1}+\dots+x_{n}\right], &&\scriptsize{\because \E[a+bx]=a+b\E[x]}\\
+&=
+\frac{1}{n}n\mu, &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
+&=
+\mu.
+\end{aligned}
+$$
+$\bar{x}$の期待値=$\mu$なので、母集団平均値推計量$\hat{\mu}=\bar{x}$とする
+::::
+
+::::{.column width="50%"}
+$$
+\begin{aligned}
+\NU\left[\bar{x}\right]
+&=
+\NU\left[\frac{x_{1}+\dots+x_{n}}{n}\right],&&\\
+&=
+\frac{1}{n^{2}}\NU\left[x_{1}+\dots+x_{n}\right], \quad &&\scriptsize{\because\NU[a+bx]=b^{2}\NU[x]}\\
+&=
+\frac{1}{n^{2}}n\sigma^{2}, \quad &&\scriptsize{\because \mbox{ }x_{i}\mbox{'s are i.i.d.}}\\
+&=
+\frac{\sigma^{2}}{n}.&&
+\end{aligned}
+$$
+$\sigma^{2}$は不可知なので、標本分散$s^{2}_{B}=\frac{sse}{n}$で代用
+
+::::
+::::::::::
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+
+標本分散$s^{2}_{B}$は期待値が母集団分散と異なる(biased estimatorといいます)
+$$
+\begin{aligned}
+\E\left[s^{2}_{B}\right]
+&= \E\left[ \frac{1}{n} \sum_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2} \right]= \E\left[ \frac{1}{n} \sum_{i=1}^{n} \left(x_{i} - \frac{1}{n} \sum_{j=1}^{n} x_{j} \right)^{2} \right] \\
+&= \frac{1}{n} \sum_{i=1}^{n} \E\left[ x_{i}^{2} - \frac{2}{n} x_{i} \sum_{j=1}^{n} x_{j} + \frac{1}{n^2} \sum_{j=1}^{n} x_{j} \sum_{k=1}^{n} x_{k} \right] \\
+&= \frac{1}{n} \sum_{i=1}^{n}\left( \E\left[x_{i}^{2}\right] - \frac{2}{n} \left( \sum_{j \neq i} \E\left[x_{i} x_{j}\right] + \E\left[x_{i}^{2}\right] \right) + \frac{1}{n^2} \sum_{j=1}^{n} \sum_{k \neq j}^{n} \E\left[x_{j} x_{k}\right] +\frac{1}{n^{2}} \sum_{j=1}^{n} \E\left[x_{j}^{2}\right] \right) \\
+&= \frac{1}{n} \sum_{i=1}^{n} \left( \frac{n - 2}{n} \E\left[x_{i}^{2}\right] - \frac{2}{n} \sum_{j \neq i} \E\left[x_{i} x_{j}\right] + \frac{1}{n^2} \sum_{j=1}^{n} \sum_{k \neq j}^{n} \E\left[x_{j} x_{k}\right] +\frac{1}{n^2} \sum_{j=1}^{n} \E\left[x_{j}^{2}\right] \right) \\
+&= \frac 1n \sum_{i=1}^{n} \left[ \frac{n - 2}{n} \left(\sigma^{2} + \mu^{2}\right) - \frac{2}{n} (n - 1)\mu^{2} + \frac{1}{n^{2}} n(n - 1)\mu^{2} + \frac{1}{n} \left(\sigma^{2} + \mu^{2}\right) \right] \\
+&= \frac{n - 1}{n} \sigma^{2}.
+\end{aligned}
+$$
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+$$
+\E\left[s^{2}_{B}\right]= \frac{n - 1}{n} \sigma^{2}.
+$$
+$\frac{n}{n - 1}$を乗じてバイアスを除去
+$$
+\frac{n}{n - 1}\E[s^{2}_{B}]=\sigma^{2} \Rightarrow \frac{n}{n - 1}\frac{1}{n}\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}=\frac{1}{n - 1}\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}.
+$$
+
+* $n-1$分の1×sseが母集団分散の不偏推計量(unbiased estimator)
+* $n$が十分に大きいと$\frac{n}{n - 1}\simeq 1$なので$n$分の1×sseでもあまり変わりない
+:::
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+不偏分散推計量$s^{2}$を母集団分散の推計値として使う
+
+$$
+s^{2}=\frac{1}{n - 1}\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}.
+$$
+
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+$P$ valueをなぜ使うか
+:::
+</div>
+
+ある程度大きな標本サイズ$n$でないと中心極限定理central limit theoremは使えない
+
+. . .
+
+標本サイズ$n$が小さい+正規分布に従うとき=$t$分布を使う
+
+. . .
+
+::: {style="font-size: 70%;line-height: 1.1;"}
+1. 正規分布$N(\mu, \sigma^{2})$から無作為抽出された$x_{i}$
+   * 小さな$n$でも抽出回数を無限大にするにつれて$\bar{x}$は正規分布に従う$$\frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}} \quad \sim \quad N(0, 1)$$
+1. 母集団標準偏差&larr;標本標準偏差$s$で代替 &rArr; $t$分布になる   $$   \begin{aligned}\frac{\bar{x}-\mu}{\frac{s}{\sqrt{n}}}=\frac{\sqrt{n}(\bar{x}-\mu)/\sigma}{\sqrt{\frac{s^{2}}{\sigma^{2}}}} \quad \sim \quad \frac{N(0, 1)}{\sqrt{\frac{\chi^{2}(n-1)}{n-1}}}&=t_{n-1} \quad \scriptsize{\mbox{[$t$ distribution with $n-1$ degrees of freedom]}} \\ & s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}.\end{aligned}  $$
+:::
+
+----
+
+#### References
+
+::: {#refs}
+:::
+

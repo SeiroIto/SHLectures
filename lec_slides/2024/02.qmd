@@ -101,7 +101,7 @@ RoyalBlue
 
 祝: ノーベル経済学賞受賞3人(2019年)
 
-![](ImpactEvaluation/figure/BanerjeeDufloKremer.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/BanerjeeDufloKremer.jpg)
 
 出所: <https://wikibio.in/abhijit-banerjee/>
 
@@ -139,7 +139,7 @@ RoyalBlue
 
 例
 
-![](ImpactEvaluation/figure/fig2_ek_19_improved_educational_outcomes.jpg){width=14cm}
+![](../CommonFiles/ImpactEvaluation/figure/fig2_ek_19_improved_educational_outcomes.jpg){width=14cm}
 
 教科書無料配布よりも(ケニア西部)、無料学校給食よりも(ケニア西部)、習熟の遅い生徒に補習させる方が試験点数を上げることが分かった(インド、ムンバイ近郊)
 
@@ -173,7 +173,7 @@ RoyalBlue
 ::::{.columns}
 
 ::: {.column width="60%"}
-![鍵を捜す男](ImpactEvaluation/figure/FindKey_small.jpg){.lightbox height=50%}  
+![鍵を捜す男](../CommonFiles/ImpactEvaluation/figure/FindKey_small.jpg){.lightbox height=50%}  
 :::
 ::: {.column width="30%"}
 :::{style="font-size: 55%;line-height: 1.1;"}
@@ -218,12 +218,12 @@ RoyalBlue
 :::: {.columns}
 
 ::: {.column width="60%"}
-![](ImpactEvaluation/figure/hahaha0.jpg){width=25cm}
+![](../CommonFiles/ImpactEvaluation/figure/hahaha0.jpg){width=25cm}
 :::
 
 ::: {.column width="40%"}
 
-![](ImpactEvaluation/figure/hahaha1.jpg){}
+![](../CommonFiles/ImpactEvaluation/figure/hahaha1.jpg){}
 
 * 高齢者: 笑う頻度が減ると健康不調を報告する比率が増える
 
@@ -276,7 +276,7 @@ Does laughter cause (self-reported) healthiness?
 
 ----
 
-![](ImpactEvaluation/figure/hahaha.jpg){height=800}
+![](../CommonFiles/ImpactEvaluation/figure/hahaha.jpg){height=800}
 
 
 ----
@@ -906,7 +906,7 @@ NGO: ノルウェイで養親候補を書類審査+面接、合格者の書類�
 :::: {.columns}
 
 ::: {.column width="50%"}
-![](ImpactEvaluation/figure/FMR_Fig4.jpg){height="60%"}
+![](../CommonFiles/ImpactEvaluation/figure/FMR_Fig4.jpg){height="60%"}
 :::
 
 ::: {.column width="50%"}
@@ -1384,7 +1384,7 @@ Before-after:
 ::::{.columns}
 
 ::: {.column width=75%}
-![](ImpactEvaluation/figure/bad_graphs/subaru02.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/bad_graphs/subaru02.jpg)
 :::
 
 ::: {.column width=25%}
@@ -1413,7 +1413,7 @@ With-without:
 ::::{.columns}
 
 ::: {.column width=65%}
-![](ImpactEvaluation/figure/bad_graphs/subaru01.jpg){}
+![](../CommonFiles/ImpactEvaluation/figure/bad_graphs/subaru01.jpg){}
 :::
 
 ::: {.column width=25%}
@@ -1448,12 +1448,12 @@ Before-after:
 日経新聞10月21日(月)朝刊
 
 ```{r , echo = F, out.width='35%'}
-knitr::include_graphics("2/Nikkei2024Oct21.jpg")
+knitr::include_graphics("../CommonFiles/2/Nikkei2024Oct21.jpg")
 ```
 knitr::include_graphics gives wierd scroll bar. For ![](){}, height="50%" does not work, only width does.
 -->
 
-![日経新聞10月21日(月)朝刊](2/Nikkei2024Oct21.jpg){width="60%"}
+![日経新聞10月21日(月)朝刊](../CommonFiles/2/Nikkei2024Oct21.jpg){width="60%"}
 :::
 
 ::: {.column width=80%}
@@ -1778,12 +1778,12 @@ teacher-pupil ratio $\Rightarrow$ exam score
 ::::{.columns}
 
 ::: {.column width=65%}
-![](ImpactEvaluation/figure/maimonides-mishna.jpg){width="90%"}
+![](../CommonFiles/ImpactEvaluation/figure/maimonides-mishna.jpg){width="90%"}
 :::
 
 ::: {.column width=25%}
 ::: {.fragment}
-![](ImpactEvaluation/figure/maimonides.jpg){}
+![](../CommonFiles/ImpactEvaluation/figure/maimonides.jpg){}
 :::
 :::
 
@@ -1800,18 +1800,18 @@ Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
 ::::{.columns}
 ::: {.column width=25%}
 :::{.fragment}
-![](ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
+![](../CommonFiles/ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
 ```{r , eval = F, echo = F, out.width='70%'}
-knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig01.jpg")
+knitr::include_graphics("../CommonFiles/ImpactEvaluation/figure/AEvans_Fig01.jpg")
 ```
 :::
 :::
 
 ::: {.column width=25%}
 :::{.fragment}
-![](ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
+![](../CommonFiles/ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
 ```{r , eval = F, echo = F, out.width='70%'}
-knitr::include_graphics("ImpactEvaluation/figure/AEvans_Fig02.jpg")
+knitr::include_graphics("../CommonFiles/ImpactEvaluation/figure/AEvans_Fig02.jpg")
 ```
 :::
 :::
@@ -1834,13 +1834,13 @@ Ingenuity of @AngristLavy1999: Predicited class size vs. exam scores.
 ::::{.columns}
 ::: {.column width=25%}
 :::{.fragment}
-![](ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
+![](../CommonFiles/ImpactEvaluation/figure/AEvans_Fig01.jpg){width="90%"}
 :::
 :::
 
 ::: {.column width=25%}
 :::{.fragment}
-![](ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
+![](../CommonFiles/ImpactEvaluation/figure/AEvans_Fig02.jpg){width="90%"}
 :::
 :::
 
@@ -1861,7 +1861,7 @@ $$
 
 ::::{.columns}
 ::: {.column width=30%}
-![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){width="99%"}
+![4th graders](../CommonFiles/ImpactEvaluation/figure/AEvans_Tab05.jpg){width="99%"}
 :::
 
 ::: {.column width=35%}
@@ -1911,7 +1911,7 @@ N
 ----
 
 
-![4th graders](ImpactEvaluation/figure/AEvans_Tab05.jpg){}
+![4th graders](../CommonFiles/ImpactEvaluation/figure/AEvans_Tab05.jpg){}
 
 * Class size $\SIMneg$ learning, in some specifications of all samples
 * For 4th graders, no impacts of class size at discontinuity neighbourhood sample
@@ -1921,7 +1921,7 @@ N
 
 ::::{.columns}
 ::: {.column width=99%}
-![4th and 5th graders, discontinuity samples](ImpactEvaluation/figure/ALavy_Tab06.jpg){width="70%"}
+![4th and 5th graders, discontinuity samples](../CommonFiles/ImpactEvaluation/figure/ALavy_Tab06.jpg){width="70%"}
 :::
 ::::
 
@@ -1931,14 +1931,14 @@ N
 
 横浜市2009年40人学級: 小6国語(共通試験点数偏差値)
 
-![](ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaShou6.png)
+![](../CommonFiles/ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaShou6.png)
 
 @Akabayashi2013
 
 ----
 
 横浜市2009年40人学級: 中3国語(共通試験点数偏差値)
-![](ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaChu3.png)
+![](../CommonFiles/ImpactEvaluation/figure/Akabayashi_ClassSizeYokohamaChu3.png)
 
 @Akabayashi2013
 
@@ -1976,7 +1976,7 @@ N
 
 ::::{.columns}
 ::: {.column width=60%}
-![ダイアモンド・オンライン2015年2月18日<https://diamond.jp/articles/-/66992>](ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){width="80%"}  
+![ダイアモンド・オンライン2015年2月18日<https://diamond.jp/articles/-/66992>](../CommonFiles/ImpactEvaluation/figure/35ninGakkyu_DiamondOnline.jpg){width="80%"}  
 :::
 
 ::: {.column width=40%}
@@ -1997,7 +1997,7 @@ N
 
 ::::{.columns}
 ::: {.column width=40%}
-![日経新聞2020年12月17日(木)朝刊](ImpactEvaluation/figure/Nikkei_35NinClass2020Dec17.jpg){width="80%"}
+![日経新聞2020年12月17日(木)朝刊](../CommonFiles/ImpactEvaluation/figure/Nikkei_35NinClass2020Dec17.jpg){width="80%"}
 :::
 
 ::: {.column width=60%}
@@ -2034,7 +2034,7 @@ N
 
 ::::{.columns}
 ::: {.column width=60%}
-![](ImpactEvaluation/figure/Lemieux_Fig03.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/Lemieux_Fig03.jpg)
 :::
 
 ::: {.column width=40%}
@@ -2054,7 +2054,7 @@ It is reduced.
 
 ::::{.columns}
 ::: {.column width=60%}
-![](ImpactEvaluation/figure/Lee_Fig02a.jpg){}
+![](../CommonFiles/ImpactEvaluation/figure/Lee_Fig02a.jpg){}
 :::
 
 ::: {.column width=40%}
@@ -2074,13 +2074,13 @@ Placebo tests
 
 ::::{.columns}
 ::: {.column width=50%}
-![](ImpactEvaluation/figure/Lemieux_Tab03.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/Lemieux_Tab03.jpg)
 
 Rest of Canada or post 1991 should not detect effects.
 :::
 
 ::: {.column width=50%}
-![](ImpactEvaluation/figure/Lee_Fig02b.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/Lee_Fig02b.jpg)
 
 Margin of vote share in $t$ should not give a jump of events before $t$.
 :::
@@ -2131,7 +2131,7 @@ PTは論理的なチェックで傍証。DT, ETはランダム化の検定。
 
 Density testの例  
 
-![Figure 2, @BoschSchady2019](ImpactEvaluation/figure/BoschSchady_DensityTest.jpg)
+![Figure 2, @BoschSchady2019](../CommonFiles/ImpactEvaluation/figure/BoschSchady_DensityTest.jpg)
 
 
 確率密度は境界でジャンプしていないことが視覚的に分かる(検定結果の統計値は-.007、標準誤差が.006)
@@ -2191,7 +2191,7 @@ Density testの例
 
 ::::::::: {.columns}
 ::: {.column width="50%"}
-![FNNプライムニュース2020年11月25日(水)](ImpactEvaluation/figure/Suga_NoEvidenceCropped.jpg)
+![FNNプライムニュース2020年11月25日(水)](../CommonFiles/ImpactEvaluation/figure/Suga_NoEvidenceCropped.jpg)
 :::
 
 ::: {.column width="50%"}
@@ -2341,7 +2341,7 @@ GoToトラベル実施月の旅客人数を前年度同月値と比較して「x
 ::::::::::{.columns}
 
 :::{.column width="50%"}
-![論文: @Miyawaki2020](ImpactEvaluation/figure/TokyoShinbun_GoToCovid.jpg)
+![論文: @Miyawaki2020](../CommonFiles/ImpactEvaluation/figure/TokyoShinbun_GoToCovid.jpg)
 :::
 
 :::{.column width="50%"}
@@ -2544,7 +2544,7 @@ $$
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
+![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](../CommonFiles/ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2572,7 +2572,7 @@ $$
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
+![厚生労働省感染症アドバイザリーボード2020年11月19日(木)資料3(参考資料)](../CommonFiles/ImpactEvaluation/KoroAdbBoardMaterial3_2020Nov19.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2645,9 +2645,9 @@ $$
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![](ImpactEvaluation/figure/ImpactsDropTiesWithTokyo.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/ImpactsDropTiesWithTokyo.jpg)
 
-![](ImpactEvaluation/figure/SmokePlotsDropTiesWithTokyo.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/SmokePlotsDropTiesWithTokyo.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2675,7 +2675,7 @@ GTT+東京に曝露されたと仮定: 他道府県のインパクト推計値�
 
 :::::::::: {.columns}
 ::::{.column width="50%"}
-![リッジ密度図](ImpactEvaluation/figure/SmokeDensityDropTiesWithTokyo.jpg)
+![リッジ密度図](../CommonFiles/ImpactEvaluation/figure/SmokeDensityDropTiesWithTokyo.jpg)
 ::::
 
 ::::{.column width="50%"}
@@ -2776,7 +2776,7 @@ $$
 
 ----
 
-![](ImpactEvaluation/figure/spain-states-map.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/spain-states-map.jpg)
 
 ----
 
@@ -2822,11 +2822,11 @@ $w_{j}$の計算方法 (テロ前T期、テロ発生以降$T+1, T+2, \dots$)<gra
 
 ----
 
-![Terrorism impacts on growth: T=1969](ImpactEvaluation/figure/Abadie_Fig01.jpg)
+![Terrorism impacts on growth: T=1969](../CommonFiles/ImpactEvaluation/figure/Abadie_Fig01.jpg)
 
 ----
 
-![A placebo study: Catalonia: バスクに似ているがテロがない](ImpactEvaluation/figure/Abadie_Fig04.jpg)
+![A placebo study: Catalonia: バスクに似ているがテロがない](../CommonFiles/ImpactEvaluation/figure/Abadie_Fig04.jpg)
 
 ----
 
@@ -2903,12 +2903,12 @@ SCMの考え方: 共変数が似ていれば結果も似ているはず <gray>Id
 
 ::::::::::: {.columns}
 :::: {.column width="50%"}
-![Tobacco tax in California and per capita cigarette sales](ImpactEvaluation/figure/abadie_tobacco_main.jpg)
+![Tobacco tax in California and per capita cigarette sales](../CommonFiles/ImpactEvaluation/figure/abadie_tobacco_main.jpg)
 ::::
 
 :::: {.column width="50%"}
 ::: {.fragment}
-![Tobacco tax in California, placebo studies on all control states, lines show gap = actual - synthetic contro](ImpactEvaluation/figure/abadie_tobacco_placebo.jpg)
+![Tobacco tax in California, placebo studies on all control states, lines show gap = actual - synthetic contro](../CommonFiles/ImpactEvaluation/figure/abadie_tobacco_placebo.jpg)
 :::
 :::: 
 :::::::::::
@@ -2917,31 +2917,31 @@ SCMの考え方: 共変数が似ていれば結果も似ているはず <gray>Id
 
 @Pinotti2015 on effects of mafia violence on growth
 
-![Mafia violence on growth in Apulia and Basilicata](ImpactEvaluation/figure/Pinotti_mafia_Fig06.jpg)
+![Mafia violence on growth in Apulia and Basilicata](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig06.jpg)
 
 ----
 
 @Pinotti2015 on effects of mafia violence on growth
 
-![Apulia and Basilicata were new to violence](ImpactEvaluation/figure/Pinotti_mafia_Fig04.jpg)
+![Apulia and Basilicata were new to violence](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig04.jpg)
 
 ----
 
 @Pinotti2015 on effects of mafia violence on growth
 
-![Mafia violence deters investments](ImpactEvaluation/figure/Pinotti_mafia_Fig09.jpg)
+![Mafia violence deters investments](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig09.jpg)
 
 ----
 
 @Pinotti2015 on effects of mafia violence on growth
 
-![Mafia violence slows industry (\% of provincial GDP)](ImpactEvaluation/figure/Pinotti_mafia_Fig12.jpg)
+![Mafia violence slows industry (\% of provincial GDP)](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig12.jpg)
 
 ----
 
 @Pinotti2015 on effects of mafia violence on growth
 
-![Mafia violence placebo studies](ImpactEvaluation/figure/Pinotti_mafia_Fig10.jpg)
+![Mafia violence placebo studies](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig10.jpg)
 
 ----
 
@@ -2965,37 +2965,37 @@ He argues that increased public investments were channeled to mafia activities t
 
 @Pinotti2015
 
-![Private and public investment and employment](ImpactEvaluation/figure/Pinotti_mafia_Fig13.jpg)
+![Private and public investment and employment](../CommonFiles/ImpactEvaluation/figure/Pinotti_mafia_Fig13.jpg)
 
 ----
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-![貿易自由化の効果、Asia](ImpactEvaluation/figure/Billmeier_Fig01.jpg)
+![貿易自由化の効果、Asia](../CommonFiles/ImpactEvaluation/figure/Billmeier_Fig01.jpg)
 
 ----
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-![Latin America](ImpactEvaluation/figure/Billmeier_Fig02.jpg)
+![Latin America](../CommonFiles/ImpactEvaluation/figure/Billmeier_Fig02.jpg)
 
 ----
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-![Africa before 1987](ImpactEvaluation/figure/Billmeier_Fig03.jpg)
+![Africa before 1987](../CommonFiles/ImpactEvaluation/figure/Billmeier_Fig03.jpg)
 
 ----
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-![Africa 1987-91](ImpactEvaluation/figure/Billmeier_Fig04.jpg)
+![Africa 1987-91](../CommonFiles/ImpactEvaluation/figure/Billmeier_Fig04.jpg)
 
 ----
 
 @Billmeier2013 on the effects of trade liberalisation on growth
 
-![Africa after 1991](ImpactEvaluation/figure/Billmeier_Fig05.jpg)
+![Africa after 1991](../CommonFiles/ImpactEvaluation/figure/Billmeier_Fig05.jpg)
 
 ----
 
@@ -3089,7 +3089,7 @@ RCTではないこと、統御群データがないことなどから、実施�
 
 ::::::::::: {.columns}
 :::: {.column width="50%"}
-![](ImpactEvaluation/figure/MVPhase1Evaluation.jpg)
+![](../CommonFiles/ImpactEvaluation/figure/MVPhase1Evaluation.jpg)
 ::::
 
 :::: {.column width="50%"}
@@ -3106,7 +3106,7 @@ RCTではないこと、統御群データがないことなどから、実施�
 
 ::::::::::: {.columns}
 :::: {.column width="70%"}
-![@ClemensDemombynes2011, Figure 10](ImpactEvaluation/figure/ClemensDemombynes2010_MilleniumVillageEvaluation_Fig10.jpg){width="85%"}
+![@ClemensDemombynes2011, Figure 10](../CommonFiles/ImpactEvaluation/figure/ClemensDemombynes2010_MilleniumVillageEvaluation_Fig10.jpg){width="85%"}
 ::::
 
 :::: {.column width="30%"}
@@ -3186,7 +3186,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 ::::
 
 :::: {.column width="30%"}
-![@Mitchell2018, Figure 2](ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig2.jpg){width="50%"}
+![@Mitchell2018, Figure 2](../CommonFiles/ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig2.jpg){width="50%"}
 ::::
 :::::::::::
 
@@ -3194,7 +3194,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ::::::::::: {.columns}
 :::: {.column width="40%"}
-![@Mitchell2018, Figure 3A](ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig3A.jpg){width="50%"}
+![@Mitchell2018, Figure 3A](../CommonFiles/ImpactEvaluation/figure/MVPEndlineEvaluationMap_Lancet2018Fig3A.jpg){width="50%"}
 ::::
 
 :::: {.column width="60%"}
@@ -3295,7 +3295,7 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 :::: {.column width="30%"}
 :::{.fragment}
-![](ImpactEvaluation/figure/heckman_returns.jpg){width="30%"}
+![](../CommonFiles/ImpactEvaluation/figure/heckman_returns.jpg){width="30%"}
 :::
 ::::
 :::::::::::
@@ -3312,11 +3312,11 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ::::::::::: {.columns}
 :::: {.column width="40%"}
-![@Porteous2022, Figure 1](ImpactEvaluation/figure/Porteus2022Fig1.jpg){width="100%"}
+![@Porteous2022, Figure 1](../CommonFiles/ImpactEvaluation/figure/Porteus2022Fig1.jpg){width="100%"}
 ::::
 
 :::: {.column width="20%"}
-![Source: freepik.com](ImpactEvaluation/figure/MapAfrica3.jpg){width="60%"}
+![Source: freepik.com](../CommonFiles/ImpactEvaluation/figure/MapAfrica3.jpg){width="60%"}
 ::::
 
 :::: {.column width="40%"}
@@ -3342,9 +3342,9 @@ Sachsらによる説明とDavid MacKenzie (世銀)による反論 (<https://blog
 
 ::::::::::: {.columns}
 :::: {.column width="40%"}
-![](ImpactEvaluation/figure/Porteus2022Tab1a.jpg){width="100%"}
+![](../CommonFiles/ImpactEvaluation/figure/Porteus2022Tab1a.jpg){width="100%"}
 
-![](ImpactEvaluation/figure/Porteus2022Tab1b.jpg){width="100%"}
+![](../CommonFiles/ImpactEvaluation/figure/Porteus2022Tab1b.jpg){width="100%"}
 
 @Porteous2022, Table 1
 ::::

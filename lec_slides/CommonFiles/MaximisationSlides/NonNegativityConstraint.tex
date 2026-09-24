@@ -1,0 +1,90 @@
+\begin{tikzpicture}[ 
+axis/.style={very thick, ->, >=stealth'},
+dashed line/.style={dashed, thin},
+every node/.style={},
+background rectangle/.style = {fill = gray90},
+]
+\begin{axis}[
+  scale = .5,
+  axis equal image, % forces a square plot
+  clip = false, % allows plotting outside axis bounds
+  axis x line=center, axis y line=center,
+  xlabel = {$x$}, ylabel = {$y$},
+  xtick={100}, ytick={100}, % effectively drops axis ticks
+  xlabel style={below right}, ylabel style={above left},
+  xmin=0, xmax=11,
+  ymin=0, ymax=10]
+\coordinate (origin) at (axis cs: 0, 0) ;
+\path[name path=xaxis, gray] (0, 0) -- (axis cs: 10, 0);
+\path[name path=yaxis, gray] (0, 0) -- (axis cs: 0, 10);
+\coordinate (m1) at (axis cs: 4, 5) ;
+\draw (axis cs: 0, 0) node[below] {$O$};
+% curves
+\addplot [name path=X2curve,  no marks, line width = .5pt, domain=0.01:7, smooth] {1+2*x-.25*x^(2)} node[below right, xshift = -.5cm] (fend) {\small $f(x)=1+2x-.25x^{2}$};
+\addplot [name path=Hor1, azure, no marks, line width = .5pt, domain=0.01:9, dashed, smooth] (0, 5) node [left] {5} -- (axis cs: 9, 5) node[right] (Dend) {\small $f'(x)=0$};
+\addplot [name path=Ver1, azure, no marks, line width = .5pt, domain=0.01:9, dashed, smooth] (4, 0) node [below] {4} -- (m1);
+% intersections of curves
+\fill [azure] (m1) circle (3pt);
+% x and y coordinates of intersections
+\coordinate (m1Xaxis) at (m1 |- origin) ;
+\end{axis}
+\end{tikzpicture}\hspace{-2cm}\begin{tikzpicture}[ 
+axis/.style={very thick, ->, >=stealth'},
+dashed line/.style={dashed, thin},
+every node/.style={},
+background rectangle/.style = {fill = gray90},
+]
+\begin{axis}[
+  scale = .5,
+  axis equal image, % forces a square plot
+  clip = false, % allows plotting outside axis bounds
+  axis x line=center, axis y line=center,
+  xlabel = {$x$}, ylabel = {$y$},
+  xtick={100}, ytick={100}, % effectively drops axis ticks
+  xlabel style={below right}, ylabel style={above left},
+  xmin=-5, xmax=5,
+  ymin=0, ymax=10]
+\path[name path=xaxis, gray] (axis cs: -5, 0) -- (axis cs: 5, 0);
+\path[name path=yaxis, gray] (axis cs: 0, 0) -- (axis cs: 0, 10);
+\draw (axis cs: 0, 0) node[below] {$O$};
+\coordinate (X1max) at (axis cs: -3, 7.25) ;
+% curves
+\addplot [name path=X1curve, no marks, line width = .5pt, domain=-4.99:1.75, smooth] {5-1.5*x-.25*x^(2)}
+  node[sloped, fill=black, circle, inner sep=1pt, pos=0.62, label={[absolute]0:$$}] (a) {};
+\draw [name path=Tancurve, dashed, line width = 1.0pt, red] ($(a.west)!-.75cm!(a.east)$) -- ($(a.west)!1cm!(a.east)$) node[right] {$f'(x)<0$};
+\draw [name path=Hor1, azure, line width = .5pt, dashed] (axis cs: -5, 7.25) -- (axis cs: 1, 7.25) node[right] (X1maxY) {\small $f'(x)=0$};
+\draw [name path=Ver1, azure, line width = .5pt, dashed] (X1max) -- (axis cs: -3, 0) node[below] (X1maxX) {\small $x^{*}$};
+% intersections of curves
+\path [name intersections={of=X1curve and yaxis, by={e0}}];
+\fill [azure] (e0) circle (3pt);
+\draw (X1max) node[above, xshift = -1.5cm] {\small $f(x)=5-1.5x-.25x^{2}$};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[ 
+axis/.style={very thick, ->, >=stealth'},
+dashed line/.style={dashed, thin},
+every node/.style={},
+background rectangle/.style = {fill = gray90},
+]
+\begin{axis}[
+  scale = .5,
+  axis equal image, % forces a square plot
+  clip = false, % allows plotting outside axis bounds
+  axis x line=center, axis y line=center,
+  xlabel = {$x$}, ylabel = {$y$},
+  xtick={100}, ytick={100}, % effectively drops axis ticks
+  xlabel style={below right}, ylabel style={above left},
+  xmin=-5, xmax=5,
+  ymin=0, ymax=10]
+\coordinate (origin) at (axis cs: 0, 0) ;
+\path[name path=xaxis, gray] (-5, 0) -- (axis cs: 5, 0);
+\path[name path=yaxis, gray] (0, 0) -- (axis cs: 0, 10);
+\coordinate (m1) at (axis cs: 0, 6) ;
+\draw (axis cs: 0, 0) node[below] {$O$};
+% curves
+\addplot [name path=X3curve, no marks, line width = .5pt, domain=-4:2, smooth] {6-.25*x^(2)} node[below right, xshift = -.25cm] (fend) {\small $f(x)=6-.25x^{2}$};
+\draw [name path=Hor1, azure, line width = .5pt, dashed] (axis cs: -3, 6)  -- (axis cs: 3, 6) node[right] (X3end) {\small $f'(x)=0$};
+% intersections of curves
+\fill [azure] (m1) circle (3pt);
+\end{axis}
+\end{tikzpicture}

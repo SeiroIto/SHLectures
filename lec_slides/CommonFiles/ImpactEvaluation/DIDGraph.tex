@@ -1,0 +1,147 @@
+\def\xlow{3.83}
+\def\xadd{1.87}
+\def\xpivot{3.2}
+\def\xpivothalf{1.6}
+\def\xpivothalftwo{5.6}
+\def\xright2{4.5}
+\def\beforeline{(0, 3) to [out=20, in=-170] (8, \xright2) }
+\def\afterline{(0, 3)  to [out=45, in=-170] (8, 7.5)}
+\tikzstyle{line} = [draw, very thick, color=black, -latex']
+\tikzstyle{shadingcosts} = [left color=gray!90, right color=gray!80, opacity = .3]
+\def\beforelinesecondhalf{(\xpivot, \xlow) to [out=10, in=-170] (8, 4.5)}
+\def\beforelinefirsthalf{(0, 3) to [out=20, in=-172] (\xpivot, \xlow)}
+\def\afterlinesecondhalf{(\xpivot, \xlow+\xadd) to [out=32, in=-170] (8, 7.5)}
+\def\afterlinefirsthalf{(0, 3) to [out=45, in=-145] (\xpivot, \xlow + \xadd)}
+\def\rectwidth{1.5}
+\def\timeshift{.45}
+\begin{frame}{}
+FD estimator requires $D_{i,t-1}=0$ for all individuals and $D_{i,t}=0,1$.\\
+\begin{center}
+\begin{tikzpicture}
+	%	coordinates for 
+	\coordinate (befCorigin) at (1, 3);
+	\coordinate (befTorigin) at ($(befCorigin) + (0, .86)$);
+	\coordinate (cfTorigin) at ($(befCorigin) + (4, \timeshift + .86)$);
+	\coordinate (aftCorigin) at ($(befCorigin) + (4, \timeshift)$);
+	\coordinate (aftTorigin) at (6.5, 5.7);
+	%	axises
+	\draw[->] (0, 2.5) -- (0, 8) node[above] {outcome};
+	\draw[-, dashed, gray!40] (0, 3) -- (9, 3) node[right] {0};
+	\draw[->] (0, 2.5) -- (9, 2.5) node[right] {time};
+	%	sequence of events 
+	\node (x1) at ($(befCorigin) + (.75, -1)$) {\footnotesize $t-1$};
+	\node (x2) at ($(befCorigin) + (2.75, -1)$) {\footnotesize policy};
+	\node (x3) at ($(aftCorigin) + (.75, -1-\timeshift)$) {\footnotesize $t$};
+	%	background shading
+	\filldraw[color = gray!50, opacity = .3] 
+		($(befCorigin) + (0, -.5)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = orange!50, opacity = .3] 
+		($(befCorigin) + (1.5, -.5)$) 
+		rectangle ($(befCorigin) + (4, 5.25)$);
+	\filldraw[color = gray!30, opacity = .3] 
+		($(aftCorigin) + (0, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	\filldraw[color = blue!25, opacity = .3] 
+		($(aftCorigin) + (\rectwidth, -.5-\timeshift)$) 
+		rectangle +(\rectwidth, 5.75);
+	%	arrows between events
+	\draw[> = latex, thick, ->] (x1) -- (x2);
+	\draw[> = latex, thick, ->] (x2) -- (x3);
+	%	dashed lines
+		%	t=0, control horizontal line
+	\draw[-, dashed, deepred] ($(befCorigin) + (\rectwidth, .415)$) -- 
+					($(befCorigin) + (4+2*\rectwidth+.5, .415)$);
+		%	t=0, treated horizontal line
+	\draw[-, dashed, deepred] ($(befTorigin) + (0, .23)$) -- 
+					($(befTorigin) + (4+2*\rectwidth+.5, .23)$);
+	%	t = 0, tukey plot: split into 2
+		%	to be control group
+	\draw[-] ($(befCorigin) + (.75, 0)$) -- ($(befCorigin) + (.75, .83)$);
+		\filldraw[shading = ball] 
+			($(befCorigin) + (0, .2075)$) rectangle +(\rectwidth, 0.405);
+		\draw[-] (befCorigin) -- ($(befCorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befCorigin) + (0, .83)$) -- 
+			($(befCorigin) + (\rectwidth, .83)$);
+		%	to be treated group
+	\draw[-] ($(befTorigin) + (.75, 0)$) -- 
+		($(befTorigin) + (.75, 1.5-.86)$) node[above] {before};
+		\filldraw[shading = ball] ($(befCorigin) + (0, 1)$) 
+			rectangle +(\rectwidth, .27);
+		\draw[-] (befTorigin) -- ($(befTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(befTorigin) + (0, 1.5-.86)$) -- 
+			($(befTorigin) + (\rectwidth, 1.5-.86)$);
+	%	t = 1, control tukey plot
+	\pause
+	\draw[-] ($(aftCorigin) + (.75, 0)$) -- ($(aftCorigin) + (.75, .83)$);
+		\filldraw[shading = ball, ball color = green] 
+			($(aftCorigin) + (0, .2075)$) rectangle +(\rectwidth, .405);
+		\draw[-] (aftCorigin) -- ($(aftCorigin) + (\rectwidth, 0)$)
+			node [below, xshift = -1.8em] {$D_{i,t}=0$};
+		\draw[-] ($(aftCorigin) + (0, .83)$) -- ($(aftCorigin) + (\rectwidth, .83)$);
+			%	t=1, control horizontal line
+		\draw[-, dashed, deepred] ($(aftCorigin) + (\rectwidth, .415)$) -- 
+						($(aftCorigin) + (2*\rectwidth+.5, .415)$);
+			%	arrows, control
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .415)$) -- 
+			($(befCorigin) + (4, \timeshift + .415)$);
+	%	treated tukey plot
+	\pause
+	\draw[-] ($(aftTorigin) + (.75, 0)$) -- 
+		($(aftTorigin) + (.75, 1.8)$) node[above] {$D_{i,t}=1$};
+		\filldraw[ball color = darkred, shading = ball] 
+			($(aftTorigin) + (0, .45)$) rectangle +(\rectwidth, .9);
+		\draw[-] (aftTorigin) -- ($(aftTorigin) + (\rectwidth, 0)$);
+		\draw[-] ($(aftTorigin) + (0, 1.8)$) -- 
+			($(aftTorigin) + (\rectwidth, 1.8)$);
+			%	arrows treated
+        	\draw [gray, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) to [out = 80, in = -180]
+			($(aftTorigin) + (-.1, .9)$);
+	%	treated CF tukey plot
+	\pause
+	\draw[-, gray] ($(cfTorigin) + (.75, 0)$) -- ($(cfTorigin) + (.75, .54)$) 
+		node[above, black] {CF};
+		\filldraw[shading = ball, ball color = gray!10!white] 
+			($(cfTorigin) + (0, .135)$) rectangle +(\rectwidth, .27);
+		\draw[-, gray] (cfTorigin) -- ($(cfTorigin) + (\rectwidth, 0)$);
+		\draw[-, gray] ($(cfTorigin) + (0, .54)$) -- 
+						($(cfTorigin) + (\rectwidth, .54)$);
+		%	t=1, treated CF horizontal line
+		\draw[-, dashed, deepred] 
+			($(cfTorigin) + (\rectwidth, .28)$) -- 
+			($(cfTorigin) + (2*\rectwidth+.5, .28)$);
+		%	arrows treated CF
+	    	\draw [gray, dashed, ultra thick, >= latex, ->]
+			($(befCorigin) + (\rectwidth, .84+.28)$) --
+			($(befCorigin) + (4, \timeshift + .84+.28)$);
+	%	ATT (treated comparison)
+	\pause
+		%	before-after
+    	\draw [orange, ultra thick, >= latex, <->]
+		($(befTorigin) + (4+2*\rectwidth+.25, .28)$) --
+		($(aftTorigin) + (\rectwidth + .25, .9)$)
+		node[left = 1pt, pos = .55] {\scriptsize\textbf{after$-$}}
+		node[left = 1pt, pos = .45] {\scriptsize\textbf{before}};
+		%	ATT 
+		\pause
+        	\draw [red, ultra thick, >= latex, <->]
+			($(cfTorigin) + (2*\rectwidth+ .5, .28)$) --
+			($(aftTorigin) + (\rectwidth + .5, .9)$) 
+			%node[left = 1pt, pos = .5] {\scriptsize $\E[y_{1,t=1}-y_{0,t=0}|D=1]$}
+			node[right = 1pt, pos = .5] {\scriptsize ATT}
+			;
+		%	treated CF pararell shift
+	\pause
+    	\draw [purple, thick, >= stealth, <->]
+		($(befTorigin) + (4+2*\rectwidth+.5, .28)$) --
+		($(cfTorigin) + (2*\rectwidth+.5, .28)$) 
+		node [right = .5pt, pos = .5] (para1) {\scriptsize\textbf{trend}};
+    	\draw [white, thick, >= stealth, <->]
+		($(befCorigin) + (4+2*\rectwidth+.5, .415)$) --
+		($(aftCorigin) + (2*\rectwidth+.5, .415)$) 
+		node [right = .5pt, pos = .5] (para2) {\scriptsize\textbf{trend}};
+\end{tikzpicture}
+\end{center}
+\end{frame}

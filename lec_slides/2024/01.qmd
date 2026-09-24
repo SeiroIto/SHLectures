@@ -274,9 +274,9 @@ AIの利用について
 
 ::: {#fig-con layout-ncol=2}
 
-![1](1/ConvergenceSlide1.jpg){.fragment .lightbox #fig-con1}
+![1](../CommonFiles/1/ConvergenceSlide1.jpg){.fragment .lightbox #fig-con1}
 
-![2](1/ConvergenceSlide2.jpg){.fragment .lightbox #fig-con2}
+![2](../CommonFiles/1/ConvergenceSlide2.jpg){.fragment .lightbox #fig-con2}
 
 :::
 
@@ -288,7 +288,7 @@ AIの利用について
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
-![](1/NonConvergence.jpg)
+![](../CommonFiles/1/NonConvergence.jpg)
 :::
 ::: {.column width="50%"}
 - SHU, IDE
@@ -302,7 +302,7 @@ AIの利用について
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
-![](1/ConvergenceIn2000s.jpg)
+![](../CommonFiles/1/ConvergenceIn2000s.jpg)
 :::
 ::: {.column width="50%"}
 - SHU, IDE
@@ -1050,9 +1050,9 @@ $$
 
 ::: {#fig-Angus1 layout-ncol=2}
 
-![AD0-2000](1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
+![AD0-2000](../CommonFiles/1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
 
-![BC40000-2000](1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
+![BC40000-2000](../CommonFiles/1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
 
 Source: Angus Maddison. I made up \$200 in 40000BC. 
 :::
@@ -1092,9 +1092,9 @@ Source: Angus Maddison. I made up \$200 in 40000BC.
 
 ::: {#fig-Angus2 layout-ncol=2}
 
-![自然数目盛](1/world_income_1950-2008_natural.jpg){.fragment #fig-Angus21}
+![自然数目盛](../CommonFiles/1/world_income_1950-2008_natural.jpg){.fragment #fig-Angus21}
 
-![対数目盛](1/world_income_1950-2008.jpg){.fragment #fig-Angus22}
+![対数目盛](../CommonFiles/1/world_income_1950-2008.jpg){.fragment #fig-Angus22}
 
 Source: Angus Maddison.  
 :::
@@ -1112,7 +1112,7 @@ library(data.table)
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
-y <- fread("1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
+y <- fread("../CommonFiles/1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
   header = T, skip = 2, sep = ",")
 setnames(y, 
   grepout("^1|^2", colnames(y))
@@ -1150,26 +1150,26 @@ g <- ggplot(data = yL2,
     legend.position="none"
   )
 cairo_pdf(
-  "1/pcPPPGDP1990-2020.pdf"
+  "../CommonFiles/1/pcPPPGDP1990-2020.pdf"
   , width=14/2.54, height=8/2.54, 
   family = "Meiryo")
 print(g)
 whatever <- dev.off()
 ggsave(
-   "1/pcPPPGDP1990-2020.jpg"
+   "../CommonFiles/1/pcPPPGDP1990-2020.jpg"
   , g, width = 14, height = 8, units = "cm",
   dpi = 300
  )
 glog <- g +
   scale_y_log10(breaks = c(1000, 3000, 5000, 10000, 20000, 40000, 80000))
 cairo_pdf(
-   "1/LogpcPPPGDP1990-2020.pdf"
+   "../CommonFiles/1/LogpcPPPGDP1990-2020.pdf"
   , width=14/2.54, height=8/2.54, 
   family = "Meiryo")
 print(glog)
 whatever <- dev.off()
 ggsave(
-   "1/LogpcPPPGDP1990-2020.jpg"
+   "../CommonFiles/1/LogpcPPPGDP1990-2020.jpg"
   , glog, width = 14, height = 8, units = "cm",
   dpi = 300
  )
@@ -1214,7 +1214,7 @@ Poor countries are not catching up the rich countries.
 :::: {.columns}
 
 ::: {.column width="65%"}
-![](1/NonConvergence.jpg)
+![](../CommonFiles/1/NonConvergence.jpg)
 :::
 
 ::: {.column width="30%"}
@@ -1233,7 +1233,7 @@ Poor countries are not catching up the rich countries.
 :::: {.columns}
 
 ::: {.column width="65%"}
-![](1/ConvergenceIn2000s.jpg)
+![](../CommonFiles/1/ConvergenceIn2000s.jpg)
 
 @KremerWillisYou2022
 :::
@@ -1262,7 +1262,7 @@ Poor countries are not catching up the rich countries.
 :::: {.columns}
 
 ::: {.column width="30%"}
-![](1/InequalityWithinBetweenCountries.jpg)  
+![](../CommonFiles/1/InequalityWithinBetweenCountries.jpg)  
 :::
 
 ::: {.column width="70%"}

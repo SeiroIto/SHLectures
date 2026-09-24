@@ -1,0 +1,742 @@
+---
+title: "RP06"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2024年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP04.html>
+    css: ../../seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - parse-latex
+  - imagify
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      </style>
+bibliography: c:/seiro/docs/seiro.bib
+#### ../../../seiro.bib
+resources:
+  - RP06.pdf
+# quarto render RP06.qmd
+---
+```{css, echo = F, results = "hide"}
+.small-font-list {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.small-font-list ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  counter-reset: item;
+}
+.small-font-list ol li {
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.small-font-list ol li::before {
+  content: counter(item) ". ";
+  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
+  text-align: right;
+  margin-right: 0.5em;
+}
+#### description list by Claude
+/* Main container for the description list */
+.description-list {
+  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
+  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
+}
+/* Styles for the description list element */
+.description-list dl {
+  margin-left: 0;  /* Removes default left margin */
+  padding-left: 0;  /* Removes default left padding */
+}
+/* Styles for the term (header) in the description list */
+.description-list dt {
+  font-weight: bold;  /* Makes the term text bold */
+  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
+  margin-right: 0.5em;  /* Adds some space after the term */
+}
+/* Styles for the description in the description list */
+.description-list dd {
+  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
+  margin-left: 0;  /* Removes default left margin */
+}
+/* Styles for paragraphs within the description */
+.description-list dd p {
+  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
+  margin: 0;  /* Removes default paragraph margins */
+}
+/* Creates a new line and adds space between list items */
+.description-list dd::after {
+  content: "";  /* Necessary for the pseudo-element to render */
+  display: block;  /* Creates a line break */
+  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
+}
+#### description with a line break between item header and texts
+.description-lb {
+  font-size: 70%;
+  line-height: 1.2;
+}
+.description-lb dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.description-lb dt {
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.description-lb dd {
+  margin-left: 0;
+  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
+}
+.description-lb dd p {
+  margin: 0;
+}
+```
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+<br>
+
+南アを去る直前に知り、あまりのショックだったので、先週講義では触れませんでした
+
+. . .
+
+最初は民主主義の限界ではなく、アメリカの選挙人制度が駄目なんだと思っていました  
+ 
+   * ヒラリー・クリントン、アル・ゴアも得票数では勝っていました
+
+. . .
+
+しかし、得票数でも圧倒したと知り、民主主義の優位&larr;有権者の判断がある程度理知的という前提、を思い起こしました
+
+* 大統領選敗北への対応
+   * 敗北宣言: ヒラリー、ゴア、カマラ・ハリス、ジョン・マケイン、ミット・ロムニー
+   * 議会占拠事件(警察官を含む複数名死亡)扇動容疑、票数をねつ造するよう司法長官や副大統領に圧力(両氏とも拒否、後に攻撃対象に): ドナルド・トランプ
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+トランプの政策=予測可能性が低い、という特徴があります  
+ 
+ * 衝動で動くからです
+ * 衝動=整合性を欠くなので、インフレ抑制を掲げながら、関税引き上げ(労働需要増)+移民制限(労働供給減)+財政赤字拡大、というインフレ昂進的な政策を公約しています
+ * 整合性のなさ、バラマキ先行はカマラ・ハリスも同様です
+
+. . .
+
+注意: 
+
+* 以下の予想は相当ネガティブに捉えていると思います
+* 僕は単なる経済学ph.dでしかなく、国際貿易論やマクロ経済学を10年以上専門にしていない門外漢です
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+関税率&uarr; &rArr; 物価&uarr; &rArr; 消費&darr; &rArr; 景気&darr;
+
+* インフレ(=継続的な物価上昇)ではなく、一時的な物価上昇です
+
+. . .
+
+関税率&uarr; &rArr; 外国から直接投資&uarr;  &rArr; 時間が経って景気&uarr; &rArr; FRBは金利&uarr;
+
+* ただし、トランプがインフレを制御しようとするFRBを押さえつける可能性はあります
+
+. . .
+
+米国金利&uarr; &rArr; 円&darr;  
+
+* 日本の貿易財産業(製造業など)は収益&uarr;
+* 日本の国内物価&uarr; &rArr; 消費&darr; &rArr; 日本の景気&darr;
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+ロシアや中国の対外威嚇を容認 &rArr; 各国の防衛費&uarr; &rArr; 一時的に防衛産業を契機とした景気&uarr;? &rArr; 長期的な生産性上昇率&darr; &rArr; 経済成長率&darr;  
+
+* 防衛支出は技術革新をもたらすこともあります
+   * インターネット, AI
+* しかし、研究開発費=2024年度防衛関係費(7.7兆円、2025年度概算要求8.5兆円)の3.4%なので、増やした額をすべて技術開発予算や教育予算に支出する方が成長率&uarr;
+
+. . .
+
+日本の防衛費&uarr; &rArr; 財政赤字&uarr; &rArr; 金利&uarr; &rArr; 景気&darr;
+
+. . .
+
+日本のカントリー・リスク&uarr; &rArr; 金利&uarr; &rArr; 景気&darr;
+
+* この辺りはハリスが当選していても同じ結果か
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+どう対応すべきか
+
+1. 関税を上げるとアメリカの家計を痛めつけると説得する
+   * 逆ギレされそう
+1. 関税を上げるなら日本は直接投資で応援する、と媚びを売り込む
+   * 喜ばれるが、日本の国内景気には効果があまりないかも
+1. 関税同盟を結ぼうと働きかける
+   * 対外的に同じ関税率、お互いには無関税
+   * ブロック化進展に協調することになる
+   * 第2次大戦の教訓をないがしろに: ブロック化 &rArr; 戦争
+   * ただし、現在進展するfriendshoringも「中国以外」という大括りのブロック化
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+どう対応すべきか
+
+4. 侵略した者勝ちはアメリカの海外利権を脅かすと説得
+   * 軍事オタクの石破さんの得意分野
+   * でも、防衛費を駐留米軍にもっと使えと言われる
+   * Putin, Xiは良いやつだから大丈夫とか言いそう
+   * 孤立主義=アメリカの海外利権は同盟国の海外利権と関係が薄い、が前提
+   * なので、聞く耳を持たず、アメリカの海外利権は大丈夫と考えるかも
+
+. . .
+
+日本の防衛費1.6倍増はバイデン政権期に岸田政権が決定&larr;さらに増えるか
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+最近行われたアメリカの大統領選挙で、トランプ氏が当選した。これは自分にとってもかなり衝撃的な結果であったが、彼が大統領に返り咲いたことで、日本経済や世界経済にどのような影響を及ぼすのかが気になった。
+:::
+</div>
+
+岸田前首相の防衛費増額について国会で野党が内訳を質問したところ以下の回答
+
+::: {style="font-size: 70%;line-height: .5;"}
+> 木原防衛相は「積み上げられた事業は数万件に上り、それらをまとめたエクセルファイルを確認している」と明言。いまだに詳しい内訳を示せないのは「ひとつの事業でも複数の項目にまたがるケースがあり、職員が整理している最中のためだ」と、今年5月の国会で答えている。
+:::
+
+::: {style="font-size: 50%;line-height: .5;"}
+<div style="text-align: right">[東京新聞2024年9月10日](https://www.tokyo-np.co.jp/article/353087)</div>
+:::
+
+. . .
+
+数万件のデータはMSエクセルではなくデータベース・プログラムで管理した方が効率的
+
+* MSエクセルなど使っていると時間がかかる
+* Dbプログラム(MySQL, [DuckDB](https://github.com/duckdb/duckdb?tab=readme-ov-file#duckdb)など)なら計算は速く、手作業ではなくコードを書いて計算させるので間違いも最小限になります
+* 「一つの事業が複数の項目にまたがるケース」の対応など、数万件のDBならほぼ瞬時
+   * 実はRの`data.table`パッケージはDb言語([SQL](https://ja.wikipedia.org/wiki/SQL))をヒントに開発されました
+   * `data.table`の特徴: [記述法syntaxの簡便さ、計算の速さ、低メモリ使用](https://jangorecki.gitlab.io/r-talks/2019-12-26_Mumbai_Efficiency-in-data-processing/Efficiency-in-data-processing.pdf#page=13)
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+103万円の壁はたいしたことはない
+
+課税所得が194万円までは所得税率=5%&larr; 194+103=297万円まで5%  
+
+* 例: 給与年収203万円ならば課税所得=203-103、所得税は100万円×5%=5万円
+   * ただし、150万円を超えると配偶者特別控除が減るので、「夫」(夫婦合計で1000万以下)の所得税が増える[(表)](https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2672.htm)
+
+. . .
+
+それなのに、税収減が大きすぎるので、財政政策として割に合わない(愚策)
+
+. . .
+
+理由: 減税対象者が低所得者に限定されないため
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+基礎控除48万円+給与所得控除55万円=103万円
+
+:::{.description-list}
+基礎控除
+: [個人の所得のうち、本人の最低限度の生活を維持するのに必要な部分は担税力を持たないから](https://ja.wikipedia.org/wiki/%E5%9F%BA%E7%A4%8E%E6%8E%A7%E9%99%A4)、確定申告(被雇用者は年末調整)で還付
+
+給与所得控除
+: 給与所得者の[勤務に伴う必要経費](https://www.nta.go.jp/publication/pamph/koho/kurashi/html/02_1.htm#:~:text=%E8%80%85%E3%81%AB%E3%81%AF%E3%80%81-,%E5%8B%A4%E5%8B%99%E3%81%AB%E4%BC%B4%E3%81%86%E5%BF%85%E8%A6%81%E7%B5%8C%E8%B2%BB,-%E3%81%AE%E6%A6%82%E7%AE%97%E6%8E%A7%E9%99%A4)
+:::
+
+. . .
+
+::::::::::{.columns}
+
+::::{.column width="40%"}
+![日経新聞2024年11月12日朝刊](06/Nikkei2024Nov12.jpg){width="80%"}
+::::
+
+::::{.column width="60%"}
+どちらの控除額を増やすのか分からないが、対象者は広い
+
+* 給与所得控除: 1625万円以下の給与所得者全員
+* 基礎控除: 所得2400万円以下の全員
+::::
+
+::::::::::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+配偶者特別控除の壁もたいしたことはない
+
+::: {style="font-size: 70%;line-height: 1.0;"}
+* 「妻」が一気に稼いで配偶者特別控除を抜けるとき
+* 配偶者特別控除は最大で38万円(夫が750万円)なので、給与所得は750-給与所得控除(75+110)=565, その他控除額(社会保険60万、配偶者38万、基礎控除48万)146万を引くと課税所得565-146=419の税率は20%なので、419×20%=83.8万円が課税所得565-108=457の税率20%なので457×20%=90.4万円、90.4-83.8=6.6万円の所得税額増
+:::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+影響が大きいのは社会保険による106万円の壁
+
+::::::::::{.columns}
+::::{.column width="40%"}
+![日経新聞2019年12月10日朝刊](06/NenkinDiscontinuity.jpg){}
+::::
+
+::::{.column width="60%"}
+
+:::{.fragment}
+月収8.8万円以上だと現在の手取りが`r round((1-90/(8.8*12))*100, 2)`%減る
+:::
+
+* 傷病手当金、出産手当金受給可能
+* 将来に年金で[一部]取り戻せる&larr;信頼?
+
+:::{.fragment}
+国民年金保険料支払いを免除されている「会社員」の被扶養配偶者(第3号被保険者)は厚生年金保険料負担に「抵抗感が強い」
+:::
+::::
+
+::::{.column width="40%"}
+:::{.fragment}
+```{r tikz pic0, engine = 'tikz'}
+#| out-width: "30%"
+\usetikzlibrary{backgrounds, calc, intersections}
+\begin{tikzpicture}
+\draw[ultra thick, name path = coord] (-3, 6) node[above]{earned amount} -- (-3, 0) node (origin){} -- (8, 0) node[right]{yen};
+\draw[blue, dashed] (2, 0) node[below]{105.6} -- (2, 5.5) node (a){};
+\draw[blue, dashed] (6, 0) node[below]{122} -- (6, 5.5) node (c){};
+\draw[thick] ($(a)-(.05, .05)$)  -- (-2, 1.5);
+\draw[thick] (2, 1.5) node (b){} -- ($(c)+(.05, .05)$);
+\draw (a -| origin) node (aY) {};
+\draw (b -| origin) node (bY) {};
+\draw[blue, dashed] (aY) node[left]{105.6} -- ($(a)-(.05, .0)$);
+\draw[blue, dashed] (bY) node[left]{90} -- (b);
+\node[draw, circle, label=above right:jumps down, inner sep = 1pt] at (a) {};
+\node[draw, circle, fill, inner sep = 1pt] at (b) {};
+\node[draw, circle, fill, inner sep = 1pt] at (c) {};
+\draw[red, thick, xshift = .1] (a) edge[<->] node[right]{gap} (b);
+\end{tikzpicture}
+```
+:::
+::::
+
+::::{.column width="60%"}
+&larr;正しい図はこっち
+::::
+::::::::::
+
+<!--
+----
+
+
+```{r tikz pic, engine = 'tikz'}
+\usetikzlibrary{backgrounds, calc, intersections}
+\begin{tikzpicture}
+\draw[ultra thick, name path = coord] (-3, 6) node[above]{earned amount} -- (-3, 0) node (origin){} -- (8, 0) node[right]{yen};
+\draw[blue, dashed] (2, 0) node[below]{105.6} -- (2, 5.5) node (a){};
+\draw[blue, dashed] (6, 0) node[below]{122} -- (6, 5.5) node (c){};
+\draw[thick] ($(a)-(.05, .05)$)  -- (-2, 1.5);
+\draw[thick] (2, 1.5) node (b){} -- ($(c)+(.05, .05)$);
+\draw (a -| origin) node (aY) {};
+\draw (b -| origin) node (bY) {};
+\draw[blue, dashed] (aY) node[left]{105.6} -- ($(a)-(.05, .0)$);
+\draw[blue, dashed] (bY) node[left]{90} -- (b);
+\node[draw, circle, label=above right:jumps down, inner sep = 1pt] at (a) {};
+\node[draw, circle, fill, inner sep = 1pt] at (b) {};
+\node[draw, circle, fill, inner sep = 1pt] at (c) {};
+\draw[red, thick, xshift = .1] (a) edge[<->] node[right]{gap} (b);
+\end{tikzpicture}
+```
+-->
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+::::::::::{.columns}
+::::{.column width="100%"}
+短期
+
+可処分所得&uarr;
+
+* 与党支持率&uarr;  
+
+:::{.fragment}
+財政赤字&uarr; &rArr; 金利&uarr; &rArr; 景気&darr;
+
+* 与党支持率&darr;  
+:::
+::::
+
+::::{.column width="72%"}
+:::{.fragment}
+長期
+
+労働供給&uarr; &rArr; 賃金&darr;、生産&uarr; &rArr; 景気&uarr; &rArr; 財政赤字増加分&darr; (税収7-8兆円&uarr;はあり得ないので財政赤字は残る)
+:::
+::::
+
+::::{.column width="28%"}
+:::{.fragment}
+![日経新聞2024年11月14日朝刊](06/Nikkei2024Nov14.jpg){width="30%"}
+:::
+::::
+::::::::::
+
+::: {style="font-size: 80%;line-height: 1.0;"}
+* 100万円&rarr;300万円だと30万-9.75万円=20.25万円所得税額 (300万円支払うほど労働需要は強い?)
+* ×1000万人だと2.025兆円、2023年15-39歳人口は[`r (5494+6236+6479+6380+7047)/10`万人](https://www.e-stat.go.jp/dbview?sid=0003448230)
+* 130万円の社会保険の壁によって歳入はさらに増えるが、この壁も引き上げるとすれば社会保険歳入増は減る
+:::
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+財政赤字は将来世代に支払ってもらう負債です
+
+. . .
+
+どの政党の公約や選挙後の主張でも、政府の信用が低下して買い手が控え(国債価格が急落、円が暴落し)ないかぎり、赤字手形を刷るだけで、工面しようと考えていません
+
+. . .
+
+::: {layout-ncol=2}
+![日経新聞2022年09月20日朝刊](06/Nikkei2022Sep20.jpg){width="60%"}
+
+![東京新聞2022年11月08日朝刊](06/Tokyo2022Nov08.jpg){width="50%"}
+:::
+
+. . .
+
+これこそが家計が消費を増やせない根源の原因と指摘する人も多くいますが、指摘自体にあまり効果はないようです
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+各種壁の正攻法
+
+. . .
+
+控除をなくす=崖の手前をならして低くする
+
+. . .
+
+基礎控除の理念を守るために、低所得者には補助金を支給
+
+* 低所得者の所得を守るために税制を使うので「壁」ができる
+* 対象を特定した所得移転income transferの方が弊害が少ない
+   * ただし、対象特定ミスによるターゲティング・エラーも発生する
+
+. . .
+
+社会保険の壁: 第3号資格者(配偶者被扶養者20-59歳、学生含む、年収130万円未満、週20時間以上51人以上企業なら106万円未満、学生除外)を撤廃、全員が社会保険料を支払う
+
+* 第3号資格者の既得権益が奪われるので不人気
+* 各種控除に相当するだけ所得税率を下げないと選挙で負ける
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+103万円の壁が引き上げられたとして、国家に生じる損失はどのように工面していくのだろうか。そしてその損失によって及ばされる生活への影響はあるのだろうか。
+:::
+</div>
+
+政府の対策
+
+* 106万円対策: 政府は[3年間50万円/対象者の企業向け補助金](https://www.gov-online.go.jp/article/202312/entry-5288.html)を実施
+   * 4年後に本当に壁をなくすならば、移行措置
+   * 厚労省は106万円という賃金要件撤廃を検討中=年収にかかわらず20時間以上働くと壁ができる制度&larr;19時間しか働かない、はないという想定?
+* 130万円対策: [繁忙期に労働時間を延ばしたことを申請](https://www.gov-online.go.jp/article/202312/entry-5288.html)すれば、連続2年まで被扶養のままでいられる
+   * なんだこれは? 忙しいときは大目に見る、というだけ
+   * 2年申請&rarr;1年時間を増やさず&rarr;2年申請&rarr;...を繰り返せば半永久的に被扶養
+   * 106万円を撤廃するのは130万円でこういう逃げ道があるから?
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+アイサイト搭載車の所の話で、搭載していない車と搭載している車の比較で、アイサイトの効果を示した記事が適切ではないと話されていましたが、効果がある・ないを比べるのは凄くむずしいのだと感じました。検証したいこと以外の要素を全く同じ条件下にするというのは不可能なのではないかと授業を聞いていて最近感じています。排除しないといけない要素が多すぎて把握しきれないと思ったからです。
+:::
+</div>
+
+全くその通りです。効果計測のチャンスを意図的に探さなければ、ほぼ不可能です。
+
+* それなのに、効果を意味する文章が世の中に溢れているのはなぜでしょうか
+
+. . .
+
+効果計測方法の原則は単純: RCT(=介入・政策の割り当てをランダム化)
+
+. . .
+
+しかし、人間が意図的に実施しなければRCTは存在しません
+
+* たまに、政府が実験に理解があり、政策実施地域・個人の**順番をランダム化**してRCTのようにすることもあります
+   * 先に実施した地域・個人 vs. 後に実施した地域・個人
+   * Progresa (メキシコ)
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+アイサイト搭載車の所の話で、搭載していない車と搭載している車の比較で、アイサイトの効果を示した記事が適切ではないと話されていましたが、効果がある・ないを比べるのは凄くむずしいのだと感じました。検証したいこと以外の要素を全く同じ条件下にするというのは不可能なのではないかと授業を聞いていて最近感じています。排除しないといけない要素が多すぎて把握しきれないと思ったからです。
+:::
+</div>
+
+そこで、あたかもRCTのような割り当てが発生している状況&データを探すのです
+
+. . .
+
+どうやって探すか
+
+* 自然実験: rule of thumbなし
+* DID: 共通トレンド&rarr;乖離を捉えるパネル・データ
+* RDD: 区切りの前後
+
+. . .
+
+どうやって探すか、placebo testの内容&larr;研究者の技量
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+アムステルダムの飢餓の冬の自然実験の話を聞いた感想で、これまで扱われた自然実験の話もそうだが、世の中には色々な出来事があってその出来事で実験している人もいるということが面白いと思った。
+:::
+</div>
+
+ひどいと思われることが多いので、面白いと思って頂いて有り難いです
+
+. . .
+
+悲劇的な出来事=倫理的に許されない実験、ということが多いので、エコノミストが嗅ぎ回ります
+
+* 日本: 地震や洪水
+* 海外: +干ばつ、その他の自然災害
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+トレンドが確実か確認するためのデータが、穀物反収であれば支援前の二期分あれば良いというのが思ったよりも少なくて意外だった。
+:::
+</div>
+
+最も単純な例を示したので、誤解を招いたようです
+
+. . .
+
+2期あれば最低限のことができる、という意図でしたmeant: can do the minimum due diligence with 2 pre-periods
+
+. . .
+
+介入前のデータ期間を遡る(期間数を伸ばす)とif we can extend the pre-periods
+
+. . .
+
+<br>
+
+長所advantage
+
+. . .
+
+共通トレンド検定の検出力statistical powerが高まるstatistical power of null hypothesis (of no common trend) testing increases  
+
+* もしも成り立っていなければ、トレンドが乖離するのを観察するチャンスが多いためlonger periods give a greater chance of observing diverging trends
+* 成り立っていない場合: (DIDで予想される方向に両群が乖離する=政策効果が無くてもDID推計値が非ゼロになるような)「pre-trendがある」と表現しますwhen rejecting, we say, "we cannot reject a pre-trend"
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+トレンドが確実か確認するためのデータが、穀物反収であれば支援前の二期分あれば良いというのが思ったよりも少なくて意外だった。
+:::
+</div>
+
+短所disadvantages
+
+1. 対象家計がデータから脱落attritする可能性が高まるincreases the chance of households to attrit from data
+   * Attrition: 選抜の一種、もしも、効果の小さい(大きい)家計ほど脱落 &rArr; 効果は過大(過小)推計if households with smaller (larger) impacts attrit from data, it leads to overestimation (underestimation) of impacts
+   * Missing at random (MAR)の場合は効果の大小にかかわらず脱落 &rArr; 効果の推計値に影響を与えない、ただし、標本サイズが小さくなるので推計精度を落とすif MAR, observations attri irrespective of impact size, so it does not affect estimates, only it makes them less precise due to smaller sample size
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+トレンドが確実か確認するためのデータが、穀物反収であれば支援前の二期分あれば良いというのが思ったよりも少なくて意外だった。
+:::
+</div>
+
+短所
+
+2. バイアスを持ち込む可能性が高まるincreases the chance of bringing in a bias
+   * 例: 4年前-現在=両群は同質で共通トレンド、5-10年前=両群は異質で異なるトレンド &rArr; 5-10年前のデータで帰無仮説=共通トレンドなし、を棄却 &rArr; DIDの識別仮定を疑問視=推計結果を疑問視
+   * Example: past 4 years=groups are similar with a common trend, 5-10 years ago=groups are different without a common trend &rArr; data including 5-10 years ago may reject the null hypothesis of no common trend  &rArr; identification assumption of DID is questioned=results of DID are questioned
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+トレンドが確実か確認するためのデータが、穀物反収であれば支援前の二期分あれば良いというのが思ったよりも少なくて意外だった。
+:::
+</div>
+
+<br>
+
+解決法
+
+DID推計値を利するようなプリトレンドがあるときwhen there is a pre-trend that makes null hypothesis (of zero DID estimate) more difficult to reject 
+
+* 肥料支援前から治療群の反収増$>$統御群の反収増yield growth of the treated > yield growth of the control, in pre-periods  
+
+. . .
+
+@RambachanRoth2023 はプリトレンドをそのまま伸ばし、どのくらい大きな推計値でないと介入効果といえないか=プリトレンド(肥料支援前の治療群の反収増トレンド$-$統御群の反収増トレンド)を差し引いたDID推計・統計学的推論の方法、を示しましていますthey extrapolate the pre-trend to the post-periods and show how large DID estimates need to be by subtracting the pre-trend, and show how to do statistical inference conditional of pre-trend
+
+
+----
+
+#### References
+
+::: {#refs}
+:::
+

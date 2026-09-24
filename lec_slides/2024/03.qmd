@@ -163,7 +163,7 @@ Aqua {
 
 ::::::::::{.columns}
 ::::{.column width="60%"}
-![School enrollment rates, 2020](HK/figure/SG.png){width="85%"}
+![School enrollment rates, 2020](../CommonFiles/HK/figure/SG.png){width="85%"}
 ::::
 
 ::::{.column width="40%"}
@@ -173,11 +173,11 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ----
 
-![Under 5 stunting rate, 2020](HK/figure/HG.png){width="50%"}
+![Under 5 stunting rate, 2020](../CommonFiles/HK/figure/HG.png){width="50%"}
 
 ----
 
-![Infant mortality rate, 2020](HK/figure/MG.png){width="50%"}
+![Infant mortality rate, 2020](../CommonFiles/HK/figure/MG.png){width="50%"}
 
 ----
 
@@ -220,7 +220,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 ::::::::::{.columns}
 
 ::::{.column width="55%"}
-![被雇用者1人あたりGDP(労働生産性)](HK/figure/LabourProductivityPerEmployee.jpg){width="85%"}
+![被雇用者1人あたりGDP(労働生産性)](../CommonFiles/HK/figure/LabourProductivityPerEmployee.jpg){width="85%"}
 
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 <lord-icon
@@ -242,7 +242,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ::::::::::{.columns}
 ::::{.column width="55%"}
-![被雇用者1人あたりGDP(労働生産性): 現在の高所得国のみ](HK/figure/LabourProductivityPerEmployee2.jpg){width="85%"}
+![被雇用者1人あたりGDP(労働生産性): 現在の高所得国のみ](../CommonFiles/HK/figure/LabourProductivityPerEmployee2.jpg){width="85%"}
 
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 <lord-icon
@@ -264,7 +264,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ::::::::::{.columns}
 ::::{.column width="70%"}
-![1人あたりGDP](HK/figure/GDPPerCapita.jpg){width="85%}
+![1人あたりGDP](../CommonFiles/HK/figure/GDPPerCapita.jpg){width="85%}
 
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 <lord-icon
@@ -287,7 +287,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ::::::::::{.columns}
 ::::{.column width="70%"}
-![1人あたりGDP: 現在の高所得国のみ](HK/figure/GDPPerCapita2.jpg){width="85%}
+![1人あたりGDP: 現在の高所得国のみ](../CommonFiles/HK/figure/GDPPerCapita2.jpg){width="85%}
 
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 <lord-icon
@@ -309,7 +309,7 @@ $$\mbox{就学率}=\frac{\mbox{就学者数}}{\mbox{就学年齢人口}}$$
 
 ::::::::::{.columns}
 ::::{.column width="70%"}
-![資本分配率(=資本報酬/国民所得=1-労働分配率)](HK/figure/PikettySaezZucman.jpg){width="85%}
+![資本分配率(=資本報酬/国民所得=1-労働分配率)](../CommonFiles/HK/figure/PikettySaezZucman.jpg){width="85%}
 
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 <lord-icon
@@ -363,7 +363,7 @@ lm1 <- lm(log(value) ~ trend, data = yL[grepl("JP", code) & year >= 1991 & year 
 ```{r read labour force stat of japan, echo = F, warning = F, message = F, results = "hide"}
 # 総務省統計局、労働力調査、長期時系列データ, unit = 10 thousands
 #https://www.stat.go.jp/data/roudou/longtime/zuhyou/lt01-a10.xlsx
-lfj <- fread("HK/JapanLabourForce.prn", skip = 2, header = T)
+lfj <- fread("../CommonFiles/HK/JapanLabourForce.prn", skip = 2, header = T)
 lfj <- lfj[-(1:2), ]
 lfj[, year := repseq(1953:2021, 12)]
 # okinawa is included from 1973 onwards
@@ -379,8 +379,8 @@ lfjL[, month := unlist(strsplit(month, "月"))]
 nv <- c("year", "month", "LForce", "Employed", "Employee", "Unemployed", "NLForce", "URate")
 lfjL[, (nv) := lapply(.SD, as.numeric), .SDcols = nv]
 # merge population census 人口推計, 政府統計コード=00200524, unit = thousand
-popj <- fread("HK/JapanPopulation.prn", skip = 1, header = T)
-popj2 <- fread("HK/JapanPop2015-2019.prn", skip = 5, header = T)
+popj <- fread("../CommonFiles/HK/JapanPopulation.prn", skip = 1, header = T)
+popj2 <- fread("../CommonFiles/HK/JapanPop2015-2019.prn", skip = 5, header = T)
 popj2 <- popj2[grepl("総数", AgeGroup) & !grepl("%", unit), .(year, GenderGroup, value)]
 popj2[, gen := "t"]
 popj2[grepl("男$", GenderGroup), gen := "m"]
@@ -420,7 +420,7 @@ lm2 <- lm(log(value) ~ trend, data = lfL2)
 ```
 ```{r read labour force stat of Japan at FRED, echo = F, warning = F, message = F, results = "hide"}
 # labour shares in japan
-ls <- fread("HK/LabourShareFromFRED.csv", header = T)
+ls <- fread("../CommonFiles/HK/LabourShareFromFRED.csv", header = T)
 setnames(ls, c("date", "value"))
 ls[, trend := 1:.N]
 ls[, Date := as.IDate(date)]
@@ -429,7 +429,7 @@ lm3 <- lm(log(value) ~ trend, data = ls[Date >= as.IDate("1991-01-01") & Date <=
 
 ::::::::::{.columns}
 ::::{.column width="40%"}
-![@ADKPV2020, Figure 1](HK/figure/ADKPV2021_Fig1small.jpg)
+![@ADKPV2020, Figure 1](../CommonFiles/HK/figure/ADKPV2021_Fig1small.jpg)
 ::::
 
 ::::{.column width="60%"}
@@ -661,7 +661,7 @@ $$
 ::::::::::{.columns}
 ::::{.column width="40%"}
 :::{.fragment}
-![](HK/figure/MRMC.jpg)
+![](../CommonFiles/HK/figure/MRMC.jpg)
 :::
 ::::
 
@@ -897,31 +897,31 @@ $u'\left\{h(l)+Rs\right\}h'(l)$は$l$が大きいほど$u'\left\{h(l)+Rs\right\}
 ----
 
 <center>
-![](HK/figure/109_D_HK.jpg)
+![](../CommonFiles/HK/figure/109_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/110_D_HK.jpg)
+![](../CommonFiles/HK/figure/110_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/111_D_HK.jpg)
+![](../CommonFiles/HK/figure/111_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/112_D_HK.jpg)
+![](../CommonFiles/HK/figure/112_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/113_D_HK.jpg)
+![](../CommonFiles/HK/figure/113_D_HK.jpg)
 </center>
 
 ----
@@ -981,38 +981,38 @@ $$
 ----
 
 <center>
-![](HK/figure/115_D_HK.jpg)
+![](../CommonFiles/HK/figure/115_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/116_D_HK.jpg)
+![](../CommonFiles/HK/figure/116_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/117_D_HK.jpg)
+![](../CommonFiles/HK/figure/117_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/118_D_HK.jpg)
+![](../CommonFiles/HK/figure/118_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/119_D_HK.jpg)
+![](../CommonFiles/HK/figure/119_D_HK.jpg)
 </center>
 
 ----
 
 ::::::::::{.columns}
 :::{.column width="75%"}
-![](HK/figure/119_D_HK.jpg){width="133.333%"}
+![](../CommonFiles/HK/figure/119_D_HK.jpg){width="133.333%"}
 :::
 
 :::{.column width="25%"}
@@ -1026,7 +1026,7 @@ $$
 ----
 
 <center>
-![](HK/figure/D2_HK.gif)
+![](../CommonFiles/HK/figure/D2_HK.gif)
 </center>
 
 ----
@@ -1061,38 +1061,38 @@ $$
 ----
 
 <center>
-![](HK/figure/138_D_HK.jpg)
+![](../CommonFiles/HK/figure/138_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/139_D_HK.jpg)
+![](../CommonFiles/HK/figure/139_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/140_D_HK.jpg)
+![](../CommonFiles/HK/figure/140_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/141_D_HK.jpg)
+![](../CommonFiles/HK/figure/141_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/142_D_HK.jpg)
+![](../CommonFiles/HK/figure/142_D_HK.jpg)
 </center>
 
 ----
 
 ::::::::::{.columns}
 :::{.column width="75%"}
-![](HK/figure/D3_HK.gif)
+![](../CommonFiles/HK/figure/D3_HK.gif)
 :::
 
 :::{.column width="25%"}
@@ -1309,97 +1309,97 @@ skill-biased technological change
 ----
 
 <center>
-![](HK/figure/192/1_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/1_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/2_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/2_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/3_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/3_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/4_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/4_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/5_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/5_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/6_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/6_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/7_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/7_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/8_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/8_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/9_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/9_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/10_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/10_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/11_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/11_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/12_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/12_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/13_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/13_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/14_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/14_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/15_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/15_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/192/16_D_HK.jpg)
+![](../CommonFiles/HK/figure/192/16_D_HK.jpg)
 </center>
 
 ----
@@ -1449,49 +1449,49 @@ skill-biased technological change
 日本の大卒新卒賃金プレミアム
 
 <center>
-![](HK/figure/CollegePremiumInJapan.jpg){width="70%"}
+![](../CommonFiles/HK/figure/CollegePremiumInJapan.jpg){width="70%"}
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/1_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/1_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/2_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/2_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/3_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/3_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/4_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/4_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/5_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/5_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/6_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/6_D_218_D_HK.jpg)
 </center>
 
 ----
 
 <center>
-![](HK/figure/218/7_D_218_D_HK.jpg)
+![](../CommonFiles/HK/figure/218/7_D_218_D_HK.jpg)
 </center>
 
 ----
@@ -1617,11 +1617,11 @@ skill-biased technological change
 
 ::::::::::{.columns}
 ::::{.column width="40%"}
-![](HK/figure/MDG.jpg)
+![](../CommonFiles/HK/figure/MDG.jpg)
 ::::
 
 ::::{.column width="40%"}
-![](HK/figure/SDGs.jpg)
+![](../CommonFiles/HK/figure/SDGs.jpg)
 ::::
 ::::::::::
 
@@ -1681,11 +1681,11 @@ Only if they are learning
 ::::{.column width="80%"}
 
 ::: {layout="[[1,1], [1]]"}
-![](HK/figure/Pratham2018GovPvtReading.jpg)
+![](../CommonFiles/HK/figure/Pratham2018GovPvtReading.jpg)
 
-![](HK/figure/Pratham2018GovPvtArithmetic.jpg)
+![](../CommonFiles/HK/figure/Pratham2018GovPvtArithmetic.jpg)
 
-![](HK/figure/Pratham2018Gender.jpg)
+![](../CommonFiles/HK/figure/Pratham2018Gender.jpg)
 
 出所: @Pratham2018, p.52-54
 :::

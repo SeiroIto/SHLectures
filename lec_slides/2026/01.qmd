@@ -163,12 +163,12 @@ resources:
 :::::::::: {.columns}
 ::::: {.column width = "60%"}
 ::: {.fragment fragment-index="2"}
-![堂々と嘘を言い](1/Claude_2026Aug17EarlierResponses.jpg){width="50%"}
+![堂々と嘘を言い](../CommonFiles/1/Claude_2026Aug17EarlierResponses.jpg){width="50%"}
 :::
 ::::: 
 ::::: {.column width = "38%"}
 ::: {.fragment fragment-index="3"}
-![堂々と謝る](1/Claude_2026Aug17Lined.jpg)
+![堂々と謝る](../CommonFiles/1/Claude_2026Aug17Lined.jpg)
 :::
 ::::: 
 ::::::::::
@@ -288,7 +288,7 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 
 :::::::::: {.columns}
 ::::: {.column width = "50%"}
-[Deck 1](1/Deck1_TheGraduationModelBlueprint.pdf)![](1/NotebookLM_SlideDeck1.jpg){height=80}
+[Deck 1](../CommonFiles/1/Deck1_TheGraduationModelBlueprint.pdf)![](../CommonFiles/1/NotebookLM_SlideDeck1.jpg){height=80}
 
 :::: {.incremental}
 * 通常のMFは全く駄目と断定
@@ -299,7 +299,7 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 ::::: 
 
 ::::: {.column width = "50%"}
-[Deck 2](1/Deck2_MicrocreditAndPovertyRealities.pdf)![](1/NotebookLM_SlideDeck2.jpg){height=80}
+[Deck 2](../CommonFiles/1/Deck2_MicrocreditAndPovertyRealities.pdf)![](../CommonFiles/1/NotebookLM_SlideDeck2.jpg){height=80}
 
 :::: {.incremental}
 * 貧困の罠は存在しないと断定
@@ -331,13 +331,13 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 ::::
 
 :::: {style="font-size: 50%;" .fragment fragment-index=3}
-<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](1/ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
+<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](../CommonFiles/1/ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](../CommonFiles/1/Transcript_yagi4tou.html)
 
 > (00:00)「あの、もし私がですよ、極度の貧困状態にある人にヤギを4頭無料でプレゼントするとしますよね」「はい」「そしたら、3年後には、なんと<Red>何も支援しなかった場合よりもさらに貧困になってしまう</Red>と言ったら、これ信じられますか」「いやあ、直感的には信じがたいですよね」「ですよね...今日私たちが深掘りしていくのは、まさにこの直感を根底から崩す、非常に興味深い、そしてちょっと考えさせられるテーマなんです」
 
 > (11:48) 「<Red>資産を無料で与えられたことで、却って全体的な家畜の価値を下げてしまった</Red>という、完全に直感に反するショッキングな結果でした」
 
-<Red>[Escape_Velocity_and_the_Poverty_Trap.m4a](1/あEscape_Velocity_and_the_Poverty_Trap.m4a)</Red> [(台本)](1/Transcript_EscapeVelocity.html)
+<Red>[Escape_Velocity_and_the_Poverty_Trap.m4a](../CommonFiles/1/あEscape_Velocity_and_the_Poverty_Trap.m4a)</Red> [(台本)](../CommonFiles/1/Transcript_EscapeVelocity.html)
 
 > (18:50) The households that received just the goats actually saw <Red>their overall wealth decrease compared to the control group.</Red>
 ::::
@@ -366,7 +366,7 @@ Hallucination: 誤解。全種類の支援を受けたアームと比較する�
 ::::
 
 :::: {style="font-size: 50%;" .fragment fragment-index=2}
-<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](1/Transcript_yagi4tou.html)
+<Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](../CommonFiles/1/Transcript_yagi4tou.html)
 
 > (14:00) そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<Red>資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</Red>ということが、この研究から導き出された最も重要な結論なんですよ。
 ::::
@@ -2650,21 +2650,21 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 . . . 
 
 
-* 女性育児休業取得月数-男性育児休業取得月数[12.2月(令和3年度)&rarr;11.2月(令和5年度)&rarr;11.3月(令和7年度)![](1/spark_ikukyu_gap.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
-* 女性の管理職登用目標30%[課長以上で10.2%(2009年)&rarr;12.7%(2022年)&rarr;13.1%(2024年)![](1/spark_kacho.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
+* 女性育児休業取得月数-男性育児休業取得月数[12.2月(令和3年度)&rarr;11.2月(令和5年度)&rarr;11.3月(令和7年度)![](../CommonFiles/1/spark_ikukyu_gap.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
+* 女性の管理職登用目標30%[課長以上で10.2%(2009年)&rarr;12.7%(2022年)&rarr;13.1%(2024年)![](../CommonFiles/1/spark_kacho.svg){style="height:0.9em;width:auto;vertical-align:-0.08em;margin:0 0 0 0.3em;box-shadow:none;border:none"}]
 
 
 
 ----
 
-![](1/ikukyu_kikan.png){width=80%}
+![](../CommonFiles/1/ikukyu_kikan.png){width=80%}
 
 * 女性は6か月以上が9割超
 * 男性は2週間～3か月未満が約6割
 
 ----
 
-![](1/ikukyu_kikan_regular.png){width=80%}
+![](../CommonFiles/1/ikukyu_kikan_regular.png){width=80%}
 
 * 2か月刻みの等間隔階級に再配分(公表階級を階級内一様分布と仮定、総和は保存)
 * 育児休暇は男女同時に取得できない: 父+母=法定最長3年、企業によってはそれ以上も
@@ -2676,7 +2676,7 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 :::::: {.columns}
 
 ::: {.column width="45%"}
-![@ChenXiongTang2024](1/FangLiuYang_ChinaFertilityFig.jpg){width=50%}
+![@ChenXiongTang2024](../CommonFiles/1/FangLiuYang_ChinaFertilityFig.jpg){width=50%}
 :::
 
 ::: {.column width="50%"}
@@ -2784,7 +2784,7 @@ $$
 
 ::: {.column width="35%"}
 :::: {.fragment}
-![](1/ChinaFertilityDecompFig1.jpg){width="60%"}
+![](../CommonFiles/1/ChinaFertilityDecompFig1.jpg){width="60%"}
 ::::
 :::
 
@@ -2815,9 +2815,9 @@ $$
 ::: {.column width="35%"}
 :::: {.fragment}
 ::: {layout-ncol=2}
-![](1/DoepkeKindermann_Fig2.jpg){}
+![](../CommonFiles/1/DoepkeKindermann_Fig2.jpg){}
 
-![](1/DoepkeKindermann_6TaskShareQuestions.jpg){width="20%"}
+![](../CommonFiles/1/DoepkeKindermann_6TaskShareQuestions.jpg){width="20%"}
 :::
 ::::
 :::
@@ -3096,9 +3096,9 @@ Section 3:
 
 ::: {#fig-Angus1 layout-ncol=2}
 
-![AD0-2000](1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
+![AD0-2000](../CommonFiles/1/world_income_pop_1-2009.jpg){.fragment #fig-Angus11}
 
-![BC40000-2000](1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
+![BC40000-2000](../CommonFiles/1/world_income_pop_-40000-2009.jpg){.fragment #fig-Angus12}
 
 Source: Angus Maddison. I made up \$200 in 40000BC. 
 :::
@@ -3138,9 +3138,9 @@ Source: Angus Maddison. I made up \$200 in 40000BC.
 
 ::: {#fig-Angus2 layout-ncol=2}
 
-![自然数目盛](1/world_income_1950-2008_natural.jpg){.fragment #fig-Angus21}
+![自然数目盛](../CommonFiles/1/world_income_1950-2008_natural.jpg){.fragment #fig-Angus21}
 
-![対数目盛](1/world_income_1950-2008.jpg){.fragment #fig-Angus22}
+![対数目盛](../CommonFiles/1/world_income_1950-2008.jpg){.fragment #fig-Angus22}
 
 Source: Angus Maddison.  
 :::
@@ -3158,7 +3158,7 @@ library(data.table)
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
-y <- fread("1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
+y <- fread("../CommonFiles/1/data/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_2925849.csv", 
   header = T, skip = 2, sep = ",")
 setnames(y, 
   grepout("^1|^2", colnames(y))
@@ -3196,26 +3196,26 @@ g <- ggplot(data = yL2,
     legend.position="none"
   )
 cairo_pdf(
-  "1/pcPPPGDP1990-2020.pdf"
+  "../CommonFiles/1/pcPPPGDP1990-2020.pdf"
   , width=14/2.54, height=8/2.54, 
   family = "Meiryo")
 print(g)
 whatever <- dev.off()
 ggsave(
-   "1/pcPPPGDP1990-2020.jpg"
+   "../CommonFiles/1/pcPPPGDP1990-2020.jpg"
   , g, width = 14, height = 8, units = "cm",
   dpi = 300
  )
 glog <- g +
   scale_y_log10(breaks = c(1000, 3000, 5000, 10000, 20000, 40000, 80000))
 cairo_pdf(
-   "1/LogpcPPPGDP1990-2020.pdf"
+   "../CommonFiles/1/LogpcPPPGDP1990-2020.pdf"
   , width=14/2.54, height=8/2.54, 
   family = "Meiryo")
 print(glog)
 whatever <- dev.off()
 ggsave(
-   "1/LogpcPPPGDP1990-2020.jpg"
+   "../CommonFiles/1/LogpcPPPGDP1990-2020.jpg"
   , glog, width = 14, height = 8, units = "cm",
   dpi = 300
  )
@@ -3266,7 +3266,7 @@ After 1990's
 :::: {.columns}
 
 ::: {.column width="65%"}
-![](1/NonConvergence.jpg)
+![](../CommonFiles/1/NonConvergence.jpg)
 :::
 
 ::: {.column width="30%"}
@@ -3286,7 +3286,7 @@ After 1990's
 :::: {.columns}
 
 ::: {.column width="65%"}
-![](1/ConvergenceIn2000s.jpg)
+![](../CommonFiles/1/ConvergenceIn2000s.jpg)
 
 @KremerWillisYou2022
 :::
@@ -3334,7 +3334,7 @@ $$
 :::: {.columns}
 
 ::: {.column width="50%"}
-![Figure 1, @Hartley2026](1/2020sConvergence.jpg){width="45%"}
+![Figure 1, @Hartley2026](../CommonFiles/1/2020sConvergence.jpg){width="45%"}
 :::
 
 ::: {.column width="45%"}
@@ -3374,7 +3374,7 @@ $$
 :::: {.columns}
 
 ::: {.column width="30%"}
-![](1/InequalityWithinBetweenCountries.jpg)  
+![](../CommonFiles/1/InequalityWithinBetweenCountries.jpg)  
 :::
 
 ::: {.column width="70%"}
@@ -3461,7 +3461,7 @@ $$
 :::: {.column width="50%"}
 
 ::: {#fig-Herrendorf}
-![](1/HerrFig1ABC.jpg){width="100%"}
+![](../CommonFiles/1/HerrFig1ABC.jpg){width="100%"}
 
 @HerrendorfRogersonValentinyi2026, Figure 1
 :::
@@ -3486,7 +3486,7 @@ $$
 
 :::::: {.columns}
 :::: {.column width="30%"}
-![Figure 2AB, @HerrendorfRogersonValentinyi2026](1/HerrFig2AB.jpg){width="75%"}
+![Figure 2AB, @HerrendorfRogersonValentinyi2026](../CommonFiles/1/HerrFig2AB.jpg){width="75%"}
 ::::
 
 :::: {.column width="65%"}
@@ -3497,7 +3497,7 @@ $$
 
 :::::: {.columns}
 :::: {.column width="30%"}
-![Figure 2CD, @HerrendorfRogersonValentinyi2026](1/HerrFig2CD.jpg){width="75%"}
+![Figure 2CD, @HerrendorfRogersonValentinyi2026](../CommonFiles/1/HerrFig2CD.jpg){width="75%"}
 ::::
 
 :::: {.column width="65%"}
@@ -3539,7 +3539,7 @@ UNIDOデータとGCDCデータの不一致点
 
 :::::: {.columns}
 :::: {.column width="30%"}
-![Figure 3B](1/HerrFig3B.jpg){width="30%"}
+![Figure 3B](../CommonFiles/1/HerrFig3B.jpg){width="30%"}
 ::::
 
 :::: {.column width="68%"}

@@ -3,9 +3,13 @@
 name: Deploy Quarto site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the default branch except files in paths-ignore
   push:
     branches: ['main']
+    paths-ignore:
+      - 'lec_slides/2024/**'
+      - 'homeworks/2024/**'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -52,6 +56,10 @@ jobs:
             any::modelsummary
             any::treemap
             any::ggfittext
+            any::ggrepel
+            any::patchwork
+            any::viridis
+            any::WDI
             any::wooldridge
 
       - name: Render

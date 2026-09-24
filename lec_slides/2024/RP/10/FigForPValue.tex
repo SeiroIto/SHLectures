@@ -1,0 +1,116 @@
+\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169.rnw}
+%\input{c:/seiro/settings/Rsetting/knitrPreamble/knitr_beamer_preamble169_ho.rnw}
+% setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/RP/10/"); library(knitr); knit("FigForPValue.rnw", "FigForPValue.tex"); system("platex FigForPValue"); system("dvipdfmx FigForPValue")
+
+
+\usetikzlibrary{tikzmark, matrix}
+\usetikzlibrary{decorations.pathreplacing}
+\definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
+\definecolor{bondibluelight}{rgb}{0.0, 0.3, 0.41}
+\definecolor{aqua}{rgb}{0.0, 1.0, 1.0}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\setbeamercolor{background canvas}{bg=bondibluelight}
+\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{item}{fg=aqua}
+\hypersetup{
+linkcolor = lightblue, urlcolor = lightblue
+%linkcolor = blue, urlcolor = darkdarkblue
+, citecolor = lightblue
+}
+\pgfplotsset{compat=1.5}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\pgfmathdeclarefunction{RectOfHeight}{1}{\pgfmathparse{#1}}
+\pgfmathdeclarefunction{truncnorm}{4}{\pgfmathparse{(1/#2)*(1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2)))/(#3-#4)}}
+% #1: mean, #2: std, #3 upperbound cdf, #4 lowerbound cdf
+
+\begin{document}
+
+
+
+
+
+\begin{frame}[t]{}
+\begin{adjustbox}{width=.95\linewidth, height=.8\paperheight}
+\begin{tikzpicture}
+  \begin{axis}[
+    name = axis0, 
+    no markers, domain=0:9, samples=200,
+    axis lines*=left, xlabel=$x$, ylabel=density,
+    every axis y label/.style={at=(current axis.above origin), anchor=south},
+    every axis x label/.style={at=(current axis.right of origin), anchor=west},
+    height=5cm, width=9.5cm,
+    xtick={4.2, 4.5}, ytick=\empty,
+    xticklabels = {\scriptsize , \scriptsize $\bar{x}$},
+    enlargelimits=false, clip=false, axis on top,
+    grid = major
+    ]
+    \draw [] (axis cs:2.5, .70) node [above] {\footnotesize 帰無仮説下の分布};
+    \only<1>{\draw [] (axis cs:4.0, .70) node [below] {\scriptsize $p=.05$};}
+    \addplot [fill=cyan!20, draw=none, opacity = .8, domain=4.2:7] {gauss(3,.65)} \closedcycle;
+    \addplot [very thick, black , domain = .01:7] {gauss(3,.65)};
+    \only<2>{
+    \addplot [very thick, red, domain = .01:7] {gauss(4.5,.65)};
+    }
+  \end{axis}
+\end{tikzpicture}
+\end{adjustbox}
+\end{frame}
+
+
+
+\end{document}
+
+\begin{frame}[t]{}
+\begin{tikzpicture}
+  \begin{axis}[
+    name = axis1, 
+    no markers, domain=0:10, samples=100,
+    axis lines*=left, xlabel=$x$, ylabel=density,
+    every axis y label/.style={at=(current axis.above origin), anchor=south},
+    every axis x label/.style={at=(current axis.right of origin), anchor=west},
+    height=3cm, width=12cm,
+    xtick={4.64, 5.0}, ytick=\empty,
+    xticklabels = {\scriptsize , \scriptsize $\bar{x}$},
+    enlargelimits=false, clip=false, axis on top,
+    grid = major
+    ]
+    \addplot [very thick, red!50!black, domain = .01:10] {gauss(3,.8)};
+    \draw [] (axis cs:2.5, .5) node [above] {\footnotesize 帰無仮説下の分布};
+    \only<1>{\draw [] (axis cs:4.64, .65) node [below] {\scriptsize $p=.05$};}
+    \draw [opacity = 0, yshift=-0.0cm, <-, >=stealth](axis cs:4.8, 0.015) -- (axis cs:2.0, -0.2) 
+      node [xshift = -.5cm, opacity = 0, below right] {\mpage{4cm}{$\alpha$\\ significance level}};
+    \addplot [fill=cyan!20, draw=none, opacity = .8, domain=4.64:10] {gauss(3,.8)} \closedcycle;
+    \addplot [very thick, black , domain = .01:10] {gauss(3,.8)};
+    \only<2>{
+    \addplot [very thick, red, domain = .01:10] {gauss(5,.8)};
+    }
+  \end{axis}
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}[t]{}
+\begin{tikzpicture}
+  \begin{axis}[
+    name = axis2,
+    at={(axis1.below south west)}, yshift = -1.5cm, 
+    no markers, domain=0:10, samples=100,
+    axis lines*=left, xlabel=$x$, ylabel=density,
+    every axis y label/.style={at=(current axis.above origin), anchor=south},
+    every axis x label/.style={at=(current axis.right of origin), anchor=west},
+    height=3cm, width=12cm,
+    xtick={5}, xticklabels = {\scriptsize $\bar{x}$},
+    ytick=\empty,
+    enlargelimits=false, clip=false, axis on top,
+    grid = major
+    ]
+  % 2nd distribution
+    \draw [] (axis cs:2.5, .5) node [above] {\footnotesize 帰無仮説下の分布};
+    \addplot [fill=cyan!20, draw=none, opacity = .8, domain=4.64:10] {gauss(3,.8)} \closedcycle;
+    \addplot [very thick, black , domain = .01:10] {gauss(3,.8)};
+    \addplot [very thick, red, domain = .01:10] {gauss(5,.8)};
+  \end{axis}
+\end{tikzpicture}
+\end{frame}
