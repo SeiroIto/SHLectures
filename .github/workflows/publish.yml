@@ -6,14 +6,11 @@ on:
   # Runs on pushes targeting the default branch except files in paths-ignore
   push:
     branches: ['main']
-    paths-ignore:
-      - 'lec_slides/2024/**'
-      - 'homeworks/2024/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+ # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -61,6 +58,14 @@ jobs:
             any::viridis
             any::WDI
             any::wooldridge
+
+ # deletes the posts directory only in the temporary GitHub Actions runner workspace. If the workflow later fails:
+ # Your committed repository files remain unchanged.
+ # Your local files remain unchanged.
+ # The failed run does not deploy a new Pages artifact.
+ # The temporary runner workspace is discarded automatically.
+       - name: Clean rendered site
+        run: rm -rf posts
 
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
