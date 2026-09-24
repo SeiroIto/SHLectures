@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
- # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -43,7 +43,7 @@ jobs:
       - name: Install R Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages:
+          packages: |
             any::knitr
             any::rmarkdown
             any::kableExtra
@@ -59,12 +59,13 @@ jobs:
             any::WDI
             any::wooldridge
 
- # deletes the posts directory only in the temporary GitHub Actions runner workspace. If the workflow later fails:
- # Your committed repository files remain unchanged.
- # Your local files remain unchanged.
- # The failed run does not deploy a new Pages artifact.
- # The temporary runner workspace is discarded automatically.
-       - name: Clean rendered site
+      # Deletes the posts directory only in the temporary GitHub Actions runner workspace.
+      # If the workflow later fails:
+      #   Committed repository files and local files remain unchanged.
+      #   Your local files remain unchanged.
+      #   A failed run does not deploy a new Pages artifact.
+      #   The temporary runner workspace is discarded automatically.
+      - name: Clean rendered site
         run: rm -rf posts
 
       - name: Render
