@@ -55,10 +55,17 @@ jobs:
             any::ggfittext
             any::ggrepel
             any::patchwork
-            any::qs
             any::viridis
             any::WDI
             any::wooldridge
+            any::remotes
+
+      # install qs from archive
+      # in futrue, use qs2
+      - name: Install archived qs
+        run: |
+          Rscript -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/qs/qs_0.27.3.tar.gz", dependencies = TRUE, upgrade = "never")'
+          Rscript -e 'library(qs); packageVersion("qs")'
 
       # Deletes the posts directory only in the temporary GitHub Actions runner workspace.
       # If the workflow later fails:
