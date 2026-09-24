@@ -55,8 +55,7 @@ include-in-header:
         transform: translateY(-50%), translateX(-50%);
       }
       </style>
-bibliography: c:/seiro/docs/seiro.bib
-#### ../../../seiro.bib
+bibliography: ../../../seiro.bib
 resources:
   - RP01.pdf
 # quarto render RP01.qmd

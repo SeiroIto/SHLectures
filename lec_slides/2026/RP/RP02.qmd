@@ -70,8 +70,7 @@ include-in-header:
         transform: translateY(-50%), translateX(-50%);
       }
       </style>
-bibliography: c:/seiro/docs/seiro.bib
-#### ../../../seiro.bib
+bibliography: ../../../seiro.bib
 resources:
   - RP02.pdf
 # quarto render RP02.qmd
@@ -242,7 +241,7 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 :::::{.columns}
 
 ::::{.column width="50%"}
-```{r, engine = "tikz"}
+```{r, engine = "tikz", eval = F}
 #| out-width: "30%"
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
@@ -322,7 +321,7 @@ AIに殺人を判断させるのは戦争がより身近になってしまうよ
 
 ----
 
-```{r read homicide data, results = "hide"}
+```{r read homicide data, eval = F, results = "hide"}
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
@@ -351,7 +350,7 @@ hdt <- hdt[grepl("Vic", Indicator), ]
 hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
 ```
 年ごとの標本サイズを調べます
-```{r}
+```{r, eval = F}
 table(hdt[, Year])
 ```
 
@@ -360,7 +359,7 @@ table(hdt[, Year])
 :::::{.columns}
 
 ::::{.column width="70%"}
-```{r plot homicide in 2020, width = 800}
+```{r plot homicide in 2020, eval = F, width = 800}
 #### Tabulate num of observations by year: 
 ####   2020 is most recent among large number of obs
 setkey(hdt, Year, VALUE)
@@ -407,7 +406,7 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="font-size: 100%;"}
-```{r read UN homicide data}
+```{r read UN homicide data, eval = F}
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
@@ -442,13 +441,13 @@ hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
 
 年ごとの標本サイズ
 
-```{r}
+```{r, eval = F}
 table(hdt[, Year])
 ```
 
 描画
 
-```{r plot UN homicide in 2020, width = 800}
+```{r plot UN homicide in 2020, eval = F, width = 800}
 #### Tabulate num of observations by year: 
 ####   2020 is most recent among large number of obs
 setkey(hdt, Year, VALUE)
