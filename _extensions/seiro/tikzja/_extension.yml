@@ -1,0 +1,7 @@
+title: TikZ-JA
+author: seiro (fork of dan mackinlay's tikz v0.1.0)
+version: 0.1.0
+quarto-required: ">=1.3.0"
+contributes:
+  filters:
+    - tikzja.lua

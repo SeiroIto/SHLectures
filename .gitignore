@@ -7,7 +7,6 @@
 /**/cache/
 **/*.quarto_ipynb
 /admin/
-/_extensions/
 /_freeze/
 /homeworks/201*/
 /homeworks/2020/
