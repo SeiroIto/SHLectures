@@ -163,12 +163,14 @@ resources:
 ----
 
 ```{r school enrollment, results = "hide", echo = F}
-library(qs)
+library(qs2)
 library(data.table)
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
-SMHGd <- qread("../CommonFiles/HK/SchoolingInfantMortalityGDP.qs")
+##### SMHGd <- qread("../CommonFiles/HK/SchoolingInfantMortalityGDP.qs")
+#### qs_save(SMHGd, "../CommonFiles/HK/SchoolingInfantMortalityGDP.qs2")
+SMHGd <- qs_read("../CommonFiles/HK/SchoolingInfantMortalityGDP.qs2")
 SMHGd[, Latest := max(year, na.rm = T), by = .(country, variable)]
 SMHGdGDP <- SMHGd[grepl("GD", variable), ]
 setnames(SMHGdGDP, "value", "pcGDP")
