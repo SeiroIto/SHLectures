@@ -67,7 +67,7 @@ format:
 winget install --id Microsoft.PowerShell -e
 ```
 
-![PowerShell 7 のインストール手順ページ。MSI パッケージのリンクから入れます](setup_shots/pwsh_install.png){width=85%}
+![PowerShell 7 のインストール手順ページ。MSI パッケージのリンクから入れます](../CommonFiles/setup_shots/pwsh_install.png){width=85%}
 
 
 ## コマンドプロンプト
@@ -85,7 +85,7 @@ winget install --id Microsoft.PowerShell -e
 
 * multiple window (single windowではない)を選ぶことをお薦めします
 
-![CRAN の Windows 版ページ。上端のリンク1つだけ押します](setup_shots/cran_windows.png){width=85%}
+![CRAN の Windows 版ページ。上端のリンク1つだけ押します](../CommonFiles/setup_shots/cran_windows.png){width=85%}
 
 起動は、スタートメニューの「**R x64 4.x.x**」です。黒い窓ではなく、
 `R Console` という白い窓が出ます。これが R GUI です。
@@ -106,7 +106,7 @@ install.packages(c("quarto", "rmarkdown", "knitr", "ggplot2"))
 <https://quarto.org/docs/download/> を開き、**Download Quarto CLI** を押します。
 落ちてきた `.msi` を実行し、すべて既定のまま進みます。
 
-![Quarto のダウンロードページ。青いボタン、または表の Windows 行の .msi](setup_shots/quarto_download.png){width=85%}
+![Quarto のダウンロードページ。青いボタン、または表の Windows 行の .msi](../CommonFiles/setup_shots/quarto_download.png){width=85%}
 
 入ったか確かめます。ターミナルに貼って Enter。
 
@@ -171,7 +171,7 @@ tab
 **portable x64 (zip)** を落とします。zip を好きなフォルダに展開するだけで、
 インストールは不要です。
 
-![Notepad++ のダウンロードページ。最新版を選び、portable zip を落とします](setup_shots/nppp_downloads.png){width=85%}
+![Notepad++ のダウンロードページ。最新版を選び、portable zip を落とします](../CommonFiles/setup_shots/nppp_downloads.png){width=85%}
 
 日本語表示は `Settings` → `Preferences` → `General` → `Localization` → `日本語`。
 
@@ -193,7 +193,7 @@ tab
 4. 「セット追加」を押し、セット名に `R` と入れる
 5. 「インポート」を押し、保存した `R3.kwd` を選ぶ
 
-![R3.kwd の配布ページ](setup_shots/sakura_r_kwd.png){width=85%}
+![R3.kwd の配布ページ](../CommonFiles/setup_shots/sakura_r_kwd.png){width=85%}
 
 **Markdown**
 
@@ -203,7 +203,7 @@ tab
    「正規表現キーワードを使用する」に印 → 「インポート」で `markdown2.rkw`
 4. 同じ画面の「カラー」タブ → 「インポート」で `Markdown2.col`
 
-![サクラエディタ用 Markdown 設定の配布ページ](setup_shots/sakura_markdown.png){width=85%}
+![サクラエディタ用 Markdown 設定の配布ページ](../CommonFiles/setup_shots/sakura_markdown.png){width=85%}
 
 **`.qmd` を markdown 扱いにする**
 
@@ -219,7 +219,7 @@ tab
 2. Notepad++ → 言語 → ユーザー定義言語 → 定義をインポート
 3. 保存した xml を選び、Notepad++ を再起動する
 
-![Notepad++ の定義ファイル一覧。R language の行](setup_shots/nppp_udl_list.png){width=85%}
+![Notepad++ の定義ファイル一覧。R language の行](../CommonFiles/setup_shots/nppp_udl_list.png){width=85%}
 
 **Markdown**
 
@@ -270,7 +270,7 @@ Add-Content $PROFILE 'Set-PSReadLineOption -PredictionSource History -Prediction
 winget install --id chrisant996.Clink -e
 ```
 
-![clink の Releases ページ。Assets の中の setup.exe を落とします](setup_shots/clink_releases.png){width=85%}
+![clink の Releases ページ。Assets の中の setup.exe を落とします](../CommonFiles/setup_shots/clink_releases.png){width=85%}
 
 入れたあとは `F7` で一覧表示設定(1セッション限り)
 
@@ -303,22 +303,22 @@ quarto render bunsho.qmd
 
 ## 作例1: 本文・Rコード・図
 
-[作例1を開く](examples/example_basic.html) ・
-[qmd を見る](examples/example_basic.qmd)
+[作例1を開く](../CommonFiles/examples/example_basic.html) ・
+[qmd を見る](../CommonFiles/examples/example_basic.qmd)
 
 ```{r}
 #| results: asis
-cat("`````markdown", readLines("examples/example_basic.qmd"), "`````", sep = "\n")
+cat("`````markdown", readLines("../CommonFiles/examples/example_basic.qmd"), "`````", sep = "\n")
 ```
 
 ## 作例2: Tufte 風(傍注レイアウト)
 
 本文は作例1と同じで、ヘッダだけが違います。
 
-[作例2を開く](examples/example_tufte.html) ・
-[qmd を見る](examples/example_tufte.qmd)
+[作例2を開く](../CommonFiles/examples/example_tufte.html) ・
+[qmd を見る](../CommonFiles/examples/example_tufte.qmd)
 
 ```{r}
 #| results: asis
-cat("`````markdown", readLines("examples/example_tufte.qmd"), "`````", sep = "\n")
+cat("`````markdown", readLines("../CommonFiles/examples/example_tufte.qmd"), "`````", sep = "\n")
 ```
