@@ -2245,7 +2245,7 @@ Peter Singer、倫理学者、哲学者 [https://petersinger.info/projects](http
 
 :::: {.column width="20%"}
 
-![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PeterSinger.jpg){.lightbox width=60%}
+![](../CommonFiles/1/PeterSinger.jpg){.lightbox width=60%}
 
 ::: {style="font-size: 30%;"}
 Photo by Alletta Vaandering  
@@ -2295,10 +2295,10 @@ Denis Mukwege、婦人科医、ノーベル平和賞受賞者
 
 :::: {.column width="40%"}
 
-![](c:/seiro/docs/external/seishin/lec_slides/2024/1/DenisMukwege.jpg)
+![](../CommonFiles/1/DenisMukwege.jpg)
 
 ::: {style="font-size: 30%;"}
-Photo by MONUSCO CC BY-SA 2.0 ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/cc-by-sa_nobackground.jpg){.lightbox width=10%}
+Photo by MONUSCO CC BY-SA 2.0 ![](../CommonFiles/1/cc-by-sa_nobackground.jpg){.lightbox width=10%}
 :::
 
 ::::
@@ -2335,8 +2335,8 @@ John Rawls、政治哲学者
 
 :::: {.column width="20%"}
 
-![](c:/seiro/docs/external/seishin/lec_slides/2024/1/JohnRawls.jpg){.lightbox width=20%} <span style="font-size: 30%;">
-Photo by Alec Rawls ![](c:/seiro/docs/external/seishin/lec_slides/2024/1/PublicDomain.jpg){.lightbox width=10%} </span>
+![](../CommonFiles/1/JohnRawls.jpg){.lightbox width=20%} <span style="font-size: 30%;">
+Photo by Alec Rawls ![](../CommonFiles/1/PublicDomain.jpg){.lightbox width=10%} </span>
 
 
 ::::
@@ -2518,7 +2518,7 @@ a teacher/director of Juilliard Jazz Studies program
 
 :::: {.column width="60%"}
 ```{r, echo=FALSE, fig.align='center', out.width='92.5%', fig.show='animate'}
-knitr::include_graphics("c:/seiro/docs/external/seishin/lec_slides/2024/1/ChinaClamSchoolFeeControl_Nikkei20201Sep07.jpg")
+knitr::include_graphics("../CommonFiles/1/ChinaClamSchoolFeeControl_Nikkei20201Sep07.jpg")
 ```
 ::::
 
@@ -3223,9 +3223,9 @@ ggsave(
 
 ::: {#fig-pcincome layout-ncol=2}
 
-![自然数目盛](c:/seiro/docs/external/seishin/lec_slides/2024/1/pcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome1}
+![自然数目盛](../CommonFiles/1/pcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome1}
 
-![対数目盛](c:/seiro/docs/external/seishin/lec_slides/2024/1/LogpcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome2}
+![対数目盛](../CommonFiles/1/LogpcPPPGDP1990-2020.jpg){.fragment .lightbox #fig-pcincome2}
 
 Source: World Bank [https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)
 :::
