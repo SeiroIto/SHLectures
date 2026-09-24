@@ -35,7 +35,7 @@ format:
     includes:
       in_header: ../../assets/style/sky_add_FilePointer.html
       after-body: ../../assets/style/toc-add.html
-    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+    toc-bg-image: "../../assets/GrootbergGiraffe3.jpg"
     css:
       - ../../assets/style/seiro.css
 #### Looks like seiro.css in sky_add_FilePointer.html does not work but local ../../assets/style/seiro.css works

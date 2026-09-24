@@ -33,7 +33,7 @@ format:
     template-partials: 
       - ../../assets/style/toc-slide.html
     include-after-body: ../../assets/style/toc-add.html
-    toc-bg-image: "../../GrootbergGiraffe3.jpg"
+    toc-bg-image: "../../assets/GrootbergGiraffe3.jpg"
 filters:
   - parse-latex
   - ../../_extensions/seiro/tikzja/tikzja.lua
