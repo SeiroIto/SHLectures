@@ -20,7 +20,6 @@ format:
 ---
 
 上から順に実施してください。使う道具は4つで、互いに独立しています。
-
 | 道具 | 役割 |
 |---|---|
 | R | 計算と作図 |
@@ -47,7 +46,9 @@ format:
 
 貼り付けは右クリックです。
 
-# ターミナルのインストレーション
+# インストレーション
+
+## ターミナル
 
 一度打ったコマンドを一覧から選べます。PowerShell と コマンドプロンプトで
 やり方が違うので、使う方だけ読んでください。
@@ -58,7 +59,7 @@ format:
 | 履歴を一覧から選ぶ | ↑↓ で選べる一覧。既定は切、下の1行で入 | `F7` または `Ctrl+Alt+↑` |
 | 履歴を検索 | `Ctrl+R` | `Ctrl+R` |
 
-## PowerShell 7
+### PowerShell 7
 
 [入手先](https://learn.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows)。
 ターミナルに貼り付けても入ります。
@@ -70,14 +71,14 @@ winget install --id Microsoft.PowerShell -e
 ![PowerShell 7 のインストール手順ページ。MSI パッケージのリンクから入れます](../CommonFiles/setup_shots/pwsh_install.png){width=85%}
 
 
-## コマンドプロンプト
+### コマンドプロンプト
 
 
 履歴の一覧が出ます。
 
-# Rのインストレーション
+## R
 
-## バイナリ(実行ファイル)
+### バイナリ(実行ファイル)
 
 <https://cran.r-project.org/bin/windows/base/> を開き、いちばん上の
 **Download R-x.x.x for Windows** を押します。落ちてきた `.exe` を実行し、
@@ -90,7 +91,7 @@ winget install --id Microsoft.PowerShell -e
 起動は、スタートメニューの「**R x64 4.x.x**」です。黒い窓ではなく、
 `R Console` という白い窓が出ます。これが R GUI です。
 
-## ライブラリ
+### ライブラリ
 
 R GUI の `R Console` 窓に、次の1行を貼って Enter。数分かかります。
 
@@ -100,8 +101,22 @@ install.packages(c("quarto", "rmarkdown", "knitr", "ggplot2"))
 
 途中でミラーサイトを聞かれたら `Japan` のどれかを選びます。
 
+### Pandoc
 
-# Quartoのインストレーション
+rmarkdown は変換に Pandoc を使います。
+入っているか確かめます。
+
+```r
+rmarkdown::pandoc_available()
+```
+
+`FALSE` なら <https://pandoc.org/installing.html> から Windows 用の `.msi`
+を入れ、R を開き直します。`TRUE` なら次へ。
+
+
+## Quarto
+
+### 実行ファイル
 
 <https://quarto.org/docs/download/> を開き、**Download Quarto CLI** を押します。
 落ちてきた `.msi` を実行し、すべて既定のまま進みます。
@@ -114,7 +129,11 @@ install.packages(c("quarto", "rmarkdown", "knitr", "ggplot2"))
 quarto check
 ```
 
-# テキスト・エディタのインストレーション
+### Pandoc
+
+Quarto には Pandoc が同梱されています。Quarto のために別途入れる必要はありません。
+
+## テキスト・エディタ
 
 どちらか1つで足ります。両方入れる必要はありません。
 
@@ -158,14 +177,14 @@ tab
 
 @tbl-editors のどちらを選んでも、この先の手順は実質的に同じです。
 
-## サクラエディタ
+### サクラエディタ
 
 <https://sakura-editor.github.io/> の「インストーラ、パッケージダウンロード」から
 落として実行します。画面は日本語です。
 
-![サクラエディタ公式サイト。最新版ダウンロードから入ります](setup_shots/sakura_top.png){width=85%}
+![サクラエディタ公式サイト。最新版ダウンロードから入ります](../CommonFiles/setup_shots/sakura_top.png){width=85%}
 
-## Notepad++ ポータブル版
+### Notepad++ ポータブル版
 
 <https://notepad-plus-plus.org/downloads/> の最新版を開き、
 **portable x64 (zip)** を落とします。zip を好きなフォルダに展開するだけで、
@@ -197,13 +216,17 @@ tab
 
 **Markdown**
 
-1. <http://sakura.qp.land.to/?Customize%2F%C5%EA%B9%C6%2F77> を開く
-2. `markdown2.rkw` と `Markdown2.col` を保存する
-3. 設定 → タイプ別設定 → 「正規表現キーワード」タブ →
-   「正規表現キーワードを使用する」に印 → 「インポート」で `markdown2.rkw`
-4. 同じ画面の「カラー」タブ → 「インポート」で `Markdown2.col`
+[解説記事](https://keitetsu.blogspot.com/2021/03/markdown.html)の手順です。
 
-![サクラエディタ用 Markdown 設定の配布ページ](../CommonFiles/setup_shots/sakura_markdown.png){width=85%}
+1. <https://github.com/KeitetsuWorks/Sakura_Monokai> を開き、`Code` →
+   `Download ZIP` で保存して展開する
+2. サクラエディタ → 設定 → タイプ別設定一覧 → 「インポート」
+3. 展開したフォルダの `markdown_monokai/markdown_monokai.ini` を選ぶ
+   (バージョンの確認が出たら「OK」)
+4. 「インポート確認」で「読込先:」を「新規追加」にして「OK」
+5. 「ファイルをインポートしました。」と出れば完了。一覧に Markdown (md) が加わります
+
+![Markdown 設定の配布ページ。`Code` → `Download ZIP`](../CommonFiles/setup_shots/sakura_markdown.png){width=85%}
 
 **`.qmd` を markdown 扱いにする**
 
@@ -230,6 +253,20 @@ tab
 **`.qmd` を markdown 扱いにする**
 
 設定 → スタイル設定 → 左下の「ユーザー定義拡張子」に `qmd` を足す。
+
+### 設定が効いたかの確認
+
+設定後のエディタで `.qmd` と R ファイルを開くと、次のように色が付きます。
+
+::: {layout-ncol=2}
+![Notepad++: `.qmd`](../CommonFiles/setup_shots/editor_npp_qmd.png)
+
+![Notepad++: R ファイル](../CommonFiles/setup_shots/editor_npp_r.png)
+
+![サクラエディタ: `.qmd`(R のキーワードに色)](../CommonFiles/setup_shots/editor_sakura_qmd.png)
+
+![サクラエディタ: R ファイル](../CommonFiles/setup_shots/editor_sakura_r.png)
+:::
 
 ### reveal.js について
 
@@ -277,11 +314,13 @@ winget install --id chrisant996.Clink -e
 ## R の設定
 
 
-# quartoの実行方法
+# 実行方法
+
+## quarto
 
 `bunsho.qmd` を作業フォルダに置いた状態で、どちらかを実行します。
 
-## R GUI から
+### R GUI から
 
 `R Console` 窓に貼ります。
 
@@ -290,7 +329,7 @@ setwd("C:/Users/自分の名前/Documents/quarto")
 quarto::quarto_render("bunsho.qmd")
 ```
 
-## ターミナルから
+### ターミナルから
 
 ```
 cd C:\Users\自分の名前\Documents\quarto
@@ -298,6 +337,54 @@ quarto render bunsho.qmd
 ```
 
 同じフォルダに `bunsho.html` ができます。ダブルクリックで開きます。
+
+## RMarkdown (.Rmd) と litedown (.md)
+
+Quarto を使わず、R だけで `.Rmd` や `.md` を html にする方法です。
+どちらも `R Console` 窓に貼って実行します。
+
+| ファイル | パッケージ | 関数 | Pandoc |
+|---|---|---|---|
+| `.Rmd` | rmarkdown | `rmarkdown::render()` | 必要 |
+| `.Rmd` | litedown | `litedown::fuse()` | 不要 |
+| `.md` | litedown | `litedown::mark()` | 不要 |
+
+### RMarkdown (.Rmd)
+
+Quarto を入れていれば、Pandoc も一緒に入っています。ただし rmarkdown は
+それを自動では見つけません。`rmarkdown::pandoc_available()` が `FALSE` のときは、
+Pandoc を別に入れる代わりに、次の1行で Quarto の Pandoc を使わせることができます
+(R を開くたびに1回)。
+
+```r
+Sys.setenv(RSTUDIO_PANDOC = dirname(list.files(file.path(dirname(quarto::quarto_path()), "tools"), pattern = "^pandoc(\\.exe)?$", recursive = TRUE, full.names = TRUE)[1]))
+rmarkdown::pandoc_available()
+```
+
+`TRUE` と出れば準備完了です。
+
+```r
+setwd("C:/Users/自分の名前/Documents/quarto")
+rmarkdown::render("bunsho.Rmd")
+```
+
+### litedown (.Rmd / .md)
+
+litedown は Pandoc なしで動きます。最初に1回だけ入れます。
+
+```r
+install.packages("litedown")
+```
+
+R コードを含む `.Rmd` は `fuse()`、R コードのない `.md` は `mark()` です。
+
+```r
+setwd("C:/Users/自分の名前/Documents/quarto")
+litedown::fuse("bunsho.Rmd")
+litedown::mark("memo.md")
+```
+
+どの方法でも、同じフォルダに同じ名前の `.html` (`bunsho.html`、`memo.html`) ができます。
 
 # 例
 

@@ -1,63 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="../github-markdown.css">
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-body {
-  display: flex;
-  margin: 0;
-}
-nav#TOC {
-  position: sticky;
-  top: 0;
-  align-self: flex-start;
-  width: 220px;
-  min-width: 220px;
-  height: 100vh;
-  overflow-y: auto;
-  padding: 20px 12px;
-  border-right: 1px solid #d0d7de;
-  background: #f6f8fa;
-  font-size: 13px;
-  line-height: 1.4;
-}
-nav#TOC ul {
-  list-style: none;
-  padding-left: 12px;
-  margin: 0;
-}
-nav#TOC > ul {
-  padding-left: 0;
-}
-nav#TOC a {
-  color: #1F2328;
-  text-decoration: none;
-  display: block;
-  padding: 3px 0;
-}
-nav#TOC a:hover {
-  color: #0969da;
-}
-.markdown-body {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 45px;
-  flex: 1;
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Transcript_yagi4tou</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
 </head>
 <body>
-<article class="markdown-body">
 <p>(00:00)</p>
 <p>A:
 あの、もし私がですよ、極度の貧困状態にある人に、ええとヤギを4頭無料でプレゼントするとしますよね。</p>
 <p>B: はい。</p>
-<p>A:
-そしたら、3年後には、なんと何も支援しなかった場合よりもさらに貧困になってしまうって言ったらこれ信じられますか？</p>
+<p>A: そしたら、3年後には、<span
+style="background:red;">なんと何も支援しなかった場合よりもさらに貧困になってしまう</span>って言ったらこれ信じられますか？</p>
 <p>B: いやー、直感的には信じがたいですよね。</p>
 <p>A:
 ですよね。普通に考えたら、いやいや、資産をもらったんだから豊かになるはずでしょって思うじゃないですか。</p>
@@ -73,13 +190,15 @@ nav#TOC a:hover {
 <p>B:
 今日はですね、実際のデータに基づきながら、そのメカニズムを解き明かしていければと思っています。</p>
 <p>A:
-はい、で、今回の深掘りのミッションなんですけど、2018年に発表された画期的な論文で、ええと「極度の貧困層の持続可能な収入を構築するための多角的プログラムの紐解き」というものを情報源として使っていきます。</p>
-<p>B: はい、有名な論文ですね。</p>
+はい、で、今回の深掘りのミッションなんですけど、2018年に発表された<span
+style="background:pink;">画期的な論文</span>で、ええと「極度の貧困層の持続可能な収入を構築するための多角的プログラムの紐解き」というものを情報源として使っていきます。</p>
+<p>B: はい、<span style="background:pink;">有名な論文</span>ですね。</p>
 <p>A:
 ええ。アビジット・バナジーとかディーン・カーランといったもう開発経済学のトップランナーたちの研究ですね。</p>
-<p>B: そうですね、ノーベル賞受賞者も関わっているレベルの。</p>
-<p>A:
-はい。で、舞台はアフリカのガーナなんです。この研究では、すでに圧倒的な効果が実証されている「GUP（超貧困からの卒業）」って呼ばれる複合的なプログラムがあるんですが、</p>
+<p>B: そうですね、<span
+style="background:pink;">ノーベル賞受賞者も関わっている</span>レベルの。</p>
+<p>A: はい。で、舞台はアフリカのガーナなんです。この研究では、<span
+style="background:pink;">すでに圧倒的な効果が実証されている</span>「GUP（超貧困からの卒業）」って呼ばれる複合的なプログラムがあるんですが、</p>
 <p>B: ええ、GUPですね。</p>
 <p>A:
 はい。それがなぜ機能するのかを解明しているんです。そしてこれ、パズルみたいで本当に面白いんですけど。</p>
@@ -257,8 +376,8 @@ GUP参加者の71%が選んだ、現地で最も人気のある資産セット�
 <p>B: はい。</p>
 <p>A:
 もらったヤギを繁殖させて増やせないどころか、元々細々と飼っていた牛や鶏の数まで減らしてしまっていたっていう。これ本当に衝撃的です。</p>
-<p>B:
-そうなんですよ。資産を無料で与えられたことでかえって全体的な家畜の価値を下げてしまったという、完全に直感に反するショッキングな結果でした。</p>
+<p>B: そうなんですよ。<span
+style="background:red;">資産を無料で与えられたことでかえって全体的な家畜の価値を下げてしまったという、完全に直感に反するショッキングな結果</span>でした。</p>
 <p>A:
 これ、また私なりの例えで言わせてもらうとあの、分厚いマニュアルも、日々のメンテナンス費用も持っていない素人に、突然複雑な産業用機械をプレゼントするようなものですよね。</p>
 <p>B: ああ、なるほど。</p>
@@ -360,7 +479,8 @@ GUPによってもたらされた長期的な収入増加の最大の要因は�
 ええ。貧困というものは、単に財布の中にお金がない状態ではなくて、選択肢とリスクを取る余裕が完全に奪われた状態そのものなんです。</p>
 <p>B: 状態、ですか。</p>
 <p>A:
-はい。そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だったということが、この研究から導き出された最も重要な結論なんですよ。</p>
+はい。そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<span
+style="background:red;">資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</span>ということが、この研究から導き出された最も重要な結論なんですよ。</p>
 <p>B:
 いやー、魔法の杖はなかったけれど、正しい組み合わせのレシピは確かに存在したということですね。</p>
 <p>A:
@@ -396,6 +516,5 @@ GUPによってもたらされた長期的な収入増加の最大の要因は�
 あなたはどう思いますか？ぜひこの問いを頭の片隅に置いて、これからのテクノロジーの進化や、あなた自身の周りにあるサポートのあり方を見つめ直してみてください。今日も一緒に深掘りにお付き合いいただき、ありがとうございました。</p>
 <p>B: ありがとうございました。</p>
 <p>A: また次回お会いしましょう。</p>
-</article>
 </body>
 </html>

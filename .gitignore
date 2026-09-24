@@ -1,6 +1,7 @@
 #### This is gitignore for Seishin
 /.quarto/
 /.claude/
+/CLAUDE*
 /**/*.mp4
 /**/*.sqlite
 /**/*.zip

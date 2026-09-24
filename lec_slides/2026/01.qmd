@@ -62,6 +62,7 @@ resources:
 
 * 低所得国で貧困を生むメカニズムを知ること。Know the mechanism that generates poverty in low income countries.  
 * 身の回りの社会経済課題についての論理的・経済学的思考方法に習熟すること。Be familiar with logical and economic thinking on socioeconomic issues around us.  
+* AIを倫理的に活用する方法を知ること。Know how to use AI ethically.
 * 因果関係の推論方法を知ること。Know how to infer causal relationships.  
 * データ視覚化の方法を知ること。Know how to visualise data.  
 * 開発ミクロ経済学の入門的知識を得ること。Get an accessible introduction to development microeconomics.  
@@ -111,6 +112,116 @@ resources:
 	* こういう理解で良いかという確認
 	* 参考文献照会
 	* その他疑問など
+
+----
+
+::: {style="text-align: center;"}
+オンライン講義(変更の可能性あり)
+
+* 11月20日(金)
+* 11月27日(金)
+
+Google classroomのMeetで実施します
+
+:::
+
+----
+
+## クラウドやプログラムの利用
+
+
+クラウド
+
+講義資料は[伊藤のサイトhttps://github.com/SeiroIto/SHLectures/2026](https://github.com/SeiroIto/SHLectures/2026)で共有します  
+
+. . .
+
+受講者はGithub(ファイルのバックアップ、版管理、協業、共有のクラウド・サービス)を使って自分のファイルを管理してほしいと思います  
+
+. . . 
+
+そのために、次回までに以下の作業を自分のPCで実施してください  
+
+1. 自分のアカウントをGithubで作成(無料プランを選ぶ)  
+1. Githubでレポジトリ(ファイルを管理するフォルダ)を1つ作成する  
+   * [参照](https://qiita.com/TakuroKawakami/items/5d3a08bafb156e16491e)  
+1. Gitのプログラムをダウンロードしてインストール、プログラムに作成したGithubアカウントのレポジトリを登録する  
+   * [参照](https://www.sejuku.net/blog/73444?utm_source=blog&utm_medium=blog&utm_campaign=blog_Normal_73468)  
+
+----
+
+プログラム
+
+使途: 
+
+1. Rというプログラムを使ってデータ視覚化、簡単な統計分析をする
+1. rmarkdown, litedownというRのライブラリ(もしくは[quarto](https://quarto.org/))を使い、Rのプログラム計算(コード+結果)を含む文書(html, pdf, docxなど)を作成する
+
+* [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdown/litedownのための道具として考えてください  
+    * Rは統計計算や描画で最も使われているプログラムです
+* rmarkdown/litedownはmarkdownという文法で各種ファイルを作成するライブラリです  
+* [markdown](https://ja.wikipedia.org/wiki/Markdown)文法は[とても](https://www.tohoho-web.com/ex/markdown.html)、[簡単](https://www.markdownguide.org/basic-syntax/)で、多くの人が使っています
+    * [オンライン](https://markdown.org/tools/editors/markdown/)・[ツール](https://markdownlivepreview.com/)を使って試せます
+    * [dillinger.io](https://dillinger.io/)ではpdfで出力もできます 
+
+----
+
+プログラム
+
+使途: 
+
+* quartoのインストレーションは[ここ(Mac, Win)](https://kazuyanagimoto.com/course-kobe-firstyear-2026/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)や[ここ(Mac)](https://kumaroot.readthedocs.io/ja/latest/quarto/quarto-install.html)が分かりやすいです
+    * インストール後、ターミナルで`quarto render bunsho.qmd`と打ち込んで動かします
+    * `bunsho.qmd`を書くためにテキスト・エディタを使います
+    * `bunsho.qmd`はヘッダ部分(YAML header)と本文(main text)から成ります
+    * YAMLヘッダに`format: html`, `format: pdf`, `format: docx`と書いて出力形式を選びます(1ファイルで複数の出力形式も指定できます)
+    * [Windows用インストール・設定ガイド](https://seiroito.github.io/SHLectures/lec_slides/2026/QuartoSetupWindows.html)(画面写真つき、作例2本)
+    * [Mac用インストール・設定ガイド](https://seiroito.github.io/SHLectures/lec_slides/2026/QuartoSetupMac.html)(画面写真つき、作例2本)
+
+
+----
+
+プログラム
+
+::: {.fragment}
+AIに任せるのが最も容易です
+:::
+
+* Rのインストレーション、実行を許可して文書を作らせる
+* Gitのインストレーション、実行を許可してGithubを利用する
+
+::: {.fragment}
+独創的な製品を作らない限り、コードを書く能力はすでに不要
+
+* 「AIを使ってプログラムを動かす技量」を蓄えてください
+:::
+
+::: {.fragment}
+token数に余裕のある有料版AI(Claude, codex(chatGPT)など)を使うことをお薦めします
+:::
+
+----
+
+
+. . .
+
+hw01: 以下の作業を自分のPCで実施してください  
+
+1. Githubでアカウントを作成する
+1. Rをインストールする  
+   * 参照: [1. (windows)](https://syunsuke.github.io/r_install_guide_for_beginners/03_installation_of_R.html)、[2. (windows)](https://multivariate-statistics.com/2022/10/21/r-programming-install/)、[3. (mac)](https://bigdata-analytics.jp/install-tools/install_r_for_mac/)  
+1. Rでrmarkdown/litedownライブラリ、もしくは、quartoをインストールする  
+   * [ライブラリ参照](https://seiroito.github.io/SHLectures/InstallPackagesInR.html)  
+1. エディタなどを使って以下のいずれかのmarkdown形式のファイルを作成し、htmlを作成する
+   * rmd: rmarkdown
+   * qmd: quarto
+   * md: litedown
+
+提出期限
+: 9月30日(水)23:59
+
+提出先
+: google classroom
 
 ::: {style="text-align: center;"}
 # AI利用について
@@ -294,7 +405,7 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 * 通常のMFは全く駄目と断定
 * 大型家畜移転+トレーニング+現金補助こそがsilver bullet
 * 貧困の罠を克服するための高額な介入をスケールアップすることの可否ばかりを論じる(podcastも)
-* 影響力のある研究者の特定論文[@BanerjeeKarlanetal2022]の主張
+* 影響力のある研究者たちの特定論文[@BanerjeeKarlanetal2022]の主張
 ::::
 ::::: 
 
@@ -314,23 +425,16 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 
 ## AI利用の考え方と方法
 
-### 間違い予防: 
+### 間違い予防 
 
 * Hallucination対策: 要約作業での偏り・誤り
-
-:::: {style="font-size: 100%;" .fragment fragment-index=1}
-
-::: {.nonincremental}
 * RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
-:::
 
-::::
-
-:::: {style="font-size: 50%;" .fragment fragment-index=2}
+:::: {style="font-size: 50%;" .fragment}
 > microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=3}
+:::: {style="font-size: 50%;" .fragment}
 <Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](../CommonFiles/1/ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](../CommonFiles/1/Transcript_yagi4tou.html)
 
 > (00:00)「あの、もし私がですよ、極度の貧困状態にある人にヤギを4頭無料でプレゼントするとしますよね」「はい」「そしたら、3年後には、なんと<Red>何も支援しなかった場合よりもさらに貧困になってしまう</Red>と言ったら、これ信じられますか」「いやあ、直感的には信じがたいですよね」「ですよね...今日私たちが深掘りしていくのは、まさにこの直感を根底から崩す、非常に興味深い、そしてちょっと考えさせられるテーマなんです」
@@ -342,8 +446,8 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 > (18:50) The households that received just the goats actually saw <Red>their overall wealth decrease compared to the control group.</Red>
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=4}
-Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。家畜の合計価値は不変。
+:::: {style="font-size: 70%;" .fragment}
+Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。<Blue>家畜の合計価値は不変。</Blue>
 ::::
 
 ----
@@ -352,35 +456,34 @@ Hallucination: 誤解。全種類の支援を受けたアームと比較する�
 
 ### 間違い予防
 
-* Hallucination対策: 要約作業での偏り・誤り
-
-:::: {style="font-size: 50%;" .fragment fragment-index=1}
-
-::: {style="font-size: 100%;"}
+:::: {.fragment fragment-index=1}
 ::: {.nonincremental}
+* Hallucination対策: 要約作業での偏り・誤り
 * RAG (retrieval-augmented generation)で情報源を固定(source-grounded)しても、[やはりhallucinateする](https://www.youtube.com/watch?v=tmf8Ew9Z87Q)([13%](https://arxiv.org/html/2509.25498v1))
 :::
-:::
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=2}
 
 > microfinance貧困削減プログラムの各要素が持つメカニズムを学術的に深く掘り下げてください。下記に特に焦点があると尚良い 1. 融資額サイズ、資産移転、最貧困層 2. 金融論で融資額サイズについて論じていれば各論文の参考文献から探してください 3. poverty trapの実証研究
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=2}
+:::: {style="font-size: 50%;" .fragment fragment-index=3}
 <Red>[ヤギを4頭あげるともっと貧しくなる理由.m4a](ヤギを4頭あげるともっと貧しくなる理由.m4a)</Red> [(台本)](../CommonFiles/1/Transcript_yagi4tou.html)
 
 > (14:00) そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<Red>資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</Red>ということが、この研究から導き出された最も重要な結論なんですよ。
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=3}
-* 過度の一般化: 組み合わせると上手くいく事例、資産+現金給付、資産+ノウハウでも上手くいく可能性あり、現金給付=セーフティネットではなく経常投入費支援かも&rarr;「特効薬は存在しませんでした」「三位一体の多角的アプローチが...不可欠だった」
-::::
-
 :::: {style="font-size: 50%;" .fragment fragment-index=4}
-> (15:33) 「バンドウィドス・タックスという言葉を聞いたことがあるかもしれません」「おびいきはば(帯域幅?)への課税ですか」「人は明日のご飯をどうしようという強烈な不安に直面しているとき、脳の認知的余裕、つまり、おびいきはばの殆どをその短期的な問題に奪われてしまうのです」「あー」「長期的な計画を立てたり、新しいスキルを学んだりする余裕が完全にゼロになってしまうのです」「分かります、私も仕事でもう極限まで追い詰められている時は、1年後のキャリアプランなんて絶対に考えられませんもん。」
+* 過度の一般化: 組み合わせると上手くいく事例、<Blue>資産+現金給付、資産+ノウハウでも上手くいく可能性あり、</Blue>現金給付=セーフティネットではなく経常投入費支援かも&rarr;「特効薬は存在しませんでした」「三位一体の多角的アプローチが...不可欠だった」
 ::::
 
 :::: {style="font-size: 50%;" .fragment fragment-index=5}
-* Hallucination: 「介入&rArr;cognition&uarr;」という結果は出なかったのに、現金補助を組み合わせて効果が高くなったことを説明するために「scarcity&uarr;&rArr;cognition&darr;」で説明
+> (15:33) 「バンドウィドス・タックスという言葉を聞いたことがあるかもしれません」「おびいきはば(帯域幅?)への課税ですか」「人は明日のご飯をどうしようという強烈な不安に直面しているとき、脳の認知的余裕、つまり、おびいきはばの殆どをその短期的な問題に奪われてしまうのです」「あー」「長期的な計画を立てたり、新しいスキルを学んだりする余裕が完全にゼロになってしまうのです」「分かります、私も仕事でもう極限まで追い詰められている時は、1年後のキャリアプランなんて絶対に考えられませんもん。」
+::::
+
+:::: {style="font-size: 50%;" .fragment fragment-index=6}
+* Hallucination: <Blue>「介入&rArr;cognition&uarr;」という結果は出なかった</Blue>のに、現金補助を組み合わせて効果が高くなったことを説明するために「scarcity&uarr;&rArr;cognition&darr;」で説明
 ::::
 
 
@@ -1332,6 +1435,7 @@ p_fig1 + p_fig2_nat + p_fig_new + plot_layout(nrow = 1)
 ```
 
 * Fast growers: 1990年代から成長率が高まる&rarr;キャッチアップ?
+
 ----
 
 
@@ -1860,7 +1964,7 @@ p_gni2
 ```{r}
 #| fig-width: 5.4
 #| fig-height: 4.8
-p_sc
+p_traj_gni
 ```
 ::::
 
@@ -1868,7 +1972,7 @@ p_sc
 * GDP = gross domestic product 国内(自国人+外国人)で計上される付加価値
 * GNI = gross national income 国内に留まる付加価値
 <!-- * 多国籍企業が本社機能と知的財産をアイルランドに移し利益を本国に送金 -->
-* 国外流出分を計上する: 
+* 国外流出分を含める: 
 
     ⭕国内総生産 (G<span style="text-decoration: underline;">D</span>P)
     
@@ -2080,101 +2184,6 @@ Data cleaning
 
 ----
 
-## クラウドやプログラムの利用
-
-
-クラウド
-
-講義資料は[伊藤のサイトhttps://github.com/SeiroIto/SHLectures/2026](https://github.com/SeiroIto/SHLectures/2026)で共有します  
-
-. . .
-
-受講者はGithub(ファイルのバックアップ、版管理、協業、共有のクラウド・サービス)を使って自分のファイルを管理してほしいと思います  
-
-. . . 
-
-そのために、次回までに以下の作業を自分のPCで実施してください  
-
-1. 自分のアカウントをGithubで作成(無料プランを選ぶ)  
-1. Githubでレポジトリ(ファイルを管理するフォルダ)を1つ作成する  
-   * [参照](https://qiita.com/TakuroKawakami/items/5d3a08bafb156e16491e)  
-1. Gitのプログラムをダウンロードしてインストール、プログラムに作成したGithubアカウントのレポジトリを登録する  
-   * [参照](https://www.sejuku.net/blog/73444?utm_source=blog&utm_medium=blog&utm_campaign=blog_Normal_73468)  
-
-----
-
-プログラム
-
-使途: 
-
-1. Rというプログラムを使ってデータ視覚化、簡単な統計分析をする
-1. rmarkdownというRのライブラリ(もしくは[quarto](https://quarto.org/))を使い、Rのプログラム計算(コード+結果)を含む文書(html, pdf, docxなど)を作成する
-
-* [R](https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E)は[統計プログラム](https://okumuralab.org/~okumura/stat/first.html)ですが、今はrmarkdownのための道具として考えてください  
-    * Rは統計計算や描画で最も使われているプログラムです
-* rmarkdownはmarkdownという文法で各種ファイルを作成するライブラリです  
-* [markdown](https://ja.wikipedia.org/wiki/Markdown)文法は[とても](https://camo.qiitausercontent.com/41c6af25e2e51c21bdfa55aac53353d8526e9117/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3738373538322f63383130343236352d633263632d363563322d646234352d6534616263306432333765382e706e67)、[簡単](https://mdg.imgix.net/assets/images/dillinger.png?auto=format&fit=clip&q=40&w=1080)で、多くの人が使っています  
-
-----
-
-プログラム
-
-使途: 
-
-* quartoのインストレーションは[ここ(Mac, Win)](https://kazuyanagimoto.com/course-kobe-firstyear-2026/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)や[ここ(Mac)](https://kumaroot.readthedocs.io/ja/latest/quarto/quarto-install.html)が分かりやすいです
-    * インストール後、ターミナルで`quarto render bunsho.qmd`と打ち込んで動かします
-    * `bunsho.qmd`を書くためにテキスト・エディタを使います
-    * `bunsho.qmd`はヘッダ部分(YAML header)と本文(main text)から成ります
-    * YAMLヘッダに`format: html`, `format: pdf`, `format: docx`と書いて出力形式を選びます(1ファイルで複数の出力形式も指定できます)
-    * [Windows用インストール・設定ガイド](https://seiroito.github.io/SHLectures/lec_slides/2026/QuartoSetupWindows.html)(画面写真つき、作例2本)
-
-
-----
-
-プログラム
-
-::: {.fragment}
-AIに任せるのが最も容易です
-:::
-
-* Rのインストレーション、実行を許可して文書を作らせる
-* Gitのインストレーション、実行を許可してGithubを利用する
-
-::: {.fragment}
-独創的な製品を作らない限り、コードを書く能力はすでに不要
-
-* 「AIを使ってプログラムを動かす技量」を蓄えてください
-:::
-
-::: {.fragment}
-token数に余裕のある有料版AI(Claude, codex(chatGPT)など)を使うことをお薦めします
-:::
-
-----
-
-
-. . .
-
-そのために、次回までに以下の作業を自分のPCで実施してください  
-
-1. Rをインストールする  
-   * 参照: [1. (windows)](https://syunsuke.github.io/r_install_guide_for_beginners/03_installation_of_R.html)、[2. (windows)](https://multivariate-statistics.com/2022/10/21/r-programming-install/)、[3. (mac)](https://bigdata-analytics.jp/install-tools/install_r_for_mac/)  
-1. Rでrmarkdownライブラリをインストールする  
-   * [参照](https://seiroito.github.io/SHLectures/InstallPackagesInR.html)  
-
-----
-
-::: {style="text-align: center;"}
-オンライン講義(変更の可能性あり)
-
-* 11月20日(金)
-* 11月27日(金)
-
-Google classroomのMeetで実施します
-
-:::
-
-----
 
 ::: {style="text-align: center;"}
 # 開発経済学の動機
@@ -2818,10 +2827,27 @@ $$
 
 * 日本も中国も政策は育児の直接費用ばかり
     * 簡単だから
+    * 人気取りもできる
 * 高所得化につれて機会費用を下げる政策も必要
     * 構造的な政策が多いので実施は難しく、実現するのに時間がかかる
     * 集票や官僚の業績に反映しにくいので、実施されにくい
+* 機会費用に男女差があることも問題
+* 育児や家事の過半を女性が負担
+    * 結婚や出産の機会費用は
+        * 女性にとって高い
+        * 男性にとって低い
+* 男性だけ結婚や出産を希望するかも...男女の家事育児負担割合をどうやって変えるか?
+
+. . .
+
+あくまで平均値の話です。例外はたくさんいます。
+
+----
+
 * 女性の育児負担&uarr; &rArr; 出生率&darr; [@DoepkeKindermann2019]　([紹介](https://www.ide.go.jp/Japanese/IDEsquare/Column/ISQ000002/ISQ000002_035.html))
+    * エビデンス(因果関係の証拠)ではない
+    * 相関関係、理論モデル、政策シミュレーション結果を示した
+    * 現実的な状況下での頭の整理、あり得るメカニズムの提示
 
 :::::: {.columns}
 
@@ -2837,15 +2863,16 @@ $$
 
 ::: {.column width="60%"}
 :::: {.fragment}
-* 女性が出産に反対し男性が賛成している比率-男性が出産に反対し女性が賛成している比率
-* 女性がより強く出産に反対している指標
-    * 両方が同じ意志だったら検討対象にしない
-* 男性の育児負担率と負の相関
-    * 着替え、就寝、看病、遊び、宿題、送り迎えの6項目で男性が主たる実施者の割合
-* 自分が今よりも大変になる(転退職で所得が減る)のであれば、結婚も出産も女性は拒否する
+* 女性反対指標=出産に女性が反対し男性が賛成しているカップルの割合-出産に女性が賛成し男性が反対しているカップルの割合
+    * 女性がより強く出産に反対している指標
+* 男性の育児負担率=着替え、就寝、看病、遊び、宿題、送り迎えの6項目で男性が主たる実施者の割合
+* 男性の育児負担率&darr; $\sim$ 女性反対指標&uarr;
 :::
 ::::
 ::::::
+
+* 自分が今よりも効用が減る(所得が減る)のであれば、結婚も出産も女性は拒否する
+* マッチョな国では出生率が低くなる
 
 ----
 
@@ -3317,6 +3344,8 @@ $t$年の一人あたりGDP成長率$\Delta y_{it}$を前年($t-1$年)の一人�
 $$
 \Delta y_{it}=a_{t}+\beta_{t}y_{it-1}+e_{it}
 $$
+
+. . . 
 
 \begin{equation*}
 \beta_{t} \left\{
