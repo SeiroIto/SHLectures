@@ -33,8 +33,8 @@ format:
     toc-bg-image: "../../../assets/GrootbergGiraffe3.jpg"
 lightbox: auto
 filters:
-  - parse-latex
-  - imagify
+  - ../../../_extensions/tarleb/parse-latex/parse-latex.lua
+  - ../../../_extensions/dialoa/imagify/imagify.lua
 imagify:
   header-includes: |
     \usetikzlibrary{calc}
