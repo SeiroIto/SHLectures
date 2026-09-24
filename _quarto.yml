@@ -1,10 +1,11 @@
 project:
   render:
-    - "*.qmd"
-    - "lec_slides/2026/**"
+    - "lec_slides/2026/"
     # do not render this after a push
-    - "!lec_slides/2024/**"  
-    - "!homeworks/2024/**"
+    - "!lec_slides/2024/*.qmd"  
+    - "!lec_slides/2024/**/*.qmd"  
+    - "!homeworks/2024/*.qmd"
+    - "!homeworks/2024/**/*.qmd"
 
 filters:
   - assets/filters/ListArrow.lua
