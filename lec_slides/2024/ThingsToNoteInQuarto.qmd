@@ -1,0 +1,112 @@
+---
+title: "Quartoの注意事項"
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    fontcolor: black
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/ThingsToNoteInQuarto.html>
+    theme: sky
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+bibliography: ../../seiro.bib
+resources:
+  - ThingsToNoteInQuarto.pdf
+# quarto render ThingsToNoteInQuarto.qmd
+---
+
+## 守らないと、いろんなエラーが出て無駄に時間を費やします{.center}
+
+----
+
+## yml (ファイル冒頭のヘッダ部分)
+
+* `---` 3つ  
+* 同じカテゴリで改行後のスペースは2  
+* セミコロン`:`後に何か書くときのスペースは1、何も書かないときにはすぐに改行  
+* 余計な空白を残さない  
+* `toc-depth`を`toc_depth`と指定してもエラーは出ないが、目次表示の深さは変更できない  
+
+```
+---
+title: "Quartoの注意事項"
+format:
+  revealjs:
+    width: 1600
+    height: 900
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    theme: sky
+bibliography: ../../MyBibFileName.bib
+resources:
+  - ThingsToNoteInQuarto.pdf
+# quarto render ThingsToNoteInQuarto.qmd
+---
+```
+
+----
+
+## 文法
+
+* 改ページは`----`  
+   * なぜか`---`でも改ページされることもあるが、ページ数を重ねるとエラーとなり、エラーの原因が何か分からなくなる  
+* 順次開示は` * * * `のスペース付き`*`  
+* 改ページ`----`や順次開示` * * * `の後は空行を1つ入れる  
+
+* `:::: {.column width="45%"}`+`. . . `= NG、`::: {.fragment}`= 順次開示  
+
+```
+::::: {.columns}
+:::: {.column width="45%"}
+* A  
+* B  
+
+::: {.fragment}
+C  
+:::
+::: {.fragment}
+D  
+:::
+::::
+:::::
+```
+
+----
+
+::::: {.columns}
+:::: {.column width="45%"}
+* A  
+* B  
+
+::: {.fragment}
+C  
+:::
+::: {.fragment}
+D  
+:::
+::::
+
+:::: {.column width="55%"}
+* 前ページの例  
+::::
+
+:::::
+
+----
+
