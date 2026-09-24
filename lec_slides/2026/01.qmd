@@ -35,7 +35,7 @@ format:
     include-after-body: ../../assets/style/toc-add.html
     toc-bg-image: "../../assets/GrootbergGiraffe3.jpg"
 filters:
-  - parse-latex
+  - ../../_extensions/tarleb/parse-latex/parse-latex.lua
   - ../../_extensions/seiro/tikzja/tikzja.lua
   - ../../assets/filters/ListArrow.lua
   - ../../_extensions/schochastics/nutshell/nutshell.lua
@@ -2691,8 +2691,14 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 :::::: {.columns}
 
 ::: {.column width="70%"}
-```{.tikz libraries="arrows.meta,calc" width="1250"}
-\tikzset{
+```{r}
+#| echo: false
+#| output: asis
+# tikzja needs lualatex; that's present locally but not on GitHub's build
+# runner, so render live only when lualatex is actually on PATH, otherwise
+# fall back to the pre-rendered static image (BirthDiagram.*).
+fence <- strrep("`", 3)
+tikz_body <- r"(\tikzset{
   box/.style={draw, rectangle, font=\Large, inner sep=5pt,
               minimum width=2.4cm, minimum height=1.1cm},
   lbl/.style={font=\Large},
@@ -2723,7 +2729,14 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 \draw[cost] (ik_c) -| (m2d);
 
 \node[lbl] (juku) at (7.8,-3.8) {塾授業料};
-\draw[cost] (juku) -- (ik_c);
+\draw[cost] (juku) -- (ik_c);)"
+if (nzchar(Sys.which("lualatex"))) {
+  cat(fence, '{.tikz libraries="arrows.meta,calc" width="1250"}\n', sep = "")
+  cat(tikz_body, "\n", sep = "")
+  cat(fence, "\n", sep = "")
+} else {
+  cat('![](../CommonFiles/1/BirthDiagram.svg){width="1250"}\n')
+}
 ```
 :::
 
