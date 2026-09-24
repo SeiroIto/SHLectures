@@ -197,7 +197,7 @@ AIに任せるのが最も容易です
 :::
 
 ::: {.fragment}
-token数に余裕のある有料版AI(Claude, codex(chatGPT)など)を使うことをお薦めします
+ただし、有料版AI(Claude, codex(chatGPT)など)でのみ使えます
 :::
 
 ----
