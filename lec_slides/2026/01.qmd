@@ -217,11 +217,18 @@ hw01: 以下の作業を自分のPCで実施してください
    * qmd: quarto
    * md: litedown
 
+:::::::::: {.columns}
+::::: {.column width = "45%"}
 提出期限
 : 9月30日(水)23:59
-
+::::: 
+::::: {.column width = "45%"}
 提出先
 : google classroom
+::::: 
+::::::::::
+
+
 
 ::: {style="text-align: center;"}
 # AI利用について
@@ -356,6 +363,12 @@ Claudeはtoo verbose/wordy
 
 ----
 
+::: {style="font-size: 120%; text-align: center;"}
+## AI = Almost Intelligent {.center}
+:::
+
+----
+
 ## AI利用の考え方と方法
 
 
@@ -447,7 +460,7 @@ RAG+CoVe &rArr; 単純な事実のみ、研究論文は一度に1本以上扱う
 ::::
 
 :::: {style="font-size: 70%;" .fragment}
-Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。<Blue>家畜の合計価値は不変。</Blue>
+Hallucination: 誤解。全種類の支援を受けたアームと比較すると低かった。<Blue>家畜の合計価値は支援前後で不変。</Blue>
 ::::
 
 ----
@@ -474,7 +487,7 @@ Hallucination: 誤解。全種類の支援を受けたアームと比較する�
 > (14:00) そこから抜け出すための安上がりな近道とか、特効薬は存在しませんでした。<Red>資産、ノウハウ、そしてセーフティーネット。この三位一体の多角的アプローチが人間の本来持っている可能性を引き出して、行動を変容させるためには不可欠だった</Red>ということが、この研究から導き出された最も重要な結論なんですよ。
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=4}
+:::: {style="font-size: 70%;" .fragment fragment-index=4}
 * 過度の一般化: 組み合わせると上手くいく事例、<Blue>資産+現金給付、資産+ノウハウでも上手くいく可能性あり、</Blue>現金給付=セーフティネットではなく経常投入費支援かも&rarr;「特効薬は存在しませんでした」「三位一体の多角的アプローチが...不可欠だった」
 ::::
 
@@ -482,7 +495,7 @@ Hallucination: 誤解。全種類の支援を受けたアームと比較する�
 > (15:33) 「バンドウィドス・タックスという言葉を聞いたことがあるかもしれません」「おびいきはば(帯域幅?)への課税ですか」「人は明日のご飯をどうしようという強烈な不安に直面しているとき、脳の認知的余裕、つまり、おびいきはばの殆どをその短期的な問題に奪われてしまうのです」「あー」「長期的な計画を立てたり、新しいスキルを学んだりする余裕が完全にゼロになってしまうのです」「分かります、私も仕事でもう極限まで追い詰められている時は、1年後のキャリアプランなんて絶対に考えられませんもん。」
 ::::
 
-:::: {style="font-size: 50%;" .fragment fragment-index=6}
+:::: {style="font-size: 70%;" .fragment fragment-index=6}
 * Hallucination: <Blue>「介入&rArr;cognition&uarr;」という結果は出なかった</Blue>のに、現金補助を組み合わせて効果が高くなったことを説明するために「scarcity&uarr;&rArr;cognition&darr;」で説明
 ::::
 
@@ -532,6 +545,7 @@ Hallucination: 誤解。全種類の支援を受けたアームと比較する�
        * フォルダ(ファイル)ごとにアクセス可否を決めておく
          * OS filesystemレヴェルで設定すると安全(だが、ユーザ権限を変えるのは不便かも)
          * rulesでも可能だが、AIが勝手に適用除外するなど、(なぜか)絶対ではない
+         * 9月24日(木)午前にClaudeにファイル(1104個)を勝手に書き換えられてしまった、これで3度目
 
 ----
 
@@ -1976,7 +1990,8 @@ p_traj_gni
 
     ⭕国内総生産 (G<span style="text-decoration: underline;">D</span>P)
     
-    ❌国民総所得 (GNI) 
+    ❌国民総所得 (GN<span style="text-decoration: underline;">I</span
+    >) 
 ::::
 :::::
 
