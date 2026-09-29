@@ -42,6 +42,12 @@ Blue {
 Gray {
   color: gray;
 }
+Orange {
+  color: orange;
+}
+DarkOrange {
+  color: #FF7700;
+}
 .reveal .slides pre code {
     max-height: 800px;
 }

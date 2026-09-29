@@ -3,6 +3,7 @@ project:
     - "!lec_slides/2026/VibeCodingExample.qmd"
     - "lec_slides/2026/**/*.md"
     - "lec_slides/2026/**/*.qmd"
+    - "lec_slides/2026/**/*.pdf"
     - "!assets/*.qmd"
     - "!lec_slides/2024/*.qmd"
     - "!lec_slides/2024/**/*.qmd"

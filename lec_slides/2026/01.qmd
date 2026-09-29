@@ -22,7 +22,7 @@ format:
     #### CSS bypasses the Sass compiler's internal search logic
     #### theme: [sky, sky-add.scss, ../../style/hiragino.scss] error
     #### theme: [sky, sky-add.scss, /style/hiragino.scss] error
-    css: [../../assets/style/hiragino.scss, ../../assets/style/my.css]
+    css: [../../assets/style/hiragino.scss, ../../assets/style/my.css] 
     lightbox: true
     linkcolor: red
     code-line-numbers: true
@@ -47,7 +47,7 @@ include-in-header:
       </style>
 bibliography: ../../seiro.bib
 resources:
-  - 01.pdf
+  - 1.pdf
   - ../../assets/style/fonts/
 #### quarto render 01.qmd
 ---
@@ -2778,7 +2778,7 @@ if (nzchar(Sys.which("lualatex"))) {
 
 中国の少子化対策のその後
 
-* @ChenXiongTang2024: (学生結婚、婚外子を無視した簡便法)
+* @ChenXiongTang2024: total fertility rate decomposition (学生結婚、婚外子を無視した簡便法)
 
 :::: {.fragment}
 ::: {style="margin-bottom:-7.5cm"}
@@ -2933,15 +2933,16 @@ Have you ever been arrested and imprisoned?
 
 ----
 
-企業が前科のない人に支払うことを厭わない賃金は下記  
+企業が前科のある人に支払うことを厭わない賃金は下記  
 
 ::: {style="font-size: 80%;"}
 $$
 \begin{aligned}
-\mbox{前科のない人の賃金} \leqslant &\mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  \\
+\mbox{前科のない人の賃金} \geqslant &\mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  \\
 &\hspace{2em}+\mbox{前科のある人の賃金}\\
 \mbox{前科のない人の賃金} - &\mbox{前科のある人の賃金}\\
-& \leqslant \mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値}  
+& \geqslant \mbox{「前科のある人を雇って犯罪が発生して余計にかかる費用」の期待値} > 0 \\
+\mbox{前科のない人の賃金} > &\mbox{前科のある人の賃金}
 \end{aligned}
 $$
 
@@ -3052,8 +3053,11 @@ $$
 
 雇用主は<Blue>人種、年齢、ジェンダー、学歴</Blue>などを使った模様。<Blue>若い高卒アフリカ系男性</Blue>は避けられました。犯罪歴を持つ確率が高いため。
 
-* <Orange>統計的差別statistical discrimination:</Orange> 観察可能な属性を使ってネガティブな属性を類推し差別すること。ネガティブ・ステレオタイピング。Using observable characteristics to infer a negative trait (and discriminate). A negative stereotyping.  
-* <Orange>選好による差別taste based discrimination:</Orange> 好みや信念による差別。Discrimination out of preferences or beliefs. 
+<DarkOrange>統計的差別statistical discrimination:</DarkOrange>
+: 観察可能な属性を使ってネガティブな属性を類推し差別すること。ネガティブ・ステレオタイピング。Using observable characteristics to infer a negative trait (and discriminate). A negative stereotyping.  
+
+<Orange>選好による差別taste based discrimination:</Orange> 
+: 好みや信念による差別。Discrimination out of preferences or beliefs. 
 
 . . . 
 
@@ -3140,14 +3144,6 @@ BTB政策研究のその後
 
 ::: {style="text-align: center;"}
 # 開発の概観
-:::
-
-----
-
-:::{.r-fit-text}
-Section 3: 
-
-開発の概観
 :::
 
 ----
@@ -3632,7 +3628,7 @@ UNIDOデータとGCDCデータの不一致点
 
 ----
 
-[図](http://seiroito.github.io/SHLectures/lec_slides/2024/1.pdf#page=220)
+[図](http://seiroito.github.io/SHLectures/lec_slides/2026/1.pdf#page=220)
 
 ----
 

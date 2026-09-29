@@ -36,7 +36,8 @@
 /lec_slides/2026/HK/
 /lec_slides/2026/ImpactEvaluation/
 /lec_slides/2026/Maxi*/
-/lec_slides/**/[123]*.pdf
+/lec_slides/**/[23]*.pdf
+/lec_slides/**/* *.pdf
 /lec_slides/**/*HK.pdf
 /lec_slides/**/RP/_imag*
 /lec_slides/**/**/*.log
