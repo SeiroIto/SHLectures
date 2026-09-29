@@ -1,3 +1,30 @@
+---
+title: "SHLectures site"
+author: "Seiro Ito"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 1
+    grid:
+      margin-width: 350px
+    linkcolor: "green"
+    urlcolor: "#009900"
+    template-partials: 
+      - assets/style/toc-slide.html
+    include-after-body: assets/style/toc-add.html
+theme: [sky, assets/style/sky-add.scss]
+css: [assets/style/my.css]
+---
+
 ## SHLectures
 
 ## Lecture materials at SHU
