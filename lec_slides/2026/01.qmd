@@ -3690,7 +3690,8 @@ J-PAL to the rescue!
 
 * Abdul Ratif Jameel Poverty Action Lab at MIT.
 * \sout{Homepage: ``729 ongoing and completed randomized evaluations in 67 countries''.}  
-* "1094 randomized evaluations...in 91 countries," "from clean water to microfinance to crime prevention."   
+* ~~"1094 randomized evaluations...in 91 countries," "from clean water to microfinance to crime prevention."~~
+* "conducted over 2,400 randomized evaluations" in "over 120 countries"   
 * 大変な数  
 * ランダム化比較試験RCTは政策の効果を歪み無く示すことができる  
 	* なぜ歪まないか? 理由はコースの後半で学びます。
