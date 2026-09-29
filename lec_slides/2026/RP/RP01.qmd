@@ -2,7 +2,7 @@
 title: "RP01"
 subtitle: |
   聖心女子大学国際交流学科\
-  2024年秋学期
+  2026年秋学期
 author: "アジア経済研究所 伊藤成朗"
 engine: knitr
 execute:
@@ -17,9 +17,9 @@ format:
     width: 1600
     height: 900
     preview-links: auto
-    logo: ../GrootbergGiraffeHead.jpg
-    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP01.html>
-    theme: [sky, sky-add.scss]
+    logo: ../../../assets/GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP01.html>
+    theme: [sky, ../../../assets/style/sky-add.scss]
     linkcolor: red
     code-line-numbers: true
     code-copy: true
@@ -28,7 +28,7 @@ format:
     toc-depth: 1
     template-partials: 
       - toc-slide.html
-    include-after-body: toc-add.html
+    include-after-body: ../../../assets/style/toc-add.html
     toc-bg-image: "../../../assets/GrootbergGiraffe3.jpg"
 filters:
   - parse-latex
@@ -44,403 +44,303 @@ include-in-header:
 #### Horizontal centering can be challenging (!) in quarto: stupid
 #### https://github.com/quarto-dev/quarto-cli/issues/1231
 #### It turns out an easy solution is :::{style="text-align: center;"}
-  - text: |
-      <style>
-      .center-xy {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 20%;
-        -ms-transform: translateY(-50%), translateX(-50%);
-        transform: translateY(-50%), translateX(-50%);
-      }
-      </style>
 bibliography: ../../../seiro.bib
 resources:
   - RP01.pdf
 # quarto render RP01.qmd
 ---
-```{css, echo = F, results = "hide"}
-Red {
-  color: red;
-}
-Orange {
-  color: #e94e2c;
-}
-Blue {
-  color: blue;
-}
-.reveal .slides pre code {
-    max-height: 800px;
-}
-#TOC {
-  font-color: #e94e2c;
-}
-.big-code{
-  font-size: 110%  
-}
-#### Below is suggested by Claude
-#### .small-font-list {
-####   font-size: 70%;
-####   line-height: 1.2;
-#### }
-#### .small-font-list {
-####   font-size: 70%;
-####   line-height: 1.2;
-#### }
-#### .small-font-list ol {
-####   list-style-type: none;
-####   padding-left: 0;
-####   margin-left: 0;
-####   counter-reset: item;
-#### }
-#### .small-font-list ol li {
-####   margin-bottom: 0.5em;
-####   display: flex;
-#### }
-#### .small-font-list ol li::before {
-####   content: counter(item) ". ";
-####   counter-increment: item;
-####   margin-right: 0.5em;
-####   flex-shrink: 0;
-#### }
-#### .small-font-list ol li > p:first-child {
-####   margin: 0;
-####   display: inline;
-#### }
-.small-font-list {
-  font-size: 70%;
-  line-height: 1.2;
-}
-.small-font-list ol {
-  list-style-type: none;
-  padding-left: 0;
-  margin-left: 0;
-  counter-reset: item;
-}
-.small-font-list ol li {
-  counter-increment: item;
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 0.5em;
-}
-.small-font-list ol li::before {
-  content: counter(item) ". ";
-  flex: 0 0 2.5em;  /* Adjust this value to change the width of the number area */
-  text-align: right;
-  margin-right: 0.5em;
-}
-#### description list by Claude
-/* Main container for the description list */
-.description-list {
-  font-size: 50% !important;  /* Reduces font size to 70% of the parent element */
-  line-height: 1.2 !important;  /* Sets line height to 1.2 times the font size */
-}
-/* Styles for the description list element */
-.description-list dl {
-  margin-left: 0;  /* Removes default left margin */
-  padding-left: 0;  /* Removes default left padding */
-}
-/* Styles for the term (header) in the description list */
-.description-list dt {
-  font-weight: bold;  /* Makes the term text bold */
-  display: inline;  /* Displays the term inline. Uncomment for a line break after item header. */
-  margin-right: 0.5em;  /* Adds some space after the term */
-}
-/* Styles for the description in the description list */
-.description-list dd {
-  display: inline;  /* Displays the description inline. Uncomment for a line break after item header. */
-  margin-left: 0;  /* Removes default left margin */
-}
-/* Styles for paragraphs within the description */
-.description-list dd p {
-  display: inline;  /* Keeps paragraph content inline. Uncomment for a line break after item header. */
-  margin: 0;  /* Removes default paragraph margins */
-}
-/* Creates a new line and adds space between list items */
-.description-list dd::after {
-  content: "";  /* Necessary for the pseudo-element to render */
-  display: block;  /* Creates a line break */
-  margin-bottom: 0.5em;  /* Adds space between items. Adjust as needed */
-}
-#### description with a line break between item header and texts
-.description-lb {
-  font-size: 70%;
-  line-height: 1.2;
-}
-.description-lb dl {
-  margin-left: 0;
-  padding-left: 0;
-}
-.description-lb dt {
-  font-weight: bold;
-  margin-bottom: 0.2em;
-}
-.description-lb dd {
-  margin-left: 0;
-  margin-bottom: 1em;  /* Adjust this value to control spacing between items */
-}
-.description-lb dd p {
-  margin: 0;
-}
-```
-#### 開発経済学を学ぶ動機
+
+
+
+
+<!--
+岩嵜夏乃
+-->
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-昨年夏から...草の根活動に参加し、スリランカの小学校で環境教育支援を行っています。現地の子どもたちの中には、学びの目的が学ぶことではなく、学校で配布されるパンと牛乳を受け取ることだと知り、この現状を直視しました。  
-
-この経験から、私は貧困に左右されず質の高い教育を受けられる環境を作りたいと強く思うようになりました。開発経済学を学ぶ理由は、現地の課題を分析するスキルを高め、より効果的に支援するためです。具体的には、ニーズや課題を定量化し、深く理解したいと考えています。将来的には、自分自身でソーシャルビジネスを立ち上げることを目指しており、ここでの学びはその実現に向けて大いに役立つと考えています。
+授業の最終的なゴールがよく分からない。 (◯◯
+が導けるようになる、◯◯の仕組みを理解できる
+など、 )
 :::
 </div>
 
-[SDGs\#04](https://sdgs.un.org/goals/goal4)そのものですね。パンと牛乳目当てであっても、登校してくれるのは有り難いことです。
-
-* パンと牛乳で「釣る」のは効果的だったので、就学率を高める手段としては成功です。  
-* 質の高い教育$\neq$通学、です。通学+学習、が必要です。  
-   * 対子ども、対教員、対学校の支援  
-* 世銀の[human capital index](https://www.worldbank.org/en/publication/human-capital) [@Filmer2020; @Angrist2021HK]: 就学率$\times$習熟度   
+* ゴールは経済学の枠組みを知ることです。
+* 経済学は最適化問題(個人の効用最大化、企業の利潤最大化など)を解きます。解くことで、枠組みを理解し、応用力があればその枠組みを使った論理的な演繹が可能になるはずです。
+* ただし、講義は時間が限られているので、何度も演習できません。このため、数学を使った演繹に習熟するか、解を導けるようになるか、経済学の道具の仕組みを理解できるか、は皆さんの努力次第です。
 
 ----
 
-#### 開発経済学を学ぶ動機
+<!--
+髙橋杏奈
+-->
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-アジア圏の国は受験戦争がシビアである上に、何卒かどうか・大卒であればどの大学を出ているのか、などで就職出来る会社や生涯年収が決まってしまいます。こうした社会構造なのにも関わらず、格差を拡大させる要因に対して何のアクションもしないのは、社会的流動性の低さや貧困の再生産に寄与してしまっているなと感じました。
-
-(中略)
-
-お金を出せる家庭は月にいくらでも学業の支援を受けられて、出す余裕がない家庭は最悪一度も通わずに自力でやらなければならないという状況の中、子供が塾に通えるかが完全に家庭(親)に依拠しているのは恐ろしいことだなと感じました。
+自分は経済がとても苦手な分野で、初回の授業だけですでに授業についていけるか不安になっています。過去にミクロ経済学、マクロ経済学どちらかの授業を取っていたのですが、開発経済論はこの二つの授業より難しいですか？またこの授業についていくための必要最低限の知識がありましたら教えていただきたいです。
 :::
 </div>
 
+* 学部レヴェルのマクロ経済学ほど大雑把ではないと思います。より細かな説明をします。よって、説明が足りないのに理解を求めることはない、という意味で難しくないと思います。
+    * IS-LMの枠組みは、どうしてあのような線を描けるのか、十分な説明なしに登場します。それで理解せよというのは少し酷です。「難しい」と僕は感じてしまいます。
+* ミクロ経済学の応用なので、ミクロ経済学の基礎的な考え方を身に付けていれば、難しいと感じないと思います。
+* シラバスにも書きましたが、前提となる知識はとくにありません。微分の知識があると良いですが、知らなくても内容と使い方を講義で取り上げます。
+    * 知識量よりも、自分の言葉で理解を表現する姿勢が最も大事です
+    * AIを計算助手として試すような積極性も大事です
 
-:::{.fragment}
-日本は義務教育が履行されており、出自の違いが影響するのは中等、高等教育です  
-:::
-
-:::{.fragment}
-::: {.small-font-list}
-* ハーバード大学では、世帯所得が12000万円(US$85,000)以下だと学費免除です  
-* 日本でも大学ごとの学費減免制度が充実すると良いと思いますが、財務基盤が弱いために実施困難です  
-* 最近になってようやく公的な給付型奨学金も増え始めてきました  
-:::
-:::
-
-:::{.fragment}
-途上国では初等教育の就学率は100%近くになりました  
-:::
-
-:::{.fragment}
-中等教育以降の就学率は世帯の豊かさに強く縛られます  
-:::
 
 ----
+
+<!--
+鐘優佳
+-->
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-ボックス禁止政策の話のところで、”what do you expect the impacts of BTB policy?”の答えが意図せざる結果となったとありますが、なぜそうなったのか、reduce employment and increase recividism と答えたからなんなのか、良く分かりませんでした。
+私はマクロ経済学の授業を履修したことがあるが、今回の内容は正直難しく感じた。特に、ある支援策が効果を持つかどうかを考える際には、対象となる人々の生活や置かれた環境まで踏まえる必要があり、これまで学んだ経済学の知識だけでは簡単に判断できないと感じた。
+
+<!--
+印象に残ったのは、AIに文献を与えて回答させても、要約の段階で誤りが生じうるという話である。見た目の整ったスライドや、もっともらしい説明をそのまま信じてしまいそうなので、出典や元の論文に戻って確かめることの大切さを実感した。また、AIに計算やデータ整理を任せるとしても、何を調べ、結果をどう解釈するかは自分で考えなければならないと思った。開発経済学についてどのようなものかまだ十分に理解できていない部分もあるが、経済の理論を実際の人々の暮らしに当てはめ、前提が成り立つかを考えることが大切なのではないかと今回の授業を通じて受け止めた。今後は分からない用語や研究例を一つずつ確認しながら、自分なりに理解を深めていきたい。
+-->
 :::
 </div>
 
-:::{.fragment}
-政策意図=就業差別抑止による再犯防止でした
-:::
-
-:::{.fragment}
-なので、収監可能性と再犯可能性の最も高いYAA男性に正反対の効果が出たので、意図せざる結果、と表現しました
-:::
-
-:::{.fragment}
-意図・目的と手段が一致していない例です
-:::
-
+* 学部レヴェルのマクロ経済学は、多くの場合、環境を明示して考察しません。市場環境が完備している理想的な場合を暗黙裏に想定します。
+* ミクロ経済学でも完備状態からスタートし、少しずつ現実に近づけるために、特定環境に欠陥があることを導入していき、問題の構造と解決策を提示します。
+    * この講義の後半でも、信用市場の欠陥度&uarr; &rArr; 児童労働時間&uarr; を示します。
 
 ----
+
+<!--
+深澤日菜
+-->
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-ボックス禁止政策について、職業差別が話題に上がっていたが、私は差別だとは思わなかった。一度罪を犯した人間が社会に出たときに、罪を犯していない人間と同じ立場になれてしまうと、その事実がまた罪を犯すきっかけになると考えるからである。罪を犯したら、もう二度と元の立場には戻れないという認識を持つ必要があると考える。(冤罪は別)
+本題の開発経済論に関しては、まず「開発経済論とは何か」という疑問に向き合いました。もちろん、授業内で解説があったように途上国における社会経済条件下での経済学ということは理解できますが、学問として学ぶ意義まではこれまで自分では見出せていなかったように思います。
 :::
 </div>
 
-良い視点です。
-
-* 事前(=予防)の視点  
-   * 犯罪を予防するためには、犯罪を犯す前に罪の重さを認識させることが有効です  
-   * 初犯予防には、犯罪リスクの高い人たちへの働きかけ(e.g., 闇バイト容疑広告の制限、闇バイトの特徴周知)や就業支援の仕組みが必要でしょう  
-* 事後(=社会復帰)の視点  
-   * 再犯予防には、罪認識だけでなく、前科のある人が合法に生きられる必要があります  
-   * 雇用機会の提供は犯罪に頼らない生き方を可能にします  
+* 開発経済学は経済学の応用です。これは普通の学問の営為です。
+* 日本を対象にしていても、日本特有の環境や構造を想定して、教科書から少し異なる環境下の分析をします。たとえば、女性の家事育児負担が高い状況下で、育児支援策の効果を分析します。フィランドを対象にすれば異なる想定下の分析をすることになるでしょう。途上国では、大家族、高い出生率、母親の家族内地位や学力が低く、特定の宗教的タブー、交通機関や医療機関の普及率が低い、政府の実施能力が乏しい、などの想定で分析するでしょう。
+* 日本経済学はないのになぜ開発経済学があるのかは、議論の余地があります。しかし、教科書的な分析を日本に適合させるための環境設定と、途上国に適合させるための環境設定では変更点が相当違うこと、そして、第2次大戦後に途上国の経済発展を進めるという意図が強くあったために新たな学問を要したという歴史的経緯から、開発経済学は学問分野として独立しています。こうした意識で数多くの先人たちが知的努力をした成果が70年間分あります。これに学問として学ぶ意義を見出すかは個人の判断です。
 
 ----
+
+
+<!--
+荒澤はな
+-->
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
-ボックス禁止政策について、職業差別が話題に上がっていたが、私は差別だとは思わなかった。一度罪を犯した人間が社会に出たときに、罪を犯していない人間と同じ立場になれてしまうと、その事実がまた罪を犯すきっかけになると考えるからである。罪を犯したら、もう二度と元の立場には戻れないという認識を持つ必要があると考える。(冤罪は別)
+私は普段異文化コミュニケーションコースだったことやあまり経済と言う分野に興味がなく、触れる機会がなかったが、フィリピンへ旅行へ行った際にあまりのインフラの整備がなってないことや治安の悪さに驚き、データや数値の面から日本とそのほかの国を比べて見て見たいと思い履修しました。
 :::
 </div>
 
-犯罪を減らすには、予防と社会復帰の両方が必要です。しかし、両者はトレード・オフにあります。予防に偏ると社会復帰が妨げられ、社会復帰に偏ると予防が疎かになります。  
+* インフラや治安についての第一印象や最初の疑問はとても貴重ですので、忘れないようにしてください。
+* インフラは多様です。何のインフラに着目するのか考えることをお薦めします。たとえば、保健に興味がある人は上下水道普及率、プライマリー・ヘルスケア提供者数、教育に興味のある人は学校施設数、電気普及率、携帯基地局数など、分析対象ごとに関係するインフラ施設は違います。目的に応じて、どのインフラが大事なのか、その違いによってどのような結果になるのか調べると、問題の中身がより見えてきます。
+* 治安も公共財です。しかも、取締権限は政府が独占していて、政府が真面目に働かない限り、治安は回復しません。民間警備会社ができるのは事前予防と事後対応だけです。
+* 犯罪者集団(ギャング)は損耗率が高いため、新規構成員の「供給」が途絶えると組織を維持できません。若者がギャングを目指さないこと、元服役囚が再犯をしないことが必要です。これらには雇用が効果的です。雇用と取締を両輪にすることが望ましいと思います。
 
-* 初犯と再犯をどのようにウェイト付けるかによって、最適なバランスが異なります  
-   * 数学のセクションで最適化問題を解くとき、具体例を示すことができます  
 
 ----
 
-事前対応(予防)と事後対応(再犯防止)が矛盾・トレードオフ関係にあるのは割と一般的で、ほかにも多くの事例があります  
+<!--
+木内千櫻
+-->
 
-::: {style="font-size: 100%;line-height: 1.0;"}
-* 銀行健全性規制 vs. 銀行救済  
-* 求職 vs. 失業保険  
-* 禁煙 vs. [COPD](https://ja.wikipedia.org/wiki/%E6%85%A2%E6%80%A7%E9%96%89%E5%A1%9E%E6%80%A7%E8%82%BA%E7%96%BE%E6%82%A3)への医療保険  
-* 経済的自立 vs. 生活保護  
-* ハザード・マップを利用した災害回避 vs. 防災インフラ支出・救助・復興作業  
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+私は以前、...(中略)...インド...(中略)...ネパールを訪れた経験がある。どちらも非常に印象に残っているが、特にインドを訪れた際には、想像していた以上に大きな経済格差を目の当たりにした。高層ビルが立ち並び、まるで東京の丸の内のように発展した地域の道路を挟んだ向かい側には、枝やトタンなどで作られた簡素な屋台が並んでいた。同じ場所に、経済的に大きく異なる生活環境が隣り合って存在していることに驚いた。
+
+一方、ネパールではインドほど極端な経済格差を目にする機会はなかったものの、農村地域を訪れた際には、インフラ整備を主として都市部との生活環境や経済的な違いを感じた。この経験から、単に国全体の経済状況を見るだけではなく、同じ国の中でも都市と農村、あるいは異なる所得層の間にどのような格差が存在しているのかを見ることが重要なのではないかと考えるようになった。
+
+今回の講義では、こうした経済格差がなぜ生じるのか、また、世界をより豊かにしていくためにはどのような取り組みが必要なのかという点について、経済学の視点から考えられることを知った。これまで海外で実際に見てきた光景を、単なる「印象」や「驚き」で終わらせるのではなく、開発経済学の知識を用いて、その背景にある要因や構造について考えてみたい。
 :::
+</div>
+
+* 途上国に行って得た第一印象や最初の疑問はとても貴重ですので、忘れないようにしてください。
+* マクロ経済学は一国全体を扱います。その各国間比較では一国単位の分析が多く、国内格差を見落としがちです。途上国でも富裕層が出現し、平均所得だけでは国内の最貧層が見えにくくなります。これを実際に見て感じた経験は、低所得国がキャッチアップしているか、という講義で紹介した議論に対して強い疑問を引き起こすはずです。こうした反応をもたらすので、実際の経験や最初の疑問は貴重です。
+* 農村は都市よりもなぜ貧しいのか。経済学を使ってそのメカニズムを理解すると、経済学の便利さも理解できると思います。
 
 ----
 
-$$
-\mbox{共通: }
-\underbrace{\mbox{事前の自助努力を鈍らせる原因 }\vphantom{\mbox{モラル・ハザード}}}_{\class{fragment}{\mbox{モラル・ハザード}}}
-\mbox{ ← 事後的な救済措置}
-$$
+<!--
+細沼咲帆
+-->
 
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+経済学を初めて学ぶ中で、少子化や子育ての問題を経済の視点から考えることができて面白かったです。特に印象に残ったのは、中国の塾に対する授業料の上限規制の例です。授業料を安くすれば誰でも塾に通えるという単純な話ではなく、授業料を安くしても、需要が増える一方で供給が減り、お金を払うことができてもサービスを受けられない人が出てきてしまう事を知りました。この例から需要と供給の関係が大事なのだと学ぶことができました。また、養育費用には、保育料や教育費などの直接費用だけでなく、子どものために時間を使うことで失う仕事などの機会費用も含まれることを知りました。これまで私は子育ての負担というと、必要なお金ばかりを考えていたため、時間にも経済的な価値があるという考え方が新鮮でした。経済学はお金だけを考える学問だと思っていましたが、人の時間や行動にも価値があると分かり、もっと学んでみたいと思いました。
+:::
+</div>
+
+* 超過需要が発生すると、需要のすべてが満たされなくなることを鋭く見抜いていますね。講義では言い忘れましたが、価格が使えないので価格以外の何らかの方法で供給を割り当てます。時間、コネ、さまざまです。
+* 経済学は人間が価値を感じるもの、効用を得られるものならば何でも対象にします。分析道具の効用関数$u$は消費$c$を対象とするのが通常で、消費量$c$から得る効用水準を$u(c)$と表現します。時間配分を考えたいときには、余暇時間$\ell$も対象にして、消費量と余暇時間の2変数の効用関数$u(c, \ell)$を使います。
+
+----
+
+<!--
+岩谷舞衣
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+「開発経済学=どのような条件の下に置かれているかを理論モデルを使いつつ位置づけ、(機会平等を期するため、資源を無駄なく利用するためには)どのような介入が必要か考える共感能力が乏しくても、環境を特定し論理的に整理することで、問題を理解して解決策を提示できる」(講義資料, p.58)とありましたが、ここで示される共感能力とはどのような能力のことを指しているのでしょうか。
+:::
+</div>
+
+* 厳密に考えたことはないのですが、他人のことを我が事のように感じる能力です。
+* 経済学で表現すれば、他人の効用(幸福度)を自らの効用の決定因として組み込んだモデルかもしれません
 
 ::: {.fragment}
-事後の救済があるので事前の自助努力が不足気味になります  
-:::
-
-::: {.fragment}
-事後救済をする理由  
-:::
-
-::: {style="font-size: 70%;line-height: 0.8;"}
-::: {.description-lb}
-社会的影響が甚大
-: 銀行(決済システムが停止すると経済が大混乱に)
-
-権利
-: 文化的な生活をする権利
-
-互助
-: 被災者・患者を救うのは政府・社会の責務
-:::
-:::
-
-----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-国、個人の所得の世界平均所得との差=国間の差+国内の差になるという式によって、国ごとに比べたら埋もれてしまう貧困部について明確にわかる点が非常に優れていると感じました。
-:::
-</div>
-
-グループ$a$、個人$i$の値$x_{ai}$とグループ$a$の$x$の平均値$\bar{x}_{a}$の差にグループ$A$の平均値$\bar{x}_{A}$を足して引く(=差し引きゼロ)ことで、差を分解するのはよく使われるテクニックです。
-
-
-:::{.fragment}
+自分の効用関数
 $$
-x_{ai}-\bar{x}_{a}=\underbrace{x_{ai}-\bar{x}_{A}}_{\scriptsize{\mbox{$x_{ai}$と$\bar{x}_{A}$の差}}}+\overbrace{\bar{x}_{A}-\bar{x}_{a}}^{\scriptsize{\mbox{$\bar{x}_{A}$と$\bar{x}_{a}$の差}}}
+u=u\left(c, v\right)
 $$
-:::
-
-:::{.fragment}
-グループが$a, b, c, ...$と複数あり、グループ$A$がそうしたすべてのグループを集めたもの(=全標本)とすると、$\bar{x}_{A}$は全体の平均値です。この分解は、グループ内の格差を「全体平均値との格差」と「グループ$a$平均値と全体平均値との格差」に分解します。そうすると個人$i$の全体での位置づけ、グループの全体での位置づけ、という意味づけができます。
-:::
-
-
-----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-開発の概観のところで、グラフの線が多過ぎてどこみるべきなのか、「キャッチアップ」とはどのような効果のことなのか、という根本（？）のことがわからず、その先の詳しい話も芋蔓式で分からなくなっていました。
-:::
-</div>
-
-:::{.fragment}
-キャッチアップ: 横軸=初期時点の所得、縦軸=その後の成長率のグラフで右下がりの関係を言います
-:::
-
-:::{.fragment}
-線が多いグラフは見にくかったので、見せ方に工夫が必要だと思います
-:::
-
-----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-メディアなどでも、AIについては取り上げていますが、毎回どのメディアも、AIと人間の共存が大事という結論に至ってます。具体的な解決策を講じてくれないため、共存といわれても、ピンとくるようなことがありませんでした。
-:::
-</div>
-
-AIは社会を豊かにする技術革新です  
-
-. . .
-
-懸念点は以下です  
-
-* 作り出したデジタル成果物によって、人々を混乱(事実誤認や認知誤認)させ、homophily(=似た者集団化)による社会分断を加速させる可能性があること  
-* パタン認識を安価に提供することで、特定の技能を代替し、代替された技能の持ち主の所得が減ること、一部企業の独占(=一部の人への富の集中)が進むこと  
-* 電力消費を高めて温暖化を加速させること    
-
-----
-
-Claudeに尋ねたら以下のような返答が来ました  
-
-::: {.small-font-list}
-1. Job displacement: AI could automate many tasks, potentially leading to unemployment in certain sectors.  
-1. Privacy concerns: (略)  
-1. Bias and discrimination: (略)  
-1. Cybersecurity risks: (略)  
-1. Autonomous weapons: (略)  
-1. Misinformation and deepfakes: (略)  
-1. Economic inequality: The benefits of AI might disproportionately go to those who own and control the technology, potentially widening wealth gaps.  
-1. Overdependence on technology: As AI systems become more prevalent, society might become overly reliant on them, potentially losing important skills or critical thinking abilities.  
-1. Ethical decision-making: AI systems may need to make complex ethical decisions (e.g., in self-driving cars), raising questions about how to program moral judgments.  
-1. Loss of human connection: (略)  
-1. Unintended consequences: (略)  
-1. Concentration of power: Companies or governments with the most advanced AI capabilities could gain disproportionate influence over society and the economy.  
-:::
-
-* このリストを生成するコードも、Claudeに合計10数回に及んだ質問でようやく希望の出力を得ました  
-
-----
-
-Claudeになぜそんなに回数を要したのか、どのように尋ねるべきだったかを尋ねたら、以下の回答を得ました  
-
-::: {.description-list}
-Misinterpretation of requirements
-: Initially, I focused too much on the automatic incrementing feature and lost sight of the font size and line height requirements that were working earlier.
-
-Lack of continuity
-: I didn't consistently build upon the parts of previous solutions that were working, leading to some back-and-forth.
-
-Overcomplication
-: In some responses, I added unnecessary complexity, trying to solve problems that weren't explicitly stated.
-
-Assumptions about the environment
-: I made assumptions about how the CSS would interact with Quarto and Reveal.js without fully considering your specific setup.
+他人の効用関数
+$$
+v=v(c')
+$$
 :::
 
 ----
 
 <!--
-::: {.description-lb}
-Misinterpretation of requirements
-: Initially, I focused too much on the automatic incrementing feature and lost sight of the font size and line height requirements that were working earlier.
-
-Overcomplication
-: In some responses, I added unnecessary complexity, trying to solve problems that weren't explicitly stated.
-
-Lack of continuity
-: I didn't consistently build upon the parts of previous solutions that were working, leading to some back-and-forth.
-
-Assumptions about the environment
-: I made assumptions about how the CSS would interact with Quarto and Reveal.js without fully considering your specific setup.
-:::
+深澤日菜
 -->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+動機づけとして、「われわれの共感能力が不完全であること」、「世界を豊かにするため」の２つが挙げられていましたが、私は２つ目の動機の方が自分の中で納得できるものだと感じました。もちろん、シンガーの掲げるノブレス・オブリージュ的な考えも理解できます。しかし、こうした道徳的な動機づけは、言ってしまえば、人の良心に依存するものです。そのため、持続可能性として考えるともう少し理論や実益に即した動機づけの方が魅力的だと感じました。中国の塾授業料上限規制の中でもみられたように、需要があるとわかれば、結局は市場の原理で闇営業などが発生してしまいます。それならば、最初から現実に即した解決策を提示することが寛容だと、本日の授業を通して考えました。
+:::
+</div>
+
+* 経済学は価値観を明示して分析を進めます。
+    * たとえば、シンガー流の寄付を予算制約として表現し、所得から定額もしくは定率を一定所得以下の人たちに配分することを組み入れ、人々の効用最大化問題を解いて、どのような人たちがどれだけ働いてどれだけ消費するか、という「最適解」を示すことができます。もしも、寄付=税として捉えると、寄付する人たちは仕事に励まなくなり、全体の富は減って寄付の量も減ります。
+* 経済学は効率化は良いことという特定の価値を明示して分析します。
+    * ここでいう効率化とは、「他の個人の状態を悪化させずに、誰かの状態を改善すること」=「パレート改善」Pareto improvementです。
+
+----
+
+<!--
+深澤日菜
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+動機づけとして、「われわれの共感能力が不完全であること」、「世界を豊かにするため」の２つが挙げられていましたが、私は２つ目の動機の方が自分の中で納得できるものだと感じました。もちろん、シンガーの掲げるノブレス・オブリージュ的な考えも理解できます。しかし、こうした道徳的な動機づけは、言ってしまえば、人の良心に依存するものです。そのため、持続可能性として考えるともう少し理論や実益に即した動機づけの方が魅力的だと感じました。中国の塾授業料上限規制の中でもみられたように、需要があるとわかれば、結局は市場の原理で闇営業などが発生してしまいます。それならば、最初から現実に即した解決策を提示することが寛容だと、本日の授業を通して考えました。
+:::
+</div>
+
+* 資源配分の無駄をなくす(パレート改善する)ことで、(外部からの寄付なしに)事態を改善する方法を示すこともできます。
+    * たとえば、女性の産後復職保証、テレワーク業務の普及させると、生産性は一時的に低下します。ここで政府が減税によって企業利潤を確保させ、出産率を高めれば、将来の人口増 &rArr; 税収増が減税分を上回るかもしれません。
+    * シンガーの問題では、単に一回きりのお金を渡すよりも、就学環境や保健環境を整備(=投資)する方が効果は持続すると思います。学力のある人口が増えて企業が成長し株価が上がれば、資金の一部をその国の株式インデクスに投資すると、共感能力のない世界の裏側の人も収益目当てにお金を出すかもしれません。
+* これらは単なる応用問題で共感能力を要しません。ご指摘のように、良心に依存(道徳的な動機付けを強制)する方法と誘因に依存する方法では結果は異なり、後者の方が目標を達成する可能性が高い気もします。
+
+----
+
+<!--
+神出環
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+「経済学」という言葉自体は聞き慣れていたが、具体的に何を分析する学問なのかは曖昧だったため、今回の授業を通して理解を深めることができた。特に開発経済学では通常の経済学の考え方を使いながら地域特有の社会や経済の状況を踏まえて分析することが印象に残った。経済学とはシンプルな学問かと思っていましたが、直接費用や機会費用などさまざまな視点から分析する必要があると分かり、興味深く感じました。また、保育にかかる費用を下げれば子育ての負担が減り、単純に良い結果につながると思っていたが、保育サービスの供給が追いつかなければ超過需要が生まれてしまうという具体例も学びました。経済学とは金銭面だけでなく、家事や育児にかかる「機会費用」を下げることが重要だとわかった。
+:::
+</div>
+
+* 経済学は資源配分の効率性を扱う学問です。
+* 保育することによりその人の時間配分が変わり、何が得られ、何が失われるか、効用関数(より一般的には人々の選好順位)を通じて評価します。そして効用関数の値を最も高める判断を導き出します。
+    * 得られるものは子どもの人的資本や保護者の満足感などですが、失うものは保育費用(=直接費用)と保育時間(=機会費用)です。10時間保育する場合、5時間保育する場合などによって得失は変わりますし、外注を組み合わせるとさらに変化します。たとえば、無償保育1時間分を余していれば資源配分に無駄があり、非効率です。
+    * 有償保育でも、保護者の時給と保育の時間あたり料金を比較して得失で最も望ましい組み合わせを選ぶはずです。
+
+----
+
+<!--
+渡辺鈴菜
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+AIの使用に関して、授業では適切、不適切に関わらずAIの使用を禁じられることが多いので、AIのデメリットを逆手にとって使用することは新しい視点でした。適切な使用方法を学びたいと思います。
+
+女性の育児負担が上がると出生率が下がるという需要供給曲線が非常に興味深いと感じた。共働きが当たり前の時代だからこそ、政府の取り組みとのズレが生じないようにすべきだと思った。
+:::
+</div>
+
+* 需要と供給は塾の文脈で扱いました。
+* 次回扱いますが、子どもを産むには「男女一組が必要」なため、出生行動そのものは需要曲線と供給曲線で扱いにくい点があります。
+* 経済学で需要と供給に分けて分析されがちなのが婚姻市場です。ただし、その場合には、価格にはさまざまな内容が考えられます。男性優位で物質的な社会では男性の生涯資産が価格ですし、女性の若さを尊ぶ局面では女性の年齢かもしれません。婚姻市場では複数の要素を価格として扱い、要素の特定の組み合わせが婚姻相手としての望ましさを決める関数を想定しながら分析します。
+* 途上国全般によく見られる婚資(dowry)も、婚姻市場の均衡に依存して決まると考えられています。婚資が少なすぎて嫁いだ女性が焼き殺されてしまうという悲劇的な事件も南アジアではありますが、法令による禁止以外に婚姻市場への介入も考えるべきです。たとえば、地域や宗教ごとに分断されている婚姻市場を統合し、より広く相手を探索することで局地的に婚資が高くならないように誘導することも考えられます。
+
+
+----
+
+<!--
+荒澤はな
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+普段は文化や考え方などの視覚化されづらいものなどで日本と異国を比較するような授業を多く履修していたので、実際に自身で統計を出していったりなどすることに興味と少しの不安があります...(中略)...これからの授業で自身で統計をとったり、データから読み取っていく作業はあるのでしょうか。
+:::
+</div>
+
+* 予定していませんでしたが、実演するのも一案ですね。
+* AI利用=計算能力の民主化、と述べる人たちがいます。vibe codingで統計を取得させ、データ視覚化を指示すると、その意味を実感できると思います。
+
+----
+
+<!--
+石峯優花
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+AIを利用する際には、AIが出した回答をそのまま信じるのではなく、情報の正確性を自分自身で確認することが重要だと分かった。特に印象に残ったのは、AIが自信満々に間違った情報を作り出すHallucinationである。AIは人間のようにこれは分からないと判断することが苦手であり、最もらしい文章を生成してしまうため、回答の根拠を確認する必要があると感じた。また、AIはプライバシーや文脈を十分に理解できない場合があるため、AIに渡す情報を自分で選別することも重要だと思った。一方でRAGとCoVeが実際にどのような仕組みで動いているのか、また、それぞれを使うことでどの程度誤情報を減らすことができるのかが少し分かりにくかった。例えば、RAGでは情報源を固定するとあったが、そもそもその情報源自体が間違っていた場合にどうなるのかという疑問が残った。CoVeについても、AIが作った回答を別のAIに確認させた場合、確認する側のAIも間違っている可能性があるのではないかと思った。
+:::
+</div>
+
+* RAGやCoVeがどのように働いているのか、人間には分かりません。AIの機能はブラックボックスです。AIが複層の神経回路を模して予測している理解以上に、多くの人は思考回路を気にしていません。AIは予測機械なので、予測が当たれば良いためです。
+* RAGやCoVeもユーザが実施の指針を与えますが、無視されることもあります。それでも、RAGで要約させ、CoVeでその内容を検証させる、というのは有用な手段です。
+* しかし、別のエージェントとはいえ、同じ訓練を経た同じAIモデルです。よって、敵対的エージェントadversarial agentによる検証は、別のAIモデル(claudeを使っていたらchatGPT)を使う方が独立性が高いと議論されることもあります。
+* 情報源が誤っている場合は人間に要約させても誤ります。
+
+----
+
+<!--
+亀山心結
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+以前受講した授業で日本では、アメリカと比較すると誤情報の影響は現時点では大きくないものの、誤情報に対抗する仕組みが十分に整っていないため、一度広がり始めると急速に影響が拡大する可能性がある。また、デマや誤情報はSNSなどを通じて無料で拡散される一方、正確な情報を得るためには有料の記事やサービスが必要。このような構造ではファクトチェックをビジネスとして成立させることが難しく、誤情報への対策が進みにくいという課題があるということを、学んだことを資料を拝見し、思い出しました。
+:::
+</div>
+
+* 日本は第二次大戦終戦まで連戦勝利の大本営発表を信じていた人が大半でした。今はだいぶ変わったと信じたいですが、アメリカに比して社会が同質的なので、誤情報を信じやすい土壌は確かにある気がします。
+* 一方、アメリカではワクチン懐疑論者で似非科学信奉者が保健省長官に大統領から指名され、議会承認を得て就任しました。公衆衛生専門家の離職によるCDC弱体化、度重なる予防医療を軽んじる情報発信により、ワクチン接種を拒否する人が急増しています。エコー・チェインバーの度合いは分断の進んだアメリカの方が激しい気もしますので、誤情報の広がり方が日本よりも遅いと一概に言い切れません。データ・センター反対。
+* 正確な情報は追加的費用をほぼかけずにコピー可能な公共財です。お金を支払う人が少ないことから、公共財は収入に見合うだけしか供給されず、常に供給不足です。このため、ファクト・チェックは費用に比べて収入が不十分になり、単体のビジネスとしてできることは限られます。
+
+----
+
+<!--
+飯島杏奈
+-->
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回の講義では、RCTやJ-PAL、機会費用など、初めて聞く言葉が多くありました。講義で出てきた用語について、意味や具体例などを一覧のような形でまとめていただけると、復習する際に分かりやすく助かります。今回紹介されたGitHubについても、サイトを添付していただいていましたが、使い方をまだ十分に理解できていないため、可能であれば次回の授業の最初に10分程度でも大まかな説明をしていただけるとありがたいです。今後も講義資料をGoogle Classroomに掲載していただけると助かります。リアクションペーパーの文字数について、目安として何文字程度が適切か教えていただきたいです。
+:::
+</div>
+
+* RCTやJ-PALを今回の講義では取り上げていません。
+* Githubについては講義前の時間を使って少し説明をいたします。
+* 用語についてはご自分で調べた内容をAIを使って要約すると便利だと思います。試してみてください。
+* RPに字数制限や目安を考えておりません。書くべき内容が少ない場合は短く、議論を詰めたい場合には必要なだけ記入してください。
+
 
 ----
 

@@ -1,0 +1,75 @@
+---
+title: |
+  Vibe coding example\
+  問いかけと出力記録
+subtitle: "Claude Opus 5.5を利用"
+author: "Seiro Ito"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+pdf-engine: lualatex
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 1
+    grid:
+      margin-width: 350px
+    linkcolor: "green"
+    urlcolor: "#009900"
+    template-partials: 
+      - ../../assets/style/toc-slide.html
+    include-after-body: ../../assets/style/toc-add.html
+theme: [sky, ../../assets/style/sky-add.scss]
+css: [../../assets/style/my.css]
+filters:
+  - ../../_extensions/tarleb/parse-latex/parse-latex.lua
+  - ../../_extensions/seiro/tikzja/tikzja.lua
+  - ../../assets/filters/ListArrow.lua
+  - ../../_extensions/schochastics/nutshell/nutshell.lua
+lightbox: auto
+backgroundcolor: "#fffcf2"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+doi-title: "doi.org/10.1086/734780"
+callout-appearance: simple
+callout-icon: false
+bibliography: ../../seiro.bib
+link-citations: true
+reference-location: margin
+citation-location: margin
+---
+
+# Meta prompt
+
+> I am a student who is analyzing data related to development and health. Find ViveCodingExample.qmd in XXX folder and render. I will update the file each time I receive your outputs written in the file. 
+
+# Procedure
+
+* I will add instructions as you provide outputs. 
+* You will add outputs under each instruction.
+* Outputs must be R or Python codes. R is the most preferred language. Use Python only if you cannot achieve using R.
+* Code blocks must not result in a horizontal scroll bar. Use linebreaks.
+* Use a Tufte style css.
+* Outputs must be succinct. Do not provide any anaylitical comments. Provide only data related information that is useful in interpreting outputs. 
+
+# Instructions and outputs
+
+## 1st query
+
+### Instructions
+
+* I am trying to find empirical relationship between child mortality and per capita health spending across countries. 
+* Final output is a group of graphs showing time series changes by country in a single figure.
+* X axis is spendings, Y axis is mortality, and points are connected by a line for a same country.
+* Find most suitable variables from WB data, WHO, DHS. 
+
+### outputs
+
+## 2nd query
+

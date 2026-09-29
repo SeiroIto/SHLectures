@@ -22,7 +22,7 @@ format:
     #### CSS bypasses the Sass compiler's internal search logic
     #### theme: [sky, sky-add.scss, ../../style/hiragino.scss] error
     #### theme: [sky, sky-add.scss, /style/hiragino.scss] error
-    css: [../../assets/style/hiragino.scss, ../../assets/my.css] 
+    css: [../../assets/style/hiragino.scss, ../../assets/style/my.css]
     lightbox: true
     linkcolor: red
     code-line-numbers: true
@@ -2571,7 +2571,7 @@ knitr::include_graphics("../CommonFiles/1/ChinaClamSchoolFeeControl_Nikkei20201S
 
 ::: {.column width="60%"}
 
-[DSの図](http://seiroito.github.io/SHLectures/lec_slides/2024/1.pdf#page=82)
+[DSの図](1.pdf#page=82)
 
 :::
 
@@ -2955,7 +2955,10 @@ $$
 . . . 
 
 * 前科のある人を雇うと犯罪により期待値で10万円費用が余計にかかるとき  
-&rArr; 10万円余計に払っても犯罪歴のない人を雇う、前科のある人を(10万円安く雇うことは明確な差別になるので)雇わない
+
+    &rArr; 10万円余計に払っても犯罪歴のない人を雇う
+    
+    &rArr; 前科のある人を(10万円安く雇うことは明確な差別になるので)雇わない
 
 ----
 
