@@ -2691,7 +2691,7 @@ Take away: 市場を強権で統制しても、望んだ結果を都合よく得
 ![](../CommonFiles/1/ikukyu_kikan_regular.png){width=80%}
 
 * 2か月刻みの等間隔階級に再配分(公表階級を階級内一様分布と仮定、総和は保存)
-* 育児休暇は男女同時に取得できない: 父+母=法定最長3年、企業によってはそれ以上も
+* 育児休暇は男女同時に取得できる: 法定1歳まで、2歳まで延長可能
 
 ----
 
@@ -2897,9 +2897,9 @@ $$
 
 * 背景
   * 収監は犯罪対策としては費用が高い。  
-  * 637,000人の服役囚が毎年出所するが2/3が3年以内に再服役する。  
+  * 637,000人の服役囚が毎年出所するが、2/3が3年以内に再逮捕され、約半数が再収監される。  
      * 2001年生まれの男性のうち、アフリカ系32%、ヒスパニック系17%、白人6%が1度は服役する。収監は再犯防止効果を上げていない。とくにアフリカ系男性。  
-* 雇用は効果あり: 雇用機会を増やすとrecividism (再犯)確率が減ることがデータで示されている。  
+* 雇用は効果あり: 雇用機会を増やすとrecidivism (再犯)確率が減ることがデータで示されている。  
 * `The Box': 	求職応募用紙  
 
 . . . 
@@ -2991,7 +2991,7 @@ $$
 \mbox{do not change}  \\
 \mbox{increase}
 \end{array}
-\right\} \ \mbox{recividism}.
+\right\} \ \mbox{recidivism}.
 $$
 
 ----
@@ -3020,7 +3020,7 @@ $$
 \phantom{\mbox{do not change}}  \\
 \class{fragment}{\mbox{increase}}\\
 \end{array}
-\right\} \ \mbox{recividism}.
+\right\} \ \mbox{recidivism}.
 $$
 
 
@@ -3112,7 +3112,28 @@ $$
 
 ### :x btb03
 
-* Criminal Justice Administrative Records System (CJARS)
+Criminal Justice Administrative Records System (CJARS)
+
+* Misdemeanour defendants
+    - Above the poverty line&uarr; (+1.8% points)
+    - Paid wages&uarr; (+$665, about 5%)
+    - Felony recidivism&darr; (−0.8 % points)
+* Felony defendants
+    - Felony recidivism&darr; (−0.9 % points)
+
+
+### :x btb04
+
+[Doleacは効果が疑問視されていることに猛反対している (2024)](https://www.youtube.com/watch?v=0887KNibSBI&t=1728s)
+
+> I just completely vehemently disagree (29:33)
+
+[a podcast interview (2026 Sep 3), 16:22](https://open.spotify.com/episode/5BjubRcXMOVPhOPvFAJXHQ)
+
+> Evidence was piling up against the ban the box (20:41)
+
+他の論文を知っているのになぜ???
+
 
 ----
 
@@ -3121,8 +3142,10 @@ BTB政策研究のその後
 * 結果が疑問視されている
     @d1.  [: @BurtonWasser2025](#btb01)
     @d2.  [: @KaestnerWang2024](#btb02)
+    @d3.  [: OpenToDebate on substack](#btb04)
 * データを吟味し、仮説を統計学的に検証して効果を考える
 * 学派などに依るのではなく虚心坦懐にデータを検証する
+
 
 ----
 
@@ -3693,13 +3716,13 @@ J-PAL to the rescue!
 * ~~"1094 randomized evaluations...in 91 countries," "from clean water to microfinance to crime prevention."~~
 * "conducted over 2,400 randomized evaluations" in "over 120 countries"   
 * 大変な数  
-* ランダム化比較試験RCTは政策の効果を歪み無く示すことができる  
+* ランダム化比較試験randomised controlled trial (RCT)は政策の効果を歪み無く示すことができる  
 	* なぜ歪まないか? 理由はコースの後半で学びます。
 * RCTはパイロット研究pilot studyです。パイロット研究はロジスティクスや費用対効果などを示すことができます。  
 
 ----
 
-Examples: A summary of their RCTs on \href{https://www.povertyactionlab.org/policy-lessons/education/increasing-test-score-performance}{learning (web page in 2020)}.
+Examples: A summary of their RCTs on \href{https://www.povertyactionlab.org/policy-lessons/education/increasing-test-score-performance}{learning }[(archived web page in 2018)](https://web.archive.org/web/20180808145601/https://www.povertyactionlab.org/policy-insight/improving-learning-increasing-motivation-targeting-instruction-and-addressing-school).
 
 * When access to education is extremely limited, getting children into school can lead to large learning gains (Afghanistan).
 * Motivating students to go to school and learn can be very cost-effective, by scholarship (Kenya), by conditional cash transfer (Malawi).
@@ -3726,16 +3749,56 @@ Examples: Learning (continued).
 
 . . . 
 
+:::::: {.columns}
+:::: {.column width="4%"}
+![](1/jpal_country_sector_v.png){width="20%"}
+::::
+:::: {.column width="4%"}
+![](1/jpal_country_total.png){width="50%"}
+::::
+:::: {.column width="4%"}
+![](1/jpal_country_percapita.png){width="50%"}
+::::
+:::: {.column width="4%"}
+![](1/jpal_country_pop_scatter.png){width="50%"}
+::::
+
+:::: {.column width="4%"}
+![](1/jpal_sector_pop_scatter.png){width="50%"}
+::::
+
+:::: {.column width="4%"}
+![](1/jpal_half_portfolio_scatter.png){width="50%"}
+::::
+
+:::: {.column width="4%"}
+![](1/jpal_HalfPortfolioChoropleth.png){width="50%"}
+::::
+
+:::: {.column width="68%"}
+ClaudeにJ-PALのプロジェクト・リストをscrapeさせ描画
+::::
+::::::
+
+* インドとケニア偏重、ガーナ、ウガンダ、バングラデシュ、マラウィ、メキシコ、コロンビアも
+    * 金融: インド+東アフリカ+その他
+    * 保健: インド+東アフリカ中心
+    * 教育: インド、ケニア、チリ、ガーナ、コロンビア
+* インドは人口が多いので多くても妥当だがケニアは? アフリカは仏語圏僅少
+* 教育=全世界的関心事、J-PALでは5か国で1/2
+
+----
+
 * 政策効果の因果推計causal inference (教訓the lesson learned)が他の地域に当てはまらないとき、推計は<Red>外的妥当性external validity</Red>を欠く、といいます。リストした研究内容は外的妥当性が限られています。 
 * 推計が因果関係を捉えている(識別するidentify)とき、推計には<Red>内的妥当性internal validity</Red>がある、といいます。
 
 ----
 
 * これは厳しすぎる批判かも。J-PALは重要な知見のある研究をたくさん実施。
-* しかし、リスト内容からは、小規模RCTを使った方法に限界があることが分かります。
+* 違う視点: リスト内容からは、小規模RCTを使った方法に限界があることが分かります。
    * 比較的小さな政策が多い: 教員給与、補助教員追加、学習教材配布、家計への補助金、ワクチン接種、etc.  
    * 不可逆的政策は無理: 授業の現地語化・英語化、進級・進学基準の変更  
-   * +大規模政策は無理: 学校建設、正規教員増員  
+   * 大規模政策は無理: 学校建設、正規教員増員  
 *  2019年にJ-PALのBanerjee, Duflo, Kremerがノーベル経済学賞を受賞。
 
 . . .
@@ -3745,23 +3808,6 @@ Examples: Learning (continued).
 . . . 
 
 * 素晴らしい本。読みやすい。開発経済学に興味のある誰もが読むべき。
-
----- 
-
-@Ravallion2012, @Rosenzweig2012 は批判:
-
-* 小規模なエビデンスを積み上げるとビッグ・プッシュになるのか?
-* 的を射ている。でも、他の研究方法と組み合わせて、ビッグ・プッシュになるようにすれば良いのでは?
-   * 行政データなどの大規模データを使った観察研究でも知見はある。
-
-. . . 
-
-@HeckmanSmith1995, @Heckman2010bridgegaps はRCTの利用と誘導型推計を疑問視:
-
-* 全ての政策を実験・ランダム化できるのか? できない。
-* ランダム化=政策実施か? 二重盲検(double blind) RCTでないと、ランダム化バイアスrandomisation biasは必ずある。
-* なぜ効果があった・無かったのか? メカニズムを示す理論はあるのか?
-	* ただし、誘導型推計でも理論を検定することは可能
 
 ----
 
@@ -3781,7 +3827,56 @@ Can't save them.
 
 * *Poor Economics*以前の時代を単純化しすぎていないか、ちょっと疑問が残ります。
 
+---- 
+
+RCT経由の知識生産への批判
+
+* 小規模なエビデンスを積み上げるとビッグ・プッシュになるのか?[@Ravallion2012; @Rosenzweig2012]
+    * 的を射ている。でも、他の研究方法と組み合わせて、ビッグ・プッシュになるようにすれば良いのでは?
+    * 行政データなどの大規模データを使った観察研究でも知見はある。
+* なぜ効果があった・無かったのか? メカニズムを示す理論はあるのか?
+    * 構造推計: 経済モデルを組み込んだ推計をして、メカニズムを前提にした検定をする
+    * 誘導型推計(モデルを組み込まない)でも理論を検定することは可能
+
+---- 
+
+RCT実施体制への批判[@HeckmanSmith1995; @Heckman2010bridgegaps]
+
+* 全ての政策を実験・ランダム化できるのか? できない。
+* ランダム化=政策実施か? 二重盲検(double blind) RCTでないと、ランダム化バイアスrandomisation biasは必ずある。
+    * 実験を意識して治療群(Hawthorn effect)・統御群(John Henry effect)が行動を変える
+    * 被験者が質問者の意図におもねる(preferrability bias)
+
 ----
+
+他の研究方法=観察研究 (&harr;実験研究)
+
+* 政策効果: 政策の影響下にあったグループ(治療群) vs. そうではなかったグループ(統御群)
+* 普通に比較するだけでは効果推計値が歪むので、正しい方法を知る必要があります
+* コース後半(インパクト評価)で説明します
+
+----
+
+知見を総合する方法
+
+* Systematic review
+    1. 既存研究をすべてリスト
+    1. 特定の基準を満たさない研究を除外
+    1. 同じ政策と結果指標ごとに効果を分析
+
+* Meta analysis
+    1. Systematic review +
+    1. 効果を統計的に総合する
+        * 政策実施前の標準偏差$\sigma$単位で各研究を加算可能にする
+        * 特定の統計量(平均値、中央値など)を使って効果を要約する
+
+. . . 
+
+(開発)経済学は伝統的にmeta-analysisが少ない
+
+----
+
+古いタイプの観察研究(お薦めではない)
 
 [Milleneum Villages (サイトがなくなっています!)](http://millenniumvillages.org/)はどうなったでしょうか? 
 
@@ -3819,7 +3914,10 @@ Can't save them.
 * J-PAL:  A research centre focusing on randomised controlled trials (RCTs) to produce practical policy lessons.
 * internal validity:  An unbiased causal inference.
 * external validity:  An unbiased causal inference with applicability beyond studied subjects.
-
+* 2 ways to estimate policy impacts
+    * RCTs
+    * Observational studies
+* Use meta analysis to synthesize learned lessons
 
 ----
 

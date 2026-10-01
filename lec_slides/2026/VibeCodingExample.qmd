@@ -52,7 +52,7 @@ citation-location: margin
 # Procedure
 
 * I will add instructions as you provide outputs. 
-* You will add outputs under each instruction.
+* You will add outputs under each instruction. Add "X+1th query" subsection when you respond to the X-th query.
 * Outputs must be R or Python codes. R is the most preferred language. Use Python only if you cannot achieve using R.
 * Code blocks must not result in a horizontal scroll bar. Use linebreaks.
 * Use a Tufte style css.

@@ -14,4 +14,7 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
 
 * Lecture 01  
    * [01](https://seiroito.github.io/SHLectures/lec_slides/2026/01.html)  
+* Lecture 02  
    * [RP01](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP01.html)  
+   * Vibe coding example ([source](https://seiroito.github.io/SHLectures/lec_slides/2026/VibeCodingExample.qmd), [output](https://seiroito.github.io/SHLectures/lec_slides/2026/VibeCodingExample.html))  
+

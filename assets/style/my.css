@@ -124,3 +124,15 @@ DarkOrange {
 .ListArrow .arrow-right {
   flex: 0 0 var(--right-width, 50%);
 }
+/* terminal output blocks: ```{.terminal} -> Pandoc emits <pre class="terminal"><code> (no sourceCode, so no copy button) */
+pre.terminal {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  font-family: Consolas, "Courier New", monospace;
+  border: none;
+  padding: 0.6em 0.8em;
+}
+pre.terminal code {
+  background: transparent !important;
+  color: inherit !important;
+}
