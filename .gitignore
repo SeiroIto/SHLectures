@@ -43,6 +43,7 @@
 /lec_slides/**/**/*.log
 /lec_slides/**/*.log
 /lec_slides/**/RP/*.log
+/lec_slides/**/RP/*.qmd
 /lec_slides/**/test*
 /lec_slides/**/ImpactEvaluation/figure/bad_graphs/
 /lec_slides/**/ImpactEvaluation/figure/local/
