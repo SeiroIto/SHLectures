@@ -3186,6 +3186,59 @@ Source: Angus Maddison. I made up \$200 in 40000BC.
 
 ----
 
+産業革命開始時期[@BouscasseNakamuraSteinsson2025]
+
+:::: {.columns}
+
+::: {.column width="20%"}
+![](1/BNS_Fig07.jpg){width="70%"}
+:::
+::: {.column width="20%"}
+![](1/BNS_Fig04.jpg){width="70%"}
+:::
+::: {.column width="55%"}
+* 19世紀&rarr;18世紀半ば&rarr;1600年前後
+* 1750年以降の実質賃金低迷Engel's pause\
+&larr;人口増大\
+&larr;「資本家の搾取」(エンゲルス)ではない
+:::
+::::
+
+産業革命の契機
+
+* 1600年頃までに成立していた事柄
+* ⭕ 農業の生産性上昇と農業就労人口低下[@WallisColsonChilosi2018]、ヘンリー8世の教会領没収と地価低下[@HeldringRobinsonVollmer2021]、ヨーマンの興隆[@Allen1992]、貿易・植民地とロンドン都市化[]、活版印刷と識字率上昇[@Dittmar2011]
+    * 進歩主義思想・ブルジョワ的価値[@Mokyr2009; @Mokyr2016;  @McCloskey2006]やプロテスタンティズムの倫理[@Weber1904; @Tawney1926]などは整合的であるがタイミングを示しづらい
+* ❌ 名誉革命(1688)、エンクロージャ[@NorthWeingast1989; @BogartRichardson2011]、English Civil War (1642-1651)
+
+
+----
+
+(農業の)機械化進展の契機[@VothCaprettiniTrew2026]
+
+:::: {.columns}
+::: {.column width="30%"}
+![](1/VCT_Figure4.png){width="70%"}
+:::
+::: {.column width="30%"}
+![](1/ThreshingMachine.jpg){width="70%"}
+:::
+::: {.column width="35%"}
+* ナポレオン戦争(1793-1815)\
+&rArr; 徴兵\
+&rArr; 賃金高騰\
+&rArr; 労働節約的技術(機械)導入
+:::
+::::
+
+. . .
+
+徴兵が多い地域ほど機械導入が進展
+
+* 生産要素賦存 &rArr; 採用される技術の特徴
+
+----
+
 次のページで1960年からの各国の一人あたり所得が図に描かれています。どのようなパタンを予想しますか。低所得国は豊かになっているでしょうか。  
 
 . . .
