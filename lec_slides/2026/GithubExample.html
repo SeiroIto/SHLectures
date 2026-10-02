@@ -2385,7 +2385,7 @@ color: inherit !important;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 01, 2026, 20:10 +0900</p>
+        <p class="date">October 02, 2026, 10:10 +0900</p>
       </div>
     </div>
     
@@ -2399,7 +2399,7 @@ color: inherit !important;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#githubとは" id="toc-githubとは" class="nav-link active" data-scroll-target="#githubとは">Githubとは</a></li>
+  <li><a href="#github" id="toc-github" class="nav-link active" data-scroll-target="#github">Github</a></li>
   <li><a href="#bash-ターミナルのインストール" id="toc-bash-ターミナルのインストール" class="nav-link" data-scroll-target="#bash-ターミナルのインストール">bash ターミナルのインストール</a></li>
   <li><a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore">.gitignore</a></li>
   <li><a href="#procedures" id="toc-procedures" class="nav-link" data-scroll-target="#procedures">Procedures</a></li>
@@ -2415,8 +2415,10 @@ color: inherit !important;
 
 
 
-<section id="githubとは" class="level1">
-<h1>Githubとは</h1>
+<section id="github" class="level1">
+<h1>Github</h1>
+<section id="githubとは" class="level2">
+<h2 class="anchored" data-anchor-id="githubとは">Githubとは</h2>
 <ul>
 <li>Git(手元PCのソフト)が記録した変更履歴ごと、ファイルを預かるオンラインの保存場所</li>
 <li>変更履歴があるので、任意時点の状態に戻ることができる</li>
@@ -2428,10 +2430,29 @@ color: inherit !important;
 <li>webページ・webサイトを公開することができる</li>
 </ul>
 </section>
+<section id="githubアカウントの作成" class="level2">
+<h2 class="anchored" data-anchor-id="githubアカウントの作成">GitHubアカウントの作成</h2>
+<ol type="1">
+<li><a href="https://github.com/">github.com</a> を開き、右上の「Sign up」を押す</li>
+<li>メールアドレス、パスワード、ユーザー名(username)を入力して「Continue」</li>
+<li>登録したメールに届く確認コード(数字)を入力</li>
+<li>ログイン後、右上のアイコンに自分のユーザー名が表示されれば作成完了</li>
+</ol>
+<ul>
+<li>ユーザー名は後で教員に送る(「招待を受ける」参照)</li>
+<li>既にアカウントがあれば不要</li>
+</ul>
+</section>
+</section>
 <section id="bash-ターミナルのインストール" class="level1">
 <h1>bash ターミナルのインストール</h1>
 <ul>
 <li>以下の git コマンドは bash ターミナルで実行する</li>
+<li>GUI付きのプログラムもあるが、ターミナルでの作業が便利
+<ul>
+<li>自分がやりたいことのために、どのコマンドをどのように書くのか分からなければ、AIに尋ねる</li>
+<li>同じAIに(たとえばChatGPT)繰り返し尋ねると、今までの質問履歴を参考に回答してくれる</li>
+</ul></li>
 </ul>
 <section id="windows" class="level2">
 <h2 class="anchored" data-anchor-id="windows">Windows</h2>
@@ -2448,7 +2469,10 @@ color: inherit !important;
 <li>スタートメニューで「Git GUI」を開く →「Create New Repository」→ <code>C:\test\sandbox</code> を選んで「Create」→ メニュー「Repository」→「Git Bash」</li>
 </ol></li>
 <li>プロンプトに <code>MINGW64</code> と表示されれば Git Bash</li>
+<li>起動したら、作業フォルダに移動する</li>
 </ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> c:/test            <span class="co"># 初回: ここで git clone する(sandbox フォルダができる)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> c:/test/sandbox    <span class="co"># 2回目以降: 起動したらまずこれ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mac" class="level2">
 <h2 class="anchored" data-anchor-id="mac">Mac</h2>
@@ -2456,7 +2480,10 @@ color: inherit !important;
 <li>インストール不要: 標準の「ターミナル」を使う(初期設定のシェルは zsh だが、以下のコマンドはそのまま動く)</li>
 <li>起動: <code>⌘ + スペース</code> で Spotlight を開き「ターミナル」と入力。または Finder →「アプリケーション」→「ユーティリティ」→「ターミナル」</li>
 <li>git が無ければ <code>xcode-select --install</code> または <code>brew install git</code>(<a href="https://git-scm.com/install/mac">git-scm.com</a>)</li>
+<li>起動したら、作業フォルダに移動する(先に Finder でホームに <code>test</code> フォルダを作っておく)</li>
 </ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/test             <span class="co"># 初回: ここで git clone する(sandbox フォルダができる)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/test/sandbox     <span class="co"># 2回目以降: 起動したらまずこれ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="gitignore" class="level1">
@@ -2468,22 +2495,22 @@ color: inherit !important;
 <p>黒地の枠は、練習用レポジトリで実際に得た出力(英語表示)。パスやハッシュ(<code>ff0073e</code> 等)は各自で異なる。</p>
 <section id="初回設定pcごとに1回" class="level2">
 <h2 class="anchored" data-anchor-id="初回設定pcごとに1回">初回設定(PCごとに1回)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Your Name&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;you@example.com&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Your Name&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;you@example.com&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>何も表示されなければ成功</p>
 </section>
 <section id="レポジトリの取得" class="level2">
 <h2 class="anchored" data-anchor-id="レポジトリの取得">レポジトリの取得</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>user<span class="op">&gt;</span>/<span class="op">&lt;</span>repo<span class="op">&gt;</span>.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>user<span class="op">&gt;</span>/<span class="op">&lt;</span>repo<span class="op">&gt;</span>.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>Cloning into &#39;&lt;repo&gt;&#39;...</code> と表示され、<code>&lt;repo&gt;</code> フォルダができる</p>
 <p>練習用レポジトリ <a href="https://github.com/SeiroIto/sandbox">sandbox</a> の場合</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/SeiroIto/sandbox.git</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sandbox</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/SeiroIto/sandbox.git</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sandbox</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="他の人別pcの編集を取り込む" class="level2">
 <h2 class="anchored" data-anchor-id="他の人別pcの編集を取り込む">他の人(別PC)の編集を取り込む</h2>
 <p>作業を始めたら、まずこれ</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>From https://github.com/SeiroIto/test
  * branch            main       -&gt; FETCH_HEAD
 Updating 9c62715..556ab47
@@ -2494,7 +2521,7 @@ Fast-forward
 </section>
 <section id="状況確認" class="level2">
 <h2 class="anchored" data-anchor-id="状況確認">状況確認</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>On branch main
 
 No commits yet
@@ -2505,7 +2532,7 @@ Untracked files:
 
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
 <p>編集済みファイル名を指定して、次のコミットの記録対象に加える</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add 01.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add 01.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>何も表示されなければ成功。<code>git status</code> で確認すると</p>
 <pre class="terminal"><code>On branch main
 
@@ -2515,21 +2542,21 @@ Changes to be committed:
   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
         new file:   01.qmd</code></pre>
 <p>すべての編集済みファイルを、次のコミットの記録対象に加える</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>編集を確定(備忘録用の確定メッセージを付加)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;added VibeCodingExample.qmd&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;added VibeCodingExample.qmd&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>[main (root-commit) ff0073e] added VibeCodingExample.qmd
  1 file changed, 5 insertions(+)
  create mode 100644 01.qmd</code></pre>
 </section>
 <section id="履歴" class="level2">
 <h2 class="anchored" data-anchor-id="履歴">履歴</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>ff0073e added VibeCodingExample.qmd</code></pre>
 </section>
 <section id="編集内容の確認add前" class="level2">
 <h2 class="anchored" data-anchor-id="編集内容の確認add前">編集内容の確認(add前)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>diff --git a/01.qmd b/01.qmd
 index 0886b05..410288c 100644
 --- a/01.qmd
@@ -2543,7 +2570,7 @@ index 0886b05..410288c 100644
 </section>
 <section id="add-の取り消し" class="level2">
 <h2 class="anchored" data-anchor-id="add-の取り消し">add の取り消し</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> 01.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> 01.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>何も表示されなければ成功。<code>git status</code> で確認すると</p>
 <pre class="terminal"><code>On branch main
 Changes not staged for commit:
@@ -2555,15 +2582,15 @@ no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&q
 </section>
 <section id="remoteとlocalの比較" class="level2">
 <h2 class="anchored" data-anchor-id="remoteとlocalの比較">remoteとlocalの比較</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff HEAD origin/main <span class="at">--stat</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff HEAD origin/main <span class="at">--stat</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>From https://github.com/SeiroIto/test
    9c62715..556ab47  main       -&gt; origin/main
  .gitignore |   2 +
  seiro.bib  | 389 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
  2 files changed, 384 insertions(+), 7 deletions(-)</code></pre>
 <p>全ての編集の比較(<code>-</code> はremoteにあってlocalにない行)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff origin/main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff origin/main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="terminal"><code>diff --git a/.gitignore b/.gitignore
 index f68b506..2a539d4 100644
 --- a/.gitignore
@@ -2579,7 +2606,7 @@ index f68b506..2a539d4 100644
 </section>
 <section id="localの編集をremoteに反映させる" class="level2">
 <h2 class="anchored" data-anchor-id="localの編集をremoteに反映させる">localの編集をremoteに反映させる</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>出力例(取得したものではない)</p>
 <pre class="terminal"><code>Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
@@ -2602,7 +2629,7 @@ To https://github.com/&lt;user&gt;/&lt;repo&gt;.git
 <section id="招待を受ける初回のみ" class="level2">
 <h2 class="anchored" data-anchor-id="招待を受ける初回のみ">招待を受ける(初回のみ)</h2>
 <ol type="1">
-<li><a href="https://github.com/">github.com</a> でアカウントを作る(既にあれば不要)</li>
+<li>GitHub アカウントを作る(「GitHubアカウントの作成」参照)</li>
 <li>自分の GitHub ユーザー名を教員(伊藤)に送る</li>
 <li>教員が sandbox レポジトリに招待する</li>
 <li>GitHub から届く招待メール(または github.com 右上の通知)を開き、“Accept invitation” を押す</li>
@@ -2625,17 +2652,17 @@ To https://github.com/&lt;user&gt;/&lt;repo&gt;.git
 <li><p>以下のコマンドは bash ターミナルで実行する(起動方法は「bash ターミナルのインストール」)</p></li>
 <li><p><code>git clone</code> は親フォルダ <code>C:\test</code> で実行する: clone が <code>sandbox</code> フォルダを作るので、<code>C:\test\sandbox</code> の中で実行すると不要な <code>C:\test\sandbox\sandbox</code> ができてしまう</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /c/test                                           <span class="co"># 親フォルダ C:\test に移動</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/SeiroIto/sandbox.git   <span class="co"># 初回のみ。C:\test\sandbox ができる</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sandbox</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main                                 <span class="co"># 他の人の編集を取り込む</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /c/test                                           <span class="co"># 親フォルダ C:\test に移動</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/SeiroIto/sandbox.git   <span class="co"># 初回のみ。C:\test\sandbox ができる</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sandbox</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main                                 <span class="co"># 他の人の編集を取り込む</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>EditMe.md</code> をエディタで開き、<code># Your playground</code> の下に1行追加して保存</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status                   <span class="co"># modified: EditMe.md と表示される</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff                     <span class="co"># 追加した行が + 付きで表示される</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add EditMe.md</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;added my line to EditMe.md&quot;</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main         <span class="co"># push 直前にもう一度取り込む</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status                   <span class="co"># modified: EditMe.md と表示される</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff                     <span class="co"># 追加した行が + 付きで表示される</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add EditMe.md</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;added my line to EditMe.md&quot;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main         <span class="co"># push 直前にもう一度取り込む</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>ブラウザで <a href="https://github.com/SeiroIto/sandbox/blob/main/EditMe.md">EditMe.md</a> を再読込し、自分の行が反映されていれば成功</li>
 <li><code>git log --oneline -n 10</code> で、他の人のコミットも並んでいることを確認</li>

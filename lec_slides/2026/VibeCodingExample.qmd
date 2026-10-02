@@ -2,7 +2,6 @@
 title: |
   Vibe coding example\
   問いかけと出力記録
-subtitle: "Claude Opus 5.5を利用"
 author: "Seiro Ito"
 date: last-modified
 date-format: "MMMM DD, YYYY, HH:MM ZZ"
@@ -47,16 +46,18 @@ citation-location: margin
 
 # Meta prompt
 
-> I am a student who is analyzing data related to development and health. Find ViveCodingExample.qmd in XXX folder and render. I will update the file each time I receive your outputs written in the file. 
+Below is what I asked you in the terminal.
+
+> I am a student who is analyzing data related to development and health. Find ViveCodingExample.qmd in this folder. Read the Procedure. Respond to my Instructions and render the file. I will update the file each time I receive your outputs written in the file. 
 
 # Procedure
 
-* I will add instructions as you provide outputs. 
-* You will add outputs under each instruction. Add "X+1th query" subsection when you respond to the X-th query.
-* Outputs must be R or Python codes. R is the most preferred language. Use Python only if you cannot achieve using R.
+* I will add "Instructions" as you provide "Outputs." 
+* You will add outputs right after each instruction. Also add "X+1th query" subsection, "Instructions", and "Outputs" when you respond to the X-th query.
+* When you provide codes, they must be either in R or Python. R is the most preferred language. Use Python only if you cannot get the task done with R.
 * Code blocks must not result in a horizontal scroll bar. Use linebreaks.
 * Use a Tufte style css.
-* Outputs must be succinct. Do not provide any anaylitical comments. Provide only data related information that is useful in interpreting outputs. 
+* Outputs must be succinct. Do not provide any analytical comments. I will do the interpretations. Provide only data related information that is useful in interpreting outputs, and the reason of your choices in creating outputs. 
 
 # Instructions and outputs
 
@@ -65,8 +66,8 @@ citation-location: margin
 ### Instructions
 
 * I am trying to find empirical relationship between child mortality and per capita health spending across countries. 
-* Final output is a group of graphs showing time series changes by country in a single figure.
-* X axis is spendings, Y axis is mortality, and points are connected by a line for a same country.
+* Final output is a scatter plot with a line connecting each points, showing time series changes by country in a single figure.
+* X axis is spendings, Y axis is mortality, and points are connected by a line for a same country. Use colour blind aware colour schemes, as in viridis.
 * Find most suitable variables from WB data, WHO, DHS. 
 
 ### outputs
