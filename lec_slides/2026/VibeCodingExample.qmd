@@ -25,7 +25,9 @@ format:
       - ../../assets/style/toc-slide.html
     include-after-body: ../../assets/style/toc-add.html
 theme: [sky, ../../assets/style/sky-add.scss]
-css: [../../assets/style/my.css]
+css:
+  - ../../assets/style/my.css
+  - https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/tufte.min.css
 filters:
   - ../../_extensions/tarleb/parse-latex/parse-latex.lua
   - ../../_extensions/seiro/tikzja/tikzja.lua
@@ -72,5 +74,92 @@ Below is what I asked you in the terminal.
 
 ### outputs
 
+Variables (all from World Bank WDI, fetched with the R package `WDI`)
+
+| Axis | Variable | WDI code | Unit | Original source |
+|------|----------|----------|------|-----------------|
+| Y | Under-5 mortality rate | `SH.DYN.MORT` | deaths per 1,000 live births | UN IGME (WHO/UNICEF/WB/UN) |
+| X | Current health expenditure per capita | `SH.XPD.CHEX.PP.CD` | current int'l $, PPP | WHO Global Health Expenditure Database |
+
+Reasons for choices
+
+* Under-5 mortality: widest country × year coverage among child mortality series; WHO GHO publishes the same UN IGME estimates.
+* Health spending in PPP dollars: removes cross-country price level differences, so X is comparable across countries.
+* WDI rather than WHO GHO API: both variables in one call, same country codes and region labels.
+* DHS not used: surveys are 5 or more years apart, country-specific years, and contain no health spending variable.
+* Years 2000–2022: spending series starts in 2000.
+* Both axes log10: spending ranges over about 100× across countries.
+* Facets by WB region: 7 panels instead of one panel with over 200 colours.
+* Legend off: colours only separate lines within a panel; viridis palette (colour-blind safe).
+* Points connected in year order (`geom_path`), so each line traces a country over time.
+
+```{r}
+#| label: u5m-hexp
+#| echo: true
+#| cache: true
+#| fig-width: 9
+#| fig-height: 9
+library(WDI)
+library(dplyr)
+library(ggplot2)
+# WB API is slow: longer download timeout
+old <- getOption("timeout")
+options(timeout = 300)
+d <- WDI(
+  indicator = c(u5m  = "SH.DYN.MORT",
+                hexp = "SH.XPD.CHEX.PP.CD"),
+  start = 2000, end = 2022, extra = TRUE
+) |>
+  filter(region != "Aggregates",
+         !is.na(region)) |>
+  select(iso3c, country, region, year,
+         u5m, hexp)
+options(timeout = old)  # restore
+dp <- d |>
+  filter(!is.na(u5m), !is.na(hexp)) |>
+  arrange(iso3c, year)
+ggplot(dp, aes(hexp, u5m,
+               colour = country,
+               group = country)) +
+  geom_path(alpha = .6) +
+  geom_point(size = .6) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_colour_viridis_d() +
+  facet_wrap(~ region, ncol = 2) +
+  labs(x = paste("Health expenditure per",
+                 "capita (PPP int'l $, log)"),
+       y = paste("Under-5 mortality per",
+                 "1,000 (log)")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+Data notes
+
+```{r}
+#| label: u5m-hexp-notes
+#| echo: true
+tibble(
+  item = c("countries fetched",
+           "countries plotted",
+           "country-years plotted",
+           "years",
+           "missing u5m",
+           "missing hexp"),
+  value = c(n_distinct(d$iso3c),
+            n_distinct(dp$iso3c),
+            nrow(dp),
+            paste(range(dp$year),
+                  collapse = "-"),
+            sum(is.na(d$u5m)),
+            sum(is.na(d$hexp)))
+) |> knitr::kable()
+```
+
 ## 2nd query
+
+### Instructions
+
+### Outputs
 
