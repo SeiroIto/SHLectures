@@ -1,0 +1,21 @@
+---
+title: "HW2: Vibe coding example2 問いかけと出力記録"
+author: "作者の名前をここに書きます"
+date: "`r format(Sys.time(), '%Y年%m月%d日 %R')`"
+output:
+  tufte::tufte_html:
+    toc: true
+# setwd(path <- "c:/seiro/docs/external/seishin/homeworks/2026/"); rmarkdown::render(paste0(path, "h2/HW2_rmarkdown.Rmd"))
+---
+
+```{r, child='Procedure.Rmd', message = F, warning = F}
+```
+```{r, child='1stRound.Rmd', message = F, warning = F}
+```
+
+
+## 2nd query
+
+### Instructions
+
+### Outputs

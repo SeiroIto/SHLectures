@@ -1,7 +1,4 @@
 project:
-  resources:
-    - "lec_slides/2026/VibeCodingExample.html"
-    - "lec_slides/2026/RP/RP01.html"
   render:
     - "!lec_slides/2026/VibeCodingExample.qmd"
     - "lec_slides/2026/**/*.md"
@@ -12,6 +9,9 @@ project:
     - "!lec_slides/2024/**/*.qmd"
     - "!homeworks/2024/*.qmd"
     - "!homeworks/2024/**/*.qmd"
+    - "!homeworks/2026/**/*.qmd"
+    - "!homeworks/2026/**/*.rmd"
+    - "!homeworks/2026/**/*.Rmd"
 
 filters:
   - assets/filters/ListArrow.lua

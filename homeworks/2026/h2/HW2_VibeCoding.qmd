@@ -1,0 +1,163 @@
+---
+title: |
+  HW2\
+  Vibe coding example2\
+  問いかけと出力記録
+author: "author欄に自分の名前を書いてください"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+pdf-engine: lualatex
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    grid:
+      body-width: 720px  # ~70 characters per line
+      margin-width: 350px
+    code-line-numbers: true
+    code-copy: true
+    css:
+      - https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/tufte.min.css
+    linkcolor: "green"
+    urlcolor: "#009900"
+lightbox: auto
+backgroundcolor: "#fffcf2"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+callout-appearance: simple
+callout-icon: false
+link-citations: true
+reference-location: margin
+citation-location: margin
+---
+
+```{css}
+/* Tufte caps text at 55% and code at 52.5% */
+body { padding-left: 0; width: 100%;
+       max-width: none; margin-left: 0; }
+section > p, section > table,
+section > footer, blockquote p,
+hr { width: 100%; }
+section > ul, section > ol,
+section > dl { width: 95%; }
+pre > code { width: 100%; margin-left: 0; }
+figure { max-width: 100%; }
+/* Tufte ul{font-size:1.4rem} hits nested TOC lists; match level 1 */
+#TOC ul ul { font-size: inherit; line-height: inherit; }
+```
+
+# HW2
+
+内容と目標
+
+内容
+: AIを使って図を描き、自分でその説明文を書きます
+
+目標(提出物)
+: その内容をquarto, rmarkdown, litedownなどを使ってhtmlファイルにし、提出してください
+
+手順
+
+1. すべてのファイルを同じフォルダに保存してください
+1. AIにこのファイル、および、Procedure.rmd、1stRound.rmdを読ませてください
+1. AIに指示を出し、その回答をファイル[下記留意点で説明]に付け加えてプログラムを実行してください
+1. 出来上がったhtmlを見て必要に応じて、3rd query, 4th queryを加えてください
+
+留意点
+
+* 使うプログラムによって皆さんが使う(書き込み先の)ファイルが違います
+    * quarto: HW2_quarto.qmd
+    * rmarkdown: HW2_rmarkdown.rmd
+    * litedown: HW2_litedown.rmd
+* プログラム実行方法(詳しくは前回講義資料を参照)
+    * quarto: ターミナルで`quarto render HW2_quarto.qmd`
+    * rmarkdown: R GUIで`knitr::rmarkdown("HW2_rmarkdown.rmd")`
+    * litedown: R GUIで`litedown::fuse("HW2_litedown.rmd")`
+* 上で選んだファイルの2nd queryに自分の指示内容を書いてください
+    * このhtmlにはすでに指示すべき内容が書かれています
+    * このhtmlのソースファイルHW2_VibeCoding.qmdの該当場所からコピーし、これに自分の指示を追加してください
+* ファイルを編集するのが誰かは、AIを使う方法によって変わります
+    * ブラウザなどでAIを使う場合、自分がAIの回答をファイルに貼り付けます
+        * Procedure.rmdに貼り付けるだけで良い回答をせよと指示していますが、念のために、ファイルに貼り付けられる回答を戻すよう、改めて指示してください
+    * Claude Codeのようにファイルを直接扱わせている場合には、指示を与えるだけでAIがファイルを編集します
+* いずれのAI使用方法でも、対話しながら作業の内容と目標をAIが理解したか確認して進めると安全です
+* この作業ではデータ・ファイルをダウンロードします
+    * ブラウザなどでAIを使う場合、以下を指示してください
+        a) (APIを使った)データ取り込み・保存
+        a) そのデータを使った具体的作業
+    * Claude Codeのようにファイルを直接扱わせている場合には、内容と目標を与えるだけで、AIがデータ取り込み・保存と作業を実行します
+* もしもAIがファイルを直接編集する場合、ファイルを絶対に削除しないこと、ファイルを許可なしに編集しないこと、というルールを最初に与えると安全です
+
+
+```{r, child='Procedure.rmd', message = F, warning = F}
+```
+```{r, child='1stRound.rmd', message = F, warning = F}
+```
+
+## 2nd query
+
+### Instructions
+
+
+(履修者へ: 1回目の指示でデータが保存されたのを確認するように、グラフが見やすくなるように、そして、レポートが読みやすくなるように、この節で下記を含めて指示を与えてください)
+
+(履修者へ: 2nd queryの回答が1stRound.rmdの編集するよう促すはずなので、回答内容に従って編集してください)
+
+1. If you have access to local files, confirm that the data files are saved locally, show the user their location, or if you do not have access, show the user where to look for the data files
+1. Make sure your next response is complete by itself and does not rely on previous code chunks. In doing so, edit or propose how to edit headers of code blocks of 1stRound.rmd, so they are set to echo = F, eval = F, but only after the first rendering. 
+    * Your future code blocks must use the downloaded data, so keep the file location specified in 1stRound.rmd
+    * You will set to echo = F, eval = F from the 2nd time render = "3rd query" onwards, so you will propose an edit in the Outputs of the "2nd query"
+       * 1st render (2nd query): run 1stRound.rmd, propose an edit of it
+       * 2nd render (3rd query): confirm the edit is done to make 1stRound.rmd stale, then run only code chunks of 2nd render
+    * If you ask me to edit, it is best if to show in a pastable way the entire contents of the Outputs section of the file, then I can just overwrite the whole section
+1. 重なって視認性を損なうので、線周囲の信頼区間を消す
+1. 視認性を高めるため、地域ごとの図は点の形(point shapes)を変える
+1. (他にもあれば指示を加えてください)
+
+(自分なりの指示を加えると面白いので、必ず試してください)
+
+<!--
+Aesthetics
+
+1. Collapsible codeblocks, which expand on a click
+    * If you can place it in a callout box or nutshell extensions, it is better, if not, use details and summary
+    * Can you invoke line hilighting upon cursor hover?
+1. Discard CIs in the regional line plots, because they cross with each other massively
+1. Use different point shapes in the regional plots
+1. Provide figures and tables the numbers and labels so I can cross reference them
+1. Rehsape the last table to wide, with two rows of BL and UNDP
+1. What is mys?
+1. Use tinytable and its theme striped, with a faint light blue header row
+1. Use #### in place of # in comment lines
+
+Contents
+
+1. You are being too verbose in Reasons for choices
+    * 
+1. Explain what the whole chunk tries to achieve before showing a code block
+    * Aim
+    * Input
+    * Output
+1. Explain the country breakdown of regional groups for each data sets
+    * Contrast how two data sets differ
+1. 65+ is a separate group in HDR but not included in BL?
+    * To assist interpreting results, you cannot be silent on how data are formed
+        * Original information source
+        * Coverage
+        * Aggregation method
+
+-->
+
+### Outputs
+
+(この節にAIの回答をコピーし、quarto, rmarkdown, litedownで実行renderし、htmlを作ってください)
+
+(1回に留めず、QueryとResponseの回数を重ねてhtmlを改良すると尚良いです)
+

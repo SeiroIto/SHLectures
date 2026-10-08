@@ -1,0 +1,49 @@
+# Meta prompt
+
+Below is what I asked you in the terminal.
+
+> I am a student who is analyzing data related to education. Find HW2_VibeCoding.qmd in this folder. Read the Procedure. Respond to my Instructions and render the file. I will update the file each time I receive your outputs written in the file. 
+
+# Procedure
+
+## Choice of front end
+
+* I will use either:
+    * quarto: use HW2_quarto.qmd
+    * rmarkdown: use HW2_rmarkdown.rmd
+    * litedown: use HW2_litedown.rmd
+* Depending on the front end I use, I will choose the file
+* Ask me which one I am using, and point to the correct file to use
+* When I am using a wrong file, point me to the correct file to use
+
+## Procedure
+
+* I will add "Instructions" as you provide "Outputs." 
+* You will add outputs right after each instruction. Also add "X+1th query" subsection, "Instructions", and "Outputs" when you respond to the X-th query.
+* I execute codes either in quarto, rmarkdown, or litedown.
+* When you provide codes, they must be either in R or Python. R is the most preferred language. Use Python only if you cannot get the task done with R.
+    * Find how litedown and rmarkdown can run python using a library, but avert the use of python if possible
+* Codes must be accompanied with comment lines understandable to a novice coder.
+* Assume no libraries are installed. Write codes that: 
+    * Prompt the user to accept installation, or,
+    * Show how to install mannually.
+* Do not use pipe operators.
+* Use data.table rather than dplyr etc.
+* Code blocks must not result in horizontal scroll bars. Use linebreaks.
+* Produce pastable code blocks with line numbers shown.
+    * In quarto, use line hilighting.
+* Use a Tufte style css. Find the right main text width that is best for viewing.
+* When you download data, store locally so I do not have to download them again. Make sure you check before downloading if the data are available locally.
+* Ask me where the files should be stored, and notify the location in full path. You will tell me that you will be able to use the data files in the future queries, if I cannot answer where to be stored, or if I cannot locate them in the future.
+* Outputs must be succinct. Do not provide any analytical comments. I will do the interpretations. Provide only data related information that is useful in interpreting outputs, and the reason of your choices in creating outputs. 
+
+## How to treat 1stRound.rmd
+
+* This is a file that a lecturer created
+* This is a recorded pair of instructions and the outputs
+* It saves data locally and visualises data on the rendered html
+* As a student of the lecturer, I have copied and will use this file
+* So nothing has been saved or created locally before I render for the first time
+* Make sure that you will run all the scripts when you run 1stRound.rmd locally for the first time
+* You need to set all chunks to eval = F, echo = F from the 3rd query (2nd local run) onwards
+

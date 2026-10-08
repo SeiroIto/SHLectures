@@ -1,0 +1,222 @@
+---
+title: |
+  Vibe coding example2\
+  問いかけと出力記録
+author: "Seiro Ito"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+pdf-engine: lualatex
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 1
+    grid:
+      body-width: 720px  # ~70 characters per line
+      margin-width: 350px
+    linkcolor: "green"
+    urlcolor: "#009900"
+    template-partials: 
+      - ../../assets/style/toc-slide.html
+    include-after-body: ../../assets/style/toc-add.html
+theme: [sky, ../../assets/style/sky-add.scss]
+css:
+  - ../../assets/style/my.css
+  - https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/tufte.min.css
+filters:
+  - ../../_extensions/tarleb/parse-latex/parse-latex.lua
+  - ../../_extensions/seiro/tikzja/tikzja.lua
+  - ../../assets/filters/ListArrow.lua
+  - ../../_extensions/schochastics/nutshell/nutshell.lua
+lightbox: auto
+backgroundcolor: "#fffcf2"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+doi-title: "doi.org/10.1086/734780"
+callout-appearance: simple
+callout-icon: false
+bibliography: ../../seiro.bib
+link-citations: true
+reference-location: margin
+citation-location: margin
+---
+
+# Meta prompt
+
+Below is what I asked you in the terminal.
+
+> I am a student who is analyzing data related to education. Find ViveCodingExample2.qmd in this folder. Read the Procedure. Respond to my Instructions and render the file. I will update the file each time I receive your outputs written in the file. 
+
+# Procedure
+
+* I will add "Instructions" as you provide "Outputs." 
+* You will add outputs right after each instruction. Also add "X+1th query" subsection, "Instructions", and "Outputs" when you respond to the X-th query.
+* When you provide codes, they must be either in R or Python. R is the most preferred language. Use Python only if you cannot get the task done with R.
+* Code blocks must not result in a horizontal scroll bar. Use linebreaks.
+* Use a Tufte style css. Find the right main text width that is best for viewing.
+* Outputs must be succinct. Do not provide any analytical comments. I will do the interpretations. Provide only data related information that is useful in interpreting outputs, and the reason of your choices in creating outputs. 
+
+# Instructions and outputs
+
+## 1st query
+
+### Instructions
+
+* I am trying to estimate the mean schooling years of humans. 
+* This is an average of schooling years of all world population at each point of time. 
+* Final output is a line plot with a line connecting each points, showing time series changes.
+* I also want a regional breakdown of estimates and their plots, a group of lines in a singe figure.
+* X axis is calendar years, Y axis is school years. Use colour blind aware colour schemes, as in viridis.
+* Find most suitable variables from WB data, UNICEF, DHS or any other authoritative sources. 
+
+### outputs
+
+Variables
+
+| Source | Variable | Years | Coverage | Age |
+|--------|----------|-------|----------|-----|
+| Barro-Lee v3 (`BL_v3_MF.csv`) | `yr_sch` | 1950–2015, every 5 years | 146 countries | 25–64 |
+| UNDP HDR 2023/24 (composite indices time series) | `mys_YYYY` | 1990–2022, annual | UNDP world and 6 regional aggregates | 25+ |
+
+Reasons for choices
+
+* Mean years of schooling is published by Barro-Lee and UNDP; WB WDI and UNICEF re-publish these, DHS covers only surveyed countries and years.
+* Barro-Lee: longest span; file gives `yr_sch` and population (`pop`, thousands) by country × 10-year age group.
+* Barro-Lee world and regional means: population-weighted over countries × age groups 25–64. The file has no 65+ group.
+* UNDP: total (both sexes) columns `mys_YYYY` only; `mys_f_*`, `mys_m_*` not used.
+* UNDP: annual and more recent; world and regional values are UNDP's own aggregates (rows `ZZK.WORLD`, `ZZE.AS` … `ZZJ.SSA`), not recomputed.
+* Regions are each source's own grouping: Barro-Lee 7 (incl. "Advanced Economies"), UNDP 6 (developing regions only). Not comparable one-to-one.
+* World line in black, regions in viridis (colour-blind safe).
+
+```{r}
+#| label: libs
+#| echo: true
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+```{r}
+#| label: bl-fetch
+#| echo: true
+#| cache: true
+bl_url <- paste0(
+  "https://barrolee.github.io/",
+  "BarroLeeDataSet/BLData/BL_v3_MF.csv")
+bl <- read.csv(bl_url)
+```
+
+```{r}
+#| label: bl-plot
+#| echo: true
+#| fig-width: 8
+#| fig-height: 5
+bl25 <- bl |> filter(agefrom >= 25)
+bl_reg <- bl25 |>
+  group_by(year, region = region_code) |>
+  summarise(mys = weighted.mean(yr_sch, pop),
+            .groups = "drop")
+bl_wld <- bl25 |>
+  group_by(year) |>
+  summarise(mys = weighted.mean(yr_sch, pop)) |>
+  mutate(region = "World")
+ggplot(bl_reg, aes(year, mys, colour = region)) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_line(data = bl_wld, colour = "black",
+            linewidth = 1) +
+  geom_point(data = bl_wld, colour = "black") +
+  scale_colour_viridis_d(end = .9) +
+  labs(x = "Year",
+       y = "Mean years of schooling, age 25-64",
+       colour = NULL,
+       caption = "Black: World. Source: Barro-Lee v3") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(nrow = 3))
+```
+
+```{r}
+#| label: undp-fetch
+#| echo: true
+#| cache: true
+undp_url <- paste0(
+  "https://hdr.undp.org/sites/default/files/",
+  "2023-24_HDR/HDR23-24_Composite_indices_",
+  "complete_time_series.csv")
+undp <- read.csv(undp_url,
+                 fileEncoding = "latin1")
+```
+
+```{r}
+#| label: undp-plot
+#| echo: true
+#| fig-width: 8
+#| fig-height: 5
+agg <-c("ZZE.AS", "ZZF.EAP", "ZZG.ECA",
+         "ZZH.LAC", "ZZI.SA", "ZZJ.SSA",
+         "ZZK.WORLD")
+un <- undp |>
+  filter(iso3 %in% agg) |>
+  select(country,
+         matches("^mys_[0-9]{4}$")) |>
+  pivot_longer(-country,
+               names_to = "year",
+               names_prefix = "mys_",
+               values_to = "mys") |>
+  mutate(year = as.integer(year))
+un_wld <- un |> filter(country == "World")
+un_reg <- un |> filter(country != "World")
+ggplot(un_reg, aes(year, mys, colour = country)) +
+  geom_line() +
+  geom_point(size = .8) +
+  geom_line(data = un_wld, colour = "black",
+            linewidth = 1) +
+  geom_point(data = un_wld, colour = "black",
+             size = .8) +
+  scale_colour_viridis_d(end = .9) +
+  labs(x = "Year",
+       y = "Mean years of schooling, age 25+",
+       colour = NULL,
+       caption = "Black: World. Source: UNDP HDR") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(nrow = 2))
+```
+
+Data notes
+
+```{r}
+#| label: data-notes
+#| echo: true
+tibble(
+  item = c("Barro-Lee countries",
+           "Barro-Lee years",
+           "Barro-Lee missing yr_sch (25-64)",
+           "Barro-Lee missing pop (25-64)",
+           "UNDP aggregate rows",
+           "UNDP years",
+           "UNDP missing mys (aggregates)"),
+  value = c(n_distinct(bl$BLcode),
+            paste(range(bl$year),
+                  collapse = "-"),
+            sum(is.na(bl25$yr_sch)),
+            sum(is.na(bl25$pop)),
+            n_distinct(un$country),
+            paste(range(un$year),
+                  collapse = "-"),
+            sum(is.na(un$mys)))
+) |> knitr::kable()
+```
+
+## 2nd query
+
+### Instructions
+
+### Outputs

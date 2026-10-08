@@ -1,0 +1,322 @@
+# Instructions and outputs
+
+## 1st query
+
+### Instructions
+
+* I am trying to estimate the mean schooling years of humans.
+* This is an average of schooling years of all world population at each point of time.
+* Final output is a line plot with a line connecting each points, showing time series changes.
+* Lines must be accompanied with 95% confidence intervals, expressed as shades.
+* I also want a regional breakdown of estimates and their plots, a group of lines in a single figure.
+* X axis is calendar years, Y axis is schooling years. Use colour blind aware colour schemes, as in viridis. Use a discrete scale.
+* Find most suitable variables from WB data, UNICEF, DHS or any other authoritative sources.
+
+### Outputs
+
+Variables
+
+| Source | Variable | Unit of observation | Years | Countries | Ages |
+|:-------|:---------|:--------------------|:------|----------:|:-----|
+| Barro-Lee v3 | `yr_sch`, `pop` | country × 10-year age group | 1950–2015, every 5 years | 146 | 25–64 |
+| UNDP HDR 2023/24 | `mys_YYYY`, `pop_total_YYYY` | country | 1990–2022, annual | 195 | 25+ |
+
+Reasons for choices
+
+* Variable: mean years of schooling of adults. Barro-Lee and UNDP are the
+  two producers. WB WDI and UNICEF republish them. DHS reports medians for
+  surveyed countries only, so it cannot give a world mean.
+* Two sources: Barro-Lee covers the longest span (from 1950). UNDP is
+  annual and more recent (to 2022).
+* Ages: 25+ is the usual definition (most people have finished school by 25).
+  Barro-Lee's file stops at age 64, so it uses 25–64.
+* World and regional means: population-weighted means of country values.
+  In Barro-Lee, each country's value is first a population-weighted mean
+  over its four age groups.
+* 95% confidence intervals: neither source publishes standard errors. The
+  shades are bootstrap intervals: countries are redrawn with replacement
+  1,000 times (within each region for the regional figures) and the
+  weighted mean is recomputed each time. The 2.5% and 97.5% values of the
+  1,000 means form the interval. The interval reflects variation across
+  countries, not measurement error in each country's figure.
+* Regions are those defined by each source. They differ: Barro-Lee has 7
+  regions including "Advanced Economies"; UNDP has 6 developing regions.
+  The 44 countries with no UNDP region are grouped as "No UNDP region".
+  So each source has its own regional figure.
+* Missing values: UNDP lacks 1990 values for 43 countries; a country enters a
+  year's mean only when it has a value for that year. Barro-Lee has none missing.
+* Colours: viridis discrete scale (colour-blind safe).
+* Data files are downloaded once into this folder and read from there afterwards.
+
+```{r pkgs, echo = TRUE}
+# Packages used below:
+#  data.table: data handling
+#  ggplot2:    figures
+pkgs <- c("data.table", "ggplot2")
+have <- rownames(installed.packages())
+miss <- pkgs[!pkgs %in% have]
+if (length(miss) > 0) {
+  if (interactive()) {
+    # Ask before installing anything
+    ans <- readline(paste0(
+      "Install ",
+      paste(miss, collapse = ", "),
+      "? [y/n] "))
+    if (tolower(ans) == "y") {
+      install.packages(miss)
+    }
+  } else {
+    # While rendering, R cannot ask.
+    # Stop and show the command to type
+    # in the R console.
+    stop("Please run in the R console: ",
+         "install.packages(c(\"",
+         paste(miss, collapse = "\", \""),
+         "\"))")
+  }
+}
+library(data.table)
+library(ggplot2)
+```
+
+```{r data, echo = TRUE}
+# Download each file only if it is not
+# already in this folder.
+bl_file <- "BL_v3_MF.csv"
+bl_url <- paste0(
+  "https://barrolee.github.io/",
+  "BarroLeeDataSet/BLData/", bl_file)
+if (!file.exists(bl_file)) {
+  download.file(bl_url, bl_file,
+                mode = "wb")
+}
+un_file <- paste0(
+  "HDR23-24_Composite_indices_",
+  "complete_time_series.csv")
+un_url <- paste0(
+  "https://hdr.undp.org/sites/default/",
+  "files/2023-24_HDR/", un_file)
+if (!file.exists(un_file)) {
+  download.file(un_url, un_file,
+                mode = "wb")
+}
+# Read both files as data.tables
+bl <- fread(bl_file)
+un <- fread(un_file)
+```
+
+```{r boot-function, echo = TRUE}
+# Population-weighted mean for each year,
+# with a 95% bootstrap interval.
+# Input d: one row per country x year,
+#   with columns country, year,
+#   mys (schooling years), pop.
+boot_mean <- function(d, B = 1000) {
+  # Tables: rows = countries,
+  #         columns = years
+  m <- dcast(d, country ~ year,
+             value.var = "mys")
+  w <- dcast(d, country ~ year,
+             value.var = "pop")
+  yrs <- as.integer(names(m)[-1])
+  m <- as.matrix(m[, -1])
+  w <- as.matrix(w[, -1])
+  # A missing value gets zero weight
+  w[is.na(m) | is.na(w)] <- 0
+  m[is.na(m)] <- 0
+  # Weighted mean of the actual data
+  est <- colSums(m * w) / colSums(w)
+  # Redraw countries B times
+  n <- nrow(m)
+  draws <- matrix(NA_real_, B,
+                  ncol(m))
+  for (b in 1:B) {
+    i <- sample(n, n, replace = TRUE)
+    mi <- m[i, , drop = FALSE]
+    wi <- w[i, , drop = FALSE]
+    draws[b, ] <- colSums(mi * wi) /
+      colSums(wi)
+  }
+  # 2.5% and 97.5% of the B means
+  lo <- apply(draws, 2, quantile,
+              probs = 0.025,
+              na.rm = TRUE)
+  hi <- apply(draws, 2, quantile,
+              probs = 0.975,
+              na.rm = TRUE)
+  data.table(year = yrs, mys = est,
+             lo = lo, hi = hi)
+}
+# Fix the random draws so the
+# intervals are the same every run
+set.seed(20261008)
+```
+
+```{r barro-lee, echo = TRUE}
+# Keep adults: age groups 25-34 to 55-64
+bla <- bl[agefrom >= 25]
+# One value per country x year:
+# population-weighted over age groups
+blc <- bla[, .(
+  mys = sum(yr_sch * pop) / sum(pop),
+  pop = sum(pop)),
+  by = .(country, year,
+         region = region_code)]
+# World: all countries together
+bl_wld <- boot_mean(blc)
+# Regions: one run per region
+bl_reg <- blc[, boot_mean(.SD),
+              by = region]
+```
+
+```{r undp, echo = TRUE}
+# Country rows only (UNDP's own
+# aggregates have codes starting "ZZ")
+unc <- un[!grepl("^ZZ", iso3)]
+# Names of the year columns
+mys_cols <- grep("^mys_[0-9]{4}$",
+                 names(unc), value = TRUE)
+pop_cols <- grep("^pop_total_[0-9]{4}$",
+                 names(unc), value = TRUE)
+# Wide (one column per year) to long
+# (one row per country x year)
+m1 <- melt(unc,
+           id.vars = c("country",
+                       "region"),
+           measure.vars = mys_cols,
+           variable.name = "year",
+           value.name = "mys")
+m1[, year := as.integer(
+  sub("mys_", "", year))]
+p1 <- melt(unc,
+           id.vars = "country",
+           measure.vars = pop_cols,
+           variable.name = "year",
+           value.name = "pop")
+p1[, year := as.integer(
+  sub("pop_total_", "", year))]
+unl <- merge(m1, p1,
+             by = c("country", "year"))
+# Region codes to names. Countries with
+# a blank code get "No UNDP region".
+reg_names <- c(
+  AS  = "Arab States",
+  EAP = "East Asia and the Pacific",
+  ECA = "Europe and Central Asia",
+  LAC = "Latin America and the Caribbean",
+  SA  = "South Asia",
+  SSA = "Sub-Saharan Africa")
+unl[, region := reg_names[region]]
+unl[is.na(region),
+    region := "No UNDP region"]
+un_wld <- boot_mean(unl)
+un_reg <- unl[, boot_mean(.SD),
+              by = region]
+```
+
+```{r fig-world, echo = TRUE, fig.width = 7, fig.height = 4.5}
+# World mean from both sources in one
+# figure. Shades = 95% intervals.
+bl_wld[, source := "Barro-Lee (25-64)"]
+un_wld[, source := "UNDP HDR (25+)"]
+wld <- rbind(bl_wld, un_wld)
+ggplot(wld, aes(x = year, y = mys,
+                colour = source,
+                fill = source)) +
+  geom_ribbon(aes(ymin = lo,
+                  ymax = hi),
+              alpha = 0.25,
+              colour = NA) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_colour_viridis_d(end = 0.7) +
+  scale_fill_viridis_d(end = 0.7) +
+  labs(x = "Year",
+       y = "Mean years of schooling",
+       colour = NULL, fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+```{r fig-bl-regions, echo = TRUE, fig.width = 7, fig.height = 5.5}
+# Barro-Lee regions, one line each
+ggplot(bl_reg, aes(x = year, y = mys,
+                   colour = region,
+                   fill = region)) +
+  geom_ribbon(aes(ymin = lo,
+                  ymax = hi),
+              alpha = 0.2,
+              colour = NA) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_d(end = 0.9) +
+  labs(x = "Year",
+       y = "Mean years of schooling, 25-64",
+       colour = NULL, fill = NULL,
+       caption = "Source: Barro-Lee v3") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(ncol = 2),
+         fill = guide_legend(ncol = 2))
+```
+
+```{r fig-undp-regions, echo = TRUE, fig.width = 7, fig.height = 5.5}
+# UNDP regions, one line each
+ggplot(un_reg, aes(x = year, y = mys,
+                   colour = region,
+                   fill = region)) +
+  geom_ribbon(aes(ymin = lo,
+                  ymax = hi),
+              alpha = 0.2,
+              colour = NA) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_d(end = 0.9) +
+  labs(x = "Year",
+       y = "Mean years of schooling, 25+",
+       colour = NULL, fill = NULL,
+       caption = "Source: UNDP HDR 2023/24") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(ncol = 2),
+         fill = guide_legend(ncol = 2))
+```
+
+Data notes
+
+```{r notes, echo = TRUE}
+# Counts that describe the data used
+n_un <- unl[!is.na(mys),
+            .(countries = uniqueN(country)),
+            by = year]
+notes <- data.table(
+  item = c(
+    "Barro-Lee countries",
+    "Barro-Lee years",
+    "Barro-Lee regions",
+    "Barro-Lee missing yr_sch or pop",
+    "UNDP countries",
+    "UNDP countries with mys, 1990",
+    "UNDP countries with mys, 2022",
+    "UNDP years",
+    "UNDP regions (incl. No UNDP region)",
+    "Bootstrap draws"),
+  value = c(
+    uniqueN(blc$country),
+    paste(range(blc$year),
+          collapse = "-"),
+    uniqueN(blc$region),
+    sum(is.na(bla$yr_sch) |
+          is.na(bla$pop)),
+    uniqueN(unl$country),
+    n_un[year == 1990, countries],
+    n_un[year == 2022, countries],
+    paste(range(unl$year),
+          collapse = "-"),
+    uniqueN(unl$region),
+    1000))
+notes
+```
+

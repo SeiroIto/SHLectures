@@ -77,6 +77,15 @@ jobs:
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
 
+      # Copy committed html under lec_slides/2026 that the render did not produce
+      # (qmd deleted or excluded). Never overwrites a rendered file.
+      - name: Copy pre-rendered html
+        run: |
+          git ls-files -z 'lec_slides/2026/*.html' |
+            while IFS= read -r -d '' f; do
+              [ -e "posts/$f" ] || install -D -m 644 "$f" "posts/$f"
+            done
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

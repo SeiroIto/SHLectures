@@ -18,6 +18,7 @@ format:
     toc-location: left
     toc-depth: 1
     grid:
+      body-width: 900px
       margin-width: 350px
     linkcolor: "green"
     urlcolor: "#009900"
@@ -46,6 +47,51 @@ reference-location: margin
 citation-location: margin
 ---
 
+```{css}
+/* Tufte caps text at 55% and code at 52.5% */
+body { padding-left: 0; width: 100%;
+       max-width: none; margin-left: 0; }
+section > p, section > table,
+section > footer, blockquote p,
+hr { width: 100%; }
+section > ul, section > ol,
+section > dl { width: 95%; }
+pre > code { width: 100%; margin-left: 0; }
+figure { max-width: 100%; }
+table.tinytable { width: 100% !important;
+  table-layout: auto !important; }
+table.tinytable td,
+table.tinytable th { font-size: 1rem;
+  overflow-wrap: anywhere; color: #222; }
+table.tinytable { background: #fff; }
+table.tinytable thead td,
+table.tinytable th { overflow-wrap: normal; }
+```
+
+```{r}
+#| label: tt-style
+#| include: false
+library(tinytable)
+# dplyr here too: a cache hit on u5m-hexp
+# does not attach it for later chunks
+library(dplyr)
+# striped, light-blue header, header and
+# 1st column centred, others right-aligned
+tt_st <- function(d) {
+  # width: CSS chunk sets 100%, auto layout
+  x <- tt(d)
+  x <- theme_striped(x)
+  x <- style_tt(x, i = 0, align = "c",
+                background = "#e8f1fb")
+  x <- style_tt(x, j = 1, align = "c")
+  if (ncol(d) > 1) {
+    x <- style_tt(x, i = seq_len(nrow(d)),
+                  j = 2:ncol(d), align = "r")
+  }
+  x
+}
+```
+
 # Meta prompt
 
 Below is what I asked you in the terminal.
@@ -60,6 +106,7 @@ Below is what I asked you in the terminal.
 * Code blocks must not result in a horizontal scroll bar. Use linebreaks.
 * Use a Tufte style css.
 * Outputs must be succinct. Do not provide any analytical comments. I will do the interpretations. Provide only data related information that is useful in interpreting outputs, and the reason of your choices in creating outputs. 
+* Output html should be VibeCodingExampleX.html for X-th turn. Use double digits for X like 01, 02, ...
 
 # Instructions and outputs
 
@@ -76,10 +123,29 @@ Below is what I asked you in the terminal.
 
 Variables (all from World Bank WDI, fetched with the R package `WDI`)
 
+<!-- markdown table replaced by tinytable (2nd query)
 | Axis | Variable | WDI code | Unit | Original source |
 |------|----------|----------|------|-----------------|
 | Y | Under-5 mortality rate | `SH.DYN.MORT` | deaths per 1,000 live births | UN IGME (WHO/UNICEF/WB/UN) |
 | X | Current health expenditure per capita | `SH.XPD.CHEX.PP.CD` | current int'l $, PPP | WHO Global Health Expenditure Database |
+-->
+
+```{r}
+#| label: q1-vars
+tt_st(data.frame(
+  Axis = c("Y", "X"),
+  Variable = c("Under-5 mortality rate",
+               paste("Current health expenditure",
+                     "per capita")),
+  `WDI code` = c("SH.DYN.MORT",
+                 "SH.XPD.CHEX.PP.CD"),
+  Unit = c("deaths per 1,000 live births",
+           "current int'l $, PPP"),
+  `Original source` = c(
+    "UN IGME (WHO/UNICEF/WB/UN)",
+    "WHO Global Health Expenditure Database"),
+  check.names = FALSE))
+```
 
 Reasons for choices
 
@@ -96,6 +162,8 @@ Reasons for choices
 ```{r}
 #| label: u5m-hexp
 #| echo: true
+#| warning: false
+#| message: false
 #| cache: true
 #| fig-width: 9
 #| fig-height: 9
@@ -154,12 +222,330 @@ tibble(
                   collapse = "-"),
             sum(is.na(d$u5m)),
             sum(is.na(d$hexp)))
-) |> knitr::kable()
+) |> tt_st()  # was knitr::kable()
 ```
 
 ## 2nd query
 
 ### Instructions
+
+Aesthetic
+
+* Expand the main text width. Way too narrow. The variable table width can be the main text width.
+* Horizontal scroll bars are present. Use linebreaks in codeblocs so they will go away.
+* For tables, use tinytable package. Use striped theme, but headers need to be in faintly light blue. Headers and 1st column (data name) must be centre aligned, all other descriptive columns should be right aligned.
+
+Contents
+
+* Your reasoning of using WHO is not acceptable. I do not mind making as many calls as possible, or merging two data sets using country names or ISO3. The reason should be based on the superiority of data contents in achieving the goal of this task.
+
+    > WDI rather than WHO GHO API: both variables in one call, same country codes and region labels.
+
+* Give me a list of data sources and their strengths and weaknesses in a concise table. 
+* In comparing contents of different data, we need to facet figures side by side. facet_grid(~ data).
+
+### Outputs
+
+Aesthetic changes (whole document)
+
+* Text width: the Tufte CSS caps paragraphs and tables at 55% and code at 52.5% of the column; a CSS chunk at the top sets them to 100%, and the body width is 900px.
+* Code: lines at most 55 characters.
+* Tables: `tinytable`, striped theme, header background `#e8f1fb`, header and 1st column centred, other columns right-aligned (function `tt_st()`, code below). The two 1st-query tables now use it.
+
+```{r}
+#| label: tt-style-show
+#| ref.label: tt-style
+#| echo: true
+#| eval: false
+```
+
+Data download (latest releases at render time; WHO GHED is a 39 MB xlsx)
+
+```{r}
+#| label: q2-fetch
+#| echo: true
+#| warning: false
+#| cache: true
+library(WDI)
+library(jsonlite)
+library(readr)
+library(readxl)
+old <- getOption("timeout")
+options(timeout = 600)
+# WDI: u5m, current-PPP spending, regions
+wdi <- WDI(
+  indicator = c(u5m  = "SH.DYN.MORT",
+                hexp = "SH.XPD.CHEX.PP.CD"),
+  start = 1960, end = 2025, extra = TRUE)
+wdi <- wdi[wdi$region != "Aggregates" &
+             !is.na(wdi$region), ]
+reg <- unique(wdi[, c("iso3c", "region")])
+# UN IGME (UNICEF SDMX API): u5m + bounds
+igme_url <- paste0(
+  "https://sdmx.data.unicef.org/ws/public/",
+  "sdmxapi/rest/data/UNICEF,CME,1.0/",
+  ".CME_MRY0T4._T?format=csv")
+igme <- read_csv(igme_url,
+                 show_col_types = FALSE)
+igme <- igme[igme$WEALTH_QUINTILE == "_T" &
+               grepl("^[A-Z]{3}$",
+                     igme$REF_AREA), ]
+igme <- data.frame(
+  iso3c = igme$REF_AREA,
+  year  = as.integer(
+    substr(igme$TIME_PERIOD, 1, 4)),
+  u5m   = igme$OBS_VALUE,
+  lo    = igme$LOWER_BOUND,
+  hi    = igme$UPPER_BOUND)
+# WHO GHO API: u5m, both sexes
+gho_url <- paste0(
+  "https://ghoapi.azureedge.net/api/",
+  "MDG_0000000007")
+gho <- fromJSON(gho_url)$value
+gho <- gho[gho$SpatialDimType == "COUNTRY" &
+             gho$Dim1 == "SEX_BTSX", ]
+gho_t <- gho[gho$Dim3 ==
+               "WEALTHQUINTILE_TOTL", ]
+# DHS API: direct estimate, 5 years
+# preceding the survey
+dhs_url <- paste0(
+  "https://api.dhsprogram.com/rest/dhs/",
+  "data?indicatorIds=CM_ECMR_C_U5M",
+  "&perpage=5000&f=json")
+dhs <- fromJSON(dhs_url)$Data
+dhs <- dhs[dhs$IsTotal == 1 &
+             dhs$IsPreferred == 1, ]
+dcn <- fromJSON(paste0(
+  "https://api.dhsprogram.com/rest/dhs/",
+  "countries?f=json"))$Data
+dhs$iso3c <- dcn$ISO3_CountryCode[
+  match(dhs$DHS_CountryCode,
+        dcn$DHS_CountryCode)]
+# WHO GHED: full database
+ghed_f <- tempfile(fileext = ".xlsx")
+download.file(paste0(
+  "https://apps.who.int/nha/database/",
+  "Home/IndicatorsDownload/en"),
+  ghed_f, mode = "wb", quiet = TRUE)
+ghed_ver <- read_excel(
+  ghed_f, sheet = "Version")[[1]][2]
+ghed <- read_excel(ghed_f, sheet = "Data")
+ghed <- ghed[, c("code", "year",
+                 "che_ppp_pc", "che_ncu2023",
+                 "ppp", "pop")]
+options(timeout = old)  # restore
+# constant 2023 int'l $ per capita =
+# million const. 2023 NCU / 2023 PPP / pop
+p23 <- ghed[ghed$year == 2023, ]
+ghed$ppp23 <- p23$ppp[match(ghed$code,
+                            p23$code)]
+ghed$hexp_k <- ghed$che_ncu2023 * 1e6 /
+  ghed$ppp23 / (ghed$pop * 1e3)
+```
+
+Agreement between sources (same country-year)
+
+```{r}
+#| label: q2-agree
+#| echo: true
+m1 <- merge(igme,
+  data.frame(iso3c = gho_t$SpatialDim,
+             year = gho_t$TimeDim,
+             g = gho_t$NumericValue))
+m2 <- merge(wdi[, c("iso3c", "year", "u5m")],
+  igme[, c("iso3c", "year", "u5m")],
+  by = c("iso3c", "year"))
+m3 <- merge(wdi[, c("iso3c", "year", "hexp")],
+  data.frame(iso3c = ghed$code,
+             year = ghed$year,
+             h = ghed$che_ppp_pc))
+r3 <- abs(m3$hexp / m3$h - 1)
+tt_st(data.frame(
+  Comparison = c("u5m: GHO vs UN IGME",
+                 "u5m: WDI vs UN IGME",
+                 "spending: WDI vs GHED"),
+  `Country-years` = c(nrow(m1), nrow(m2),
+                      sum(!is.na(r3))),
+  `Max relative difference` = sprintf(
+    "%.4f", c(max(abs(m1$u5m / m1$g - 1)),
+              max(abs(m2$u5m.x /
+                        m2$u5m.y - 1)),
+              max(r3, na.rm = TRUE))),
+  `Share differing > 1%` = sprintf(
+    "%.3f", c(mean(abs(m1$u5m / m1$g - 1)
+                   > .01),
+              mean(abs(m2$u5m.x /
+                         m2$u5m.y - 1) > .01),
+              mean(r3 > .01, na.rm = TRUE))),
+  check.names = FALSE))
+```
+
+Data sources
+
+```{r}
+#| label: q2-sources
+#| echo: true
+nc <- function(iso, v) {
+  length(unique(iso[!is.na(v)]))
+}
+yr <- function(y, v) {
+  paste(range(y[!is.na(v)]), collapse = "-")
+}
+tt_st(data.frame(
+  Data = c("WDI", "UN IGME", "WHO GHO",
+           "DHS", "WHO GHED"),
+  Years = c(yr(wdi$year, wdi$u5m),
+            yr(igme$year, igme$u5m),
+            yr(gho_t$TimeDim,
+               gho_t$NumericValue),
+            yr(dhs$SurveyYear, dhs$Value),
+            yr(ghed$year, ghed$che_ppp_pc)),
+  Countries = c(nc(wdi$iso3c, wdi$u5m),
+                nc(igme$iso3c, igme$u5m),
+                nc(gho_t$SpatialDim,
+                   gho_t$NumericValue),
+                nc(dhs$iso3c, dhs$Value),
+                nc(ghed$code, ghed$che_ppp_pc)),
+  Strengths = c(
+    "WB region and income-group labels",
+    paste("latest u5m round; lower/upper",
+          "bounds; wealth quintiles"),
+    paste("u5m equals UN IGME;",
+          "wealth quintiles"),
+    paste("direct survey estimate, not",
+          "modelled; confidence interval"),
+    paste("source of all spending series;",
+          "constant prices; gov./private/",
+          "external split")),
+  Weaknesses = c(
+    paste("older UN IGME round; spending in",
+          "current PPP only"),
+    "no spending; modelled where data sparse",
+    "PPP spending series return no rows",
+    paste("refers to 5 years before survey;",
+          "few surveys per country"),
+    "starts 2000; latest year preliminary"),
+  check.names = FALSE))
+```
+
+* GHED version: `r ghed_ver`.
+* "Countries" counts areas with at least one value of u5m (spending for GHED).
+
+Choices and reasons (content of the data)
+
+* Y, main: UN IGME. Its u5m is the newest estimation round and carries lower/upper bounds; WDI republishes an older round, and WHO GHO publishes identical numbers (table above).
+* X, main: WHO GHED, constant 2023 int'l $ per capita (`che_ncu2023` / 2023 PPP / population). A movement along a country's line is then a real change, not price inflation in current int'l $. WDI carries only the current-PPP copy of the GHED series.
+* WHO GHO not plotted: its u5m equals UN IGME and its PPP spending indicators are empty.
+* DHS panel: an independent, survey-based u5m. Spending is the mean of GHED constant 2023 $ over the survey year and the 4 years before it (the 5-year window of the estimate); surveys with fewer than 3 GHED years are dropped.
+* Colours: Okabe–Ito palette (colour-blind safe) for 7 WB regions; viridis gave two near-identical dark colours at 7 categories.
+
+```{r}
+#| label: q2-fig
+#| echo: true
+#| warning: false
+#| fig-width: 11
+#| fig-height: 5.5
+library(ggplot2)
+p1 <- data.frame(
+  data = "WDI (current PPP $)",
+  iso3c = wdi$iso3c, year = wdi$year,
+  u5m = wdi$u5m, hexp = wdi$hexp)
+p2 <- merge(igme[, c("iso3c", "year", "u5m")],
+            data.frame(iso3c = ghed$code,
+                       year = ghed$year,
+                       hexp = ghed$hexp_k))
+p2$data <- "UN IGME x GHED (2023 $)"
+k <- data.frame(iso3c = ghed$code,
+                year = ghed$year,
+                h = ghed$hexp_k)
+dhs$hexp <- NA_real_
+dhs$nyr <- 0L
+for (r in seq_len(nrow(dhs))) {
+  s <- k$h[k$iso3c == dhs$iso3c[r] &
+             k$year >= dhs$SurveyYear[r] - 4 &
+             k$year <= dhs$SurveyYear[r]]
+  s <- s[!is.na(s)]
+  dhs$nyr[r] <- length(s)
+  if (length(s) >= 3) dhs$hexp[r] <- mean(s)
+}
+p3 <- data.frame(
+  data = "DHS x GHED (2023 $)",
+  iso3c = dhs$iso3c, year = dhs$SurveyYear,
+  u5m = dhs$Value, hexp = dhs$hexp)
+cols <- c("data", "iso3c", "year",
+          "u5m", "hexp")
+pd <- rbind(p1[, cols], p2[, cols],
+            p3[, cols])
+pd <- pd[!is.na(pd$u5m) &
+           !is.na(pd$hexp) & pd$hexp > 0, ]
+pd$region <- reg$region[match(pd$iso3c,
+                              reg$iso3c)]
+pd <- pd[!is.na(pd$region), ]
+pd$data <- factor(pd$data,
+                  levels = unique(pd$data))
+pd <- pd[order(pd$data, pd$iso3c,
+               pd$year), ]
+oi <- unname(palette.colors(
+  8, "Okabe-Ito"))[2:8]
+ggplot(pd, aes(hexp, u5m,
+               colour = region,
+               group = iso3c)) +
+  geom_path(alpha = .5) +
+  geom_point(size = .5) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_colour_manual(values = oi) +
+  facet_grid(~ data) +
+  labs(x = paste("Health expenditure per",
+                 "capita (int'l $, log)"),
+       y = paste("Under-5 mortality per",
+                 "1,000 (log)"),
+       colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+Data notes
+
+```{r}
+#| label: q2-notes
+#| echo: true
+tt_st(data.frame(
+  Panel = levels(pd$data),
+  Countries = as.vector(tapply(
+    pd$iso3c, pd$data,
+    function(x) length(unique(x)))),
+  `Country-years` = as.vector(
+    table(pd$data)),
+  Years = as.vector(tapply(
+    pd$year, pd$data,
+    function(x) paste(range(x),
+                      collapse = "-"))),
+  check.names = FALSE))
+```
+
+* DHS surveys dropped for fewer than 3 GHED years: `r sum(dhs$nyr < 3)` of `r nrow(dhs)`.
+
+## 3rd query
+
+### Instructions
+
+Aesthetics
+
+* For comments in codeblocks, use #### in place of single #.
+* bg of codeblocks are too dark, give me something lighter
+* Add country annotations as much as possible using ggrepel
+* The colour scheme gives undistinguishable colours on the dark ened, can you come up with a more distinctive scheme? 
+    * Facetted figure has a more visibly distinguishable scheme
+* Add Figure/Table numbers so I can refer easily
+
+Contents
+
+* Data comparison table: Add a column of data source so I can see which sources are common
+* Facetted figure, DHS*GHED: Looks very few, much less than 203 obs as noted in the 2nd data comp table
+* Can you combine GHED with other data so PPP can be used in all data?
+* No helth ex with constant PPP series? 
+
 
 ### Outputs
 

@@ -1,0 +1,32 @@
+---
+title: "HW2: Vibe coding example2 問いかけと出力記録"
+date: "`r format(Sys.time(), '%Y%m%d %R')`"
+output: 
+  litedown::html_format:
+    options:
+      embed_resources: "all"
+    meta:
+      css: ["@default", "@tabsets", "@copy-button"]
+      js: ["@sidenotes", "@appendix", "@tabsets", "@copy-button"]
+#### path <- "ここにこのファイルへのパスを書く"; litedown::fuse(paste0(path, "h2/HW2_litedown.rmd"))
+---
+```{css, echo=F}
+/* Default height of a block */
+pre {
+  max-height: 700px;
+  overflow-y: auto;
+}
+```
+
+```{r, child='Procedure.Rmd', message = F, warning = F}
+```
+```{r, child='1stRound.Rmd', message = F, warning = F}
+```
+
+
+## 2nd query
+
+### Instructions
+
+### Outputs
+

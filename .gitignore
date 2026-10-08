@@ -6,6 +6,8 @@
 /**/*.sqlite
 /**/*.zip
 /**/cache/
+/**/*_cache/
+/**/*_files/
 **/*.quarto_ipynb
 /admin/
 /_freeze/
@@ -50,7 +52,6 @@
 /lec_slides/**/ImpactEvaluation/figure/lineas*/
 /lec_slides/**/ImpactEvaluation/figure/*.zip
 /lec_slides/**/ImpactEvaluation/figure/*.eps
-/lec_slides/2026/01*
 /lec_slides/2026/02.*
 /lec_slides/2026/03.*
 /lec_slides/2026/Da*/GBD*.prn
