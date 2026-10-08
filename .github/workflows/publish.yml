@@ -64,6 +64,8 @@ jobs:
             any::WDI
             any::wooldridge
             any::remotes
+            any::dplyr
+            any::tidyr
 
       # Deletes the posts directory only in the temporary GitHub Actions runner workspace.
       # If the workflow later fails:
