@@ -17,7 +17,7 @@ format:
     width: 1600
     height: 900
     preview-links: auto
-    logo: ../GrootbergGiraffeHead.jpg
+    logo: ../../CommonFiles/GrootbergGiraffeHead.jpg
     footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP02.html>
     css: ../../../assets/style/seiro.css
     theme: [sky, sky-add.scss]
@@ -79,10 +79,31 @@ resources:
   - RP02.pdf
 # quarto render RP02.qmd
 ---
+:::::: {.columns}
+::::{.column width="50%"}
 
-これも価格が安すぎる例です(少し前の銀座三越)
+::: {.fragment fragment-index=2}
+![](Bulgari.jpg){height=600}
+:::
 
-![](Bulgari.jpg){height=700}
+::: {.fragment fragment-index=3}
+これも価格が安すぎる例です\
+(少し前の銀座三越)
+:::
+
+::::
+
+::::{.column width="50%"}
+
+::: {.fragment .fade-out fragment-index="1,4"}
+![](ExcessDemand.jpg){height=700}
+:::
+
+::::
+:::::::
+
+* 均衡価格よりも低ければ「安すぎ」です
+* ハイ・ブランドかどうか、価格水準が高いかは本質的ではありません
 
 ----
 
