@@ -1,0 +1,47 @@
+---
+title: |
+  Vibe coding example2\
+  問いかけと出力記録
+author: "Seiro Ito"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 1
+    grid:
+      body-width: 720px  # ~70 characters per line
+      margin-width: 350px
+    linkcolor: "green"
+    urlcolor: "#009900"
+theme: [sky]
+css:
+  - https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/tufte.min.css
+lightbox: auto
+backgroundcolor: "#fffcf2"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+callout-appearance: simple
+callout-icon: false
+link-citations: true
+reference-location: margin
+citation-location: margin
+---
+
+```{r, child='Procedure.Rmd', message = F, warning = F}
+```
+```{r, child='1stRound.Rmd', message = F, warning = F}
+```
+
+## 2nd query
+
+### Instructions
+
+### Outputs
