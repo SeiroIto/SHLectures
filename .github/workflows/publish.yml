@@ -88,6 +88,15 @@ jobs:
               [ -e "posts/$f" ] || install -D -m 644 "$f" "posts/$f"
             done
 
+      # Publish committed sources so students can open/download them.
+      - name: Copy source files
+        run: |
+          git ls-files -z 'lec_slides/2026/*.qmd' 'homeworks/2026/*.qmd' \
+                          'homeworks/2026/*.rmd' 'homeworks/2026/*.Rmd' |
+            while IFS= read -r -d '' f; do
+              install -D -m 644 "$f" "posts/$f"
+            done
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
