@@ -265,74 +265,6 @@ $$
     就学年数&uarr; &rArr; 下位20%ｰ40%所得階層の所得&uarr;の40-70%を説明\
     なので貧困層の底上げにもなる
 
-----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-:::
-</div>
-
-:::::{.columns}
-
-::::{.column width="50%"}
-```{r, engine = "tikz", eval = F}
-#| out-width: "30%"
-\usetikzlibrary{backgrounds}
-\usetikzlibrary{calc}
-\newcommand{\mpage}[2]{\begin{minipage}[t]{#1}#2\end{minipage}}
-
-\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
-    minimum height=3em, minimum width=3cm]
-\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
-\tikzstyle{input} = [coordinate]
-\tikzstyle{output} = [coordinate]
-\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
-% The block diagram code is probably more verbose than necessary
-\begin{tikzpicture}[
-    scale = .5, auto, node distance=3cm, >=latex,
-    show background rectangle, 
-    background rectangle/.style={fill=yellow!10}
-  ]
-    % We start by placing the blocks
-    \node [block] (Poor) {poor};
-    \node [block, right of=Poor, xshift = 4.5cm] (lreturns) {\begin{minipage}{3cm}\hfil low returns\\$\phantom{m}$ on investments\end{minipage}};
-    % We draw an edge between the Poor and lreturns block to 
-    % calculate the coordinate u. We need it to place the lir block. 
-    \draw [->] (Poor) -- node[name=u] {\footnotesize\hfil low level of institutions} (lreturns);
-    \node [block, below of=u] (lir) {low investment rate};
-    % Once the nodes are placed, connecting them is easy. 
-    \draw [draw, ->] (Poor) -- (lreturns);
-    \draw [->] (lreturns) |- (lir);
-    \draw [->] (lir) -| node[pos=0.99] {} 
-        node [near end] (income) {\footnotesize income} (Poor);
-    \coordinate (low) at ($(income) + (-.1, .15)$);
-    \node[below of = low, yshift = 3.25cm] (low2) {\footnotesize low}; 
-\end{tikzpicture}
-```
-::::
-
-::::{.column width="50%"}
-::: {style="font-size: 70%;"}
-* こんな感じの図を見たことがあるかもしれません。「貧困の悪循環」。ほぼ恒等的(トートロジカル)な図なので、解決策を提示できていません。
-:::
-::::
-
-:::::
-
-:::{.fragment}
-講義で用いた図の強み: 時間を通じた資本の変化を示して  
-
-* 初期時点の資本量が一定以下であれば低い均衡、それ以上だと高い均衡に分かれること
-* よって、ビッグプッシュという解決策を提示していること  
-
-:::
-
-:::{.fragment}
-@GalorZeira1993 の図(理論モデル)が$L$&rarr;$H$の解決策を提示できるのは、貧困の悪循環に陥る均衡$L$と抜け出したときの均衡$H$を同時に示しているから  
-
-* S字線の位置(収益率水準)や傾き(収益率の増え方=限界収益率)によって行き着く均衡が変わる  
-* 位置や傾きを変える政策を議論できる
-:::
 
 ----
 
@@ -355,11 +287,10 @@ $$
 
 ----
 
-```{r read homicide data, eval = F, results = "hide"}
+```{r read homicide data, eval = T, results = "hide"}
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
-#### setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/RP/")
 library(data.table)
 hd <- fread("HomicideData.tsv", skip = 2, header = T)
 #### Change column name: Unit of measurement => Units
@@ -384,7 +315,7 @@ hdt <- hdt[grepl("Vic", Indicator), ]
 hdt[, (chacol) := lapply(.SD, droplevels), .SDcol = chacol]
 ```
 年ごとの標本サイズを調べます
-```{r, eval = F}
+```{r, eval = T}
 table(hdt[, Year])
 ```
 
@@ -393,7 +324,7 @@ table(hdt[, Year])
 :::::{.columns}
 
 ::::{.column width="70%"}
-```{r plot homicide in 2020, eval = F, width = 800}
+```{r plot homicide in 2020, eval = T, width = 800}
 #### Tabulate num of observations by year: 
 ####   2020 is most recent among large number of obs
 setkey(hdt, Year, VALUE)
@@ -444,7 +375,6 @@ knitr::opts_chunk$set(
 grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
-#### setwd(path <- "c:/seiro/docs/external/seishin/lec_slides/2024/RP/")
 library(data.table)
 hd <- fread("HomicideData.tsv", skip = 2, header = T)
 #### Change column name: Unit of measurement => Units
@@ -500,105 +430,3 @@ ggplot(data = hdt2[c(1:39, grep("JPN", iso3)), ],
 ```
 
 ----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-日本の財務基盤が安定した時日本の子供は平等に学べるのでしょうか。
-:::
-</div>
-
-簡潔で良い質問だと思いました
-
-まず、日本は公教育に関しては中学校までとても平等だと思います  
-
-* 高校以前段階の問題は公教育の質です  
-* 学級崩壊や教員多忙などで公立小学校・中学校での学習の質は低下  
-   * [2019年度](https://www.mext.go.jp/content/20230524-mext-tokubetu01-000026255_01.pdf#page=7): 小中学生男子で「学習面又は行動面で著しい困難を示す」割合=12.1%  
-   * うち、特別な教育支援が必要と判断されている割合: 28.7%
-      * 小中学校著しい困難ありで放置: 男子`r round(12.1*(100-28.7)/100, 2)`%、女子`r round(5.4*(100-28.7)/100, 2)`%&rarr;<Red>`r round(17.5*c(12.1, 5.4)*(100-28.7)/10000, 2)`人/35人学級</red>  
-   * 僕の知る限り、地方や国の政治家はほとんど取り上げません  
-   * 集票に効果がないと考えているのかもしれません(想像)  
-   * PISA(15歳)などで学力低下が表面化していないことも原因でしょう  
-      * [数学的リテラシー(1位/5位)、読解力(2位/3位)、科学的リテラシー(1位/2位)](https://www.nier.go.jp/kokusai/pisa/pdf/2022/01_point_2.pdf#page=2)  
-* 高校以前段階で私立学校教育の質がより高いならば、所得と学習の正相関が出てきます  
-
-----
-
-<div class=big-code>
-::: {.callout-note appearance="minimal"}
-日本の財務基盤が安定した時日本の子供は平等に学べるのでしょうか。
-:::
-</div>
-
-
-:::::{.columns}
-
-::::{.column width="60%"}
-高等学校等就学支援金制度(2020年度-): 高校は家庭年収660万円以下(1030万円)であれば約40万円(約12万円)を上限に授業料が減額されます  
-
-:::{.nonincremental}
-* 東京都などは年収制限無しに無償化しています  
-:::
-
-:::{.fragment}
-[高等教育の修学支援新制度(2026年度-)](https://www.mext.go.jp/content/20240426-mxt_gakushi_100001505_2.pdf): 多子家庭(3人以上)、もしくは、世帯年収600万未満であれば、70万円*4年+26万円を上限に減免
-:::
-::::
-
-::::{.column width="40%"}
-<br><br><br><br>
-
-* 大学進学希望者どれだけの割合になるのかよく分かりませんが、あまり多くないでしょう  
-* 聖心女子大学: 入学金25万、授業料70万、施設設備費30万、諸費10万  
-* 慶應義塾大学経済学部: 入学金20万、授業料92万、その他29万  
-::::
-
-:::::
-
-:::{.fragment}
-日本政府は対象者を拡げ、教育にもっと支出しても良いのではと思います  
-:::
-
-----
-
-:::::{.columns}
-
-::::{.column width="55%"}
-![](OECD_EduSpending.jpg){.lightbox width="70%"}
-
-::: {style="font-size: 50%;"}
-出所: <https://www.oecd.org/en/data/indicators/public-spending-on-education.html>
-:::
-::::
-
-```{r , echo = F, eval = T}
-u20 <- 4714+5061+5340+5769
-totpop <- 125930
-a60 <- 36050+7446
-u20r <- u20/totpop
-a60r <- a60/totpop
-egdp <- (4.0624+.4882)/(4.0624/2.98)
-```
-
-::::{.column width="45%"}
-令和6年度の文教予算は4兆624億  
-
-::: {style="font-size: 80%;"}
-
-   * 高等教育の修学支援新制度(5438億円)は社会保障関係費(消費税財源)に計上されている  
-      * 2020年度(令和2年度)は4882億  
-   * OECDの数値に入っていないものと仮定すると2.98%&rarr;`r round(egdp, 2)`%  
-   * [高齢予算対GDP比(2020年度)](https://www.ipss.go.jp/ss-cost/j/fsss-R02/R02-houdougaiyou.pdf#page=5): 9.11%  
-   * [20歳以下人口](https://www.e-stat.go.jp/dbview?sid=0003459019)`r u20/10`万人(`r round(u20r*100, 2)`%)、60歳以上`r a60/10`万人(`r round(a60r*100, 2)`%)&larr;60歳から受給可能  
-   * 1000人あたり支出: 文教`r formatC(egdp/u20, digits = 6, format = "f")`%、高齢`r formatC(9.11/a60, digits = 6, format = "f")`%、高齢予算が1人あたり<Red>`r round(((9.11/a60)/(egdp/u20)-1)*100, 0)`%多い</Red>
-:::
-::::
-
-:::::
-
-* 保健(介護保険、医療保険など)は含めず
-* 含めたら、世代間公的支出格差はもっと増えます
-* 日本の大学授業料は安いので、政府が補助しても世代間公的支出格差は埋まらないと思います  
-
-----
-
