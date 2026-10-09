@@ -83,7 +83,7 @@ resources:
 ::::{.column width="50%"}
 
 ::: {.fragment fragment-index=2}
-![](Bulgari.jpg){height=600}
+![](02/Bulgari.jpg){height=600}
 :::
 
 ::: {.fragment fragment-index=3}
@@ -96,7 +96,7 @@ resources:
 ::::{.column width="50%"}
 
 ::: {.fragment .fade-out fragment-index="1,4"}
-![](ExcessDemand.jpg){height=700}
+![](02/ExcessDemand.jpg){height=700}
 :::
 
 ::::
@@ -134,12 +134,67 @@ $$
 
 * RPにはどの部分が理解しづらかったかを書いていただくと、具体的に返答できるので有り難いです
 * 土地の(各穀物別)生産性はFAOが[詳細なデータを公開](https://gaez.fao.org/pages/crop-summary)しています
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回もかなり理解するのに苦戦しました。前期にラテンアメリカ地域論という授業を履修しておりそこでもその土地の生産性や経済などを表す数値や単位？が出て来たので少し理解しやすかったです。全世界的にこういった富の割合などを数値化してみようとなり始めたのはいつ頃なのか、また何を目的に始まったのか気になりました。
+:::
+</div>
+
 * 富の配分を数値化する試みは比較的新しいです
 * 全世界の所得分配については、ILO、世界銀行、各国政府が地道に収集してきた家計調査データを使い、各国間で比較可能なデータを作っている研究者がいます[@Gethin2025]
-* 富の配分は一国単位でのみ分析されることが多いです
-    * 富のデータは国税庁が金融資産、一部実物資産(不動産路線価)、相続資産などで所有していますが、何を含めるか、金額区分など、税制設計が違うために各国横並びで比較するのは難しいためです
-    * 非公開株、動産はフロー(利潤や所得)のみが捕捉され、ストック(資産価値)は把握できません
+
+:::::: {.columns}
+::::{.column width="30%"}
+::: {.fragment}
+![@Chancel2023](02/AfricaIncomeInequality.jpg){height=300}
+:::
+::::
+
+::::{.column width="20%"}
+::: {.fragment}
+![](02/AfricaMap.jpg){height=300}
+:::
+::::
+
+::::{.column width="50%"}
+不平等: 南高北低
+::::
+:::::::
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+今回もかなり理解するのに苦戦しました。前期にラテンアメリカ地域論という授業を履修しておりそこでもその土地の生産性や経済などを表す数値や単位？が出て来たので少し理解しやすかったです。全世界的にこういった富の割合などを数値化してみようとなり始めたのはいつ頃なのか、また何を目的に始まったのか気になりました。
+:::
+</div>
+
+:::::: {.columns}
+::::{.column width="48%"}
+::: {.fragment}
+![@AlbersBartelsSchularick2026](02/AlbersBartelsSchularick2024_Fig8.jpg){height=300}
+:::
+::::
+
+::::{.column width="48%"}
+::: {.fragment}
+![@ChatterjeeCzajkaGethin2022](02/ChaterjeeCzajkaGethin_WBER2022_Fig6.jpg){height=300}
+:::
+::::
+
+:::::::
+
+
+* 富の配分は一国のみで分析[@ChatterjeeCzajkaGethin2022; @BhartiChancelPikettySomanchi2026]
+    * 国税庁が金融資産、一部実物資産(不動産路線価)、相続資産などの情報を所有
+    * 何を含めるか、金額区分など、税制設計が違うために各国横並び比較は難しい
+    * 非公開株、動産はフロー(利潤や所得)のみが捕捉、ストック(資産価値)は把握不可
     * 超富裕層は富を素直に申告しないことも原因です
+
 
 ----
 
@@ -313,7 +368,7 @@ grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
 library(data.table)
-hd <- fread("HomicideData.tsv", skip = 2, header = T)
+hd <- fread("02/HomicideData.tsv", skip = 2, header = T)
 #### Change column name: Unit of measurement => Units
 #### Change column name: Iso3_code => iso3
 setnames(hd, c(grepout("Uni", colnames(hd)), "Iso3_code"), c("Units", "iso3"))
@@ -397,7 +452,7 @@ grepout <- function(str, x)
   # returns element of match (not numbers)
   x[grep(str, x, perl = T)]
 library(data.table)
-hd <- fread("HomicideData.tsv", skip = 2, header = T)
+hd <- fread("02/HomicideData.tsv", skip = 2, header = T)
 #### Change column name: Unit of measurement => Units
 #### Change column name: Iso3_code => iso3
 setnames(hd, c(grepout("Uni", colnames(hd)), "Iso3_code"), c("Units", "iso3"))
