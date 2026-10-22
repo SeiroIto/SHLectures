@@ -23,6 +23,8 @@
 /homeworks/2024/TinyTex.zip
 /homeworks/2024/2024*.pdf
 /homeworks/2026/h2/*.csv
+/homeworks/2026/**/*.zip
+/homeworks/2026/**/data
 /lec_slides/201*/
 /lec_slides/2020/
 /lec_slides/2021/

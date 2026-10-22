@@ -119,7 +119,7 @@ figure { max-width: 100%; }
     * If you ask me to edit, it is best if to show in a pastable way the entire contents of the Outputs section of the file, then I can just overwrite the whole section
 1. 重なって視認性を損なうので、線周囲の信頼区間を消す
 1. 視認性を高めるため、地域ごとの図は点の形(point shapes)を変える
-1. (他にもあれば指示を加えてください)
+1. 平均成長率をOLSで推計、その結果を点推計値[95%信頼区間]として示せ
 
 (自分なりの指示を加えると面白いので、必ず試してください)
 
@@ -160,4 +160,368 @@ Contents
 (この節にAIの回答をコピーし、quarto, rmarkdown, litedownで実行renderし、htmlを作ってください)
 
 (1回に留めず、QueryとResponseの回数を重ねてhtmlを改良すると尚良いです)
+
+
+### Outputs
+
+The following code reads the two previously downloaded data files from the working directory, recalculates the estimates, and produces the revised figures and OLS growth-rate estimates. It does not require objects created by earlier code chunks.
+
+#### Data location
+
+The data files are expected to be in the folder from which Quarto renders this document. The code checks for existing files before downloading them.
+
+```{r, echo=FALSE}
+# #### 1. Check packages and locate the data
+
+pkgs <- c("data.table", "ggplot2", "viridis")
+
+have <- rownames(installed.packages())
+miss <- pkgs[!pkgs %in% have]
+
+if (length(miss) > 0) {
+  stop(
+    "Install these packages in the R console first: ",
+    "install.packages(c(",
+    paste(shQuote(miss), collapse = ", "),
+    "))"
+  )
+}
+
+library(data.table)
+library(ggplot2)
+
+cat("Working directory:", normalizePath(getwd()), "\n")
+
+bl_file <- "BL_v3_MF.csv"
+un_file <- "HDR23-24_Composite_indices_complete_time_series.csv"
+
+cat("Barro-Lee file exists:", file.exists(bl_file), "\n")
+cat("UNDP file exists:", file.exists(un_file), "\n")
+
+# #### 2. Download only files that are missing
+
+if (!file.exists(bl_file)) {
+  download.file(
+    paste0(
+      "https://barrolee.github.io/",
+      "BarroLeeDataSet/BLData/",
+      bl_file
+    ),
+    bl_file,
+    mode = "wb"
+  )
+}
+
+if (!file.exists(un_file)) {
+  download.file(
+    paste0(
+      "https://hdr.undp.org/sites/default/",
+      "files/2023-24_HDR/",
+      un_file
+    ),
+    un_file,
+    mode = "wb"
+  )
+}
+
+# Confirm that both files are now available.
+stopifnot(file.exists(bl_file), file.exists(un_file))
+
+cat("Barro-Lee:", normalizePath(bl_file), "\n")
+cat("UNDP:", normalizePath(un_file), "\n")
+
+# #### 3. Read and prepare the data
+
+bl <- fread(bl_file)
+un <- fread(un_file)
+
+# Barro-Lee: population-weighted mean for ages 25-64.
+bla <- bl[agefrom >= 25]
+
+blc <- bla[, .(
+  mys = sum(yr_sch * pop, na.rm = TRUE) /
+    sum(pop[!is.na(yr_sch)], na.rm = TRUE),
+  pop = sum(pop, na.rm = TRUE)
+), by = .(country, year, region = region_code)]
+
+# Remove rows that cannot contribute to the estimates.
+blc <- blc[is.finite(mys) & is.finite(pop) & pop > 0]
+
+# UNDP: retain country records, not aggregate records.
+unc <- un[!grepl("^ZZ", iso3)]
+
+mys_cols <- grep("^mys_[0-9]{4}$", names(unc), value = TRUE)
+pop_cols <- grep("^pop_total_[0-9]{4}$", names(unc), value = TRUE)
+
+m1 <- melt(
+  unc,
+  id.vars = c("country", "region"),
+  measure.vars = mys_cols,
+  variable.name = "year",
+  value.name = "mys"
+)
+m1[, year := as.integer(sub("mys_", "", year))]
+
+p1 <- melt(
+  unc,
+  id.vars = "country",
+  measure.vars = pop_cols,
+  variable.name = "year",
+  value.name = "pop"
+)
+p1[, year := as.integer(sub("pop_total_", "", year))]
+
+unl <- merge(m1, p1, by = c("country", "year"))
+
+reg_names <- c(
+  AS = "Arab States",
+  EAP = "East Asia and the Pacific",
+  ECA = "Europe and Central Asia",
+  LAC = "Latin America and the Caribbean",
+  SA = "South Asia",
+  SSA = "Sub-Saharan Africa"
+)
+
+unl[, region := reg_names[region]]
+unl[is.na(region), region := "No UNDP region"]
+unl <- unl[is.finite(mys) & is.finite(pop) & pop > 0]
+
+# #### 4. Calculate weighted means and bootstrap intervals
+
+boot_mean <- function(d, B = 1000) {
+  m <- dcast(d, country ~ year, value.var = "mys")
+  w <- dcast(d, country ~ year, value.var = "pop")
+
+  yrs <- as.integer(names(m)[-1])
+  m <- as.matrix(m[, -1])
+  w <- as.matrix(w[, -1])
+
+  w[is.na(m) | is.na(w)] <- 0
+  m[is.na(m)] <- 0
+
+  est <- colSums(m * w) / colSums(w)
+
+  draws <- matrix(NA_real_, B, ncol(m))
+  set.seed(20261008)
+
+  for (b in seq_len(B)) {
+    i <- sample(seq_len(nrow(m)), nrow(m), replace = TRUE)
+    draws[b, ] <- colSums(m[i, , drop = FALSE] *
+      w[i, , drop = FALSE]) /
+      colSums(w[i, , drop = FALSE])
+  }
+
+  data.table(
+    year = yrs,
+    mys = est,
+    lo = apply(draws, 2, quantile, probs = 0.025, na.rm = TRUE),
+    hi = apply(draws, 2, quantile, probs = 0.975, na.rm = TRUE)
+  )
+}
+
+bl_wld <- boot_mean(blc)
+un_wld <- boot_mean(unl)
+
+# Regional estimates are population-weighted means.
+weighted_mean <- function(d) {
+  d[, .(
+    mys = sum(mys * pop) / sum(pop)
+  ), by = .(year, region)]
+}
+
+bl_reg <- weighted_mean(blc)
+un_reg <- weighted_mean(unl)
+
+# #### 5. Prepare the world series
+
+bl_wld[, source := "Barro-Lee (25-64)"]
+un_wld[, source := "UNDP HDR (25+)"]
+
+wld <- rbindlist(list(bl_wld, un_wld), use.names = TRUE)
+
+# #### 6. Figure 1: world estimates with 95% intervals
+
+p_world <- ggplot(
+  wld,
+  aes(x = year, y = mys, colour = source, fill = source)
+) +
+  geom_ribbon(
+    aes(ymin = lo, ymax = hi),
+    alpha = 0.20,
+    colour = NA
+  ) +
+  geom_line() +
+  geom_point(size = 1.5) +
+  scale_colour_viridis_d(end = 0.7) +
+  scale_fill_viridis_d(end = 0.7) +
+  labs(
+    title = "Figure 1. Mean years of schooling worldwide",
+    x = "Year",
+    y = "Mean years of schooling",
+    colour = NULL,
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+print(p_world)
+
+# #### 7. Figures 2 and 3: regional estimates without intervals
+
+p_bl <- ggplot(
+  bl_reg,
+  aes(x = year, y = mys, colour = region, shape = region)
+) +
+  geom_line() +
+  geom_point(size = 2) +
+  scale_colour_viridis_d(end = 0.9) +
+  scale_shape_discrete() +
+  labs(
+    title = "Figure 2. Barro-Lee regional estimates",
+    x = "Year",
+    y = "Mean years of schooling, ages 25-64",
+    colour = "Region",
+    shape = "Region",
+    caption = "Source: Barro-Lee v3"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(ncol = 2),
+         shape = guide_legend(ncol = 2))
+
+print(p_bl)
+
+p_un <- ggplot(
+  un_reg,
+  aes(x = year, y = mys, colour = region, shape = region)
+) +
+  geom_line() +
+  geom_point(size = 2) +
+  scale_colour_viridis_d(end = 0.9) +
+  scale_shape_discrete() +
+  labs(
+    title = "Figure 3. UNDP regional estimates",
+    x = "Year",
+    y = "Mean years of schooling, ages 25+",
+    colour = "Region",
+    shape = "Region",
+    caption = "Source: UNDP HDR 2023/24"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(ncol = 2),
+         shape = guide_legend(ncol = 2))
+
+print(p_un)
+
+# #### 8. Estimate annual growth rates by OLS
+
+# The dependent variable is log(mean years of schooling).
+# The slope therefore estimates a compound annual growth rate.
+# The confidence interval is based on the OLS standard error.
+
+growth_data <- rbindlist(list(
+  data.table(
+    year = bl_wld$year,
+    mys = bl_wld$mys,
+    source = "Barro-Lee",
+    series = "World"
+  ),
+  data.table(
+    year = un_wld$year,
+    mys = un_wld$mys,
+    source = "UNDP",
+    series = "World"
+  ),
+  data.table(
+    year = bl_reg$year,
+    mys = bl_reg$mys,
+    source = "Barro-Lee",
+    series = bl_reg$region
+  ),
+  data.table(
+    year = un_reg$year,
+    mys = un_reg$mys,
+    source = "UNDP",
+    series = un_reg$region
+  )
+))
+
+growth_data <- growth_data[
+  is.finite(mys) & mys > 0 & is.finite(year)
+]
+
+keys <- unique(growth_data[, .(source, series)])
+growth_results <- vector("list", nrow(keys))
+
+for (i in seq_len(nrow(keys))) {
+  d <- growth_data[
+    source == keys$source[i] &
+      series == keys$series[i]
+  ]
+
+  fit <- lm(log(mys) ~ year, data = d)
+  b <- coef(fit)["year"]
+  ci <- confint(fit, "year", level = 0.95)
+
+  growth_results[[i]] <- data.table(
+    source = keys$source[i],
+    series = keys$series[i],
+    first_year = min(d$year),
+    last_year = max(d$year),
+    annual_growth_percent = 100 * (exp(b) - 1),
+    ci_lower = 100 * (exp(ci[1]) - 1),
+    ci_upper = 100 * (exp(ci[2]) - 1),
+    observations = nrow(d)
+  )
+}
+
+growth_table <- rbindlist(growth_results)
+
+growth_table[, `:=`(
+  estimate_and_95CI = sprintf(
+    "%.3f%% [%.3f%%, %.3f%%]",
+    annual_growth_percent, ci_lower, ci_upper
+  )
+)]
+
+# #### 9. Output the growth-rate estimates
+
+growth_output <- growth_table[, .(
+  Source = source,
+  Region = series,
+  Period = paste(first_year, last_year, sep = "-"),
+  `Annual growth rate [95% CI]` = estimate_and_95CI,
+  Years = observations
+)]
+
+growth_output <- growth_output[
+  order(Source, Region)
+]
+
+print(growth_output)
+
+# #### 10. Data coverage and regional counts
+
+coverage <- rbindlist(list(
+  data.table(
+    Source = "Barro-Lee",
+    Countries = uniqueN(blc$country),
+    First_year = min(blc$year),
+    Last_year = max(blc$year),
+    Regions = uniqueN(blc$region)
+  ),
+  data.table(
+    Source = "UNDP HDR",
+    Countries = uniqueN(unl$country),
+    First_year = min(unl$year),
+    Last_year = max(unl$year),
+    Regions = uniqueN(unl$region)
+  )
+))
+
+print(coverage)
+```
+
+**Interpretation of the OLS output:** each estimate is the fitted annual percentage growth rate in mean years of schooling, with its 95% confidence interval in brackets. This is a log-linear trend over the available years, not a year-by-year growth rate. The intervals reflect OLS uncertainty under the regression assumptions.
 

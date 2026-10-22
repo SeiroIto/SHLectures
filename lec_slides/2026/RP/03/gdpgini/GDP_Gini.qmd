@@ -1,0 +1,164 @@
+---
+title: "GDP per capita and Gini index, all countries"
+format:
+  html:
+    embed-resources: true
+    lightbox: true
+    code-overflow: wrap
+execute:
+  warning: false
+---
+
+Data sources:
+
+* World Bank, World Development Indicators (WDI), via the [WDI API](https://api.worldbank.org/v2/)
+  * `NY.GDP.PCAP.KD`: GDP per capita, constant 2015 US$ (market exchange rates; from 1960)
+  * `SI.POV.GINI`: Gini index (0-100), World Bank Poverty and Inequality Platform estimates from household surveys
+  * `NY.GDP.PETR.RT.ZS`: oil rents, % of GDP (to flag oil producers)
+  * Country metadata (`/v2/country`): World Bank region; aggregates (World, income groups, regions) dropped
+
+How the data are constructed:
+
+* Raw API responses saved once to `data/*.json`; later renders read the local copies
+* Country-years kept only where the Gini index is available (and GDP per capita is non-missing)
+* Constant-US$ GDP per capita (not PPP) is used to keep Gini surveys before 1990, when PPP series start
+* Market exchange rates understate incomes in low-price countries relative to PPP
+* Gini is income-based for some countries and consumption-based for others, so levels are not strictly comparable across countries
+* Groups: World Bank regions, re-cut as follows (applied in this order)
+  * City states: SGP, HKG, MAC, LUX, MLT, MCO, SMR, LIE, AND
+  * Oil producers: mean oil rents >= 10% of GDP over all available years
+  * East Asia & Pacific split into Pacific (Oceania: AUS, NZL, Pacific islands) and East & Southeast Asia
+  * Europe & Central Asia split into Central Asia & Caucasus (5 Central Asian states, ARM, AZE, GEO), Eastern Europe (former socialist Europe, Russia, Ukraine, Belarus, Moldova, plus TUR) and Western Europe (the rest)
+  * Sub-Saharan Africa split by former colonial power: Francophone (France, Belgium; CMR counted here), Anglophone (Britain; SDN, SSD, SYC counted here; also LBR, English-speaking, never colonised), Other (Portugal, Spain, Italy, never colonised: e.g. MOZ, GNB, CPV, STP, ETH)
+* Dots of the same country are joined in year order; the larger dot is its latest survey year
+
+```{r}
+#| label: setup
+options(repos = c(CRAN = "https://cran.ism.ac.jp/"))  # Japan mirror (ISM, Tokyo)
+pkgs <- c("data.table", "jsonlite", "qs2", "ggplot2", "ggrepel")
+new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(new) > 0) install.packages(new)
+library(data.table)
+library(ggplot2)
+dir.create("data", showWarnings = FALSE)
+```
+
+```{r}
+#| label: data
+#| eval: false
+# Not run at render (kept as a record): builds data/gdp_gini.qs2, read in the next chunk
+api <-"https://api.worldbank.org/v2/"
+src <- c(gini.json = "country/all/indicator/SI.POV.GINI?format=json&per_page=30000",
+         gdppc_usd.json = "country/all/indicator/NY.GDP.PCAP.KD?format=json&per_page=30000",
+         oil.json = "country/all/indicator/NY.GDP.PETR.RT.ZS?format=json&per_page=30000",
+         country.json = "country?format=json&per_page=400")
+for (f in names(src)) if (!file.exists(file.path("data", f)))
+  download.file(paste0(api, src[f]), file.path("data", f), mode = "wb")
+
+wdi <-function(f, v) {
+  x <- as.data.table(jsonlite::fromJSON(file.path("data", f), flatten = TRUE)[[2]])
+  x[, .(iso3 = countryiso3code, year = as.integer(date), value)][, setnames(.SD, "value", v)]
+}
+gini <- wdi("gini.json", "gini")[!is.na(gini)]
+gdp  <- wdi("gdppc_usd.json", "gdppc")[!is.na(gdppc)]
+ctry <- as.data.table(jsonlite::fromJSON("data/country.json", flatten = TRUE)[[2]])
+ctry <- ctry[region.value != "Aggregates", .(iso3 = id, country = name, region = trimws(region.value))]
+
+gg <- merge(gini, gdp, by = c("iso3", "year"))          # keeps Gini years only
+gg <- merge(gg, ctry, by = "iso3")                      # drops aggregates
+
+# Regrouping (World Bank regions split; city states and oil producers pulled out of all groups)
+oil  <- wdi("oil.json", "oil")[!is.na(oil)]
+oilp <- oil[, .(oil = mean(oil)), by = iso3][oil >= 10, iso3]      # mean oil rents >= 10% of GDP
+city <- c("SGP", "HKG", "MAC", "LUX", "MLT", "MCO", "SMR", "LIE", "AND")
+pac  <- c("AUS", "NZL", "PNG", "FJI", "SLB", "VUT", "WSM", "TON", "KIR", "TUV", "NRU", "FSM", "MHL", "PLW")
+cas  <- c("KAZ", "KGZ", "TJK", "TKM", "UZB", "ARM", "AZE", "GEO")
+eeu  <- c("ALB", "BGR", "BIH", "BLR", "CZE", "EST", "HRV", "HUN", "LTU", "LVA", "MDA", "MKD",
+          "MNE", "POL", "ROU", "RUS", "SRB", "SVK", "SVN", "UKR", "XKX", "TUR")
+# SSA by former colonial power: French or Belgian = francophone, British = anglophone
+fra  <- c("BEN", "BFA", "BDI", "CAF", "TCD", "COM", "COG", "COD", "CIV", "GAB", "GIN", "MDG",
+          "MLI", "MRT", "NER", "RWA", "SEN", "TGO", "CMR")
+eng  <- c("BWA", "GMB", "GHA", "KEN", "LSO", "LBR", "MWI", "MUS", "NAM", "NGA", "SLE", "ZAF",
+          "SSD", "SDN", "SWZ", "TZA", "UGA", "ZMB", "ZWE", "SYC")
+gg[, wb_region := region]
+gg[, region := fcase(iso3 %in% city, "City states", iso3 %in% oilp, "Oil producers",
+                     iso3 %in% pac, "Pacific", wb_region == "East Asia & Pacific", "East & Southeast Asia",
+                     iso3 %in% cas, "Central Asia & Caucasus", iso3 %in% eeu, "Eastern Europe",
+                     wb_region == "Europe & Central Asia", "Western Europe",
+                     iso3 %in% fra, "Francophone SSA", iso3 %in% eng, "Anglophone SSA",
+                     wb_region == "Sub-Saharan Africa", "Other SSA",
+                     wb_region == "Middle East, North Africa, Afghanistan & Pakistan", "MENA, Afghanistan & Pakistan",
+                     default = wb_region)]
+setorder(gg, iso3, year)
+gg[, latest := year == max(year), by = iso3]
+qs2::qs_save(gg, "data/gdp_gini.qs2")
+fwrite(gg, "data/gdp_gini.csv")
+```
+
+```{r}
+#| label: data-load
+gg <- qs2::qs_read("data/gdp_gini.qs2")                 # made by the data chunk above
+gg[, .(countries = uniqueN(iso3), obs = .N, from = min(year), to = max(year)), by = region]
+gg[region %in% c("City states", "Oil producers", "Francophone SSA", "Anglophone SSA", "Other SSA"), .(members = paste(unique(iso3), collapse = " ")), by = region]
+```
+
+```{r}
+#| label: fig-all
+#| fig-cap: "GDP per capita (constant 2015 US$, log scale) and Gini index; each line joins one country's survey years; colour = group, shape = country within group (12 shapes, recycled); ISO3 code at the latest survey year."
+#| fig-width: 10
+#| fig-height: 6.5
+# Okabe-Ito + Paul Tol colours (colour-blind aware), one per group
+cols <- c("#E69F00", "#56B4E9", "#009E73", "#000000", "#0072B2", "#D55E00", "#CC79A7",
+          "#882255", "#44AA99", "#999933", "#AA4499", "#332288", "#661100", "#6699CC")
+names(cols) <- sort(unique(gg$region))
+# Point shapes (solid, then hollow), cycled by country order within group
+shp <- c(16, 17, 15, 18, 1, 2, 0, 5, 6, 4, 3, 8)
+gg[, sid := factor((match(iso3, unique(iso3)) - 1) %% length(shp) + 1), by = region]
+p_all <- ggplot(gg, aes(gdppc, gini, colour = region, shape = sid, group = iso3)) +
+  geom_path(linewidth = 0.3, alpha = 0.6) +
+  geom_point(size = 1, alpha = 0.6) +
+  geom_point(data = gg[latest == TRUE], size = 2.2) +
+  ggrepel::geom_text_repel(data = gg[latest == TRUE], aes(label = iso3), size = 2.3, show.legend = FALSE,
+                           max.overlaps = Inf, min.segment.length = 0, segment.size = 0.2, seed = 1) +
+  scale_x_log10(labels = scales::label_dollar(accuracy = 1)) +
+  scale_colour_manual(values = cols, name = NULL) +
+  scale_shape_manual(values = shp, guide = "none") +
+  labs(x = "GDP per capita (constant 2015 US$, log scale)", y = "Gini index") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank()) +
+  guides(colour = guide_legend(nrow = 3, override.aes = list(size = 3)))
+ggsave("data/gdp_gini_all.png", p_all, width = 10, height = 6.5, dpi = 200, bg = "white")
+p_all
+```
+
+```{r}
+#| label: fig-region
+#| fig-cap: "Same data by region: one colour per country (12 colours, recycled within a region), labelled with its ISO3 code at the latest survey year; grey = all other countries."
+#| fig-width: 11
+#| fig-height: 11
+bg <- gg[, .(gdppc, gini, iso3)]                        # background without region column
+# Country colours: Paul Tol + Okabe-Ito (colour-blind-aware), cycled by country order within region
+ccol <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#000000",
+          "#882255", "#44AA99", "#999933", "#AA4499", "#332288")
+gg[, cid := factor((match(iso3, unique(iso3)) - 1) %% length(ccol) + 1), by = region]
+p_reg <- ggplot(gg, aes(gdppc, gini, group = iso3)) +
+  geom_path(data = bg, colour = "grey85", linewidth = 0.2) +
+  geom_path(aes(colour = cid), linewidth = 0.4) +
+  geom_point(data = gg[latest == TRUE], aes(colour = cid), size = 1.2) +
+  ggrepel::geom_text_repel(data = gg[latest == TRUE], aes(label = iso3, colour = cid), size = 2.3,
+                           max.overlaps = Inf, min.segment.length = 0, segment.size = 0.2, seed = 1) +
+  facet_wrap(~region, ncol = 4) +
+  scale_x_log10(labels = scales::label_dollar(accuracy = 1, scale_cut = scales::cut_short_scale())) +
+  scale_colour_manual(values = ccol, guide = "none") +
+  labs(x = "GDP per capita (constant 2015 US$, log scale)", y = "Gini index") +
+  theme_minimal(base_size = 11) +
+  theme(panel.grid.minor = element_blank())
+ggsave("data/gdp_gini_region.png", p_reg, width = 11, height = 11, dpi = 200, bg = "white")
+p_reg
+```
+
+Saved in `data/`:
+
+* `gini.json`, `gdppc_usd.json`, `oil.json`, `country.json`: raw WDI API responses
+* `gdp_gini.qs2`, `gdp_gini.csv`: merged country-year panel
+* `gdp_gini_all.png`, `gdp_gini_region.png`: the two figures

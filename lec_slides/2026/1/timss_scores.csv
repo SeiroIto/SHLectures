@@ -1,0 +1,1179 @@
+iso3,year,grade,subject,score,source,wbname
+ALB,2019,Grade 4,Mathematics,494,World Bank EdStats,Albania
+ALB,2023,Grade 4,Mathematics,512,IEA TIMSS 2023,Albania
+DZA,2007,Grade 4,Mathematics,377.645056927192,World Bank EdStats,Algeria
+ARM,2003,Grade 4,Mathematics,455.924949283983,World Bank EdStats,Armenia
+ARM,2007,Grade 4,Mathematics,499.512849357335,World Bank EdStats,Armenia
+ARM,2011,Grade 4,Mathematics,452.282070235656,World Bank EdStats,Armenia
+ARM,2019,Grade 4,Mathematics,498,World Bank EdStats,Armenia
+ARM,2023,Grade 4,Mathematics,513,IEA TIMSS 2023,Armenia
+AUS,1995,Grade 4,Mathematics,495,World Bank EdStats,Australia
+AUS,2003,Grade 4,Mathematics,499,World Bank EdStats,Australia
+AUS,2007,Grade 4,Mathematics,516,World Bank EdStats,Australia
+AUS,2011,Grade 4,Mathematics,516,World Bank EdStats,Australia
+AUS,2015,Grade 4,Mathematics,517,World Bank EdStats,Australia
+AUS,2019,Grade 4,Mathematics,516,World Bank EdStats,Australia
+AUS,2023,Grade 4,Mathematics,525,IEA TIMSS 2023,Australia
+AUT,1995,Grade 4,Mathematics,530.504716219526,World Bank EdStats,Austria
+AUT,2007,Grade 4,Mathematics,505.388634673218,World Bank EdStats,Austria
+AUT,2011,Grade 4,Mathematics,508.310902502236,World Bank EdStats,Austria
+AUT,2019,Grade 4,Mathematics,539,World Bank EdStats,Austria
+AZE,2011,Grade 4,Mathematics,462.750717080357,World Bank EdStats,Azerbaijan
+AZE,2019,Grade 4,Mathematics,515,World Bank EdStats,Azerbaijan
+AZE,2023,Grade 4,Mathematics,494,IEA TIMSS 2023,Azerbaijan
+BHR,2011,Grade 4,Mathematics,436,World Bank EdStats,Bahrain
+BHR,2015,Grade 4,Mathematics,451,World Bank EdStats,Bahrain
+BHR,2019,Grade 4,Mathematics,480,World Bank EdStats,Bahrain
+BHR,2023,Grade 4,Mathematics,462,IEA TIMSS 2023,Bahrain
+BIH,2019,Grade 4,Mathematics,452,World Bank EdStats,Bosnia and Herzegovina
+BIH,2023,Grade 4,Mathematics,447,IEA TIMSS 2023,Bosnia and Herzegovina
+BRA,2023,Grade 4,Mathematics,400,IEA TIMSS 2023,Brazil
+BGR,2015,Grade 4,Mathematics,524,World Bank EdStats,Bulgaria
+BGR,2019,Grade 4,Mathematics,515,World Bank EdStats,Bulgaria
+BGR,2023,Grade 4,Mathematics,530,IEA TIMSS 2023,Bulgaria
+CAN,1995,Grade 4,Mathematics,505.692981960238,World Bank EdStats,Canada
+CAN,2015,Grade 4,Mathematics,511,World Bank EdStats,Canada
+CAN,2019,Grade 4,Mathematics,512,World Bank EdStats,Canada
+CAN,2023,Grade 4,Mathematics,504,IEA TIMSS 2023,Canada
+CHL,2011,Grade 4,Mathematics,462,World Bank EdStats,Chile
+CHL,2015,Grade 4,Mathematics,459,World Bank EdStats,Chile
+CHL,2019,Grade 4,Mathematics,441,World Bank EdStats,Chile
+CHL,2023,Grade 4,Mathematics,444,IEA TIMSS 2023,Chile
+COL,2007,Grade 4,Mathematics,355.45044473569,World Bank EdStats,Colombia
+HRV,2011,Grade 4,Mathematics,490,World Bank EdStats,Croatia
+HRV,2015,Grade 4,Mathematics,502,World Bank EdStats,Croatia
+HRV,2019,Grade 4,Mathematics,509,World Bank EdStats,Croatia
+CYP,1995,Grade 4,Mathematics,475,World Bank EdStats,Cyprus
+CYP,2003,Grade 4,Mathematics,510,World Bank EdStats,Cyprus
+CYP,2015,Grade 4,Mathematics,523,World Bank EdStats,Cyprus
+CYP,2019,Grade 4,Mathematics,532,World Bank EdStats,Cyprus
+CYP,2023,Grade 4,Mathematics,516,IEA TIMSS 2023,Cyprus
+CZE,1995,Grade 4,Mathematics,541,World Bank EdStats,Czechia
+CZE,2007,Grade 4,Mathematics,486,World Bank EdStats,Czechia
+CZE,2011,Grade 4,Mathematics,511,World Bank EdStats,Czechia
+CZE,2015,Grade 4,Mathematics,528,World Bank EdStats,Czechia
+CZE,2019,Grade 4,Mathematics,533,World Bank EdStats,Czechia
+CZE,2023,Grade 4,Mathematics,530,IEA TIMSS 2023,Czechia
+DNK,2007,Grade 4,Mathematics,523,World Bank EdStats,Denmark
+DNK,2011,Grade 4,Mathematics,537,World Bank EdStats,Denmark
+DNK,2015,Grade 4,Mathematics,539,World Bank EdStats,Denmark
+DNK,2019,Grade 4,Mathematics,525,World Bank EdStats,Denmark
+DNK,2023,Grade 4,Mathematics,524,IEA TIMSS 2023,Denmark
+SLV,2007,Grade 4,Mathematics,329.905617624414,World Bank EdStats,El Salvador
+FIN,2011,Grade 4,Mathematics,545,World Bank EdStats,Finland
+FIN,2015,Grade 4,Mathematics,535,World Bank EdStats,Finland
+FIN,2019,Grade 4,Mathematics,532,World Bank EdStats,Finland
+FIN,2023,Grade 4,Mathematics,529,IEA TIMSS 2023,Finland
+FRA,2015,Grade 4,Mathematics,488,World Bank EdStats,France
+FRA,2019,Grade 4,Mathematics,485,World Bank EdStats,France
+FRA,2023,Grade 4,Mathematics,484,IEA TIMSS 2023,France
+GEO,2007,Grade 4,Mathematics,438,World Bank EdStats,Georgia
+GEO,2011,Grade 4,Mathematics,450,World Bank EdStats,Georgia
+GEO,2015,Grade 4,Mathematics,463,World Bank EdStats,Georgia
+GEO,2019,Grade 4,Mathematics,482,World Bank EdStats,Georgia
+GEO,2023,Grade 4,Mathematics,498,IEA TIMSS 2023,Georgia
+DEU,2007,Grade 4,Mathematics,525,World Bank EdStats,Germany
+DEU,2011,Grade 4,Mathematics,528,World Bank EdStats,Germany
+DEU,2015,Grade 4,Mathematics,522,World Bank EdStats,Germany
+DEU,2019,Grade 4,Mathematics,521,World Bank EdStats,Germany
+DEU,2023,Grade 4,Mathematics,524,IEA TIMSS 2023,Germany
+GRC,1995,Grade 4,Mathematics,462.828725424643,World Bank EdStats,Greece
+HKG,1995,Grade 4,Mathematics,557,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2003,Grade 4,Mathematics,575,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2007,Grade 4,Mathematics,607,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2011,Grade 4,Mathematics,602,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2015,Grade 4,Mathematics,615,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2019,Grade 4,Mathematics,602,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2023,Grade 4,Mathematics,594,IEA TIMSS 2023,"Hong Kong SAR, China"
+HUN,1995,Grade 4,Mathematics,521,World Bank EdStats,Hungary
+HUN,2003,Grade 4,Mathematics,529,World Bank EdStats,Hungary
+HUN,2007,Grade 4,Mathematics,510,World Bank EdStats,Hungary
+HUN,2011,Grade 4,Mathematics,515,World Bank EdStats,Hungary
+HUN,2015,Grade 4,Mathematics,529,World Bank EdStats,Hungary
+HUN,2019,Grade 4,Mathematics,523,World Bank EdStats,Hungary
+HUN,2023,Grade 4,Mathematics,520,IEA TIMSS 2023,Hungary
+ISL,1995,Grade 4,Mathematics,452.507632677302,World Bank EdStats,Iceland
+IDN,2015,Grade 4,Mathematics,397,World Bank EdStats,Indonesia
+IRN,1995,Grade 4,Mathematics,387,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2003,Grade 4,Mathematics,389,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2007,Grade 4,Mathematics,402,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2011,Grade 4,Mathematics,431,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2015,Grade 4,Mathematics,431,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2019,Grade 4,Mathematics,443,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2023,Grade 4,Mathematics,420,IEA TIMSS 2023,"Iran, Islamic Rep."
+IRL,1995,Grade 4,Mathematics,523,World Bank EdStats,Ireland
+IRL,2011,Grade 4,Mathematics,527,World Bank EdStats,Ireland
+IRL,2015,Grade 4,Mathematics,547,World Bank EdStats,Ireland
+IRL,2019,Grade 4,Mathematics,548,World Bank EdStats,Ireland
+IRL,2023,Grade 4,Mathematics,546,IEA TIMSS 2023,Ireland
+ISR,1995,Grade 4,Mathematics,505.374421238583,World Bank EdStats,Israel
+ITA,2003,Grade 4,Mathematics,503,World Bank EdStats,Italy
+ITA,2007,Grade 4,Mathematics,507,World Bank EdStats,Italy
+ITA,2011,Grade 4,Mathematics,508,World Bank EdStats,Italy
+ITA,2015,Grade 4,Mathematics,507,World Bank EdStats,Italy
+ITA,2019,Grade 4,Mathematics,515,World Bank EdStats,Italy
+ITA,2023,Grade 4,Mathematics,513,IEA TIMSS 2023,Italy
+JPN,1995,Grade 4,Mathematics,567,World Bank EdStats,Japan
+JPN,2003,Grade 4,Mathematics,565,World Bank EdStats,Japan
+JPN,2007,Grade 4,Mathematics,568,World Bank EdStats,Japan
+JPN,2011,Grade 4,Mathematics,585,World Bank EdStats,Japan
+JPN,2015,Grade 4,Mathematics,593,World Bank EdStats,Japan
+JPN,2019,Grade 4,Mathematics,593,World Bank EdStats,Japan
+JPN,2023,Grade 4,Mathematics,591,IEA TIMSS 2023,Japan
+JOR,2015,Grade 4,Mathematics,388,World Bank EdStats,Jordan
+JOR,2023,Grade 4,Mathematics,427,IEA TIMSS 2023,Jordan
+KAZ,2007,Grade 4,Mathematics,549.347838329726,World Bank EdStats,Kazakhstan
+KAZ,2011,Grade 4,Mathematics,501,World Bank EdStats,Kazakhstan
+KAZ,2015,Grade 4,Mathematics,544,World Bank EdStats,Kazakhstan
+KAZ,2019,Grade 4,Mathematics,512,World Bank EdStats,Kazakhstan
+KAZ,2023,Grade 4,Mathematics,487,IEA TIMSS 2023,Kazakhstan
+KOR,1995,Grade 4,Mathematics,581,World Bank EdStats,"Korea, Rep."
+KOR,2011,Grade 4,Mathematics,605,World Bank EdStats,"Korea, Rep."
+KOR,2015,Grade 4,Mathematics,608,World Bank EdStats,"Korea, Rep."
+KOR,2019,Grade 4,Mathematics,600,World Bank EdStats,"Korea, Rep."
+KOR,2023,Grade 4,Mathematics,594,IEA TIMSS 2023,"Korea, Rep."
+XKX,2019,Grade 4,Mathematics,444,World Bank EdStats,Kosovo
+XKX,2023,Grade 4,Mathematics,451,IEA TIMSS 2023,Kosovo
+KWT,1995,Grade 4,Mathematics,351.457242797751,World Bank EdStats,Kuwait
+KWT,2007,Grade 4,Mathematics,315.535346979527,World Bank EdStats,Kuwait
+KWT,2011,Grade 4,Mathematics,342,World Bank EdStats,Kuwait
+KWT,2015,Grade 4,Mathematics,353,World Bank EdStats,Kuwait
+KWT,2019,Grade 4,Mathematics,383,World Bank EdStats,Kuwait
+KWT,2023,Grade 4,Mathematics,382,IEA TIMSS 2023,Kuwait
+LVA,1995,Grade 4,Mathematics,498.93920641792,World Bank EdStats,Latvia
+LVA,2003,Grade 4,Mathematics,535.854737859331,World Bank EdStats,Latvia
+LVA,2007,Grade 4,Mathematics,537.200205195817,World Bank EdStats,Latvia
+LVA,2019,Grade 4,Mathematics,546,World Bank EdStats,Latvia
+LVA,2023,Grade 4,Mathematics,534,IEA TIMSS 2023,Latvia
+LTU,2003,Grade 4,Mathematics,534,World Bank EdStats,Lithuania
+LTU,2007,Grade 4,Mathematics,530,World Bank EdStats,Lithuania
+LTU,2011,Grade 4,Mathematics,534,World Bank EdStats,Lithuania
+LTU,2015,Grade 4,Mathematics,536,World Bank EdStats,Lithuania
+LTU,2019,Grade 4,Mathematics,542,World Bank EdStats,Lithuania
+LTU,2023,Grade 4,Mathematics,561,IEA TIMSS 2023,Lithuania
+MAC,2023,Grade 4,Mathematics,582,IEA TIMSS 2023,"Macao SAR, China"
+MLT,2011,Grade 4,Mathematics,495.765960738839,World Bank EdStats,Malta
+MLT,2019,Grade 4,Mathematics,509,World Bank EdStats,Malta
+MDA,2003,Grade 4,Mathematics,504.148971012289,World Bank EdStats,Moldova
+MNG,2007,Grade 4,Mathematics,435.595348861614,World Bank EdStats,Mongolia
+MNE,2019,Grade 4,Mathematics,453,World Bank EdStats,Montenegro
+MNE,2023,Grade 4,Mathematics,477,IEA TIMSS 2023,Montenegro
+MAR,2003,Grade 4,Mathematics,346.807092040199,World Bank EdStats,Morocco
+MAR,2007,Grade 4,Mathematics,341.304704671772,World Bank EdStats,Morocco
+MAR,2011,Grade 4,Mathematics,335,World Bank EdStats,Morocco
+MAR,2015,Grade 4,Mathematics,377,World Bank EdStats,Morocco
+MAR,2019,Grade 4,Mathematics,383,World Bank EdStats,Morocco
+MAR,2023,Grade 4,Mathematics,393,IEA TIMSS 2023,Morocco
+NLD,1995,Grade 4,Mathematics,549,World Bank EdStats,Netherlands
+NLD,2003,Grade 4,Mathematics,540,World Bank EdStats,Netherlands
+NLD,2007,Grade 4,Mathematics,535,World Bank EdStats,Netherlands
+NLD,2011,Grade 4,Mathematics,540,World Bank EdStats,Netherlands
+NLD,2015,Grade 4,Mathematics,530,World Bank EdStats,Netherlands
+NLD,2019,Grade 4,Mathematics,538,World Bank EdStats,Netherlands
+NLD,2023,Grade 4,Mathematics,537,IEA TIMSS 2023,Netherlands
+NZL,1995,Grade 4,Mathematics,469,World Bank EdStats,New Zealand
+NZL,2003,Grade 4,Mathematics,493,World Bank EdStats,New Zealand
+NZL,2007,Grade 4,Mathematics,492,World Bank EdStats,New Zealand
+NZL,2011,Grade 4,Mathematics,486,World Bank EdStats,New Zealand
+NZL,2015,Grade 4,Mathematics,491,World Bank EdStats,New Zealand
+NZL,2019,Grade 4,Mathematics,487,World Bank EdStats,New Zealand
+NZL,2023,Grade 4,Mathematics,490,IEA TIMSS 2023,New Zealand
+MKD,2019,Grade 4,Mathematics,472,World Bank EdStats,North Macedonia
+MKD,2023,Grade 4,Mathematics,474,IEA TIMSS 2023,North Macedonia
+NOR,1995,Grade 4,Mathematics,476,World Bank EdStats,Norway
+NOR,2003,Grade 4,Mathematics,451,World Bank EdStats,Norway
+NOR,2007,Grade 4,Mathematics,473,World Bank EdStats,Norway
+NOR,2011,Grade 4,Mathematics,495,World Bank EdStats,Norway
+NOR,2015,Grade 4,Mathematics,493,World Bank EdStats,Norway
+NOR,2019,Grade 4,Mathematics,543,World Bank EdStats,Norway
+NOR,2023,Grade 4,Mathematics,531,IEA TIMSS 2023,Norway
+OMN,2011,Grade 4,Mathematics,385,World Bank EdStats,Oman
+OMN,2015,Grade 4,Mathematics,425,World Bank EdStats,Oman
+OMN,2019,Grade 4,Mathematics,431,World Bank EdStats,Oman
+OMN,2023,Grade 4,Mathematics,421,IEA TIMSS 2023,Oman
+PAK,2019,Grade 4,Mathematics,328,World Bank EdStats,Pakistan
+PHL,2003,Grade 4,Mathematics,358.194672440031,World Bank EdStats,Philippines
+PHL,2019,Grade 4,Mathematics,297,World Bank EdStats,Philippines
+POL,2011,Grade 4,Mathematics,481.164918235109,World Bank EdStats,Poland
+POL,2015,Grade 4,Mathematics,535,World Bank EdStats,Poland
+POL,2019,Grade 4,Mathematics,520,World Bank EdStats,Poland
+POL,2023,Grade 4,Mathematics,546,IEA TIMSS 2023,Poland
+PRT,1995,Grade 4,Mathematics,442,World Bank EdStats,Portugal
+PRT,2011,Grade 4,Mathematics,532,World Bank EdStats,Portugal
+PRT,2015,Grade 4,Mathematics,541,World Bank EdStats,Portugal
+PRT,2019,Grade 4,Mathematics,525,World Bank EdStats,Portugal
+PRT,2023,Grade 4,Mathematics,517,IEA TIMSS 2023,Portugal
+QAT,2007,Grade 4,Mathematics,296.268187751537,World Bank EdStats,Qatar
+QAT,2011,Grade 4,Mathematics,413,World Bank EdStats,Qatar
+QAT,2015,Grade 4,Mathematics,439,World Bank EdStats,Qatar
+QAT,2019,Grade 4,Mathematics,449,World Bank EdStats,Qatar
+QAT,2023,Grade 4,Mathematics,464,IEA TIMSS 2023,Qatar
+ROU,2011,Grade 4,Mathematics,482.2806824196,World Bank EdStats,Romania
+ROU,2023,Grade 4,Mathematics,542,IEA TIMSS 2023,Romania
+RUS,2003,Grade 4,Mathematics,532,World Bank EdStats,Russian Federation
+RUS,2007,Grade 4,Mathematics,544,World Bank EdStats,Russian Federation
+RUS,2011,Grade 4,Mathematics,542,World Bank EdStats,Russian Federation
+RUS,2015,Grade 4,Mathematics,564,World Bank EdStats,Russian Federation
+RUS,2019,Grade 4,Mathematics,567,World Bank EdStats,Russian Federation
+SAU,2011,Grade 4,Mathematics,410,World Bank EdStats,Saudi Arabia
+SAU,2015,Grade 4,Mathematics,383,World Bank EdStats,Saudi Arabia
+SAU,2019,Grade 4,Mathematics,398,World Bank EdStats,Saudi Arabia
+SAU,2023,Grade 4,Mathematics,420,IEA TIMSS 2023,Saudi Arabia
+SRB,2011,Grade 4,Mathematics,516,World Bank EdStats,Serbia
+SRB,2015,Grade 4,Mathematics,518,World Bank EdStats,Serbia
+SRB,2019,Grade 4,Mathematics,508,World Bank EdStats,Serbia
+SRB,2023,Grade 4,Mathematics,523,IEA TIMSS 2023,Serbia
+SGP,1995,Grade 4,Mathematics,590,World Bank EdStats,Singapore
+SGP,2003,Grade 4,Mathematics,594,World Bank EdStats,Singapore
+SGP,2007,Grade 4,Mathematics,599,World Bank EdStats,Singapore
+SGP,2011,Grade 4,Mathematics,606,World Bank EdStats,Singapore
+SGP,2015,Grade 4,Mathematics,618,World Bank EdStats,Singapore
+SGP,2019,Grade 4,Mathematics,625,World Bank EdStats,Singapore
+SGP,2023,Grade 4,Mathematics,615,IEA TIMSS 2023,Singapore
+SVK,2007,Grade 4,Mathematics,496,World Bank EdStats,Slovak Republic
+SVK,2011,Grade 4,Mathematics,507,World Bank EdStats,Slovak Republic
+SVK,2015,Grade 4,Mathematics,498,World Bank EdStats,Slovak Republic
+SVK,2019,Grade 4,Mathematics,510,World Bank EdStats,Slovak Republic
+SVK,2023,Grade 4,Mathematics,515,IEA TIMSS 2023,Slovak Republic
+SVN,1995,Grade 4,Mathematics,462,World Bank EdStats,Slovenia
+SVN,2003,Grade 4,Mathematics,479,World Bank EdStats,Slovenia
+SVN,2007,Grade 4,Mathematics,502,World Bank EdStats,Slovenia
+SVN,2011,Grade 4,Mathematics,513,World Bank EdStats,Slovenia
+SVN,2015,Grade 4,Mathematics,520,World Bank EdStats,Slovenia
+SVN,2023,Grade 4,Mathematics,514,IEA TIMSS 2023,Slovenia
+ZAF,2019,Grade 4,Mathematics,374,World Bank EdStats,South Africa
+ZAF,2023,Grade 4,Mathematics,362,IEA TIMSS 2023,South Africa
+ESP,2011,Grade 4,Mathematics,482,World Bank EdStats,Spain
+ESP,2015,Grade 4,Mathematics,505,World Bank EdStats,Spain
+ESP,2019,Grade 4,Mathematics,502,World Bank EdStats,Spain
+ESP,2023,Grade 4,Mathematics,498,IEA TIMSS 2023,Spain
+SWE,2007,Grade 4,Mathematics,503,World Bank EdStats,Sweden
+SWE,2011,Grade 4,Mathematics,504,World Bank EdStats,Sweden
+SWE,2015,Grade 4,Mathematics,519,World Bank EdStats,Sweden
+SWE,2019,Grade 4,Mathematics,521,World Bank EdStats,Sweden
+SWE,2023,Grade 4,Mathematics,530,IEA TIMSS 2023,Sweden
+THA,1995,Grade 4,Mathematics,466.523453393553,World Bank EdStats,Thailand
+THA,2011,Grade 4,Mathematics,457.975859250054,World Bank EdStats,Thailand
+TUN,2003,Grade 4,Mathematics,339.300013621143,World Bank EdStats,Tunisia
+TUN,2007,Grade 4,Mathematics,327.435410819987,World Bank EdStats,Tunisia
+TUN,2011,Grade 4,Mathematics,359.344597355526,World Bank EdStats,Tunisia
+TUR,2011,Grade 4,Mathematics,469,World Bank EdStats,Turkiye
+TUR,2015,Grade 4,Mathematics,483,World Bank EdStats,Turkiye
+TUR,2019,Grade 4,Mathematics,523,World Bank EdStats,Turkiye
+TUR,2023,Grade 4,Mathematics,553,IEA TIMSS 2023,Turkiye
+UKR,2007,Grade 4,Mathematics,469.003302468776,World Bank EdStats,Ukraine
+ARE,2011,Grade 4,Mathematics,434,World Bank EdStats,United Arab Emirates
+ARE,2015,Grade 4,Mathematics,452,World Bank EdStats,United Arab Emirates
+ARE,2019,Grade 4,Mathematics,481,World Bank EdStats,United Arab Emirates
+ARE,2023,Grade 4,Mathematics,498,IEA TIMSS 2023,United Arab Emirates
+USA,1995,Grade 4,Mathematics,518,World Bank EdStats,United States
+USA,2003,Grade 4,Mathematics,518,World Bank EdStats,United States
+USA,2007,Grade 4,Mathematics,529,World Bank EdStats,United States
+USA,2011,Grade 4,Mathematics,541,World Bank EdStats,United States
+USA,2015,Grade 4,Mathematics,539,World Bank EdStats,United States
+USA,2019,Grade 4,Mathematics,535,World Bank EdStats,United States
+USA,2023,Grade 4,Mathematics,517,IEA TIMSS 2023,United States
+UZB,2023,Grade 4,Mathematics,443,IEA TIMSS 2023,Uzbekistan
+YEM,2007,Grade 4,Mathematics,223.682638876229,World Bank EdStats,"Yemen, Rep."
+YEM,2011,Grade 4,Mathematics,247.565153391287,World Bank EdStats,"Yemen, Rep."
+ALB,2019,Grade 4,Science,489,World Bank EdStats,Albania
+ALB,2023,Grade 4,Science,491,IEA TIMSS 2023,Albania
+DZA,2007,Grade 4,Science,353.819252571125,World Bank EdStats,Algeria
+ARM,2003,Grade 4,Science,436.528134792769,World Bank EdStats,Armenia
+ARM,2007,Grade 4,Science,484.386840578583,World Bank EdStats,Armenia
+ARM,2011,Grade 4,Science,416.083203002665,World Bank EdStats,Armenia
+ARM,2019,Grade 4,Science,466,World Bank EdStats,Armenia
+ARM,2023,Grade 4,Science,457,IEA TIMSS 2023,Armenia
+AUS,1995,Grade 4,Science,521,World Bank EdStats,Australia
+AUS,2003,Grade 4,Science,521,World Bank EdStats,Australia
+AUS,2007,Grade 4,Science,527,World Bank EdStats,Australia
+AUS,2011,Grade 4,Science,516,World Bank EdStats,Australia
+AUS,2015,Grade 4,Science,524,World Bank EdStats,Australia
+AUS,2019,Grade 4,Science,533,World Bank EdStats,Australia
+AUS,2023,Grade 4,Science,550,IEA TIMSS 2023,Australia
+AUT,1995,Grade 4,Science,537.801157282587,World Bank EdStats,Austria
+AUT,2007,Grade 4,Science,525.626764752944,World Bank EdStats,Austria
+AUT,2011,Grade 4,Science,531.502150328741,World Bank EdStats,Austria
+AUT,2019,Grade 4,Science,522,World Bank EdStats,Austria
+AZE,2011,Grade 4,Science,438.06629595546,World Bank EdStats,Azerbaijan
+AZE,2019,Grade 4,Science,427,World Bank EdStats,Azerbaijan
+AZE,2023,Grade 4,Science,422,IEA TIMSS 2023,Azerbaijan
+BHR,2011,Grade 4,Science,449,World Bank EdStats,Bahrain
+BHR,2015,Grade 4,Science,459,World Bank EdStats,Bahrain
+BHR,2019,Grade 4,Science,493,World Bank EdStats,Bahrain
+BHR,2023,Grade 4,Science,475,IEA TIMSS 2023,Bahrain
+BIH,2019,Grade 4,Science,459,World Bank EdStats,Bosnia and Herzegovina
+BIH,2023,Grade 4,Science,448,IEA TIMSS 2023,Bosnia and Herzegovina
+BRA,2023,Grade 4,Science,425,IEA TIMSS 2023,Brazil
+BGR,2015,Grade 4,Science,536,World Bank EdStats,Bulgaria
+BGR,2019,Grade 4,Science,521,World Bank EdStats,Bulgaria
+BGR,2023,Grade 4,Science,530,IEA TIMSS 2023,Bulgaria
+CAN,1995,Grade 4,Science,525.343409072365,World Bank EdStats,Canada
+CAN,2015,Grade 4,Science,525,World Bank EdStats,Canada
+CAN,2019,Grade 4,Science,523,World Bank EdStats,Canada
+CAN,2023,Grade 4,Science,521,IEA TIMSS 2023,Canada
+CHL,2011,Grade 4,Science,480,World Bank EdStats,Chile
+CHL,2015,Grade 4,Science,478,World Bank EdStats,Chile
+CHL,2019,Grade 4,Science,469,World Bank EdStats,Chile
+CHL,2023,Grade 4,Science,479,IEA TIMSS 2023,Chile
+COL,2007,Grade 4,Science,400.304571920106,World Bank EdStats,Colombia
+HRV,2011,Grade 4,Science,516,World Bank EdStats,Croatia
+HRV,2015,Grade 4,Science,533,World Bank EdStats,Croatia
+HRV,2019,Grade 4,Science,524,World Bank EdStats,Croatia
+CYP,1995,Grade 4,Science,450,World Bank EdStats,Cyprus
+CYP,2003,Grade 4,Science,480,World Bank EdStats,Cyprus
+CYP,2015,Grade 4,Science,481,World Bank EdStats,Cyprus
+CYP,2019,Grade 4,Science,511,World Bank EdStats,Cyprus
+CYP,2023,Grade 4,Science,487,IEA TIMSS 2023,Cyprus
+CZE,1995,Grade 4,Science,532,World Bank EdStats,Czechia
+CZE,2007,Grade 4,Science,515,World Bank EdStats,Czechia
+CZE,2011,Grade 4,Science,536,World Bank EdStats,Czechia
+CZE,2015,Grade 4,Science,534,World Bank EdStats,Czechia
+CZE,2019,Grade 4,Science,534,World Bank EdStats,Czechia
+CZE,2023,Grade 4,Science,526,IEA TIMSS 2023,Czechia
+DNK,2007,Grade 4,Science,517,World Bank EdStats,Denmark
+DNK,2011,Grade 4,Science,528,World Bank EdStats,Denmark
+DNK,2015,Grade 4,Science,527,World Bank EdStats,Denmark
+DNK,2019,Grade 4,Science,522,World Bank EdStats,Denmark
+DNK,2023,Grade 4,Science,522,IEA TIMSS 2023,Denmark
+SLV,2007,Grade 4,Science,389.582953269441,World Bank EdStats,El Salvador
+FIN,2011,Grade 4,Science,570,World Bank EdStats,Finland
+FIN,2015,Grade 4,Science,554,World Bank EdStats,Finland
+FIN,2019,Grade 4,Science,555,World Bank EdStats,Finland
+FIN,2023,Grade 4,Science,542,IEA TIMSS 2023,Finland
+FRA,2015,Grade 4,Science,487,World Bank EdStats,France
+FRA,2019,Grade 4,Science,488,World Bank EdStats,France
+FRA,2023,Grade 4,Science,488,IEA TIMSS 2023,France
+GEO,2007,Grade 4,Science,418,World Bank EdStats,Georgia
+GEO,2011,Grade 4,Science,455,World Bank EdStats,Georgia
+GEO,2015,Grade 4,Science,451,World Bank EdStats,Georgia
+GEO,2019,Grade 4,Science,454,World Bank EdStats,Georgia
+GEO,2023,Grade 4,Science,465,IEA TIMSS 2023,Georgia
+DEU,2007,Grade 4,Science,528,World Bank EdStats,Germany
+DEU,2011,Grade 4,Science,528,World Bank EdStats,Germany
+DEU,2015,Grade 4,Science,528,World Bank EdStats,Germany
+DEU,2019,Grade 4,Science,518,World Bank EdStats,Germany
+DEU,2023,Grade 4,Science,515,IEA TIMSS 2023,Germany
+GRC,1995,Grade 4,Science,472.743577154579,World Bank EdStats,Greece
+HKG,1995,Grade 4,Science,508,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2003,Grade 4,Science,542,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2007,Grade 4,Science,554,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2011,Grade 4,Science,535,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2015,Grade 4,Science,557,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2019,Grade 4,Science,531,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2023,Grade 4,Science,545,IEA TIMSS 2023,"Hong Kong SAR, China"
+HUN,1995,Grade 4,Science,508,World Bank EdStats,Hungary
+HUN,2003,Grade 4,Science,530,World Bank EdStats,Hungary
+HUN,2007,Grade 4,Science,536,World Bank EdStats,Hungary
+HUN,2011,Grade 4,Science,534,World Bank EdStats,Hungary
+HUN,2015,Grade 4,Science,542,World Bank EdStats,Hungary
+HUN,2019,Grade 4,Science,529,World Bank EdStats,Hungary
+HUN,2023,Grade 4,Science,524,IEA TIMSS 2023,Hungary
+ISL,1995,Grade 4,Science,479.035409719059,World Bank EdStats,Iceland
+IDN,2015,Grade 4,Science,397,World Bank EdStats,Indonesia
+IRN,1995,Grade 4,Science,380,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2003,Grade 4,Science,414,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2007,Grade 4,Science,436,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2011,Grade 4,Science,453,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2015,Grade 4,Science,421,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2019,Grade 4,Science,441,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2023,Grade 4,Science,432,IEA TIMSS 2023,"Iran, Islamic Rep."
+IRL,1995,Grade 4,Science,515,World Bank EdStats,Ireland
+IRL,2011,Grade 4,Science,516,World Bank EdStats,Ireland
+IRL,2015,Grade 4,Science,529,World Bank EdStats,Ireland
+IRL,2019,Grade 4,Science,528,World Bank EdStats,Ireland
+IRL,2023,Grade 4,Science,532,IEA TIMSS 2023,Ireland
+ISR,1995,Grade 4,Science,482.472819464808,World Bank EdStats,Israel
+ITA,2003,Grade 4,Science,516,World Bank EdStats,Italy
+ITA,2007,Grade 4,Science,535,World Bank EdStats,Italy
+ITA,2011,Grade 4,Science,524,World Bank EdStats,Italy
+ITA,2015,Grade 4,Science,516,World Bank EdStats,Italy
+ITA,2019,Grade 4,Science,510,World Bank EdStats,Italy
+ITA,2023,Grade 4,Science,511,IEA TIMSS 2023,Italy
+JPN,1995,Grade 4,Science,553,World Bank EdStats,Japan
+JPN,2003,Grade 4,Science,543,World Bank EdStats,Japan
+JPN,2007,Grade 4,Science,548,World Bank EdStats,Japan
+JPN,2011,Grade 4,Science,559,World Bank EdStats,Japan
+JPN,2015,Grade 4,Science,569,World Bank EdStats,Japan
+JPN,2019,Grade 4,Science,562,World Bank EdStats,Japan
+JPN,2023,Grade 4,Science,555,IEA TIMSS 2023,Japan
+JOR,2023,Grade 4,Science,418,IEA TIMSS 2023,Jordan
+KAZ,2007,Grade 4,Science,532.830391436105,World Bank EdStats,Kazakhstan
+KAZ,2011,Grade 4,Science,495,World Bank EdStats,Kazakhstan
+KAZ,2015,Grade 4,Science,550,World Bank EdStats,Kazakhstan
+KAZ,2019,Grade 4,Science,494,World Bank EdStats,Kazakhstan
+KAZ,2023,Grade 4,Science,467,IEA TIMSS 2023,Kazakhstan
+KOR,1995,Grade 4,Science,576,World Bank EdStats,"Korea, Rep."
+KOR,2011,Grade 4,Science,587,World Bank EdStats,"Korea, Rep."
+KOR,2015,Grade 4,Science,589,World Bank EdStats,"Korea, Rep."
+KOR,2019,Grade 4,Science,588,World Bank EdStats,"Korea, Rep."
+KOR,2023,Grade 4,Science,583,IEA TIMSS 2023,"Korea, Rep."
+XKX,2019,Grade 4,Science,413,World Bank EdStats,Kosovo
+XKX,2023,Grade 4,Science,403,IEA TIMSS 2023,Kosovo
+KWT,1995,Grade 4,Science,360.057271427715,World Bank EdStats,Kuwait
+KWT,2007,Grade 4,Science,348.15114661949,World Bank EdStats,Kuwait
+KWT,2011,Grade 4,Science,347,World Bank EdStats,Kuwait
+KWT,2015,Grade 4,Science,315,World Bank EdStats,Kuwait
+KWT,2019,Grade 4,Science,392,World Bank EdStats,Kuwait
+KWT,2023,Grade 4,Science,373,IEA TIMSS 2023,Kuwait
+LVA,1995,Grade 4,Science,486.3831497841,World Bank EdStats,Latvia
+LVA,2003,Grade 4,Science,531.520859319496,World Bank EdStats,Latvia
+LVA,2007,Grade 4,Science,541.895062388756,World Bank EdStats,Latvia
+LVA,2019,Grade 4,Science,542,World Bank EdStats,Latvia
+LVA,2023,Grade 4,Science,526,IEA TIMSS 2023,Latvia
+LTU,2003,Grade 4,Science,512,World Bank EdStats,Lithuania
+LTU,2007,Grade 4,Science,514,World Bank EdStats,Lithuania
+LTU,2011,Grade 4,Science,515,World Bank EdStats,Lithuania
+LTU,2015,Grade 4,Science,530,World Bank EdStats,Lithuania
+LTU,2019,Grade 4,Science,538,World Bank EdStats,Lithuania
+LTU,2023,Grade 4,Science,537,IEA TIMSS 2023,Lithuania
+MAC,2023,Grade 4,Science,536,IEA TIMSS 2023,"Macao SAR, China"
+MLT,2011,Grade 4,Science,445.825745802997,World Bank EdStats,Malta
+MLT,2019,Grade 4,Science,496,World Bank EdStats,Malta
+MDA,2003,Grade 4,Science,496.420293772852,World Bank EdStats,Moldova
+MNG,2007,Grade 4,Science,421.396985272932,World Bank EdStats,Mongolia
+MNE,2019,Grade 4,Science,453,World Bank EdStats,Montenegro
+MNE,2023,Grade 4,Science,461,IEA TIMSS 2023,Montenegro
+MAR,2003,Grade 4,Science,304.391822633424,World Bank EdStats,Morocco
+MAR,2007,Grade 4,Science,297.446869713583,World Bank EdStats,Morocco
+MAR,2011,Grade 4,Science,264,World Bank EdStats,Morocco
+MAR,2015,Grade 4,Science,352,World Bank EdStats,Morocco
+MAR,2019,Grade 4,Science,374,World Bank EdStats,Morocco
+MAR,2023,Grade 4,Science,390,IEA TIMSS 2023,Morocco
+NLD,1995,Grade 4,Science,530,World Bank EdStats,Netherlands
+NLD,2003,Grade 4,Science,525,World Bank EdStats,Netherlands
+NLD,2007,Grade 4,Science,523,World Bank EdStats,Netherlands
+NLD,2011,Grade 4,Science,531,World Bank EdStats,Netherlands
+NLD,2015,Grade 4,Science,517,World Bank EdStats,Netherlands
+NLD,2019,Grade 4,Science,518,World Bank EdStats,Netherlands
+NLD,2023,Grade 4,Science,517,IEA TIMSS 2023,Netherlands
+NZL,1995,Grade 4,Science,505,World Bank EdStats,New Zealand
+NZL,2003,Grade 4,Science,520,World Bank EdStats,New Zealand
+NZL,2007,Grade 4,Science,504,World Bank EdStats,New Zealand
+NZL,2011,Grade 4,Science,497,World Bank EdStats,New Zealand
+NZL,2015,Grade 4,Science,506,World Bank EdStats,New Zealand
+NZL,2019,Grade 4,Science,503,World Bank EdStats,New Zealand
+NZL,2023,Grade 4,Science,517,IEA TIMSS 2023,New Zealand
+MKD,2019,Grade 4,Science,426,World Bank EdStats,North Macedonia
+MKD,2023,Grade 4,Science,439,IEA TIMSS 2023,North Macedonia
+NOR,1995,Grade 4,Science,504,World Bank EdStats,Norway
+NOR,2003,Grade 4,Science,466,World Bank EdStats,Norway
+NOR,2007,Grade 4,Science,477,World Bank EdStats,Norway
+NOR,2011,Grade 4,Science,494,World Bank EdStats,Norway
+NOR,2015,Grade 4,Science,493,World Bank EdStats,Norway
+NOR,2019,Grade 4,Science,539,World Bank EdStats,Norway
+NOR,2023,Grade 4,Science,530,IEA TIMSS 2023,Norway
+OMN,2011,Grade 4,Science,377,World Bank EdStats,Oman
+OMN,2015,Grade 4,Science,431,World Bank EdStats,Oman
+OMN,2019,Grade 4,Science,435,World Bank EdStats,Oman
+OMN,2023,Grade 4,Science,433,IEA TIMSS 2023,Oman
+PAK,2019,Grade 4,Science,290,World Bank EdStats,Pakistan
+PHL,2003,Grade 4,Science,331.619979865004,World Bank EdStats,Philippines
+PHL,2019,Grade 4,Science,249,World Bank EdStats,Philippines
+POL,2011,Grade 4,Science,504.891886830669,World Bank EdStats,Poland
+POL,2015,Grade 4,Science,547,World Bank EdStats,Poland
+POL,2019,Grade 4,Science,531,World Bank EdStats,Poland
+POL,2023,Grade 4,Science,550,IEA TIMSS 2023,Poland
+PRT,1995,Grade 4,Science,452,World Bank EdStats,Portugal
+PRT,2011,Grade 4,Science,522,World Bank EdStats,Portugal
+PRT,2015,Grade 4,Science,508,World Bank EdStats,Portugal
+PRT,2019,Grade 4,Science,504,World Bank EdStats,Portugal
+PRT,2023,Grade 4,Science,511,IEA TIMSS 2023,Portugal
+QAT,2007,Grade 4,Science,294.395625910358,World Bank EdStats,Qatar
+QAT,2011,Grade 4,Science,394,World Bank EdStats,Qatar
+QAT,2015,Grade 4,Science,436,World Bank EdStats,Qatar
+QAT,2019,Grade 4,Science,449,World Bank EdStats,Qatar
+QAT,2023,Grade 4,Science,472,IEA TIMSS 2023,Qatar
+ROU,2011,Grade 4,Science,505.385242438007,World Bank EdStats,Romania
+ROU,2023,Grade 4,Science,526,IEA TIMSS 2023,Romania
+RUS,2003,Grade 4,Science,526,World Bank EdStats,Russian Federation
+RUS,2007,Grade 4,Science,546,World Bank EdStats,Russian Federation
+RUS,2011,Grade 4,Science,552,World Bank EdStats,Russian Federation
+RUS,2015,Grade 4,Science,567,World Bank EdStats,Russian Federation
+RUS,2019,Grade 4,Science,567,World Bank EdStats,Russian Federation
+SAU,2011,Grade 4,Science,429,World Bank EdStats,Saudi Arabia
+SAU,2015,Grade 4,Science,390,World Bank EdStats,Saudi Arabia
+SAU,2019,Grade 4,Science,402,World Bank EdStats,Saudi Arabia
+SAU,2023,Grade 4,Science,428,IEA TIMSS 2023,Saudi Arabia
+SRB,2011,Grade 4,Science,516,World Bank EdStats,Serbia
+SRB,2015,Grade 4,Science,525,World Bank EdStats,Serbia
+SRB,2019,Grade 4,Science,517,World Bank EdStats,Serbia
+SRB,2023,Grade 4,Science,510,IEA TIMSS 2023,Serbia
+SGP,1995,Grade 4,Science,523,World Bank EdStats,Singapore
+SGP,2003,Grade 4,Science,565,World Bank EdStats,Singapore
+SGP,2007,Grade 4,Science,587,World Bank EdStats,Singapore
+SGP,2011,Grade 4,Science,583,World Bank EdStats,Singapore
+SGP,2015,Grade 4,Science,590,World Bank EdStats,Singapore
+SGP,2019,Grade 4,Science,595,World Bank EdStats,Singapore
+SGP,2023,Grade 4,Science,607,IEA TIMSS 2023,Singapore
+SVK,2007,Grade 4,Science,526,World Bank EdStats,Slovak Republic
+SVK,2011,Grade 4,Science,532,World Bank EdStats,Slovak Republic
+SVK,2015,Grade 4,Science,520,World Bank EdStats,Slovak Republic
+SVK,2019,Grade 4,Science,521,World Bank EdStats,Slovak Republic
+SVK,2023,Grade 4,Science,521,IEA TIMSS 2023,Slovak Republic
+SVN,1995,Grade 4,Science,464,World Bank EdStats,Slovenia
+SVN,2003,Grade 4,Science,490,World Bank EdStats,Slovenia
+SVN,2007,Grade 4,Science,518,World Bank EdStats,Slovenia
+SVN,2011,Grade 4,Science,520,World Bank EdStats,Slovenia
+SVN,2015,Grade 4,Science,543,World Bank EdStats,Slovenia
+SVN,2023,Grade 4,Science,526,IEA TIMSS 2023,Slovenia
+ZAF,2019,Grade 4,Science,324,World Bank EdStats,South Africa
+ESP,2011,Grade 4,Science,505,World Bank EdStats,Spain
+ESP,2015,Grade 4,Science,518,World Bank EdStats,Spain
+ESP,2019,Grade 4,Science,511,World Bank EdStats,Spain
+ESP,2023,Grade 4,Science,504,IEA TIMSS 2023,Spain
+SWE,2007,Grade 4,Science,525,World Bank EdStats,Sweden
+SWE,2011,Grade 4,Science,533,World Bank EdStats,Sweden
+SWE,2015,Grade 4,Science,540,World Bank EdStats,Sweden
+SWE,2019,Grade 4,Science,537,World Bank EdStats,Sweden
+SWE,2023,Grade 4,Science,533,IEA TIMSS 2023,Sweden
+THA,1995,Grade 4,Science,449.653379603036,World Bank EdStats,Thailand
+THA,2011,Grade 4,Science,471.570755011502,World Bank EdStats,Thailand
+TUN,2003,Grade 4,Science,313.988493052305,World Bank EdStats,Tunisia
+TUN,2007,Grade 4,Science,318.474368147064,World Bank EdStats,Tunisia
+TUN,2011,Grade 4,Science,345.606303930365,World Bank EdStats,Tunisia
+TUR,2011,Grade 4,Science,463,World Bank EdStats,Turkiye
+TUR,2015,Grade 4,Science,483,World Bank EdStats,Turkiye
+TUR,2019,Grade 4,Science,526,World Bank EdStats,Turkiye
+TUR,2023,Grade 4,Science,570,IEA TIMSS 2023,Turkiye
+UKR,2007,Grade 4,Science,473.81363457389,World Bank EdStats,Ukraine
+ARE,2011,Grade 4,Science,428,World Bank EdStats,United Arab Emirates
+ARE,2015,Grade 4,Science,451,World Bank EdStats,United Arab Emirates
+ARE,2019,Grade 4,Science,473,World Bank EdStats,United Arab Emirates
+ARE,2023,Grade 4,Science,495,IEA TIMSS 2023,United Arab Emirates
+USA,1995,Grade 4,Science,542,World Bank EdStats,United States
+USA,2003,Grade 4,Science,536,World Bank EdStats,United States
+USA,2007,Grade 4,Science,539,World Bank EdStats,United States
+USA,2011,Grade 4,Science,544,World Bank EdStats,United States
+USA,2015,Grade 4,Science,546,World Bank EdStats,United States
+USA,2019,Grade 4,Science,539,World Bank EdStats,United States
+USA,2023,Grade 4,Science,532,IEA TIMSS 2023,United States
+UZB,2023,Grade 4,Science,412,IEA TIMSS 2023,Uzbekistan
+YEM,2007,Grade 4,Science,197.364777073704,World Bank EdStats,"Yemen, Rep."
+YEM,2011,Grade 4,Science,209.064814081133,World Bank EdStats,"Yemen, Rep."
+DZA,2007,Grade 8,Mathematics,386.75187254735,World Bank EdStats,Algeria
+ARM,2003,Grade 8,Mathematics,478.127159401159,World Bank EdStats,Armenia
+ARM,2007,Grade 8,Mathematics,498.679859638984,World Bank EdStats,Armenia
+ARM,2011,Grade 8,Mathematics,466.587958652074,World Bank EdStats,Armenia
+AUS,1995,Grade 8,Mathematics,509,World Bank EdStats,Australia
+AUS,1999,Grade 8,Mathematics,525.080254160981,World Bank EdStats,Australia
+AUS,2003,Grade 8,Mathematics,505,World Bank EdStats,Australia
+AUS,2007,Grade 8,Mathematics,496,World Bank EdStats,Australia
+AUS,2011,Grade 8,Mathematics,505,World Bank EdStats,Australia
+AUS,2015,Grade 8,Mathematics,505,World Bank EdStats,Australia
+AUS,2019,Grade 8,Mathematics,517,World Bank EdStats,Australia
+AUS,2023,Grade 8,Mathematics,509,IEA TIMSS 2023,Australia
+AUT,1995,Grade 8,Mathematics,529.411722754899,World Bank EdStats,Austria
+AUT,2023,Grade 8,Mathematics,512,IEA TIMSS 2023,Austria
+AZE,2023,Grade 8,Mathematics,479,IEA TIMSS 2023,Azerbaijan
+BHR,2003,Grade 8,Mathematics,401,World Bank EdStats,Bahrain
+BHR,2007,Grade 8,Mathematics,398,World Bank EdStats,Bahrain
+BHR,2011,Grade 8,Mathematics,409,World Bank EdStats,Bahrain
+BHR,2015,Grade 8,Mathematics,454,World Bank EdStats,Bahrain
+BHR,2019,Grade 8,Mathematics,481,World Bank EdStats,Bahrain
+BHR,2023,Grade 8,Mathematics,426,IEA TIMSS 2023,Bahrain
+BIH,2007,Grade 8,Mathematics,455.863275198849,World Bank EdStats,Bosnia and Herzegovina
+BWA,2003,Grade 8,Mathematics,366.34498123248,World Bank EdStats,Botswana
+BWA,2007,Grade 8,Mathematics,363.538811553312,World Bank EdStats,Botswana
+BRA,2023,Grade 8,Mathematics,378,IEA TIMSS 2023,Brazil
+BGR,1999,Grade 8,Mathematics,510.59051419115,World Bank EdStats,Bulgaria
+BGR,2003,Grade 8,Mathematics,476.168633677246,World Bank EdStats,Bulgaria
+BGR,2007,Grade 8,Mathematics,463.629851086622,World Bank EdStats,Bulgaria
+CAN,1995,Grade 8,Mathematics,520.543557561849,World Bank EdStats,Canada
+CAN,1999,Grade 8,Mathematics,530.75272098414,World Bank EdStats,Canada
+CAN,2015,Grade 8,Mathematics,527,World Bank EdStats,Canada
+CHL,1999,Grade 8,Mathematics,392,World Bank EdStats,Chile
+CHL,2003,Grade 8,Mathematics,387,World Bank EdStats,Chile
+CHL,2011,Grade 8,Mathematics,416,World Bank EdStats,Chile
+CHL,2015,Grade 8,Mathematics,427,World Bank EdStats,Chile
+CHL,2019,Grade 8,Mathematics,441,World Bank EdStats,Chile
+CHL,2023,Grade 8,Mathematics,416,IEA TIMSS 2023,Chile
+COL,1995,Grade 8,Mathematics,332.255886299398,World Bank EdStats,Colombia
+COL,2007,Grade 8,Mathematics,379.635834143286,World Bank EdStats,Colombia
+CYP,1995,Grade 8,Mathematics,467.533337086899,World Bank EdStats,Cyprus
+CYP,1999,Grade 8,Mathematics,476.382112266399,World Bank EdStats,Cyprus
+CYP,2003,Grade 8,Mathematics,459.365871006138,World Bank EdStats,Cyprus
+CYP,2007,Grade 8,Mathematics,465.477097053043,World Bank EdStats,Cyprus
+CYP,2019,Grade 8,Mathematics,501,World Bank EdStats,Cyprus
+CYP,2023,Grade 8,Mathematics,494,IEA TIMSS 2023,Cyprus
+CZE,1995,Grade 8,Mathematics,545.551038605093,World Bank EdStats,Czechia
+CZE,1999,Grade 8,Mathematics,519.873965700437,World Bank EdStats,Czechia
+CZE,2007,Grade 8,Mathematics,503.806843263332,World Bank EdStats,Czechia
+CZE,2023,Grade 8,Mathematics,518,IEA TIMSS 2023,Czechia
+DNK,1995,Grade 8,Mathematics,497.259342555794,World Bank EdStats,Denmark
+EGY,2003,Grade 8,Mathematics,406,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2007,Grade 8,Mathematics,391,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2015,Grade 8,Mathematics,392,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2019,Grade 8,Mathematics,413,World Bank EdStats,"Egypt, Arab Rep."
+SLV,2007,Grade 8,Mathematics,340.440938795769,World Bank EdStats,El Salvador
+EST,2003,Grade 8,Mathematics,530.915500208726,World Bank EdStats,Estonia
+FIN,1999,Grade 8,Mathematics,520.451764633465,World Bank EdStats,Finland
+FIN,2011,Grade 8,Mathematics,514.033966141633,World Bank EdStats,Finland
+FIN,2019,Grade 8,Mathematics,509,World Bank EdStats,Finland
+FIN,2023,Grade 8,Mathematics,504,IEA TIMSS 2023,Finland
+FRA,1995,Grade 8,Mathematics,529.789754876593,World Bank EdStats,France
+FRA,2019,Grade 8,Mathematics,483,World Bank EdStats,France
+FRA,2023,Grade 8,Mathematics,479,IEA TIMSS 2023,France
+GEO,2007,Grade 8,Mathematics,410,World Bank EdStats,Georgia
+GEO,2011,Grade 8,Mathematics,431,World Bank EdStats,Georgia
+GEO,2015,Grade 8,Mathematics,453,World Bank EdStats,Georgia
+GEO,2019,Grade 8,Mathematics,461,World Bank EdStats,Georgia
+GEO,2023,Grade 8,Mathematics,467,IEA TIMSS 2023,Georgia
+DEU,1995,Grade 8,Mathematics,502.307773790818,World Bank EdStats,Germany
+GHA,2003,Grade 8,Mathematics,275.704126764247,World Bank EdStats,Ghana
+GHA,2007,Grade 8,Mathematics,309.369549111905,World Bank EdStats,Ghana
+GHA,2011,Grade 8,Mathematics,330.830563185651,World Bank EdStats,Ghana
+GRC,1995,Grade 8,Mathematics,478.855086781043,World Bank EdStats,Greece
+HKG,1995,Grade 8,Mathematics,569,World Bank EdStats,"Hong Kong SAR, China"
+HKG,1999,Grade 8,Mathematics,582,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2003,Grade 8,Mathematics,586,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2007,Grade 8,Mathematics,572,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2011,Grade 8,Mathematics,586,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2015,Grade 8,Mathematics,594,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2019,Grade 8,Mathematics,578,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2023,Grade 8,Mathematics,575,IEA TIMSS 2023,"Hong Kong SAR, China"
+HUN,1995,Grade 8,Mathematics,527,World Bank EdStats,Hungary
+HUN,1999,Grade 8,Mathematics,532,World Bank EdStats,Hungary
+HUN,2003,Grade 8,Mathematics,529,World Bank EdStats,Hungary
+HUN,2007,Grade 8,Mathematics,517,World Bank EdStats,Hungary
+HUN,2011,Grade 8,Mathematics,505,World Bank EdStats,Hungary
+HUN,2015,Grade 8,Mathematics,514,World Bank EdStats,Hungary
+HUN,2019,Grade 8,Mathematics,517,World Bank EdStats,Hungary
+HUN,2023,Grade 8,Mathematics,506,IEA TIMSS 2023,Hungary
+ISL,1995,Grade 8,Mathematics,484.42985006872,World Bank EdStats,Iceland
+IDN,1999,Grade 8,Mathematics,403.07013729207,World Bank EdStats,Indonesia
+IDN,2003,Grade 8,Mathematics,410.701929594947,World Bank EdStats,Indonesia
+IDN,2007,Grade 8,Mathematics,397.109959431977,World Bank EdStats,Indonesia
+IDN,2011,Grade 8,Mathematics,385.837758569168,World Bank EdStats,Indonesia
+IRN,1995,Grade 8,Mathematics,418,World Bank EdStats,"Iran, Islamic Rep."
+IRN,1999,Grade 8,Mathematics,422,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2003,Grade 8,Mathematics,411,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2007,Grade 8,Mathematics,403,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2011,Grade 8,Mathematics,415,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2015,Grade 8,Mathematics,436,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2019,Grade 8,Mathematics,446,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2023,Grade 8,Mathematics,423,IEA TIMSS 2023,"Iran, Islamic Rep."
+IRL,1995,Grade 8,Mathematics,519,World Bank EdStats,Ireland
+IRL,2015,Grade 8,Mathematics,523,World Bank EdStats,Ireland
+IRL,2019,Grade 8,Mathematics,524,World Bank EdStats,Ireland
+IRL,2023,Grade 8,Mathematics,522,IEA TIMSS 2023,Ireland
+ISR,1995,Grade 8,Mathematics,513.314915256329,World Bank EdStats,Israel
+ISR,1999,Grade 8,Mathematics,466.336024506998,World Bank EdStats,Israel
+ISR,2003,Grade 8,Mathematics,495.647806669078,World Bank EdStats,Israel
+ISR,2007,Grade 8,Mathematics,463.251295019033,World Bank EdStats,Israel
+ISR,2011,Grade 8,Mathematics,516,World Bank EdStats,Israel
+ISR,2015,Grade 8,Mathematics,511,World Bank EdStats,Israel
+ISR,2019,Grade 8,Mathematics,519,World Bank EdStats,Israel
+ISR,2023,Grade 8,Mathematics,487,IEA TIMSS 2023,Israel
+ITA,1995,Grade 8,Mathematics,491.014834673134,World Bank EdStats,Italy
+ITA,1999,Grade 8,Mathematics,479,World Bank EdStats,Italy
+ITA,2003,Grade 8,Mathematics,484,World Bank EdStats,Italy
+ITA,2007,Grade 8,Mathematics,480,World Bank EdStats,Italy
+ITA,2011,Grade 8,Mathematics,498,World Bank EdStats,Italy
+ITA,2015,Grade 8,Mathematics,494,World Bank EdStats,Italy
+ITA,2019,Grade 8,Mathematics,497,World Bank EdStats,Italy
+ITA,2023,Grade 8,Mathematics,501,IEA TIMSS 2023,Italy
+JPN,1995,Grade 8,Mathematics,581,World Bank EdStats,Japan
+JPN,1999,Grade 8,Mathematics,579,World Bank EdStats,Japan
+JPN,2003,Grade 8,Mathematics,570,World Bank EdStats,Japan
+JPN,2007,Grade 8,Mathematics,570,World Bank EdStats,Japan
+JPN,2011,Grade 8,Mathematics,570,World Bank EdStats,Japan
+JPN,2015,Grade 8,Mathematics,586,World Bank EdStats,Japan
+JPN,2019,Grade 8,Mathematics,594,World Bank EdStats,Japan
+JPN,2023,Grade 8,Mathematics,595,IEA TIMSS 2023,Japan
+JOR,1999,Grade 8,Mathematics,428,World Bank EdStats,Jordan
+JOR,2003,Grade 8,Mathematics,424,World Bank EdStats,Jordan
+JOR,2007,Grade 8,Mathematics,427,World Bank EdStats,Jordan
+JOR,2011,Grade 8,Mathematics,406,World Bank EdStats,Jordan
+JOR,2015,Grade 8,Mathematics,386,World Bank EdStats,Jordan
+JOR,2019,Grade 8,Mathematics,420,World Bank EdStats,Jordan
+JOR,2023,Grade 8,Mathematics,388,IEA TIMSS 2023,Jordan
+KAZ,2011,Grade 8,Mathematics,487,World Bank EdStats,Kazakhstan
+KAZ,2015,Grade 8,Mathematics,528,World Bank EdStats,Kazakhstan
+KAZ,2019,Grade 8,Mathematics,488,World Bank EdStats,Kazakhstan
+KAZ,2023,Grade 8,Mathematics,454,IEA TIMSS 2023,Kazakhstan
+KOR,1995,Grade 8,Mathematics,581,World Bank EdStats,"Korea, Rep."
+KOR,1999,Grade 8,Mathematics,587,World Bank EdStats,"Korea, Rep."
+KOR,2003,Grade 8,Mathematics,589,World Bank EdStats,"Korea, Rep."
+KOR,2007,Grade 8,Mathematics,597,World Bank EdStats,"Korea, Rep."
+KOR,2011,Grade 8,Mathematics,613,World Bank EdStats,"Korea, Rep."
+KOR,2015,Grade 8,Mathematics,606,World Bank EdStats,"Korea, Rep."
+KOR,2019,Grade 8,Mathematics,607,World Bank EdStats,"Korea, Rep."
+KOR,2023,Grade 8,Mathematics,596,IEA TIMSS 2023,"Korea, Rep."
+KWT,1995,Grade 8,Mathematics,354.980389781019,World Bank EdStats,Kuwait
+KWT,2007,Grade 8,Mathematics,354,World Bank EdStats,Kuwait
+KWT,2015,Grade 8,Mathematics,375,World Bank EdStats,Kuwait
+KWT,2019,Grade 8,Mathematics,403,World Bank EdStats,Kuwait
+KWT,2023,Grade 8,Mathematics,399,IEA TIMSS 2023,Kuwait
+LVA,1995,Grade 8,Mathematics,488.280621245764,World Bank EdStats,Latvia
+LVA,1999,Grade 8,Mathematics,505.059120035329,World Bank EdStats,Latvia
+LVA,2003,Grade 8,Mathematics,508.327336318546,World Bank EdStats,Latvia
+LBN,2003,Grade 8,Mathematics,433,World Bank EdStats,Lebanon
+LBN,2007,Grade 8,Mathematics,449,World Bank EdStats,Lebanon
+LBN,2011,Grade 8,Mathematics,449,World Bank EdStats,Lebanon
+LBN,2015,Grade 8,Mathematics,442,World Bank EdStats,Lebanon
+LBN,2019,Grade 8,Mathematics,429,World Bank EdStats,Lebanon
+LTU,1995,Grade 8,Mathematics,472,World Bank EdStats,Lithuania
+LTU,1999,Grade 8,Mathematics,482,World Bank EdStats,Lithuania
+LTU,2003,Grade 8,Mathematics,502,World Bank EdStats,Lithuania
+LTU,2007,Grade 8,Mathematics,506,World Bank EdStats,Lithuania
+LTU,2011,Grade 8,Mathematics,502,World Bank EdStats,Lithuania
+LTU,2015,Grade 8,Mathematics,512,World Bank EdStats,Lithuania
+LTU,2019,Grade 8,Mathematics,520,World Bank EdStats,Lithuania
+LTU,2023,Grade 8,Mathematics,514,IEA TIMSS 2023,Lithuania
+MYS,1999,Grade 8,Mathematics,519,World Bank EdStats,Malaysia
+MYS,2003,Grade 8,Mathematics,508,World Bank EdStats,Malaysia
+MYS,2007,Grade 8,Mathematics,474,World Bank EdStats,Malaysia
+MYS,2011,Grade 8,Mathematics,440,World Bank EdStats,Malaysia
+MYS,2015,Grade 8,Mathematics,465,World Bank EdStats,Malaysia
+MYS,2019,Grade 8,Mathematics,461,World Bank EdStats,Malaysia
+MYS,2023,Grade 8,Mathematics,411,IEA TIMSS 2023,Malaysia
+MLT,2007,Grade 8,Mathematics,488,World Bank EdStats,Malta
+MLT,2015,Grade 8,Mathematics,494,World Bank EdStats,Malta
+MLT,2023,Grade 8,Mathematics,499,IEA TIMSS 2023,Malta
+MDA,1999,Grade 8,Mathematics,469.230616693144,World Bank EdStats,Moldova
+MDA,2003,Grade 8,Mathematics,459.894755105404,World Bank EdStats,Moldova
+MNG,2007,Grade 8,Mathematics,432.171662241942,World Bank EdStats,Mongolia
+MAR,1999,Grade 8,Mathematics,336.59663257597,World Bank EdStats,Morocco
+MAR,2003,Grade 8,Mathematics,386.539098579595,World Bank EdStats,Morocco
+MAR,2007,Grade 8,Mathematics,380.783501123641,World Bank EdStats,Morocco
+MAR,2011,Grade 8,Mathematics,371,World Bank EdStats,Morocco
+MAR,2015,Grade 8,Mathematics,384,World Bank EdStats,Morocco
+MAR,2019,Grade 8,Mathematics,388,World Bank EdStats,Morocco
+MAR,2023,Grade 8,Mathematics,378,IEA TIMSS 2023,Morocco
+NLD,1995,Grade 8,Mathematics,528.842514080599,World Bank EdStats,Netherlands
+NLD,1999,Grade 8,Mathematics,539.875414206986,World Bank EdStats,Netherlands
+NLD,2003,Grade 8,Mathematics,536.273120512313,World Bank EdStats,Netherlands
+NZL,1995,Grade 8,Mathematics,501,World Bank EdStats,New Zealand
+NZL,1999,Grade 8,Mathematics,491,World Bank EdStats,New Zealand
+NZL,2003,Grade 8,Mathematics,494,World Bank EdStats,New Zealand
+NZL,2011,Grade 8,Mathematics,488,World Bank EdStats,New Zealand
+NZL,2015,Grade 8,Mathematics,493,World Bank EdStats,New Zealand
+NZL,2019,Grade 8,Mathematics,482,World Bank EdStats,New Zealand
+NZL,2023,Grade 8,Mathematics,485,IEA TIMSS 2023,New Zealand
+MKD,1999,Grade 8,Mathematics,446.603542958467,World Bank EdStats,North Macedonia
+MKD,2003,Grade 8,Mathematics,434.983502046399,World Bank EdStats,North Macedonia
+MKD,2011,Grade 8,Mathematics,426.141148940837,World Bank EdStats,North Macedonia
+NOR,1995,Grade 8,Mathematics,498,World Bank EdStats,Norway
+NOR,2003,Grade 8,Mathematics,461,World Bank EdStats,Norway
+NOR,2007,Grade 8,Mathematics,469,World Bank EdStats,Norway
+NOR,2011,Grade 8,Mathematics,475,World Bank EdStats,Norway
+NOR,2015,Grade 8,Mathematics,487,World Bank EdStats,Norway
+NOR,2019,Grade 8,Mathematics,503,World Bank EdStats,Norway
+NOR,2023,Grade 8,Mathematics,501,IEA TIMSS 2023,Norway
+OMN,2007,Grade 8,Mathematics,372,World Bank EdStats,Oman
+OMN,2011,Grade 8,Mathematics,366,World Bank EdStats,Oman
+OMN,2015,Grade 8,Mathematics,403,World Bank EdStats,Oman
+OMN,2019,Grade 8,Mathematics,411,World Bank EdStats,Oman
+OMN,2023,Grade 8,Mathematics,411,IEA TIMSS 2023,Oman
+PHL,1999,Grade 8,Mathematics,344.905191596328,World Bank EdStats,Philippines
+PHL,2003,Grade 8,Mathematics,377.689890016105,World Bank EdStats,Philippines
+PRT,1995,Grade 8,Mathematics,451.31977331823,World Bank EdStats,Portugal
+PRT,2019,Grade 8,Mathematics,500,World Bank EdStats,Portugal
+PRT,2023,Grade 8,Mathematics,475,IEA TIMSS 2023,Portugal
+QAT,2007,Grade 8,Mathematics,306.790917052356,World Bank EdStats,Qatar
+QAT,2011,Grade 8,Mathematics,410,World Bank EdStats,Qatar
+QAT,2015,Grade 8,Mathematics,437,World Bank EdStats,Qatar
+QAT,2019,Grade 8,Mathematics,443,World Bank EdStats,Qatar
+QAT,2023,Grade 8,Mathematics,451,IEA TIMSS 2023,Qatar
+ROU,1995,Grade 8,Mathematics,473.729434910406,World Bank EdStats,Romania
+ROU,1999,Grade 8,Mathematics,472.439932362597,World Bank EdStats,Romania
+ROU,2003,Grade 8,Mathematics,475.281560803412,World Bank EdStats,Romania
+ROU,2007,Grade 8,Mathematics,461.317915623448,World Bank EdStats,Romania
+ROU,2011,Grade 8,Mathematics,457.948343898534,World Bank EdStats,Romania
+ROU,2019,Grade 8,Mathematics,479,World Bank EdStats,Romania
+ROU,2023,Grade 8,Mathematics,496,IEA TIMSS 2023,Romania
+RUS,1995,Grade 8,Mathematics,524,World Bank EdStats,Russian Federation
+RUS,1999,Grade 8,Mathematics,526,World Bank EdStats,Russian Federation
+RUS,2003,Grade 8,Mathematics,508,World Bank EdStats,Russian Federation
+RUS,2007,Grade 8,Mathematics,512,World Bank EdStats,Russian Federation
+RUS,2011,Grade 8,Mathematics,539,World Bank EdStats,Russian Federation
+RUS,2015,Grade 8,Mathematics,538,World Bank EdStats,Russian Federation
+RUS,2019,Grade 8,Mathematics,543,World Bank EdStats,Russian Federation
+SAU,2003,Grade 8,Mathematics,331.682064774532,World Bank EdStats,Saudi Arabia
+SAU,2007,Grade 8,Mathematics,329.337192309023,World Bank EdStats,Saudi Arabia
+SAU,2011,Grade 8,Mathematics,394,World Bank EdStats,Saudi Arabia
+SAU,2015,Grade 8,Mathematics,368,World Bank EdStats,Saudi Arabia
+SAU,2019,Grade 8,Mathematics,394,World Bank EdStats,Saudi Arabia
+SAU,2023,Grade 8,Mathematics,397,IEA TIMSS 2023,Saudi Arabia
+SRB,2003,Grade 8,Mathematics,476.636521211499,World Bank EdStats,Serbia
+SRB,2007,Grade 8,Mathematics,485.767472471353,World Bank EdStats,Serbia
+SGP,1995,Grade 8,Mathematics,609,World Bank EdStats,Singapore
+SGP,1999,Grade 8,Mathematics,604,World Bank EdStats,Singapore
+SGP,2003,Grade 8,Mathematics,605,World Bank EdStats,Singapore
+SGP,2007,Grade 8,Mathematics,593,World Bank EdStats,Singapore
+SGP,2011,Grade 8,Mathematics,611,World Bank EdStats,Singapore
+SGP,2015,Grade 8,Mathematics,621,World Bank EdStats,Singapore
+SGP,2019,Grade 8,Mathematics,616,World Bank EdStats,Singapore
+SGP,2023,Grade 8,Mathematics,605,IEA TIMSS 2023,Singapore
+SVK,1995,Grade 8,Mathematics,533.99083901376,World Bank EdStats,Slovak Republic
+SVK,1999,Grade 8,Mathematics,533.953188678463,World Bank EdStats,Slovak Republic
+SVK,2003,Grade 8,Mathematics,507.740094508853,World Bank EdStats,Slovak Republic
+SVN,1995,Grade 8,Mathematics,494,World Bank EdStats,Slovenia
+SVN,1999,Grade 8,Mathematics,530.112515783048,World Bank EdStats,Slovenia
+SVN,2003,Grade 8,Mathematics,493,World Bank EdStats,Slovenia
+SVN,2007,Grade 8,Mathematics,501,World Bank EdStats,Slovenia
+SVN,2011,Grade 8,Mathematics,505,World Bank EdStats,Slovenia
+SVN,2015,Grade 8,Mathematics,516,World Bank EdStats,Slovenia
+ZAF,1999,Grade 8,Mathematics,274.502579530995,World Bank EdStats,South Africa
+ZAF,2003,Grade 8,Mathematics,263.613711738623,World Bank EdStats,South Africa
+ZAF,2019,Grade 8,Mathematics,389,World Bank EdStats,South Africa
+ZAF,2023,Grade 8,Mathematics,397,IEA TIMSS 2023,South Africa
+ESP,1995,Grade 8,Mathematics,482.791522094872,World Bank EdStats,Spain
+SWE,1995,Grade 8,Mathematics,540,World Bank EdStats,Sweden
+SWE,2003,Grade 8,Mathematics,499,World Bank EdStats,Sweden
+SWE,2007,Grade 8,Mathematics,491,World Bank EdStats,Sweden
+SWE,2011,Grade 8,Mathematics,484,World Bank EdStats,Sweden
+SWE,2015,Grade 8,Mathematics,501,World Bank EdStats,Sweden
+SWE,2019,Grade 8,Mathematics,503,World Bank EdStats,Sweden
+SWE,2023,Grade 8,Mathematics,517,IEA TIMSS 2023,Sweden
+CHE,1995,Grade 8,Mathematics,533.686635247002,World Bank EdStats,Switzerland
+SYR,2007,Grade 8,Mathematics,394.838343344997,World Bank EdStats,Syrian Arab Republic
+SYR,2011,Grade 8,Mathematics,380.166404807656,World Bank EdStats,Syrian Arab Republic
+THA,1995,Grade 8,Mathematics,516.215544828477,World Bank EdStats,Thailand
+THA,1999,Grade 8,Mathematics,467,World Bank EdStats,Thailand
+THA,2007,Grade 8,Mathematics,441,World Bank EdStats,Thailand
+THA,2011,Grade 8,Mathematics,427,World Bank EdStats,Thailand
+THA,2015,Grade 8,Mathematics,431,World Bank EdStats,Thailand
+TUN,1999,Grade 8,Mathematics,447.925200553828,World Bank EdStats,Tunisia
+TUN,2003,Grade 8,Mathematics,410.329482491539,World Bank EdStats,Tunisia
+TUN,2007,Grade 8,Mathematics,420.413222765589,World Bank EdStats,Tunisia
+TUN,2011,Grade 8,Mathematics,424.736494007647,World Bank EdStats,Tunisia
+TUR,1999,Grade 8,Mathematics,428.605640312769,World Bank EdStats,Turkiye
+TUR,2007,Grade 8,Mathematics,431.810290901126,World Bank EdStats,Turkiye
+TUR,2011,Grade 8,Mathematics,452,World Bank EdStats,Turkiye
+TUR,2015,Grade 8,Mathematics,458,World Bank EdStats,Turkiye
+TUR,2019,Grade 8,Mathematics,496,World Bank EdStats,Turkiye
+TUR,2023,Grade 8,Mathematics,509,IEA TIMSS 2023,Turkiye
+UKR,2007,Grade 8,Mathematics,462.162037886625,World Bank EdStats,Ukraine
+UKR,2011,Grade 8,Mathematics,479.185753462383,World Bank EdStats,Ukraine
+ARE,2011,Grade 8,Mathematics,456,World Bank EdStats,United Arab Emirates
+ARE,2015,Grade 8,Mathematics,465,World Bank EdStats,United Arab Emirates
+ARE,2019,Grade 8,Mathematics,473,World Bank EdStats,United Arab Emirates
+ARE,2023,Grade 8,Mathematics,489,IEA TIMSS 2023,United Arab Emirates
+USA,1995,Grade 8,Mathematics,492,World Bank EdStats,United States
+USA,1999,Grade 8,Mathematics,502,World Bank EdStats,United States
+USA,2003,Grade 8,Mathematics,504,World Bank EdStats,United States
+USA,2007,Grade 8,Mathematics,508,World Bank EdStats,United States
+USA,2011,Grade 8,Mathematics,509,World Bank EdStats,United States
+USA,2015,Grade 8,Mathematics,518,World Bank EdStats,United States
+USA,2019,Grade 8,Mathematics,515,World Bank EdStats,United States
+USA,2023,Grade 8,Mathematics,488,IEA TIMSS 2023,United States
+UZB,2023,Grade 8,Mathematics,421,IEA TIMSS 2023,Uzbekistan
+PSE,2003,Grade 8,Mathematics,390.486388252117,World Bank EdStats,West Bank and Gaza
+PSE,2007,Grade 8,Mathematics,367.154687219065,World Bank EdStats,West Bank and Gaza
+PSE,2011,Grade 8,Mathematics,404.180572925899,World Bank EdStats,West Bank and Gaza
+PSE,2023,Grade 8,Mathematics,382,IEA TIMSS 2023,West Bank and Gaza
+DZA,2007,Grade 8,Science,408.059522665874,World Bank EdStats,Algeria
+ARM,2003,Grade 8,Science,461.26667960083,World Bank EdStats,Armenia
+ARM,2007,Grade 8,Science,487.96038113791,World Bank EdStats,Armenia
+ARM,2011,Grade 8,Science,436.924651660779,World Bank EdStats,Armenia
+AUS,1995,Grade 8,Science,514,World Bank EdStats,Australia
+AUS,1999,Grade 8,Science,540.258155910842,World Bank EdStats,Australia
+AUS,2003,Grade 8,Science,527,World Bank EdStats,Australia
+AUS,2007,Grade 8,Science,515,World Bank EdStats,Australia
+AUS,2011,Grade 8,Science,519,World Bank EdStats,Australia
+AUS,2015,Grade 8,Science,512,World Bank EdStats,Australia
+AUS,2019,Grade 8,Science,528,World Bank EdStats,Australia
+AUS,2023,Grade 8,Science,520,IEA TIMSS 2023,Australia
+AUT,1995,Grade 8,Science,538.933283526888,World Bank EdStats,Austria
+AUT,2023,Grade 8,Science,512,IEA TIMSS 2023,Austria
+AZE,2023,Grade 8,Science,411,IEA TIMSS 2023,Azerbaijan
+BHR,2003,Grade 8,Science,438,World Bank EdStats,Bahrain
+BHR,2007,Grade 8,Science,467,World Bank EdStats,Bahrain
+BHR,2011,Grade 8,Science,452,World Bank EdStats,Bahrain
+BHR,2015,Grade 8,Science,466,World Bank EdStats,Bahrain
+BHR,2019,Grade 8,Science,486,World Bank EdStats,Bahrain
+BHR,2023,Grade 8,Science,452,IEA TIMSS 2023,Bahrain
+BIH,2007,Grade 8,Science,465.745172896738,World Bank EdStats,Bosnia and Herzegovina
+BWA,2003,Grade 8,Science,364.569247526974,World Bank EdStats,Botswana
+BWA,2007,Grade 8,Science,354.534085505979,World Bank EdStats,Botswana
+BRA,2023,Grade 8,Science,420,IEA TIMSS 2023,Brazil
+BGR,1999,Grade 8,Science,518.010989531571,World Bank EdStats,Bulgaria
+BGR,2003,Grade 8,Science,478.843141831503,World Bank EdStats,Bulgaria
+BGR,2007,Grade 8,Science,470.283975345393,World Bank EdStats,Bulgaria
+CAN,1995,Grade 8,Science,513.987704053365,World Bank EdStats,Canada
+CAN,1999,Grade 8,Science,533.081996731371,World Bank EdStats,Canada
+CAN,2015,Grade 8,Science,526,World Bank EdStats,Canada
+CHL,1999,Grade 8,Science,420,World Bank EdStats,Chile
+CHL,2003,Grade 8,Science,413,World Bank EdStats,Chile
+CHL,2011,Grade 8,Science,461,World Bank EdStats,Chile
+CHL,2015,Grade 8,Science,454,World Bank EdStats,Chile
+CHL,2019,Grade 8,Science,462,World Bank EdStats,Chile
+CHL,2023,Grade 8,Science,455,IEA TIMSS 2023,Chile
+COL,1995,Grade 8,Science,365.240740196305,World Bank EdStats,Colombia
+COL,2007,Grade 8,Science,417.182388857802,World Bank EdStats,Colombia
+CYP,1995,Grade 8,Science,452.011628848848,World Bank EdStats,Cyprus
+CYP,1999,Grade 8,Science,460.238274720467,World Bank EdStats,Cyprus
+CYP,2003,Grade 8,Science,441.473573305145,World Bank EdStats,Cyprus
+CYP,2007,Grade 8,Science,451.623515757144,World Bank EdStats,Cyprus
+CYP,2019,Grade 8,Science,484,World Bank EdStats,Cyprus
+CYP,2023,Grade 8,Science,464,IEA TIMSS 2023,Cyprus
+CZE,1995,Grade 8,Science,554.955291696651,World Bank EdStats,Czechia
+CZE,1999,Grade 8,Science,539.416887054047,World Bank EdStats,Czechia
+CZE,2007,Grade 8,Science,538.877791225102,World Bank EdStats,Czechia
+CZE,2023,Grade 8,Science,527,IEA TIMSS 2023,Czechia
+DNK,1995,Grade 8,Science,471.548936832362,World Bank EdStats,Denmark
+EGY,2003,Grade 8,Science,421,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2007,Grade 8,Science,408,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2015,Grade 8,Science,371,World Bank EdStats,"Egypt, Arab Rep."
+EGY,2019,Grade 8,Science,389,World Bank EdStats,"Egypt, Arab Rep."
+SLV,2007,Grade 8,Science,387.274137866449,World Bank EdStats,El Salvador
+EST,2003,Grade 8,Science,552.257622746035,World Bank EdStats,Estonia
+FIN,1999,Grade 8,Science,535.206772523814,World Bank EdStats,Finland
+FIN,2011,Grade 8,Science,552.352299842508,World Bank EdStats,Finland
+FIN,2019,Grade 8,Science,543,World Bank EdStats,Finland
+FIN,2023,Grade 8,Science,531,IEA TIMSS 2023,Finland
+FRA,1995,Grade 8,Science,487.625586331122,World Bank EdStats,France
+FRA,2019,Grade 8,Science,489,World Bank EdStats,France
+FRA,2023,Grade 8,Science,486,IEA TIMSS 2023,France
+GEO,2007,Grade 8,Science,421,World Bank EdStats,Georgia
+GEO,2011,Grade 8,Science,420,World Bank EdStats,Georgia
+GEO,2015,Grade 8,Science,443,World Bank EdStats,Georgia
+GEO,2019,Grade 8,Science,447,World Bank EdStats,Georgia
+GEO,2023,Grade 8,Science,448,IEA TIMSS 2023,Georgia
+DEU,1995,Grade 8,Science,517.703438399041,World Bank EdStats,Germany
+GHA,2003,Grade 8,Science,255.324157656939,World Bank EdStats,Ghana
+GHA,2007,Grade 8,Science,303.272502695918,World Bank EdStats,Ghana
+GHA,2011,Grade 8,Science,305.993026570029,World Bank EdStats,Ghana
+GRC,1995,Grade 8,Science,486.130849036133,World Bank EdStats,Greece
+HKG,1995,Grade 8,Science,510,World Bank EdStats,"Hong Kong SAR, China"
+HKG,1999,Grade 8,Science,530,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2003,Grade 8,Science,556,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2007,Grade 8,Science,530,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2011,Grade 8,Science,535,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2015,Grade 8,Science,546,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2019,Grade 8,Science,504,World Bank EdStats,"Hong Kong SAR, China"
+HKG,2023,Grade 8,Science,528,IEA TIMSS 2023,"Hong Kong SAR, China"
+HUN,1995,Grade 8,Science,537,World Bank EdStats,Hungary
+HUN,1999,Grade 8,Science,552,World Bank EdStats,Hungary
+HUN,2003,Grade 8,Science,543,World Bank EdStats,Hungary
+HUN,2007,Grade 8,Science,539,World Bank EdStats,Hungary
+HUN,2011,Grade 8,Science,522,World Bank EdStats,Hungary
+HUN,2015,Grade 8,Science,527,World Bank EdStats,Hungary
+HUN,2019,Grade 8,Science,530,World Bank EdStats,Hungary
+HUN,2023,Grade 8,Science,522,IEA TIMSS 2023,Hungary
+ISL,1995,Grade 8,Science,483.718547735102,World Bank EdStats,Iceland
+IDN,1999,Grade 8,Science,435.472478302536,World Bank EdStats,Indonesia
+IDN,2003,Grade 8,Science,420.220584759283,World Bank EdStats,Indonesia
+IDN,2007,Grade 8,Science,426.989513888015,World Bank EdStats,Indonesia
+IDN,2011,Grade 8,Science,405.612380461103,World Bank EdStats,Indonesia
+IRN,1995,Grade 8,Science,463,World Bank EdStats,"Iran, Islamic Rep."
+IRN,1999,Grade 8,Science,448,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2003,Grade 8,Science,453,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2007,Grade 8,Science,459,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2011,Grade 8,Science,474,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2015,Grade 8,Science,456,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2019,Grade 8,Science,449,World Bank EdStats,"Iran, Islamic Rep."
+IRN,2023,Grade 8,Science,419,IEA TIMSS 2023,"Iran, Islamic Rep."
+IRL,1995,Grade 8,Science,518,World Bank EdStats,Ireland
+IRL,2015,Grade 8,Science,530,World Bank EdStats,Ireland
+IRL,2019,Grade 8,Science,523,World Bank EdStats,Ireland
+IRL,2023,Grade 8,Science,525,IEA TIMSS 2023,Ireland
+ISR,1995,Grade 8,Science,508.957497756461,World Bank EdStats,Israel
+ISR,1999,Grade 8,Science,468.062096029497,World Bank EdStats,Israel
+ISR,2003,Grade 8,Science,488.200185499598,World Bank EdStats,Israel
+ISR,2007,Grade 8,Science,467.921531172929,World Bank EdStats,Israel
+ISR,2011,Grade 8,Science,516,World Bank EdStats,Israel
+ISR,2015,Grade 8,Science,507,World Bank EdStats,Israel
+ISR,2019,Grade 8,Science,513,World Bank EdStats,Israel
+ISR,2023,Grade 8,Science,481,IEA TIMSS 2023,Israel
+ITA,1995,Grade 8,Science,497.247674657476,World Bank EdStats,Italy
+ITA,1999,Grade 8,Science,493,World Bank EdStats,Italy
+ITA,2003,Grade 8,Science,491,World Bank EdStats,Italy
+ITA,2007,Grade 8,Science,495,World Bank EdStats,Italy
+ITA,2011,Grade 8,Science,501,World Bank EdStats,Italy
+ITA,2015,Grade 8,Science,499,World Bank EdStats,Italy
+ITA,2019,Grade 8,Science,500,World Bank EdStats,Italy
+ITA,2023,Grade 8,Science,501,IEA TIMSS 2023,Italy
+JPN,1995,Grade 8,Science,554,World Bank EdStats,Japan
+JPN,1999,Grade 8,Science,550,World Bank EdStats,Japan
+JPN,2003,Grade 8,Science,552,World Bank EdStats,Japan
+JPN,2007,Grade 8,Science,554,World Bank EdStats,Japan
+JPN,2011,Grade 8,Science,558,World Bank EdStats,Japan
+JPN,2015,Grade 8,Science,571,World Bank EdStats,Japan
+JPN,2019,Grade 8,Science,570,World Bank EdStats,Japan
+JPN,2023,Grade 8,Science,557,IEA TIMSS 2023,Japan
+JOR,1999,Grade 8,Science,450,World Bank EdStats,Jordan
+JOR,2003,Grade 8,Science,475,World Bank EdStats,Jordan
+JOR,2007,Grade 8,Science,482,World Bank EdStats,Jordan
+JOR,2011,Grade 8,Science,449,World Bank EdStats,Jordan
+JOR,2015,Grade 8,Science,426,World Bank EdStats,Jordan
+JOR,2019,Grade 8,Science,452,World Bank EdStats,Jordan
+JOR,2023,Grade 8,Science,413,IEA TIMSS 2023,Jordan
+KAZ,2011,Grade 8,Science,490,World Bank EdStats,Kazakhstan
+KAZ,2015,Grade 8,Science,533,World Bank EdStats,Kazakhstan
+KAZ,2019,Grade 8,Science,478,World Bank EdStats,Kazakhstan
+KAZ,2023,Grade 8,Science,443,IEA TIMSS 2023,Kazakhstan
+KOR,1995,Grade 8,Science,546,World Bank EdStats,"Korea, Rep."
+KOR,1999,Grade 8,Science,549,World Bank EdStats,"Korea, Rep."
+KOR,2003,Grade 8,Science,558,World Bank EdStats,"Korea, Rep."
+KOR,2007,Grade 8,Science,553,World Bank EdStats,"Korea, Rep."
+KOR,2011,Grade 8,Science,560,World Bank EdStats,"Korea, Rep."
+KOR,2015,Grade 8,Science,556,World Bank EdStats,"Korea, Rep."
+KOR,2019,Grade 8,Science,561,World Bank EdStats,"Korea, Rep."
+KOR,2023,Grade 8,Science,545,IEA TIMSS 2023,"Korea, Rep."
+KWT,1995,Grade 8,Science,414.812004646015,World Bank EdStats,Kuwait
+KWT,2007,Grade 8,Science,418,World Bank EdStats,Kuwait
+KWT,2015,Grade 8,Science,394,World Bank EdStats,Kuwait
+KWT,2019,Grade 8,Science,444,World Bank EdStats,Kuwait
+KWT,2023,Grade 8,Science,420,IEA TIMSS 2023,Kuwait
+LVA,1995,Grade 8,Science,476.156190060695,World Bank EdStats,Latvia
+LVA,1999,Grade 8,Science,502.692817068044,World Bank EdStats,Latvia
+LVA,2003,Grade 8,Science,512.362657442354,World Bank EdStats,Latvia
+LBN,2003,Grade 8,Science,393,World Bank EdStats,Lebanon
+LBN,2007,Grade 8,Science,414,World Bank EdStats,Lebanon
+LBN,2011,Grade 8,Science,406,World Bank EdStats,Lebanon
+LBN,2015,Grade 8,Science,398,World Bank EdStats,Lebanon
+LBN,2019,Grade 8,Science,377,World Bank EdStats,Lebanon
+LTU,1995,Grade 8,Science,464,World Bank EdStats,Lithuania
+LTU,1999,Grade 8,Science,488,World Bank EdStats,Lithuania
+LTU,2003,Grade 8,Science,519,World Bank EdStats,Lithuania
+LTU,2007,Grade 8,Science,519,World Bank EdStats,Lithuania
+LTU,2011,Grade 8,Science,514,World Bank EdStats,Lithuania
+LTU,2015,Grade 8,Science,522,World Bank EdStats,Lithuania
+LTU,2019,Grade 8,Science,534,World Bank EdStats,Lithuania
+LTU,2023,Grade 8,Science,519,IEA TIMSS 2023,Lithuania
+MYS,1999,Grade 8,Science,492,World Bank EdStats,Malaysia
+MYS,2003,Grade 8,Science,510,World Bank EdStats,Malaysia
+MYS,2007,Grade 8,Science,471,World Bank EdStats,Malaysia
+MYS,2011,Grade 8,Science,426,World Bank EdStats,Malaysia
+MYS,2015,Grade 8,Science,471,World Bank EdStats,Malaysia
+MYS,2019,Grade 8,Science,460,World Bank EdStats,Malaysia
+MYS,2023,Grade 8,Science,426,IEA TIMSS 2023,Malaysia
+MLT,2007,Grade 8,Science,457,World Bank EdStats,Malta
+MLT,2015,Grade 8,Science,481,World Bank EdStats,Malta
+MLT,2023,Grade 8,Science,501,IEA TIMSS 2023,Malta
+MDA,1999,Grade 8,Science,459.137038990096,World Bank EdStats,Moldova
+MDA,2003,Grade 8,Science,472.422635594355,World Bank EdStats,Moldova
+MNG,2007,Grade 8,Science,449.310817137664,World Bank EdStats,Mongolia
+MAR,1999,Grade 8,Science,322.816241946353,World Bank EdStats,Morocco
+MAR,2003,Grade 8,Science,396.473750729717,World Bank EdStats,Morocco
+MAR,2007,Grade 8,Science,401.8307424805,World Bank EdStats,Morocco
+MAR,2011,Grade 8,Science,376,World Bank EdStats,Morocco
+MAR,2015,Grade 8,Science,393,World Bank EdStats,Morocco
+MAR,2019,Grade 8,Science,394,World Bank EdStats,Morocco
+MAR,2023,Grade 8,Science,327,IEA TIMSS 2023,Morocco
+NLD,1995,Grade 8,Science,541.418259612431,World Bank EdStats,Netherlands
+NLD,1999,Grade 8,Science,544.749299086505,World Bank EdStats,Netherlands
+NLD,2003,Grade 8,Science,535.765032620618,World Bank EdStats,Netherlands
+NZL,1995,Grade 8,Science,511,World Bank EdStats,New Zealand
+NZL,1999,Grade 8,Science,510,World Bank EdStats,New Zealand
+NZL,2003,Grade 8,Science,520,World Bank EdStats,New Zealand
+NZL,2011,Grade 8,Science,512,World Bank EdStats,New Zealand
+NZL,2015,Grade 8,Science,513,World Bank EdStats,New Zealand
+NZL,2019,Grade 8,Science,499,World Bank EdStats,New Zealand
+NZL,2023,Grade 8,Science,502,IEA TIMSS 2023,New Zealand
+MKD,1999,Grade 8,Science,458.09461446518,World Bank EdStats,North Macedonia
+MKD,2003,Grade 8,Science,449.372917407616,World Bank EdStats,North Macedonia
+MKD,2011,Grade 8,Science,407.498317940515,World Bank EdStats,North Macedonia
+NOR,1995,Grade 8,Science,514,World Bank EdStats,Norway
+NOR,2003,Grade 8,Science,494,World Bank EdStats,Norway
+NOR,2007,Grade 8,Science,487,World Bank EdStats,Norway
+NOR,2011,Grade 8,Science,494,World Bank EdStats,Norway
+NOR,2015,Grade 8,Science,489,World Bank EdStats,Norway
+NOR,2019,Grade 8,Science,495,World Bank EdStats,Norway
+NOR,2023,Grade 8,Science,488,IEA TIMSS 2023,Norway
+OMN,2007,Grade 8,Science,423,World Bank EdStats,Oman
+OMN,2011,Grade 8,Science,420,World Bank EdStats,Oman
+OMN,2015,Grade 8,Science,455,World Bank EdStats,Oman
+OMN,2019,Grade 8,Science,457,World Bank EdStats,Oman
+OMN,2023,Grade 8,Science,456,IEA TIMSS 2023,Oman
+PHL,1999,Grade 8,Science,345.229312782613,World Bank EdStats,Philippines
+PHL,2003,Grade 8,Science,377.373177685515,World Bank EdStats,Philippines
+PRT,1995,Grade 8,Science,472.761449465081,World Bank EdStats,Portugal
+PRT,2019,Grade 8,Science,519,World Bank EdStats,Portugal
+PRT,2023,Grade 8,Science,506,IEA TIMSS 2023,Portugal
+QAT,2007,Grade 8,Science,318.85377631951,World Bank EdStats,Qatar
+QAT,2011,Grade 8,Science,419,World Bank EdStats,Qatar
+QAT,2015,Grade 8,Science,457,World Bank EdStats,Qatar
+QAT,2019,Grade 8,Science,475,World Bank EdStats,Qatar
+QAT,2023,Grade 8,Science,481,IEA TIMSS 2023,Qatar
+ROU,1995,Grade 8,Science,470.92582463352,World Bank EdStats,Romania
+ROU,1999,Grade 8,Science,471.865496128185,World Bank EdStats,Romania
+ROU,2003,Grade 8,Science,469.604192877296,World Bank EdStats,Romania
+ROU,2007,Grade 8,Science,461.900434145033,World Bank EdStats,Romania
+ROU,2011,Grade 8,Science,464.694502143717,World Bank EdStats,Romania
+ROU,2019,Grade 8,Science,470,World Bank EdStats,Romania
+ROU,2023,Grade 8,Science,466,IEA TIMSS 2023,Romania
+RUS,1995,Grade 8,Science,523,World Bank EdStats,Russian Federation
+RUS,1999,Grade 8,Science,529,World Bank EdStats,Russian Federation
+RUS,2003,Grade 8,Science,514,World Bank EdStats,Russian Federation
+RUS,2007,Grade 8,Science,530,World Bank EdStats,Russian Federation
+RUS,2011,Grade 8,Science,542,World Bank EdStats,Russian Federation
+RUS,2015,Grade 8,Science,544,World Bank EdStats,Russian Federation
+RUS,2019,Grade 8,Science,543,World Bank EdStats,Russian Federation
+SAU,2003,Grade 8,Science,397.741144760411,World Bank EdStats,Saudi Arabia
+SAU,2007,Grade 8,Science,403.245157610985,World Bank EdStats,Saudi Arabia
+SAU,2011,Grade 8,Science,436,World Bank EdStats,Saudi Arabia
+SAU,2015,Grade 8,Science,396,World Bank EdStats,Saudi Arabia
+SAU,2019,Grade 8,Science,431,World Bank EdStats,Saudi Arabia
+SAU,2023,Grade 8,Science,419,IEA TIMSS 2023,Saudi Arabia
+SRB,2003,Grade 8,Science,467.686027621505,World Bank EdStats,Serbia
+SRB,2007,Grade 8,Science,470.306899228803,World Bank EdStats,Serbia
+SGP,1995,Grade 8,Science,580,World Bank EdStats,Singapore
+SGP,1999,Grade 8,Science,568,World Bank EdStats,Singapore
+SGP,2003,Grade 8,Science,578,World Bank EdStats,Singapore
+SGP,2007,Grade 8,Science,567,World Bank EdStats,Singapore
+SGP,2011,Grade 8,Science,590,World Bank EdStats,Singapore
+SGP,2015,Grade 8,Science,597,World Bank EdStats,Singapore
+SGP,2019,Grade 8,Science,608,World Bank EdStats,Singapore
+SGP,2023,Grade 8,Science,606,IEA TIMSS 2023,Singapore
+SVK,1995,Grade 8,Science,531.913138286513,World Bank EdStats,Slovak Republic
+SVK,1999,Grade 8,Science,535.009258448254,World Bank EdStats,Slovak Republic
+SVK,2003,Grade 8,Science,516.784914976813,World Bank EdStats,Slovak Republic
+SVN,1995,Grade 8,Science,514,World Bank EdStats,Slovenia
+SVN,1999,Grade 8,Science,533.254641324846,World Bank EdStats,Slovenia
+SVN,2003,Grade 8,Science,520,World Bank EdStats,Slovenia
+SVN,2007,Grade 8,Science,538,World Bank EdStats,Slovenia
+SVN,2011,Grade 8,Science,543,World Bank EdStats,Slovenia
+SVN,2015,Grade 8,Science,551,World Bank EdStats,Slovenia
+ZAF,1999,Grade 8,Science,242.639904868399,World Bank EdStats,South Africa
+ZAF,2003,Grade 8,Science,243.664011518355,World Bank EdStats,South Africa
+ZAF,2019,Grade 8,Science,370,World Bank EdStats,South Africa
+ZAF,2023,Grade 8,Science,362,IEA TIMSS 2023,South Africa
+ESP,1995,Grade 8,Science,503.511973147361,World Bank EdStats,Spain
+SWE,1995,Grade 8,Science,553,World Bank EdStats,Sweden
+SWE,2003,Grade 8,Science,524,World Bank EdStats,Sweden
+SWE,2007,Grade 8,Science,511,World Bank EdStats,Sweden
+SWE,2011,Grade 8,Science,509,World Bank EdStats,Sweden
+SWE,2015,Grade 8,Science,522,World Bank EdStats,Sweden
+SWE,2019,Grade 8,Science,521,World Bank EdStats,Sweden
+SWE,2023,Grade 8,Science,521,IEA TIMSS 2023,Sweden
+CHE,1995,Grade 8,Science,508.514257154684,World Bank EdStats,Switzerland
+SYR,2007,Grade 8,Science,451.976178955652,World Bank EdStats,Syrian Arab Republic
+SYR,2011,Grade 8,Science,426.411504366041,World Bank EdStats,Syrian Arab Republic
+THA,1995,Grade 8,Science,510.044809363307,World Bank EdStats,Thailand
+THA,1999,Grade 8,Science,482,World Bank EdStats,Thailand
+THA,2007,Grade 8,Science,471,World Bank EdStats,Thailand
+THA,2011,Grade 8,Science,451,World Bank EdStats,Thailand
+THA,2015,Grade 8,Science,456,World Bank EdStats,Thailand
+TUN,1999,Grade 8,Science,429.511739401176,World Bank EdStats,Tunisia
+TUN,2003,Grade 8,Science,403.54750834793,World Bank EdStats,Tunisia
+TUN,2007,Grade 8,Science,444.89760695607,World Bank EdStats,Tunisia
+TUN,2011,Grade 8,Science,438.561055324194,World Bank EdStats,Tunisia
+TUR,1999,Grade 8,Science,432.950957025683,World Bank EdStats,Turkiye
+TUR,2007,Grade 8,Science,454.158975223816,World Bank EdStats,Turkiye
+TUR,2011,Grade 8,Science,483,World Bank EdStats,Turkiye
+TUR,2015,Grade 8,Science,493,World Bank EdStats,Turkiye
+TUR,2019,Grade 8,Science,515,World Bank EdStats,Turkiye
+TUR,2023,Grade 8,Science,530,IEA TIMSS 2023,Turkiye
+UKR,2007,Grade 8,Science,485.062953648787,World Bank EdStats,Ukraine
+UKR,2011,Grade 8,Science,500.991769372517,World Bank EdStats,Ukraine
+ARE,2011,Grade 8,Science,465,World Bank EdStats,United Arab Emirates
+ARE,2015,Grade 8,Science,477,World Bank EdStats,United Arab Emirates
+ARE,2019,Grade 8,Science,473,World Bank EdStats,United Arab Emirates
+ARE,2023,Grade 8,Science,486,IEA TIMSS 2023,United Arab Emirates
+USA,1995,Grade 8,Science,513,World Bank EdStats,United States
+USA,1999,Grade 8,Science,515,World Bank EdStats,United States
+USA,2003,Grade 8,Science,527,World Bank EdStats,United States
+USA,2007,Grade 8,Science,520,World Bank EdStats,United States
+USA,2011,Grade 8,Science,525,World Bank EdStats,United States
+USA,2015,Grade 8,Science,530,World Bank EdStats,United States
+USA,2019,Grade 8,Science,522,World Bank EdStats,United States
+USA,2023,Grade 8,Science,513,IEA TIMSS 2023,United States
+UZB,2023,Grade 8,Science,396,IEA TIMSS 2023,Uzbekistan
+PSE,2003,Grade 8,Science,435.386768929392,World Bank EdStats,West Bank and Gaza
+PSE,2007,Grade 8,Science,404.126170658274,World Bank EdStats,West Bank and Gaza
+PSE,2011,Grade 8,Science,420.454965234216,World Bank EdStats,West Bank and Gaza
+PSE,2023,Grade 8,Science,393,IEA TIMSS 2023,West Bank and Gaza

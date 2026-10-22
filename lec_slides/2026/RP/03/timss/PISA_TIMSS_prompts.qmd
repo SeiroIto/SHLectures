@@ -1,0 +1,124 @@
+---
+title: "Prompts used: TIMSS and PISA country trends"
+subtitle: "Verbatim prompts given to an AI coding agent (Claude Code), in order"
+date: 2026-10-13
+date-format: "MMMM D, YYYY"
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+---
+
+# How to read this
+
+* Each block below is one prompt, copied verbatim (typos kept).
+* "Mid-turn" = sent while the agent was still working on the previous prompt.
+* The agent's one clarifying question is shown where it occurred.
+* Output: `TIMSS_PISA_trends.html` (3 figures, 2 tables).
+
+# Prompts
+
+1. First request
+
+    ```
+    can you find out PISA's scores for partcipating countries
+    end output: time series plot of all countries
+    facet(grades ~ subjects)
+    i will give you auto mode on the condition that you do not touch any existing files
+    ```
+
+    * Agent's question: PISA tests only 15-year-olds, so it has no grade dimension.
+      What should the facet rows be?
+    * Answer chosen: TIMSS grades 4 & 8 (TIMSS tests grade 4 and grade 8 students).
+
+1. Checking what the agent creates
+
+    ```
+    what are the files do you work on?
+    ```
+
+1. Go-ahead
+
+    ```
+    good
+    ```
+
+1. Mid-turn: add PISA
+
+    ```
+    please also work on PISA
+    rows by sex
+    ```
+
+1. Report
+
+    ```
+    can you make a quarto file of the above and render?
+    ```
+
+1. Mid-turn: latest PISA round
+
+    ```
+    can you also download pisa 2022
+    ```
+
+1. Highlight countries
+
+    ```
+    PISA
+    use diff colours for Japan (red bold), Korea, US, Finland, mean line (light green)
+    use lightbox
+    note obs years in figure footnote
+    ```
+
+1. Mid-turn: same style for TIMSS
+
+    ```
+    same colour scheme for TIMSS
+    ```
+
+1. Control for changing country composition
+
+    ```
+    another figure for PISA
+    fix the countries as countries observed in 2000
+    so compositional changes will be controlled
+    ```
+
+1. Keep two countries with one missing cycle
+
+    ```
+    add US and spain to reading
+    ```
+
+1. Which countries to draw
+
+    ```
+    for 3rd fig, include all countries observed in 2000
+    for 2nd fig, include all countries
+    ```
+
+1. Document structure
+
+    ```
+    you need 2 subsections for PISA
+    ```
+
+1. Zoom without changing the mean
+
+    ```
+    for 3rd fig, set ymin = 450 but still use below y min countries to compute mean
+    ```
+
+# Points for discussion
+
+* Prompt 1 asked for `facet(grades ~ subjects)`, but PISA has no grades.
+  Only the agent's clarifying question led to the TIMSS (grade x subject) /
+  PISA (sex x subject) split.
+* Prompt 9 asks for a fixed set of countries. A "country observed in 2000"
+  may still miss a later round, so the agent kept only countries with a score
+  in every round for the mean, and reported which ones were left out.
+* Prompt 13 separates what is shown (y-axis from 450) from what is computed
+  (mean over all countries in the fixed set).

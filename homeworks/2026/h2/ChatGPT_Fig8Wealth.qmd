@@ -1,0 +1,165 @@
+---
+title: "Figure 8(b): Top 1% wealth share, Germany in international comparison"
+format:
+  html:
+    embed-resources: true
+    lightbox: true
+execute:
+  warning: false
+---
+
+Replicates Albers, Bartels & Schularick (JEEA, [doi:10.1093/jeea/jvag004](https://doi.org/10.1093/jeea/jvag004)), Figure 8(b),
+from the local copy of their replication package ([Zenodo 17399187](https://zenodo.org/records/17399187)).
+Inputs and filters follow `Do-Files/6a_Graphics_Distribution_1895-2021.do`, the "Figure 8b" block.
+
+```{r}
+#| label: setup
+options(repos = c(CRAN = "https://cran.ism.ac.jp/"))  # Japan mirror (ISM, Tokyo)
+pkgs <- c("data.table", "haven", "qs2", "ggplot2")
+new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(new) > 0) install.packages(new)
+library(data.table)
+library(ggplot2)
+
+# Replication package already unzipped locally; outputs go to data/
+src <- "data/replication_files/_ReplicationFiles_RR_JEEA"
+if (!dir.exists(src)) src <- "replication_files/_ReplicationFiles_RR_JEEA"
+dir.create("data", showWarnings = FALSE)
+
+# Very faint grey bands for WW1 (1914-1918) and WW2 (1939-1945), and a darker
+# grey line at the 1929 crash, all drawn under the country lines
+wars <- list(annotate("rect", xmin = c(1914, 1939), xmax = c(1918, 1945),
+                      ymin = -Inf, ymax = Inf, fill = "grey50", alpha = 0.08),
+             geom_vline(xintercept = 1929, colour = "grey60", linewidth = 0.5))
+```
+
+```{r}
+#| label: data
+# Germany: wealth tax 1895-1989, EVS survey 1993-2018, 2021 estimate.
+# The do-file drops EVS years before 1993.
+de <- as.data.table(haven::read_dta(file.path(src, "Output/Shares_Germany.dta")))
+de <- de[!(year < 1993 & data == "EVS"),
+         .(year, country = "Germany", top1 = topsh9900)]
+
+# Other countries: secondary-literature series bundled in the package.
+int <- as.data.table(haven::read_dta(file.path(src,
+  "Input/Secondary Literature Estimates/International/top1shares_wealth.dta")))
+vars <- c(wealthshj_US1 = "United States", wealthshi_GB1 = "United Kingdom",
+          wealthshj_FR1 = "France", wealthshj_SE1 = "Sweden")
+oth <- melt(int[, c("year", names(vars)), with = FALSE], id.vars = "year",
+            variable.name = "v", value.name = "top1", variable.factor = FALSE)
+oth <- oth[, .(year, country = vars[v], top1)]
+
+# One country-year panel for all five countries
+fig8b <- rbind(de, oth)
+fig8b <- fig8b[!is.na(top1) & year >= 1895]
+fig8b[, `:=`(year = as.integer(year), top1 = as.numeric(top1))]
+setorder(fig8b, country, year)
+qs2::qs_save(fig8b, "data/fig8b_top1_panel.qs2")
+
+fig8b[, .(obs = .N, from = min(year), to = max(year),
+          first = top1[1], last = top1[.N]), by = country]
+```
+
+```{r}
+#| label: fig-8b
+#| fig-cap: "Top 1% share of net personal wealth (%), 1895-2021."
+#| fig-width: 9
+#| fig-height: 5.5
+# Okabe-Ito palette: distinguishable under common colour-vision deficiencies
+cols <- c("Germany" = "#000000", "United States" = "#0072B2",
+          "United Kingdom" = "#D55E00", "France" = "#009E73",
+          "Sweden" = "#CC79A7")
+ggplot(fig8b, aes(year, top1, colour = country, shape = country)) +
+  wars +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 1.4) +
+  scale_colour_manual(values = cols, name = NULL) +
+  scale_shape_manual(values = c(16, 17, 15, 3, 18), name = NULL) +
+  scale_x_continuous(breaks = seq(1895, 2025, 10)) +
+  scale_y_continuous(breaks = seq(15, 75, 5)) +
+  labs(x = NULL, y = "Wealth share (%)",
+       caption = paste0("Sources: Germany, Albers et al.; US, Saez & Zucman (2016, 2020); ",
+                        "UK, Alvaredo et al. (2018);\nFrance, Garbinti et al. (2021); ",
+                        "Sweden, Roine & Waldenström (2009), Lundberg & Waldenström (2018).")) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(),
+        plot.caption = element_text(hjust = 0, colour = "grey40"))
+```
+
+## Update with WID.world
+
+`data/WID_top1_wealth.csv` holds the top 1% wealth-share rows of the WID.world bulk file
+(version of 2026-09-09) for the five countries. Units are chosen to match the paper's series:
+US tax units (`shwealt992`, ends 2019; matches the package within 0.18 points on average),
+others equal-split adults (`shwealj992`, to 2024).
+
+```{r}
+#| label: fig-8b-wid
+#| fig-cap: "Top 1% wealth share (%): paper (solid) vs WID.world (dashed)."
+#| fig-width: 9
+#| fig-height: 5.5
+wid <- fread("data/WID_top1_wealth.csv")
+wid <- wid[percentile == "p99p100" &
+           ((country == "US" & variable == "shwealt992") |
+            (country != "US" & variable == "shwealj992")) & year >= 1895]
+iso <- c(US = "United States", GB = "United Kingdom", FR = "France",
+         DE = "Germany", SE = "Sweden")
+wid <- wid[, .(year, country = iso[country], top1 = 100 * value, source = "WID.world")]
+both <- rbind(fig8b[, .(year, country, top1, source = "Paper")], wid)
+qs2::qs_save(both, "data/fig8b_paper_wid.qs2")
+
+ggplot(both, aes(year, top1, colour = country, linetype = source)) +
+  wars +
+  geom_line(linewidth = 0.7) +
+  scale_colour_manual(values = cols, name = NULL) +
+  scale_linetype_manual(values = c(Paper = "solid", WID.world = "22"), name = NULL) +
+  scale_x_continuous(breaks = seq(1895, 2025, 10)) +
+  scale_y_continuous(breaks = seq(15, 75, 5)) +
+  labs(x = NULL, y = "Wealth share (%)") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", legend.box = "vertical",
+        panel.grid.minor = element_blank())
+```
+
+## Country-level total net wealth
+
+`Output/Totalwealth_long-run.dta` holds Germany's aggregate net wealth (`tnw`,
+in billions of euro per the label at `6c_Graphics_Totals_1895-2021.do`, line 138)
+and national income (`ni`). It also holds net wealth as % of national income for all five
+countries (Fig. 8a). Germany's ratio is `wi = 100 * tnw / ni` (`2a_Dataprep_macrodata.do`, line 237).
+
+```{r}
+#| label: tbl-de-total
+#| tbl-cap: "Germany: total net wealth, national income and their ratio."
+tw <- as.data.table(haven::read_dta(file.path(src, "Output/Totalwealth_long-run.dta")))
+tw <- tw[year > 1890]
+de_tot <- tw[!is.na(tnw), .(year = as.integer(year), tnw, ni, wi = 100 * tnw / ni)]
+print(de_tot, digits = 4, nrows = Inf)
+```
+
+```{r}
+#| label: fig-8a
+#| fig-cap: "Net wealth (% of national income), 1895-2021."
+#| fig-width: 9
+#| fig-height: 5.5
+wvars <- c(wi = "Germany", WI_US = "United States", WI_UK = "United Kingdom",
+           WI_FR = "France", WI_SE = "Sweden")
+wi <- melt(tw[, c("year", names(wvars)), with = FALSE], id.vars = "year",
+           variable.name = "v", value.name = "wi", variable.factor = FALSE)
+wi <- wi[!is.na(wi), .(year = as.integer(year), country = wvars[v], wi = as.numeric(wi))]
+setorder(wi, country, year)
+qs2::qs_save(wi, "data/fig8a_wealth_income_panel.qs2")
+
+ggplot(wi, aes(year, wi, colour = country, shape = country)) +
+  wars +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 1.4) +
+  scale_colour_manual(values = cols, name = NULL) +
+  scale_shape_manual(values = c(16, 17, 15, 3, 18), name = NULL) +
+  scale_x_continuous(breaks = seq(1890, 2020, 10)) +
+  scale_y_continuous(breaks = seq(0, 800, 100)) +
+  labs(x = NULL, y = "Net wealth (% of national income)") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```

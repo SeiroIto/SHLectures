@@ -1,0 +1,157 @@
+---
+title: "US top 1% and 0.1% wealth shares: conservative estimates"
+format:
+  html:
+    embed-resources: true
+    lightbox: true
+    code-overflow: wrap
+execute:
+  warning: false
+---
+
+Saez & Zucman's equal-return capitalization series compared with more conservative estimates:
+
+* Smith, Zidar & Zwick (SZZ, QJE 2023): capitalization with heterogeneous returns
+* Survey of Consumer Finances (SCF): Fed household survey, alone and with the Forbes 400 added
+* Kopczuk & Saez (2004): estate-tax multiplier estimates
+* Fed Distributional Financial Accounts (DFA): SCF shares scaled to national balance sheets
+
+Data sources:
+
+* SZZ: Harvard Dataverse [doi:10.7910/DVN/JKFYMJ](https://doi.org/10.7910/DVN/JKFYMJ)
+* DFA: [federalreserve.gov](https://www.federalreserve.gov/releases/z1/dataviz/dfa/)
+
+```{r}
+#| label: setup
+options(repos = c(CRAN = "https://cran.ism.ac.jp/"))  # Japan mirror (ISM, Tokyo)
+pkgs <- c("data.table", "readxl", "qs2", "ggplot2")
+new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(new) > 0) install.packages(new)
+library(data.table)
+library(ggplot2)
+dir.create("data", showWarnings = FALSE)
+
+# Download once into data/ (Dataverse file ids from the dataset's file list)
+src <- c(SZZ_wealth_excel_exhibits.xlsx = "https://dataverse.harvard.edu/api/access/datafile/6567225",
+         `dfa-networth-shares.csv` ="https://www.federalreserve.gov/releases/z1/dataviz/download/dfa-networth-shares.csv")
+for (f in names(src)) if (!file.exists(file.path("data", f)))
+  download.file(src[f], file.path("data", f), mode = "wb")
+
+# Very faint grey bands for WW1 and WW2, darker grey line at the 1929 crash
+wars <- list(annotate("rect", xmin = c(1914, 1939), xmax = c(1918, 1945),
+                      ymin = -Inf, ymax = Inf, fill = "grey50", alpha = 0.08),
+             geom_vline(xintercept = 1929, colour = "grey60", linewidth = 0.5))
+# Okabe-Ito palette: distinguishable under common colour-vision deficiencies
+cols <- c("Saez-Zucman (equal returns)" = "#D55E00", "SZZ (heterogeneous returns)" = "#0072B2",
+          "SCF" = "#009E73", "SCF + Forbes 400" = "#56B4E9",
+          "Estate tax (Kopczuk-Saez)" = "#000000", "DFA (Fed)" = "#CC79A7")
+xl <- "data/SZZ_wealth_excel_exhibits.xlsx"
+```
+
+```{r}
+#| label: data
+# Long run, top 0.1% only (SZZ Fig. I-A): rows 3+ are years, row 2 holds series names
+a <- as.data.table(readxl::read_excel(xl, sheet = "DataFig1A", skip = 2, col_names = FALSE))
+a <- a[, .(year = as.integer(...1), `SZZ (heterogeneous returns)` = ...2, SCF = ...4,
+           `Saez-Zucman (equal returns)` = ...5, `Estate tax (Kopczuk-Saez)` = ...6)]
+long <- melt(a, id.vars = "year", variable.name = "series", value.name = "share",
+             variable.factor = FALSE)
+long <- long[!is.na(share), .(year, series, group = "Top 0.1%", share = as.numeric(share))]
+
+# 1966-2019, top 1% and 0.1%, harmonized units (SZZ Fig. I-B): five series per group
+b <- as.data.table(readxl::read_excel(xl, sheet = "DataFig1B", skip = 3, col_names = FALSE))
+nm <- c("SZZ (heterogeneous returns)", "PSZ", "SCF", "SCF + Forbes 400", "Saez-Zucman (equal returns)")
+grp <- c(`Top 1%` = 17, `Top 0.1%` = 12)          # first column of each group's block
+harm <- rbindlist(lapply(names(grp), function(g) {
+  x <- b[, c(1, grp[g]:(grp[g] + 4)), with = FALSE]
+  setnames(x, c("year", nm))
+  x <- melt(x, id.vars = "year", variable.name = "series", value.name = "share",
+            variable.factor = FALSE)
+  x[, .(year = as.integer(year), series, group = g, share = as.numeric(share))]
+}))
+harm <- harm[!is.na(share) & series != "PSZ"]
+
+# DFA: households, quarterly from 1989; keep each year's last quarter
+dfa <- fread("data/dfa-networth-shares.csv")
+dfa[, `:=`(year = as.integer(substr(Date, 1, 4)), q = substr(Date, 7, 7))]
+dfa <- dfa[Category %in% c("TopPt1", "RemainingTop1")]
+setorder(dfa, year, q)
+dfa <- dfa[, .SD[q == max(q)], by = year]
+dfa <- dfa[, .(`Top 0.1%` = `Net worth`[Category == "TopPt1"],
+               `Top 1%` = sum(`Net worth`)), by = year]
+dfa <- melt(dfa, id.vars = "year", variable.name = "group", value.name = "share",
+            variable.factor = FALSE)[, series := "DFA (Fed)"]
+
+recent <- rbind(harm, dfa[, .(year, series, group, share)])
+qs2::qs_save(list(long = long, recent = recent), "data/us_top_wealth_conservative.qs2")
+recent[, .(obs = .N, from = min(year), to = max(year)), by = .(group, series)]
+```
+
+```{r}
+#| label: fig-long
+#| fig-cap: "Top 0.1% wealth share (%), 1913-2019: equal-return capitalization (Saez-Zucman 2016) vs. more conservative estimates."
+#| fig-width: 9
+#| fig-height: 5
+ggplot(long, aes(year, share, colour = series)) +
+  wars +
+  geom_line(linewidth = 0.8) +
+  geom_point(data = long[series == "SCF"], size = 1.6) +
+  scale_colour_manual(values = cols, name = NULL) +
+  scale_x_continuous(breaks = seq(1910, 2020, 10)) +
+  labs(x = NULL, y = "Top 0.1% wealth share (%)",
+       caption = "Source: Smith, Zidar & Zwick (2023), replication file, sheet DataFig1A (unadjusted series).") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(),
+        plot.caption = element_text(hjust = 0, colour = "grey40"))
+```
+
+```{r}
+#| label: fig-recent
+#| fig-cap: "Top 1% and 0.1% wealth shares (%), 1966-2026, harmonized tax-unit series (Saez-Zucman = revised 2020 series) and the Fed DFA (households)."
+#| fig-width: 9
+#| fig-height: 5.5
+recent[, group := factor(group, c("Top 1%", "Top 0.1%"))]
+ggplot(recent, aes(year, share, colour = series)) +
+  geom_line(data = recent[!grepl("SCF", series)], linewidth = 0.8) +
+  geom_point(data = recent[grepl("SCF", series)], size = 1.8) +
+  facet_wrap(~group, scales = "free_y") +
+  scale_colour_manual(values = cols, name = NULL) +
+  labs(x = NULL, y = "Wealth share (%)",
+       caption = paste0("Sources: Smith, Zidar & Zwick (2023), sheet DataFig1B (SCF triennial, shown as points); ",
+                        "Federal Reserve DFA, last quarter of each year.")) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(),
+        plot.caption = element_text(hjust = 0, colour = "grey40"))
+```
+
+```{r}
+#| label: tbl-change
+#| tbl-cap: "Levels in 1989 and 2016 and change (percentage points)."
+chg <- recent[year %in% c(1989, 2016),
+              .(y1989 = share[year == 1989][1], y2016 = share[year == 2016][1]),
+              by = .(group, series)]
+chg[, change := y2016 - y1989]
+setorder(chg, group, -y2016)
+print(chg, digits = 3)
+```
+
+## What the series show (@tbl-change)
+
+* 2016 top 1% share: SZZ 33.7%, DFA 30.5%, Saez-Zucman 2020 36.3%
+* 2016 top 0.1% share: SZZ 15.7%, DFA 12.5%, Saez-Zucman 2020 18.4%
+* 1989-2016 rise in the top 0.1%: SZZ +4.6, SCF +3.6, Saez-Zucman 2020 +6.3 points
+* In harmonized units the SCF is not lower for the top 1% (37.0% in 2016); DFA is the lowest series for both groups
+
+## What drove the post-1980 rise? Three readings
+
+* **Smith, Zidar & Zwick** (QJE 2023), *composition*:
+  * Top wealth is mostly firm equity: private pass-through businesses (taxed on owners' returns) and C-corporation shares. Fixed income is small and stable. Hence "a central role for entrepreneurs and other stockholders" (p. 569).
+  * Top 0.1% rise 2001-16 by asset class: fixed income +1.0, C-corp +0.8, pass-through +0.8 points (p. 558).
+  * Whether the rise reflects asset prices or new saving is left open (pp. 569-570).
+* **Kuhn, Schularick & Steins** (JPE 2020), *asset prices*:
+  * Middle-class wealth is leveraged housing; top wealth is business and stock equity, so wealth inequality is "a race between the housing market and the stock market" (p. 3471).
+  * 1971-2007: rising house prices slowed top-10% concentration by 2.9 points (p. 3515); after 2007, stocks recovered faster than houses, producing "the largest spike in wealth inequality in postwar American history" (p. 3472).
+* **Gomez** (Econometrica 2023), *mobility*:
+  * Splits growth of a top group's share into *within* (growth of incumbents' wealth), *between* (new fortunes displacing old ones) and *demography* (death, population growth) (p. 979).
+  * Forbes 400, 1983-2017: annual share growth 3.9% = within 3.0 + between 2.5 + demography −1.5 (p. 980).
+  * "more than half of the recent rise in top wealth inequality is due to the rise of new fortunes in top percentiles" (p. 1008), which is at odds with incumbents compounding high saving (Saez & Zucman 2016).
