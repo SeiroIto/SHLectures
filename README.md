@@ -20,4 +20,12 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
 * Lecture 03  
    * [RP02](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP02.html)  
    * [HW2](https://seiroito.github.io/SHLectures/homeworks/2026/h2/HW2_VibeCoding.html)
+* Lecture 04  
+   * [RP03](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP03.html)  
+   * [HW2: Updated](https://seiroito.github.io/SHLectures/homeworks/2026/h2/HW2_VibeCoding.html)
+   * [PISA](https://seiroito.github.io/SHLectures/lec_slides/2026/1/TIMSS_PISA_trends.html)  
+   * [MLIT](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/03/mlit/MLIT_Grants.html)  
+   * [GDP and Gini](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/03/gdpgini/GDP_Gini.html)
+   * [WID](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/03/wid/WID_WorldWealth.html)
+   
 

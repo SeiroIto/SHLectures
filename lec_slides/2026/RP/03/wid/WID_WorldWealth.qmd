@@ -1,0 +1,348 @@
+---
+title: "World wealth inequality, WID"
+format:
+  html:
+    embed-resources: true
+    lightbox: true
+    code-overflow: wrap
+    code-fold: true
+execute:
+  warning: false
+---
+
+## Introduction
+
+* This page builds a world distribution of net personal wealth from the World
+  Inequality Database (WID) and plots it.
+  * Every country's 100 wealth percentiles (1980 onwards) are pooled, each weighted
+    by the country's adults, in US$ at market exchange rates.
+* Outputs:
+  * a Japan 2022 example of the raw and converted rows (@tbl-japan, @fig-japan)
+  * world wealth density, 1980-2020 every 10 years (@fig-world-dist)
+  * share of world wealth held by the richest 1% of world adults (@fig-world-top1)
+  * top 1% share of national wealth by country, grouped by the 1987 World Bank
+    income group (@fig-country-top1)
+  * WID metadata: variables, sources and methods (@tbl-meta)
+* Data are read from saved files in `data/` (WID bulk extract, World Bank country
+  list, income classification, oil rents); nothing is downloaded at render.
+  The download script is shown but not run (`eval: false`).
+
+```{r}
+#| label: setup
+#| code-summary: "Code: load packages, table style"
+options(repos = c(CRAN = "https://cran.ism.ac.jp/"))  # Japan mirror (ISM, Tokyo)
+pkgs <- c("data.table", "qs2", "ggplot2", "ggrepel", "scales", "jsonlite", "readxl", "tinytable", "patchwork")
+new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(new) > 0) install.packages(new)
+library(data.table)
+library(ggplot2)
+library(tinytable)
+# Tables: striped rows, faint light-blue header
+ttx <- function(x, width) style_tt(theme_tt(tt(x, width = width), theme = "striped"), i = 0, background = "#EAF2FB")
+```
+
+```{r}
+#| label: extract
+#| code-summary: "Code: download WID data (record, not run)"
+#| eval: false
+# Not run at render (kept as a record): streams the WID bulk zip and writes
+# data/wid_extract.csv and data/wid_meta.csv (about 6 minutes)
+# run from a WSL shell in this folder:  python3 -I wid_extract.py data
+writeLines(readLines("wid_extract.py"))
+```
+
+```{r}
+#| label: data
+#| code-summary: "Code: build world distribution, top 1% shares, income groups"
+d    <- fread("data/wid_extract.csv", fill = TRUE)       # aggregate rows lack data_quality
+meta <- as.data.table(read.csv("data/wid_meta.csv", encoding = "UTF-8"))  # fread stops at quoted line breaks
+# Keep countries: drop WID regional aggregates (O*, Q*, X*, except Oman OM and Qatar QA),
+# the World (WO), former states (CS, DD, SU, YU, AN) and sub-country units (ZZ Zanzibar, XI Channel Islands)
+agg  <- c("WO", "ZZ", "CS", "DD", "SU", "YU", "AN", "XI")
+cc   <- setdiff(unique(d$country), agg)
+cc   <- cc[!grepl("^[OQX]", cc) | cc %in% c("OM", "QA")]
+d    <- d[country %in% c(cc, "WO")]
+
+pop <- d[variable == "npopuli992", .(country, year, pop = value)]
+# 1% groups: average wealth (constant local currency) -> US$ at the market rate of the
+# country's latest wealth year (xlcusxi999 is a yearly series)
+w <- d[variable == "ahwealj992" & country != "WO",
+       .(country, year, p = as.integer(sub("^p([0-9]+)p.*", "\\1", percentile)), lcu = value)]
+fx <- d[variable == "xlcusxi999", .(country, fx_year = year, fx = value)]
+fx <- fx[w[, .(fx_year = max(year)), by = country], on = .(country, fx_year)]
+w <- w[, if (.N == 100) .SD, by = .(country, year)]         # complete 100-group years only
+w <- w[year >= 1980]                                        # all 215 countries from 1980; 48 before
+w <- merge(w, pop, by = c("country", "year"))
+w <- merge(w, fx, by = "country")
+w[, `:=`(usd = lcu / fx, wt = pop / 100)]                   # each group = 1% of adults
+
+# World distribution: pool all country groups of a year, sort by wealth, weight by adults
+setorder(w, year, usd)
+w[, cum := cumsum(wt) / sum(wt), by = year]
+grid <- seq(0.005, 0.995, by = 0.01)
+wq <- w[, .(pct = grid * 100, usd = approx(cum, usd, xout = grid, ties = "ordered", rule = 2)$y), by = year]
+wq[, decade := paste0(10 * (year %/% 10), "s")]
+
+# World top 1% share: fraction of each group above the 99th world percentile
+top1 <- w[, {
+  W <- sum(wt); f <- pmin(1, pmax(0, (cum - 0.99) / (wt / W)))
+  .(share = sum(usd * wt * f) / sum(usd * wt), countries = uniqueN(country), adults = W)
+}, by = year]
+top1 <- merge(top1, pop[country == "WO", .(year, world = pop)], by = "year")
+top1[, coverage := adults / world]
+
+# Country top 1% shares
+s <- d[variable == "shwealj992" & percentile == "p99p100" & country != "WO" & year >= 1980,
+       .(country, year, share = value)]
+# ISO2 -> ISO3 and region from the World Bank country list (copied from ../gdpgini/data/country.json)
+wb  <- as.data.table(jsonlite::fromJSON("data/wb_country.json", flatten = TRUE)[[2]])[
+  , .(iso2 = iso2Code, iso3 = id, region = trimws(region.value))]
+wb  <- rbind(wb, data.table(iso2 = c("KS", "TW", "GG", "JE", "AI", "MS", "BQ"),   # not in WB list
+                            iso3 = c("XKX", "TWN", "GGY", "JEY", "AIA", "MSR", "BES"),  # WID KS = Kosovo
+                            region = NA_character_))
+s[wb, `:=`(iso3 = i.iso3, region = i.region), on = .(country = iso2)]
+
+# Income group: World Bank analytical classification for calendar year 1987 (FY89), the earliest
+og  <- as.data.table(readxl::read_excel("data/wb_OGHIST.xlsx", sheet = "Country Analytical History",
+                                        skip = 11, col_names = FALSE))[, 1:3]
+setnames(og, c("iso3", "name", "g1987"))
+inc <- og[iso3 %in% s$iso3, .(iso3, g1987)]
+inc[, inc1987 := fcase(g1987 == "H", "High income",
+                       g1987 %in% c("UM", "LM"), "Middle income",
+                       default = "Not classified")]
+s <- merge(s, inc[, .(iso3, g1987, inc1987)], by = "iso3", all.x = TRUE)
+s[is.na(inc1987), inc1987 := "Not classified"]
+# Low income split into Sub-Saharan Africa and the rest (too many lines for one panel)
+s[g1987 == "L", inc1987 := fifelse(region == "Sub-Saharan Africa", "Low income: Sub-Saharan Africa",
+                                   "Low income: other")]
+# City states and oil producers (mean oil rents >= 10% of GDP, WB NY.GDP.PETR.RT.ZS) form own groups
+city <- c("SGP", "HKG", "MAC", "LUX", "MLT", "MCO", "SMR", "LIE", "AND",
+          "ABW", "BHS", "BMU", "GRL", "IMN")                      # + small island economies
+oil  <- as.data.table(jsonlite::fromJSON("data/wb_oil.json", flatten = TRUE)[[2]])[!is.na(value)]
+oilp <- oil[, .(r = mean(value)), by = countryiso3code][r >= 10, countryiso3code]
+s[iso3 %in% oilp, inc1987 := "Oil producers"]
+s[iso3 %in% city, inc1987 := "City states"]
+s[, inc1987 := factor(inc1987, levels = c("High income", "Middle income", "Low income: Sub-Saharan Africa",
+                                          "Low income: other", "Oil producers", "City states", "Not classified"))]
+# WID repeats the last estimate in years without new data: a value equal to the previous year's -> NA
+setorder(s, country, year)
+s[, share := fifelse(share == shift(share), NA_real_, share), by = country]
+
+qs2::qs_save(list(w = w, wq = wq, top1 = top1, s = s, inc = inc), "data/wid_world.qs2")
+fwrite(wq, "data/wid_world_quantiles.csv")
+fwrite(top1, "data/wid_world_top1.csv")
+fwrite(s, "data/wid_country_top1.csv")
+
+top1[, .(years = paste(range(year), collapse = "-"), countries = paste(range(countries), collapse = "-"),
+         coverage = paste(round(100 * range(coverage), 1), collapse = "-"))]
+s[, .(countries = uniqueN(country), years = paste(range(year), collapse = "-")), keyby = inc1987]
+s[is.na(iso3), unique(country)]
+```
+
+How the world distribution is built:
+
+* For country $c$, year $y$, group $p = 1, \dots, 100$: average wealth $w_{cyp}$ (US$) and adult population $z_{cy}$ of the same year
+* World distribution in year $y$: all $100 \times C$ values $w_{cyp}$, each weighted by $z_{cy}/100$
+* 2022: `r format(w[year == 2022, .N], big.mark = ",")` values = 100 × `r w[year == 2022, uniqueN(country)]` countries
+
+```{r}
+#| label: tbl-japan
+#| tbl-cap: "Japan 2022, every 5th group: raw WID rows of `d` (percentile, value in JPY) and the rows of `w` built from them"
+#| code-summary: "Code: Japan example of d and w"
+jp_d <- d[country == "JP" & year == 2022 & variable == "ahwealj992", .(percentile, value)]
+jp_d <- jp_d[order(as.integer(sub("^p([0-9]+)p.*", "\\1", percentile)))][seq(5, 100, 5)]
+jp_w <- w[country == "JP" & year == 2022][order(p)][seq(5, 100, 5), .(fx = round(fx, 1), usd, pop_z = pop)]
+jp <- cbind(jp_d, jp_w)
+for (v in c("value", "usd", "pop_z")) set(jp, j = v, value = format(round(jp[[v]]), big.mark = ","))
+ttx(jp, 0.7)
+```
+
+* `fx`: market exchange rate, JPY per US$ (`xlcusxi999`), in Japan's latest wealth year; `usd = value / fx`
+* `pop_z`: adults (over age 20) in Japan in 2022; each of the 100 groups holds `pop_z / 100` adults
+
+```{r}
+#| label: fig-japan
+#| code-summary: "Code: plot Japan 2022 density"
+#| fig-cap: "Japan 2022: density of net personal wealth across Japan's 100 wealth percentiles (US$). Left: log scale (percentiles with zero or negative wealth not shown). Right: natural scale, negatives included."
+#| fig-width: 11
+#| fig-height: 3.8
+jp_all <- w[country == "JP" & year == 2022]
+lab_usd <- scales::label_dollar(scale_cut = scales::cut_short_scale())
+p_jl <- ggplot(jp_all[usd > 0], aes(usd)) +
+  geom_density(fill = "#56B4E9", colour = "#0072B2", alpha = 0.4, bw = 0.15) +
+  scale_x_log10(breaks = c(1e3, 3e3, 1e4, 3e4, 1e5, 3e5, 1e6, 3e6, 1e7, 3e7), labels = lab_usd,
+                limits = c(1e3, 3e7)) +
+  labs(x = "Net personal wealth per adult (US$, log scale)", y = "Density") +
+  theme_minimal(base_size = 11) +
+  theme(panel.grid.minor = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+p_jn <- ggplot(jp_all, aes(usd)) +
+  geom_density(fill = "#E69F00", colour = "#D55E00", alpha = 0.4) +
+  geom_vline(xintercept = 0, colour = "grey40", linetype = "dashed") +
+  scale_x_continuous(breaks = seq(-5e5, 7e6, 5e5), labels = lab_usd, limits = c(-5e5, 7e6)) +  # top percentile ~ $5.0M
+  labs(x = "Net personal wealth per adult (US$, natural scale)", y = "Density") +
+  theme_minimal(base_size = 11) +
+  theme(panel.grid.minor = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+patchwork::wrap_plots(p_jl, p_jn, ncol = 2)
+```
+
+## Figures
+
+```{r}
+#| label: fig-world-dist-nat
+#| code-summary: "Code: plot world wealth density, natural scale"
+#| fig-cap: "As @fig-world-dist, natural scale; x axis shown from $1K to $3M, density computed on all values (negatives included)."
+#| column: margin
+#| fig-width: 4
+#| fig-height: 3.6
+# Placed before @fig-world-dist so the margin figure sits beside it
+wn <- w[year %% 10 == 0]
+p_nat <- ggplot(wn, aes(usd, weight = wt, colour = factor(year))) +
+  geom_density(linewidth = 0.6, n = 2^14) +
+  coord_cartesian(xlim = c(1e3, 3e6)) +                      # zoom only: density uses all values
+  scale_x_continuous(breaks = c(1e3, 5e5, 1e6, 1.5e6, 2e6, 2.5e6, 3e6),
+                     labels = scales::label_dollar(scale_cut = scales::cut_short_scale())) +
+  scale_colour_viridis_d(name = NULL, end = 0.9) +
+  labs(x = "Net personal wealth per adult (US$)", y = "Density") +
+  theme_minimal(base_size = 10) +
+  theme(panel.grid.minor = element_blank(), legend.position = "bottom",
+        axis.text.x = element_text(angle = 45, hjust = 1))
+p_nat
+```
+
+```{r}
+#| label: fig-world-dist
+#| code-summary: "Code: plot world wealth density"
+#| fig-cap: "Wealth percentiles of the world wealth distribution, 1980-2020 every 10 years: the 100 wealth percentiles of every country pooled, each weighted by its adults; net personal wealth in US$ at market exchange rates, log scale. Percentiles with zero or negative wealth are not drawn (their share of world adults is printed below)."
+#| fig-width: 9
+#| fig-height: 5.5
+w[, decade := paste0(10 * (year %/% 10), "s")]
+wd <- w[year %% 10 == 0]
+# Weighted mean and std of wealth across world adults (natural scale, negatives included), in the legend
+sdy <- wd[, {m <- sum(usd * wt) / sum(wt); .(m = m, std = sqrt(sum(wt * (usd - m)^2) / sum(wt)))}, by = year]
+sdy[, lab := sprintf("%d  (mean %s, std %s, CV %.2f)", year, format(round(m), big.mark = ","),
+                     format(round(std), big.mark = ","), std / m)]           # CV = std / mean
+wd[sdy, ylab := i.lab, on = "year"]
+p_dist <- ggplot(wd[usd > 0], aes(usd, weight = wt, colour = ylab)) +
+  geom_density(linewidth = 0.8, bw = 0.12, key_glyph = "path") +
+  scale_x_log10(breaks = c(10, 30, 100, 300, 1e3, 3e3, 1e4, 3e4, 1e5, 3e5, 1e6, 3e6, 1e7),
+                labels = scales::label_dollar(scale_cut = scales::cut_short_scale())) +
+  scale_colour_viridis_d(name = "Year (US$)", end = 0.9) +
+  expand_limits(y = 0.9) +                                   # headroom so the inside legend clears the peaks
+  labs(x = "Net personal wealth per adult, by country wealth percentile (US$)", y = "Density (share of world adults)") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), legend.position = "inside", legend.position.inside = c(0.99, 0.99),
+        legend.justification = c(1, 1), legend.background = element_rect(fill = "white", colour = NA),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+ggsave("data/wid_world_dist.png", p_dist, width = 9, height = 5.5, dpi = 200, bg = "white")
+p_dist
+wd[, .(adults_le0 = sprintf("%.1f%%", 100 * sum(wt[usd <= 0]) / sum(wt))), keyby = year]
+```
+
+
+```{r}
+#| label: fig-world-top1
+#| code-summary: "Code: plot world top 1% share"
+#| fig-cap: "Share of world net personal wealth held by the richest 1% of world adults, from the pooled wealth percentiles of all countries (wealth treated as equal within each country percentile)."
+#| fig-width: 8
+#| fig-height: 4.5
+#| out-width: 50%
+p_top1 <- ggplot(top1, aes(year, share)) +
+  geom_line(colour = "#0072B2") + geom_point(colour = "#0072B2", size = 1.2) +
+  scale_y_continuous(labels = scales::label_percent()) +
+  labs(x = NULL, y = "Top 1% share of world wealth") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank())
+ggsave("data/wid_world_top1.png", p_top1, width = 8, height = 4.5, dpi = 200, bg = "white")
+p_top1
+```
+
+```{r}
+#| label: fig-country-top1
+#| code-summary: "Code: plot country top 1% shares"
+#| fig-cap: "Top 1% wealth share by country, grouped by World Bank income classification for 1987 (earliest available), low income split by region, oil producers and city states separate; a value equal to the previous year's is treated as missing (WID carries estimates forward); y axis per panel; viridis colour and shape = country within group; ISO3 labels placed at staggered years along each line; points every 5 years."
+#| fig-width: 12
+#| fig-height: 15
+shp <- c(16, 17, 15, 18, 1, 2, 0, 5, 6, 4, 3, 8)
+setorder(s, inc1987, iso3, year)
+s[, cid := match(country, unique(country)), by = inc1987]
+s[, n := uniqueN(country), by = inc1987]
+s[, col := (cid - 1) / pmax(n - 1, 1)]                     # 0-1 within group -> full viridis range
+s[, sid := factor((cid - 1) %% length(shp) + 1)]
+# Label year: countries spread across 1982-2022 in group order, so labels do not pile up
+s[, lab_year := 1982L + as.integer(round(40 * ((cid - 1) %% 9) / 8))]
+s[, lab := fifelse(year == lab_year & !is.na(share), iso3, "")]   # empty labels: repel from all points
+p_cty <- ggplot(s, aes(year, share, colour = col, shape = sid, group = country)) +
+  geom_line(linewidth = 0.35, alpha = 0.8) +
+  geom_point(data = s[!is.na(share)], size = 0.9) +
+  ggrepel::geom_text_repel(aes(label = lab), size = 2.6, max.overlaps = Inf, box.padding = 0.25,
+                           point.padding = 0.1, min.segment.length = 0.2, segment.size = 0.2,
+                           max.time = 5, seed = 1, show.legend = FALSE) +
+  facet_wrap(~inc1987, ncol = 2, scales = "free_y") +
+  scale_colour_viridis_c(end = 0.9, guide = "none") +
+  scale_shape_manual(values = shp, guide = "none") +
+  scale_x_continuous(breaks = seq(1980, 2025, 5)) +
+  scale_y_continuous(labels = scales::label_percent(), breaks = seq(0, 1, 0.05)) +
+  labs(x = NULL, y = "Top 1% share of national wealth") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+ggsave("data/wid_country_top1.png", p_cty, width = 12, height = 15, dpi = 200, bg = "white")
+p_cty
+```
+
+```{r}
+#| include: false
+nm <- unique(meta[, .(country, countryname)])
+nc <- nm[country %in% s[inc1987 == "Not classified", unique(country)], sort(countryname)]
+hi <- unique(s[inc1987 == "High income", .(country, iso3)])[nm, on = "country", nomatch = NULL][order(iso3)]
+```
+
+* High income in 1987 (`r nrow(hi)`), ISO3 = country: `r paste(hi$iso3, "=", hi$countryname, collapse = ", ")`
+* Not classified in 1987 (`r length(nc)`): `r paste(nc, collapse = ", ")`
+
+## Metadata notes
+
+```{r}
+#| label: tbl-meta
+#| code-summary: "Code: metadata table"
+#| tbl-cap: "WID variables used (from the WID metadata files)"
+mt <- meta[country %in% cc]
+m <- mt[, {
+  u <- unique(unit[unit != ""])
+  .(Name = shortname[1], Type = shorttype[1], Population = shortpop[1], Age = shortage[1],
+    Unit = if (length(u) > 3) sprintf("local currency (%d codes)", length(u)) else paste(u, collapse = ", "),
+    Countries = uniqueN(country), Quality = round(mean(as.numeric(avg_quality), na.rm = TRUE), 1))
+}, by = .(Variable = variable)]
+m[, Quality := fifelse(is.nan(Quality), "", as.character(Quality))]
+ttx(m, 0.95)
+```
+
+* Source: WID.world bulk download `wid_all_data.zip` (`WID_data_XX.csv`, `WID_metadata_XX.csv`)
+* Variable code = series + population letter + age code, e.g. `ahweal` + `j` + `992`
+* Units (WID `unit` field):
+  * `ahwealj992` (average net personal wealth), `anninci992` (average national income): the country's own currency, e.g. JPY for Japan, USD for the United States; converted here at `xlcusxi999` of the country's latest wealth year
+  * `xlcusxi999`: local currency per US$
+  * `npopuli992`: persons
+  * `shwealj992`: share of national net personal wealth, 0 to 1
+* Population (`shortpop`):
+  * equal-split adults (`j`): individuals, with resources split equally within couples
+  * individuals (`i`): no sharing within couples
+* Age: `992` = individuals over age 20; `999` = all ages
+* Net personal wealth: non-financial and financial assets of households minus their debts
+* Quality: mean of WID's `avg_quality` score; empty where WID gives none
+
+```{r}
+#| label: meta-source
+#| code-summary: "Code: WID source and method texts"
+# WID source and method notes, top 1% wealth share: the 5 most common texts
+# Drop WID link markup: [URL][URL_LINK]..[/URL_LINK][URL_TEXT]text[/URL_TEXT][/URL] -> text
+unlink <- function(x) trimws(gsub("\\[/?URL[A-Z_]*\\]", " ", gsub("\\[URL_LINK\\].*?\\[/URL_LINK\\]", "", x, perl = TRUE)))
+ttx(mt[variable == "shwealj992", .N, by = .(Source = substr(unlink(source), 1, 200))][order(-N)][1:5], c(0.7, 0.1))
+ttx(mt[variable == "shwealj992" & method != "", .N, by = .(Method = substr(method, 1, 200))][order(-N)][1:5], c(0.7, 0.1))
+```
+
+Saved in `data/`:
+
+* `wid_extract.csv`, `wid_meta.csv`: rows kept from the WID bulk zip
+* `wid_world.qs2`: all derived tables
+* `wid_world_quantiles.csv`, `wid_world_top1.csv`, `wid_country_top1.csv`
+* `wid_world_dist.png`, `wid_world_top1.png`, `wid_country_top1.png`

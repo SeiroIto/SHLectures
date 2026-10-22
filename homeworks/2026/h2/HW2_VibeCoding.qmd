@@ -50,7 +50,36 @@ section > dl { width: 95%; }
 pre > code { width: 100%; margin-left: 0; }
 figure { max-width: 100%; }
 /* Tufte ul{font-size:1.4rem} hits nested TOC lists; match level 1 */
-#TOC ul ul { font-size: inherit; line-height: inherit; }
+#### TOC ul ul { font-size: inherit; line-height: inherit; }
+/* Fix code and output contrast, including when the browser uses dark mode */
+pre,
+pre code,
+.sourceCode,
+.sourceCode pre,
+.cell-output,
+.cell-output pre,
+.cell-output-stdout,
+.cell-output-stderr {
+  background-color: #f4f4f4 !important;
+  color: #222222 !important;
+}
+/* Keep syntax-highlighted code readable */
+pre code span {
+  color: #222222 !important;
+}
+/* Keep printed output readable */
+.cell-output,
+.cell-output-stdout,
+.cell-output-stderr,
+.cell-output p {
+  color: #222222 !important;
+}
+/* Preserve a light page background */
+html,
+body {
+  background-color: #fffcf2 !important;
+  color: #222222 !important;
+}
 ```
 
 # HW2
@@ -162,7 +191,7 @@ Contents
 (1回に留めず、QueryとResponseの回数を重ねてhtmlを改良すると尚良いです)
 
 
-### Outputs
+
 
 The following code reads the two previously downloaded data files from the working directory, recalculates the estimates, and produces the revised figures and OLS growth-rate estimates. It does not require objects created by earlier code chunks.
 
@@ -171,7 +200,7 @@ The following code reads the two previously downloaded data files from the worki
 The data files are expected to be in the folder from which Quarto renders this document. The code checks for existing files before downloading them.
 
 ```{r, echo=FALSE}
-# #### 1. Check packages and locate the data
+#### 1. Check packages and locate the data
 
 pkgs <- c("data.table", "ggplot2", "viridis")
 
@@ -198,7 +227,7 @@ un_file <- "HDR23-24_Composite_indices_complete_time_series.csv"
 cat("Barro-Lee file exists:", file.exists(bl_file), "\n")
 cat("UNDP file exists:", file.exists(un_file), "\n")
 
-# #### 2. Download only files that are missing
+#### 2. Download only files that are missing
 
 if (!file.exists(bl_file)) {
   download.file(
@@ -224,18 +253,18 @@ if (!file.exists(un_file)) {
   )
 }
 
-# Confirm that both files are now available.
+#### Confirm that both files are now available.
 stopifnot(file.exists(bl_file), file.exists(un_file))
 
 cat("Barro-Lee:", normalizePath(bl_file), "\n")
 cat("UNDP:", normalizePath(un_file), "\n")
 
-# #### 3. Read and prepare the data
+################### 3. Read and prepare the data
 
 bl <- fread(bl_file)
 un <- fread(un_file)
 
-# Barro-Lee: population-weighted mean for ages 25-64.
+#### Barro-Lee: population-weighted mean for ages 25-64.
 bla <- bl[agefrom >= 25]
 
 blc <- bla[, .(
@@ -244,10 +273,10 @@ blc <- bla[, .(
   pop = sum(pop, na.rm = TRUE)
 ), by = .(country, year, region = region_code)]
 
-# Remove rows that cannot contribute to the estimates.
+#### Remove rows that cannot contribute to the estimates.
 blc <- blc[is.finite(mys) & is.finite(pop) & pop > 0]
 
-# UNDP: retain country records, not aggregate records.
+#### UNDP: retain country records, not aggregate records.
 unc <- un[!grepl("^ZZ", iso3)]
 
 mys_cols <- grep("^mys_[0-9]{4}$", names(unc), value = TRUE)
@@ -286,7 +315,7 @@ unl[, region := reg_names[region]]
 unl[is.na(region), region := "No UNDP region"]
 unl <- unl[is.finite(mys) & is.finite(pop) & pop > 0]
 
-# #### 4. Calculate weighted means and bootstrap intervals
+#### 4. Calculate weighted means and bootstrap intervals
 
 boot_mean <- function(d, B = 1000) {
   m <- dcast(d, country ~ year, value.var = "mys")
@@ -322,7 +351,7 @@ boot_mean <- function(d, B = 1000) {
 bl_wld <- boot_mean(blc)
 un_wld <- boot_mean(unl)
 
-# Regional estimates are population-weighted means.
+#### Regional estimates are population-weighted means.
 weighted_mean <- function(d) {
   d[, .(
     mys = sum(mys * pop) / sum(pop)
@@ -332,14 +361,14 @@ weighted_mean <- function(d) {
 bl_reg <- weighted_mean(blc)
 un_reg <- weighted_mean(unl)
 
-# #### 5. Prepare the world series
+#### 5. Prepare the world series
 
 bl_wld[, source := "Barro-Lee (25-64)"]
 un_wld[, source := "UNDP HDR (25+)"]
 
 wld <- rbindlist(list(bl_wld, un_wld), use.names = TRUE)
 
-# #### 6. Figure 1: world estimates with 95% intervals
+#### 6. Figure 1: world estimates with 95% intervals
 
 p_world <- ggplot(
   wld,
@@ -366,7 +395,7 @@ p_world <- ggplot(
 
 print(p_world)
 
-# #### 7. Figures 2 and 3: regional estimates without intervals
+#### 7. Figures 2 and 3: regional estimates without intervals
 
 p_bl <- ggplot(
   bl_reg,
@@ -414,11 +443,11 @@ p_un <- ggplot(
 
 print(p_un)
 
-# #### 8. Estimate annual growth rates by OLS
+#### 8. Estimate annual growth rates by OLS
 
-# The dependent variable is log(mean years of schooling).
-# The slope therefore estimates a compound annual growth rate.
-# The confidence interval is based on the OLS standard error.
+#### The dependent variable is log(mean years of schooling).
+#### The slope therefore estimates a compound annual growth rate.
+#### The confidence interval is based on the OLS standard error.
 
 growth_data <- rbindlist(list(
   data.table(
@@ -485,7 +514,7 @@ growth_table[, `:=`(
   )
 )]
 
-# #### 9. Output the growth-rate estimates
+#### 9. Output the growth-rate estimates
 
 growth_output <- growth_table[, .(
   Source = source,
@@ -501,7 +530,7 @@ growth_output <- growth_output[
 
 print(growth_output)
 
-# #### 10. Data coverage and regional counts
+#### 10. Data coverage and regional counts
 
 coverage <- rbindlist(list(
   data.table(
@@ -524,4 +553,222 @@ print(coverage)
 ```
 
 **Interpretation of the OLS output:** each estimate is the fitted annual percentage growth rate in mean years of schooling, with its 95% confidence interval in brackets. This is a log-linear trend over the available years, not a year-by-year growth rate. The intervals reflect OLS uncertainty under the regression assumptions.
+
+
+## 3rd query
+
+![](GPTReply.jpg)
+
+### Instructions
+
+* OLS results
+    * Table: Use tinytable, theme=striped, use minimal width
+        * Use groups, with "Barro-Lee (1950-2015, 14 data points)" as group header that separates BL and UNDP
+    * Figure: show estimates with error bars
+        * Horizontal error bar, with y label = subgroups, use group headers to separate GL and UNDP
+
+### Outputs
+
+![](GPTReply2.jpg)
+
+
+
+Paste the following code into the `Outputs` section of `HW2_VibeCoding(1).qmd`, under the 2nd query. It uses the objects already created by `1stRound.rmd`: `bl_wld`, `bl_reg`, `un_wld`, and `un_reg`. It does not download the data again.
+
+The code estimates a separate OLS time trend for each world or regional series:
+
+\\[ \text{Mean schooling years}\_t = \alpha + \beta\\,\text{Year}\_t + \varepsilon_t \\]
+
+The reported estimate is \\(\hat\beta\\), measured in additional schooling years per calendar year, with a 95% confidence interval. For Barro-Lee, the regression uses 14 five-year observations per complete series; UNDP uses its available annual observations.
+
+#### 1. OLS results: table and figure
+
+
+```{r ols-results, echo=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=7}
+#### Aim: Estimate the linear time trend for each world and regional series.
+#### Input: bl_wld, bl_reg, un_wld, un_reg from 1stRound.rmd.
+#### Output: A compact OLS table and a horizontal coefficient plot.
+
+#### Install the packages only if they are missing.
+required <- c("data.table", "ggplot2", "tinytable")
+missing <- required[
+  !vapply(required, requireNamespace, logical(1), quietly = TRUE)
+]
+
+if (length(missing) > 0L) {
+  if (interactive()) {
+    install.packages(missing)
+  } else {
+    stop(
+      "Run this in the R console first: install.packages(c(",
+      paste(sprintf('"%s"', missing), collapse = ", "),
+      "))"
+    )
+  }
+}
+
+library(data.table)
+library(ggplot2)
+library(tinytable)
+
+#### Combine the world and regional estimates from both sources.
+#### "World" is added as a subgroup so it appears in the results.
+make_series <- function(world, regions, source_name) {
+  world_part <- copy(world)
+  world_part[, subgroup := "World"]
+
+  region_part <- copy(regions)
+  region_part[, subgroup := as.character(region)]
+
+  world_part[, region := NULL]
+  region_part[, region := NULL]
+
+  world_part[, source := source_name]
+  region_part[, source := source_name]
+
+  rbindlist(list(world_part, region_part), fill = TRUE)
+}
+
+series <- rbindlist(list(
+  make_series(
+    bl_wld, bl_reg,
+    "Barro-Lee (1950-2015, 14 data points)"
+  ),
+  make_series(
+    un_wld, un_reg,
+    "UNDP HDR (1990-2022)"
+  )
+), fill = TRUE)
+
+#### Estimate mys = intercept + slope * year separately
+#### for every source and subgroup.
+ols_results <- series[
+  !is.na(year) & is.finite(mys),
+  {
+    fit <- lm(mys ~ year)
+    ci <- confint(fit, "year", level = 0.95)
+
+    list(
+      observations = nobs(fit),
+      estimate = unname(coef(fit)["year"]),
+      lower = ci[1, 1],
+      upper = ci[1, 2],
+      p_value = summary(fit)$coefficients["year", "Pr(>|t|)"]
+    )
+  },
+  by = .(source, subgroup)
+]
+
+#### Set the source and subgroup order for both outputs.
+ols_results[, source := factor(
+  source,
+  levels = c(
+    "Barro-Lee (1950-2015, 14 data points)",
+    "UNDP HDR (1990-2022)"
+  )
+)]
+
+ols_results[, subgroup := factor(
+  subgroup,
+  levels = unique(subgroup)
+)]
+
+setorder(ols_results, source, subgroup)
+
+#### Prepare a compact table with readable column labels.
+table_data <- ols_results[, .(
+  Subgroup = as.character(subgroup),
+  `N` = observations,
+  `OLS estimate` = sprintf("%.4f", estimate),
+  `95% CI` = sprintf("[%.4f, %.4f]", lower, upper),
+  `p-value` = ifelse(
+    p_value < 0.001,
+    "<0.001",
+    sprintf("%.3f", p_value)
+  )
+)]
+
+#### Add group headers to separate the two data sources.
+bl_n <- sum(ols_results$source ==
+              "Barro-Lee (1950-2015, 14 data points)")
+
+un_n <- nrow(table_data) - bl_n
+
+tab <- tinytable::tt(table_data, theme = "striped")
+
+tab <- group_tt(
+  tab,
+  i = list(
+    "Barro-Lee (1950-2015, 14 data points)" = seq_len(bl_n),
+    "UNDP HDR (1990-2022)" =
+      seq.int(bl_n + 1L, bl_n + un_n)
+  )
+)
+
+tab
+
+#### Plot: horizontal point estimates and 95% confidence intervals.
+#### Facet strips act as group headers for the two data sources.
+plot_data <- copy(ols_results)
+plot_data[, subgroup_label := as.character(subgroup)]
+
+#### Reverse subgroup order so the first subgroup appears at the top.
+plot_data[, subgroup_label := factor(
+  subgroup_label,
+  levels = rev(unique(subgroup_label))
+)]
+
+ggplot(
+  plot_data,
+  aes(x = estimate, y = subgroup_label)
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey50"
+  ) +
+  geom_errorbar(
+    aes(xmin = lower, xmax = upper),
+    orientation = "y",
+    width = 0.2
+  ) +
+  geom_point(size = 2) +
+  facet_grid(
+    source ~ .,
+    scales = "free_y",
+    space = "free_y",
+    switch = "y"
+  ) +
+  labs(
+    x = "OLS estimate: change in schooling years per calendar year",
+    y = NULL,
+    title = "OLS estimates of schooling trends",
+    subtitle = "Points are estimates; horizontal bars are 95% confidence intervals"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    strip.placement = "outside",
+    strip.text.y.left = element_text(
+      angle = 0,
+      face = "bold"
+    ),
+    strip.background = element_rect(
+      fill = "grey90",
+      colour = NA
+    ),
+    axis.text.y = element_text(colour = "black")
+  )
+```
+
+
+#### 2. Important notes
+
+- Table: `theme = "striped"` gives alternating row shading; `group_tt()` separates Barro-Lee and UNDP with source headers.
+- Figure: The horizontal bars are 95% confidence intervals for the OLS slope. The vertical dashed line marks zero growth.
+- Subgroups: The code includes the world series and each source's regions. Barro-Lee and UNDP retain their own regional classifications.
+- Interpretation: These confidence intervals describe uncertainty in the estimated linear time trend under the OLS model; they are not the bootstrap intervals from the original time-series plots.
+- Observation counts: The code reports the actual number of usable observations in each regression. A complete Barro-Lee series has 14 observations, but missing values, if any, can reduce that count.
+
+I interpreted “GL” in your figure request as BL (Barro-Lee). If you meant a different dataset, its name and data objects would need to be specified.
 

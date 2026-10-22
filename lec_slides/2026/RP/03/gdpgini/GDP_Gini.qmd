@@ -9,6 +9,18 @@ execute:
   warning: false
 ---
 
+## Introduction
+
+* This page plots the Gini index of income inequality against GDP per capita for every
+  country and survey year in the World Bank data: 2,421 country-years, 171 countries,
+  1963-2025.
+* Outputs: all countries in one panel, coloured by group (@fig-all); one panel per group,
+  other countries in grey (@fig-region).
+* Groups: the World Bank regions re-cut into 14 groups (city states, oil producers,
+  Sub-Saharan Africa by former colonial power, ...); rules below.
+* Data are read from the saved WDI API responses in `data/`; the download-and-build
+  chunk is a record and is not run (`eval: false`).
+
 Data sources:
 
 * World Bank, World Development Indicators (WDI), via the [WDI API](https://api.worldbank.org/v2/)

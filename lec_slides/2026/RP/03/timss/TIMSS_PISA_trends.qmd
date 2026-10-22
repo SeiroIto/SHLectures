@@ -36,6 +36,18 @@ pisa  <- fread("pisa_scores.csv")
 source("timss_pisa_plot.R")
 ```
 
+# Introduction
+
+* This page plots country trends in two international student assessments:
+  * TIMSS, 1995-2023, by grade (4, 8) and subject (mathematics, science).
+  * PISA, 2000-2022, by sex and subject (mathematics, reading, science).
+* Japan, Korea, the United States and Finland are highlighted against all other
+  participants, with the mean of all economies in light green.
+* Scores are read from saved files (World Bank EdStats, IEA TIMSS 2023, the
+  PISA 2022 student file); nothing is downloaded at render.
+* Sections: Data (sources, exclusions, coverage), TIMSS, PISA (all participants;
+  a fixed set of economies), Reading the figures.
+
 # Data
 
 * TIMSS (Trends in International Mathematics and Science Study, IEA) tests

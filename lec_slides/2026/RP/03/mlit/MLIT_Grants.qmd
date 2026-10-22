@@ -24,6 +24,7 @@ format:
     include-in-header:
       text: |
         <style>details.code-fold > summary { font-family: var(--bs-font-monospace); font-size: 0.85em; color: #6c757d; }</style>
+        <style>.tinytable td, .tinytable th { white-space: nowrap; }  /* one line per table row */</style>
 execute:
   warning: false
 ---
@@ -77,6 +78,14 @@ if (length(new) > 0) install.packages(new)
 library(data.table)
 library(ggplot2)
 library(tinytable)
+# Tables: striped rows, faint blue header, small font, text columns left / numbers right
+ttj <- function(x, txt, num) {
+  y <- tt(x, theme = "striped")
+  y <- style_tt(y, i = 0, background = "#e7f0fa")
+  y <- style_tt(y, fontsize = 0.85)
+  y <- style_tt(y, j = txt, align = "l")
+  style_tt(y, j = num, align = "r")
+}
 dir.create("data", showWarnings = FALSE)
 
 # Download once into data/: one PDF per fiscal year + GADM 4.1 prefecture boundaries
@@ -99,6 +108,7 @@ jis <- c("北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島"
          "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄")
 glab <- c(a = "(a) Social Capital Development", b = "(b) Disaster Prevention & Safety",
            c = "(c) Total")
+gjp <- c(a = "(a) 社会資本整備総合交付金", b = "(b) 防災・安全交付金", c = "(c) 合計")
 ```
 
 ```{r}
@@ -137,9 +147,16 @@ qs2::qs_save(gl, "data/mlit_grants_pref.qs2")
 fwrite(gl[, .(fy, code, pref, grant, mn_yen, chg)], "data/mlit_grants_pref.csv", bom = TRUE)
 
 # National totals by year (million yen) and mean/std of prefecture changes
-dcast(gl[, .(total = sum(mn_yen)), by = .(fy, grant)], fy ~ grant, value.var = "total")
-gl[!is.na(chg), .(n = .N, mean = mean(chg), std = sd(chg), min = min(chg), max = max(chg)),
-   by = grant_lab]
+nt <- dcast(gl[, .(total = sum(mn_yen)), by = .(fy, grant)], fy ~ grant, value.var = "total")
+nt <- nt[, .(`年度` = paste0("FY", fy), a = format(a, big.mark = ","),
+             b = format(b, big.mark = ","), c = format(c, big.mark = ","))]
+setnames(nt, c("a", "b", "c"), gjp)
+ttj(nt, 1, 2:4)
+ps <- gl[!is.na(chg), .(n = .N, `平均%` = sprintf("%.1f", mean(chg)), `std` = sprintf("%.1f", sd(chg)),
+                        `最小%` = sprintf("%.1f", min(chg)), `最大%` = sprintf("%.1f", max(chg))),
+         keyby = grant]
+ps <- ps[, c(list(`交付金` = gjp[grant]), .SD), .SDcols = !"grant"]
+ttj(ps, 1, 2:6)
 ```
 
 ```{r}
@@ -292,14 +309,10 @@ mu[fy > 2022, .(both = sum(!is.na(chg)), entry = sum(prev == 0 & kyen > 0),
 two <- mu[code == 9 & entity %in% c("那須烏山市", "那珂川町") & fy == 2026 & kyen > 0]
 pool <- mu[!is.na(chg)]
 two[, pctile := 100 * pool[two, on = "grant", mean(x.chg <= i.chg), by = .EACHI]$V1]
-gjp <- c(a = "(a) 社会資本整備総合交付金", b = "(b) 防災・安全交付金", c = "(c) 合計")
 tw <- two[, .(`自治体` = entity, `交付金` = gjp[grant],
               FY2025 = format(prev, big.mark = ","), FY2026 = format(kyen, big.mark = ","),
               `変化%` = sprintf("%.1f", chg), `百分位` = sprintf("%.1f", pctile))]
-tw_tt <- tt(tw, width = c(0.16, 0.36, 0.13, 0.13, 0.11, 0.11), theme = "striped")  # sums to 1
-tw_tt <- style_tt(tw_tt, i = 0, background = "#e7f0fa")
-tw_tt <- style_tt(tw_tt, j = 1:2, align = "l")
-style_tt(tw_tt, j = 3:6, align = "r")
+ttj(tw, 1:2, 3:6)
 ```
 
 * The two municipalities are not outliers: each FY2026 change sits between the
@@ -438,12 +451,9 @@ p_kt
 kc <- big[order(chg), .(`都県` = jis[code], `自治体` = entity,
                         FY2025 = format(prev, big.mark = ","), FY2026 = format(kyen, big.mark = ","),
                         `変化%` = sprintf("%.1f", chg))]
-kc_tt <- tt(kc, width = c(0.12, 0.2, 0.14, 0.14, 0.12), theme = "striped")  # sums to 0.72
-kc_tt <- style_tt(kc_tt, i = 0, background = "#e7f0fa")
-kc_tt <- style_tt(kc_tt, j = 1:2, align = "l")
 kc_n <- mu[code %in% kanto & fy == 2026 & grant == "c",
            .(both_years = sum(!is.na(chg)), dropped_to_0 = sum(prev > 0 & kyen == 0))]
-style_tt(kc_tt, j = 3:5, align = "r")
+ttj(kc, 1:2, 3:5)
 ```
 
 * Kanto, (c) 合計, FY2026: `r kc_n$both_years` municipalities with listed road projects

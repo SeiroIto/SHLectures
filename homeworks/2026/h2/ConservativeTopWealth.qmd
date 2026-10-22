@@ -9,6 +9,16 @@ execute:
   warning: false
 ---
 
+## Introduction
+
+* This page asks how high US top wealth shares are when estimated more conservatively
+  than Saez & Zucman's equal-return capitalization.
+* Outputs: top 0.1% share 1913-2019 (@fig-long); top 1% and 0.1% 1966-2026 in
+  harmonized units plus the Fed DFA (@fig-recent); 1989 vs 2016 levels and change
+  (@tbl-change); three readings of what drove the post-1980 rise.
+* Data: the SZZ replication Excel file and the Fed DFA csv, downloaded only if missing
+  from `data/` (setup chunk).
+
 Saez & Zucman's equal-return capitalization series compared with more conservative estimates:
 
 * Smith, Zidar & Zwick (SZZ, QJE 2023): capitalization with heterogeneous returns
