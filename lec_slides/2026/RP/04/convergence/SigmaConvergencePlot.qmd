@@ -1,0 +1,510 @@
+---
+title: "σ-convergence across countries"
+subtitle: "WDI 1960-2024 dispersion with a Kong-Phillips-Sul trend test; PWT 10.01 2000-2019 KPS (with factor removal) and Phillips-Sul log t tests"
+date: last-modified
+date-format: "MMMM DD, YYYY"
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    code-fold: true
+    lightbox: true
+    grid:
+      sidebar-width: 220px
+      body-width: 1000px
+      margin-width: 150px
+    linkcolor: "green"
+    theme:
+      light: ../../../../../../../addtosky.scss
+      dark: darkly
+    backgroundcolor: "#fffcf2"
+    title-block-banner: "#f0f3f5"
+    title-block-banner-color: "black"
+execute:
+  warning: false
+  message: false
+---
+
+# Introduction
+
+* This page plots σ-convergence: the cross-country standard deviation of log GDP per capita, year by year.
+* It reports a weak σ-convergence test in the spirit of Kong, Phillips & Sul (2019, *J. Econometrics*): regress the cross-section variance on a linear trend; a significantly negative slope (Newey-West HAC t ratio) indicates convergence.
+* Data: World Bank WDI `NY.GDP.PCAP.KD` (GDP per capita, constant 2015 US$, market exchange rates), saved locally (`data/gdppc_usd.json`); nothing is downloaded.
+* Caveats:
+  * Constant US$ at market exchange rates, not PPP; PPP series start only in 1990.
+  * Common factors are not removed before the test, as KPS recommend for trending panels; this treats all countries as loading equally on the world trend.
+
+```{r}
+#| label: setup
+#| code-summary: "Code: load WDI GDP per capita; drop aggregates, oil producers and countries under 1 million"
+library(data.table)
+library(ggplot2)
+library(tinytable)
+g <- "data/"
+wdi <- function(f) as.data.table(jsonlite::fromJSON(paste0(g, f), flatten = TRUE)[[2]])
+gdp <- wdi("gdppc_usd.json")[!is.na(value), .(iso3 = countryiso3code, year = as.integer(date), y = value)]
+ctry <- wdi("country.json")[region.value != "Aggregates", .(iso3 = id)]   # drops World, regions, income groups
+oil <- wdi("oil.json")[!is.na(value), .(r = mean(value)), by = .(iso3 = countryiso3code)][r >= 10, iso3]
+pop <- readRDS("data/wdi_pop_2019_2024.rds")[year == 2019, .(iso3 = iso3c, pop)]
+gdp <- gdp[iso3 %in% ctry$iso3 & year <= 2024]
+# Sample rule (as in Patel, Sandefur & Subramanian 2021, Fig. A.5): drop oil producers
+# (mean oil rents >= 10% of GDP) and countries under 1 million people (2019)
+small <- pop[pop < 1e6, iso3]
+gdp <- gdp[!(iso3 %in% c(oil, small))]
+gdp[, ly := log(y)]
+```
+
+```{r}
+#| label: sigma
+#| code-summary: "Code: compute the yearly cross-country std and variance of log income for three samples"
+# Three samples: every country observed in a year (unbalanced); fixed sample observed every year
+# 1960-2024; fixed sample observed every year 1990-2024
+bal <- function(from) {
+  yrs <- from:2024
+  keep <- gdp[year %in% yrs, .N, by = iso3][N == length(yrs), iso3]
+  gdp[iso3 %in% keep & year %in% yrs]
+}
+s_all <- gdp[, .(sigma = sd(ly), K = mean((ly - mean(ly))^2), n = .N), by = year]
+s_60  <- bal(1960)[, .(sigma = sd(ly), K = mean((ly - mean(ly))^2), n = .N), by = year]
+s_90  <- bal(1990)[, .(sigma = sd(ly), K = mean((ly - mean(ly))^2), n = .N), by = year]
+s_all[, sample := sprintf("All available (n = %d-%d)", min(n), max(n))]
+s_60[,  sample := sprintf("Fixed since 1960 (n = %d)", n[1])]
+s_90[,  sample := sprintf("Fixed since 1990 (n = %d)", n[1])]
+ss <- rbind(s_all, s_60, s_90)
+```
+
+# What σ-convergence looks like (simulated)
+
+* σ-convergence: the spread of (log) incomes across economies shrinks over time.
+* β-convergence: poorer economies grow faster than richer ones.
+* The two can part ways: poor economies can grow faster while random shocks keep pushing incomes apart.
+* The simulation uses the model of the derivation page: $\ln y_{it} = a + (1-\beta_1)\ln y_{i,t-1} + u_{it}$, with catch-up $\beta_1 = 0.05$ per year and independent shocks $u_{it}$ of standard deviation $\sigma_u$; 200 economies, 40 years; 12 of them drawn as lines.
+  * Left: incomes start far apart ($\sigma_0 = 1.0$) and shocks are small ($\sigma_u = 0.03$): the spread falls.
+  * Right: incomes start close together ($\sigma_0 = 0.15$) and shocks are larger ($\sigma_u = 0.08$): poor economies still grow faster, but the spread rises towards its steady state $\sigma^{*} = \sigma_u/\sqrt{1-(1-\beta_1)^2}$.
+
+```{r}
+#| label: fig-concept
+#| code-summary: "Code: simulate 200 economies under two scenarios; plot income paths and σ_t"
+#| fig-cap: "Simulated log incomes of 12 of 200 economies (top) and the cross-section standard deviation σ_t of all 200 (bottom). β-convergence holds in both panels (slope of 40-year average growth on initial log income is negative, shown in the panel titles); σ-convergence holds only on the left. Dashed line: steady-state σ*."
+#| fig-width: 10
+#| fig-height: 6
+sim <- function(sig0, sigu, b1 = 0.05, N = 200, T = 40, a = 0.05 * log(10000), seed = 1) {
+  set.seed(seed)
+  y <- matrix(NA_real_, T + 1, N)
+  y[1, ] <- log(10000) + rnorm(N, 0, sig0)                       # mean log income ~ log(10,000)
+  for (t in 2:(T + 1)) y[t, ] <- a + (1 - b1) * y[t - 1, ] + rnorm(N, 0, sigu)
+  g <- (y[T + 1, ] - y[1, ]) / T                                  # average annual growth
+  list(y = y, sd = apply(y, 1, sd), slope = coef(lm(g ~ y[1, ]))[2],
+       sstar = sigu / sqrt(1 - (1 - b1)^2))
+}
+sc <- list(sim(1.0, 0.03), sim(0.15, 0.08))
+lab <- c(sprintf("A. σ-convergence (β slope = %.4f)", sc[[1]]$slope),
+         sprintf("B. β-convergence without σ-convergence (β slope = %.4f)", sc[[2]]$slope))
+paths <- rbindlist(lapply(1:2, function(s) {
+  d <- as.data.table(sc[[s]]$y[, 1:12]); d[, year := 0:40]
+  d <- melt(d, id.vars = "year", variable.name = "econ", value.name = "ly"); d[, panel := lab[s]]
+}))
+sds <- rbindlist(lapply(1:2, function(s) data.table(year = 0:40, sd = sc[[s]]$sd, sstar = sc[[s]]$sstar, panel = lab[s])))
+p1 <- ggplot(paths, aes(year, ly, group = econ)) +
+  geom_line(colour = "#0072B2", alpha = 0.7, linewidth = 0.5) +
+  facet_wrap(~panel, scales = "free_y") +
+  labs(x = NULL, y = "Log income") +
+  theme_minimal(base_size = 11) + theme(panel.grid.minor = element_blank())
+p2 <- ggplot(sds, aes(year, sd)) +
+  geom_line(colour = "#D55E00", linewidth = 1) +
+  geom_hline(aes(yintercept = sstar), linetype = "dashed", colour = "grey40") +
+  facet_wrap(~panel, scales = "free_y") +
+  labs(x = "Year", y = "σ_t (std of log income)") +
+  theme_minimal(base_size = 11) + theme(panel.grid.minor = element_blank(), strip.text = element_blank())
+patchwork::wrap_plots(p1, p2, ncol = 1, heights = c(1.4, 1))
+```
+
+* Reading: in both panels the poorest economies grow fastest, yet only panel A narrows. Whether dispersion falls depends on where it starts relative to $\sigma^{*}$: it falls only from above.
+
+* The same model as cross-section distributions at years 0 and 40, with a common growth trend of 4% per year added to every economy:
+  * the trend moves the bell to the right (location: the mean, dashed line);
+  * catch-up and shocks change its width (size: the std).
+* Each curve is the normal density with the model's exact mean and std in that year: mean $\ln 10{,}000 + 0.04\,t$; variance $\sigma^{*2} + (\sigma_0^2-\sigma^{*2})(1-\beta_1)^{2t}$, the path of dispersion on the derivation page.
+  * Catch-up $\beta_1 = 0.02$ per year (about BSM's estimate, p. 227) in both panels.
+  * A: $\sigma_0 = 0.30$, $\sigma_u = 0.03$, so $\sigma^{*} = 0.15 < \sigma_0$ and the bell narrows.
+  * B: $\sigma_0 = 0.15$, $\sigma_u = 0.06$, so $\sigma^{*} = 0.30 > \sigma_0$ and the bell widens.
+
+```{r}
+#| label: fig-dist-sim
+#| code-summary: "Code: draw the model's bell curves at years 0 and 40 for scenarios A and B"
+#| fig-cap: "Model distribution of log income at years 0 and 40, with 4% common growth per year. Normal density with the model's mean and std; dashed: mean. A: the bell moves right and narrows. B: it moves right and widens until it reaches σ*."
+#| fig-width: 10
+#| fig-height: 6
+pal4 <- c("#8c8c8c", "#8fa8c4", "#5a8fd0", "#1a73e8")         # mid gray (earliest) -> bright blue (latest)
+bell <- function(s, xl) {
+  grid <- seq(xl[1], xl[2], length.out = 600)
+  d <- s[, .(ly = grid, dens = dnorm(grid, mu, s)), by = .(panel, when)]
+  s[, lab := sprintf("%s: mean %s, std %.2f", when, scales::dollar(round(exp(mu), -1)), s)]
+  cols <- if (nlevels(s$when) == 2) pal4[c(1, 4)] else pal4
+  s <- s[order(when)]
+  arr <- data.table(x0 = s$mu[1], x1 = s$mu[nrow(s)], y = 0.5 * min(dnorm(0, 0, s$s)))  # first mean -> last mean
+  ggplot(d, aes(ly, dens, colour = when)) +
+    geom_area(aes(fill = when), alpha = 0.25, position = "identity", colour = NA) +
+    geom_line(linewidth = 1) +
+    geom_segment(data = s, aes(x = mu, xend = mu, y = 0, yend = dnorm(0, 0, s), colour = when),
+                 linetype = "dashed", linewidth = 0.5) +
+    geom_segment(data = arr, aes(x = x0, xend = x1, y = y, yend = y), inherit.aes = FALSE,
+                 colour = "grey25", linewidth = 0.8, arrow = arrow(length = unit(0.3, "cm"), type = "closed")) +
+    facet_wrap(~panel, ncol = 1) +
+    scale_fill_manual(values = cols, guide = "none") +
+    scale_colour_manual(values = cols, labels = s[, lab], name = NULL) +
+    scale_x_continuous(breaks = log(c(250, 1000, 4000, 16000, 64000)),
+                       labels = scales::dollar(c(250, 1000, 4000, 16000, 64000)), limits = xl) +
+    labs(x = "Income per capita (log scale)", y = "Density") +
+    theme_minimal(base_size = 11) + theme(panel.grid.minor = element_blank())
+}
+yrs_h <- c(0, 40)
+b1 <- 0.02; x <- 0.04                                            # catch-up 2% (BSM); common growth 4%
+pars <- data.table(panel = sub(" \\(.*", "", lab), sig0 = c(0.30, 0.15), sigu = c(0.03, 0.06))
+pars[, sstar := sigu / sqrt(1 - (1 - b1)^2)]
+# exact mean and std: mean = ln 10,000 + x t; std^2 = sigma*^2 + (sigma_0^2 - sigma*^2)(1 - b1)^(2t)
+sh <- pars[, .(when = factor(paste("Year", yrs_h), levels = paste("Year", yrs_h)),
+               mu = log(10000) + x * yrs_h,
+               s = sqrt(sstar^2 + (sig0^2 - sstar^2) * (1 - b1)^(2 * yrs_h))), by = panel]
+xl_h <- c(log(3000), log(1.3e5))
+patchwork::wrap_plots(bell(sh[panel == panel[1]], xl_h), bell(sh[panel != panel[1]], xl_h), ncol = 1)
+```
+
+# Dispersion over time
+
+```{r}
+#| label: fig-sigma
+#| code-summary: "Code: plot the std of log GDP per capita, 1960-2024, for three samples"
+#| fig-cap: "Cross-country standard deviation of log GDP per capita (constant 2015 US$), oil producers and countries under 1 million people excluded. Shaded: 2000-2024."
+#| fig-width: 9
+#| fig-height: 5
+ggplot(ss, aes(year, sigma, colour = sample)) +
+  annotate("rect", xmin = 2000, xmax = 2024, ymin = -Inf, ymax = Inf, fill = "grey50", alpha = 0.08) +
+  geom_line(linewidth = 0.9) +
+  scale_colour_manual(values = c("#0072B2", "#D55E00", "#009E73"), name = NULL) +
+  scale_x_continuous(breaks = seq(1960, 2020, 10)) +
+  labs(x = NULL, y = "Std of log GDP per capita") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+```{r}
+#| label: fig-dist-wdi
+#| code-summary: "Code: draw bell curves of actual log GDP per capita in 1960, 1980, 2000 and 2024"
+#| fig-cap: "Distribution of log GDP per capita (constant 2015 US$) across the fixed 1960-2024 sample in 1960, 1980, 2000 and 2024. Normal density with each year's mean and std; dashed: mean. The normal curve shows location and size only; the actual distribution is not bell-shaped (two humps after 1980; Quah 1996)."
+#| fig-width: 10
+#| fig-height: 3.5
+b60 <- bal(1960)
+sa <- b60[year %in% c(1960, 1980, 2000, 2024), .(mu = mean(ly), s = sd(ly)), keyby = year]
+sa[, `:=`(panel = sprintf("Actual, WDI (n = %d)", uniqueN(b60$iso3)), when = factor(year))]
+bell(sa, c(log(50), log(3e5)))
+```
+
+* The bell moves right and widens to 2000, then narrows slightly:
+  * location, mean: `r scales::dollar(round(exp(sa$mu[1]), -1))` (1960) to `r scales::dollar(round(exp(sa$mu[4]), -1))` (2024);
+  * size, std of log income: `r sprintf("%.2f", sa$s[1])` (1960), `r sprintf("%.2f", sa$s[3])` (2000), `r sprintf("%.2f", sa$s[4])` (2024).
+
+# Weak σ-convergence test
+
+```{r}
+#| label: tbl-kps
+#| code-summary: "Code: KPS weak σ-convergence test: variance on a linear trend, Newey-West t"
+#| tbl-cap: "Trend regression K_t = a + φ t + u_t on the cross-section variance K_t of log GDP per capita; t ratio uses a Newey-West HAC variance with floor(T^(1/3)) lags. φ < 0 with t below -1.65 indicates weak σ-convergence (one-sided 5%)."
+kps <- function(d, from, to, lab) {
+  d <- d[year >= from & year <= to]
+  m <- lm(K ~ year, data = d)
+  L <- floor(nrow(d)^(1/3))
+  se <- sqrt(sandwich::NeweyWest(m, lag = L, prewhite = FALSE)[2, 2])
+  data.table(Sample = lab, Period = sprintf("%d-%d", from, to), T = nrow(d), Lags = L,
+             `φ × 100` = sprintf("%.3f", 100 * coef(m)[2]), `t ratio` = sprintf("%.2f", coef(m)[2] / se))
+}
+res <- rbind(kps(s_60, 1960, 2024, "Fixed since 1960"), kps(s_60, 1960, 1999, "Fixed since 1960"),
+             kps(s_60, 2000, 2024, "Fixed since 1960"), kps(s_90, 1990, 2024, "Fixed since 1990"),
+             kps(s_90, 2000, 2024, "Fixed since 1990"))
+y <- tt(res, theme = "striped")
+y <- style_tt(y, i = 0, background = "#e7f0fa")
+style_tt(y, j = 3:6, align = "r")
+```
+
+* Reading: a negative $\varphi$ means cross-country variance is trending down over the period.
+* The fixed samples avoid compositional change (countries entering the data), which moves the unbalanced series.
+
+# PWT 10.01, 2000-2019: KPS and Phillips-Sul tests
+
+* Question: did cross-country income dispersion fall over 2000-2019?
+  * Lähdemäki (2024, *Empirical Economics*, abstract) reports σ-convergence of labour productivity "from the year 2000" for all countries.
+  * Patel, Sandefur & Subramanian (2021, p. 5) find "no evidence of meaningful σ-convergence" of income per capita, with variance falling only after 2008.
+* Three tests on income per capita:
+  1. Kong, Phillips & Sul (2019) weak σ test on the raw cross-section variance of log income.
+  2. The same test after removing estimated common factors, as KPS recommend for trending panels (KPS p. 5; Sul slides 29, 32).
+  3. Phillips & Sul (2007) log t test of relative convergence, which allows nonstationary income (PS p. 1773).
+* Data: Penn World Table 10.01, `rgdpe / pop` (expenditure-side real GDP at chained PPPs, 2017 US$, per person), saved in `data/pwt1001.dta`; nothing is downloaded at render.
+* Sample: countries observed every year 2000-2019; oil producers and countries under 1 million people (PWT, 2019) excluded, as above.
+
+```{r}
+#| label: pwt-setup
+#| code-summary: "Code: load PWT 10.01, build the balanced 2000-2019 panel; define variance and KPS test functions"
+pwt <- as.data.table(haven::read_dta("data/pwt1001.dta"))[, .(iso3 = countrycode, year, rgdpe, pop)]
+pwt <- pwt[year %in% 2000:2019 & !is.na(rgdpe) & !is.na(pop) & rgdpe > 0]
+small_p <- pwt[year == 2019 & pop < 1, iso3]                    # PWT pop in millions
+keep_p <- pwt[, .N, by = iso3][N == 20, iso3]                   # balanced 2000-2019
+pwt <- pwt[iso3 %in% setdiff(keep_p, c(oil, small_p))]
+pwt[, ly := log(rgdpe / pop)]
+Y <- as.matrix(dcast(pwt, year ~ iso3, value.var = "ly")[, -1])  # T x n, rows 2000..2019
+TT <- nrow(Y); n <- ncol(Y); yrs_p <- 2000:2019
+# Cross-section variance K_t = n^-1 sum_i (y_it - mean_t)^2
+Kfun <- function(M) apply(M, 1, function(r) mean((r - mean(r))^2))
+# KPS trend test: K_t on a linear trend, Newey-West HAC t with floor(T^(1/3)) lags
+kpsK <- function(K, lab) {
+  tr <- seq_along(K); m <- lm(K ~ tr); L <- floor(length(K)^(1/3))
+  se <- sqrt(sandwich::NeweyWest(m, lag = L, prewhite = FALSE)[2, 2])
+  data.table(Series = lab, phi100 = 100 * coef(m)[2], t = coef(m)[2] / se, Lags = L)
+}
+```
+
+* Sample size: `r n` countries, `r TT` years.
+
+## Absolute β-convergence in this sample
+
+```{r}
+#| label: pwt-beta
+#| code-summary: "Code: β-convergence regression 2000-2019: growth on initial log income; implied λ"
+g <- (Y[TT, ] - Y[1, ]) / (TT - 1)                              # average annual growth 2000-2019
+mb <- lm(g ~ Y[1, ])
+b  <- -coef(mb)[2]
+lam <- -log(1 - b * (TT - 1)) / (TT - 1)                        # lambda = -ln(1 - bT)/T
+bse <- sqrt(sandwich::vcovHC(mb, type = "HC1")[2, 2])
+```
+
+* Average growth 2000-2019 on log income in 2000: slope $-b$ with $b$ = `r sprintf("%.4f", b)` (HC1 s.e. `r sprintf("%.4f", bse)`), implying $\lambda$ = `r sprintf("%.4f", lam)` per year and a half-life of `r sprintf("%.0f", log(2)/lam)` years.
+* Patel et al. report $\beta$ = .00425 (s.e. .00156) and a half-life of 170 years for 124 PWT countries, 2000-2019 (p. 5).
+
+## Removing common factors
+
+* Model: $y_{it} = c_i + \lambda_i' F_t + y^o_{it}$; the test is applied to $z_{it} = c_i + y^o_{it}$ (Sul slide 32).
+* Estimation: principal components of the time-demeaned panel; $\hat F$ = first $k$ eigenvectors of $\tilde Y\tilde Y'$ scaled by $\sqrt T$, $\hat\lambda_i = \tilde Y_i'\hat F/T$.
+* Number of factors: Bai-Ng $IC_2$ on standardised growth rates, $k_{\max}=5$.
+
+```{r}
+#| label: pwt-factors
+#| code-summary: "Code: choose the number of common factors (Bai-Ng IC2) and remove principal-component factors"
+Yt <- sweep(Y, 2, colMeans(Y))                                  # remove c_i
+pc <- function(M, k) {                                          # principal-component factors
+  e <- eigen(M %*% t(M), symmetric = TRUE)
+  Fh <- sqrt(nrow(M)) * e$vectors[, 1:k, drop = FALSE]
+  Lh <- t(M) %*% Fh / nrow(M)
+  list(F = Fh, L = Lh, fit = Fh %*% t(Lh))
+}
+G <- scale(diff(Y)); Tg <- nrow(G)                              # Bai-Ng IC2 on standardised differences
+ic2 <- sapply(1:5, function(k) {
+  V <- mean((G - pc(G, k)$fit)^2)
+  log(V) + k * (n + Tg) / (n * Tg) * log(min(n, Tg))
+})
+k_ic <- which.min(ic2)
+Z <- lapply(1:3, function(k) Y - pc(Yt, k)$fit)                 # z = c_i + residual
+```
+
+* $IC_2$ selects $k$ = `r k_ic` (values for k = 1-5: `r paste(sprintf("%.3f", ic2), collapse = ", ")`).
+
+## Phillips-Sul log t test
+
+* Steps (PS pp. 1788-1789): $h_{it} = X_{it}/(n^{-1}\sum_i X_{it})$, $H_t = n^{-1}\sum_i (h_{it}-1)^2$; regress $\log(H_1/H_t) - 2\log L(t)$ on $\log t$ with $L(t)=\log(t+1)$, $t = [rT],\dots,T$, $r = 0.3$; one-sided HAC t test (quadratic-spectral kernel, as in the `ConvergenceClubs` package); reject convergence at 5% if $t < -1.65$.
+* $X_{it}$: log income, HP-filtered with $\lambda = 400$ as in Sichera & Pizzuto (2019, pp. 146-147); also unfiltered.
+
+```{r}
+#| label: pwt-ps
+#| code-summary: "Code: HP-filter log income; Phillips-Sul log t test on filtered and raw series"
+hp <- function(x, lambda = 400) {                               # Hodrick-Prescott trend
+  Tn <- length(x); D <- diff(diag(Tn), differences = 2)
+  as.vector(solve(diag(Tn) + lambda * crossprod(D), x))
+}
+logt <- function(X, lab, r = 0.3) {
+  h <- X / rowMeans(X); H <- rowMeans((h - 1)^2)
+  t0 <- max(floor(r * nrow(X)), 1); tr <- t0:nrow(X)
+  dep <- log(H[1] / H[tr]) - 2 * log(log(tr + 1))
+  m <- lm(dep ~ log(tr))
+  se <- sqrt(sandwich::kernHAC(m, kernel = "Quadratic Spectral", prewhite = FALSE)[2, 2])
+  list(H = H, res = data.table(Series = lab, b = coef(m)[2], t = coef(m)[2] / se, `First t` = t0, Obs = length(tr)))
+}
+Xhp <- apply(Y, 2, hp)
+ps_hp  <- logt(Xhp, "log income, HP-filtered (λ = 400)")
+ps_raw <- logt(Y,   "log income, unfiltered")
+```
+
+## Results
+
+```{r}
+#| label: fig-pwt-K
+#| code-summary: "Code: plot the cross-section variance, raw and after removing 1-3 factors"
+#| fig-cap: "Cross-section variance of log real GDP per capita (PWT 10.01, rgdpe/pop), balanced 2000-2019 sample; raw and after removing k principal-component factors (country means kept)."
+#| fig-width: 9
+#| fig-height: 4.8
+kd <- rbind(data.table(year = yrs_p, K = Kfun(Y), Series = "Raw log income"),
+            rbindlist(lapply(1:3, function(k) data.table(year = yrs_p, K = Kfun(Z[[k]]),
+                                                         Series = sprintf("After removing %d factor%s", k, ifelse(k > 1, "s", ""))))))
+ggplot(kd, aes(year, K, colour = Series)) +
+  geom_line(linewidth = 0.9) + geom_point(size = 1.2) +
+  facet_wrap(~ Series == "Raw log income", scales = "free_y", labeller = as_labeller(c(`TRUE` = "Raw", `FALSE` = "Factors removed"))) +
+  scale_colour_manual(values = c("#D55E00", "#009E73", "#CC79A7", "#0072B2"), name = NULL) +
+  labs(x = NULL, y = "Cross-section variance K_t") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+```{r}
+#| label: tbl-pwt-kps
+#| code-summary: "Code: tabulate the KPS test, raw and after factor removal"
+#| tbl-cap: "KPS weak σ-convergence test, PWT 2000-2019: K_t = a + φ t + u_t; Newey-West HAC t (floor(T^(1/3)) lags). Weak σ-convergence if t < -1.65."
+res_k <- rbind(kpsK(Kfun(Y), "Raw log income"),
+               rbindlist(lapply(1:3, function(k) kpsK(Kfun(Z[[k]]), sprintf("After removing %d factor%s%s", k,
+                 ifelse(k > 1, "s", ""), ifelse(k == k_ic, " (IC2 choice)", ""))))))
+res_k[, Verdict := fifelse(t < -1.65, "σ-convergence", fifelse(t > 1.65, "σ-divergence", "no significant trend"))]
+res_k_show <- res_k[, .(Series, `φ × 100` = sprintf("%.4f", phi100), t = sprintf("%.2f", t), Lags, Verdict)]
+y1 <- tt(res_k_show, theme = "striped"); y1 <- style_tt(y1, i = 0, background = "#e7f0fa")
+style_tt(y1, j = 2:4, align = "r")
+```
+
+```{r}
+#| label: tbl-pwt-ps
+#| code-summary: "Code: tabulate the Phillips-Sul log t test"
+#| tbl-cap: "Phillips-Sul log t test, PWT 2000-2019 (r = 0.3). Relative convergence is rejected at 5% if t < -1.65."
+res_p <- rbind(ps_hp$res, ps_raw$res)
+res_p[, Verdict := fifelse(t < -1.65, "reject convergence", "convergence not rejected")]
+res_p_show <- res_p[, .(Series, b = sprintf("%.3f", b), t = sprintf("%.2f", t), `First t`, Obs, Verdict)]
+y2 <- tt(res_p_show, theme = "striped"); y2 <- style_tt(y2, i = 0, background = "#e7f0fa")
+style_tt(y2, j = 2:5, align = "r")
+```
+
+```{r}
+#| label: fig-pwt-H
+#| code-summary: "Code: plot the Phillips-Sul H_t, HP-filtered and unfiltered"
+#| fig-cap: "Phillips-Sul H_t: cross-section variance of relative transition paths h_it (log income relative to the cross-section mean), 2000-2019."
+#| fig-width: 7
+#| fig-height: 3.8
+#| out-width: 75%
+hd <- rbind(data.table(year = yrs_p, H = ps_hp$H, Series = "HP-filtered"), data.table(year = yrs_p, H = ps_raw$H, Series = "Unfiltered"))
+ggplot(hd, aes(year, H, colour = Series)) + geom_line(linewidth = 0.9) +
+  scale_colour_manual(values = c("#0072B2", "#E69F00"), name = NULL) +
+  labs(x = NULL, y = "H_t") + theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+## Club convergence (Phillips-Sul 2007, 2009)
+
+* When the log t test rejects for the whole panel, PS cluster countries into convergence clubs (steps from Sichera & Pizzuto 2019, pp. 144-145):
+  1. Sort countries by the last observation (HP-filtered log income in 2019), richest first.
+  2. Core group: the first $k$ countries, with $k^{*} = \arg\max_k t_k$ subject to $t_k > -1.65$; if the first two fail, drop the first country and retry.
+  3. Sieve: add each remaining country whose log t with the core exceeds $c^{*} = 0$ (PS suggestion for $T < 50$); raise $c^{*}$ if the club as a whole fails.
+  4. Repeat on the countries left over; if no core forms, they diverge.
+  5. Merge adjacent clubs when their joint log t exceeds $-1.65$ (PS 2009).
+* Implemented directly below (the `ConvergenceClubs` package is not installed); not validated against that package.
+
+```{r}
+#| label: pwt-clubs
+#| code-summary: "Code: Phillips-Sul club clustering: core groups, club membership, merging"
+logt_t <- function(X, idx, r = 0.3) {                           # log t statistic for columns idx
+  Xs <- X[, idx, drop = FALSE]
+  h <- Xs / rowMeans(Xs); H <- rowMeans((h - 1)^2)
+  t0 <- max(floor(r * nrow(Xs)), 1); tr <- t0:nrow(Xs)
+  dep <- log(H[1] / H[tr]) - 2 * log(log(tr + 1))
+  m <- lm(dep ~ log(tr))
+  unname(coef(m)[2] / sqrt(sandwich::kernHAC(m, kernel = "Quadratic Spectral", prewhite = FALSE)[2, 2]))
+}
+core_group <- function(X, ord) {                                # step 2
+  while (length(ord) >= 2) {
+    if (logt_t(X, ord[1:2]) > -1.65) {
+      tk <- numeric(0)
+      for (k in 2:length(ord)) { tk_k <- logt_t(X, ord[1:k]); if (tk_k <= -1.65) break; tk <- c(tk, tk_k) }
+      return(ord[1:(which.max(tk) + 1)])
+    }
+    ord <- ord[-1]
+  }
+  NULL
+}
+find_clubs <- function(X, cstar = 0) {                          # steps 1-4
+  ord <- order(X[nrow(X), ], decreasing = TRUE); clubs <- list()
+  repeat {
+    if (length(ord) < 2) break
+    if (logt_t(X, ord) > -1.65) { clubs[[length(clubs) + 1]] <- ord; ord <- integer(0); break }
+    core <- core_group(X, ord); if (is.null(core)) break
+    cs <- cstar
+    repeat {
+      rest <- setdiff(ord, core)
+      add <- rest[vapply(rest, function(j) logt_t(X, c(core, j)) > cs, logical(1))]
+      club <- c(core, add)
+      if (logt_t(X, club) > -1.65 || length(add) == 0) break
+      cs <- cs + 0.1
+    }
+    clubs[[length(clubs) + 1]] <- club[order(match(club, ord))]
+    ord <- setdiff(ord, club)
+  }
+  list(clubs = clubs, divergent = ord)
+}
+merge_clubs <- function(X, clubs) {                             # step 5
+  out <- list(); i <- 1
+  while (i <= length(clubs)) {
+    cur <- clubs[[i]]; j <- i + 1
+    while (j <= length(clubs) && logt_t(X, c(cur, clubs[[j]])) > -1.65) { cur <- c(cur, clubs[[j]]); j <- j + 1 }
+    out[[length(out) + 1]] <- cur; i <- j
+  }
+  out
+}
+fc <- find_clubs(Xhp)
+mc <- merge_clubs(Xhp, fc$clubs)
+nm <- unique(as.data.table(haven::read_dta("data/pwt1001.dta"))[, .(iso3 = countrycode, country)])
+club_tab <- rbindlist(lapply(seq_along(mc), function(k) {
+  iso <- colnames(Y)[mc[[k]]]
+  data.table(Club = as.character(k), n = length(iso), `log t` = sprintf("%.2f", logt_t(Xhp, mc[[k]])),
+             `Mean income 2019 (2017 US$)` = format(round(mean(exp(Y[TT, mc[[k]]])), -2), big.mark = ","),
+             Countries = paste(nm[match(iso, iso3), country], collapse = "; "))
+}))
+if (length(fc$divergent)) club_tab <- rbind(club_tab, data.table(Club = "Divergent", n = length(fc$divergent), `log t` = "",
+  `Mean income 2019 (2017 US$)` = format(round(mean(exp(Y[TT, fc$divergent])), -2), big.mark = ","),
+  Countries = paste(nm[match(colnames(Y)[fc$divergent], iso3), country], collapse = "; ")))
+```
+
+* Initial clubs: `r length(fc$clubs)` (sizes `r paste(sapply(fc$clubs, length), collapse = ", ")`); after merging: `r length(mc)`; divergent: `r length(fc$divergent)`.
+
+```{r}
+#| label: tbl-pwt-clubs
+#| code-summary: "Code: tabulate the convergence clubs and their members"
+#| tbl-cap: "Phillips-Sul convergence clubs after merging, PWT 10.01 income per capita (HP-filtered log), 2000-2019. log t > -1.65: convergence within the club not rejected."
+y3 <- tt(club_tab, theme = "striped", width = c(0.08, 0.04, 0.06, 0.12, 0.70))
+y3 <- style_tt(y3, i = 0, background = "#e7f0fa")
+y3 <- style_tt(y3, fontsize = 0.85)
+y3 <- style_tt(y3, j = 5, align = "l")
+style_tt(y3, j = 2:4, align = "r")
+```
+
+```{r}
+#| label: fig-pwt-clubs
+#| code-summary: "Code: plot each club average relative transition path"
+#| fig-cap: "Average relative transition path of each club: club mean of h_it (HP-filtered log income relative to the cross-country mean), 2000-2019."
+#| fig-width: 8
+#| fig-height: 4.5
+#| out-width: 80%
+hm <- Xhp / rowMeans(Xhp)
+cp <- rbindlist(lapply(seq_along(mc), function(k) data.table(year = yrs_p, h = rowMeans(hm[, mc[[k]], drop = FALSE]),
+                                                             Club = sprintf("Club %d (n = %d)", k, length(mc[[k]])))))
+ggplot(cp, aes(year, h, colour = Club)) + geom_line(linewidth = 1) +
+  scale_colour_viridis_d(end = 0.9, name = NULL) +
+  labs(x = NULL, y = "Relative transition path h_it (club mean)") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right", panel.grid.minor = element_blank())
+```
+
+## Reading the results
+
+* Raw log income: weak σ-convergence over 2000-2019 (@tbl-pwt-kps, t = `r sprintf("%.2f", res_k$t[1])`), but @fig-pwt-K shows the variance rising until 2008 and falling afterwards. This reconciles the two claims: the linear-trend test (as in Lähdemäki) reports convergence over the whole window; the path (as in Patel et al.) shows the decline only after 2008.
+* After removing 1-3 common factors: no significant trend. The decline in raw dispersion is carried by heterogeneous loadings on common factors, not by the idiosyncratic components.
+* Phillips-Sul: $H_t$ falls (@fig-pwt-H), yet relative convergence is rejected (@tbl-pwt-ps, t = `r sprintf("%.2f", res_p$t[1])` HP-filtered). The test asks $H_t$ to fall at least as fast as $L(t)^{-2}$ (PS p. 1789); here $\log(H_1/H_T)$ = `r sprintf("%.3f", log(ps_hp$H[1]/ps_hp$H[TT]))`, too slow over 20 years.
+* β and σ agree with the literature: catch-up is real but slow (half-life near 170 years), and dispersion declines only modestly.
+* Clubs: the whole panel does not converge, but `r length(mc)` clubs do (@tbl-pwt-clubs). Countries converge towards their club's path, not towards one world level (@fig-pwt-clubs), in line with Quah's convergence clubs (Twin Peaks DP, p. 9).
+
+## Caveats
+
+* Removing common factors with heterogeneous loadings can absorb catch-up itself: if poorer countries load more heavily on a common growth factor, convergence sits in $\lambda_i'F_t$ and is removed with it. The factor-removed rows test σ-convergence of the idiosyncratic component, not of income.
+* PS log t tests relative convergence ($h_{it}\to 1$); with trending data this does not imply weak σ-convergence (KPS p. 7). With $T = 20$ and $r = 0.3$ the regression uses 15 years.
+* Club membership depends on the core-group rule, $c^{*}$ and the merging rule (Sichera & Pizzuto 2019, p. 144); the clustering here is a direct implementation, not checked against `ConvergenceClubs`.
+* HP filtering with $\lambda = 400$ on 20 annual observations has end-point effects.

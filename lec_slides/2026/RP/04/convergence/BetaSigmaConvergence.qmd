@@ -1,0 +1,822 @@
+---
+title: "β-convergence and σ-convergence"
+subtitle: "From the speed of convergence λ to the growth regression, and why β is necessary but not sufficient for σ"
+date: last-modified
+date-format: "MMMM DD, YYYY"
+format:
+  html:
+    standalone: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    number-sections: true
+    grid:
+      sidebar-width: 220px
+      body-width: 1000px
+      margin-width: 150px
+    linkcolor: "green"
+    urlcolor: "#009900"
+    include-before-body:
+      file: ../../../../../../../MathShorthand.html
+    include-in-header:
+      text: |
+        <style>
+        mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+        </style>
+    theme:
+      light: ../../../../../../../addtosky.scss
+      dark: darkly
+    backgroundcolor: "#fffcf2"
+    title-block-banner: "#f0f3f5"
+    title-block-banner-color: "black"
+---
+
+# Introduction
+
+* What this page does:
+  * defines β- and σ-convergence;
+  * derives the speed of convergence $\lambda$ in the Solow model;
+  * derives the cross-section growth regression and the map between its slope $b$ and $\lambda$;
+  * shows, line by line, why β-convergence is necessary but not sufficient for σ-convergence;
+  * asks how likely β-convergence with rising σ is (@sec-likely): plausible for similar regions such as U.S. counties, implausible for the world's countries in the linear model; studies that relax that model are summarised in @sec-beyond.
+* Sources:
+  * Barro, R. J. and X. Sala-i-Martin (1992), "Convergence", *Journal of Political Economy* 100(2): 223-251 (BSM).
+  * Young, A. T., M. J. Higgins and D. Levy (2008), "Sigma Convergence versus Beta Convergence: Evidence from U.S. County-Level Data", *Journal of Money, Credit and Banking* 40(5): 1083-1093 (YHL). Page numbers below refer to the MPRA preprint No. 2714 (2007).
+* Notation. The two papers use β for different objects, so this page uses:
+
+| Symbol | Meaning | BSM | YHL |
+|---|---|---|---|
+| $\lambda$ | speed of convergence, per year (continuous time) | $\beta$ | |
+| $b$ | slope on $-\ln y_{i0}$ in a cross-section regression of average growth over $T$ years | $(1-e^{-\beta T})/T$ | |
+| $\beta_1$ | one-period coefficient: $\ln y_{it} = a + (1-\beta_1)\ln y_{i,t-1} + u_{it}$ | $1-e^{-\beta}$ | $\beta$ |
+
+# Definitions
+
+* β-convergence: poorer economies grow faster than richer ones.
+  * Absolute: the partial correlation between growth and initial log income is negative with no other controls; all economies share one steady state.
+  * Conditional: the same holds after controlling for each economy's steady state.
+  * YHL: "When the partial correlation between growth in income over time and its initial level is negative, there is β-convergence" (p. 3).
+* σ-convergence: the cross-section dispersion of log income falls over time.
+  * YHL: "When the dispersion of real per capita income ... across a group of economies falls over time, there is σ-convergence" (p. 3).
+  * Dispersion measure: the cross-section variance $\sigma_t^2 = \frac{1}{N}\sum_{i=1}^{N}(\ln y_{it} - \mu_t)^2$, $\mu_t$ the mean of $\ln y_{it}$ (YHL eq. 2, p. 5).
+
+# Deriving the speed of convergence λ
+
+Why a long derivation for one number? $\lambda$ is not a parameter we choose; it is a property of how the model moves, so it has to be extracted from the model's dynamics. Each step removes one obstacle:
+
+| Step | Obstacle | Result |
+|---|---|---|
+| Model, @eq-acc | We only know how capital changes, $\dot{\hat k}$ | law of motion |
+| Steady state, @eq-ss | Convergence needs a point to converge to | $\hat k^{*}$ |
+| Logs, @eq-zdot | Convergence is about proportional gaps, so work with growth rates | $\dot z$ as a function of $z$ |
+| Linearise, @eq-zlin | The speed of catch-up changes with the distance from $\hat k^{*}$; a single speed exists only for small gaps | $\dot z \approx -(\cdot)(z-z^{*})$ |
+| Capital to output, @eq-ydot | We observe income, not capital | $\lambda = (1-\alpha)(n+x+\delta)$ |
+| Solve, @eq-path | Data compare incomes at two dates, not instantaneous rates | the growth regression |
+
+The payoff: $\lambda$ links an estimated regression slope to the model's parameters $\alpha, n, x, \delta$. That is how BSM can say that the estimated $\lambda\approx 0.02$ requires a capital share near 0.8 (pp. 226-227).
+
+## Model
+
+* Solow model with labour-augmenting technology.
+  * Hats denote per effective worker: $\hat k = K/(EL)$ and $\hat y = Y/(EL)$, where $K$ is capital, $Y$ output, $L$ workers and $E = e^{xt}$ labour-augmenting technology growing at rate $x$.
+  * A dot denotes the time derivative: $\dot{\hat k} \equiv d\hat k/dt$, the change in capital per effective worker per year.
+  * Production, Cobb-Douglas with $0<\alpha<1$ (as in BSM eq. 7, p. 225), @eq-prod.
+    * $A$ is a fixed level parameter that does not change over time. All technical progress is labour-augmenting and sits in $E = e^{xt}$, which is already divided out of $\hat y$ and $\hat k$. BSM note that $A$ "does not affect" the speed of convergence (p. 226).
+  * Accumulation, @eq-acc, with saving rate $s$, labour growth $n$, technology growth $x$, depreciation $\delta$: investment per effective worker minus the capital needed to keep $\hat k$ constant.
+
+$$
+\hat y = A\hat k^{\alpha}
+$$ {#eq-prod}
+
+$$
+\dot{\hat k} = sA\hat k^{\alpha} - (n+x+\delta)\hat k
+$$ {#eq-acc}
+
+* BSM derive $\lambda$ in the Ramsey model with optimal saving (their eqs. 8-9, p. 225). The Solow model with a constant saving rate gives the same form of solution with a simpler $\lambda$; it is derived first, and the Ramsey $\lambda$ follows in @sec-ramsey.
+
+## Steady state
+
+$$
+\begin{aligned}
+0 &= sA\hat k^{*\alpha} - (n+x+\delta)\hat k^{*} &&\quad\text{(} \dot{\hat k}=0 \text{ in (2))}\\
+sA\hat k^{*\alpha-1} &= n+x+\delta &&\quad\text{(divide by } \hat k^{*}>0)
+\end{aligned}
+$$
+
+Steady-state condition:
+
+$$
+sA\hat k^{*\alpha-1} = n+x+\delta
+$$ {#eq-ss}
+
+## Log-linearisation
+
+Let $z \equiv \ln\hat k$, the log of capital per effective worker. Then $\hat k = e^{z}$ (take exponentials of both sides).
+
+$$
+\begin{aligned}
+\dot z &\equiv \frac{dz}{dt} = \frac{d\ln\hat k}{dt} &&\quad\text{(definition of } z)\\
+&= \frac{d\ln\hat k}{d\hat k}\cdot\frac{d\hat k}{dt} &&\quad\text{(chain rule)}\\
+&= \frac{1}{\hat k}\cdot\dot{\hat k} &&\quad\text{(} d\ln u/du = 1/u\text{; } \dot{\hat k}\equiv d\hat k/dt)\\
+&= \frac{sA\hat k^{\alpha} - (n+x+\delta)\hat k}{\hat k} &&\quad\text{(substitute (2))}\\
+&= sA\frac{\hat k^{\alpha}}{\hat k} - (n+x+\delta)\frac{\hat k}{\hat k} &&\quad\text{(split the fraction)}\\
+&= sA\hat k^{\alpha-1} - (n+x+\delta) &&\quad\text{(} \hat k^{\alpha}/\hat k = \hat k^{\alpha-1}\text{; } \hat k/\hat k = 1)\\
+&= sAe^{(\alpha-1)z} - (n+x+\delta) &&\quad\text{(} \hat k^{\alpha-1} = (e^{z})^{\alpha-1} = e^{(\alpha-1)z})
+\end{aligned}
+$$
+
+So $\dot z$, the growth rate of $\hat k$, is
+
+$$
+\dot z = sAe^{(\alpha-1)z} - (n+x+\delta)
+$$ {#eq-zdot}
+
+Write the right-hand side of @eq-zdot as a function of $z$, $g(z) \equiv sAe^{(\alpha-1)z} - (n+x+\delta)$, so that $\dot z = g(z)$. $g$ is nonlinear in $z$; near the steady state $z^{*}=\ln\hat k^{*}$ we replace it by a straight line, its tangent at $z^{*}$ (a first-order Taylor approximation).
+
+Why the tangent line: the derivative is the slope of $g$ at $z^{*}$.
+
+$$
+\begin{aligned}
+g'(z^{*}) &= \lim_{z\to z^{*}}\frac{g(z)-g(z^{*})}{z-z^{*}} &&\quad\text{(definition of the derivative)}\\
+\frac{g(z)-g(z^{*})}{z-z^{*}} &\approx g'(z^{*}) &&\quad\text{(for } z \text{ close to } z^{*}\text{, drop the limit)}\\
+g(z)-g(z^{*}) &\approx g'(z^{*})\,(z-z^{*}) &&\quad\text{(multiply both sides by } z-z^{*})\\
+g(z) &\approx g(z^{*}) + g'(z^{*})\,(z-z^{*}) &&\quad\text{(add } g(z^{*}) \text{ to both sides)}
+\end{aligned}
+$$
+
+In words: value at $z^{*}$, plus slope at $z^{*}$ times the distance from $z^{*}$. We need two numbers, $g(z^{*})$ and $g'(z^{*})$:
+
+$$
+\begin{aligned}
+g(z^{*}) &= sA\hat k^{*\alpha-1} - (n+x+\delta) &&\quad\text{(} e^{(\alpha-1)z^{*}} = \hat k^{*\alpha-1})\\
+&= (n+x+\delta) - (n+x+\delta) = 0 &&\quad\text{(by (3))}\\
+g'(z) &= sA\,\frac{d}{dz}e^{(\alpha-1)z} - 0 &&\quad\text{(} n+x+\delta \text{ does not depend on } z)\\
+&= (\alpha-1)\,sAe^{(\alpha-1)z} &&\quad\text{(} \tfrac{d}{dz}e^{cz} = c\,e^{cz}\text{, } c=\alpha-1)\\
+g'(z^{*}) &= (\alpha-1)\,sA\hat k^{*\alpha-1} &&\quad\text{(evaluate at } z^{*})\\
+&= (\alpha-1)(n+x+\delta) &&\quad\text{(by (3))}\\
+\dot z &= g(z) &&\quad\text{(by (4))}\\
+&\approx g(z^{*}) + g'(z^{*})(z-z^{*}) &&\quad\text{(tangent line above)}\\
+&= 0 + (\alpha-1)(n+x+\delta)\,(z-z^{*}) &&\quad\text{(substitute } g(z^{*}) \text{ and } g'(z^{*}))\\
+&= -(1-\alpha)(n+x+\delta)\,(z-z^{*}) &&\quad\text{(} \alpha-1 = -(1-\alpha))
+\end{aligned}
+$$
+
+Log-linearised accumulation:
+
+$$
+\dot z \approx -(1-\alpha)(n+x+\delta)\,(z-z^{*})
+$$ {#eq-zlin}
+
+## Why it converges, and what the linearisation adds
+
+Two separate questions: (i) does $z$ reach $z^{*}$ at all; (ii) how fast. Linearisation answers only (ii). Question (i) is settled without any approximation, from the sign of $g$ in @eq-zdot:
+
+$$
+\begin{aligned}
+g'(z) &= (\alpha-1)\,sAe^{(\alpha-1)z} &&\quad\text{(derivative computed above)}\\
+&< 0 \ \text{ for every } z &&\quad\text{(} \alpha<1\text{; } s, A>0\text{; } e^{(\alpha-1)z}>0)\\
+g(z^{*}) &= 0 &&\quad\text{(by (3))}\\
+z < z^{*} \ &\Rightarrow\ g(z) > g(z^{*}) = 0 \ \Rightarrow\ \dot z > 0 &&\quad\text{(} g \text{ decreasing; } \dot z = g(z))\\
+z > z^{*} \ &\Rightarrow\ g(z) < g(z^{*}) = 0 \ \Rightarrow\ \dot z < 0 &&\quad\text{(} g \text{ decreasing; } \dot z = g(z))
+\end{aligned}
+$$
+
+* Below the steady state capital per effective worker rises; above it, it falls; at $z^{*}$ it stays. So from any starting point $z$ moves monotonically towards $z^{*}$: convergence is global, not assumed. BSM: "k monotonically approaches k*" (p. 225).
+* This is the Solow diagram in growth-rate form. With $f(\hat k) = A\hat k^{\alpha}$, @eq-zdot reads $\dot z = s\,f(\hat k)/\hat k - (n+x+\delta)$:
+  * $s\,f(\hat k)/\hat k$ is saving per unit of capital, $s$ times the average product of capital;
+  * $n+x+\delta$ is the break-even rate needed to keep $\hat k$ constant;
+  * the average product $f(\hat k)/\hat k = A\hat k^{\alpha-1}$ falls as $\hat k$ rises because $\alpha<1$ (diminishing returns), so the two cross exactly once, at $\hat k^{*}$, and the sign of $\dot z$ flips there.
+  * The crossing condition is $s\,f(\hat k^{*}) = (n+x+\delta)\hat k^{*}$, which is @eq-ss multiplied by $\hat k^{*}$; it involves the average product $f/\hat k$, not the marginal product $f'$. (A condition on $f'$, such as $f'(\hat k) = n+x+\delta$, is the golden rule, a different object.)
+```{r}
+#| label: fig-solow
+#| echo: false
+#| fig-cap: "Why the Solow economy converges (s = 0.2, A = 1, α = 0.35, n + x + δ = 0.09). Left: saving per unit of capital s·f(k)/k falls with k (diminishing returns) and crosses the break-even rate n + x + δ once, at the steady state k\\*; arrows show the direction k moves. Right: ż = g(z) in logs, with its tangent at the steady state z\\* (dashed), whose slope is −λ; the linearisation replaces the curve by this line. (k = capital per effective worker.)"
+#| fig-width: 10
+#| fig-height: 4
+library(ggplot2)
+s <- 0.2; A <- 1; al <- 0.35; d <- 0.09
+ks <- (s * A / d)^(1 / (1 - al)); zs <- log(ks); lam <- (1 - al) * d
+kk <- seq(0.4, 12, length.out = 400)
+p1 <- ggplot(data.frame(k = kk, sav = s * A * kk^(al - 1)), aes(k, sav)) +
+  geom_line(colour = "#0072B2", linewidth = 1) +
+  geom_hline(yintercept = d, colour = "#D55E00", linewidth = 1) +
+  geom_vline(xintercept = ks, linetype = "dotted") +
+  annotate("segment", x = 1, xend = 2.6, y = 0.03, yend = 0.03, arrow = arrow(length = unit(0.25, "cm"))) +
+  annotate("segment", x = 9, xend = 5, y = 0.03, yend = 0.03, arrow = arrow(length = unit(0.25, "cm"))) +
+  annotate("text", x = 1.8, y = 0.045, label = "ż > 0", size = 3.6) +
+  annotate("text", x = 7, y = 0.045, label = "ż < 0", size = 3.6) +
+  annotate("text", x = 11, y = d + 0.012, label = "n + x + δ", colour = "#D55E00", size = 3.6) +
+  annotate("text", x = 2.0, y = 0.26, label = "s·f(k̂)/k̂", colour = "#0072B2", size = 3.6) +
+  annotate("text", x = ks, y = 0.31, label = "k̂*", hjust = -0.3, size = 3.6) +
+  coord_cartesian(ylim = c(0, 0.32)) +
+  labs(x = "k̂ (capital per effective worker)", y = "per unit of capital") +
+  theme_minimal(base_size = 11) + theme(panel.grid.minor = element_blank())
+zz <- seq(log(0.4), log(12), length.out = 400)
+p2 <- ggplot(data.frame(z = zz, g = s * A * exp((al - 1) * zz) - d), aes(z, g)) +
+  geom_hline(yintercept = 0, colour = "grey50") +
+  geom_line(colour = "#0072B2", linewidth = 1) +
+  geom_abline(intercept = lam * zs, slope = -lam, linetype = "dashed", colour = "#009E73", linewidth = 0.9) +
+  geom_point(data = data.frame(z = zs, g = 0), size = 2) +
+  annotate("text", x = zs, y = 0, label = "z*", vjust = -1, hjust = -0.3, size = 3.6) +
+  annotate("text", x = log(0.45), y = -0.05, label = "tangent at z*: slope −λ", colour = "#009E73", hjust = 0, size = 3.6) +
+  coord_cartesian(ylim = c(-0.08, 0.25)) +
+  labs(x = "z = ln k̂", y = "ż = g(z)") +
+  theme_minimal(base_size = 11) + theme(panel.grid.minor = element_blank())
+patchwork::wrap_plots(p1, p2, ncol = 2)
+```
+
+* What the linearisation adds is the speed. Define it as the proportional rate at which the gap shrinks, for a small gap:
+
+$$
+\lambda \equiv \lim_{w\to 0}\Bigl(-\frac{\dot w}{w}\Bigr), \qquad w \equiv z - z^{*} \text{ (the gap)}
+$$
+
+* $\dot w = \dot z$ ($\because z^{*}$ constant), so the ratio is $-\dot z/(z-z^{*})$; its limit is computed below (right panel of @fig-solow).
+
+$$
+\begin{aligned}
+\frac{\dot z}{z-z^{*}} &= \frac{g(z)-g(z^{*})}{z-z^{*}} &&\quad\text{(} \dot z = g(z)\text{, } g(z^{*})=0)\\
+\lim_{z\to z^{*}}\frac{\dot z}{z-z^{*}} &= g'(z^{*}) &&\quad\text{(definition of the derivative)}\\
+&= -(1-\alpha)(n+x+\delta) &&\quad\text{(by (5))}\\
+&= -\lambda &&\quad\text{(definition of } \lambda \text{ above)}
+\end{aligned}
+$$
+
+* So $\lambda$ is exact as the gap goes to zero and an approximation elsewhere. Elsewhere, in this model, the speed is higher below the steady state and lower above it, because $g$ is convex:
+
+$$
+g''(z) = (\alpha-1)^2 sAe^{(\alpha-1)z} > 0
+$$
+
+* In the Ramsey model (@sec-ramsey) convergence is not automatic for every consumption choice: only the saddle path converges, and households choose it because the other paths violate optimality (BSM cite Blanchard and Fischer 1989, ch. 2, p. 225). The stable root then gives the speed.
+
+## From capital to output
+
+$$
+\begin{aligned}
+\ln\hat y &= \ln A + \alpha z &&\quad\text{(log of (1); } z=\ln\hat k)\\
+\ln\hat y - \ln\hat y^{*} &= \alpha\,(z-z^{*}) &&\quad\text{(minus steady state)}\\
+\frac{d\ln\hat y}{dt} &= \frac{d\ln A}{dt} + \alpha\,\frac{dz}{dt} &&\quad\text{(differentiate line 1)}\\
+&= 0 + \alpha\,\frac{dz}{dt} &&\quad\text{(} A \text{ fixed over time, so } d\ln A/dt = 0)\\
+&= \alpha\,\dot z &&\quad\text{(} \dot z \equiv dz/dt\text{, defined in section 3.3)}\\
+&= \alpha\,\bigl[-(1-\alpha)(n+x+\delta)(z-z^{*})\bigr] &&\quad\text{(substitute (5))}\\
+&= -(1-\alpha)(n+x+\delta)\,\alpha\,(z-z^{*}) &&\quad\text{(reorder factors)}\\
+&= -(1-\alpha)(n+x+\delta)\,(\ln\hat y - \ln\hat y^{*}) &&\quad\text{(} \alpha(z-z^{*}) = \ln\hat y - \ln\hat y^{*}\text{, line 2)}\\
+&= -\lambda\,(\ln\hat y - \ln\hat y^{*}) &&\quad\text{(by the definition of } \lambda \text{ above)}
+\end{aligned}
+$$
+
+$$
+\frac{d\ln\hat y}{dt} = -\lambda\,(\ln\hat y - \ln\hat y^{*}), \qquad \lambda = (1-\alpha)(n+x+\delta)
+$$ {#eq-ydot}
+
+* $\lambda = (1-\alpha)(n+x+\delta)$: the proportional rate at which the log gap shrinks; the share closed in one year is $1-e^{-\lambda}$.
+* Half-life of the gap: $t_{1/2} = \ln 2/\lambda$.
+* Example, BSM baseline values $n = x = 0.02$, $\delta = 0.05$, $\alpha = 0.35$ (p. 226):
+  * $\lambda = (1-0.35)(0.02+0.02+0.05) = 0.65 \times 0.09 = 0.0585$ per year;
+  * $t_{1/2} = 0.6931/0.0585 = 11.8$ years.
+  * In BSM's Ramsey version the same α gives $\lambda = 0.126$ (half-life 5.5 years); $\alpha = 0.80$ (broad capital) gives $0.026$ (27 years) (p. 226).
+
+## Solving for the path of income
+
+Let $v(t) = \ln\hat y(t) - \ln\hat y^{*}$ (the gap in log income).
+
+$$
+\begin{aligned}
+\dot v &= -\lambda\, v &&\quad\text{(by (6); } \ln\hat y^{*} \text{ constant)}\\
+v(t) &= v(0)\,e^{-\lambda t} &&\quad\text{(solve linear ODE)}\\
+\ln\hat y(t) - \ln\hat y^{*} &= \bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr)e^{-\lambda t} &&\quad\text{(substitute } v)\\
+\ln\hat y(t) &= e^{-\lambda t}\ln\hat y(0) + \bigl(1-e^{-\lambda t}\bigr)\ln\hat y^{*} &&\quad\text{(add } \ln\hat y^{*})
+\end{aligned}
+$$
+
+$$
+\ln\hat y(t) = e^{-\lambda t}\ln\hat y(0) + \bigl(1-e^{-\lambda t}\bigr)\ln\hat y^{*}
+$$ {#eq-path}
+
+@eq-path is BSM eq. (8) (p. 225).
+
+## Ramsey model: λ with optimal saving {#sec-ramsey}
+
+* Same technology $f(\hat k) = A\hat k^{\alpha}$. The saving rate is no longer a fixed $s$: households choose consumption, and saving is the output left after consumption.
+* BSM state the household problem (eqs. 3-4, p. 224) and the first-order condition (eq. 5, p. 225), and refer to Blanchard and Fischer (1989, ch. 2) for the steps. The steps below are a reconstruction by the standard Hamiltonian method; the results match BSM eqs. 2, 5, 6 and 9.
+
+### Resource constraint
+
+Aggregate capital accumulates as $\dot K = F(K, EL) - C - \delta K$, with $\dot E/E = x$ and $\dot L/L = n$. Write $\hat c \equiv C/(EL)$, consumption per effective worker.
+
+$$
+\begin{aligned}
+\ln\hat k &= \ln K - \ln E - \ln L &&\quad\text{(log of } \hat k = K/(EL))\\
+\frac{\dot{\hat k}}{\hat k} &= \frac{\dot K}{K} - x - n &&\quad\text{(differentiate in } t)\\
+\dot{\hat k} &= \frac{\dot K}{EL} - (n+x)\hat k &&\quad\text{(multiply by } \hat k = K/(EL))\\
+&= \frac{F(K,EL) - C - \delta K}{EL} - (n+x)\hat k &&\quad\text{(substitute } \dot K)\\
+&= f(\hat k) - \hat c - \delta\hat k - (n+x)\hat k &&\quad\text{(constant returns: } F(K,EL)/(EL) = f(\hat k))\\
+&= f(\hat k) - \hat c - (n+x+\delta)\hat k &&\quad\text{(collect terms)}
+\end{aligned}
+$$
+
+$$
+\dot{\hat k} = f(\hat k) - \hat c - (n+x+\delta)\hat k
+$$ {#eq-racc}
+
+* This is BSM eq. 2 (p. 224). With $\hat c = (1-s)f(\hat k)$ it is the Solow @eq-acc.
+
+### Household objective
+
+The household maximises (BSM eqs. 3-4, p. 224)
+
+$$
+U = \int_0^{\infty} u(c)\,e^{nt}e^{-\rho t}\,dt, \qquad u(c) = \frac{c^{1-\theta}-1}{1-\theta}
+$$
+
+* $c = C/L$ is consumption per person; $e^{nt}$ counts family members; $\rho$ is the discount rate; $\theta>0$ is the elasticity of marginal utility in absolute value ($u'(c) = c^{-\theta}$; BSM p. 225).
+
+Rewrite the integrand in effective units, with $E = e^{xt}$ (normalised so $E(0)=1$, as in BSM's $Le^{xt}$, p. 224):
+
+$$
+\begin{aligned}
+c &= \frac{C}{L} = \hat c\,E = \hat c\,e^{xt} &&\quad\text{(} \hat c = C/(EL))\\
+c^{1-\theta} &= \hat c^{1-\theta}e^{(1-\theta)xt} &&\quad\text{(raise to } 1-\theta)\\
+u(c)\,e^{(n-\rho)t} &= \frac{\hat c^{1-\theta}e^{(1-\theta)xt} - 1}{1-\theta}\,e^{(n-\rho)t} &&\quad\text{(substitute into } u)\\
+&= \frac{\hat c^{1-\theta}}{1-\theta}\,e^{-[\rho-n-(1-\theta)x]t} - \frac{e^{(n-\rho)t}}{1-\theta} &&\quad\text{(split; collect exponents)}\\
+&= \frac{\hat c^{1-\theta}}{1-\theta}\,e^{-\zeta t} - \frac{e^{(n-\rho)t}}{1-\theta} &&\quad\text{(} \zeta \equiv \rho-n-(1-\theta)x)
+\end{aligned}
+$$
+
+* The last term is an additive constant (finite if $\rho>n$) that does not involve $\hat c$, so it does not change the maximiser; drop it.
+* $\zeta$ is the effective discount rate. BSM assume $\zeta>0$ "to satisfy the transversality condition" (p. 225).
+
+### Optimal consumption: the Euler equation
+
+Hamiltonian, with $\nu$ the shadow value (in time-0 utility) of one unit of $\hat k$:
+
+$$
+\mathcal H = \frac{\hat c^{1-\theta}}{1-\theta}\,e^{-\zeta t} + \nu\bigl[f(\hat k) - \hat c - (n+x+\delta)\hat k\bigr]
+$$
+
+Conditions for a maximum:
+
+$$
+\begin{aligned}
+\frac{\partial\mathcal H}{\partial\hat c} &= \hat c^{-\theta}e^{-\zeta t} - \nu = 0 &&\quad\text{(choose } \hat c)\\
+\dot\nu &= -\frac{\partial\mathcal H}{\partial\hat k} = -\nu\bigl[f'(\hat k) - (n+x+\delta)\bigr] &&\quad\text{(costate equation)}\\
+0 &= \lim_{t\to\infty}\nu(t)\,\hat k(t) &&\quad\text{(transversality)}
+\end{aligned}
+$$
+
+Eliminate $\nu$:
+
+$$
+\begin{aligned}
+\nu &= \hat c^{-\theta}e^{-\zeta t} &&\quad\text{(first condition)}\\
+\ln\nu &= -\theta\ln\hat c - \zeta t &&\quad\text{(take logs)}\\
+\frac{\dot\nu}{\nu} &= -\theta\,\frac{\dot{\hat c}}{\hat c} - \zeta &&\quad\text{(differentiate in } t)\\
+\frac{\dot\nu}{\nu} &= -f'(\hat k) + (n+x+\delta) &&\quad\text{(costate equation} \div \nu)\\
+-\theta\,\frac{\dot{\hat c}}{\hat c} - \zeta &= -f'(\hat k) + (n+x+\delta) &&\quad\text{(equate the two lines above)}\\
+\theta\,\frac{\dot{\hat c}}{\hat c} &= f'(\hat k) - (n+x+\delta) - \zeta &&\quad\text{(multiply by } -1\text{; move } \zeta \text{ right)}\\
+&= f'(\hat k) - n - x - \delta - \rho + n + (1-\theta)x &&\quad\text{(substitute } \zeta)\\
+&= f'(\hat k) - \delta - \rho - \theta x &&\quad\text{(} -x + (1-\theta)x = -\theta x)\\
+\frac{\dot{\hat c}}{\hat c} &= \frac{1}{\theta}\bigl[f'(\hat k) - \delta - \rho - \theta x\bigr] &&\quad\text{(divide by } \theta)
+\end{aligned}
+$$
+
+$$
+\frac{\dot{\hat c}}{\hat c} = \frac{1}{\theta}\bigl[f'(\hat k) - \delta - \rho - \theta x\bigr]
+$$ {#eq-euler}
+
+* BSM eq. 5 (p. 225) is for consumption per person: $\dot c/c = \frac{1}{\theta}[f'(\hat k) - \delta - \rho]$. Since $c = \hat c\,e^{xt}$, $\dot c/c = \dot{\hat c}/\hat c + x$, so $\dot{\hat c}/\hat c = \frac{1}{\theta}[f'(\hat k) - \delta - \rho] - x$, which is @eq-euler.
+* Reading: consumption per effective worker rises when the net return to capital, $f'-\delta$, exceeds $\rho + \theta x$.
+* Optimal saving: the saving rate is $1 - \hat c/f(\hat k)$, set by the path of $\hat c$ from @eq-euler; it is not a constant $s$.
+
+### Steady state
+
+$$
+\begin{aligned}
+0 &= \frac{1}{\theta}\bigl[f'(\hat k^{*}) - \delta - \rho - \theta x\bigr] &&\quad\text{(} \dot{\hat c} = 0 \text{ in (9); } \hat c^{*}>0)\\
+f'(\hat k^{*}) &= \rho + \delta + \theta x &&\quad\text{(multiply by } \theta\text{; rearrange)}\\
+0 &= f(\hat k^{*}) - \hat c^{*} - (n+x+\delta)\hat k^{*} &&\quad\text{(} \dot{\hat k} = 0 \text{ in (8))}\\
+\hat c^{*} &= f(\hat k^{*}) - (n+x+\delta)\hat k^{*} &&\quad\text{(rearrange)}
+\end{aligned}
+$$
+
+$$
+f'(\hat k^{*}) = \rho + \delta + \theta x
+$$ {#eq-rss}
+
+$$
+\hat c^{*} = f(\hat k^{*}) - (n+x+\delta)\hat k^{*}
+$$ {#eq-rc}
+
+* @eq-rss is BSM eq. 6 (p. 225).
+* $\hat c^{*}>0$ ($\because$ with Cobb-Douglas, $\hat c^{*}/\hat k^{*} = f'(\hat k^{*})/\alpha - (n+x+\delta) > f'(\hat k^{*}) - (n+x+\delta) = \zeta > 0$, using $\alpha<1$; both steps derived below).
+
+### Linearising the two equations
+
+$$
+\begin{aligned}
+f'(\hat k^{*}) - (n+x+\delta) &= \rho+\delta+\theta x - n - x - \delta &&\quad\text{(by (10))}\\
+&= \rho - n - (1-\theta)x &&\quad\text{(collect terms)}\\
+&= \zeta &&\quad\text{(definition of } \zeta)
+\end{aligned}
+$$
+
+Write @eq-racc as $\dot{\hat k} = G(\hat k,\hat c)$ and @eq-euler as $\dot{\hat c} = h(\hat k,\hat c) \equiv \frac{\hat c}{\theta}\bigl[f'(\hat k) - \delta - \rho - \theta x\bigr]$. A first-order Taylor expansion in two variables adds one slope term per variable to the tangent line used for Solow. BSM log-linearise instead; the log system is this one rescaled by the constants $1/\hat k^{*}$ and $1/\hat c^{*}$, so the eigenvalues, and $\lambda$, are the same.
+
+$$
+\begin{aligned}
+G(\hat k^{*},\hat c^{*}) &= 0 &&\quad\text{(by (11))}\\
+\partial G/\partial\hat k &= f'(\hat k^{*}) - (n+x+\delta) = \zeta &&\quad\text{(at the steady state; block above)}\\
+\partial G/\partial\hat c &= -1 &&\quad\text{(differentiate (8))}\\
+\dot{\hat k} &\approx \zeta\,(\hat k-\hat k^{*}) - (\hat c-\hat c^{*}) &&\quad\text{(} G^{*} + G_{\hat k}(\hat k-\hat k^{*}) + G_{\hat c}(\hat c-\hat c^{*}))
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+h(\hat k^{*},\hat c^{*}) &= 0 &&\quad\text{(} [\,\cdot\,] = 0 \text{ by (10))}\\
+\partial h/\partial\hat k &= \frac{\hat c^{*}}{\theta}\,f''(\hat k^{*}) &&\quad\text{(at the steady state)}\\
+\partial h/\partial\hat c &= \frac{1}{\theta}\bigl[f'(\hat k^{*}) - \delta - \rho - \theta x\bigr] = 0 &&\quad\text{(at the steady state; by (10))}\\
+\dot{\hat c} &\approx \frac{\hat c^{*}}{\theta}\,f''(\hat k^{*})\,(\hat k-\hat k^{*}) &&\quad\text{(} h^{*} + h_{\hat k}(\hat k-\hat k^{*}) + h_{\hat c}(\hat c-\hat c^{*}))
+\end{aligned}
+$$
+
+### Eigenvalues
+
+The linear system has coefficient matrix $J = \begin{pmatrix} \zeta & -1 \\ \hat c^{*}f''(\hat k^{*})/\theta & 0 \end{pmatrix}$:
+
+$$
+\begin{aligned}
+\det(J-\mu I) &= (\zeta-\mu)(-\mu) + \frac{\hat c^{*}f''(\hat k^{*})}{\theta} &&\quad\text{(2×2 determinant)}\\
+0 &= \mu^2 - \zeta\mu + \frac{\hat c^{*}f''(\hat k^{*})}{\theta} &&\quad\text{(characteristic equation)}\\
+\mu_{\pm} &= \frac{\zeta \pm \sqrt{\zeta^2 - 4\hat c^{*}f''(\hat k^{*})/\theta}}{2} &&\quad\text{(quadratic formula)}\\
+\mu_{+}\mu_{-} &= \frac{\hat c^{*}f''(\hat k^{*})}{\theta} < 0 &&\quad\text{(product of roots; } \hat c^{*},\theta>0,\ f''<0)
+\end{aligned}
+$$
+
+* The product is negative, so one root is positive ($\mu_{+}$, unstable) and one negative ($\mu_{-}$, stable).
+
+Saddle path:
+
+$$
+\begin{aligned}
+\hat k(t)-\hat k^{*} &= a_{+}e^{\mu_{+}t} + a_{-}e^{\mu_{-}t} &&\quad\text{(general solution of the linear system)}\\
+a_{+} &= 0 &&\quad\text{(otherwise } \hat k \text{ diverges; see below)}\\
+\hat k(t)-\hat k^{*} &= a_{-}e^{\mu_{-}t} &&\quad\text{(set } a_{+}=0)\\
+\hat k(0)-\hat k^{*} &= a_{-} &&\quad\text{(at } t=0)\\
+\hat k(t)-\hat k^{*} &= \bigl(\hat k(0)-\hat k^{*}\bigr)e^{\mu_{-}t} &&\quad\text{(substitute } a_{-})
+\end{aligned}
+$$
+
+* $\hat k(0)$ is given, but $\hat c(0)$ is chosen. The linear solution holds only near the steady state; the global argument uses the phase diagram (standard argument; see Blanchard and Fischer 1989, ch. 2, cited by BSM p. 225):
+  * $\hat c(0)$ too high: $\hat k$ hits zero in finite time; $\hat c$ must then jump to zero, which breaks @eq-euler.
+  * $\hat c(0)$ too low: $\hat k$ rises beyond the golden-rule level, where $f'(\hat k) < n+x+\delta$; then $\dot\nu/\nu>0$ and $\nu\hat k \not\to 0$, so transversality fails.
+  * Only the $\hat c(0)$ that sets $a_{+}=0$ satisfies both conditions.
+* The speed of convergence is $\lambda = -\mu_{-}$:
+
+$$
+\begin{aligned}
+\lambda &= -\mu_{-} &&\quad\text{(definition of } \lambda\text{: gap} \propto e^{-\lambda t})\\
+&= -\frac{\zeta - \sqrt{\zeta^2 - 4\hat c^{*}f''(\hat k^{*})/\theta}}{2} &&\quad\text{(} \mu_{-} \text{ above)}\\
+2\lambda &= \sqrt{\zeta^2 - 4\hat c^{*}f''(\hat k^{*})/\theta} - \zeta &&\quad\text{(multiply by 2; distribute } -)
+\end{aligned}
+$$
+
+### Substituting Cobb-Douglas
+
+$$
+\begin{aligned}
+f'(\hat k) &= \alpha A\hat k^{\alpha-1} &&\quad\text{(differentiate } A\hat k^{\alpha})\\
+f''(\hat k) &= \alpha(\alpha-1)A\hat k^{\alpha-2} &&\quad\text{(differentiate again)}\\
+&= (\alpha-1)\,\frac{\alpha A\hat k^{\alpha-1}}{\hat k} &&\quad\text{(} \hat k^{\alpha-2} = \hat k^{\alpha-1}/\hat k)\\
+&= -(1-\alpha)\frac{f'(\hat k)}{\hat k} &&\quad\text{(} f' \text{ line 1; } \alpha-1 = -(1-\alpha))\\
+-\hat c^{*}f''(\hat k^{*}) &= (1-\alpha)\,f'(\hat k^{*})\,\frac{\hat c^{*}}{\hat k^{*}} &&\quad\text{(multiply by } -\hat c^{*})
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{\hat c^{*}}{\hat k^{*}} &= \frac{f(\hat k^{*})}{\hat k^{*}} - (n+x+\delta) &&\quad\text{((11)} \div \hat k^{*})\\
+\frac{f(\hat k)}{\hat k} &= A\hat k^{\alpha-1} = \frac{f'(\hat k)}{\alpha} &&\quad\text{(} f' = \alpha A\hat k^{\alpha-1})\\
+\frac{\hat c^{*}}{\hat k^{*}} &= \frac{f'(\hat k^{*})}{\alpha} - (n+x+\delta) &&\quad\text{(substitute)}\\
+&= \frac{\rho+\delta+\theta x}{\alpha} - (n+x+\delta) &&\quad\text{(by (10))}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+-\hat c^{*}f''(\hat k^{*}) &= (1-\alpha)\,f'(\hat k^{*})\,\frac{\hat c^{*}}{\hat k^{*}} &&\quad\text{(first block)}\\
+&= (1-\alpha)(\rho+\delta+\theta x)\Bigl[\frac{\rho+\delta+\theta x}{\alpha} - (n+x+\delta)\Bigr] &&\quad\text{(by (10); block above)}
+\end{aligned}
+$$
+
+Rewrite $2\lambda$ so that $-\hat c^{*}f''(\hat k^{*})$ appears:
+
+$$
+\begin{aligned}
+2\lambda &= \sqrt{\zeta^2 + 4\bigl(-\hat c^{*}f''(\hat k^{*})\bigr)/\theta} - \zeta &&\quad\text{(} -4\hat c^{*}f'' = 4(-\hat c^{*}f''))
+\end{aligned}
+$$
+
+Substitute the block above for $-\hat c^{*}f''(\hat k^{*})$:
+
+$$
+2\lambda = \Bigl\{\zeta^2 + 4\,\frac{1-\alpha}{\theta}(\rho+\delta+\theta x)\Bigl[\frac{\rho+\delta+\theta x}{\alpha} - (n+x+\delta)\Bigr]\Bigr\}^{1/2} - \zeta
+$$ {#eq-rlam}
+
+* @eq-rlam is BSM eq. 9 (p. 225), where BSM write $\beta$ for $\lambda$.
+
+### From capital to output
+
+$$
+\begin{aligned}
+\ln\hat y - \ln\hat y^{*} &= \alpha(\ln\hat k - \ln\hat k^{*}) &&\quad\text{(Cobb-Douglas)}\\
+&\approx \alpha\,\frac{\hat k-\hat k^{*}}{\hat k^{*}} &&\quad\text{(} \ln\hat k - \ln\hat k^{*} \approx (\hat k-\hat k^{*})/\hat k^{*})\\
+&= e^{-\lambda t}\,\alpha\,\frac{\hat k(0)-\hat k^{*}}{\hat k^{*}} &&\quad\text{(saddle path)}\\
+&\approx e^{-\lambda t}\bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr) &&\quad\text{(first two lines at } t=0)
+\end{aligned}
+$$
+
+* So the path of income has the same form as in the Solow model; only the formula for $\lambda$ differs. Everything in the next sections holds for either model.
+
+### Numbers
+
+BSM baseline: $\rho = \delta = 0.05$, $n = x = 0.02$, $\theta = 1$ (p. 226).
+
+| | $\alpha = 0.35$ (narrow capital) | $\alpha = 0.80$ (broad capital) |
+|---|---|---|
+| $\lambda$, @eq-rlam | 0.1262 | 0.0258 |
+| half-life $\ln 2/\lambda$ | 5.5 years | 26.9 years |
+| BSM (p. 226) | 0.126, 5.5 years | 0.026, 27 years |
+
+* Steps for $\alpha=0.35$: $\zeta = 0.05-0.02-0 = 0.03$; $\rho+\delta+\theta x = 0.12$; bracket $= 0.12/0.35 - 0.09 = 0.25286$; $4\times0.65\times0.12\times0.25286 = 0.07889$; $\sqrt{0.03^2+0.07889} = \sqrt{0.07979} = 0.28247$; $\lambda = (0.28247-0.03)/2 = 0.1262$.
+* Estimated $\lambda\approx 0.02$ fits only with broad capital, $\alpha$ near 0.8 (BSM pp. 226-227).
+* Unlike Solow, $\lambda$ depends on $\theta$: a lower $\theta$ (more willingness to shift consumption over time) raises $\lambda$ (BSM p. 226).
+
+# From λ to the β-convergence regression
+
+## Average growth over T years
+
+$$
+\begin{aligned}
+\ln\hat y(T) &- \ln\hat y(0) &&\\
+&= \bigl(e^{-\lambda T}-1\bigr)\ln\hat y(0) + \bigl(1-e^{-\lambda T}\bigr)\ln\hat y^{*} &&\quad\text{((7) at } t=T\text{, minus } \ln\hat y(0))\\
+&= -\bigl(1-e^{-\lambda T}\bigr)\bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr) &&\quad\text{(factor)}\\
+\frac{1}{T}\ln\frac{\hat y(T)}{\hat y(0)} &= -\frac{1-e^{-\lambda T}}{T}\bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr) &&\quad\text{(divide by } T)
+\end{aligned}
+$$
+
+Per-capita income is $y(t) = \hat y(t)\,e^{xt}$ (technology normalised to 1 at $t=0$):
+
+$$
+\begin{aligned}
+\ln y(t) &= \ln\hat y(t) + xt &&\quad\text{(take logs)}\\
+\frac{1}{T}\ln\frac{y(T)}{y(0)} &= \frac{1}{T}\ln\frac{\hat y(T)}{\hat y(0)} + x &&\quad\text{(} t=T \text{ minus } t=0\text{, } \div T)\\
+&= x - \frac{1-e^{-\lambda T}}{T}\bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr) &&\quad\text{(block above)}
+\end{aligned}
+$$
+
+$$
+\frac{1}{T}\ln\frac{y(T)}{y(0)} = x - \frac{1-e^{-\lambda T}}{T}\bigl(\ln\hat y(0) - \ln\hat y^{*}\bigr)
+$$ {#eq-growth}
+
+@eq-growth is BSM eq. (10) (p. 225).
+
+## Cross-section regression
+
+For economies $i=1,\dots,N$, assume a common steady state $\hat y^{*}$ and a common $x$; BSM argue this is tenable for U.S. states (p. 227). Since $\ln y_{i}(0) = \ln\hat y_{i}(0)$ at $t=0$:
+
+$$
+\begin{aligned}
+g_i &\equiv \frac{1}{T}\ln\frac{y_{i}(T)}{y_{i}(0)}&&\\
+&= x + \frac{1-e^{-\lambda T}}{T}\ln\hat y^{*} - \frac{1-e^{-\lambda T}}{T}\ln y_{i}(0) &&\quad\text{(expand (13))}\\
+&= B - b\,\ln y_{i}(0) + u_i &&\quad\text{(add a disturbance } u_i)
+\end{aligned}
+$$
+
+$$
+g_i = B - b\,\ln y_{i}(0) + u_i, \qquad b = \frac{1-e^{-\lambda T}}{T}
+$$ {#eq-reg}
+
+Which coefficient is "β"? Label each piece of the estimated regression:
+
+$$
+\underbrace{g_i}_{\text{average growth, } 0\text{ to }T}
+= \underbrace{B}_{\text{intercept}}
+\;\underbrace{-\,b}_{\substack{\text{slope on initial income}\\[2pt] = -(1-e^{-\lambda T})/T}}\,\ln y_i(0) + u_i,
+\qquad
+\underbrace{\lambda}_{\substack{\text{speed of convergence}\\[2pt] =\ \text{BSM's } \beta}}
+$$
+
+* The slope on $\ln y_i(0)$ is $-b$. "β-convergence" means this slope is negative: $b>0$, poorer economies grow faster.
+* BSM call the speed $\lambda$ "β": they write the slope as $-(1-e^{-\beta T})/T$ and estimate $\beta$ directly (eq. 15, p. 230). So in BSM's tables, the reported β is $\lambda$ here, not the slope $-b$.
+* Many textbook regressions instead report the slope itself as "β", with β-convergence meaning β < 0; that β is $-b$ here.
+* $B = x + \frac{1-e^{-\lambda T}}{T}\ln\hat y^{*}$ is common to all $i$ ($\because$ common $\hat y^{*}$ and $x$).
+* $b = \dfrac{1-e^{-\lambda T}}{T}$ (BSM eq. 15 and the text below it, p. 230).
+* β-convergence, $b>0$, holds if and only if $\lambda>0$ ($\because$ $e^{-\lambda T}<1 \iff \lambda T>0$).
+* For a given $\lambda$, $b$ falls as $T$ rises (BSM p. 230), so slopes from periods of different length are not comparable; BSM estimate $\lambda$ directly by nonlinear least squares.
+
+## Converting between b and λ
+
+$$
+\begin{aligned}
+bT &= 1-e^{-\lambda T} &&\quad\text{(} b \text{ in (14), times } T)\\
+e^{-\lambda T} &= 1 - bT &&\quad\text{(rearrange)}\\
+-\lambda T &= \ln(1-bT) &&\quad\text{(take logs; needs } bT<1)\\
+\lambda &= -\frac{\ln(1-bT)}{T} &&\quad\text{(divide by } -T)
+\end{aligned}
+$$
+
+$$
+\lambda = -\frac{\ln(1-bT)}{T}
+$$ {#eq-lamb}
+
+Worked example: BSM Table 1, line 1, personal income 1880-1988 ($T=108$), $\hat\lambda = 0.0175$ (s.e. 0.0046) (p. 231):
+
+$$
+\begin{aligned}
+\lambda T &= 0.0175 \times 108 = 1.890 &&\\
+e^{-\lambda T} &= e^{-1.890} = 0.1511 &&\\
+b &= \frac{1-0.1511}{108} = \frac{0.8489}{108} = 0.00786 &&\\
+t_{1/2} &= \frac{\ln 2}{\lambda} = \frac{0.6931}{0.0175} = 39.6 \text{ years} &&
+\end{aligned}
+$$
+
+* Reading: an economy 1% richer in 1880 grew 0.0079 percentage points less per year over 1880-1988.
+* BSM summarise their estimates as $\lambda$ "in the neighborhood of .02 per year" (p. 226).
+
+# β-convergence is necessary but not sufficient for σ-convergence
+
+## One-period version of the model
+
+Apply the path of income over one period ($t-1$ to $t$) and add a shock:
+
+$$
+\begin{aligned}
+\ln\hat y_{t} &= e^{-\lambda}\ln\hat y_{t-1} + \bigl(1-e^{-\lambda}\bigr)\ln\hat y^{*} &&\quad\text{((7) over one period)}
+\end{aligned}
+$$
+
+Adding a shock $u_{it}$ gives YHL eq. (1) (p. 4):
+
+$$
+\ln y_{it} = a + (1-\beta_1)\ln y_{i,t-1} + u_{it}
+$$ {#eq-ar1}
+
+* $1-\beta_1 = e^{-\lambda}$, so $\beta_1 = 1-e^{-\lambda}$; with $\lambda = 0.02$, $\beta_1 = 1-e^{-0.02} = 0.0198$.
+* Assumptions (YHL p. 4): $0<\beta_1<1$; $a$ common to all $i$ (absolute convergence); $u_{it}$ has mean 0 and variance $\sigma_u^2$, independent over $t$ and $i$.[^drift]
+
+[^drift]: With technology growth $x>0$ the intercept drifts over time, $a_t = (1-e^{-\lambda})(\ln\hat y^{*} + xt) + e^{-\lambda}x$. The variance results below are unaffected because $a_t$ is still common to all $i$ within each period.
+* Subtracting $\ln y_{i,t-1}$ gives $\ln(y_{it}/y_{i,t-1}) = a - \beta_1\ln y_{i,t-1} + u_{it}$ (YHL eq. 1', p. 5): $\beta_1>0$ is β-convergence.
+
+## Law of motion of the variance
+
+$$
+\begin{aligned}
+\sigma_t^2 &= \operatorname{Var}\bigl(a + (1-\beta_1)\ln y_{i,t-1} + u_{it}\bigr) &&\quad\text{(variance of (16) across } i)\\
+&= \operatorname{Var}\bigl((1-\beta_1)\ln y_{i,t-1} + u_{it}\bigr) &&\quad\text{(} a \text{ common to all } i)\\
+&= (1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2 + 2(1-\beta_1)\operatorname{Cov}(\ln y_{i,t-1},u_{it}) &&\quad\text{(variance of a sum)}\\
+&= (1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2 &&\quad\text{(} u_{it} \text{ indep. of } \ln y_{i,t-1})
+\end{aligned}
+$$
+
+$$
+\sigma_t^2 = (1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2
+$$ {#eq-var}
+
+@eq-var is YHL eq. (3) (p. 5); sample and population variances coincide for large $N$.
+
+## Necessary: no β-convergence means rising dispersion
+
+Suppose $\beta_1 \le 0$:
+
+$$
+\begin{aligned}
+1-\beta_1 &\ge 1 &&\quad\text{(} \beta_1\le 0)\\
+(1-\beta_1)^2 &\ge 1 &&\quad\text{(square a number} \ge 1)\\
+\sigma_t^2 &\ge \sigma_{t-1}^2 + \sigma_u^2 &&\quad\text{(by (17))}\\
+&> \sigma_{t-1}^2 &&\quad\text{(} \sigma_u^2>0)
+\end{aligned}
+$$
+
+* Dispersion rises every period, so σ-convergence requires $\beta_1>0$ (YHL p. 5 and footnote 3).
+* The strict inequality needs $\sigma_u^2>0$: without shocks and with $\beta_1=0$, dispersion stays constant.
+
+## Steady-state dispersion
+
+For $0<\beta_1<1$, set $\sigma_t^2 = \sigma_{t-1}^2 = \sigma^{*2}$:
+
+$$
+\begin{aligned}
+\sigma^{*2} &= (1-\beta_1)^2\sigma^{*2} + \sigma_u^2 &&\quad\text{((17) with } \sigma_t^2=\sigma_{t-1}^2=\sigma^{*2})\\
+\bigl[1-(1-\beta_1)^2\bigr]\sigma^{*2} &= \sigma_u^2 &&\quad\text{(collect } \sigma^{*2})\\
+\sigma^{*2} &= \frac{\sigma_u^2}{1-(1-\beta_1)^2} &&\quad\text{(divide; denominator}>0 \text{ for } 0<\beta_1<1)
+\end{aligned}
+$$
+
+$$
+\sigma^{*2} = \frac{\sigma_u^2}{1-(1-\beta_1)^2}
+$$ {#eq-sstar}
+
+* YHL eq. (4) (p. 5): dispersion settles lower with larger $\beta_1$ and higher with larger $\sigma_u^2$.
+* Example, $\lambda = 0.02$: $1-(1-\beta_1)^2 = 1-e^{-0.04} = 0.0392$, so $\sigma^{*2} = \sigma_u^2/0.0392 = 25.5\,\sigma_u^2$.
+
+## Path of dispersion
+
+Let $d_t = \sigma_t^2 - \sigma^{*2}$:
+
+$$
+\begin{aligned}
+d_t &= (1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2 - \sigma^{*2} &&\quad\text{((17) minus } \sigma^{*2})\\
+&= (1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2 - (1-\beta_1)^2\sigma^{*2} - \sigma_u^2 &&\quad\text{(} \sigma^{*2} = (1-\beta_1)^2\sigma^{*2}+\sigma_u^2 \text{ from (17))}\\
+&= (1-\beta_1)^2\bigl(\sigma_{t-1}^2 - \sigma^{*2}\bigr) &&\quad\text{(cancel } \sigma_u^2\text{, factor)}\\
+&= (1-\beta_1)^2\, d_{t-1} &&\quad\text{(definition of } d)\\
+d_t &= (1-\beta_1)^{2t}\, d_0 &&\quad\text{(iterate } t \text{ times)}\\
+\sigma_t^2 &= \sigma^{*2} + (1-\beta_1)^{2t}\bigl(\sigma_0^2 - \sigma^{*2}\bigr) &&\quad\text{(add } \sigma^{*2})
+\end{aligned}
+$$
+
+$$
+\sigma_t^2 = \sigma^{*2} + (1-\beta_1)^{2t}\bigl(\sigma_0^2 - \sigma^{*2}\bigr)
+$$ {#eq-varpath}
+
+* @eq-varpath is YHL eq. (6) (p. 6), with their arbitrary constant $c=0$.
+* $0<(1-\beta_1)^2<1$, so $\sigma_t^2 \to \sigma^{*2}$ monotonically (YHL eqs. 7-8, p. 6).
+
+## Not sufficient: when does dispersion fall?
+
+$$
+\begin{aligned}
+\sigma_t^2 &< \sigma_{t-1}^2 &&\quad\text{(σ-convergence in period } t)\\
+(1-\beta_1)^2\sigma_{t-1}^2 + \sigma_u^2 &< \sigma_{t-1}^2 &&\quad\text{(by (17))}\\
+\sigma_u^2 &< \bigl[1-(1-\beta_1)^2\bigr]\sigma_{t-1}^2 &&\quad\text{(subtract } (1-\beta_1)^2\sigma_{t-1}^2)\\
+\frac{\sigma_u^2}{1-(1-\beta_1)^2} &< \sigma_{t-1}^2 &&\quad\text{(divide; denominator}>0)\\
+\sigma^{*2} &< \sigma_{t-1}^2 &&\quad\text{(by (18))}
+\end{aligned}
+$$
+
+* Dispersion falls only when it is above its steady state.
+* If $\sigma_0^2 < \sigma^{*2}$, dispersion rises towards $\sigma^{*2}$ even though $\beta_1>0$: economies catch up, but new shocks push them apart faster (YHL p. 6).
+* BSM make the same point with their eqs. (12)-(13): "a positive coefficient β does not ensure a falling σ²" (p. 228).
+
+## How likely is β-convergence with rising σ? {#sec-likely}
+
+::: {.callout-important}
+## Main message
+* In the linear model with one catch-up speed (@eq-ar1), β-convergence with rising σ needs $\sigma_0 < \sigma^{*}$: economies must start closer together than their shocks will keep them. That is plausible for similar regions (U.S. counties) and implausible for the world's countries, where σ rose because there was no β-convergence.
+* Beyond that model, catch-up speed differs by income level and countries form clubs (@sec-beyond). σ can then rise while incomes converge, as countries move from a poor peak to a rich one.
+:::
+
+The condition in terms of catch-up:
+
+$$
+\begin{aligned}
+\sigma^{*} &= \frac{\sigma_u}{\sqrt{1-(1-\beta_1)^2}} &&\quad\text{(by (18))}\\
+&= \frac{\sigma_u}{\sqrt{1-0.98^2}} = \frac{\sigma_u}{0.199} \approx 5\,\sigma_u &&\quad\text{(} \beta_1 = 0.02\text{, BSM's estimate, p. 227)}\\
+\sigma_0 < \sigma^{*} &\iff \sigma_u > 0.199\,\sigma_0 &&\quad\text{(multiply both sides by 0.199)}
+\end{aligned}
+$$
+
+* Countries (WDI GDP per capita, 84 countries observed every year 1960-2024; oil producers and countries under 1 million people excluded):
+  * $\sigma_0 = 1.37$ (1960), so rising σ needs $\sigma_u > 0.199 \times 1.37 = 0.27$: shocks to annual growth with a std of 27%.
+  * Measured $\sigma_u = 0.048$ (residual std of $\ln y_{it}$ on $\ln y_{i,t-1}$ with year effects, 1961-2024).
+  * The same regression gives $\beta_1 = -0.002$: no β-convergence, so $\sigma^{*}$ does not exist and σ rises by @eq-var (1.37 in 1960, 1.70 in 2000).
+  * 2001-2024: $\beta_1 = 0.0014$ and $\sigma^{*} = 0.68 < \sigma_{2000} = 1.70$, so σ should fall slowly. The path of dispersion, @eq-varpath, predicts 1.65 in 2024, and the observed value is 1.65.
+* U.S. counties (YHL):
+  * 3,058 counties: σ of log income per capita 0.2728 in 1970 and 0.2887 in 1998, a significant rise (p = 0.0017; Table 2, p. 16), alongside β-convergence (abstract).
+  * In 24 of 50 states σ rose significantly; in 2 it fell (p. 9).
+  * $\sigma_0 = 0.27$ needs only $\sigma_u > 0.199 \times 0.27 = 0.054$, a 5% annual county shock.
+  * YHL's first interpretation: the 1970 distribution was "narrow" relative to the distribution of balanced growth paths (p. 11), that is, $\sigma_0 < \sigma^{*}$.
+
+### Beyond the linear model {#sec-beyond}
+
+* The condition above assumes @eq-ar1: linear, one catch-up speed $\beta_1$ for all economies, independent shocks, a common steady state. Studies that drop these assumptions find the following. Page numbers are PDF pages of the working-paper versions read.
+* Distribution dynamics (the whole cross-section distribution, no growth regression):
+  * Quah (1993; LSE FMG DP 154, 1992): 118 countries, 1962-1985, transition matrix of income relative to the world average. Incomes are heading to "a distribution where many remain wealthy, and many remain poor" (p. 3). Means and standard deviations "would not suffice", because they hide movement within the distribution (p. 8).
+  * Quah (1997; LSE CEP DP 324): 105 countries, 1961-1988. Twin peaks emerge; the distance between the peaks rises from about 1.5 to more than 3 times world average income (p. 11). The twin peaks vanish once income is measured relative to physical neighbours (p. 26).
+  * Bianchi (1997; Bank of England WP, 1995): 119 countries, kernel density with a bootstrap test of the number of modes. One mode: p = 0.07 (1970), 0.00 (1980 and 1989); two modes not rejected (p. 11).
+  * Kremer, Onatski & Stock (2001; NBER WP 8250): with 5-year transitions, 72% of countries end in the richest group in the long run (p. 4), reached very slowly. Along the way, "the standard deviation of log income and the coefficient of polarization are likely to rise for hundreds of years", while the Gini falls (p. 24). σ rising while incomes converge, by a route other than $\sigma_0 < \sigma^{*}$.
+  * Jones (1997, *J. Economic Perspectives*): 121 countries, GDP per worker relative to the U.S., 1960 and 1988. The 1960 distribution is "single-peaked and looks roughly normal"; by 1988 it shows "twin-peaks" (p. 3). A transition matrix projects the long run: 19% of countries above 80% of U.S. income and 49% above 40% (p. 16); "there is no development trap into which the poorest countries will be permanently condemned" (p. 16), and the distribution "is likely to be more compact" in the future (p. 17).
+  * Johnson (2000, *Economics Letters*): 48 U.S. states, a single-peaked long-run distribution; "There is no evidence of the sort of polarization or convergence clubs found in the country data" (p. 4).
+  * Fiaschi & Johnson (2025, arXiv 2506.06755): 102 countries, PWT 10.0, 1970-2019. Two peaks in 1970-1995, one peak in 2000-2010 (p. 1, 31); some return to two peaks after 2009, for 5-year transitions only (p. 31).
+* Nonlinear and heterogeneous growth regressions:
+  * Durlauf & Johnson (1995; 1994 WP): "we reject the null hypothesis that all countries obey a common linear model" (p. 4). A regression tree finds 4 regimes with initial-income coefficients −0.791, −0.086, −0.316 and 0.069 (p. 19): fast catch-up in some groups, none in others.
+  * Maasoumi, Racine & Stengos (2007; SMU WP): the linear specification is rejected, p = 4×10⁻⁶ (p. 11); "separate models are required to examine different groups of countries" (p. 24).
+  * Henderson, Papageorgiou & Parmeter (2012, *Economic Journal*; author version Feb. 2011): nonparametric kernel regression, 98 countries, 5-year periods 1960-2000. "Nearly all individual growth theories possess nonlinearities and display heterogeneous partial effects" (p. 3); "assuming homogeneous effects across the sample is incorrect" (p. 19). Effect of initial income on growth (geography model): mean −0.0102, quartiles −0.0155, −0.0116, −0.0026 (p. 33); weaker for countries below median initial income (p. 21). Their earlier working paper (MPRA 8767, 2008) reports quartiles −0.037, −0.030, −0.019 for the macro model (p. 24).
+* Non-Cobb-Douglas production:
+  * Duffy & Papageorgiou (2000, *J. Economic Growth*): 82 countries, 1960-1987, CES production. Cobb-Douglas is rejected; the elasticity of substitution exceeds 1 overall (p. 18), is below 1 for the poorest countries and above 1 for the richest (p. 24).
+  * Masanjala & Papageorgiou (2004; LSU WP 2002): CES Solow model with threshold regimes; the initial-income coefficient runs from −1.24 to +0.27 across regimes (pp. 18-19).
+* Not read (full text not obtained): Durlauf, Kourtellos & Minkin (2001, "The local Solow growth model"); Liu & Stengos (1999).
+* Taken together: catch-up speed is not one number, and the country distribution has had two peaks for long stretches. In that setting σ is a poor summary, and the $\sigma_0 < \sigma^{*}$ logic is a benchmark for similar economies, not a description of the world.
+
+## Not sufficient, second case: different steady states
+
+* Let $a_i$ differ across economies (conditional β-convergence) (YHL pp. 6-7).
+  * Economies A and B start at the same income, so $\sigma_0^2 = 0$.
+  * B is on its balanced growth path; A's path is higher.
+  * A grows faster than B: β-convergence holds, yet the variance rises from zero as A moves up to its own path.
+
+# Evidence
+
+* BSM: U.S. states 1880-1988, $\hat\lambda\approx 0.02$ per year (pp. 226, 231).
+* YHL: U.S. counties 1970-1998, over 3,000 observations; β-convergence was found on these data in earlier work, but σ-convergence cannot be detected across the U.S. or within most states, and many states show significant σ-divergence (abstract, p. 2).
