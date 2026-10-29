@@ -13,16 +13,99 @@ engine: knitr
 pdf-engine: lualatex
 format:
   html:
+    code-fold: true
+    code-summary: "Show code"
+    code-tools: true
+    code-copy: true
+    number-sections: true
     standalone: true
     embed-resources: true
     toc: true
     toc-location: left
     toc-depth: 2
+    include-in-header:
+      - text: |
+          <style>
+            /* Readable TOC and code line numbers */
+            #TOC, #TOC a, nav[role="doc-toc"] a {
+              font-size: 0.95rem;
+              line-height: 1.5;
+              color: #292929;
+            }
+            /* Make the heading permalink symbol thinner */
+            a.anchorjs-link {
+                font-weight: 300 !important;
+                -webkit-text-stroke: 0 !important;
+                opacity: 0.45 !important;
+                text-shadow: none !important;
+            }
+            .anchor-section svg,
+            .anchorjs-link svg {
+              stroke-width: 1 !important;
+            }
+
+            .sourceCode pre,
+            pre.sourceCode,
+            div.sourceCode {
+              font-size: 0.86rem;
+              line-height: 1.45;
+            }
+
+            /* Wrap long code lines rather than requiring horizontal scrolling */
+            div.sourceCode,
+            pre.sourceCode,
+            pre > code.sourceCode {
+              white-space: pre-wrap !important;
+              overflow-wrap: anywhere;
+              word-break: normal;
+              overflow-x: hidden !important;
+            }
+
+            pre > code.sourceCode > span {
+              white-space: pre-wrap !important;
+              overflow-wrap: anywhere;
+            }
+
+            /* Improve contrast for numbered code lines */
+            pre.numberSource code > span > a:first-child::before {
+              color: #555 !important;
+              opacity: 1;
+            }
+
+            /* Make display equations larger and easier to read */
+            .math.display {
+              font-size: 1.12em;
+              overflow-x: auto;
+              overflow-y: hidden;
+              padding: 0.35em 0;
+            }
+
+            /* Tables */
+            table {
+              font-size: 0.92rem;
+              width: auto;
+              max-width: 100%;
+            }
+
+            th, td {
+              padding: 0.3em 0.65em;
+            }
+
+            /* Give the main text a little breathing room */
+            main.content {
+              line-height: 1.65;
+            }
+
+            /* Compact, unobtrusive margin notes */
+            .column-margin,
+            .margin-note {
+              font-size: 0.85rem;
+              line-height: 1.45;
+            }
+          </style>
     grid:
       body-width: 720px  # ~70 characters per line
       margin-width: 350px
-    code-line-numbers: true
-    code-copy: true
     css:
       - https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/tufte.min.css
     linkcolor: "green"
@@ -772,3 +855,246 @@ ggplot(
 
 I interpreted “GL” in your figure request as BL (Barro-Lee). If you meant a different dataset, its name and data objects would need to be specified.
 
+## 4th query
+
+### Instructions
+
+* Rendered html is ugly: fix them
+    a) Line numbers in codeblocks and TOC numbers are all impossible to read
+    a) Your display math is unreadable
+    a) Table 
+        1. has NA rows, ridiculous so delete them
+        1. BL and HDR data are not grouped
+    a) Tables, figs are not numbered nor cross referenceable
+    a) codeblocks come with horizontal scroll bars, use linebreaks so they will go away
+* 1st Figure looks good, except that 1st column is silly, drop group name col and insert group header lines in the figure, or you can flip 90 degrees so 1st col (facet label) takes only narrow width
+* Below needs to be dropped, because they are obvious and need no explainer
+
+    > Table: theme = "striped" gives alternating row shading; group_tt() separates Barro-Lee and UNDP with source headers.\
+    > Figure: The horizontal bars are 95% confidence intervals for the OLS slope. The vertical dashed line marks zero growth.\
+    > Subgroups: The code includes the world series and each source’s regions. Barro-Lee and UNDP retain their own regional classifications.
+
+* Below is against what I asked, do not give interpretations
+
+    > Interpretation: These confidence intervals describe uncertainty in the estimated linear time trend under the OLS model; they are not the bootstrap intervals from the original time-series plots.
+
+* Make codeblocks collapsable so main text is easier to follow
+* Use more margin footnotes judiciously, so the main text becomes less crowded and only important issues remain
+
+### Outputs
+
+
+The OLS estimates summarize the linear time trend in mean years of schooling for each source and subgroup.
+
+$$
+\mathrm{MYS}_{it} = \alpha_i + \beta_i\,\mathrm{Year}_t + \varepsilon_{it}
+$$
+
+The table and figure report the estimated slope and its 95% confidence interval.
+
+#### OLS results
+
+```{r}
+#| label: tbl-ols-results
+#| tbl-cap: "OLS estimates of schooling trends by source and subgroup"
+#| code-fold: true
+#| code-summary: "Show OLS estimation and table code"
+#| echo: true
+#| message: false
+#| warning: false
+
+library(data.table)
+library(ggplot2)
+library(tinytable)
+
+#### Combine world and regional estimates.
+make_series <- function(world, regions, source_name) {
+  world_part <- copy(world)
+  world_part[, subgroup := "World"]
+
+  region_part <- copy(regions)
+  region_part[, subgroup := as.character(region)]
+
+  if ("region" %in% names(world_part)) {
+    world_part[, region := NULL]
+  }
+  if ("region" %in% names(region_part)) {
+    region_part[, region := NULL]
+  }
+
+  world_part[, source := source_name]
+  region_part[, source := source_name]
+
+  rbindlist(
+    list(world_part, region_part),
+    use.names = TRUE,
+    fill = TRUE
+  )
+}
+
+series <- rbindlist(list(
+  make_series(
+    bl_wld, bl_reg,
+    "Barro-Lee (1950–2015)"
+  ),
+  make_series(
+    un_wld, un_reg,
+    "UNDP HDR (1990–2022)"
+  )
+), use.names = TRUE, fill = TRUE)
+
+#### Estimate one OLS trend per source and subgroup.
+series <- series[
+  is.finite(year) & is.finite(mys)
+]
+
+ols_results <- series[, {
+  fit <- lm(mys ~ year)
+  ci <- confint(fit, "year", level = 0.95)
+
+  .(
+    observations = nobs(fit),
+    estimate = unname(coef(fit)["year"]),
+    lower = ci[1, 1],
+    upper = ci[1, 2],
+    p_value = summary(fit)$coefficients[
+      "year", "Pr(>|t|)"
+    ]
+  )
+}, by = .(source, subgroup)]
+
+#### Keep source and subgroup ordering explicit.
+source_order <- c(
+  "Barro-Lee (1950–2015)",
+  "UNDP HDR (1990–2022)"
+)
+
+subgroup_order <- c(
+  "World",
+  "Arab States",
+  "East Asia and the Pacific",
+  "Europe and Central Asia",
+  "Latin America and the Caribbean",
+  "South Asia",
+  "Sub-Saharan Africa",
+  "No UNDP region"
+)
+
+subgroup_order <- unique(c(
+  subgroup_order,
+  setdiff(ols_results$subgroup, subgroup_order)
+))
+
+ols_results[, source := factor(source, levels = source_order)]
+ols_results[, subgroup := factor(
+  subgroup, levels = subgroup_order
+)]
+
+setorder(ols_results, source, subgroup)
+
+#### Format the table without missing-value rows.
+table_data <- ols_results[, .(
+  Subgroup = as.character(subgroup),
+  N = observations,
+  `OLS estimate` = sprintf("%.4f", estimate),
+  `95% CI` = sprintf("[%.4f, %.4f]", lower, upper),
+  `p-value` = ifelse(
+    p_value < 0.001,
+    "<0.001",
+    sprintf("%.3f", p_value)
+  )
+)]
+
+#### Add source group headers.
+bl_n <- sum(
+  ols_results$source == source_order[1],
+  na.rm = TRUE
+)
+
+un_n <- nrow(table_data) - bl_n
+
+tab <- tinytable::tt(table_data, theme = "striped")
+
+if (bl_n > 0L && un_n > 0L) {
+  tab <- tinytable::group_tt(
+    tab,
+    i = list(
+      "Barro-Lee (1950–2015)" = seq_len(bl_n),
+      "UNDP HDR (1990–2022)" =
+        seq.int(bl_n + 1L, bl_n + un_n)
+    )
+  )
+}
+
+tab
+```
+
+#### OLS estimates with 95% confidence intervals
+
+```{r}
+#| label: fig-ols-coefficients
+#| fig-cap: "OLS estimates of schooling trends by source and subgroup"
+#| fig-width: 8
+#| fig-height: 7
+#| code-fold: true
+#| code-summary: "Show coefficient-plot code"
+#| echo: true
+#| message: false
+#| warning: false
+
+#### Use the same subgroup order as the table.
+plot_data <- copy(ols_results)
+
+plot_data[, source := factor(
+  as.character(source),
+  levels = source_order
+)]
+
+plot_data[, subgroup := factor(
+  as.character(subgroup),
+  levels = rev(subgroup_order)
+)]
+
+#### Plot slopes and horizontal confidence intervals.
+ggplot(
+  plot_data,
+  aes(x = estimate, y = subgroup)
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey55"
+  ) +
+  geom_errorbar(
+    aes(xmin = lower, xmax = upper),
+    orientation = "y",
+    width = 0.18
+  ) +
+  geom_point(size = 2) +
+  facet_grid(
+    source ~ .,
+    scales = "free_y",
+    space = "free_y",
+    switch = "y"
+  ) +
+  labs(
+    x = "OLS slope (schooling years per calendar year)",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    strip.placement = "outside",
+    strip.text.y.left = element_text(
+      angle = 90,
+      face = "bold",
+      size = 9
+    ),
+    strip.background = element_rect(
+      fill = "grey90",
+      colour = NA
+    ),
+    axis.text.y = element_text(colour = "black"),
+    plot.margin = margin(5.5, 12, 5.5, 5.5)
+  )
+```

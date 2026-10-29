@@ -349,6 +349,61 @@ J-PALの研究によって効果が確認された政策でも、どこにでも
 
 <div class=big-code>
 ::: {.callout-note appearance="minimal"}
+経済成長と富の分配の間には必ずしも一定の関係がないという点が印象に残りました。特に、経済発展を評価する基準として成長・分配・機会の３つが挙げられていましたが、これらをどのように評価するべきなのか疑問に思いました。
+
+例えば、国民全体の所得が低くても格差が小さい国と、格差は大きくても貧困層の生活水準が比較的高い国では、どちらが経済的に発展しているといえるのでしょうか。ジニ係数は所得の不平等を数値として示すことはできますが、その数値だけでは人々が実際にどのような生活を送っているのかまではわからないと思います。
+
+また、所得格差を縮小することと、貧困そのものを解消することは、必ずしも同じではないのではないでしょうか。仮に経済成長によって貧困層の所得が増加しても、それ以上に富裕層の所得が増加すれば、格差は拡大する可能性があります。この場合、格差が拡大したことを経済発展の問題として捉えるべきなのか、それとも貧困層の生活が改善されたことを評価するべきなのか、判断が難しいと感じました。
+:::
+</div>
+
+:::::: {.columns}
+::::{.column width="60%"}
+
+::: {.fragment}
+[Great Gatsby Curve](): 
+
+不平等と異世代間所得弾力性は正相関
+:::
+
+
+::::
+
+::::{.column width="40%"}
+::: {.fragment}
+![@DurlaufKourtellosTan2022](04/GGC.jpg){.lightbox width="20%"}
+:::
+::::
+:::::::
+
+* Gini&uarr; $\sim$ 世代間所得相関&uarr; = 機会が同じ家系に偏り&uarr;\
+&rArr; 革新&darr; \
+&rArr; 成長&darr;
+* 不平等だと成長が低下する(かも)&larr; 不平等以降の因果関係は立証されていない
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+経済成長と富の分配の間には必ずしも一定の関係がないという点が印象に残りました。特に、経済発展を評価する基準として成長・分配・機会の３つが挙げられていましたが、これらをどのように評価するべきなのか疑問に思いました。
+
+例えば、国民全体の所得が低くても格差が小さい国と、格差は大きくても貧困層の生活水準が比較的高い国では、どちらが経済的に発展しているといえるのでしょうか。ジニ係数は所得の不平等を数値として示すことはできますが、その数値だけでは人々が実際にどのような生活を送っているのかまではわからないと思います。
+
+また、所得格差を縮小することと、貧困そのものを解消することは、必ずしも同じではないのではないでしょうか。仮に経済成長によって貧困層の所得が増加しても、それ以上に富裕層の所得が増加すれば、格差は拡大する可能性があります。この場合、格差が拡大したことを経済発展の問題として捉えるべきなのか、それとも貧困層の生活が改善されたことを評価するべきなのか、判断が難しいと感じました。
+:::
+</div>
+
+::: {style="font-size: 60%;line-height: 1.1;"}
+> It is true, of course, that a community must draw on a stream of <Red>fresh talent, in order to avoid stagnation</Red>, and that, unless individuals of ability can turn their powers to account, they are embittered by a sense of defeat and frustration. The existence of <Red>opportunities</Red> to move from point to point on an economic scale, and <Red>to mount from humble origins</Red> to success and affluence, is a condition, therefore, <Red>both of social well­being and of individual happiness</Red>, and impediments which deny them to some, while lavishing them on others, are injurious to both. But opportunities to “rise” are not a substi­tute for a large measure of practical equality, nor do they make immaterial the existence of sharp disparities of income and social condition. On the contrary, it is only the presence of a high degree of practical equality which can diffuse and generalize opportunities to rise. The existence of such oppor­tunities in fact, and not merely in form, depends, not only upon an open road, but upon <Red>an equal start</Red>. It is precisely, of course, when capacity is aided by a high level of general well­being in the milieu surrounding it, that its ascent is most likely to be regular and rapid, rather than fitful and intermittent.\
+> R.H. Tawney
+:::
+
+* 貧しい才能を阻むと社会が衰える
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
 実験に向いているのは比較的小さな政策で、不可逆な政策や大規模政策は実験に不向きという話については少し不思議に思いました。私の考えでは、小さな変化では結果もあまり現れないのでは？と考えていたので、実際はその逆なのかと気付かされました。
 :::
 </div>
@@ -384,11 +439,12 @@ Banerjee, Abijit, and Esther Dufloの話の中で、”Save them” “Can’t s
 :::
 </div>
 
-* 食料援助が価格を下げて現地農家を圧迫するかも?
+* 食料援助 &rArr; 農産物価格&darr;  &rArr; 現地農家生産&darr;
     * disincentive effects of food aidは確認できない[@Abdulai2005]、確認できるという指摘もあるが未公刊
-* 現金を手渡すと国内価格が上昇して輸出・生産が減るかも?
+* 現金移転 &rArr; 国内価格&uarr;  &rArr; コスト&uarr;  &rArr; 生産&darr;
     * 移転問題tranfer paradox
     * 理論的な可能性で現実妥当性は低い
+    * 輸出&darr;は可能性高い
 
 
 

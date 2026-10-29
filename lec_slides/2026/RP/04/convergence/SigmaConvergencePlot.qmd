@@ -25,16 +25,52 @@ format:
 execute:
   warning: false
   message: false
+bibliography: ../../../../../seiro.bib
 ---
 
 # Introduction
 
-* This page plots σ-convergence: the cross-country standard deviation of log GDP per capita, year by year.
+::: {.callout-note collapse="true"}
+## 概要
+* 国別の一人当たりGDP（対数）の標準偏差σを年ごとに描き、σ収束が起きているかを見る。
+* シミュレーションで「β収束あり・σ収束あり」と「β収束あり・σ収束なし」を比べ、所得分布の位置と広がりの変化を図示する。
+* WDI（1960-2024）とPWT 10.01（2000-2019）で、KPS検定・Phillips-Sul log t検定・収束クラブ分析を行う。
+* 結果:
+  * WDI（GDP pc、84か国、1960-2024）: 発散 &rarr; 収束
+      * σ: 1.37 (1960) → 1.70 (2000) → 1.65 (2024)
+      * 分散: <svg width="130" height="18" style="vertical-align:middle"><polyline points="2.0,16.0 4.0,15.1 5.9,14.9 7.9,14.5 9.9,13.9 11.8,13.6 13.8,13.3 15.8,13.0 17.8,12.4 19.7,11.7 21.7,11.4 23.7,11.1 25.6,10.4 27.6,9.6 29.6,9.7 31.5,9.7 33.5,9.6 35.5,9.8 37.4,9.9 39.4,9.1 41.4,8.8 43.3,8.9 45.3,8.9 47.3,8.5 49.2,7.9 51.2,7.9 53.2,7.5 55.2,7.0 57.1,6.6 59.1,6.2 61.1,5.6 63.0,5.7 65.0,4.8 67.0,3.9 68.9,2.5 70.9,2.6 72.9,2.6 74.8,2.8 76.8,2.8 78.8,2.5 80.8,2.0 82.7,2.1 84.7,2.2 86.7,2.1 88.6,2.1 90.6,2.2 92.6,2.2 94.5,2.2 96.5,2.6 98.5,3.7 100.4,4.0 102.4,4.1 104.4,4.8 106.3,4.9 108.3,5.0 110.3,4.9 112.2,5.0 114.2,5.0 116.2,5.1 118.2,5.0 120.1,5.2 122.1,4.3 124.1,4.1 126.0,4.2 128.0,4.2" fill="none" stroke="#1a73e8" stroke-width="1.5"/><circle cx="80.8" cy="2.0" r="2.5" fill="#d55e00"/></svg>（1960-2024; <span style="color:#d55e00">●</span> 最大 2000年）
+      * β: 1960-1999で発散（t = -2.01）、2000-2024で収束（t = 2.39、半減期314年）
+      * KPS検定: 1960-1999で拡散（t = 26.4）、2000-2024で収束（t = -4.88）
+  * PWT（ppp GDP pc、128か国、2000-2019）: 弱い収束
+      * 分散: <svg width="130" height="18" style="vertical-align:middle"><polyline points="2.0,5.2 8.6,6.9 15.3,6.8 21.9,6.4 28.5,6.8 35.2,5.4 41.8,3.1 48.4,2.5 55.1,2.0 61.7,8.9 68.3,10.0 74.9,11.3 81.6,13.0 88.2,13.1 94.8,15.4 101.5,16.0 108.1,16.0 114.7,14.4 121.4,13.8 128.0,13.0" fill="none" stroke="#1a73e8" stroke-width="1.5"/><circle cx="55.1" cy="2.0" r="2.5" fill="#d55e00"/></svg>（2000-2019; <span style="color:#d55e00">●</span> 最大 2008年; 1.44〜1.58）
+      * β収束はあるが遅い（b = 0.0039、半減期172年 [差が1/2になるのに172年かかる]）。
+      * KPS検定: σ収束（t = -5.29）。ただし分散は2008年まで拡大し、その後縮小。共通ファクターを除くとσ収束は認められない（t = -0.32 〜 0.20）。
+      * Phillips-Sul検定: 全体の収束は棄却（t = -33.8）。
+  * 収束クラブ（参考）: 6グループと発散4か国。15時点しかなく検出力が低いため、「収束を棄却できない」程度の弱い証拠。
+:::
+
+::: {.callout-note collapse="true"}
+## Summary
 * It reports a weak σ-convergence test in the spirit of Kong, Phillips & Sul (2019, *J. Econometrics*): regress the cross-section variance on a linear trend; a significantly negative slope (Newey-West HAC t ratio) indicates convergence.
 * Data: World Bank WDI `NY.GDP.PCAP.KD` (GDP per capita, constant 2015 US$, market exchange rates), saved locally (`data/gdppc_usd.json`); nothing is downloaded.
 * Caveats:
   * Constant US$ at market exchange rates, not PPP; PPP series start only in 1990.
   * Common factors are not removed before the test, as KPS recommend for trending panels; this treats all countries as loading equally on the world trend.
+* Results:
+  * WDI (GDP pc, 84 countries, 1960-2024): divergence → convergence.
+    * σ: 1.37 (1960) → 1.70 (2000) → 1.65 (2024).
+    * Variance: <svg width="130" height="18" style="vertical-align:middle"><polyline points="2.0,16.0 4.0,15.1 5.9,14.9 7.9,14.5 9.9,13.9 11.8,13.6 13.8,13.3 15.8,13.0 17.8,12.4 19.7,11.7 21.7,11.4 23.7,11.1 25.6,10.4 27.6,9.6 29.6,9.7 31.5,9.7 33.5,9.6 35.5,9.8 37.4,9.9 39.4,9.1 41.4,8.8 43.3,8.9 45.3,8.9 47.3,8.5 49.2,7.9 51.2,7.9 53.2,7.5 55.2,7.0 57.1,6.6 59.1,6.2 61.1,5.6 63.0,5.7 65.0,4.8 67.0,3.9 68.9,2.5 70.9,2.6 72.9,2.6 74.8,2.8 76.8,2.8 78.8,2.5 80.8,2.0 82.7,2.1 84.7,2.2 86.7,2.1 88.6,2.1 90.6,2.2 92.6,2.2 94.5,2.2 96.5,2.6 98.5,3.7 100.4,4.0 102.4,4.1 104.4,4.8 106.3,4.9 108.3,5.0 110.3,4.9 112.2,5.0 114.2,5.0 116.2,5.1 118.2,5.0 120.1,5.2 122.1,4.3 124.1,4.1 126.0,4.2 128.0,4.2" fill="none" stroke="#1a73e8" stroke-width="1.5"/><circle cx="80.8" cy="2.0" r="2.5" fill="#d55e00"/></svg> (1960-2024; <span style="color:#d55e00">●</span> peak 2000).
+    * β: divergence in 1960-1999 (t = -2.01), convergence in 2000-2024 (t = 2.39, half-life 314 years).
+    * KPS test: divergence in 1960-1999 (t = 26.4), convergence in 2000-2024 (t = -4.88).
+  * PWT (ppp GDP pc, 128 countries, 2000-2019): weak convergence.
+    * Variance: <svg width="130" height="18" style="vertical-align:middle"><polyline points="2.0,5.2 8.6,6.9 15.3,6.8 21.9,6.4 28.5,6.8 35.2,5.4 41.8,3.1 48.4,2.5 55.1,2.0 61.7,8.9 68.3,10.0 74.9,11.3 81.6,13.0 88.2,13.1 94.8,15.4 101.5,16.0 108.1,16.0 114.7,14.4 121.4,13.8 128.0,13.0" fill="none" stroke="#1a73e8" stroke-width="1.5"/><circle cx="55.1" cy="2.0" r="2.5" fill="#d55e00"/></svg> (2000-2019; <span style="color:#d55e00">●</span> peak 2008; range 1.44-1.58).
+    * β-convergence, but slow (b = 0.0039, half-life 172 years [the gap takes 172 years to halve]).
+    * KPS test: σ-convergence (t = -5.29), though the variance rises until 2008 and falls afterwards; no σ-convergence after removing common factors (t = -0.32 to 0.20).
+    * Phillips-Sul test: convergence of the whole panel rejected (t = -33.8).
+  * Convergence clubs (for reference): 6 groups and 4 divergent countries; with 15 regression points and low power, this is weak evidence.
+:::
+
+* This page plots σ-convergence: the cross-country standard deviation of log GDP per capita, year by year.
 
 ```{r}
 #| label: setup
@@ -80,9 +116,13 @@ ss <- rbind(s_all, s_60, s_90)
 * σ-convergence: the spread of (log) incomes across economies shrinks over time.
 * β-convergence: poorer economies grow faster than richer ones.
 * The two can part ways: poor economies can grow faster while random shocks keep pushing incomes apart.
-* The simulation uses the model of the derivation page: $\ln y_{it} = a + (1-\beta_1)\ln y_{i,t-1} + u_{it}$, with catch-up $\beta_1 = 0.05$ per year and independent shocks $u_{it}$ of standard deviation $\sigma_u$; 200 economies, 40 years; 12 of them drawn as lines.
-  * Left: incomes start far apart ($\sigma_0 = 1.0$) and shocks are small ($\sigma_u = 0.03$): the spread falls.
-  * Right: incomes start close together ($\sigma_0 = 0.15$) and shocks are larger ($\sigma_u = 0.08$): poor economies still grow faster, but the spread rises towards its steady state $\sigma^{*} = \sigma_u/\sqrt{1-(1-\beta_1)^2}$.
+
+::: {.callout-note collapse="true"}
+## Simulation details
+* The simulation uses the model of the derivation page, $\ln y_{it} = a + (1-\beta_1)\ln y_{i,t-1} + u_{it}$, plus a common growth trend of 4% per year: catch-up $\beta_1 = 0.02$ per year (about BSM's estimate, p. 227), independent shocks $u_{it}$ of standard deviation $\sigma_u$; 200 economies, 40 years; 12 of them drawn as lines.
+  * Left: incomes start far apart ($\sigma_0 = 0.30$) and shocks are small ($\sigma_u = 0.03$): the spread falls.
+  * Right: incomes start close together ($\sigma_0 = 0.15$) and shocks are larger ($\sigma_u = 0.06$): poor economies still grow faster, but the spread rises towards its steady state $\sigma^{*} = \sigma_u/\sqrt{1-(1-\beta_1)^2}$.
+:::
 
 ```{r}
 #| label: fig-concept
@@ -90,16 +130,17 @@ ss <- rbind(s_all, s_60, s_90)
 #| fig-cap: "Simulated log incomes of 12 of 200 economies (top) and the cross-section standard deviation σ_t of all 200 (bottom). β-convergence holds in both panels (slope of 40-year average growth on initial log income is negative, shown in the panel titles); σ-convergence holds only on the left. Dashed line: steady-state σ*."
 #| fig-width: 10
 #| fig-height: 6
-sim <- function(sig0, sigu, b1 = 0.05, N = 200, T = 40, a = 0.05 * log(10000), seed = 1) {
+sim <- function(sig0, sigu, b1 = 0.02, x = 0.04, N = 200, T = 40, a = 0.02 * log(10000), seed = 1) {
   set.seed(seed)
   y <- matrix(NA_real_, T + 1, N)
   y[1, ] <- log(10000) + rnorm(N, 0, sig0)                       # mean log income ~ log(10,000)
   for (t in 2:(T + 1)) y[t, ] <- a + (1 - b1) * y[t - 1, ] + rnorm(N, 0, sigu)
+  y <- y + x * (0:T)                                              # common growth trend, x per year
   g <- (y[T + 1, ] - y[1, ]) / T                                  # average annual growth
   list(y = y, sd = apply(y, 1, sd), slope = coef(lm(g ~ y[1, ]))[2],
        sstar = sigu / sqrt(1 - (1 - b1)^2))
 }
-sc <- list(sim(1.0, 0.03), sim(0.15, 0.08))
+sc <- list(sim(0.30, 0.03), sim(0.15, 0.06))
 lab <- c(sprintf("A. σ-convergence (β slope = %.4f)", sc[[1]]$slope),
          sprintf("B. β-convergence without σ-convergence (β slope = %.4f)", sc[[2]]$slope))
 paths <- rbindlist(lapply(1:2, function(s) {
@@ -121,19 +162,14 @@ p2 <- ggplot(sds, aes(year, sd)) +
 patchwork::wrap_plots(p1, p2, ncol = 1, heights = c(1.4, 1))
 ```
 
-* Reading: in both panels the poorest economies grow fastest, yet only panel A narrows. Whether dispersion falls depends on where it starts relative to $\sigma^{*}$: it falls only from above.
+* In both panels the poorest economies grow fastest
+    * Only panel A narrows the variance. 
+    * Dispersion falls only when the initial variance is greater than $\sigma^{*}$.
 
-* The same model as cross-section distributions at years 0 and 40, with a common growth trend of 4% per year added to every economy:
-  * the trend moves the bell to the right (location: the mean, dashed line);
-  * catch-up and shocks change its width (size: the std).
-* Each curve is the normal density with the model's exact mean and std in that year: mean $\ln 10{,}000 + 0.04\,t$; variance $\sigma^{*2} + (\sigma_0^2-\sigma^{*2})(1-\beta_1)^{2t}$, the path of dispersion on the derivation page.
-  * Catch-up $\beta_1 = 0.02$ per year (about BSM's estimate, p. 227) in both panels.
-  * A: $\sigma_0 = 0.30$, $\sigma_u = 0.03$, so $\sigma^{*} = 0.15 < \sigma_0$ and the bell narrows.
-  * B: $\sigma_0 = 0.15$, $\sigma_u = 0.06$, so $\sigma^{*} = 0.30 > \sigma_0$ and the bell widens.
 
 ```{r}
 #| label: fig-dist-sim
-#| code-summary: "Code: draw the model's bell curves at years 0 and 40 for scenarios A and B"
+#| code-summary: "Code: draw the model's bell curves at years 0 and 40 for scenarios A and B (see below)"
 #| fig-cap: "Model distribution of log income at years 0 and 40, with 4% common growth per year. Normal density with the model's mean and std; dashed: mean. A: the bell moves right and narrows. B: it moves right and widens until it reaches σ*."
 #| fig-width: 10
 #| fig-height: 6
@@ -172,6 +208,18 @@ xl_h <- c(log(3000), log(1.3e5))
 patchwork::wrap_plots(bell(sh[panel == panel[1]], xl_h), bell(sh[panel != panel[1]], xl_h), ncol = 1)
 ```
 
+::: {.callout-note collapse="true"}
+## Settings of the bell curves
+* The same model setting as @fig-dist-sim: cross-section distributions at years 0 and 40, with a common growth trend of 4% per year added to every economy:
+  * the trend moves the bell to the right (location: the mean, dashed line);
+  * catch-up and shocks change its width (size: the std).
+* Each curve is the normal density with the model's exact mean and std in that year: mean $\ln 10{,}000 + 0.04\,t$; variance $\sigma^{*2} + (\sigma_0^2-\sigma^{*2})(1-\beta_1)^{2t}$, the path of dispersion on the derivation page.
+  * Catch-up $\beta_1 = 0.02$ per year (about BSM's estimate, p. 227) in both panels.
+  * A: $\sigma_0 = 0.30$, $\sigma_u = 0.03$, so $\sigma^{*} = 0.15 < \sigma_0$ and the bell narrows.
+  * B: $\sigma_0 = 0.15$, $\sigma_u = 0.06$, so $\sigma^{*} = 0.30 > \sigma_0$ and the bell widens.
+:::
+
+
 # Dispersion over time
 
 ```{r}
@@ -208,40 +256,98 @@ bell(sa, c(log(50), log(3e5)))
 
 # Weak σ-convergence test
 
+::: {.callout-tip collapse="true"}
+## KPS: does the cross-country variance trend down?
+
+* Intuition:
+  * If incomes converge, their cross-section variance $K_t$ falls over time, perhaps slowly and noisily. KPS fit a straight line to $K_t$ and ask whether its slope is negative.
+  * The line is deliberately misspecified (the true decay is a power law $t^{-\gamma}$), but the sign of the slope still picks up the direction of the trend (KPS Theorem 1, p. 15).
+* Steps:
+  1. Each year $t$, compute $K_t = n^{-1}\sum_i (y_{it} - \bar y_t)^2$.
+  2. Regress $K_t = a + \varphi\,t + u_t$.
+  3. Compute the t ratio of $\hat\varphi$ with a Newey-West HAC variance, $\lfloor T^{1/3}\rfloor$ lags.
+  4. Weak σ-convergence if $t < -1.65$; σ-divergence if $t > 1.65$; otherwise no significant trend.
+* Distribution of the t ratio (KPS Theorem 2, p. 18):
+  * Under the null of neither convergence nor divergence (slope 0, variance only fluctuating), the t ratio is $N(0,1)$ by standard HAC theory, so one-sided normal critical values apply.
+  * Under convergence it goes to $-\infty$ for slow decay; for very fast decay it stays bounded but its limit is about $-\sqrt3 = -1.73$, still below $-1.65$ (p. 19).
+  * The scale of the variance cancels between numerator and denominator, so the limit is free of nuisance parameters (p. 19).
+  * The convergence result needs $n/T \to \infty$ (more countries than years).
+* Power: KPS simulate power with $T = 50$ (Fig. 3, p. 24): close to 1 away from the null, lower when convergence is very fast (few informative periods). Here $T$ is 25-65 (WDI) and 20 (PWT), so power is lower than in their simulations; I have not found results for $T = 20$ in the text read.
+:::
+
 ```{r}
 #| label: tbl-kps
 #| code-summary: "Code: KPS weak σ-convergence test: variance on a linear trend, Newey-West t"
 #| tbl-cap: "Trend regression K_t = a + φ t + u_t on the cross-section variance K_t of log GDP per capita; t ratio uses a Newey-West HAC variance with floor(T^(1/3)) lags. φ < 0 with t below -1.65 indicates weak σ-convergence (one-sided 5%)."
+fmt_p <- function(p) ifelse(p < 0.001, "<0.001", sprintf("%.3f", p))  # p-value display, used by all test tables
 kps <- function(d, from, to, lab) {
   d <- d[year >= from & year <= to]
   m <- lm(K ~ year, data = d)
   L <- floor(nrow(d)^(1/3))
   se <- sqrt(sandwich::NeweyWest(m, lag = L, prewhite = FALSE)[2, 2])
   data.table(Sample = lab, Period = sprintf("%d-%d", from, to), T = nrow(d), Lags = L,
-             `φ × 100` = sprintf("%.3f", 100 * coef(m)[2]), `t ratio` = sprintf("%.2f", coef(m)[2] / se))
+             `φ × 100` = sprintf("%.3f", 100 * coef(m)[2]), `t ratio` = sprintf("%.2f", coef(m)[2] / se),
+             `p (one-sided)` = fmt_p(pnorm(coef(m)[2] / se)))
 }
 res <- rbind(kps(s_60, 1960, 2024, "Fixed since 1960"), kps(s_60, 1960, 1999, "Fixed since 1960"),
              kps(s_60, 2000, 2024, "Fixed since 1960"), kps(s_90, 1990, 2024, "Fixed since 1990"),
              kps(s_90, 2000, 2024, "Fixed since 1990"))
 y <- tt(res, theme = "striped")
 y <- style_tt(y, i = 0, background = "#e7f0fa")
-style_tt(y, j = 3:6, align = "r")
+style_tt(y, j = 3:7, align = "r")
 ```
 
 * Reading: a negative $\varphi$ means cross-country variance is trending down over the period.
 * The fixed samples avoid compositional change (countries entering the data), which moves the unbalanced series.
 
+# Absolute β-convergence (WDI)
+
+```{r}
+#| label: tbl-wdi-beta
+#| code-summary: "Code: β-convergence regression on WDI: average growth on initial log income; implied λ and half-life"
+#| tbl-cap: "Average annual growth of log GDP per capita (constant 2015 US$) on initial log GDP per capita; b = minus the slope (b > 0: β-convergence, b < 0: β-divergence); HC1 s.e.; λ = -ln(1 - bT)/T."
+wbeta <- function(d, from, to, lab) {
+  w <- dcast(d[year %in% c(from, to)], iso3 ~ year, value.var = "ly")
+  setnames(w, c("iso3", "y0", "y1"))
+  TT <- to - from
+  w[, gr := (y1 - y0) / TT]                                       # average annual growth
+  m <- lm(gr ~ y0, data = w)
+  b <- -coef(m)[2]
+  se <- sqrt(sandwich::vcovHC(m, type = "HC1")[2, 2])
+  lam <- if (b > 0) -log(1 - b * TT) / TT else NA_real_
+  data.table(Sample = lab, Period = sprintf("%d-%d", from, to), n = nrow(w),
+             b = sprintf("%.5f", b), `s.e.` = sprintf("%.5f", se), `t ratio` = sprintf("%.2f", b / se),
+             p = fmt_p(2 * pt(-abs(b / se), df = nrow(w) - 2)),
+             `Half-life (years)` = if (is.na(lam)) "" else sprintf("%.0f", log(2) / lam))
+}
+b90 <- bal(1990)
+wb <- rbind(wbeta(b60, 1960, 2024, "Fixed since 1960"), wbeta(b60, 1960, 1999, "Fixed since 1960"),
+            wbeta(b60, 2000, 2024, "Fixed since 1960"), wbeta(b90, 1990, 2024, "Fixed since 1990"),
+            wbeta(b90, 2000, 2024, "Fixed since 1990"))
+y <- tt(wb, theme = "striped", width = 0.85)
+y <- style_tt(y, i = 0, background = "#e7f0fa")
+style_tt(y, j = 3:8, align = "r")
+```
+
+* Reading: β moves with σ. Poorer countries grew more slowly in 1960-1999 (β-divergence) and faster in 2000-2024 (β-convergence), but catch-up is slow (half-life of 229-314 years, 2000-2024).
+
 # PWT 10.01, 2000-2019: KPS and Phillips-Sul tests
 
-* Question: did cross-country income dispersion fall over 2000-2019?
-  * Lähdemäki (2024, *Empirical Economics*, abstract) reports σ-convergence of labour productivity "from the year 2000" for all countries.
-  * Patel, Sandefur & Subramanian (2021, p. 5) find "no evidence of meaningful σ-convergence" of income per capita, with variance falling only after 2008.
-* Three tests on income per capita:
-  1. Kong, Phillips & Sul (2019) weak σ test on the raw cross-section variance of log income.
+Did cross-country income dispersion fall over 2000-2019?
+
+::: {.callout-note collapse="true"}
+## Existing studies, tests and data
+* Existing studies
+  * @Lahdemaki2024 [abstract]: σ-convergence of labour productivity "from the year 2000" for all countries.
+  * @PatelSandefurSubramanian2021 [p. 5]: Find "no evidence of meaningful σ-convergence" of income per capita, with variance falling only after 2008.
+* This note tests log income per capita
+  1. @KongPhillipsSul2019 weak σ test on the raw cross-section variance.
   2. The same test after removing estimated common factors, as KPS recommend for trending panels (KPS p. 5; Sul slides 29, 32).
-  3. Phillips & Sul (2007) log t test of relative convergence, which allows nonstationary income (PS p. 1773).
-* Data: Penn World Table 10.01, `rgdpe / pop` (expenditure-side real GDP at chained PPPs, 2017 US$, per person), saved in `data/pwt1001.dta`; nothing is downloaded at render.
-* Sample: countries observed every year 2000-2019; oil producers and countries under 1 million people (PWT, 2019) excluded, as above.
+  3. @PhillipsSul2007 log t test of relative convergence, which allows nonstationary income (PS p. 1773).
+* Penn World Table 10.01
+    * Series: `rgdpe / pop` (expenditure-side real GDP at chained PPPs, 2017 US$, per person), saved in `data/pwt1001.dta`; nothing is downloaded at render.
+    * Sample: countries observed every year 2000-2019; oil producers and countries under 1 million people (PWT, 2019) excluded, as above.
+:::
 
 ```{r}
 #| label: pwt-setup
@@ -280,6 +386,7 @@ bse <- sqrt(sandwich::vcovHC(mb, type = "HC1")[2, 2])
 
 * Average growth 2000-2019 on log income in 2000: slope $-b$ with $b$ = `r sprintf("%.4f", b)` (HC1 s.e. `r sprintf("%.4f", bse)`), implying $\lambda$ = `r sprintf("%.4f", lam)` per year and a half-life of `r sprintf("%.0f", log(2)/lam)` years.
 * Patel et al. report $\beta$ = .00425 (s.e. .00156) and a half-life of 170 years for 124 PWT countries, 2000-2019 (p. 5).
+* β agrees with the literature: catch-up is real but slow (half-life near 170 years).
 
 ## Removing common factors
 
@@ -310,8 +417,208 @@ Z <- lapply(1:3, function(k) Y - pc(Yt, k)$fit)                 # z = c_i + resi
 
 ## Phillips-Sul log t test
 
-* Steps (PS pp. 1788-1789): $h_{it} = X_{it}/(n^{-1}\sum_i X_{it})$, $H_t = n^{-1}\sum_i (h_{it}-1)^2$; regress $\log(H_1/H_t) - 2\log L(t)$ on $\log t$ with $L(t)=\log(t+1)$, $t = [rT],\dots,T$, $r = 0.3$; one-sided HAC t test (quadratic-spectral kernel, as in the `ConvergenceClubs` package); reject convergence at 5% if $t < -1.65$.
+Test $b<0$ for nonconvergence
+
+$$
+\ln\frac{\sigma^{2}_0}{\sigma^{2}_{t}} - 2\ln\ln(t+1) = a + b\ln t + u_t
+$$
+
+
+::: {.callout-tip collapse="true"}
+## Phillips-Sul (1): intuition and steps
+
+* Intuition:
+    * Any panel can be written as a common trend $\mu_t$ times a loading, $X_{it} = \delta_{it}\mu_t$(PS eq. 5, p. 1774).
+        * This is an identity with $\delta_{it} \equiv X_{it}/\mu_t$, not an assumption.
+        * Other group trends end up in $\delta_{it}$. 
+    * The restriction is on how $\delta_{it}$ moves: $\delta_{it} = \delta_i + \sigma_i\xi_{it}L(t)^{-1}t^{-\alpha}$ (PS eq. 3, p. 1773).
+        * Group trends that drift apart make $\delta_{it}$ diverge across groups &rArr; the test rejects &rArr; clubs (PS's wage example, eq. 7, p. 1776).
+        * The specification $\delta_{it} = \delta_i + \sigma_i\xi_{it}L(t)^{-1}t^{-\alpha}$ is chosen by authors.
+        * $L(t)$: a slowly varying function, $L(at)/L(t) \to 1$ as $t \to \infty$ for all $a > 0$ (PS fn. 3, p. 1781, page unverified), with $L(t) \to \infty$ (p. 1773), e.g. $\log t$. The test sets $L(t) = \log(t+1)$ (p. 1789).
+    * Let each country's log income relative to the cross-section mean as $h_{it} = X_{it}/(N^{-1}\sum_i X_{it})$, its cross-section variance as $H_t = N^{-1}\sum_i (h_{it}-1)^2$.
+        * Mean of $h_{it}=N^{-1}\sum h_{it} = N^{-1}\sum X_{it}/(N^{-1}\sum_i X_{it})=1$
+    * Convergence\
+     &rArr; All loadings end up equal\
+     &rArr; Each relative path $h_{it}$ (own log income divided by the cross-section mean) &rarr; 1\
+     &rArr; their spread $H_t$ &rarr; 0.
+    * When loadings converge at rate $t^{-\alpha}$\, we can detect it with $b$ in $\ln\frac{H_1}{H_t} - 2\ln L(t) = a + b\ln t + u_t$ [
+     $\because$ $H_t$ shrinks like $1/(L(t)^2 t^{2\alpha})$ (PS eq. 34, p. 1789)]\
+     &rArr;
+         * if actually converging, $\ln (H_1/H_t) -2\ln L(t)$ will cancel out the shrinkage, the coeff on $\ln t$ is $b = 2\alpha \geqslant 0$
+         * if not, $\left\{\ln (H_1/H_t) -2\ln L(t)\right\}$&darr;, so $t_{\hat b} < -1.65$ (one-sided 5%; $\hat b$ itself may stay near 0, PS Thm 2(a), p. 1795)
+* Steps (PS pp. 1788-1789):
+  1. Relative transition path: $h_{it} = X_{it}/(n^{-1}\sum_i X_{it})$, each country's log income relative to the cross-section mean.
+  2. Its cross-section variance: $H_t = n^{-1}\sum_i (h_{it}-1)^2$.
+  3. Drop the first fraction $r = 0.3$ of years: keep $t = \lfloor rT\rfloor, \dots, T$.
+  4. Regress $\log(H_1/H_t) - 2\log L(t)$ on $\log t$, with $L(t) = \log(t+1)$.
+  5. Compute the t ratio of the slope with a HAC variance (quadratic-spectral kernel; said to match the `ConvergenceClubs` package, unverified: the package is not installed).
+  6. Reject convergence at 5% if $t < -1.65$ (one-sided).
 * $X_{it}$: log income, HP-filtered with $\lambda = 400$ as in Sichera & Pizzuto (2019, pp. 146-147); also unfiltered.
+:::
+
+::: {.callout-tip collapse="true"}
+## Phillips-Sul (2): derivation of the log t regression
+
+* Two sources of spread in $h_{it}$; write $s_t \equiv L(t)^{-1}t^{-\alpha}$ and $\psi_{it} \equiv \sigma_i\xi_{it}$ (PS eq. 60, p. 1817), with $s_{t}\rightarrow 0$ as $t\rightarrow\infty$:
+
+    $$
+    \begin{aligned}
+    h_{it} - 1 &= \frac{\delta_i - \bar\delta + (\psi_{it} - \bar\psi_t)\,s_t}{\bar\delta + \bar\psi_t s_t} &&\text{(} \delta_i - \bar\delta\text{: permanent;}\\
+    & &&\phantom{\text{(}}(\psi_{it} - \bar\psi_t)s_t\text{: transitory,}\\
+    & &&\phantom{\text{(}}s_t \to 0)\\
+    H_0\ (\delta_i = \delta,\ \alpha \geqslant 0):\quad h_{it} - 1 &= \frac{(\psi_{it} - \bar\psi_t)\,s_t}{\delta + \bar\psi_t s_t} \;\Rightarrow\; H_t \to 0 &&\text{(derived below;}\\
+    & &&\phantom{\text{(}}\varepsilon_t \text{ is defined on this branch)}\\
+    H_A\ (\delta_i \ne \delta,\ \alpha \geqslant 0):\quad h_{it} - 1 &\to \frac{\delta_i - \bar\delta}{\bar\delta} \;\Rightarrow\; H_t \to N^{-1}\textstyle\sum_i(\delta_i - \bar\delta)^2/\bar\delta^2 > 0 &&\text{(PS p. 1789: positive limit;}\\
+    & &&\phantom{\text{(}}\text{the formula is my algebra)}\\
+    H_A\ (\delta_i \ne \delta,\ \alpha < 0):\quad h_{it} - 1 &\to \frac{\psi_{it}}{\bar\psi_t}-1 \;\Rightarrow\; H_t \to \frac{\sigma_{\xi}^2}{N} > 0 &&\text{(loading deviations grow,}\\
+    & &&\phantom{\text{(}}\text{PS p. 1788; $s_t \to \infty$)}
+    \end{aligned}
+    $$
+
+* Under convergence, $\delta_i = \delta$ for all $i$:
+    $$
+    \begin{aligned}
+    h_{it} &= \frac{\delta_{it}\mu_t}{N^{-1}\sum_j \delta_{jt}\mu_t} = \frac{\delta_{it}}{\bar\delta_t} &&\quad\text{(} X_{it} = \delta_{it}\mu_t\text{; } \mu_t \text{ cancels)}\\
+    \delta_{it} &= \delta + \psi_{it}s_t,\qquad \bar\delta_t = \delta + \bar\psi_t s_t &&\quad\text{(eq. 3 with } \delta_i = \delta\text{; average over } i)\\
+    h_{it} - 1 &= \frac{\delta_{it} - \bar\delta_t}{\bar\delta_t} = \frac{(\psi_{it} - \bar\psi_t)\,s_t}{\delta + \bar\psi_t s_t} &&\quad\text{(subtract the two lines above)}\\
+    H_t &= N^{-1}\sum_i (h_{it}-1)^2 = \frac{s_t^2\,\sigma^2_{\psi t}}{(\delta + \bar\psi_t s_t)^2} &&\quad\text{(square, average over } i\text{; PS eq. 61)}\\
+    &= \frac{s_t^2\,\sigma^2_{\psi t}}{\delta^2 + 2\delta\bar\psi_t s_t + \bar\psi_t^2 s_t^2} &&\quad\text{(expand the square)}\\
+    &= \frac{s_t^2\,\sigma^2_{\psi t}}{\delta^2\,(1 + 2\bar\psi_t s_t/\delta + \bar\psi_t^2 s_t^2/\delta^2)} &&\quad\text{(factor out } \delta^2)\\
+    &= \frac{s_t^2\,\sigma^2_{\psi t}}{\delta^2\,(1 + 2\lambda_t + \lambda_t^2)} &&\quad\text{(} \lambda_t \equiv \bar\psi_t s_t/\delta)\\
+    &= \frac{s_t^2\,\sigma^2_{\psi t}}{\delta^2\,(1+\zeta_t)} &&\quad\text{(} \zeta_t \equiv \lambda_t^2 + 2\lambda_t\text{; PS eq. 66, p. 1819)}
+    \end{aligned}
+    $$
+    * Notations
+    
+        $\sigma^2_{\psi t} \equiv N^{-1}\sum_i(\psi_{it}-\bar\psi_t)^2 = v^2 + N^{-1/2}\eta_{Nt} - N^{-1}\eta_{2Nt}$ (PS eq. 62): random each $t$, with mean $v^2 = N^{-1}(1-N^{-1})\sum_i\sigma_i^2$
+        
+        $\eta_{Nt}, \eta_{2Nt}$: mean-zero noise (PS p. 1818).
+        
+        $\zeta_t = (1+\lambda_t)^2 - 1$: how far $(\delta + \bar\psi_t s_t)^2$ is from $\delta^2$, as a share of $\delta^2$.
+        
+        $\zeta_t \to 0$ since $s_t \to 0$, which PS use to expand $\log(1+\zeta_t) = \zeta_t - \zeta_t^2/2 + \dots$ (PS p. 1819).
+    * Every line is an identity. $H_t \to 0$ under convergence (PS p. 1789); taking logs turns the vanishing factor $s_t^2$ into the terms $-2\log L(t) - 2\alpha\log t \to -\infty$, which the regression on $\log t$ estimates.
+
+        $$
+        \begin{aligned}
+        \log H_t &= \log s_t^2 + \log\frac{\sigma^2_{\psi t}}{\delta^2} - \log(1+\zeta_t) &&\quad\text{(take logs)}\\
+        &= -2\log L(t) - 2\alpha\log t + \log\frac{\sigma^2_{\psi t}}{\delta^2} - \log(1+\zeta_t) &&\quad\text{(} s_t^2 = L(t)^{-2}t^{-2\alpha})\\
+        &= -2\log L(t) - 2\alpha\log t + 2\log(v/\delta) + \varepsilon_t &&\quad\text{(PS eqs. 68-69; } \varepsilon_t \text{ below)}\\
+        \log H_1 - \log H_t &= \log H_1 - 2\log(v/\delta) + 2\log L(t) + 2\alpha\log t - \varepsilon_t &&\quad\text{(subtract from } \log H_1)
+        \end{aligned}
+        $$
+        
+        Then we have the estimating equation:
+        $$
+        \log\frac{H_1}{H_t} - 2\log L(t) = a + b\log t + u_t
+        $$
+
+        $\varepsilon_t \equiv \log(\sigma^2_{\psi t}/v^2) - \log(1+\zeta_t)$; $a = \log H_1 - 2\log(v/\delta)$, $b = 2\alpha$, $u_t = -\varepsilon_t$ (p. 1789).
+
+* Test of $b \geqslant 0$\
+&rArr; $t_{\hat b} \geqslant -1.65$: consistent with $H_t$ shrinking at least as fast as $L(t)^{-2}$ &rArr; convergence not rejected\
+&rArr; $t_{\hat b} < -1.65$: spread shrinks too slowly &rArr; convergence rejected (one-sided HAC t test, Step 3, p. 1789). $\hat b < 0$ alone does not reject.
+* Penalty $-2\log L(t) = -2\log\log(t+1)$ (p. 1789); dependent variable $\log(H_1/H_t) - 2\log L(t)$ (eq. 36):
+    * Under $H_0$ with $\alpha > 0$: $\log(H_1/H_t) = 2\log L(t) + 2\alpha\log t + O_p(1)$ (p. 1790) &rArr; $\hat b \to_p 2\alpha > 0$ &rArr; $t_{\hat b} \to +\infty$ &rArr; not rejected.
+    * Under $H_0$ at its boundary $\alpha = 0$ (slowest convergence: only $L(t)^{-1}$ decays): $\log(H_1/H_t) = 2\log L(t) + O_p(1)$ &rArr; the penalty cancels it &rArr; $t_{\hat b} \Rightarrow N(0,1)$ (Thm 1(b), p. 1790): $\hat b < 0$ half the time, rejected 5% of the time (the test's size).
+    * $H_A$, Loadings never meet ($\delta_i \ne \delta$): $H_t \to$ positive constant (p. 1789) &rArr; $\log(H_1/H_t) = O_p(1)$ &rArr; $\log(H_1/H_t) - 2\log L(t) = -2\log L(t) + O_p(1) \to -\infty$ &rArr; LHS&darr; $\sim$ RHS&uarr; $\hat b < 0$, $t_{\hat b} \to -\infty$ &rArr; rejected (p. 1790).
+    * Without the penalty, both cases give $\hat b \to 0$ ($\log L(t)$ grows more slowly than $\log t$): the test could not tell them apart.
+    * $O_p(1)$: a term that stays bounded in probability as $t \to \infty$.
+* Fast convergence with nearly equal loadings: $\delta_i \sim \text{iid}(\delta, \kappa^2 T^{-2\omega})$ (PS eq. 41, p. 1796; PS write $c^2$ for $\kappa^2$) &rArr; permanent gap $|\delta_i - \delta| = O_p(T^{-\omega})$.
+    * $\omega \leqslant \alpha$: $\hat b \to_p 0$, $t_{\hat b} \to -\infty$ &rArr; rejected (Thm 3(a), p. 1796); a larger $\alpha$ widens this range.
+    * $\omega > \alpha$: $\hat b - b \to_p 0$ &rArr; behaves like $H_0$ (Thm 3(b), pp. 1796-1797).
+* Why $\hat b \to_p 0$ when $\omega \leqslant \alpha$ (PS App. B, eqs. 99-103, pp. 1831-1832; eqs. 123-126, pp. 1842-1843):
+
+    $$
+    \begin{aligned}
+    T_r &\equiv T - \lfloor rT\rfloor + 1 &&\quad\text{(number of } t \text{ in the window } \lfloor rT\rfloor, \dots, T)\\
+    q &\equiv t/T \in [r, 1] &&\quad\text{(position of } t \text{ in the sample; } |\log q| \leqslant |\log r|)\\
+    \tau_t &\equiv \log(t/T) - T_r^{-1}\textstyle\sum_{m=\lfloor rT\rfloor}^{T}\log(m/T) &&\quad\text{(} \log(t/T) \text{ minus its mean over the window; p. 1821)}\\
+    &= \log t - \log T - T_r^{-1}\textstyle\sum_m \log m + \log T &&\quad\text{(} \log(x/T) = \log x - \log T\text{; } \textstyle\sum_m \log T = T_r\log T)\\
+    &= \log t - T_r^{-1}\textstyle\sum_m \log m &&\quad\text{(} \log t \text{ minus its mean over the window; p. 1791)}\\
+    \textstyle\sum_t \tau_t &= \textstyle\sum_t \log t - T_r\,T_r^{-1}\sum_m \log m = 0 &&\quad\text{(} \textstyle\sum_t \equiv \sum_{t=\lfloor rT\rfloor}^{T})
+    \end{aligned}
+    $$
+
+    $$
+    \begin{aligned}
+    \log H_t &= 2\log(\kappa/\delta) - 2\omega\log T + \tilde\varepsilon_t &&\quad\text{(} \sigma_\delta^2 = \kappa^2T^{-2\omega} \text{ dominates;}\\
+    & &&\quad\phantom{\text{(}}\text{eqs. 123, 125)}\\
+    y_t \equiv \log\frac{H_1}{H_t} - 2\log L(t) &= C_T - 2\log L(t) - \tilde\varepsilon_t &&\quad\text{(eq. 124)}\\
+    \hat b &= \frac{\sum_t \tau_t y_t}{\sum_t \tau_t^2} &&\quad\text{(OLS slope, centred regressor; eq. 99)}\\
+    &= \frac{C_T\sum_t \tau_t - 2\sum_t \tau_t\log L(t) - \sum_t \tau_t\tilde\varepsilon_t}{\sum_t \tau_t^2} &&\quad\text{(substitute } y_t)\\
+    &= -2\,\frac{\sum_t \tau_t\log L(t)}{\sum_t \tau_t^2} - \frac{\sum_t \tau_t\tilde\varepsilon_t}{\sum_t \tau_t^2} &&\quad\text{(} \textstyle\sum_t \tau_t = 0)
+    \end{aligned}
+    $$
+
+    $C_T \equiv \log H_1 - 2\log(\kappa/\delta) + 2\omega\log T$: constant in $t$; $\tilde\varepsilon_t \to_p 0$ (eq. 125).
+
+    $$
+    \begin{aligned}
+    \log L(t) &= \log(\log T + \log q) &&\quad\text{(} L(t) = \log t\text{, } t = qT)\\
+    &= \log\log T + \log\Big(1 + \frac{\log q}{\log T}\Big) &&\quad\text{(factor out } \log T)\\
+    &= \log\log T + \frac{\log q}{\log T} - \frac{\log^2 q}{2\log^2 T} + O\Big(\frac{1}{\log^3 T}\Big) &&\quad\text{(Taylor; } x = \log q/\log T \to 0\text{;}\\
+    & &&\quad\phantom{\text{(}}\text{eq. 100)}\\
+    \log q &= \tau_t + T_r^{-1}\textstyle\sum_m \log(m/T) &&\quad\text{(definition of } \tau_t)\\
+    \textstyle\sum_t \tau_t\log q &= \textstyle\sum_t \tau_t^2 + T_r^{-1}\sum_m \log(m/T)\sum_t \tau_t = \sum_t \tau_t^2 &&\quad\text{(} \textstyle\sum_t \tau_t = 0)\\
+    \frac{\sum_t \tau_t\log L(t)}{\sum_t \tau_t^2} &= \log\log T\,\frac{\sum_t \tau_t}{\sum_t \tau_t^2} &&\quad\text{(multiply } \log L(t) \text{ by } \tau_t\text{,}\\
+    & &&\quad\phantom{\text{(}}\text{sum, divide)}\\
+    &\quad + \frac{1}{\log T}\,\frac{\sum_t \tau_t\log q}{\sum_t \tau_t^2} &&\\
+    &\quad - \frac{1}{2\log^2 T}\,\frac{\sum_t \tau_t\log^2 q}{\sum_t \tau_t^2} + O\Big(\frac{1}{\log^3 T}\Big) &&\\
+    &= \frac{1}{\log T} - \frac{g(r)}{2\log^2 T} + O\Big(\frac{1}{\log^3 T}\Big) &&\quad\text{(lines above;}\\
+    & &&\quad\phantom{\text{(}}\text{last ratio} \to g(r)\text{; eq. 102)}\\
+    \hat b &= -\frac{2}{\log T} + \frac{g(r)}{\log^2 T} - \frac{\sum_t \tau_t\tilde\varepsilon_t}{\sum_t \tau_t^2} + O_p\Big(\frac{1}{\log^3 T}\Big) \to_p 0 &&\quad\text{(substitute into } \hat b\text{; eq. 103)}
+    \end{aligned}
+    $$
+
+    * $g(r)$: a constant that depends only on $r$ (p. 1832). The $-2/\log T$ is $\sum_t \tau_t\log q/\sum_t \tau_t^2 = 1$ scaled by $1/\log T$ (expansion of $\log L(t)$) and by $-2$ (penalty). $s_{\hat b}$ shrinks faster, so $t_{\hat b} \to -\infty$ (Remark 11, p. 1797).
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Phillips-Sul (3): link to the growth model
+
+(PS eq. 6 and the lines after it, p. 1775):
+
+$$
+\begin{aligned}
+\log y_{it} &= \log y_i^{*} + (\log y_{i0} - \log y_i^{*})e^{-\beta_{it}} + \log A_{it} = a_{it} + \log A_{it} &&\quad\text{(Solow path plus technology;}\\
+& &&\quad\phantom{\text{(}}a_{it}\text{: transition part)}\\
+\log A_{it} &= \log A_{i0} + \gamma_{it}\log A_t &&\quad\text{(} \gamma_{it}\text{: distance to frontier technology } A_t)\\
+\log A_t &= a\,t &&\quad\text{(frontier grows at rate } a)\\
+\log y_{it} &= a_{it} + \log A_{i0} + \gamma_{it}\,a\,t &&\quad\text{(substitute the two lines above)}\\
+&= \frac{a_{it} + \log A_{i0} + \gamma_{it}\,a\,t}{a\,t}\cdot a\,t = \delta_{it}\mu_t &&\quad\text{(multiply and divide by } \mu_t = a\,t)
+\end{aligned}
+$$
+
+* $\delta_{it}\mu_t$ is one way to write log income in PS's factor form $X_{it} = \delta_{it}\mu_t$ (eq. 5), with $\mu_t = a\,t$ chosen as the common component; PS: "corresponding to (5) and $\delta_{it}$ may be modeled according to (3)" (p. 1776).
+    * The split is chosen, not identified (see the normalisation bullet below).
+    * It gives $\delta_{it}$ an economic meaning; the test itself uses only $\delta_{it}/\bar\delta_t$, which does not depend on the split.
+* What $\delta_{it}$ is made of, and its limit:
+
+    $$
+    \begin{aligned}
+    \delta_{it} &= \frac{a_{it}}{a\,t} + \frac{\log A_{i0}}{a\,t} + \gamma_{it} &&\quad\text{(split the fraction)}\\
+    |a_{it}| &\leqslant |\log y_i^{*}| + |\log y_{i0} - \log y_i^{*}| &&\quad\text{(} \beta_{it} \geqslant 0 \Rightarrow 0 < e^{-\beta_{it}} \leqslant 1\text{; a fixed number)}\\
+    \delta_{it} &\to 0 + 0 + \lim_{t\to\infty}\gamma_{it} &&\quad\text{(fixed numbers } a_{it}, \log A_{i0} \text{ divided by } a\,t \to \infty)
+    \end{aligned}
+    $$
+* $\delta_{it} \to \delta$ for all $i$ &hArr; $\gamma_{it} \to \gamma$ for all $i$: technology gaps settle at a common value.
+* Steady states $y_i^{*}$ and initial technology $A_{i0}$ may differ across countries: they are divided by $a\,t$ and drop out.
+* Hence relative, not level, convergence: let $\gamma_{it} = \gamma_{jt} \to \gamma$ and $\beta_{it} \to \infty$ (transitions end), and write $c_{it} \equiv a_{it} + \log A_{i0}$:
+
+    $$
+    \begin{aligned}
+    \log y_{it} - \log y_{jt} &= c_{it} - c_{jt} \to (\log y_i^{*} + \log A_{i0}) - (\log y_j^{*} + \log A_{j0}) &&\quad\text{(} \gamma\,a\,t \text{ cancels; a constant gap)}\\
+    \frac{\delta_{it}}{\delta_{jt}} &= \frac{c_{it}/(a\,t) + \gamma_{it}}{c_{jt}/(a\,t) + \gamma_{jt}} \to \frac{0 + \gamma}{0 + \gamma} = 1 &&\quad\text{(needs } \gamma \ne 0)\\
+    \frac{\delta_{it}}{\delta_{jt}} &= \frac{c_{it}}{c_{jt}} \to \frac{\log y_i^{*} + \log A_{i0}}{\log y_j^{*} + \log A_{j0}} &&\quad\text{(if } \gamma_{it} = \gamma_{jt} = 0\text{: } a\,t \text{ cancels;}\\
+    & &&\quad\phantom{\text{(}}\text{generally} \ne 1)
+    \end{aligned}
+    $$
+* $\mu_t = a\,t$ is a normalisation, not identified: for any common rescaling factor $k_t \ne 0$ (same for all $i$), $X_{it} = \delta_{it}\mu_t = (\delta_{it}k_t)(\mu_t/k_t)$.
+    * Only the common part of the $1/(a\,t)$ terms can move into $\mu_t$; the country-specific part $c_{it} - \bar c_t$, with $\bar c_t \equiv N^{-1}\sum_j c_{jt}$, stays in $\delta_{it}$. It is at most an analogy to PS's $\sigma_i\xi_{it}L(t)^{-1}t^{-\alpha}$ (eq. 3): $c_{it} - \bar c_t$ is a deterministic country effect, nearly constant over $t$, while $\xi_{it}$ is mean-zero noise, weakly dependent over $t$ (p. 1773) (my reading).
+    * The test is unaffected with any choice of multiplicative term $k_{t}$ with $\mu_{t}$ being one such choice: $h_{it} = (\delta_{it}k_t)/(\bar\delta_t k_t) = \delta_{it}/\bar\delta_t$ (eq. 32).
+:::
 
 ```{r}
 #| label: pwt-ps
@@ -360,21 +667,22 @@ ggplot(kd, aes(year, K, colour = Series)) +
 res_k <- rbind(kpsK(Kfun(Y), "Raw log income"),
                rbindlist(lapply(1:3, function(k) kpsK(Kfun(Z[[k]]), sprintf("After removing %d factor%s%s", k,
                  ifelse(k > 1, "s", ""), ifelse(k == k_ic, " (IC2 choice)", ""))))))
-res_k[, Verdict := fifelse(t < -1.65, "σ-convergence", fifelse(t > 1.65, "σ-divergence", "no significant trend"))]
-res_k_show <- res_k[, .(Series, `φ × 100` = sprintf("%.4f", phi100), t = sprintf("%.2f", t), Lags, Verdict)]
+res_k_show <- res_k[, .(Series, `φ × 100` = sprintf("%.4f", phi100), t = sprintf("%.2f", t), `p (one-sided)` = fmt_p(pnorm(t)), Lags)]
 y1 <- tt(res_k_show, theme = "striped"); y1 <- style_tt(y1, i = 0, background = "#e7f0fa")
-style_tt(y1, j = 2:4, align = "r")
+style_tt(y1, j = 2:5, align = "r")
 ```
+
+* Raw log income: weak σ-convergence over 2000-2019 (@tbl-pwt-kps, t = `r sprintf("%.2f", res_k$t[1])`), but @fig-pwt-K shows the variance rising until 2008 and falling afterwards. This reconciles the two claims: the linear-trend test (as in Lähdemäki) reports convergence over the whole window; the path (as in Patel et al.) shows the decline only after 2008.
+* After removing 1-3 common factors: no significant trend. The decline in raw dispersion is carried by heterogeneous loadings on common factors, not by the idiosyncratic components.
 
 ```{r}
 #| label: tbl-pwt-ps
 #| code-summary: "Code: tabulate the Phillips-Sul log t test"
 #| tbl-cap: "Phillips-Sul log t test, PWT 2000-2019 (r = 0.3). Relative convergence is rejected at 5% if t < -1.65."
 res_p <- rbind(ps_hp$res, ps_raw$res)
-res_p[, Verdict := fifelse(t < -1.65, "reject convergence", "convergence not rejected")]
-res_p_show <- res_p[, .(Series, b = sprintf("%.3f", b), t = sprintf("%.2f", t), `First t`, Obs, Verdict)]
+res_p_show <- res_p[, .(Series, b = sprintf("%.3f", b), t = sprintf("%.2f", t), `p (one-sided)` = fmt_p(pnorm(t)), `First t`, Obs)]
 y2 <- tt(res_p_show, theme = "striped"); y2 <- style_tt(y2, i = 0, background = "#e7f0fa")
-style_tt(y2, j = 2:5, align = "r")
+style_tt(y2, j = 2:6, align = "r")
 ```
 
 ```{r}
@@ -391,7 +699,14 @@ ggplot(hd, aes(year, H, colour = Series)) + geom_line(linewidth = 0.9) +
   theme(legend.position = "bottom", panel.grid.minor = element_blank())
 ```
 
-## Club convergence (Phillips-Sul 2007, 2009)
+* Phillips-Sul: $H_t$ falls (@fig-pwt-H), yet relative convergence is rejected (@tbl-pwt-ps, t = `r sprintf("%.2f", res_p$t[1])` HP-filtered). The test asks $H_t$ to fall at least as fast as $L(t)^{-2}$ (PS p. 1789); here $\log(H_1/H_T)$ = `r sprintf("%.3f", log(ps_hp$H[1]/ps_hp$H[TT]))`, too slow over 20 years.
+
+## Club convergence (exploratory)
+
+* Low weight: clubs are formed by failing to reject convergence with only 15 regression points, so membership mostly reflects low power (see Caveats). Details are folded below.
+
+::: {.callout-caution collapse="true"}
+## Club convergence details (Phillips-Sul 2007, 2009), low power
 
 * When the log t test rejects for the whole panel, PS cluster countries into convergence clubs (steps from Sichera & Pizzuto 2019, pp. 144-145):
   1. Sort countries by the last observation (HP-filtered log income in 2019), richest first.
@@ -456,13 +771,14 @@ mc <- merge_clubs(Xhp, fc$clubs)
 nm <- unique(as.data.table(haven::read_dta("data/pwt1001.dta"))[, .(iso3 = countrycode, country)])
 club_tab <- rbindlist(lapply(seq_along(mc), function(k) {
   iso <- colnames(Y)[mc[[k]]]
-  data.table(Club = as.character(k), n = length(iso), `log t` = sprintf("%.2f", logt_t(Xhp, mc[[k]])),
+  lt <- logt_t(Xhp, mc[[k]])
+  data.table(Club = as.character(k), n = length(iso), `log t` = sprintf("%.2f", lt), `p (one-sided)` = fmt_p(pnorm(lt)),
              `Mean income 2019 (2017 US$)` = format(round(mean(exp(Y[TT, mc[[k]]])), -2), big.mark = ","),
-             Countries = paste(nm[match(iso, iso3), country], collapse = "; "))
+             Countries = paste(sort(nm[match(iso, iso3), country]), collapse = "; "))
 }))
-if (length(fc$divergent)) club_tab <- rbind(club_tab, data.table(Club = "Divergent", n = length(fc$divergent), `log t` = "",
+if (length(fc$divergent)) club_tab <- rbind(club_tab, data.table(Club = "Divergent", n = length(fc$divergent), `log t` = "", `p (one-sided)` = "",
   `Mean income 2019 (2017 US$)` = format(round(mean(exp(Y[TT, fc$divergent])), -2), big.mark = ","),
-  Countries = paste(nm[match(colnames(Y)[fc$divergent], iso3), country], collapse = "; ")))
+  Countries = paste(sort(nm[match(colnames(Y)[fc$divergent], iso3), country]), collapse = "; ")))
 ```
 
 * Initial clubs: `r length(fc$clubs)` (sizes `r paste(sapply(fc$clubs, length), collapse = ", ")`); after merging: `r length(mc)`; divergent: `r length(fc$divergent)`.
@@ -471,11 +787,11 @@ if (length(fc$divergent)) club_tab <- rbind(club_tab, data.table(Club = "Diverge
 #| label: tbl-pwt-clubs
 #| code-summary: "Code: tabulate the convergence clubs and their members"
 #| tbl-cap: "Phillips-Sul convergence clubs after merging, PWT 10.01 income per capita (HP-filtered log), 2000-2019. log t > -1.65: convergence within the club not rejected."
-y3 <- tt(club_tab, theme = "striped", width = c(0.08, 0.04, 0.06, 0.12, 0.70))
+y3 <- tt(club_tab, theme = "striped", width = c(0.08, 0.04, 0.06, 0.07, 0.11, 0.64))
 y3 <- style_tt(y3, i = 0, background = "#e7f0fa")
 y3 <- style_tt(y3, fontsize = 0.85)
-y3 <- style_tt(y3, j = 5, align = "l")
-style_tt(y3, j = 2:4, align = "r")
+y3 <- style_tt(y3, j = 6, align = "l")
+style_tt(y3, j = 2:5, align = "r")
 ```
 
 ```{r}
@@ -494,17 +810,17 @@ ggplot(cp, aes(year, h, colour = Club)) + geom_line(linewidth = 1) +
   theme_minimal(base_size = 12) + theme(legend.position = "right", panel.grid.minor = element_blank())
 ```
 
-## Reading the results
-
-* Raw log income: weak σ-convergence over 2000-2019 (@tbl-pwt-kps, t = `r sprintf("%.2f", res_k$t[1])`), but @fig-pwt-K shows the variance rising until 2008 and falling afterwards. This reconciles the two claims: the linear-trend test (as in Lähdemäki) reports convergence over the whole window; the path (as in Patel et al.) shows the decline only after 2008.
-* After removing 1-3 common factors: no significant trend. The decline in raw dispersion is carried by heterogeneous loadings on common factors, not by the idiosyncratic components.
-* Phillips-Sul: $H_t$ falls (@fig-pwt-H), yet relative convergence is rejected (@tbl-pwt-ps, t = `r sprintf("%.2f", res_p$t[1])` HP-filtered). The test asks $H_t$ to fall at least as fast as $L(t)^{-2}$ (PS p. 1789); here $\log(H_1/H_T)$ = `r sprintf("%.3f", log(ps_hp$H[1]/ps_hp$H[TT]))`, too slow over 20 years.
-* β and σ agree with the literature: catch-up is real but slow (half-life near 170 years), and dispersion declines only modestly.
-* Clubs: the whole panel does not converge, but `r length(mc)` clubs do (@tbl-pwt-clubs). Countries converge towards their club's path, not towards one world level (@fig-pwt-clubs), in line with Quah's convergence clubs (Twin Peaks DP, p. 9).
+* Clubs: the whole panel does not converge, and convergence is not rejected within `r length(mc)` groups (@tbl-pwt-clubs). Not rejecting is weak evidence here; the grouping is suggestive of Quah's convergence clubs (Twin Peaks DP, p. 9), not a test of them.
+* Club 1 is not a club of rich countries: it runs from Laos (2019 income $7,359, rank 82 of 128) to $102,354. It is initial clubs 1-4 (2 + 17 + 10 + 21 = 50 countries) merged because their joint log t (−0.93) is above −1.65. Read it as "paths not statistically separable over 2000-2019". Laos enters through very fast growth (7.5% a year vs a median of 3.0%), which bends its relative path upward.
+:::
 
 ## Caveats
 
 * Removing common factors with heterogeneous loadings can absorb catch-up itself: if poorer countries load more heavily on a common growth factor, convergence sits in $\lambda_i'F_t$ and is removed with it. The factor-removed rows test σ-convergence of the idiosyncratic component, not of income.
 * PS log t tests relative convergence ($h_{it}\to 1$); with trending data this does not imply weak σ-convergence (KPS p. 7). With $T = 20$ and $r = 0.3$ the regression uses 15 years.
+* $H_t$ is $K_t$ scaled by the squared mean of log income: $h_{it} - 1 = (y_{it}-\bar y_t)/\bar y_t$, so $H_t = K_t/\bar y_t^2$ (here 0.02042 in 2000 and 0.01698 in 2019, equal to $K_t/\bar y_t^2$).
+  * $\bar y_t$ rose from 8.698 to 9.304, so $\bar y_t^2$ rose by $(9.304/8.698)^2 = 1.144$; $K_t$ fell by $1.4696/1.5446 = 0.951$.
+  * $H_t$ fell to $0.951/1.144 = 0.831$ of its 2000 value: most of the 16.9% fall comes from rising mean log income, not from incomes moving together. $H_t$ also depends on the units of income (dollars vs thousands of dollars change $\bar y_t$).
+* Power: PS report test size near nominal (the 5% test rejects 5% of the time when it should not) for $NT \geqslant 50$ and $r \geqslant 0.3$, and power falls as $r$ rises "because the effective sample size is smaller" (p. 1802). With 15 regression points, failing to reject is weak evidence. This matters for clubs, which are formed by non-rejection.
 * Club membership depends on the core-group rule, $c^{*}$ and the merging rule (Sichera & Pizzuto 2019, p. 144); the clustering here is a direct implementation, not checked against `ConvergenceClubs`.
 * HP filtering with $\lambda = 400$ on 20 annual observations has end-point effects.
