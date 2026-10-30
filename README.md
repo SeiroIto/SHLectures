@@ -28,6 +28,7 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
    * [GDP and Gini](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/03/gdpgini/GDP_Gini.html)
    * [WID](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/03/wid/WID_WorldWealth.html)
 * Lecture 05 
+   * [02](https://seiroito.github.io/SHLectures/lec_slides/2026/02.html)  
    * [RP04](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP04.html)  
    * [convergence](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/04/convergence/SigmaConvergencePlot.html)
    
