@@ -1,0 +1,222 @@
+---
+title: "HW3"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2026年秋学期
+author: "アジア経済研究所 伊藤成朗"
+output:
+  slidy_presentation:
+    self_contained: true
+    incremental: true
+    font_adjustment: -1
+    footer: "http://seiroito.github.io/SHLectures/lec_slides/2026/02.html"
+bibliography: ExampleBibFile.bib
+# rmarkdown::render("HW3_rmarkdown.rmd")
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+::: {style="text-align: center;"}
+# はじめに
+:::
+
+```{css}
+.math.inline .MathJax  {
+  font-size: 80% !important;
+}
+gray {
+  color: #aeb6bf;
+}
+Red {
+  color: Red;
+}
+Blue {
+  color: Blue;
+}
+RoyalBlue
+{
+  color: #4169e1;
+}
+a, a:link, a:visited, div.slide a {
+  color: green !important;
+}
+.columns {
+  display: flex;
+  gap: 2em;
+}
+body {
+  background: radial-gradient(circle, #f7fbfc 0%, #add9e4 100%) fixed;
+}
+div.slide {
+  background: transparent;
+}
+div.slide ol[style*="lower-alpha"] > li {
+  list-style-type: lower-alpha !important;
+}
+div.slide li li {
+  font-style: normal !important;
+  font-size: 85% !important;
+}
+div.slide li, div.slide li > p {
+  margin-top: 0.15em !important;
+  margin-bottom: 0.15em !important;
+}
+/* shrink only the リスト slide (the one holding the a)-d) list) */
+div.slide:has(ol[style*="lower-alpha"]) > * {
+  zoom: 0.85;
+}
+/* inverted slide: whole slide holding a .inverse div (as litedown snap .inverse) */
+div.slide:has(.inverse) {
+  background: #eee;
+  filter: invert(1);
+}
+.vcenter {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cmdbox {
+  border-left: 4px solid #31BAE9;
+  background: #f4f8fb;
+  padding: 0.3em 1em;
+}
+.cmdbox pre, .cmdbox code, .cmdbox code > span {
+  white-space: pre-wrap !important;
+  word-break: break-all;
+  font-family: Consolas, "Courier New", monospace;
+}
+div.slide.level1 {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+```
+
+----
+
+図の表示
+
+![@DurlaufKourtellosTan2022](GGC.jpg){width="50%"}
+
+出所: [このページ](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-082321-122703)にpdfがあります
+
+---
+
+リスト
+
+. . .
+
+長所
+
+* 歪みなく効果を計測できる(<Red>internal validity</Red>)
+   a) (結果に疑問を挟む余地は少ないので無駄な議論を節約できる)
+   a) 被験者をランダムに治療群the treatedと統御群the cotrolに割り振り、前者にのみ介入
+   a) Randomisation of treatment: 治療群と統御群は相似、異なるのは介入の有無だけ
+   a) 結果指標の違いは介入が原因と解釈可能
+* それ以外にない
+
+. . .
+
+::: {.nonincremental}
+* 一気に
+* 表示させる
+:::
+
+---
+
+:::::: {.columns}
+
+:::: {.column width="60%"}
+![鍵を捜す男](FindKey_small.jpg){width="30%"}
+::::
+:::: {.column width="30%"}
+:::{style="font-size: 55%;line-height: 1.1; overflow-wrap: anywhere;"}
+出所: <https://diabetes.diabetesjournals.org/content/64/4/1105>
+:::
+::::
+::::::
+
+ATT
+: Average treatment effects on the treated: 実施群における平均効果
+
+. . .
+
+$$
+ATT = E[y_{1i}|D_{i}=1]-E[y_{0i}|D_{i}=1].
+$$
+
+
+----
+
+2列表示
+
+::::::::::: {.columns}
+:::: {.column width="40%"}
+![](../Porteus2022Tab1a.jpg){width="100%"}
+
+![](Porteus2022Tab1b.jpg){width="100%"}
+
+@Porteous2022, Table 1
+::::
+
+:::: {.column style="width: 60%; font-size: 65%;"}
+* 人口が多い英語公用語国がトップ
+* 自国で学術雑誌を持っていると上位(e.g., South African Journal of Economics)
+
+```{=html}
+<div class="incremental">
+```
+アフリカの経済研究で得られた知識=こうした地域からの知識
+```{=html}
+</div>
+<div class="incremental">
+```
+知識の出自が偏っていることを知るべき
+```{=html}
+</div>
+```
+
+1. 西アフリカでも同じ結果?
+1. アフリカ中央部でも同じ結果?
+
+```{=html}
+<div class="incremental">
+```
+自国での研究がないと、効果が異なる(かもしれない)のに政策が実施されてしまうかも、という意味で不利
+```{=html}
+</div>
+```
+::::
+
+:::::::::::
+
+----
+
+::: {.inverse style="font-size: 130%;"}
+* 文字が大きい
+* 色を弱めずに反転
+:::
+
+----
+
+:::: {.vcenter}
+
+::: {.cmdbox}
+```powershell
+& 'C:\seiro\languages\R\R-4.4.1\bin\Rscript.exe' -e "rmarkdown::render('HW3_rmarkdown.rmd')"
+```
+:::
+
+https://pkg.yihui.org/rmarkdown-book/slidy-presentation
+
+::::
+
+----
+
+#### References
+
+::: {#refs}
+:::
