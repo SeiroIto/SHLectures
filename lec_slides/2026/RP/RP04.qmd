@@ -462,7 +462,7 @@ AIに全てやってもらうと言うよりは、アイデアは人間が考え
     * 親より身長の高い子どもが生まれる確率-親より身長の低い子どもが生まれる確率
         * 高身長の親: 負
         * 低身長の親: 正
-        * [Victor Wembayama (224cm)](https://www.nba.com/player/1641705/victor-wembanyama)
+        * [Victor Wembanyama (224cm)](https://www.nba.com/player/1641705/victor-wembanyama)
     * 生物学的に身長の上限、下限があるため
     * 上下限がある現象ならば平均への回帰がある
 * AIの出すアイディアも平均に回帰=つまらなくなっていく
