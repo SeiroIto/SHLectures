@@ -32,4 +32,6 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
    * [RP04](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP04.html)  
    * [convergence](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/04/convergence/SigmaConvergencePlot.html)
    
-
+* Lecture 06 
+   * [RP05](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP05.html)  
+   
