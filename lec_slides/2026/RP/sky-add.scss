@@ -9,4 +9,8 @@ $btn-code-copy-color: blue;
 /*-- scss:rules --*/
 @import "../../../assets/style/quarto-fixes";
 
+// Arrow-marker lists: wrap a list in ::: {.LArrowList} or ::: {.RArrowList}
+.reveal .LArrowList ul { list-style-type: "← "; }
+.reveal .RArrowList ul { list-style-type: "→ "; }
+
 
