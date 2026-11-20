@@ -37,4 +37,7 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
 
 * Lecture 07 
    * [RP06](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP06.html)  
+
+* Lecture 08 
+   * [RP07](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP07.html)  
    

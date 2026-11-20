@@ -1,0 +1,210 @@
+---
+title: "RP07"
+subtitle: |
+  聖心女子大学国際交流学科\
+  2026年秋学期
+author: "アジア経済研究所 伊藤成朗"
+engine: knitr
+execute:
+  echo: false
+  freeze: auto
+format:
+  revealjs:
+    standalone: true
+    embed-resources: true
+    slide-number: true
+    incremental: true
+    width: 1600
+    height: 900
+    preview-links: auto
+    logo: ../../CommonFiles/GrootbergGiraffeHead.jpg
+    footer: <http://seiroito.github.io/SHLectures/lec_slides/2024/RP/RP02.html>
+    css: ../../../assets/style/seiro.css
+    theme: [sky, sky-add.scss]
+    linkcolor: red
+    code-line-numbers: true
+    code-copy: true
+    code-block-border-left: "#31BAE9"
+    toc: true
+    toc-depth: 1
+    template-partials: 
+      - toc-slide.html
+    include-after-body: toc-add.html
+    toc-bg-image: "../../../assets/GrootbergGiraffe3.jpg"
+lightbox: auto
+filters:
+  - ../../../_extensions/tarleb/parse-latex/parse-latex.lua
+  - ../../../_extensions/dialoa/imagify/imagify.lua
+imagify:
+  header-includes: |
+    \usetikzlibrary{calc}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{math}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{fit}
+    \usepackage{pgfplots}
+  pdf-engine: lualatex
+include-in-header:
+  - text: |
+      <style>
+       .title {
+        font-size: 2.0em;
+      }
+      </style>
+#### From https://github.com/quarto-dev/quarto-cli/discussions/2951
+#### I am happy with the left-indenting of the section line
+#### Horizontal centering can be challenging (!) in quarto: stupid
+#### https://github.com/quarto-dev/quarto-cli/issues/1231
+#### It turns out an easy solution is :::{style="text-align: center;"}
+  - text: |
+      <style>
+      .center-xy {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        -ms-transform: translateY(-50%), translateX(-50%);
+        transform: translateY(-50%), translateX(-50%);
+      }
+      .OrangeULine {
+        text-decoration: underline;
+        color: orange;
+      }
+      </style>
+bibliography: ../../../seiro.bib
+resources:
+  - RP07.pdf
+# quarto render RP07.qmd
+---
+
+* [African lady](07/01_AfricanLady.jpg)
+* [Early morning bus](07/02_Bus.jpg)
+* [Car](07/03_DodgyCar.jpg)
+* [Parking exit](07/03_ParkingExit.mp4)
+* [Kayamandi](07/04_Kayamandi.jpg)
+* [Walk commute](07/05_PeopleWalkToWork.jpg)
+* [Khayelitsha](07/06_Khayelitsha.jpg)
+    * [Khayelitsha from ground on N2](https://upload.wikimedia.org/wikipedia/commons/2/2f/Khayelitsha_at_N2_road%2C_Cape_Town_%282015%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original)
+* [Bakkie](07/07_ToyotaHiluxBakkie.jpg)
+* [Vineyard](07/07_AlexTalkingAboutVineyards.mp4)
+* [Office](07/08_Lievland.jpg)
+* [Bottle labeling](07/08_BottleLabeling.mp4)
+* [Cellar tank](07/09_LievlandCellar.jpg)
+* [Stellenbosch University](07/10_StellenboschU.mp4)
+
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+統計学的推論で得るP値のところで5パーセント未満か、5パーセント以上で表現が変わってくるというところで、4.99パーセントと5パーセントは数字でみたらほぼ同じように感じるが結果としてはキッパリと別れてしまっていて、統計学において｢やや効率的｣のような中間を示すような表現がないのか気になりました。それとも中間があるとハッキリとデータや結果を出せないから切り捨てがあるのかなと考えました。
+:::
+</div>
+
+* 統計学的推論で統計学が提供するのはp valueです
+* 統計学では「統計学的に有意」という表現は本来ならば不要です
+* 人間は「効果がある」「効果がない」と二分法で考える方が処理が楽なので、人間のために生み出された表現です
+* われわれが知的に辛抱して量的な指標を素直に読むしかありません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+統計的に有意な結果が出るまで分析方法を変えたり、データを分けて効果がある部分を探したりする「p-hacking」は、研究結果の信頼性を損なう行為だと分かりました。特に、効果がゼロという結果も、精度高く推定できていれば意味のある結果だという考え方が印象に残りました。自分の予想と異なる結果が出たとしても、それを無理に変えようとせず、結果を正しく受け止める姿勢が研究には必要だと感じました。
+:::
+</div>
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+実験研究では、有意な結果を出すこと自体が目的ではなく、適切な研究デザインに基づいて信頼性の高い因果効果を推計することが重要だということがわかりました。特に、効果がゼロであっても、高い精度で推計できていれば立派な研究成果になるという考え方は重要だと感じました。研究者は自身がたてた仮説にとらわれず、結果を客観的に受け止めることが必要だと再確認しました。
+:::
+</div>
+
+* 効果ありの方が
+    * 面白く感じる
+    * 雑誌に掲載されやすいpublication biasがある
+* 研究者が効果ありを好むのは主に後者のためだと思います
+* 本来ならば、利害がない限り、研究者にとって効果があってもなくてもどちらでもよいはずです
+    * 製薬会社所属の研究者が効果なしの研究を隠すのは利害があるためです
+* どの雑誌でも、著者が利害関係を宣誓しないと論文は掲載されません
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+推計は、客観的な事実を正確に表す事ができると考えていましたが、そもそも推計を行う人間側の手順やバイアスによって、偏った結果が得られることが分かりました。
+:::
+</div>
+
+* 推計の手続きを機械的にすれば、誰もが同じ推計値とp valueに辿り着きます
+    * でも、そうしないのが人間です
+    * なので、pre analysis planを使うことが推奨されています
+* 複数あってもおかしくないのは推計値の意味の解釈です
+
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+サンプルサイズが小さくても、長期間にわたって同じ傾向の結果が見られた場合、その研究の信憑性は高いと言えるのか、疑問に思った。
+:::
+</div>
+
+* 長期間=複数の研究、という解釈で以下は考えています
+* P value = 何度も同じ標本が得られた場合、効果なしの分布において推計結果よりも極端な推計値が得られる確率
+* 何度も同じ母集団からの標本ならば、各標本の和=総合標本サイズとなって、meta analysisで総合標本サイズを使った統計学的推論ができます
+* 総合標本サイズが大きく、すべて同じ傾向であれば、信頼性は高いといえます
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+ランダム化が適切に行われていても、実験の途中で何らかの参加者の脱落や介入への不遵守が発生した場合、因果効果をどのように推計するのが適切なのでしょうか。
+:::
+</div>
+
+* 脱落者や介入非遵守がどのような理由で発生したのかによります
+* 最も簡単な(結果が変わらない)場合: 理由が落雷などの結果に無関係な出来事によるとき
+* 結果が変わる場合: 理由が効果に関係する場合
+    * 効果が低そうだから脱落した &rArr; 効果を過大に示すoverestimation
+    * 効果が高そうだから不正に参加した &rArr; 効果を過小に示すunderestimation
+* 理由が効果に関係するときには、推計はいろいろな仮定をおいて補正します
+* その仮定が満たされるか分からない場合には、過大推計か過小推計かを議論します
+
+----
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+開発途上国では交通手段や調査体制が整っていない地域もあり、費用や人手の面から対象者を十分に集められない場合もあると思います。そう考えると、対象が少ないという問題は完全には避けられないのではと思い、研究結果をそのまま信じるのではなく、調査の規模や分析方法まで見たうえで判断することが大切だと感じました。
+:::
+</div>
+
+* 原則論からすると、小標本になるのであればやらない方がいいです
+* 最も簡単な方法: お金(予算を獲得して大標本)で解決します
+* お金がない場合は、工夫をして検定力が高いデザインを考えねばなりません
+* お金も知恵も無いならば、街灯の下で鍵を探すか、暗闇で鍵を探すか、研究者の信条次第だと思います
+    * 暗闇で何度も探すとmeta analysisで結果が出る場合もあります
+    * でも、個別論文の評価は低く、meta analysisの分析は公共財なので、供給は過少になります
+    * 複数のプロジェクトを1つの論文にまとめると良いかもしれません
+
+----
+
+
+<div class=big-code>
+::: {.callout-note appearance="minimal"}
+人的資本への投資は幼児期ほど収益率が高いという点も興味深く、研究の数字を鵜呑みにせず、どのような方法や条件で導き出された結果なのかを考えることが大切だと感じました。
+:::
+</div>
+
+* インドのNGO代表の意見
+* 幼児期の方が高そうだという直感的な期待はありますが、その論拠だけで議論する研究には価値がありません
+    * 噂話と一緒です
+* ノーベル経済学者の描いた曲線がSouthern Economic Journalというランキング低めの雑誌に掲載されたのには理由があります
+* でも、その図が最も有名になりました
+* 本人が売り込んだからです
+
+
+----
