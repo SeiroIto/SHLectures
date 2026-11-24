@@ -4,6 +4,7 @@ project:
     - "!lec_slides/2026/1/TIMSS_PISA_trends.qmd"
     - "!lec_slides/2026/RP/**/*.qmd"
     - "!lec_slides/2026/RP/**/data/**"
+    - "!lec_slides/2026/exams/*.qmd"
     - "lec_slides/2026/**/*.md"
     - "lec_slides/2026/**/*.qmd"
     - "lec_slides/2026/**/*.pdf"
