@@ -1,0 +1,92 @@
+---
+title: |
+  中間試験
+author: "Seiro Ito"
+date: last-modified
+date-format: "MMMM DD, YYYY, HH:MM ZZ"
+execute:
+  echo: false
+  freeze: auto  # re-render only when source changes
+engine: knitr
+pdf-engine: lualatex
+format:
+  html:
+    standalone: true
+    code-copy: true
+    embed-resources: true
+    toc: true
+    toc-location: left
+    toc-depth: 1
+    grid:
+      margin-width: 350px
+    linkcolor: "green"
+    urlcolor: "#009900"
+    template-partials: 
+      - ../../../assets/style/toc-slide.html
+    include-after-body: ../../../assets/style/toc-add.html
+  pdf: default
+theme: [sky, ../../../assets/style/sky-add.scss]
+css: [../../../assets/style/my.css]
+filters:
+  - ../../../_extensions/tarleb/parse-latex/parse-latex.lua
+  - ../../../_extensions/seiro/tikzja/tikzja.lua
+  - ../../../assets/filters/ListArrow.lua
+  - ../../../_extensions/schochastics/nutshell/nutshell.lua
+lightbox: auto
+backgroundcolor: "#fffcf2"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+doi-title: "doi.org/10.1086/734780"
+callout-appearance: simple
+callout-icon: false
+bibliography: ../../../seiro.bib
+link-citations: true
+reference-location: margin
+citation-location: margin
+---
+
+::: {.callout-important title=""}
+* 論旨が通るように文章を書いてください
+* 字数制限はありません
+    * ただし、字数の少ない方が書き手も読み手も理解しやすいです
+:::
+
+
+# インパクト評価
+
+以下の状況でインパクト評価が可能か、可能であれば、どのような方法を使うかを示してください。
+
+(@) 自民党+維新の会の与党が202Y年M月に食料品消費税を1%に下げました。消費税が10%なので割高に見えるレストラン業界への影響が懸念されます。消費税減税のレストラン売り上げへの効果を考えたいと思います。
+
+    a) インパクト評価は可能でしょうか、可否とその理由を示してください
+    a) 可能な場合、どのようなデータ(「XXデータのYY項目」、統計名と項目名も具体的に示せば説得力が増します)、どのような方法を使うか具体的に示してください
+    a) その方法で得た推計値の信頼性を議論してください
+
+
+(@) 東京都中央区が生活応援のための買い物券を2026年8月に5000円分配布しました。買い物券は区内の小売店でのみ利用できます。小売店への売り上げへの効果を議論してください。
+
+    a) インパクト評価は可能でしょうか、可否とその理由を示してください
+    a) 可能な場合、どのようなデータ(「XXデータのYY項目」、統計名と項目名も具体的に示せば説得力が増します)、どのような方法を使うか具体的に示してください
+    a) その方法で得た推計値の信頼性を議論してください
+    a) 効果の大きさを予想し、その根拠を述べてください
+
+
+(@) 子どもが胎内にいるときに、精神的、経済的なショックを受けた場合、子どもの健康への長期的な影響が懸念されます。北欧諸国では、個人IDによってさまざまなデータを結びつけることができるため、すべての国民について家族構成、家族の死亡時期、自身や家族の医療保険利用実績を知ることができます。こうした国で、子どもの健康への長期的な影響を考えたいと思います。
+
+    a) インパクト評価は可能でしょうか、可否とその理由を示してください
+    a) 可能な場合、どのようなデータ(「XXデータのYY項目」、統計名と項目名も具体的に示せば説得力が増します)、どのような方法を使うか具体的に示してください
+    a) その方法で得た推計値の信頼性を議論してください
+
+
+# データ作業
+
+Rで`wooldridge`パッケージを使い、wagepanデータで勤続5年以上の人間の賃金(対数)`lwage`をY軸、教育年数`educ`をX軸にして散布図を描いてください。図を描くパッケージは`ggplot2`がお薦めですが、どのパッケージ・方法を用いても構いません。コードと描いた図を提出してください。
+
+
+```{.terminal}
+install.packages("wooldridge", repos = "http://cran.us.r-project.org")
+library(wooldridge)
+data("wagepan")
+```
+
+
