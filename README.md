@@ -43,4 +43,5 @@ Lecture slides etc. (2024 are placed [here](README2024.md)).
 
 * Lecture 09 
    * [MidTerm](https://seiroito.github.io/SHLectures/lec_slides/2026/exams/MidTerm.html)  
+   * [RP08](https://seiroito.github.io/SHLectures/lec_slides/2026/RP/RP08.html)  
    
